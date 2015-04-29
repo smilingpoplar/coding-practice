@@ -14,10 +14,11 @@ using namespace std;
 
 class Solution {
 public:
-    int ladderLength(string begin, string end, unordered_set<string> &dict) {
+    int ladderLength(string start, string end, unordered_set<string> &dict) {
         queue<string> queue;
-        queue.push(begin);
-        visited.insert(begin); // 把顶点放入队列时进行标记
+        queue.push(start);
+        unordered_set<string> visited;
+        visited.insert(start); // 把顶点放入队列时进行标记
         
         int level = 0;
         while (!queue.empty()) {
@@ -26,15 +27,15 @@ public:
             for (size_t i = 0; i < levelSize; i++) { // 按层遍历
                 auto word = queue.front();
                 queue.pop();
-                // ... 这里不需要：把顶点移出队列时更新回溯用的搜索树
-
+                // ... 把顶点移出队列时更新回溯用的搜索树：这里不需要
+                
                 if (word == end) return level;
                 
-                auto adjacences = adjacentWords(word, end, dict);
-                for (auto adjacence : adjacences) {
-                    if (visited.count(adjacence) <= 0) {
-                        queue.push(adjacence);
-                        visited.insert(adjacence); // 把顶点放入队列时进行标记
+                auto words = nextWords(word, end, dict);
+                for (auto next : words) {
+                    if (visited.count(next) <= 0) {
+                        queue.push(next);
+                        visited.insert(next); // 把顶点放入队列时进行标记
                     }
                 }
             }
@@ -44,7 +45,7 @@ public:
     }
     
 private:
-    unordered_set<string> adjacentWords(const string &word, const string &end, const unordered_set<string> &dict) {
+    unordered_set<string> nextWords(const string &word, const string &end, const unordered_set<string> &dict) {
         unordered_set<string> result;
         for (size_t i = 0; i < word.size(); i++) {
             string newWord = word;
@@ -62,8 +63,6 @@ private:
         }
         return result;
     }
-private:
-    unordered_set<string> visited;
 };
 
 int main(int argc, const char * argv[]) {
