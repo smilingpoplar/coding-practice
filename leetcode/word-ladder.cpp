@@ -26,6 +26,7 @@ public:
             for (size_t i = 0; i < levelSize; i++) { // 按层遍历
                 auto word = queue.front();
                 queue.pop();
+                // ... 这里不需要把顶点放入回溯用的搜索树
 
                 if (word == end) return level;
                 
