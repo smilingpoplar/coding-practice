@@ -23,22 +23,29 @@ public:
         
         unordered_map<string, vector<string>> searchTree;
         while (!queue.empty()) {
-            auto word = queue.front();
-            queue.pop();
-            // ... 把顶点移出队列时更新回溯用的搜索树：这里改成在进队列时更新
-            
-            auto words = nextWords(word, end, dict);
-            for (auto next : words) {
-                if (visited.count(next) <= 0) {
-                    queue.push(next);
-                    visited.insert(next); // 把顶点放入队列时进行标记
-                    searchTree[next].push_back(word); // 在进队列时更新回溯用的搜索树
-                } else if (next == end) {
-                    searchTree[next].push_back(word); // 在进队列时更新回溯用的搜索树
+            // BFS时如果找到一条最短路径，那么所有最短路径一定都在这一层，下一层的不再考虑，所以使用按层遍历
+            bool found = false;
+            size_t levelSize = queue.size();
+            for (size_t i = 0; i < levelSize; i++) {
+                auto word = queue.front();
+                queue.pop();
+                // ... 把顶点移出队列时更新回溯用的搜索树：这里改成在进队列时更新
+                
+                auto words = nextWords(word, end, dict);
+                for (auto next : words) {
+                    if (next == end) {
+                        found = true;
+                        searchTree[next].push_back(word); // 在进队列时更新回溯用的搜索树
+                    } else if (visited.count(next) <= 0) {
+                        queue.push(next);
+                        visited.insert(next); // 把顶点放入队列时进行标记
+                        searchTree[next].push_back(word); // 在进队列时更新回溯用的搜索树
+                    }
                 }
             }
+            if (found) break;
         }
-
+        
         return generatePaths(end, start, searchTree);
     }
     
@@ -85,9 +92,9 @@ private:
 };
 
 int main(int argc, const char * argv[]) {
-    string beginWord = "hit";
-    string endWord = "cog";
-    unordered_set<string> wordDict = { "hot", "dot", "dog", "lot", "log" };
+    string beginWord = "a";
+    string endWord = "c";
+    unordered_set<string> wordDict = { "a", "b", "c" };
     
     Solution solution;
     auto ladders = solution.findLadders(beginWord, endWord, wordDict);
