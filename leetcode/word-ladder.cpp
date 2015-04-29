@@ -14,10 +14,10 @@ using namespace std;
 
 class Solution {
 public:
+    // 广义图搜索可以找到一条最短路径，不能找到所有最短路径：
+    // 1. 顶点进队列时进行标记
+    // 2. 顶点出队列时更新回溯用的搜索树
     int ladderLength(string start, string end, unordered_set<string> &dict) {
-        // 广义图搜索可以找到一条最短路径，不能找到所有最短路径：
-        // 1. 顶点进队列时进行标记
-        // 2. 顶点出队列时更新回溯用的搜索树
         queue<string> queue;
         queue.push(start);
         unordered_set<string> visited;
@@ -45,6 +45,37 @@ public:
         
         return 0;
     }
+    
+    /*
+    // 双队列写法
+    int ladderLength(string start, string end, unordered_set<string> &dict) {
+        unordered_set<string> currentLevel, nextLevel;
+        currentLevel.insert(start);
+        
+        unordered_set<string> visited;
+        int level = 0;
+        while (!currentLevel.empty()) {
+            level++;
+            // 先将本层全部置为已访问，防止同层之间互相指向
+            for (const auto &word : currentLevel) {
+                visited.insert(word);
+            }
+            for (const auto &word : currentLevel) {
+                auto words = nextWords(word, end, dict);
+                for (const auto &nextWord : words) {
+                    if (visited.count(nextWord) <= 0) {
+                        nextLevel.insert(nextWord);
+                        if (nextWord == end) return level + 1;
+                    }
+                }
+            }
+            currentLevel.clear();
+            swap(currentLevel, nextLevel);
+        }
+        
+        return 0;
+    }
+    */
     
 private:
     unordered_set<string> nextWords(const string &word, const string &end, const unordered_set<string> &dict) {
