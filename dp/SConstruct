@@ -1,0 +1,4 @@
+env = Environment(CXX = 'clang++', CXXFLAGS = '-std=c++11')
+for d in ['.']:
+	for cc in Glob(d+'/*.cc'):
+	   	env.Program(cc)
