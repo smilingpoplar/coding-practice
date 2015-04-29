@@ -16,37 +16,34 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
-        queue<string> queue;
-        queue.push(start);
-        unordered_set<string> visited;
-        visited.insert(start); // 把顶点放入队列时进行标记
+        unordered_set<string> currentLevel, nextLevel;
+        currentLevel.insert(start);
         
-        unordered_map<string, vector<string>> searchTree;
-        while (!queue.empty()) {
-            // BFS时如果找到一条最短路径，那么所有最短路径一定都在这一层，下一层的不再考虑，所以使用按层遍历
-            bool found = false;
-            size_t levelSize = queue.size();
-            for (size_t i = 0; i < levelSize; i++) {
-                auto word = queue.front();
-                queue.pop();
-                // ... 把顶点移出队列时更新回溯用的搜索树：这里改成在进队列时更新
-                
+        unordered_set<string> visited;
+        unordered_map<string, unordered_set<string>> parents;
+        bool found = false;
+        while (!currentLevel.empty()) {
+            // 先将本层全部置为已访问，防止同层之间互相指向
+            for (const auto &word : currentLevel) {
+                visited.insert(word);
+            }
+            for (const auto &word : currentLevel) {
                 auto words = nextWords(word, end, dict);
-                for (auto next : words) {
-                    if (next == end) {
-                        found = true;
-                        searchTree[next].push_back(word); // 在进队列时更新回溯用的搜索树
-                    } else if (visited.count(next) <= 0) {
-                        queue.push(next);
-                        visited.insert(next); // 把顶点放入队列时进行标记
-                        searchTree[next].push_back(word); // 在进队列时更新回溯用的搜索树
+                for (const auto &nextWord : words) {
+                    if (visited.count(nextWord) <= 0) {
+                        nextLevel.insert(nextWord);
+                        parents[nextWord].insert(word);
+                        if (nextWord == end) found = true;
                     }
                 }
             }
+            currentLevel.clear();
+            swap(currentLevel, nextLevel);
+            // BFS时如果找到一条最短路径，那么所有最短路径一定都在这一层，不再考虑下一层
             if (found) break;
         }
         
-        return generatePaths(end, start, searchTree);
+        return generatePaths(end, start, parents);
     }
     
 private:
@@ -69,21 +66,21 @@ private:
         return result;
     }
     
-    vector<vector<string>> generatePaths(const string &word, const string &start, unordered_map<string, vector<string>> &searchTree) {
+    vector<vector<string>> generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &searchTree) {
         vector<vector<string>> result;
         vector<string> path;
         generatePaths(word, start, searchTree, path, result);
         return result;
     }
     
-    void generatePaths(const string &word, const string &start, unordered_map<string, vector<string>> &searchTree,
+    void generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &searchTree,
                        vector<string> &path, vector<vector<string>> &result) {
         path.push_back(word);
         if (word == start) {
             result.push_back(path);
             reverse(result.back().begin(), result.back().end());
         } else {
-            for (auto prev : searchTree[word]) {
+            for (const auto &prev : searchTree[word]) {
                 generatePaths(prev, start, searchTree, path, result);
             }
         }
@@ -92,14 +89,14 @@ private:
 };
 
 int main(int argc, const char * argv[]) {
-    string beginWord = "a";
-    string endWord = "c";
-    unordered_set<string> wordDict = { "a", "b", "c" };
+    string beginWord = "hit";
+    string endWord = "cog";
+    unordered_set<string> wordDict = { "hot","dot","dog","lot","log" };
     
     Solution solution;
     auto ladders = solution.findLadders(beginWord, endWord, wordDict);
-    for (auto ladder : ladders) {
-        for (auto word : ladder) {
+    for (const auto &ladder : ladders) {
+        for (const auto &word : ladder) {
             cout << word << " ";
         }
         cout << endl;
