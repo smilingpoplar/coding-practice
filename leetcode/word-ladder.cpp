@@ -44,7 +44,7 @@ public:
     }
     
 private:
-    unordered_set<string> adjacentWords(const string &word, const string &end, unordered_set<string> &dict) {
+    unordered_set<string> adjacentWords(const string &word, const string &end, const unordered_set<string> &dict) {
         unordered_set<string> result;
         for (size_t i = 0; i < word.size(); i++) {
             string newWord = word;
