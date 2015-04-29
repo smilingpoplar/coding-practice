@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     int ladderLength(string start, string end, unordered_set<string> &dict) {
-        // 广义图搜索的程序模板可以找到一条最短路径，不能找到所有最短路径：
+        // 广义图搜索可以找到一条最短路径，不能找到所有最短路径：
         // 1. 顶点进队列时进行标记
         // 2. 顶点出队列时更新回溯用的搜索树
         queue<string> queue;
@@ -32,13 +32,12 @@ public:
                 queue.pop();
                 // 2. 顶点出队列时更新回溯用的搜索树：这里不需要
                 
-                if (word == end) return level;
-                
                 auto words = nextWords(word, end, dict);
-                for (auto next : words) {
-                    if (visited.count(next) <= 0) {
-                        queue.push(next);
-                        visited.insert(next); // 1. 顶点进队列时进行标记
+                for (const auto &nextWord : words) {
+                    if (visited.count(nextWord) <= 0) {
+                        queue.push(nextWord);
+                        visited.insert(nextWord); // 1. 顶点进队列时进行标记
+                        if (nextWord == end) return level + 1;
                     }
                 }
             }
