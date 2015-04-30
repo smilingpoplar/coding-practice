@@ -66,22 +66,22 @@ private:
         return result;
     }
     
-    vector<vector<string>> generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &searchTree) {
+    vector<vector<string>> generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &parents) {
         vector<vector<string>> result;
         vector<string> path;
-        generatePaths(word, start, searchTree, path, result);
+        generatePaths(word, start, parents, path, result);
         return result;
     }
     
-    void generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &searchTree,
+    void generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &parents,
                        vector<string> &path, vector<vector<string>> &result) {
         path.push_back(word);
         if (word == start) {
             result.push_back(path);
             reverse(result.back().begin(), result.back().end());
         } else {
-            for (const auto &prev : searchTree[word]) {
-                generatePaths(prev, start, searchTree, path, result);
+            for (const auto &prev : parents[word]) {
+                generatePaths(prev, start, parents, path, result);
             }
         }
         path.pop_back();
