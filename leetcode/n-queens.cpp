@@ -15,19 +15,18 @@ class Solution {
 public:
     vector<vector<string>> solveNQueens(int n) {
         vector<int> placement(n, -1); // 按行放置，placement[i]=j 表示在i行的第j列放置皇后
-        vector<vector<string>> allSolutions;
         // 放置皇后的判断条件
         vector<bool> occupiedColumn(n, false);     // 某列是否被已放置的皇后占据
         vector<bool> occupiedMainDiagonal(2 * n - 1, false);
         vector<bool> occupiedAntiDiagonal(2 * n - 1, false);
         
-        dfs(0, placement, allSolutions, occupiedColumn, occupiedMainDiagonal, occupiedAntiDiagonal);
+        vector<vector<string>> allSolutions;
+        dfs(0, placement, occupiedColumn, occupiedMainDiagonal, occupiedAntiDiagonal, allSolutions);
         
         return allSolutions;
     }
 private:
-    void dfs(int row, vector<int> &placement, vector<vector<string>> &allSolutions,
-             vector<bool> &occupiedColumn, vector<bool> &occupiedMainDiagonal, vector<bool> &occupiedAntiDiagonal) {
+    void dfs(int row, vector<int> &placement, vector<bool> &occupiedColumn, vector<bool> &occupiedMainDiagonal, vector<bool> &occupiedAntiDiagonal, vector<vector<string>> &allSolutions) {
         const size_t N = placement.size();
         if (row == N) { // 终止条件
             auto solution = generateSolution(placement);
@@ -41,7 +40,7 @@ private:
             placement[row] = column;
             occupiedColumn[column] = occupiedMainDiagonal[row + column] = occupiedAntiDiagonal[row - column + N - 1] = true;
             // 递归
-            dfs(row + 1, placement, allSolutions, occupiedColumn, occupiedMainDiagonal, occupiedAntiDiagonal);
+            dfs(row + 1, placement, occupiedColumn, occupiedMainDiagonal, occupiedAntiDiagonal, allSolutions);
             // 撤销动作
             placement[row] = -1;
             occupiedColumn[column] = occupiedMainDiagonal[row + column] = occupiedAntiDiagonal[row - column + N - 1] = false;
