@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     bool wordBreak(string s, unordered_set<string>& dict) {
-        // 动态规划，设 possible[i]表示s[0,i)这个子串可以break成
+        // 动态规划，设possible[i]表示s[0,i)这个子串可break
         const size_t N = s.size();
         vector<bool> possible(N + 1, false);
         possible[0] = true;
