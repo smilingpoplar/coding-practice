@@ -34,7 +34,7 @@ public:
                 
                 auto words = nextWords(word, end, dict);
                 for (const auto &nextWord : words) {
-                    if (visited.count(nextWord) <= 0) {
+                    if (visited.find(nextWord) == visited.end()) {
                         queue.push(nextWord);
                         visited.insert(nextWord); // 1. 顶点进队列时进行标记
                         if (nextWord == end) return level + 1;
@@ -63,7 +63,7 @@ public:
             for (const auto &word : currentLevel) {
                 auto words = nextWords(word, end, dict);
                 for (const auto &nextWord : words) {
-                    if (visited.count(nextWord) <= 0) {
+                    if (visited.find(nextWord) == visited.end()) {
                         nextLevel.insert(nextWord);
                         if (nextWord == end) return level + 1;
                     }
@@ -86,7 +86,7 @@ private:
                 if (newWord[i] != c) {
                     swap(c, newWord[i]);
                     
-                    if (dict.count(newWord) > 0 || newWord == end) {
+                    if (dict.find(newWord) != dict.end() || newWord == end) {
                         result.insert(newWord);
                     }
                     
