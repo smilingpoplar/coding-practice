@@ -30,7 +30,7 @@ public:
             for (const auto &word : currentLevel) {
                 auto words = nextWords(word, end, dict);
                 for (const auto &nextWord : words) {
-                    if (visited.count(nextWord) <= 0) {
+                    if (visited.find(nextWord) == visited.end()) {
                         nextLevel.insert(nextWord);
                         parents[nextWord].insert(word);
                         if (nextWord == end) found = true;
@@ -55,7 +55,7 @@ private:
                 if (newWord[i] != c) {
                     swap(c, newWord[i]);
                     
-                    if (dict.count(newWord) > 0 || newWord == end) {
+                    if (dict.find(newWord) != dict.end() || newWord == end) {
                         result.insert(newWord);
                     }
                     
