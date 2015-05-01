@@ -23,11 +23,11 @@ public:
     vector<vector<int>> pathSum(TreeNode *root, int sum) {
         vector<vector<int>> allPaths;
         vector<int> path;
-        dfs(root, sum, path, allPaths);
+        pathSum(root, sum, path, allPaths);
         return allPaths;
     }
 private:
-    void dfs(TreeNode *root, int sum, vector<int> &path, vector<vector<int>> &allPaths) {
+    void pathSum(TreeNode *root, int sum, vector<int> &path, vector<vector<int>> &allPaths) {
         if (!root) return;
         path.push_back(root->val);
 
@@ -36,8 +36,8 @@ private:
                 allPaths.push_back(path);
             }
         }
-        dfs(root->left, sum - root->val, path, allPaths);
-        dfs(root->right, sum - root->val, path, allPaths);
+        pathSum(root->left, sum - root->val, path, allPaths);
+        pathSum(root->right, sum - root->val, path, allPaths);
 
         path.pop_back();
     }
