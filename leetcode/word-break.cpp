@@ -15,20 +15,19 @@ using namespace std;
 class Solution {
 public:
     bool wordBreak(string s, unordered_set<string>& dict) {
-        // 动态规划，设possible[i]表示s[0,i)可break
+        // 动态规划，设ok[i]表示s[0,i)可break，则存在j(0<=j<i)使得s[0,i)可break成s[0,j)子问题和s[j,i)单词
         const size_t N = s.size();
-        vector<bool> possible(N + 1, false);
-        possible[0] = true;
+        vector<bool> ok(N + 1, false);
+        ok[0] = true;
         for (size_t i = 1; i <= N; i++) {
-            // 看s[0,j)和s[j,i)是否都是合格子串
             for (size_t j = 0; j < i; j++) {
-                if (possible[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
-                    possible[i] = true;
+                if (ok[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+                    ok[i] = true;
                     break;
                 }
             }
         }
-        return possible[N];
+        return ok[N];
     }
 };
 
