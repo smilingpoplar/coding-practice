@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        // 若在第i天卖，应在[0,i)天中最便宜时买
+        // 只能买卖一次，若在第i天卖，应在[0,i)天中最便宜时买
         if (prices.size() < 2) return 0;
         int bestProfit = 0;
         int minPrice = prices[0];
