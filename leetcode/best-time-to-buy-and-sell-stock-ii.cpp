@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        // 可以多次买卖，那么在价格上升时买入后卖出
+        // 可以买卖多次，那么在价格上升时买入后卖出
         if (prices.size() < 2) return 0;
         int bestProfit = 0;
         for (auto i = 0; i < prices.size() - 1; i++) {
