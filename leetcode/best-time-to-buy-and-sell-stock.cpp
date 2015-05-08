@@ -16,13 +16,13 @@ public:
     int maxProfit(vector<int>& prices) {
         // 只能买卖一次，若在第i天卖，应在[0,i)天中最便宜时买
         if (prices.size() < 2) return 0;
-        int bestProfit = 0;
+        int maxProfit = 0;
         int minPrice = prices[0];
         for (auto i = 1; i < prices.size(); i++) {
-            bestProfit = max(bestProfit, prices[i] - minPrice);
+            maxProfit = max(maxProfit, prices[i] - minPrice);
             minPrice = min(minPrice, prices[i]);
         }
-        return bestProfit;
+        return maxProfit;
     }
 };
 

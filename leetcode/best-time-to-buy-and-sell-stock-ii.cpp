@@ -16,13 +16,13 @@ public:
     int maxProfit(vector<int>& prices) {
         // 可以买卖多次，那么在价格上升时买入后卖出
         if (prices.size() < 2) return 0;
-        int bestProfit = 0;
+        int maxProfit = 0;
         for (auto i = 0; i < prices.size() - 1; i++) {
             if (prices[i] < prices[i + 1]) {
-                bestProfit += prices[i + 1] - prices[i];
+                maxProfit += prices[i + 1] - prices[i];
             }
         }
-        return bestProfit;
+        return maxProfit;
     }
 };
 
