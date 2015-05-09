@@ -16,7 +16,7 @@ using namespace std;
 class Solution {
 public:
     vector<string> wordBreak(string s, unordered_set<string>& dict) {
-        // 动态规划，设ok[i]表示s[0,i)可break，breakAt[i,j]表示s[0,i)可在j处break成s[0,j)和s[j,i)
+        // 动态规划，设ok(i)表示s[0,i)可break，breakAt(i,j)表示s[0,i)可在j处break成s[0,j)和s[j,i)
         // (s[0,j)是子问题，s[j,i)是单词，0<=i<=N, 0<=j<i)
         const size_t N = s.size();
         vector<bool> ok(N + 1, false);
