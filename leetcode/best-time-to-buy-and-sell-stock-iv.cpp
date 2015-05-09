@@ -20,13 +20,13 @@ public:
         if (k >= N / 2) return maxProfitInf(prices);
         
         // 最多买卖k次，动态规划，在第i天可买和卖，用两个变量分别记录买和卖后的最大利润
-        // 用buy[i,j]表示prices[0,i]最多买j次后的最大利润，sell[i,j]表示prices[0,i]最多卖j次后的最大利润 (0<=i<N, 0<=j<=k)
-        // buy[i,j] = max( sell[i-1,j-1]-prices[i] /*第i天买*/, buy[i-1,j] /*第i天不买*/ )
-        // sell[i,j] = max( buy[i-1,j]+prices[i] /*第i天卖*/, sell[i-1,j] /*第i天不卖*/ )
-        // i==0时，初值：buy[0,j]=-prices[0]/*最多买一次*/，sell[0,j]=0/*还没买无法卖*/
-        // 因为上述递推式中第i天的buy和sell只跟第i-1天的值有关，按i递增循环时可降维，
-        // buy[j] = max( sell[j-1]-prices[i], buy[j] )
-        // sell[j] = max( buy[j]+prices[i], sell[j] )
+        // 用buy(i,j)表示prices[0,i]最多买j次后的最大利润，sell(i,j)表示prices[0,i]最多卖j次后的最大利润 (0<=i<N, 0<=j<=k)
+        // buy(i,j) = max( sell(i-1,j-1)-prices[i] /*第i天买*/, buy(i-1,j) /*第i天不买*/ )
+        // sell(i,j) = max( buy(i-1,j)+prices[i] /*第i天卖*/, sell(i-1,j) /*第i天不卖*/ )
+        // i==0时，初值：buy(0,j)=-prices[0]/*最多买一次*/，sell(0,j)=0/*还没买无法卖*/
+        // 因为上述递推式中第i天的buy和sell只跟第i-1天的值有关，按i循环时可降维
+        // buy(j) = max( sell(j-1)-prices(i), buy(j) )
+        // sell(j) = max( buy(j)+prices[i], sell(j) )
         vector<int> buy(k + 1, -prices[0]);
         vector<int> sell(k + 1, 0);
         for (int i = 0; i < N; i++) { // 按i递增循环
