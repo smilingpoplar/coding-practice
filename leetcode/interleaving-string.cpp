@@ -14,10 +14,10 @@ using namespace std;
 class Solution {
 public:
     bool isInterleave(string s1, string s2, string s3) {
-        // 动态规划，设f[i,j]表示s1[0,i)和s2[0,j)能interleaving成s3[0,i+j) (0<=i<=M, 0<=j<=N)
-        // 1. 若 s1[i-1] == s3[i+j-1]，则 f[i,j] = f[i-1,j]
-        // 2. 若 s2[j-1] == s3[i+j-1]，则 f[i,j] = f[i,j-1]
-        // 故 f[i,j] = (s1[i-1] == s3[i+j-1] && f[i-1,j]) || (s2[j-1] == s3[i+j-1] && f[i,j-1])
+        // 动态规划，设f(i,j)表示s1[0,i)和s2[0,j)能interleaving成s3[0,i+j) (0<=i<=M, 0<=j<=N)
+        // 若 s1[i-1] == s3[i+j-1]，则 f(i,j) = f(i-1,j)
+        // 若 s2[j-1] == s3[i+j-1]，则 f(i,j) = f(i,j-1)
+        // 故 f(i,j) = (s1[i-1] == s3[i+j-1] && f(i-1,j) || (s2[j-1] == s3[i+j-1] && f(i,j-1))
         
         const size_t M = s1.size();
         const size_t N = s2.size();
