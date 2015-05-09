@@ -15,7 +15,7 @@ class Solution {
 public:
     int calculateMinimumHP(vector<vector<int>> &dungeon) {
         // 动态规划，从右下角的P处往上往左倒推
-        // 某处需要的hp：hp[i,j] = max(1, min(hp[i+1,j], hp[i,j+1]) - dungeon[i,j])
+        // 某处需要的hp：hp(i,j) = max(1, min(hp(i+1,j), hp(i,j+1)) - dungeon[i,j])
         const int M = (int)dungeon.size();
         const int N = (int)dungeon[0].size();
         vector<vector<int>> hp(M, vector<int>(N, 0));
