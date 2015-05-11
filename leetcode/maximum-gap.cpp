@@ -18,7 +18,7 @@ public:
         if (nums.size() < 2) return 0;
         
         // 桶排序，因为 maxGap >= ceiling((max-min)/(n-1))，设后者为bucketLength，则 maxGap >= bucketLength
-        // 因为每个桶是半闭半开的区间，桶内gap < bucketLength，所以 maxGap > 桶内gap，maxGap只能在桶间取得，每个桶只需保留其最大最小值
+        // 因为每个桶是半闭半开的区间，桶内gap < bucketLength <= maxGap，maxGap只能在桶间取得，每个桶只需保留其最大最小值
         // 桶的个数为 (max-min)/bucketLength + 1（+1是因为桶是半闭半开区间），数num会落在第 (num-min)/bucketLength 个桶中
         
         // min和max
