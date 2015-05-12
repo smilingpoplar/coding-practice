@@ -19,9 +19,9 @@ public:
     }
 private:
     int lowerBound(const vector<int> &nums, int target) {
-        // 不变式：
-        // | < t | >= t |   &&  l < u (不断缩小范围后最终 l + 1 = u，u可能为下边界)
-        // [l          u]
+        // 不变式：nums[l]<target<=nums[u]（l<u）（即nums[l,u]是数组中包含target的部分）
+        // 若初始l=0,u=N-1，因l<u，只处理了N>=2的情况，故引进哨兵nums[-1]<target,nums[N]>=target，设初始l=-1,u=N
+        // 当[l,u]范围不断缩小，最终 l + 1 = u，u可能为所求的下边界)
         const int N = (int)nums.size();
         int l = -1;
         int u = N;
@@ -38,9 +38,9 @@ private:
     }
     
     int upperBound(const vector<int> &nums, int target) {
-        // 不变式：
-        // | <= t | > t |   &&  l < u (不断缩小范围后最终 l + 1 == u，l可能为上边界)
-        // [l          u]
+        // 不变式：nums[l]<=target<nums[u]（l<u）（即nums[l,u]是数组中包含target的部分）
+        // 若初始l=0,u=N-1，因l<u，只处理了N>=2的情况，故引进哨兵nums[-1]<target,nums[N]>=target，设初始l=-1,u=N
+        // 当[l,u]范围不断缩小，最终 l + 1 = u，l可能为所求的上边界)
         const int N = (int)nums.size();
         int l = -1;
         int u = N;
