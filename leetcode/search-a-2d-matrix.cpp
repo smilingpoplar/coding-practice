@@ -14,9 +14,8 @@ using namespace std;
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        // 相当于在有序数组[0,M*N-1]中搜索，不变式：
-        // | < t | == t | > t |   &&  l <= u
-        // [l                u]
+        // 相当于在有序数组A[0,M*N-1]中搜索
+        // 不变式：A[l,u]是数组中包含target的部分（l<=u）
         if (matrix.empty()) return false;
         const int M = (int)matrix.size();
         const int N = (int)matrix[0].size();
@@ -44,6 +43,6 @@ int main(int argc, const char * argv[]) {
     int target = 2;
     Solution solution;
     cout << solution.searchMatrix(matrix, target);
-
+    
     return 0;
 }
