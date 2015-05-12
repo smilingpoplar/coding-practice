@@ -15,7 +15,7 @@ class Solution {
 public:
     void sortColors(vector<int>& nums) {
         // 一遍扫描，把0都堆到[0,i0)，把2都堆到(i2,N-1]
-        // 不变式: | == 0 | == 1 |  ?  | == 2 |
+        // 不变式：| == 0 | == 1 |  ?  | == 2 |
         //        [0     [i0    [i  i2]   N-1]
         const int N = (int)nums.size();
         int i0 = 0;
