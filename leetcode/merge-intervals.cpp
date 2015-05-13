@@ -23,11 +23,11 @@ public:
     vector<Interval> merge(vector<Interval>& intervals) {
         sort(intervals.begin(), intervals.end(), compare);
         vector<Interval> result;
-        int index = 0;
+        int index = -1;
         for (int i = 0; i < intervals.size(); ++i) {
-            if (i > 0 && intervals[i].start <= result[index - 1].end) {
-                result[index - 1].start = min(result[index - 1].start, intervals[i].start);
-                result[index - 1].end = max(result[index - 1].end, intervals[i].end);
+            if (i > 0 && intervals[i].start <= result[index].end) {
+                result[index].start = min(result[index].start, intervals[i].start);
+                result[index].end = max(result[index].end, intervals[i].end);
             } else {
                 result.push_back(intervals[i]);
                 ++index;
