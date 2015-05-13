@@ -14,14 +14,14 @@ using namespace std;
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        // 相当于在有序数组A[0,M*N-1]中搜索
-        // 不变式：A[l]<=target<=A[u]（l<=u）（即A[l,u]是数组中包含target的部分）
+        // 相当于在有序数组A[0,M*N)中搜索
+        // 不变式：A[l]<=target<A[u]（l<u）（即A[l,u)是数组中包含target的部分）
         if (matrix.empty()) return false;
         const int M = (int)matrix.size();
         const int N = (int)matrix[0].size();
         int l = 0;
-        int u = M * N - 1;
-        while (l <= u) {
+        int u = M * N;
+        while (l < u) {
             int mid = l + (u - l) / 2;
             int midValue = matrix[mid / N][mid % N];
             if (midValue == target) {
@@ -29,7 +29,7 @@ public:
             } else if (midValue < target) {
                 l = mid + 1;
             } else {
-                u = mid - 1;
+                u = mid;
             }
         }
         return false;
