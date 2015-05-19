@@ -8,14 +8,16 @@
 
 #include <iostream>
 #include <vector>
-#include <unordered_set>
 
 using namespace std;
 
+/*
+#include <unordered_set>
+
 class Solution {
 public:
-    // 若能finish则图是无环有向图，即dfs时不存在回边，见图算法3.2章（回边：访问有较大后序编号的节点）
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        // 有向图无环，dfs时不存在回边，见图算法3.2章（回边：访问有较大后序编号的节点）
         // 构造图
         vector<unordered_set<int>> graph(numCourses);
         for (const auto &edge : prerequisites) {
@@ -25,7 +27,7 @@ public:
         vector<bool> visited(numCourses, false);
         vector<int> post(numCourses, -1);
         int order = 0;
-        for (int i = 0; i < numCourses; i++) {
+        for (int i = 0; i < numCourses; ++i) {
             if (!visited[i]) {
                 if (hasCycle(i, graph, visited, post, order)) return false;
             }
@@ -44,6 +46,41 @@ private:
         }
         post[v] = order++;
         return false;
+    }
+};
+*/
+
+#include <queue>
+
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        // 有向图无环，bfs不断删除源点能完成所有点的拓扑排序，见图算法3.6章（源点：入度为0的点）
+        // 计算入度
+        vector<int> indegree(numCourses, 0);
+        for (const auto &edge : prerequisites) {
+            ++indegree[edge.first];
+        }
+        // 源点队列
+        queue<int> source;
+        for (int i = 0; i < numCourses; ++i) {
+            if (indegree[i] == 0) source.push(i);
+        }
+        // 不断删除源点
+        int count = 0;
+        while (!source.empty()) {
+            int v = source.front();
+            source.pop();
+            ++count;
+            for (const auto &edge : prerequisites) {
+                if (edge.second == v) {
+                    int to = edge.first;
+                    --indegree[to];
+                    if (indegree[to] == 0) source.push(to);
+                }
+            }
+        }
+        return count == numCourses;
     }
 };
 
