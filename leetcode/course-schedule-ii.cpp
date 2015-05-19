@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 求拓扑排序，因为拓扑排序等于逆图上的逆拓扑排序，又逆拓扑排序等于后序编号，所以求逆图上的后序编号
+        // 求拓扑排序，因为拓扑排序等于逆图上的逆拓扑排序，而逆拓扑排序等于后序编号，所以求逆图上的后序编号
         // 生成逆图
         vector<unordered_set<int>> graph(numCourses);
         for (const auto &edge : prerequisites) {
