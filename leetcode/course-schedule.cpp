@@ -8,17 +8,16 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 
 using namespace std;
 
 /*
-#include <unordered_set>
-
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 有向图无环，即dfs时不存在回边，见图算法3.2章（回边：访问有较大后序编号的节点）
-        // 构造图
+        // 有向图无环，即dfs时不存在回边，见图算法3.2章（回边：访问后序编号较大的节点）
+        // 生成图
         vector<unordered_set<int>> graph(numCourses);
         for (const auto &edge : prerequisites) {
             graph[edge.second].insert(edge.first);
@@ -56,10 +55,17 @@ class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
         // 有向图无环，即bfs不断删除源点能完成所有点的拓扑排序，见图算法3.6章（源点：入度为0的点）
+        // 生成图
+        vector<unordered_set<int>> graph(numCourses);
+        for (const auto &edge : prerequisites) {
+            graph[edge.second].insert(edge.first);
+        }
         // 计算入度
         vector<int> indegree(numCourses, 0);
-        for (const auto &edge : prerequisites) {
-            ++indegree[edge.first];
+        for (int i = 0; i < numCourses; ++i) {
+            for (int to : graph[i]) {
+                ++indegree[to];
+            }
         }
         // 源点队列
         queue<int> source;
@@ -72,12 +78,9 @@ public:
             int v = source.front();
             source.pop();
             ++count;
-            for (const auto &edge : prerequisites) {
-                if (edge.second == v) {
-                    int to = edge.first;
-                    --indegree[to];
-                    if (indegree[to] == 0) source.push(to);
-                }
+            for (int to : graph[v]) {
+                --indegree[to];
+                if (indegree[to] == 0) source.push(to);
             }
         }
         return count == numCourses;
