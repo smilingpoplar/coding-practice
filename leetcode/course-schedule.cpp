@@ -17,7 +17,7 @@ using namespace std;
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 有向图无环，dfs时不存在回边，见图算法3.2章（回边：访问有较大后序编号的节点）
+        // 有向图无环，即dfs时不存在回边，见图算法3.2章（回边：访问有较大后序编号的节点）
         // 构造图
         vector<unordered_set<int>> graph(numCourses);
         for (const auto &edge : prerequisites) {
@@ -55,7 +55,7 @@ private:
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 有向图无环，bfs不断删除源点能完成所有点的拓扑排序，见图算法3.6章（源点：入度为0的点）
+        // 有向图无环，即bfs不断删除源点能完成所有点的拓扑排序，见图算法3.6章（源点：入度为0的点）
         // 计算入度
         vector<int> indegree(numCourses, 0);
         for (const auto &edge : prerequisites) {
