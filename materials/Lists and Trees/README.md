@@ -1,1 +1,0 @@
-[Lists and Trees - Stanford CS Education Library](http://cslibrary.stanford.edu/)
