@@ -27,7 +27,7 @@ public:
         int r = (int)nums.size() - 1;
         while (l < r) {
             int mid = l + (r - l) / 2;
-            // 这里要跟数组右端nums[r]比。因为子数组可能是有序数组（旋转数组的特例），
+            // 这里要跟数组右端nums[r]比！因为子数组可能是有序数组（旋转数组的特例），
             // 当跟左端nums[l]比时，l更新后不变式可能在有序数组中不成立，而跟右端nums[r]比时不变式总能成立
             if (nums[mid] > nums[r]) {
                 l = mid + 1;
