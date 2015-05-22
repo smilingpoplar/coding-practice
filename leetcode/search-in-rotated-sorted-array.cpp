@@ -21,13 +21,13 @@ public:
             int mid = l + (r - l) / 2;
             if (nums[mid] == target) return mid;
             if (nums[mid] >= nums[l]) { // 前半段有序
-                if (nums[l] <= target && target <= nums[mid]) {
+                if (nums[l] <= target && target < nums[mid]) {
                     r = mid;
                 } else {
                     l = mid + 1;
                 }
             } else { // 后半段有序
-                if (nums[mid] <= target && target <= nums[r]) {
+                if (nums[mid] < target && target <= nums[r]) {
                     l = mid;
                 } else {
                     r = mid - 1;
