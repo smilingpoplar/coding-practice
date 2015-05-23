@@ -35,7 +35,7 @@ private:
 };
 */
 
-// 更一般地，用中序遍历法，没有INT_MIN,INT_MAX边界值的问题
+// 更一般地，用中序遍历法，没有INT_MIN,INT_MAX边界值的问题，bst的中序遍历应是个单调递增序列
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
@@ -51,7 +51,7 @@ public:
                 current = stack.back();
                 stack.pop_back();
                 
-                if (prev && current->val <= prev->val) return false; // bst的中序遍历应是个单调递增序列
+                if (prev && current->val <= prev->val) return false;
                 prev = current;
                 
                 current = current->right;
