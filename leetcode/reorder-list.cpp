@@ -23,7 +23,7 @@ public:
         // 快慢指针，将链表分成两段
         auto fast = head;
         auto slow = head;
-        while (fast->next && fast->next->next) {
+        while (fast->next && fast->next->next) { // 用fast&&fast->next会让slow指向后半段的首元素，没用处
             fast = fast->next->next;
             slow = slow->next;
         }
