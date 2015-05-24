@@ -18,12 +18,13 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/*
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        // 中序遍历迭代版，用栈模拟，用curr表示调用栈[curr,stack]的栈顶
+        // 中序遍历，用栈模拟，用curr表示调用栈[curr,stack]的栈顶
         vector<int> result;
-        TreeNode *curr = root;
+        auto curr = root;
         vector<TreeNode *> stack;
         while (curr || !stack.empty()) {
             if (curr) { // 首先访问左子节点
@@ -37,6 +38,38 @@ public:
             }
         }
         
+        return result;
+    }
+};
+*/
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        // morris中序遍历，用当前节点的中序遍历前驱节点的右指针表示：访问完左子树再访问哪个节点
+        vector<int> result;
+        auto current = root;
+        TreeNode *prev = NULL;
+        while (current) {
+            if (!current->left) {
+                result.push_back(current->val); // 访问当前节点
+                current = current->right;
+            } else {
+                // 找到当前前驱节点（左子树的最右节点）
+                prev = current->left;
+                while (prev->right && prev->right != current) {
+                    prev = prev->right;
+                }
+                if (!prev->right) { // 左子树未访问
+                    prev->right = current;
+                    current = current->left;
+                } else { // 左子树已访问
+                    prev->right = NULL;
+                    result.push_back(current->val);
+                    current = current->right;
+                }
+            }
+        }
         return result;
     }
 };
