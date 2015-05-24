@@ -60,10 +60,10 @@ public:
                 while (prev->right && prev->right != current) {
                     prev = prev->right;
                 }
-                if (!prev->right) { // 未访问左子树
+                if (!prev->right) { // 左子树未访问
                     prev->right = current;
                     current = current->left;
-                } else { // 已访问左子树
+                } else { // 左子树已访问
                     prev->right = NULL;
                     result.push_back(current->val);
                     current = current->right;
