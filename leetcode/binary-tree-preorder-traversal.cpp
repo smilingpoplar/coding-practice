@@ -18,6 +18,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/*
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -31,6 +32,39 @@ public:
             result.push_back(node->val);
             if (node->right) stack.push_back(node->right);
             if (node->left) stack.push_back(node->left);
+        }
+        return result;
+    }
+};
+*/
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        // morris前序遍历，只是把morris中序遍历里访问节点的语句换个位置
+        // 用当前节点的中序遍历前驱节点的右指针表示：访问完左子树再访问当前节点
+        vector<int> result;
+        auto current = root;
+        TreeNode *prev = NULL;
+        while (current) {
+            if (!current->left) {
+                result.push_back(current->val);
+                current = current->right;
+            } else {
+                // 找到前驱结点（左子树的最右节点）
+                prev = current->left;
+                while (prev->right && prev->right != current) {
+                    prev = prev->right;
+                }
+                if (!prev->right) { // 左子树未访问
+                    prev->right = current;
+                    result.push_back(current->val); // 把这句话放到这里
+                    current = current->left;
+                } else { // 左子树已访问
+                    prev->right = NULL;
+                    current = current->right;
+                }
+            }
         }
         return result;
     }
