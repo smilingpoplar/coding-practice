@@ -20,7 +20,7 @@ class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         // head1跑完链表A跑链表B，head2跑完链表B跑链表A
-        // 无相交节点则同时跑到NULL，有相交节点则同时跑到相交节点
+        // 有相交节点则同时跑到相交节点，无相交节点则同时跑到NULL
         auto head1 = headA;
         auto head2 = headB;
         while (head1 != head2) {
