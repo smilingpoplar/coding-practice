@@ -47,8 +47,8 @@ class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         // morris中序遍历，用当前节点的中序遍历前驱节点的右指针prev->right表示左子树是否访问过
-        // prev->right为空 => 左子树未访问过，记住要返回到当前节点，再进入左子树
-        // prev->right非空 => 左子树已访问过，恢复prev->right，当问当前节点，再进入右子树
+        // prev->right为空 => 左子树未访问过，记住要返回到当前节点，进入左子树
+        // prev->right非空 => 左子树已访问过，清空prev->right，访问当前节点，进入右子树
         vector<int> result;
         auto current = root;
         TreeNode *prev = NULL;
