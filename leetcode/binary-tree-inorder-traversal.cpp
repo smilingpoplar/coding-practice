@@ -57,7 +57,7 @@ public:
                 result.push_back(current->val); // 访问当前节点
                 current = current->right;
             } else {
-                // 找到前驱节点（左子树的最右节点）
+                // 找到中序遍历的前驱节点（左子树的最右节点）
                 prev = current->left;
                 while (prev->right && prev->right != current) {
                     prev = prev->right;
