@@ -15,7 +15,7 @@ class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         // 假设无法绕圈，则存在某一站的消耗 cost(i)-gas(i) > 其他站的总积累 sum( gas(j)-cost(i) )，
-        // 即所有站的 sum( gas(i)-cost(i) ) < 0，所以只要 sum( gas(i)-cost(i) ) >=0 总能绕一圈
+        // 即所有站的 sum( gas(i)-cost(i) ) < 0，所以只要 sum( gas(i)-cost(i) ) >=0 总能绕一圈。
         // 在绕圈的过程中每站剩余汽油 left >= 0
         const int N = (int)gas.size();
         int sum = 0;
@@ -26,7 +26,7 @@ public:
             sum += gasI;
             left += gasI;
             if (left < 0) {
-                start = i + 1; // 从下一站开始
+                start = i + 1; // 尝试从下一站开始
                 left = 0;
             }
         }
