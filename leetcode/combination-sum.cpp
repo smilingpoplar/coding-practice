@@ -27,7 +27,7 @@ private:
             result.push_back(combination);
             return;
         }
-        if (start >= candiatates.size() || candiatates[start] > target) return;
+        if (target < 0) return;
         for (int i = start; i < candiatates.size(); ++i) {
             combination.push_back(candiatates[i]);
             dfs(i, candiatates, target - candiatates[i], combination, result);
