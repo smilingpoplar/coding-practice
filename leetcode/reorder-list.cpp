@@ -49,15 +49,15 @@ public:
             ListNode *current = &dummy;
             while (list1 && list2) {
                 current->next = list1;
-                current = current->next;
+                current = list1;
                 list1 = list1->next;
-
+                
                 current->next = list2;
-                current = current->next;
+                current = list2;
                 list2 = list2->next;
             }
             current->next = list1 ? list1 : list2;
-
+            
             head = dummy.next;
         }
     }
