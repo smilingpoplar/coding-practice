@@ -35,7 +35,6 @@ public:
             current = node;
             if (node->next) queue.push(node->next);
         }
-        
         return dummy.next;
     }
 private:
