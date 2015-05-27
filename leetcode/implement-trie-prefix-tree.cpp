@@ -14,10 +14,7 @@ using namespace std;
 class TrieNode {
 public:
     // Initialize your data structure here.
-    TrieNode() {
-        children = vector<TrieNode *>(26, NULL); // 'a'->'z'
-        isWord = false;
-    }
+    TrieNode() : children(26, NULL), isWord(false) {}
     
     vector<TrieNode *> children;
     bool isWord;
@@ -27,6 +24,9 @@ class Trie {
 public:
     Trie() {
         root = new TrieNode();
+    }
+    ~Trie() {
+        deleteNode(root);
     }
     
     // Inserts a word into the trie.
@@ -70,6 +70,13 @@ public:
     }
     
 private:
+    void deleteNode(TrieNode *node) {
+        for (auto child : node->children) {
+            if (child) deleteNode(child);
+        }
+        delete node;
+    }
+    
     TrieNode* root;
 };
 
