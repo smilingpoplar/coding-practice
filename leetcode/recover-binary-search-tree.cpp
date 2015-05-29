@@ -55,8 +55,8 @@ public:
     void recoverTree(TreeNode* root) {
         // morris中序遍历，O(1)空间
         // 用当前节点的中序遍历前驱节点的右指针prev->right表示左子树是否访问过
-        // 1. prev->right为空：左子树未访问过，记住要放回到当前节点，进入左子树
-        // 2. prev->right非空：左子树已访问过，清空prev->right，访问当前节点，进入右子树
+        // prev->right为空 => 左子树未访问过，记住要返回到当前节点，进入左子树
+        // prev->right非空 => 左子树已访问过，清空prev->right，访问当前节点，进入右子树
         // 在遍历过程中，找出违反递增趋势的第一个和最后一个节点
         TreeNode *firstSwapped = NULL;
         TreeNode *lastSwapped = NULL;
