@@ -16,7 +16,7 @@ public:
     int rob(vector<int>& nums) {
         // 设f(i)表示抢了nums[0..i]后的最大值，0<=i<=N-1
         // f(i) = max( nums[i]+f(i-2), f(i-1) ), 设i<0时f(i)==0
-        // 看递推式的值只跟前两个值有关，分别用prev2和prev1表示
+        // 看递推式当前项只依赖于前两项，前两项分别用prev2和prev1表示
         int prev2 = 0, prev1 = 0;
         int current = 0;
         for (int i = 0; i < nums.size(); ++i) {
