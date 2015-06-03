@@ -101,21 +101,20 @@ void print(RandomListNode *head) {
 
 int main(int argc, const char * argv[]) {
     RandomListNode l1(1);
-//    RandomListNode l2(2);
-//    RandomListNode l3(3);
-//    RandomListNode l4(4);
-//    RandomListNode l5(5);
-//    l1.next = &l2;
-//    l2.next = &l3;
-//    l2.random = &l4;
-//    l3.next = &l4;
-//    l3.random = &l4;
-//    l4.next = &l5;
-//    l4.random = &l2;
+    RandomListNode l2(2);
+    RandomListNode l3(3);
+    RandomListNode l4(4);
+    RandomListNode l5(5);
+    l1.next = &l2;
+    l2.next = &l3;
+    l2.random = &l4;
+    l3.next = &l4;
+    l3.random = &l4;
+    l4.next = &l5;
+    l4.random = &l2;
     
     Solution solution;
     auto head = solution.copyRandomList(&l1);
-    print(&l1);
     print(head);
     
     return 0;
