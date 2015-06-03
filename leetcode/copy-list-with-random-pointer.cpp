@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include <unordered_map>
 
 using namespace std;
 
@@ -18,6 +17,8 @@ struct RandomListNode {
 };
 
 /*
+#include <unordered_map>
+
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
