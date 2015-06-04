@@ -71,7 +71,7 @@ public:
         vector<int> indegree(numCourses, 0);
         for (int i = 0; i < numCourses; ++i) {
             for (int to : graph[i]) {
-            ++indegree[to];
+                ++indegree[to];
             }
         }
         // 源点队列
