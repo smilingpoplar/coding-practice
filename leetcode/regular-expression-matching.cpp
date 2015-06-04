@@ -34,6 +34,7 @@ private:
             if (si < s.size() && (s[si] == c || c == '.')) ++si;
             else return false;
         }
+        return false;
     }
 };
 
