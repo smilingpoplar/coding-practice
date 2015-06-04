@@ -10,10 +10,11 @@
 
 using namespace std;
 
-// 递归解法超时
+/*
 class Solution {
 public:
     bool isMatch(string s, string p) {
+        // 递归法
         return isMatch(s, 0, p, 0);
     }
 private:
@@ -22,28 +23,90 @@ private:
         
         if (p[pi] == '*') {
             int starCount = 1;
-            while (p[pi + starCount] == '*') ++starCount;
-            return isMatchStar(s, si, p, pi + starCount);
+            while (pi + starCount < p.size() && p[pi + starCount] == '*') ++starCount;
+            return isMatch(s, si, p, pi + starCount) || // 匹配0次
+            (si < s.size() && isMatch(s, si + 1, p, pi));  // 递归匹配多次
         }
-        if (si < s.size() && (s[si] == p[pi] || p[pi] == '?')) {
-            return isMatch(s, si + 1, p, pi + 1);
-        }
-        return false;
+        return (si < s.size() && (s[si] == p[pi] || p[pi] == '?')) && isMatch(s, si + 1, p, pi + 1);
     }
-    
-    bool isMatchStar(const string &s, int si, const string &p, int pi) {
-        while (true) {
-            if (isMatch(s, si, p, pi)) return true;
-            if (si < s.size()) ++si;
-            else return false;
+};
+*/
+
+#include <vector>
+
+/*
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        // 动态规划，设f(i,j)表示s[0,i)和p[0,j)匹配，0<=i<=M，0<=j<=N，则
+        // 当 p[j-1]=='*'，i>=1，j>=1
+        //     f(i,j) = f(i,j-1) // 匹配0次
+        //     f(i,j) = f(i-1,j) // 递归匹配多次
+        // 当 p[j-1]!='*'，i>=1，j>=1
+        //     f(i,j) = (s[i-1]==p[j-1] || p[j-1]=='?') && f(i-1,j-1)
+ 
+        const int M = (int)s.size();
+        const int N = (int)p.size();
+        vector<vector<bool>> f(M + 1, vector<bool>(N + 1, false));
+        f[0][0] = true;
+        for (int j = 1; j <= N && p[j - 1] == '*'; ++j) { // 匹配空串
+            f[0][j] = true;
         }
-        return false;
+        for (int i = 1; i <= M; ++i) {
+            for (int j = 1; j <= N; ++j) {
+                if (p[j - 1] == '*') {
+                    f[i][j] = f[i][j - 1] || f[i - 1][j];
+                } else {
+                    f[i][j] = (s[i - 1] == p[j - 1] || p[j - 1] == '?') && f[i - 1][j - 1];
+                }
+            }
+        }
+        return f[M][N];
+    }
+};
+*/
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        // 动态规划，设f(i,j)表示s[0,i)和p[0,j)匹配，0<=i<=M，0<=j<=N，则
+        // 当 p[j-1]=='*'，i>=1，j>=1
+        //     f(i,j) = f(i,j-1) // 匹配0次
+        //     f(i,j) = f(i-1,j) // 递归匹配多次
+        // 当 p[j-1]!='*'，i>=1，j>=1
+        //     f(i,j) = (s[i-1]==p[j-1] || p[j-1]=='?') && f(i-1,j-1)
+        // -----------------------------------------------------------
+        // 观察递推式可知，当前项只由前一项f(x,j-1)或前一组f(i-1,x)的值决定，
+        // 可在i的递增循环中使用一维数组f(j)，并用prev[]记录前一组的值
+        
+        const int M = (int)s.size();
+        const int N = (int)p.size();
+        vector<bool> f(N + 1, false);
+        vector<bool> prev(N + 1, false);
+        f[0] = true;
+        for (int j = 1; j <= N && p[j - 1] == '*'; ++j) { // 匹配空串
+            f[j] = true;
+        }
+        
+        for (int i = 1; i <= M; ++i) {
+            for (int j = 0; j <= N; ++j) {
+                prev[j] = f[j];
+            }
+            for (int j = 1; j <= N; ++j) {
+                if (p[j - 1] == '*') {
+                    f[j] = f[j - 1] || prev[j];
+                } else {
+                    f[j] = (s[i - 1] == p[j - 1] || p[j - 1] == '?') && prev[j - 1];
+                }
+            }
+        }
+        return f[N];
     }
 };
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    cout << solution.isMatch("ab", "*a");
+    cout << solution.isMatch("a", "a*");
     
     return 0;
 }
