@@ -22,7 +22,7 @@ private:
         if (pi == p.size()) return si == s.size();
 
         if (pi + 1 < p.size() && p[pi + 1] == '*') {
-            return (isMatch(s, si, p, pi + 2)) || // 匹配0次
+            return isMatch(s, si, p, pi + 2) || // 匹配0次
             (si < s.size() && (s[si] == p[pi] || p[pi] == '.') && isMatch(s, si + 1, p, pi)); // 递归匹配多次
         }
         return (si < s.size() && (s[si] == p[pi] || p[pi] == '.') && isMatch(s, si + 1, p, pi + 1));
