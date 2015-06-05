@@ -14,9 +14,9 @@ using namespace std;
 class Solution {
 public:
     bool isHappy(int n) {
-        // 设n的位数为m，每位数字最大为9，每次计算的结果最大为81m，而 81m < 10^(m-1) <= n (当m>=4时)，
-        // 因此每次计算的结果落在一个有限区间，如果n不是happy数，计算结果一直进行下去将出现循环
-        unordered_set<int> results; // 用一个集合记录每次计算的结果
+        // 设n为m位数，每位数最大为9，因此每次计算的结果 <= 81m，而 81m < 10^(m-1) <= n (当m较大时，如m>=4)，
+        // 也就是说，每次计算的结果落在有限区间内，如果n不是happy数，不断计算下去计算结果将出现重复
+        unordered_set<int> results; // 记录每次计算的结果
         int result = n;
         while (true) {
             result = calc(result);
