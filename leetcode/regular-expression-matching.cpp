@@ -20,7 +20,7 @@ public:
 private:
     bool isMatch(const string &s, int si, const string &p, int pi) {
         if (pi == p.size()) return si == s.size();
-
+        
         if (pi + 1 < p.size() && p[pi + 1] == '*') {
             return isMatch(s, si, p, pi + 2) || // 匹配0次
             (si < s.size() && (s[si] == p[pi] || p[pi] == '.') && isMatch(s, si + 1, p, pi)); // 递归匹配多次
@@ -32,6 +32,7 @@ private:
 
 #include <vector>
 
+/*
 class Solution {
 public:
     bool isMatch(string s, string p) {
@@ -62,10 +63,50 @@ public:
         return f[M][N];
     }
 };
+*/
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        // 动态规划，设f(i,j)表示s[0,i)和p[0,j)匹配，0<=i<=M，0<=j<=N，则
+        // 当 p[j-1]=='*'，i>=1，j>=2
+        //     f(i,j) = f(i,j-2) // 匹配0次
+        //     f(i,j) = (s[i-1]==p[j-2] || p[j-2]=='.') && f(i-1,j) // 递归匹配多次
+        // 当 p[j-1]!='*'，i>=1，j>=1
+        //     f(i,j) = (s[i-1]==p[j-1] || p[j-1]=='.') && f(i-1,j-1)
+        // ----------------------------------------------------------------
+        // 观察递推式可知，当前项只由当前组的前面项f(i,x)或前一组f(i-1,x)的值决定
+        // 可在i的递增循环中使用一维数组f(j)，并用prev[]记录前一组的值
+        
+        const int M = (int)s.size();
+        const int N = (int)p.size();
+        vector<bool> f(N + 1, false);
+        vector<bool> prev(N + 1, false);
+        prev[0] = f[0] = true;
+        for (int j = 2; j <= N && p[j - 1] == '*'; j += 2) { // 匹配空串
+            prev[j] = f[j] = true;
+        }
+        
+        for (int i = 1; i <= M; ++i) {
+            f[0] = false;
+            for (int j = 1; j <= N; ++j) {
+                if (j >= 2 && p[j - 1] == '*') {
+                    f[j] = f[j - 2] || ((s[i - 1] == p[j - 2] || p[j - 2] == '.') && prev[j]);
+                } else {
+                    f[j] = (s[i - 1] == p[j - 1] || p[j - 1] == '.') && prev[j - 1];
+                }
+            }
+            for (int j = 0; j <= N; ++j) {
+                prev[j] = f[j];
+            }
+        }
+        return f[N];
+    }
+};
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    cout << solution.isMatch("a", "a*");
+    cout << solution.isMatch("aa", "a");
     
     return 0;
 }
