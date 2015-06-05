@@ -65,7 +65,7 @@ public:
     }
 };
 */
-
+/*
 class Solution {
 public:
     bool isMatch(string s, string p) {
@@ -102,6 +102,39 @@ public:
             }
         }
         return f[N];
+    }
+};
+*/
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        // 把p看成被*分隔的子串，而*可以匹配任意个字符，s和p匹配只要能在s中依次找到这些被分隔的子串，所以主循环就是遍历s去搜索这些子串
+        // 在搜索过程中遇到*，说明*前的子串已经匹配，要继续在s中搜索*后的子串，要记录下*后子串位置pCurrent和s当前位置sCurrent以备回溯
+        const int M = (int)s.size();
+        const int N = (int)p.size();
+        int si = 0;
+        int pi = 0;
+        int sCurrent = -1;
+        int pCurrent = -1;
+        while (si < M) {
+            if (pi < N && (s[si] == p[pi] || p[pi] == '?')) {
+                ++si;
+                ++pi;
+            } else if (pi < N && p[pi] == '*') {
+                sCurrent = si;
+                pCurrent = ++pi;
+            } else if (pCurrent != -1) { // 当前搜索不匹配，还有被*分隔的子串要搜索，回溯
+                si = ++sCurrent;
+                pi = pCurrent;
+            } else {
+                return false;
+            }
+        }
+        // s遍历完了p还剩下，p应只剩下*
+        while (pi < N && p[pi] == '*') ++pi;
+
+        return pi == N;
     }
 };
 
