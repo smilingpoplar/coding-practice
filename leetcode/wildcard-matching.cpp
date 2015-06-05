@@ -44,7 +44,7 @@ public:
         //     f(i,j) = f(i-1,j) // 递归匹配多次
         // 当 p[j-1]!='*'，i>=1，j>=1
         //     f(i,j) = (s[i-1]==p[j-1] || p[j-1]=='?') && f(i-1,j-1)
- 
+        
         const int M = (int)s.size();
         const int N = (int)p.size();
         vector<vector<bool>> f(M + 1, vector<bool>(N + 1, false));
@@ -83,21 +83,22 @@ public:
         const int N = (int)p.size();
         vector<bool> f(N + 1, false);
         vector<bool> prev(N + 1, false);
-        f[0] = true;
+        prev[0] = f[0] = true;
         for (int j = 1; j <= N && p[j - 1] == '*'; ++j) { // 匹配空串
-            f[j] = true;
+            prev[j] = f[j] = true;
         }
         
         for (int i = 1; i <= M; ++i) {
-            for (int j = 0; j <= N; ++j) {
-                prev[j] = f[j];
-            }
+            f[0] = false;
             for (int j = 1; j <= N; ++j) {
                 if (p[j - 1] == '*') {
                     f[j] = f[j - 1] || prev[j];
                 } else {
                     f[j] = (s[i - 1] == p[j - 1] || p[j - 1] == '?') && prev[j - 1];
                 }
+            }
+            for (int j = 0; j <= N; ++j) {
+                prev[j] = f[j];
             }
         }
         return f[N];
@@ -106,7 +107,7 @@ public:
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    cout << solution.isMatch("a", "a*");
+    cout << solution.isMatch("aa", "a*");
     
     return 0;
 }
