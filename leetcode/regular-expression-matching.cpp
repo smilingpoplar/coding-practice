@@ -106,7 +106,7 @@ public:
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    cout << solution.isMatch("aa", "a");
+    cout << solution.isMatch("aaa", "ab*a");
     
     return 0;
 }
