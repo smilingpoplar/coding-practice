@@ -19,7 +19,6 @@ struct ListNode {
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if (!head || !head->next) return head;
         ListNode dummy(-1);
         dummy.next = head; // 在head前添加dummy节点
         auto prev = &dummy;
