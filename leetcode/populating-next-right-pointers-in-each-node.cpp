@@ -17,10 +17,11 @@ struct TreeLinkNode {
     TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 
-/* 递归
+/*
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
+        // 递归
         if (!root) return;
         connect(root->left, root->right);
     }
