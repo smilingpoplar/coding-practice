@@ -11,28 +11,6 @@
 
 using namespace std;
 
-/*
-class Solution {
-public:
-    int maxProduct(vector<int>& nums) {
-        // 设f(i,j)表示nums[i,j]的乘积，f(i,j)=f(i,j-1)*nums[j]，0<=i<=j<=N-1
-        // 在i的递增循环中降维，设f(j)表示nums[i,j]的乘积，f(j)=f(j-1)*nums[j]
-        // 在j的递增循环中再降维，设f表示nums[i,j]的乘积，f=f*nums[j]
-        // O(n^2)时间，超时
-        const int N = (int)nums.size();
-        int maxProduct = INT_MIN;
-        for (int i = 0; i < N; ++i) {
-            int f = 1;
-            for (int j = i; j < N; ++j) {
-                f *= nums[j];
-                if (f > maxProduct) maxProduct = f;
-            }
-        }
-        return maxProduct;
-    }
-};
-*/
-
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
