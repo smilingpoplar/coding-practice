@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include <queue>
 
 using namespace std;
 
@@ -17,58 +16,41 @@ struct TreeLinkNode {
     TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 
-/*
-class Solution {
-public:
-    void connect(TreeLinkNode *root) {
-        // 递归
-        if (!root) return;
-        connect(root->left, root->right);
-    }
-private:
-    void connect(TreeLinkNode *node, TreeLinkNode *sibling) {
-        if (!node) return;
-        node->next = sibling;
-        connect(node->left, node->right);
-        if (!sibling) return;
-        connect(node->right, sibling->left);
-        connect(sibling->left, sibling->right);
-    }
-};
-*/
+// 完全适用 populating-next-right-pointers-in-each-node-ii 的解法
 
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        // 层序遍历
-        queue<TreeLinkNode *> queue;
-        if (root) queue.push(root);
-        while (!queue.empty()) {
-            TreeLinkNode *prev = NULL;
-            int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; ++i) {
-                auto node = queue.front();
-                queue.pop();
-                if (prev) prev->next = node;
-                
-                if (node->left) queue.push(node->left);
-                if (node->right) queue.push(node->right);
-                prev = node;
+        // 层序遍历，利用next指针，O(1)空间
+        // 不变式：当前层已用next指针连起来了
+        while (root) { // 遍历当前层
+            TreeLinkNode *prev = NULL; // 下一层被处理节点的prev
+            TreeLinkNode *leftMost = NULL; // 下一层的leftMost节点
+            for (auto current = root; current; current = current->next) {
+                if (current->left) {
+                    if (prev) prev->next = current->left;
+                    prev = current->left;
+                }
+                if (current->right) {
+                    if (prev) prev->next = current->right;
+                    prev = current->right;
+                }
+                if (!leftMost) leftMost = current->left ? current->left : current->right;
             }
+            root = leftMost;
         }
     }
 };
 
 void print(TreeLinkNode *root) {
-    auto leftMost = root;
-    while (leftMost) {
-        auto p = leftMost;
-        while (p) {
-            cout << p->val << " ";
-            p = p->next;
+    while (root) { // 遍历当前层
+        TreeLinkNode *leftMost = NULL; // 下一层的leftMost节点
+        for (auto current = root; current; current = current->next) {
+            cout << current->val << " ";
+            if (!leftMost) leftMost = current->left ? current->left : current->right;
         }
         cout << endl;
-        leftMost = leftMost->left;
+        root = leftMost;
     }
 }
 
