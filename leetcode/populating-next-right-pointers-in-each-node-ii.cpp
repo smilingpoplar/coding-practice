@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include <queue>
 
 using namespace std;
 
@@ -18,6 +17,8 @@ struct TreeLinkNode {
 };
 
 /*
+#include <queue>
+
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
