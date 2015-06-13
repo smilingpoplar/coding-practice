@@ -25,7 +25,7 @@ public:
             if (nums[i] < nums[i + 1]) break;
             --i;
         }
-        if (i < 0) { // 不存在违反递增趋势的数
+        if (i < 0) { // 不存在违反从右到左递增趋势的数
             reverse(nums.begin(), nums.end());
             return;
         }
