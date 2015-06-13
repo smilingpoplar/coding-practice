@@ -22,8 +22,7 @@ public:
         const int N = (int)h.size();
         int largestArea = 0;
         vector<int> stack;
-        int i= 0;
-        while (i <= N) {
+        for (int i = 0; i <= N; ) {
             if (stack.empty() || (i < N && h[i] >= h[stack.back()])) {
                 stack.push_back(i);
                 ++i;
