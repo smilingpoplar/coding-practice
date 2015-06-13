@@ -35,7 +35,7 @@ private:
         }
         swap(nums[j], nums[l]);
         
-        int order = j - l + 1; //nums[j]是第几大的数
+        int order = j - l + 1; // nums[j]是第几大的数
         if (k == order) return nums[j];
         if (k < order) return findKthLargest(nums, l, j - 1, k);
         return findKthLargest(nums, j + 1, r, k - order);
