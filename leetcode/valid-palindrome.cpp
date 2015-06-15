@@ -19,7 +19,7 @@ public:
         while (i < j) {
             while (i < j && !isalnum(s[i])) ++i;
             while (i < j && !isalnum(s[j])) --j;
-            if (i < j && s[i] != s[j]) return false;
+            if (s[i] != s[j]) return false;
             ++i;
             --j;
         }
