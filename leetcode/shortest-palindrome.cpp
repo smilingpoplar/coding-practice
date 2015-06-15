@@ -41,8 +41,8 @@ public:
 };
 
 int main(int argc, const char * argv[]) {
-    Solution s;
-    cout << s.shortestPalindrome("ba");
+    Solution solution;
+    cout << solution.shortestPalindrome("ba");
     
     return 0;
 }
