@@ -15,13 +15,13 @@ public:
     bool isPalindrome(int x) {
         if (x < 0) return false;
         // 看x反转后是否仍为x，反转后溢出的情况仍适用
-        int reverse = 0;
+        int r = 0;
         int tmpX = x;
         while (tmpX) {
-            reverse = reverse * 10 + tmpX % 10;
+            r = r * 10 + tmpX % 10;
             tmpX /= 10;
         }
-        return reverse == x;
+        return r == x;
     }
 };
 
