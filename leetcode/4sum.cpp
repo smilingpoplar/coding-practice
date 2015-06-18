@@ -14,11 +14,11 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        vector<vector<int>> result;
         const int N = (int)nums.size();
-        if (N < 4) return {};
+        if (N < 4) return result;
         sort(nums.begin(), nums.end());
         
-        vector<vector<int>> result;
         for (int first = 0; first < N - 3; ++first) {
             while (0 < first && first < N - 3 && nums[first] == nums[first - 1]) ++first;
             for (int second = first + 1; second < N - 2; ++second) {
