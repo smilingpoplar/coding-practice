@@ -14,16 +14,16 @@ using namespace std;
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
-        // 把M行N列的矩形看作M个以第i行为底的直方图，直方图从底往上计算高度直到碰见0
+        // 把M行N列的矩阵看作M个以第i行为底的直方图，直方图从底往上计算高度直到碰见0
         if (matrix.empty()) return 0;
         const int M = (int)matrix.size();
         const int N = (int)matrix[0].size();
-        int largestRectangle = INT_MIN;
+        int largestRectangle = 0;
         vector<int> h(N, 0); // 直方图的高度数组
         for (int i = 0; i < M; ++i) {
             for (int j = 0; j < N; ++j) {
                 if (matrix[i][j] == '0') h[j] = 0;
-                else h[j] += 1;
+                else ++h[j];
             }
             largestRectangle = max(largestRectangle, largestRectangleInHistogram(h));
         }
