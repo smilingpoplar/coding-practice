@@ -22,7 +22,8 @@ public:
         const int N = (int)h.size();
         int largestArea = 0;
         vector<int> stack;
-        for (int i = 0; i <= N; ) {
+        int i = 0;
+        while (i <= N) { // i==N是假想的高度为0处
             if (stack.empty() || (i < N && h[i] >= h[stack.back()])) {
                 stack.push_back(i);
                 ++i;
