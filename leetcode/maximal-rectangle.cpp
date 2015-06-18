@@ -19,7 +19,7 @@ public:
         const int M = (int)matrix.size();
         const int N = (int)matrix[0].size();
         int largestRectangle = 0;
-        vector<int> h(N, 0); // 直方图的高度数组
+        vector<int> h(N, 0);
         for (int i = 0; i < M; ++i) {
             for (int j = 0; j < N; ++j) {
                 if (matrix[i][j] == '0') h[j] = 0;
@@ -41,7 +41,8 @@ private:
         const int N = (int)h.size();
         int largestArea = 0;
         vector<int> stack;
-        for (int i = 0; i <= N; ) {
+        int i = 0;
+        while (i <= N) { // i==N是假想的高度为0处
             if (stack.empty() || (i < N && h[i] >= h[stack.back()])) {
                 stack.push_back(i);
                 ++i;
