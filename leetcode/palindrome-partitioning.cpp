@@ -14,22 +14,13 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> partition(string s) {
-        // 设f(i,j)表示s[i,j]是parlindrome，0<=i<=j<=N-1，则
-        // f(i,j) = s[i]==s[j] && f(i+1,j-1), 当j-i>=2
-        // f(i,j) = s[i]==s[j], 当j-i==1
-        // f(i,j) = true, 当j-i==0
+        // 设f(i,j)表示s[i,j]是回文串，0<=i<=j<=N-1
+        // f(i,j) = f(i+1,j-1) && s[i]==s[j], 当i+1>j-1时是空串f(i+1,j-1)为true
         const int N = (int)s.size();
-        vector<vector<bool>> f(N, vector<bool>(N, 0));
-        for (int i = 0; i < N; ++i) {
-            f[i][i] = true;
-        }
-        for (int i = 0; i < N - 1; ++i) {
-            f[i][i + 1] = (s[i] == s[i + 1]);
-        }
-        for (int distance = 2; distance < N; ++distance) {
-            for (int i = 0; i < N - distance; ++i) {
-                int j = i + distance;
-                f[i][j] = (s[i] == s[j]) && f[i + 1][j - 1];
+        vector<vector<bool>> f(N, vector<bool>(N, false));
+        for (int i = N - 1; i >= 0; --i) {
+            for (int j = i; j < N; j++) {
+                f[i][j] = (i + 1 > j - 1 || f[i + 1][j - 1]) && s[i] == s[j];
             }
         }
         vector<vector<string>> result;
