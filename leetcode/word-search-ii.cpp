@@ -13,26 +13,22 @@ using namespace std;
 
 class TrieNode {
 public:
-    TrieNode() : children(26, NULL) {}
-
-    vector<TrieNode *> children;
+    TrieNode() : next(26, NULL) { }
+    vector<TrieNode *> next;
     string word;
 };
 
 class Trie {
 public:
-    Trie() {
-        root = new TrieNode();
-    }
-    ~Trie() {
-        deleteNode(root);
-    }
+    Trie() : root(new TrieNode()) { }
+    ~Trie() { deleteNode(root); }
+    
     void insert(const string &word) {
-        TrieNode *node = root;
+        auto node = root;
         for (char c : word) {
             int index = c - 'a';
-            if (!node->children[index]) node->children[index] = new TrieNode();
-            node = node->children[index];
+            if (!node->next[index]) node->next[index] = new TrieNode();
+            node = node->next[index];
         }
         node->word = word;
     }
@@ -40,7 +36,7 @@ public:
     TrieNode *root;
 private:
     void deleteNode(TrieNode *node) {
-        for (auto child : node->children) {
+        for (auto child : node->next) {
             if (child) deleteNode(child);
         }
         delete node;
@@ -72,7 +68,7 @@ private:
         if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size()) return;
         if (visited[i][j]) return;
         visited[i][j] = true;
-        auto node = trieNode->children[board[i][j] - 'a'];
+        auto node = trieNode->next[board[i][j] - 'a'];
         if (node) {
             if (!node->word.empty()) {
                 result.push_back(node->word);
