@@ -22,9 +22,7 @@ public:
 class Trie {
 public:
     Trie() : root(new TrieNode()) { }
-    ~Trie() {
-        deleteNode(root);
-    }
+    ~Trie() { deleteNode(root); }
     
     // Inserts a word into the trie.
     void insert(string s) {
