@@ -20,16 +20,17 @@ class WordDictionary {
     };
 public:
     WordDictionary() : _root(new TrieNode()) { }
+    ~WordDictionary() { deleteNode(_root); }
     
     // Adds a word into the data structure.
     void addWord(string word) {
-        TrieNode *p = _root;
+        auto node = _root;
         for (char c : word) {
             int index = c - 'a' ;
-            if (!p->next[index]) p->next[index] = new TrieNode();
-            p = p->next[index];
+            if (!node->next[index]) node->next[index] = new TrieNode();
+            node = node->next[index];
         }
-        p->isWord = true;
+        node->isWord = true;
     }
     
     // Returns if the word is in the data structure. A word could
@@ -40,23 +41,31 @@ public:
 private:
     bool search(TrieNode *root, const string &word) {
         if (!root) return false;
-        TrieNode *p = root;
+        auto node = root;
         for (int i = 0; i < word.size(); ++i) {
             char c = word[i];
             if (c == '.') {
                 string substr = word.substr(i + 1);
-                for (auto next : p->next) {
+                for (auto next : node->next) {
                     if (search(next, substr)) return true;
                 }
                 return false;
             }
             int index = c - 'a';
-            if (!p->next[index]) return false;
-            p = p->next[index];
+            if (!node->next[index]) return false;
+            node = node->next[index];
         }
-        return p->isWord;
+        return node->isWord;
     }
-
+    
+    void deleteNode(TrieNode *node) {
+        if (!node) return;
+        for (auto next : node->next) {
+            deleteNode(next);
+        }
+        delete node;
+    }
+    
     TrieNode *_root;
 };
 
