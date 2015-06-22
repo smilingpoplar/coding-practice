@@ -14,17 +14,14 @@ using namespace std;
 class TrieNode {
 public:
     // Initialize your data structure here.
-    TrieNode() : children(26, NULL), isWord(false) {}
-    
-    vector<TrieNode *> children;
+    TrieNode() : next(26, NULL), isWord(false) {}
+    vector<TrieNode *> next;
     bool isWord;
 };
 
 class Trie {
 public:
-    Trie() {
-        root = new TrieNode();
-    }
+    Trie() : root(new TrieNode()) { }
     ~Trie() {
         deleteNode(root);
     }
@@ -34,10 +31,8 @@ public:
         auto node = root;
         for (char c : s) {
             int index = c - 'a';
-            if (!node->children[index]) {
-                node->children[index] = new TrieNode();
-            }
-            node = node->children[index];
+            if (!node->next[index]) node->next[index] = new TrieNode();
+            node = node->next[index];
         }
         node->isWord = true;
     }
@@ -47,10 +42,8 @@ public:
         auto node = root;
         for (char c : key) {
             int index = c - 'a';
-            if (!node->children[index]) {
-                return false;
-            }
-            node = node->children[index];
+            if (!node->next[index]) return false;
+            node = node->next[index];
         }
         return node->isWord;
     }
@@ -61,23 +54,22 @@ public:
         auto node = root;
         for (char c : prefix) {
             int index = c - 'a';
-            if (!node->children[index]) {
-                return false;
-            }
-            node = node->children[index];
+            if (!node->next[index]) return false;
+            node = node->next[index];
         }
         return true;
     }
     
 private:
     void deleteNode(TrieNode *node) {
-        for (auto child : node->children) {
-            if (child) deleteNode(child);
+        if (!node) return;
+        for (auto next : node->next) {
+            deleteNode(next);
         }
         delete node;
     }
     
-    TrieNode* root;
+    TrieNode *root;
 };
 
 int main(int argc, const char * argv[]) {
