@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
@@ -27,9 +26,9 @@ public:
         int leftHeight = getHeight(root->left);
         int rightHeight = getHeight(root->right);
         if (leftHeight == rightHeight) { // 左子树是满二叉树
-            return pow(2, leftHeight) + countNodes(root->right);
+            return (1 << leftHeight) + countNodes(root->right);
         } else { // 右子树是满二叉树
-            return pow(2, rightHeight) + countNodes(root->left);
+            return (1 << rightHeight) + countNodes(root->left);
         }
     }
     */
@@ -40,10 +39,10 @@ public:
             int leftHeight = getHeight(root->left);
             int rightHeight = getHeight(root->right);
             if (leftHeight == rightHeight) { // 左子树是满二叉树
-                count += pow(2, leftHeight);
+                count += (1 << leftHeight);
                 root = root->right;
             } else { // 右子树是满二叉树
-                count += pow(2, rightHeight);
+                count += (1 << rightHeight);
                 root = root->left;
             }
         }
