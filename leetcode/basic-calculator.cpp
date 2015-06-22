@@ -44,7 +44,7 @@ public:
                     calculate(operands, operators);
                 }
                 operators.pop_back(); // 弹出'('
-            } else { // '+'/'-'
+            } else { // '+'||'-'
                 while (!operators.empty() && priority[c] <= priority[operators.back()]) {
                     calculate(operands, operators);
                 }
@@ -57,7 +57,7 @@ public:
         
         return operands.back();
     }
-
+    
 private:
     void calculate(vector<int> &operands, vector<char> &operators) {
         if (operators.empty() || operands.size() < 2) return;
@@ -77,7 +77,7 @@ private:
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    cout << solution.calculate("2147483647");
+    cout << solution.calculate("(1 +(4+5+2)- 3)+(6+8)" );
     
     return 0;
 }
