@@ -31,12 +31,12 @@ public:
         auto fast = head;
         auto slow = head;
         ListNode *prev = NULL;
-        while (fast->next && fast->next->next) {
+        while (fast && fast->next) {
             fast = fast->next->next;
             prev = slow;
             slow = slow->next;
         }
-        // slow指向中间节点（偶数时偏左），prev是它的前一节点
+        // slow指向中间节点（偶数时偏右），prev是它的前一节点
         auto root = new TreeNode(slow->val);
         if (prev) {
             prev->next = NULL;
