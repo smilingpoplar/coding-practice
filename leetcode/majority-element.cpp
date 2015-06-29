@@ -22,7 +22,7 @@ public:
                 ++count;
             } else if (num == candidate) {
                 ++count;
-            } else {
+            } else { // 一次删掉k个不同的数
                 --count;
             }
         }
