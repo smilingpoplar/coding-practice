@@ -20,14 +20,14 @@ class Solution {
 public:
     void reorderList(ListNode* head) {
         if (!head) return;
-        // 快慢指针，将链表分成两段
+        // 快慢指针找中间节点（偶数时偏左）
         auto fast = head;
         auto slow = head;
-        while (fast->next && fast->next->next) { // 用fast&&fast->next会让slow指向后半段的首元素，没用处
+        while (fast->next && fast->next->next) { // 用fast&&fast->next会找到偶数时偏右的中间节点
             fast = fast->next->next;
             slow = slow->next;
         }
-        // 这时slow指向前半段的最后元素
+        // 这时slow指向中间元素
         auto list2 = slow->next;
         slow->next = NULL;
         // 将list2反转
