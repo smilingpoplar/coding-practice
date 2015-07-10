@@ -27,7 +27,7 @@ class Solution {
 public:
     TreeNode* sortedListToBST(ListNode *head) {
         if (!head) return NULL;
-        // 快慢指针到中间节点（偶数时偏右）
+        // 快慢指针找中间节点（偶数时偏右奇数时中间）
         auto fast = head;
         auto slow = head;
         ListNode *prev = NULL;
