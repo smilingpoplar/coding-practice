@@ -20,14 +20,14 @@ class Solution {
 public:
     void reorderList(ListNode* head) {
         if (!head) return;
-        // 快慢指针找中间节点（偶数时偏左）
+        // 快慢指针找中间节点（偶数时偏左奇数时中间）
         auto fast = head;
         auto slow = head;
-        while (fast->next && fast->next->next) { // 用fast&&fast->next会找到偶数时偏右的中间节点
+        while (fast->next && fast->next->next) { // 用fast&&fast->next找的中间节点是偶数时偏右奇数时中间
             fast = fast->next->next;
             slow = slow->next;
         }
-        // 这时slow指向中间元素
+        // slow指向中间节点
         auto list2 = slow->next;
         slow->next = NULL;
         // 将list2反转
