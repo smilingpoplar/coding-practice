@@ -19,6 +19,9 @@ public:
         
         for (auto &c : num1) c -= '0';
         for (auto &c : num2) c -= '0';
+        // 将num1和num2从低位算起的第i位和第j位相乘，结果加到result从低位算起的第i+j位
+        // 这里将num1和num2从高位算起的第i位和第j位相乘，相当于从低位算起的第(M-1-i)位和第(N-1-j)位相乘，
+        // 结果加到result从低位算起的第(M-1-i)+(N-1-j)位，从高位算起的第(M+N-1)-(M-1-i)-(N-1-j)=i+j+1位
         for (int i = M - 1; i >= 0; --i) {
             int carry = 0;
             for (int j = N - 1; j >= 0; --j) {
