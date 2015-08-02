@@ -15,7 +15,7 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         // 相当于在有序数组A[0,M*N)中搜索
-        // 不变式：A[l]<=target<A[u]（l<u）（即A[l,u)是数组中可能包含target的部分）
+        // 不变式：A[l,u)是数组中可能包含target的部分
         if (matrix.empty()) return false;
         const int M = (int)matrix.size();
         const int N = (int)matrix[0].size();
@@ -24,9 +24,9 @@ public:
         while (l < u) {
             int mid = l + (u - l) / 2;
             int midValue = matrix[mid / N][mid % N];
-            if (midValue == target) {
+            if (target == midValue) {
                 return true;
-            } else if (midValue < target) {
+            } else if (target > midValue) {
                 l = mid + 1;
             } else {
                 u = mid;
