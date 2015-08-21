@@ -27,9 +27,9 @@ public:
         int r = (int)nums.size() - 1;
         while (l < r) {
             int mid = l + (r - l) / 2;
-            // 考虑旋转数组时，要同时考虑旋转数组的特例——有序数组，这里较tricky：要跟数组右端nums[r]比较！
-            // 若跟左端nums[l]比，当nums[mid]>nums[l]时旋转数组要更新l、有序数组要更新r，两者矛盾
-            // 而跟右端nums[r]比，不变式总能成立（要分别考虑：<、==、>三种情况）
+            // 考虑旋转数组时，要同时考虑旋转数组的特例——有序数组，这里较tricky：要跟数组右端nums[r]比！
+            // 若跟左端nums[l]比，当nums[mid]>nums[l]时旋转数组要更新l、有序数组要更新r，两者矛盾；而跟右端nums[r]比，不变式总能成立
+            // 分别考虑<、==、>三种情况（然后合并情况相同的<和==）
             if (nums[mid] <= nums[r]) {
                 r = mid;
             } else { // nums[mid] > nums[r]
