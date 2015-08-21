@@ -17,9 +17,9 @@ public:
         int one = 0; // 用one记录到当前处理的元素为止，二进制1出现1次（mod 3）的那些位
         int two = 0; // 用two记录到当前处理的元素为止，二进制1出现2次（mod 3）的那些位
         for (auto num : nums) {
-            two |= one & num; // two：原0遇1 ->1，原1遇1（即二进制1出现了4次，不会遇到这种情况，因为后面出现3次时就做了清零）
-            one ^= num; // one：原0遇1 ->1, 原1遇1（即出现两次要统计到two中）->0，所以异或
-            int clearThree = ~(one & two); // 出现3次的二进制1进行清零
+            two |= one & num; // 对于two：原0遇1 ->1；不可能原1遇1（即二进制1出现了4次，因为后面出现3次时就做了清零）
+            one ^= num; // 对于one：原0遇1 ->1, 原1遇1（即二进制1出现了2次，前面已统计到two中，所以清零）->0
+            int clearThree = ~(one & two); // 出现3次的二进制1要进行清零
             one &= clearThree;
             two &= clearThree;
         }
