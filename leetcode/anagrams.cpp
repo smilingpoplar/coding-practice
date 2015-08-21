@@ -14,33 +14,33 @@ using namespace std;
 
 class Solution {
 public:
-    vector<string> anagrams(vector<string>& strs) {
+    vector<vector<string>> groupAnagrams(vector<string> &strs) {
         unordered_map<string, vector<string>> map;
         for (const auto &str : strs) {
-            string s(str);
-            sort(s.begin(), s.end());
-            map[s].push_back(str);
+            string key(str);
+            sort(key.begin(), key.end());
+            map[key].push_back(str);
         }
         
-        vector<string> result;
-        for (const auto &kv : map) {
-            const auto &v = kv.second;
-            if (v.size() > 1) {
-                for (auto it = v.begin(); it != v.end(); ++it) {
-                    result.push_back(*it);
-                }
-            }
+        vector<vector<string>> result;
+        for (auto &kv : map) {
+            auto &v = kv.second;
+            sort(v.begin(), v.end());
+            result.push_back(v);
         }
         return result;
     }
 };
 
 int main(int argc, const char * argv[]) {
-    vector<string> strs = {"aba", "abc", "baa"};
+    vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
     Solution solution;
-    auto result = solution.anagrams(strs);
-    for (const auto &s : result) {
-        cout << s << " ";
+    auto result = solution.groupAnagrams(strs);
+    for (const auto &group : result) {
+        for (const auto &s : group) {
+            cout << s << " ";
+        }
+        cout << endl;
     }
     
     return 0;
