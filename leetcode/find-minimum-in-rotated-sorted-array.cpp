@@ -16,12 +16,12 @@ public:
     int findMin(vector<int>& nums) {
         if (nums.empty()) return INT_MIN;
 
-        // 数组对半分，一半旋转一半有序，保持l在左半r在右半
         int l = 0;
         int r = (int)nums.size() - 1;
         while (l + 1 < r) { // 至少3个元素，mid可以和l比较
             if (nums[l] < nums[r]) return nums[l];
-            
+
+            // 旋转数组对半分，一半旋转一半有序        
             int mid = l + (r - l) / 2;
             if (nums[mid] > nums[l]) { // 左半有序，那么右半旋转
                 l = mid;
