@@ -27,8 +27,12 @@ public:
                 l = mid;
             } else if (nums[mid] < nums[l]) { // 左半旋转
                 r = mid;
-            } else { // 某半边全是重复元素，不管nums[mid]==nums[r]成不成立，都不知最小元素在哪边
-                l++;
+            } else { // 某半边全是重复元素
+                if (nums[mid] != nums[r]) { // 在右半边找
+                    l = mid;
+                } else { // 不知哪边全是重复元素，两边都得找
+                    l++;
+                }
             }
         }
         
