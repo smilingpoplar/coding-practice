@@ -2,8 +2,8 @@
 //  longest-univalue-path
 //  https://leetcode.com/problems/longest-univalue-path/
 //
-//  Created by smilingpoplar on 15/6/23.
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Created by smilingpoplar on 17/10/12.
+//  Copyright (c) 2017年 YangLe. All rights reserved.
 //
 
 #include <iostream>
