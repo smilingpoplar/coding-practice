@@ -33,9 +33,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
-    Solution solution;
-    cout << solution.convert("PAYPALISHIRING", 3);
-    
+int main(int argc, const char * argv[]) {    
     return 0;
 }
