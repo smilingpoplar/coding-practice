@@ -16,8 +16,8 @@ public:
         int sum = 0;
         for (int i = 0; i < nums.size(); i++)
             sum += nums[i];
-        if (sum < S || (sum + S) % 2 == 1) return 0;
-        sum = (sum + S) / 2;
+        if (sum < S || (sum - S) % 2 != 0) return 0;
+        sum = (sum - S) / 2;
 
         vector<int> dp(sum + 1, 0);
         dp[0] = 1;
