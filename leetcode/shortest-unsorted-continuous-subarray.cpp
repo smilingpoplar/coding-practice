@@ -10,6 +10,25 @@
 
 using namespace std;
 
+/*
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        const int N = (int)nums.size();
+        int maxL = INT_MIN, minR = INT_MAX;
+        int l = 0, r = -1;
+        for (int i = 0, j = N - 1; i < N; i++, j--) {
+            maxL = max(maxL, nums[i]);
+            if (nums[i] != maxL) r = i;
+            
+            minR = min(minR, nums[j]);
+            if (nums[j] != minR) l = j;
+        }
+        return r - l + 1;
+    }
+};
+ */
+
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
