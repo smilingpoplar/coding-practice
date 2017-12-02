@@ -31,10 +31,10 @@ public:
         vector<int> ans;
         for (const auto &interval : intervals) {
             auto it = m.lower_bound(interval.end);
-            if (it == m.end()) {
-                ans.push_back(-1);
-            } else {
+            if (it != m.end()) {
                 ans.push_back(it->second);
+            } else {
+                ans.push_back(-1);
             }
         }
         return ans;
