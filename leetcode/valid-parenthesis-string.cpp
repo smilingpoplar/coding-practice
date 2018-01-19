@@ -2,7 +2,7 @@
 //  valid-parenthesis-string
 //  https://leetcode.com/problems/valid-parenthesis-string/
 //
-//  Created by smilingpoplar on 18/01/18.
+//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 
@@ -13,17 +13,14 @@ using namespace std;
 class Solution {
 public:
     bool checkValidString(string s) {
-        return check(s, 0, 0);
-    }
-    
-    // s[index..]且有lefts个左括号剩余
-    bool check(const string &s, int index, int lefts) {
-        if (index == s.size() && lefts == 0) return true;
-        if (lefts < 0) return false;
-        if (s[index] == '(') return check(s, index+1, lefts+1);
-        if (s[index] == ')') return check(s, index+1, lefts-1);
-        if (s[index] == '*') return check(s, index+1, lefts) || check(s, index+1, lefts+1) || check(s, index+1, lefts-1);
-        return false;
+        int lo = 0, hi = 0; // 左括号剩余数的可能取值范围[lo, hi]
+        for (char c : s) {
+            lo += (c == '(') ? 1 : -1;
+            hi += (c == ')') ? -1 : 1;
+            if (hi < 0) return false;
+            lo = max(lo, 0);
+        }
+        return lo == 0;
     }
 };
 
