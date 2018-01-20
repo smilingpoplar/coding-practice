@@ -14,29 +14,23 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        // 最多买卖两次，可以把prices[0,N-1]分成prices[0,i]和prices[i,N-1]分别求maxProfix (1<=i<N)
         const int N = (int)prices.size();
         if (N < 2) return 0;
-        // maxProfit[0,i]
-        vector<int> maxProfitLeft(N, 0);
-        int minPrice = prices[0];
-        for (int i = 1; i < N; i++) {
-            maxProfitLeft[i] = max(maxProfitLeft[i - 1], prices[i] - minPrice);
-            minPrice = min(minPrice, prices[i]);
+        
+        // 设dp[i][j][s]表示第i天、剩余交易数j、手上s股股票时的最大利润，s=0或1
+        // dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1] + prices[i] /*卖股票*/)
+        // dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - prices[i] /*买股票，新交易*/)
+        // 初始dp[-1][j][0]=0，dp[-1][j][1]=INT_MIN
+        // dp[i][][]只依赖dp[i-1][][]，降一维
+        const int k = 2;
+        vector<vector<int>> dp(k + 1, vector<int>({ 0, INT_MIN }));
+        for (int price : prices) {
+            for (int j = k; j >= 1; --j) { // 倒序，这样等号右边的dp[j-1][]来自旧状态[i-1]
+                dp[j][0] = max(dp[j][0], dp[j][1] + price);
+                dp[j][1] = max(dp[j][1], dp[j-1][0] - price);
+            }
         }
-        // maxProfit[i,N-1]
-        vector<int> maxProfitRight(N, 0);
-        int maxPrice = prices[N - 1];
-        for (int i = N - 2; i >= 0; i--) {
-            maxProfitRight[i] = max(maxProfitRight[i + 1], maxPrice - prices[i]);
-            maxPrice = max(maxPrice, prices[i]);
-        }
-        // maxProfix[0,N-1]
-        int maxProfit = 0;
-        for (int i = 1; i < N; i++) {
-            maxProfit = max(maxProfit, maxProfitLeft[i] + maxProfitRight[i]);
-        }
-        return maxProfit;
+        return dp[k][0];
     }
 };
 
