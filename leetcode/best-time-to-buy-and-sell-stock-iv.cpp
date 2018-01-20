@@ -16,36 +16,38 @@ public:
     int maxProfit(int k, vector<int>& prices) {
         const int N = (int)prices.size();
         if (k == 0 || N < 2) return 0;
-        // 特例：当k>=N/2时，相当于对交易次数无限制，变成问题ii，只要在价格上升阶段买入卖出即可
-        if (k >= N / 2) return maxProfitInf(prices);
+        // k足够大时，相当于对交易次数无限制
+        if (k >= N/2) return maxProfitInfK(prices);
         
-        // 最多买卖k次，动态规划，在第i天可买和卖，用两个变量分别记录买和卖后的最大利润
-        // 用buy(i,j)表示prices[0,i]最多买j次后的最大利润，sell(i,j)表示prices[0,i]最多卖j次后的最大利润 (0<=i<N, 0<=j<=k)
-        // buy(i,j) = max( sell(i-1,j-1)-prices[i] /*第i天买*/, buy(i-1,j) /*第i天不买*/ )
-        // sell(i,j) = max( buy(i-1,j)+prices[i] /*第i天卖*/, sell(i-1,j) /*第i天不卖*/ )
-        // i==0时，初值：buy(0,j)=-prices[0]/*最多买一次*/，sell(0,j)=0/*还没买无法卖*/
-        // 因为上述递推式中第i天的buy和sell只跟第i-1天的值有关，按i循环时可降维
-        // buy(j) = max( sell(j-1)-prices(i), buy(j) )
-        // sell(j) = max( buy(j)+prices[i], sell(j) )
-        vector<int> buy(k + 1, -prices[0]);
-        vector<int> sell(k + 1, 0);
-        for (int i = 0; i < N; i++) { // 按i递增循环
-            for (int j = 1; j <= k; j++) {
-                buy[j] = max(sell[j - 1] - prices[i], buy[j]);
-                sell[j] = max(buy[j] + prices[i], sell[j]);
+        // 设dp[i][j][s]表示第i天、剩余交易数j、手上s股股票时的最大利润，s=0或1
+        // dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1] + prices[i] /*卖股票*/)
+        // dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - prices[i] /*买股票，新交易*/)
+        // 初始dp[-1][j][0]=0，dp[-1][j][1]=INT_MIN
+        // dp[i][][]只依赖dp[i-1][][]，降一维
+        vector<vector<int>> dp(k + 1, vector<int>({ 0, INT_MIN }));
+        for (int price : prices) {
+            for (int j = k; j >= 1; --j) { // 倒序，这样等号右边的dp[j-1][]来自旧状态[i-1]
+                dp[j][0] = max(dp[j][0], dp[j][1] + price);
+                dp[j][1] = max(dp[j][1], dp[j-1][0] - price);
             }
         }
-        return sell[k];
+        return dp[k][0];
     }
-private:
-    int maxProfitInf(vector<int>& prices) {
-        int maxProfit = 0;
-        for (int i = 0; i < (int)prices.size() - 1; i++) {
-            if (prices[i + 1] > prices[i]) {
-                maxProfit += prices[i + 1] - prices[i];
-            }
+    
+    int maxProfitInfK(vector<int>& prices) {
+        // 设dp[i][s]表示第i天、手上有s股股票时的最大利润，s=0或1
+        // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i] /*卖股票*/)
+        // dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] /*买股票*/)
+        // 初始dp[-1][0]=0，dp[-1][1]=INT_MIN
+        // dp[i][]只依赖dp[i-1][]，降维
+        int share0 = 0;
+        int share1 = INT_MIN;
+        for (int price : prices) {
+            int oldShare0 = share0;
+            share0 = max(share0, share1 + price);
+            share1 = max(share1, oldShare0 - price);
         }
-        return maxProfit;
+        return share0;
     }
 };
 
