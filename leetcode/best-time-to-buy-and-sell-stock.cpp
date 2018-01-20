@@ -14,15 +14,15 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        // 只能买卖一次，若在第i天卖，应在[0,i)天中最便宜时买
         if (prices.size() < 2) return 0;
-        int maxProfit = 0;
+        // 只能买卖一次，若在第i天卖，应在[0,i)天最便宜时买
+        int ans = 0;
         int minPrice = prices[0];
-        for (auto i = 1; i < prices.size(); i++) {
-            maxProfit = max(maxProfit, prices[i] - minPrice);
+        for (int i = 1; i < prices.size(); i++) {
+            ans = max(ans, prices[i] - minPrice);
             minPrice = min(minPrice, prices[i]);
         }
-        return maxProfit;
+        return ans;
     }
 };
 
