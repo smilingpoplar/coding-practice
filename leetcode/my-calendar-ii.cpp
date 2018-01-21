@@ -1,6 +1,6 @@
 //
-//  my-calendar-i
-//  https://leetcode.com/problems/my-calendar-i/
+//  my-calendar-ii
+//  https://leetcode.com/problems/my-calendar-ii/
 //
 //  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -10,10 +10,10 @@
 
 using namespace std;
 
-class MyCalendar {
+class MyCalendarTwo {
     map<int, int> timeline;
 public:
-    MyCalendar() { 
+    MyCalendarTwo() {
     }
     
     bool book(int start, int end) {
@@ -22,7 +22,7 @@ public:
         int ongoing = 0;
         for (auto &e : timeline) {
             ongoing += e.second;
-            if (ongoing >= 2) {
+            if (ongoing >= 3) {
                 timeline[start]--;
                 timeline[end]++;
                 return false;
@@ -33,8 +33,8 @@ public:
 };
 
 /**
- * Your MyCalendar object will be instantiated and called as such:
- * MyCalendar obj = new MyCalendar();
+ * Your MyCalendarTwo object will be instantiated and called as such:
+ * MyCalendarTwo obj = new MyCalendarTwo();
  * bool param_1 = obj.book(start,end);
  */
 
