@@ -13,8 +13,7 @@ using namespace std;
 class MyCalendar {
     map<int, int> mp;
 public:
-    MyCalendar() {
-        
+    MyCalendar() {        
     }
     
     bool book(int start, int end) {
