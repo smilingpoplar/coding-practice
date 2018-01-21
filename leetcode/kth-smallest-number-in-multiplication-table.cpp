@@ -13,7 +13,8 @@ using namespace std;
 class Solution {
 public:
     int findKthNumber(int m, int n, int k) {
-        // 找出第一个满足enough()的x，l<x<=u
+        // enough(x)说明x至少是第k大的数
+        // x范围[1..m*n]
         int l = 0, u = m * n + 1;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;
@@ -27,7 +28,7 @@ public:
     }
     
     bool enough(int x, int m, int n, int k) {
-        // 算x是第几大，一行行看乘法表有多少数小于等于它
+        // 一行行看乘法表有多少数<=x
         int count = 0;
         for (int r = 1; r <= m; ++r) {
             count += min(x / r, n);
