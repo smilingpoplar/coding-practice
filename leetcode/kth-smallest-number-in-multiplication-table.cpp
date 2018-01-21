@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int findKthNumber(int m, int n, int k) {
-        // enough(x)说明x至少是第k大的数
+        // enough(x)表示x至少是第k大的数
         // x范围[1..m*n]
         int l = 0, u = m * n + 1;
         while (l + 1 < u) {
