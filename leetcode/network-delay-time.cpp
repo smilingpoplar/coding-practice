@@ -20,6 +20,7 @@ public:
         vector<int> dist(N + 1, INT_MAX);
         dist[K] = 0;
         
+        // vector<int> visited(N + 1, false);
         auto cmp = [&dist](int i, int j) {
             return dist[i] > dist[j];
         };
@@ -27,12 +28,14 @@ public:
         pq.push(K);
         while (!pq.empty()) {
             int u = pq.top(); pq.pop();
+            // if (visited[u]) continue;
+            // visited[u] = true;
             for (auto &e : adj[u]) { // 遍历u的所有邻接点
                 int v = e.first;
                 int newdist = dist[u] + e.second;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
-                    pq.push(v); // pq中将可能有多个v值，但后续v值对结果没影响
+                    pq.push(v); // pq中将可能有多个v值，但后续v值对结果没影响。可用visited[]来排除。
                 }
             }
         }
