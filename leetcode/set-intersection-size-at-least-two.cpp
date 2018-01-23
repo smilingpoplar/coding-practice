@@ -24,8 +24,8 @@ public:
         for (auto &interval : intervals) {
             if (last1 < interval[0]) { // 取最后两个
                 ans += 2;
-                last2 = interval[1] - 1;
                 last1 = interval[1];
+                last2 = last1 - 1;
             } else if (last2 < interval[0] && interval[0] <= last1) { // 取最后一个
                 ans += 1;
                 last2 = last1;
@@ -35,6 +35,7 @@ public:
         return ans;
     }
 };
+
 
 
 int main(int argc, const char * argv[]) {    
