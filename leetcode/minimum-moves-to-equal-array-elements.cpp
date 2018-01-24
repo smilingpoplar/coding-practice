@@ -13,15 +13,14 @@ using namespace std;
 class Solution {
 public:
     int minMoves(vector<int>& nums) {
-        if (nums.empty()) return 0;
-        const int N = nums.size();
+        // 每一步相当于把最大数减1，什么时候都减成最小数就都相等了
         int sum = 0;
         int min = INT_MAX;
         for (int num : nums) {
             sum += num;
             if (num < min) min = num;
         }
-        return sum - min * N;
+        return sum - min * nums.size();
     }
 };
 
