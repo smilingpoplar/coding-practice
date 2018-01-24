@@ -21,20 +21,21 @@ using namespace std;
  */
 class Solution {
 public:
-    // 转变成找不重叠区间的最大数，贪婪法，先取早结束的区间
+    // 等同求最多不重叠区间的方法
     int eraseOverlapIntervals(vector<Interval>& intervals) {
-        sort(intervals.begin(), intervals.end(), 
-            [](const Interval &a, const Interval &b) { return a.end < b.end; });
-        const int N = intervals.size();
-        int nonOverlap = 0;
+        sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) { 
+            return a.end < b.end;
+        });
+        int count = 0;
         int end = INT_MIN;
         for (const auto &interval : intervals) {
-            if (interval.start >= end) { // 不重叠
-                nonOverlap++;
+            if (interval.start >= end) { // 不重叠，取当前区间
                 end = interval.end;
+            } else {
+                ++count;
             }
         }
-        return N - nonOverlap;
+        return count;
     }
 };
 
