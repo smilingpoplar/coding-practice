@@ -13,18 +13,18 @@ using namespace std;
 class Solution {
 public:
     bool checkRecord(string s) {
-        int absent = 0;
-        int continuousLate = 0;
+        int a = 0;
+        int ll = 0;
         for (char c : s) {
             if (c == 'L') {
-                ++continuousLate;
+                ++ll;
             } else {
-                continuousLate = 0;
+                ll = 0;
                 if (c == 'A') {
-                    ++absent;
+                    ++a;
                 }
             }
-            if (absent > 1 || continuousLate > 2) return false;
+            if (a > 1 || ll > 2) return false;
         }
         return true;
     }
