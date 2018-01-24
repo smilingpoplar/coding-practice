@@ -14,10 +14,10 @@ class Solution {
 public:
     bool canPlaceFlowers(vector<int>& flowerbed, int n) {
         // 贪心法，能种就种
-        const int len = flowerbed.size();
+        const int N = flowerbed.size();
         int count = 0;
-        for (int i = 0; i < len; i++) {
-            if (!flowerbed[i] && (i == 0 || !flowerbed[i-1]) && (i == len-1 || !flowerbed[i+1])) {
+        for (int i = 0; i < N; i++) {
+            if (!flowerbed[i] && (i == 0 || !flowerbed[i-1]) && (i == N-1 || !flowerbed[i+1])) {
                 flowerbed[i] = 1;
                 ++count;
             }
