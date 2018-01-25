@@ -18,17 +18,17 @@ public:
         });
         priority_queue<int> taken; // 已选的课程，这里只记录duration
         
-        int current = 0;
+        int end = 0;
         for (const auto &c : courses) {
-            if (current + c[0] <= c[1]) { // 选课程c
+            if (end + c[0] <= c[1]) { // 选课程c
                 taken.push(c[0]);
-                current += c[0];
-            } else if (!taken.empty()) { // 替换一个持续时间更大的已选课程，选其中最大的
+                end += c[0];
+            } else if (!taken.empty()) { // 替换掉一个持续时间更大的已选课程，选其中最大的
                 int t = taken.top();
                 if (t > c[0]) {
                     taken.pop();
                     taken.push(c[0]);
-                    current += c[0] - t;
+                    end += c[0] - t;
                 }
             }
         }
