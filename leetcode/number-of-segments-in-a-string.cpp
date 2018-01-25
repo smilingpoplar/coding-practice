@@ -15,7 +15,7 @@ public:
     int countSegments(string s) {
         int count = 0;
         for (int i = 0; i < s.size(); i++) {
-            if ((i == 0 || s[i-1] == ' ') && s[i] != ' ') { // 单词开头
+            if (s[i] != ' ' && (i == s.size() - 1 || s[i + 1] == ' ')) { // 单词末尾
                 count++;
             }
         }
