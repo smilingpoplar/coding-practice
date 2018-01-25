@@ -23,9 +23,9 @@ public:
         for (int i = 1; i < N; i++) {
             leftMin[i] = min(nums[i - 1], leftMin[i - 1]);
         }
-        // 右边找小于当前值的最大值，使用栈顶最小的栈
+        // 右边小于当前值的最大值，相当于从右往左找下一个更大的数，用栈
         stack<int> S;
-        for (int j = N - 1; j >= 0; j--) {
+        for (int j = N - 1; j >= 0; --j) {
             int rMax = INT_MIN;
             while (!S.empty() && nums[j] > S.top()) {
                 rMax = S.top();
