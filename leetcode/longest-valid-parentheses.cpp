@@ -17,7 +17,7 @@ public:
         vector<int> lefts;  // 未匹配'('的索引
         int lastRight = -1; // 最后未匹配')'的索引
         int longest = 0;
-        for (int i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             if (s[i] == '(') {
                 lefts.push_back(i);
             } else { // ')'

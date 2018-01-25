@@ -24,16 +24,16 @@ public:
         const int N = (int)triangle.size();
         vector<int> f(N, 0);
         f[0] = triangle[0][0];
-        for (int i = 1; i < N; ++i) {
+        for (int i = 1; i < N; i++) {
             f[i] = f[i - 1] + triangle[i][i]; // j==i
-            for (int j = i - 1; j >= 1; --j) { // i>=2进循环
+            for (int j = i - 1; j >= 1; j--) { // i>=2进循环
                 f[j] = min(f[j - 1], f[j]) + triangle[i][j];
             }
             f[0] = f[0] + triangle[i][0]; //j==0
         }
 
         int minTotal = INT_MAX;
-        for (int j = 0; j < N; ++j) {
+        for (int j = 0; j < N; j++) {
             if (f[j] < minTotal) minTotal = f[j];
         }
         return minTotal;

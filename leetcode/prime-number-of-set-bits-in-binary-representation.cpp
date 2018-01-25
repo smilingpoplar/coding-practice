@@ -16,7 +16,7 @@ public:
         // L,R <= 2^20，二进制中最多有20位1s
         int ans = 0;
         set<int> primes = { 2, 3, 5, 7, 11, 13, 17, 19 };
-        for (int i = L; i <= R; ++i) {
+        for (int i = L; i <= R; i++) {
             if (primes.find(count1s(i)) != primes.end()) {
                 ++ans;
             }

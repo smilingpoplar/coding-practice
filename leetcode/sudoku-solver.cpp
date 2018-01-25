@@ -22,10 +22,10 @@ private:
         // 尝试填空格，然后测试是否合法
         const int M = (int)board.size();
         const int N = (int)board[0].size();
-        for (int i = 0; i < M; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 if (board[i][j] == '.') {
-                    for (char c = '1'; c <= '9'; ++c) {
+                    for (char c = '1'; c <= '9'; c++) {
                         board[i][j] = c;
                         if (isValid(i, j, board) && solve(board)) return true;
                     }
@@ -42,16 +42,16 @@ private:
         const int M = (int)board.size();
         const int N = (int)board[0].size();
         // 检查行
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             if (i != y && board[x][i] == board[x][y]) return false;
         }
         // 检查列
-        for (int i = 0; i < M; ++i) {
+        for (int i = 0; i < M; i++) {
             if (i != x && board[i][y] == board[x][y]) return false;
         }
         // 检查小格
-        for (int startI = x / 3 * 3, i = startI; i < startI + 3; ++i) {
-            for (int startJ = y / 3 * 3, j = startJ; j < startJ + 3; ++j) {
+        for (int startI = x / 3 * 3, i = startI; i < startI + 3; i++) {
+            for (int startJ = y / 3 * 3, j = startJ; j < startJ + 3; j++) {
                 if ((i != x || j != y) && board[i][j] == board[x][y]) return false;
             }
         }

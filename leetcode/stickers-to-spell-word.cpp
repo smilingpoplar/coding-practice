@@ -53,9 +53,9 @@ public:
     
     string reduceTarget(vector<int> target, const vector<int> &v) {
         ostringstream oss;
-        for (int i = 0; i < target.size(); ++i) {
+        for (int i = 0; i < target.size(); i++) {
             target[i] = max(0, target[i] - v[i]);
-            for (int k = 0; k < target[i]; ++k) {
+            for (int k = 0; k < target[i]; k++) {
                 oss << char(i + 'a');
             }
         }

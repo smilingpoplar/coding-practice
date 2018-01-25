@@ -20,7 +20,7 @@ public:
         // dp[i] = max(dp[i-2] + i*count[i] /*取i*/, dp[i-1] /*不取i*/)
         // dp[i]只依赖前两项，记为prev2、prev1
         int prev2 = 0, prev1 = 0;
-        for (int i = 1; i <= N; ++i) {
+        for (int i = 1; i <= N; i++) {
             int curr = max(prev2 + i * count[i], prev1) ;
             prev2 = prev1;
             prev1 = curr;

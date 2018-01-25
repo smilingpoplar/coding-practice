@@ -25,7 +25,7 @@ public:
         const int k = 2;
         vector<vector<int>> dp(k + 1, vector<int>({ 0, INT_MIN }));
         for (int price : prices) {
-            for (int j = k; j >= 1; --j) { // 倒序，这样等号右边的dp[j-1][]来自旧状态[i-1]
+            for (int j = k; j >= 1; j--) { // 倒序，这样等号右边的dp[j-1][]来自旧状态[i-1]
                 dp[j][0] = max(dp[j][0], dp[j][1] + price);
                 dp[j][1] = max(dp[j][1], dp[j-1][0] - price);
             }

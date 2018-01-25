@@ -33,8 +33,8 @@ public:
     int maxArea(vector<int>& height) {
         const int N = (int)height.size();
         int maxArea = 0;
-        for (int i = 0; i < N - 1; ++i) {
-            for (int j = i + 1; j < N; ++j) {
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = i + 1; j < N; j++) {
                 int area = min(height[i], height[j]) * (j - i);
                 maxArea = max(maxArea, area);
             }

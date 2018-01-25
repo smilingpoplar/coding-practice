@@ -24,8 +24,8 @@ public:
         vector<int> f(N, 0);
         int longest = 0;
         string palindrome;
-        for (int i = N - 1; i >= 0; --i) {
-            for (int j = N - 1; j >= i; --j) {
+        for (int i = N - 1; i >= 0; i--) {
+            for (int j = N - 1; j >= i; j--) {
                 f[j] = (i + 1 > j - 1 || f[j - 1]) && s[i] == s[j];
                 if (f[j]) {
                     int length = j - i + 1;

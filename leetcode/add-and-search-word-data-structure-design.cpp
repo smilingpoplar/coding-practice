@@ -42,7 +42,7 @@ private:
     bool search(TrieNode *root, const string &word) {
         if (!root) return false;
         auto node = root;
-        for (int i = 0; i < word.size(); ++i) {
+        for (int i = 0; i < word.size(); i++) {
             char c = word[i];
             if (c == '.') {
                 string substr = word.substr(i + 1);

@@ -29,11 +29,11 @@ public:
         vector<ListNode *> ans;
         int base = n / k;
         int remain = n % k;
-        for (int i = 0; i < k; ++i) {
+        for (int i = 0; i < k; i++) {
             int length = base + (i < remain ? 1 : 0);
             // 从链表中取length长的子链表放入ans中
             ans.push_back(root);
-            for (int j = 0; root && j < length - 1; ++j) {
+            for (int j = 0; root && j < length - 1; j++) {
                 root = root->next;
             }
             if (root) {

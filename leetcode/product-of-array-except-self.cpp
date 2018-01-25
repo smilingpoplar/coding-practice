@@ -17,12 +17,12 @@ public:
         const int N = (int)nums.size();
         auto result = vector<int>(N, 1);
         // 从左到右扫一遍
-        for (int i = 0, left = 1; i < N; ++i) {
+        for (int i = 0, left = 1; i < N; i++) {
             result[i] *= left;
             left *= nums[i];
         }
         // 从右到左扫一遍
-        for (int i = N - 1, right = 1; i >= 0; --i) {
+        for (int i = N - 1, right = 1; i >= 0; i--) {
             result[i] *= right;
             right *= nums[i];
         }

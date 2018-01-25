@@ -31,7 +31,7 @@ private:
         if (partCount == TOTAL_PART_COUNT) {
             if (startIndex == N) {
                 ostringstream oss;
-                for (int i = 0; i < TOTAL_PART_COUNT; ++i) {
+                for (int i = 0; i < TOTAL_PART_COUNT; i++) {
                     oss << parts[i];
                     if (i < TOTAL_PART_COUNT - 1) oss << ".";
                 }

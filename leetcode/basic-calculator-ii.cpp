@@ -27,7 +27,7 @@ public:
         
         vector<int> operands;
         vector<char> operators;
-        for (int i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             char c = s[i];
             if (c == ' ') continue;
             if ('0' <= c && c <= '9') {

@@ -25,7 +25,7 @@ public:
         int maxProduct = INT_MIN;
         int f = 1;
         int g = 1;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             int tmpF = f * nums[i];
             int tmpG = g * nums[i];
             f = max({tmpF, nums[i], tmpG});

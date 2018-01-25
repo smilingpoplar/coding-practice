@@ -41,7 +41,7 @@ public:
         }
         
         int ans = INT_MIN;
-        for (int i = 1; i < dist.size(); ++i) {
+        for (int i = 1; i < dist.size(); i++) {
             ans = max(ans, dist[i]);
         }
         if (ans == INT_MAX) return -1;

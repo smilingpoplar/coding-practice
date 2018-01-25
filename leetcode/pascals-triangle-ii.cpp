@@ -18,8 +18,8 @@ public:
         // 在i的递增循环j的递减循环中降维：p(j) = p(j-1) + p(j)，1<=j<i<=rowIndex
         if (rowIndex < 0) return {};
         vector<int> p;
-        for (int i = 0; i <= rowIndex; ++i) {
-            for (int j = i - 1; j >= 1; --j) { // i>=2进循环
+        for (int i = 0; i <= rowIndex; i++) {
+            for (int j = i - 1; j >= 1; j--) { // i>=2进循环
                 p[j] += p[j - 1];
             }
             p.push_back(1); // 行末的1

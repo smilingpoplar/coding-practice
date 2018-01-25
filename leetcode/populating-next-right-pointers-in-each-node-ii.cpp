@@ -28,7 +28,7 @@ public:
         while (!queue.empty()) {
             TreeLinkNode *prev = NULL;
             int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; ++i) {
+            for (int i = 0; i < levelSize; i++) {
                 auto node = queue.front();
                 queue.pop();
                 if (prev) prev->next = node;

@@ -18,8 +18,8 @@ public:
         // 上半部是n-1位格雷码（前面加个0），下半部是n-1位格雷码的倒序前面加个1
         vector<int> result;
         result.push_back(0); // n==0
-        for (int i = 0; i < n; ++i) {
-            for (int j = (int)result.size() - 1; j >= 0; --j) {
+        for (int i = 0; i < n; i++) {
+            for (int j = (int)result.size() - 1; j >= 0; j--) {
                 result.push_back(result[j] | (1 << i));
             }
         }

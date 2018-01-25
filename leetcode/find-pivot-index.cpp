@@ -20,7 +20,7 @@ public:
         }
         
         int leftSum = 0;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             if (leftSum == sum - nums[i] - leftSum) return i;
             leftSum += nums[i];
         }

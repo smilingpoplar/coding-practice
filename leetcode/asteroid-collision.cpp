@@ -14,7 +14,7 @@ class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
         vector<int> stack;
-        for (int i = 0; i < asteroids.size(); ++i) {
+        for (int i = 0; i < asteroids.size(); i++) {
             if (stack.empty() || stack.back() < 0 || asteroids[i] > 0) {
                 stack.push_back(asteroids[i]);
             } else {

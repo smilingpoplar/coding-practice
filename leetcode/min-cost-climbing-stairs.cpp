@@ -18,7 +18,7 @@ public:
         // 初始dp[N]=0, dp[N+1]=0
         const int N = cost.size();
         int f1 = 0, f2 = 0;
-        for (int i = N -1; i >= 0; --i) {
+        for (int i = N -1; i >= 0; i--) {
             int f = cost[i] + min(f1, f2);
             f2 = f1;
             f1 = f;

@@ -21,14 +21,14 @@ public:
         const int N = (int)grid[0].size();
         vector<vector<int>> f(M, vector<int>(N, 0));
         f[0][0] = grid[0][0];
-        for (int i = 1; i < M; ++i) {
+        for (int i = 1; i < M; i++) {
             f[i][0] = f[i - 1][0] + grid[i][0];
         }
-        for (int j = 1; j < N; ++j) {
+        for (int j = 1; j < N; j++) {
             f[0][j] = f[0][j - 1] + grid[0][j];
         }
-        for (int i  = 1; i < M; ++i) {
-            for (int j = 1; j < N; ++j) {
+        for (int i  = 1; i < M; i++) {
+            for (int j = 1; j < N; j++) {
                 f[i][j] = min(f[i - 1][j], f[i][j - 1]) + grid[i][j];
             }
         }

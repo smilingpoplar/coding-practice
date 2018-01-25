@@ -25,7 +25,7 @@ public:
         }
         // 右边小于当前值的最大值，相当于从右往左找下一个更大的数，用栈
         stack<int> S;
-        for (int j = N - 1; j >= 0; --j) {
+        for (int j = N - 1; j >= 0; j--) {
             int rMax = INT_MIN;
             while (!S.empty() && nums[j] > S.top()) {
                 rMax = S.top();

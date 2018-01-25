@@ -27,7 +27,7 @@ private:
             return;
         }
         if (k <= 0 || n <= 0) return;
-        for (int i = start; i <= 9; ++i) {
+        for (int i = start; i <= 9; i++) {
             combination.push_back(i);
             dfs(i + 1, k - 1, n - i, combination, result);
             combination.pop_back();

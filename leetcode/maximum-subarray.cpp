@@ -18,7 +18,7 @@ public:
         // 递推式只依赖于前一项，在i的递增循环中降维，设f表示nums[?,i]的最大和，则 f = max( f+nums[i], nums[i] )
         int maxSum = INT_MIN;
         int f = 0;
-        for (int i = 0; i < nums.size(); ++i) {
+        for (int i = 0; i < nums.size(); i++) {
             f = max(f + nums[i], nums[i]);
             if (f > maxSum) maxSum = f;
         }

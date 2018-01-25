@@ -32,7 +32,7 @@ private:
         values.push_back(to_string(root->val));
         if (!root->left && !root->right) {
             string path;
-            for (int i = 0; i < values.size(); ++i) {
+            for (int i = 0; i < values.size(); i++) {
                 if (i > 0) path += "->";
                 path += values[i];
             }

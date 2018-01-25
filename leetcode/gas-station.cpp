@@ -21,7 +21,7 @@ public:
         int sum = 0;
         int left = 0;
         int start = 0;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             int gasI = gas[i] - cost[i];
             sum += gasI;
             left += gasI;

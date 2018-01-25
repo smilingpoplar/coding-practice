@@ -17,12 +17,12 @@ public:
         // 所有长k子数组和构成数组W
         vector<int> W(nums.size() - k + 1);
         int sum = 0;
-        for (int i = 0; i < k; ++i) {
+        for (int i = 0; i < k; i++) {
             sum += nums[i];
         }
         int w = 0;
         W[w++] = sum;
-        for (int i = k; i < nums.size(); ++i) {
+        for (int i = k; i < nums.size(); i++) {
             sum += nums[i] - nums[i-k];
             W[w++] = sum;
         }
@@ -30,7 +30,7 @@ public:
         // 左边最大和的第一次出现
         vector<int> left(W.size());
         int maxIdx = 0;
-        for (int i = 0; i < W.size(); ++i) {
+        for (int i = 0; i < W.size(); i++) {
             if (W[i] > W[maxIdx]) {
                 maxIdx = i;
             }
@@ -39,7 +39,7 @@ public:
         // 右边最大和的第一次出现
         vector<int> right(W.size());
         maxIdx = W.size() - 1;
-        for (int j = W.size() - 1; j >= 0; --j) {
+        for (int j = W.size() - 1; j >= 0; j--) {
             if (W[j] >= W[maxIdx]) {
                 maxIdx = j;
             }

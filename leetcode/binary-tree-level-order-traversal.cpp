@@ -28,7 +28,7 @@ public:
         while (!queue.empty()) {
             vector<int> level;
             const int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; ++i) {
+            for (int i = 0; i < levelSize; i++) {
                 auto node = queue.front();
                 queue.pop();
                 level.push_back(node->val);

@@ -26,7 +26,7 @@ public:
         auto prev = &dummy;
         auto kNode = &dummy;
         while (true) {
-            for (int i = 0; i < k && kNode; ++i) {
+            for (int i = 0; i < k && kNode; i++) {
                 kNode = kNode->next;
             }
             if (!kNode) break; // 不足k个
@@ -34,7 +34,7 @@ public:
             // 反转kGroup
             auto p = prev->next;
             kNode = p;
-            for (int i = 0; i < k; ++i) {
+            for (int i = 0; i < k; i++) {
                 auto next = p->next;
                 p->next = prev->next;
                 prev->next = p;

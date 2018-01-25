@@ -23,7 +23,7 @@ public:
         // 快慢指针，先让快指针跑k步
         auto fast = head;
         int length = 0;
-        for (int i = 0; i < k && fast; ++i) {
+        for (int i = 0; i < k && fast; i++) {
             fast = fast->next;
             ++length;
         }
@@ -32,7 +32,7 @@ public:
             if (k == 0) return head;
             // fast重跑
             fast = head;
-            for (int i = 0; i < k; ++i) {
+            for (int i = 0; i < k; i++) {
                 fast = fast->next;
             }
         }

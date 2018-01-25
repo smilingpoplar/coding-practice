@@ -26,7 +26,7 @@ public:
         vector<bool> visited(numCourses, false);
         vector<int> post(numCourses, -1);
         int order = 0;
-        for (int i = 0; i < numCourses; ++i) {
+        for (int i = 0; i < numCourses; i++) {
             if (!visited[i]) {
                 if (hasCycle(i, graph, visited, post, order)) return false;
             }
@@ -62,14 +62,14 @@ public:
         }
         // 计算入度
         vector<int> indegree(numCourses, 0);
-        for (int i = 0; i < numCourses; ++i) {
+        for (int i = 0; i < numCourses; i++) {
             for (int to : graph[i]) {
                 ++indegree[to];
             }
         }
         // 源点队列
         queue<int> source;
-        for (int i = 0; i < numCourses; ++i) {
+        for (int i = 0; i < numCourses; i++) {
             if (indegree[i] == 0) source.push(i);
         }
         // 不断删除源点

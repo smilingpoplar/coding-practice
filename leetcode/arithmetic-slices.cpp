@@ -17,7 +17,7 @@ public:
         // 当A[i]-A[i-1]=A[i-1]-A[i-2]时，dp[i]=dp[i-1]+1；否则，dp[i]=0。初始dp[1]=0
         int ans = 0;
         int dp = 0;
-        for (int i = 2; i < A.size(); ++i) {
+        for (int i = 2; i < A.size(); i++) {
           if (A[i] - A[i-1] == A[i-1] - A[i-2]) {
               dp = dp + 1;
               ans += dp;

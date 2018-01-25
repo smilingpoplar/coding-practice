@@ -27,7 +27,7 @@ public:
         if (root) queue.push(root);
         while (!queue.empty()) {
             const int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; ++i) {
+            for (int i = 0; i < levelSize; i++) {
                 auto node = queue.front();
                 queue.pop();
                 if (i == levelSize - 1) result.push_back(node->val);

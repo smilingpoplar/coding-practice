@@ -24,12 +24,12 @@ public:
         vector<int> count(ASCII_SIZE, 0);
         for (char c : s1) ++count[c];
         for (char c : s2) --count[c];
-        for (int i = 0; i < ASCII_SIZE; ++i) {
+        for (int i = 0; i < ASCII_SIZE; i++) {
             if (count[i] != 0) return false;
         }
         
         const int N = (int)s1.size();
-        for (int i = 1; i < N; ++i) {
+        for (int i = 1; i < N; i++) {
             if ((isScramble(s1.substr(0, i), s2.substr(0, i)) && isScramble(s1.substr(i), s2.substr(i))) ||
                 (isScramble(s1.substr(0, i), s2.substr(N - i)) && isScramble(s1.substr(i), s2.substr(0, N - i))))
                 return true;
@@ -51,16 +51,16 @@ public:
         vector<vector<vector<bool>>> f(N + 1, vector<vector<bool>>(N, vector<bool>(N, false)));
         
         // n==1
-        for (int i = 0; i < N; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 f[1][i][j] = s1[i] == s2[j];
             }
         }
         
-        for (int n = 1; n <= N; ++n) {
-            for (int i = 0; i <= N - n; ++i) {
-                for (int j = 0; j <= N - n; ++j) {
-                    for (int k = 1; k < n; ++k) { // n>=2进循环
+        for (int n = 1; n <= N; n++) {
+            for (int i = 0; i <= N - n; i++) {
+                for (int j = 0; j <= N - n; j++) {
+                    for (int k = 1; k < n; k++) { // n>=2进循环
                         if ((f[k][i][j] && f[n - k][i + k][j + k]) ||
                             (f[k][i][j + n - k] && f[n - k][i + k][j])) {
                             f[n][i][j] = true;

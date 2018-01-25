@@ -50,7 +50,7 @@ private:
     
     // 反转s[start,end)
     void reverse(string &s, int start, int end) {
-        for (int i = start, j = end - 1; i < j; ++i, --j) {
+        for (int i = start, j = end - 1; i < j; i++, j--) {
             swap(s[i], s[j]);
         }
     }

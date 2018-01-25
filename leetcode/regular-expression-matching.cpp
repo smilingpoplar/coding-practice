@@ -51,8 +51,8 @@ public:
             f[0][j] = true;
         }
         
-        for (int i = 1; i <= M; ++i) {
-            for (int j = 1; j <= N; ++j) {
+        for (int i = 1; i <= M; i++) {
+            for (int j = 1; j <= N; j++) {
                 if (j >= 2 && p[j - 1] == '*') {
                     f[i][j] = f[i][j - 2] || ((s[i - 1] == p[j - 2] || p[j - 2] == '.') && f[i - 1][j]);
                 } else {
@@ -87,16 +87,16 @@ public:
             prev[j] = f[j] = true;
         }
         
-        for (int i = 1; i <= M; ++i) {
+        for (int i = 1; i <= M; i++) {
             f[0] = false;
-            for (int j = 1; j <= N; ++j) {
+            for (int j = 1; j <= N; j++) {
                 if (j >= 2 && p[j - 1] == '*') {
                     f[j] = f[j - 2] || ((s[i - 1] == p[j - 2] || p[j - 2] == '.') && prev[j]);
                 } else {
                     f[j] = (s[i - 1] == p[j - 1] || p[j - 1] == '.') && prev[j - 1];
                 }
             }
-            for (int j = 0; j <= N; ++j) {
+            for (int j = 0; j <= N; j++) {
                 prev[j] = f[j];
             }
         }

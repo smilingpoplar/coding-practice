@@ -15,7 +15,7 @@ class DisjoinSetUnion {
     vector<int> rank;
 public:
     DisjoinSetUnion(int N) : parent(N+1), rank(N+1, 0) {
-        for (int i = 1; i <= N; ++i) {
+        for (int i = 1; i <= N; i++) {
             parent[i] = i;
         }
     }

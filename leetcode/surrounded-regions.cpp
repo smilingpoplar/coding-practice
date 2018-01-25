@@ -24,8 +24,8 @@ public:
         vector<vector<bool>> zeros(M, vector<bool>(N, false));
         vector<vector<bool>> visited(M, vector<bool>(N, false));
         queue<pair<int, int>> q;
-        for (int i = 0; i < M; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 if (i == 0 || i == M - 1 || j == 0 || j == N - 1) {
                     q.push({i, j});
                 }
@@ -46,8 +46,8 @@ public:
             if (j + 1 < N) q.push({i, j + 1});
         }
         
-        for (int i = 0; i < M; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 if (!zeros[i][j]) board[i][j] = 'X';
             }
         }

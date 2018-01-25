@@ -18,7 +18,7 @@ public:
         unordered_map<int, int> left;
         unordered_map<int, int> right;
         
-        for (int i = 0; i < nums.size(); ++i) {
+        for (int i = 0; i < nums.size(); i++) {
             int x = nums[i];
             ++count[x];
             if (left.find(x) == left.end()) {

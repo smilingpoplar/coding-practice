@@ -26,7 +26,7 @@ private:
             result.push_back(combination);
             return;
         }
-        for (int i = start; i <= n; ++i) {
+        for (int i = start; i <= n; i++) {
             combination.push_back(i);
             dfs(i + 1, n, k - 1, combination, result);
             combination.pop_back();

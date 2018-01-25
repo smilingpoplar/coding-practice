@@ -17,7 +17,7 @@ public:
         const int N = chars.size();
         int write = 0;
         int anchor = 0;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             if (i == N - 1 || chars[i] != chars[i+1]) {
                 chars[write++] = chars[anchor];
                 int length = i - anchor + 1;

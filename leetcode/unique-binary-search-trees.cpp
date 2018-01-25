@@ -18,9 +18,9 @@ public:
         // 故 f(k) = sum( f(i-1)*f(k-i) ) 1<=i<=k
         vector<int> f(n + 1, 0);
         f[0] = 1;
-        for (int k = 1; k <= n; ++k) {
+        for (int k = 1; k <= n; k++) {
             int sum = 0;
-            for (int i = 1; i <= k; ++i) {
+            for (int i = 1; i <= k; i++) {
                 sum += f[i - 1] * f[k - i];
             }
             f[k] = sum;

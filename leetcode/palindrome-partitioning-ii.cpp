@@ -18,7 +18,7 @@ public:
         // f(i,j) = f(i+1,j-1) && s[i]==s[j], 当i+1>j-1时是空串f(i+1,j-1)为true
         const int N = (int)s.size();
         vector<vector<bool>> f(N, vector<bool>(N, false));
-        for (int i = N - 1; i >= 0; --i) {
+        for (int i = N - 1; i >= 0; i--) {
             for (int j = i; j < N; j++) {
                 f[i][j] = (i + 1 > j - 1 || f[i + 1][j - 1]) && s[i] == s[j];
             }
@@ -27,11 +27,11 @@ public:
         // cut(i) = 0，当f(0,i)==true
         // cut(i) = min( cut(k)+1 )，当f(0,i)==false，f(k+1,i)==true，0<=k<=i-1
         vector<int> cut(N, INT_MAX);
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             if (f[0][i]) {
                 cut[i] = 0;
             } else {
-                for (int k = 0; k < i; ++k) {
+                for (int k = 0; k < i; k++) {
                     if (f[k + 1][i]) {
                         cut[i] = min(cut[i], cut[k] + 1);
                     }

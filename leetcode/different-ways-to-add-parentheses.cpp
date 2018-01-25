@@ -15,7 +15,7 @@ class Solution {
 public:
     vector<int> diffWaysToCompute(string input) {
         vector<int> result;
-        for (int i = 0; i < input.size(); ++i) {
+        for (int i = 0; i < input.size(); i++) {
             char c = input[i];
             if (c == '+' || c == '-' || c == '*') { // 分治
                 auto result1 = diffWaysToCompute(input.substr(0, i));

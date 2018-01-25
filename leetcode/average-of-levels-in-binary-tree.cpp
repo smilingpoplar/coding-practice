@@ -29,7 +29,7 @@ public:
         while (!Q.empty()) {
             int n = Q.size();
             double sum = 0;
-            for (int i = 0; i < n; ++i) {
+            for (int i = 0; i < n; i++) {
                 auto node = Q.front();
                 Q.pop();
                 sum += node->val;

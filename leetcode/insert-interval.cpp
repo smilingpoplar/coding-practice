@@ -23,7 +23,7 @@ public:
     vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
         vector<Interval> result;
         bool inserted = false;
-        for (int i = 0; i < intervals.size(); ++i) {
+        for (int i = 0; i < intervals.size(); i++) {
             if (inserted || intervals[i].end < newInterval.start) {
                 result.push_back(intervals[i]);
             } else if (newInterval.end < intervals[i].start) {

@@ -28,7 +28,7 @@ private:
         // dp[i] = max( nums[i]+dp[i-2], dp[i-1] )，初始dp[-2]=dp[-1]=0
         // 看递推式当前项只依赖于前两项，前两项分别用prev2和prev1表示
         int prev2 = 0, prev1 = 0;
-        for (int i = from; i <= to; ++i) {
+        for (int i = from; i <= to; i++) {
             int curr = max(nums[i] + prev2, prev1);
             prev2 = prev1;
             prev1 = curr;

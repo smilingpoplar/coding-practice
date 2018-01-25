@@ -55,8 +55,8 @@ public:
             wordsToFind.insert(word);
         }
         vector<string> result;
-        for (int i = 0; i < M; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 dfs(board, i, j, visited, wordsToFind.root, result);
             }
         }

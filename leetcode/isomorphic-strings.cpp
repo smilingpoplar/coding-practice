@@ -17,7 +17,7 @@ public:
         if (s.size() != t.size()) return false;
         unordered_map<char, char> mapping;
         unordered_map<char, char> rMapping;
-        for (int i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             if (mapping.find(s[i]) != mapping.end() && mapping[s[i]] != t[i]) return false; // 一对多
             if (rMapping.find(t[i]) != rMapping.end() && rMapping[t[i]] != s[i]) return false; // 多对一
             mapping[s[i]] = t[i];

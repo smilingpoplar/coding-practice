@@ -28,7 +28,7 @@ public:
         vector<string> result;
         unordered_map<int, int> counter;
         int code = 0;
-        for (int i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             code = ((code << 2) + coding[s[i]]) & 0xfffff;
             if (i < kLength - 1) continue;
             ++counter[code];
@@ -50,10 +50,10 @@ public:
         if (N < 2 * kLength) return {};
         
         vector<string> result;
-        for (int i = 0; i < N - 2 * kLength; ++i) {
-            for (int j = i + kLength; j < N - kLength; ++j) {
+        for (int i = 0; i < N - 2 * kLength; i++) {
+            for (int j = i + kLength; j < N - kLength; j++) {
                 int k = 0;
-                for (; k < kLength; ++k) {
+                for (; k < kLength; k++) {
                     if (s[i + k] != s[j + k]) break;
                 }
                 if (k == kLength) {

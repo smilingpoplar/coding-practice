@@ -22,11 +22,11 @@ public:
         vector<vector<double>> prev(N, vector<double>(N, 0));
         prev[r][c] = 1;
         
-        for (int k = 0; k < K; ++k) {
+        for (int k = 0; k < K; k++) {
             vector<vector<double>> cur(N, vector<double>(N, 0));
-            for (int i = 0; i < N; ++i) {
-                for (int j = 0; j < N; ++j) {
-                    for (int m = 0; m < dr.size(); ++m) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    for (int m = 0; m < dr.size(); m++) {
                         int pi = i - dr[m], pj = j - dc[m];
                         if (0 <= pi && pi < N && 0 <= pj && pj < N) {
                             cur[i][j] += prev[pi][pj] / 8;
@@ -38,8 +38,8 @@ public:
         }
         
         double ans = 0;
-        for (int i = 0; i < N; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 ans += prev[i][j];
             }
         }

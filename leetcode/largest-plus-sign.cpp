@@ -20,14 +20,14 @@ public:
 
         vector<vector<int>> order(N, vector<int>(N, INT_MAX));
         // 看各点往左能延伸多长、往右能延伸多长
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             int count = 0;
-            for (int j = 0; j < N; ++j) {
+            for (int j = 0; j < N; j++) {
                 count = (grid[i][j] == 0) ? 0 : ++count;
                 if (count < order[i][j]) order[i][j] = count;
             }
             count = 0;
-            for (int j = N - 1; j >= 0; --j) {
+            for (int j = N - 1; j >= 0; j--) {
                 count = (grid[i][j] == 0) ? 0 : ++count;
                 if (count < order[i][j]) order[i][j] = count;
             }
@@ -35,14 +35,14 @@ public:
         }        
         // 看各点往上能延伸多长、往下能延伸多长
         int ans = 0;
-        for (int j = 0; j < N; ++j) {
+        for (int j = 0; j < N; j++) {
             int count = 0;
-            for (int i = 0; i < N; ++i) {
+            for (int i = 0; i < N; i++) {
                 count = (grid[i][j] == 0) ? 0 : ++count;
                 if (count < order[i][j]) order[i][j] = count;
             }
             count = 0;
-            for (int i = N - 1; i >= 0; --i) {
+            for (int i = N - 1; i >= 0; i--) {
                 count = (grid[i][j] == 0) ? 0 : ++count;
                 if (count < order[i][j]) order[i][j] = count;
                 ans = max(ans, order[i][j]);

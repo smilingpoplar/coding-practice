@@ -20,7 +20,7 @@ public:
         // 因为dp[i][]只依赖dp[i-1][]，降一维。令share0=dp[0], share1=dp[1]
         int share0 = 0;
         int share1 = INT_MIN;
-        for (int i = 0; i < prices.size(); ++i) {
+        for (int i = 0; i < prices.size(); i++) {
             int oldShare0 = share0;
             share0 = max(share0, share1 + prices[i]); // fee放到下面买时扣，避免share1下溢出
             share1 = max(share1, oldShare0 - prices[i] - fee);

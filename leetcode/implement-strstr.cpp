@@ -15,7 +15,7 @@ public:
     int strStr(string haystack, string needle) {
         const int M = (int)haystack.size();
         const int N = (int)needle.size();
-        for (int i = 0; i + N <= M; ++i) {
+        for (int i = 0; i + N <= M; i++) {
             int j = 0;
             while (j < N && haystack[i + j] == needle[j]) ++j;
             if (j == N) return i;

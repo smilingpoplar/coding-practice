@@ -20,7 +20,7 @@ public:
         vector<string> mountains;
         int count = 0;
         int start = 0;
-        for (int i = 0; i < S.size(); ++i) {
+        for (int i = 0; i < S.size(); i++) {
             count += (S[i] == '1') ? 1 : -1;
             if (count == 0) {
                 string mountain = S.substr(start, i - start + 1);

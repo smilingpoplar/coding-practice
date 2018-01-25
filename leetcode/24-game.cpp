@@ -24,12 +24,12 @@ public:
         if (N == 1) return abs(nums[0] - 24) < 1e-6;
         
         // 任取两位置i和j的数，准备做计算
-        for (int i = 0; i < N; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 if (i == j) continue;        
                 // 先把剩下的数放入新数组
                 vector<double> res;
-                for (int k = 0; k < N; ++k) {
+                for (int k = 0; k < N; k++) {
                     if (k != i && k != j) {
                         res.push_back(nums[k]);
                     }

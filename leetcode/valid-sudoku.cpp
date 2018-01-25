@@ -20,16 +20,16 @@ public:
         
         vector<bool> used(9, false); // 数[1,9]是否被用过
         // 检查行
-        for (int i = 0; i < M; ++i) {
+        for (int i = 0; i < M; i++) {
             fill(used.begin(), used.end(), false);
-            for (int j = 0; j < N; ++j) {
+            for (int j = 0; j < N; j++) {
                 if (!isValid(board[i][j], used)) return false;
             }
         }
         // 检查列
-        for (int j = 0; j < N; ++j) {
+        for (int j = 0; j < N; j++) {
             fill(used.begin(), used.end(), false);
-            for (int i = 0; i < M; ++i) {
+            for (int i = 0; i < M; i++) {
                 if (!isValid(board[i][j], used)) return false;
             }
         }
@@ -37,8 +37,8 @@ public:
         for (int startI = 0; startI < M; startI += 3) {
             for (int startJ = 0; startJ < N; startJ += 3) {
                 fill(used.begin(), used.end(), false);
-                for (int i = startI; i < startI + 3; ++i) {
-                    for (int j = startJ; j < startJ + 3; ++j) {
+                for (int i = startI; i < startI + 3; i++) {
+                    for (int j = startJ; j < startJ + 3; j++) {
                         if (!isValid(board[i][j], used)) return false;
                     }
                 }

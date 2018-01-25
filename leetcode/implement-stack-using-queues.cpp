@@ -16,7 +16,7 @@ public:
     // Push element x onto stack.
     void push(int x) { // O(n)时间
         _q.push(x);
-        for (int i = 0; i < _q.size() - 1; ++i) {
+        for (int i = 0; i < _q.size() - 1; i++) {
             _q.push(_q.front());
             _q.pop();
         }

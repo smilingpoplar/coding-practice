@@ -25,7 +25,7 @@ public:
         };
         // 从左到右扫描，累加当前值，如果当前字符比上一个大，补减上一个值
         int result = 0;
-        for (int i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             result += value[s[i]];
             if (i > 0 && value[s[i]] > value[s[i - 1]]) {
                 result -= 2 * value[s[i - 1]];

@@ -20,7 +20,7 @@ public:
         // dp[i][]只依赖dp[i-1][]、dp[i-2][]
         vector<int> prev2 = { 0, INT_MIN };
         vector<int> prev1 = { 0, INT_MIN };
-        for (int i = 0; i < prices.size(); ++i) {
+        for (int i = 0; i < prices.size(); i++) {
             vector<int> cur(2);
             cur[0] = max(prev1[0], prev1[1] + prices[i]);
             cur[1] = max(prev1[1], prev2[0] - prices[i]);

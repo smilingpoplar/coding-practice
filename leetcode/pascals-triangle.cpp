@@ -21,8 +21,8 @@ public:
         if (numRows <= 0) return result;
 
         vector<int> p;
-        for (int i = 0; i < numRows; ++i) {
-            for (int j = i - 1; j >= 1; --j) { // i>=2进循环
+        for (int i = 0; i < numRows; i++) {
+            for (int j = i - 1; j >= 1; j--) { // i>=2进循环
                 p[j] += p[j - 1];
             }
             p.push_back(1); // 行末的1

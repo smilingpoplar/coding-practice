@@ -18,12 +18,12 @@ public:
         // 3. 交换s[i]和s[idx]
         // 4. 排序s[i+1..]
         string s = to_string(n);
-        for (int i = s.size() - 2; i >= 0; --i) {
+        for (int i = s.size() - 2; i >= 0; i--) {
             // 1
             if (s[i] < s[i + 1]) {
                 // 2
                 int smallest = INT_MAX, idx;
-                for (int j = i + 1; j < s.size(); ++j) {
+                for (int j = i + 1; j < s.size(); j++) {
                     if (s[j] > s[i] && s[j] < smallest) {
                         smallest = s[j];
                         idx = j;

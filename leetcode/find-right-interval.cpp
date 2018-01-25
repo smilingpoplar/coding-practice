@@ -24,7 +24,7 @@ public:
     // 使用map.lower_bound(end)找到>=某终点的下一区间起点
     vector<int> findRightInterval(vector<Interval>& intervals) {
         map<int, int> m; // start=>pos
-        for (int i = 0; i < intervals.size(); ++i) {
+        for (int i = 0; i < intervals.size(); i++) {
             m[intervals[i].start] = i;
         }
 

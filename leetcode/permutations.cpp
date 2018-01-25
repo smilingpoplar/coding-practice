@@ -27,7 +27,7 @@ private:
             result.push_back(nums);
             return;
         }
-        for (int i = level; i < nums.size(); ++i) {
+        for (int i = level; i < nums.size(); i++) {
             swap(nums[level], nums[i]);
             dfs(level + 1, nums, result);
             swap(nums[level], nums[i]);

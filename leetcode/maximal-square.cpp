@@ -22,8 +22,8 @@ public:
         const int N = (int)matrix[0].size();
         int largestSquare = 0;
         vector<int> h(N, 0);
-        for (int i = 0; i < M; ++i) {
-            for (int j = 0; j < N; ++j) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 if (matrix[i][j] == '0') h[j] = 0;
                 else ++h[j];
             }

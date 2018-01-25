@@ -25,13 +25,13 @@ public:
     
     bool search(vector<int> &nums, int idx, vector<int> &subsetSums, int targetSum) {
         if (idx == nums.size()) {
-            for (int j = 0; j < subsetSums.size(); ++j) {
+            for (int j = 0; j < subsetSums.size(); j++) {
                 if (subsetSums[j] != targetSum) return false;
             }
             return true;
         }
         
-        for (int j = 0; j < subsetSums.size(); ++j) {
+        for (int j = 0; j < subsetSums.size(); j++) {
             if (subsetSums[j] + nums[idx] > targetSum) continue;
             subsetSums[j] += nums[idx];
             if (search(nums, idx + 1, subsetSums, targetSum)) return true;

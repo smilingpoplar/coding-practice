@@ -20,10 +20,10 @@ public:
         // dp[i][][]只依赖于dp[i-1][][]，降维
         const int MOD = 1000000007;
         vector<vector<int>> dp(2, vector<int>(3, 1));
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             vector<vector<int>> cur(2, vector<int>(3));
-            for (int a = 0; a < 2; ++a) {
-                for (int l = 0; l < 3; ++l) {
+            for (int a = 0; a < 2; a++) {
+                for (int l = 0; l < 3; l++) {
                     int val = dp[a][2]; // ..P
                     if (a > 0) val = (val + dp[a-1][2]) % MOD; // ..A
                     if (l > 0) val = (val + dp[a][l-1]) % MOD; // ..L

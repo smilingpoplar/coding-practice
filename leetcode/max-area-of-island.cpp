@@ -18,8 +18,8 @@ public:
         vector<vector<bool>> visited(M, vector<bool>(N, false));
 
         int ans = 0;
-        for (int r = 0; r < M; ++r) {
-            for (int c = 0; c < N; ++c) {
+        for (int r = 0; r < M; r++) {
+            for (int c = 0; c < N; c++) {
                 ans = max(ans, area(r, c, grid, visited));
             }
         }

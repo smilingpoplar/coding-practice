@@ -23,25 +23,25 @@ public:
         while (true) {
             // right
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colBegin; i <= colEnd; ++i) {
+            for (int i = colBegin; i <= colEnd; i++) {
                 matrix[rowBegin][i] = ++count;
             }
             ++rowBegin;
             // down
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowBegin; i <= rowEnd; ++i) {
+            for (int i = rowBegin; i <= rowEnd; i++) {
                 matrix[i][colEnd] = ++count;
             }
             --colEnd;
             // left
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colEnd; i >= colBegin; --i) {
+            for (int i = colEnd; i >= colBegin; i--) {
                 matrix[rowEnd][i] = ++count;
             }
             --rowEnd;
             // up
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowEnd; i >= rowBegin; --i) {
+            for (int i = rowEnd; i >= rowBegin; i--) {
                 matrix[i][colBegin] = ++count;
             }
             ++colBegin;

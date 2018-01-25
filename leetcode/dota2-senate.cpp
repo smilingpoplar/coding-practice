@@ -15,7 +15,7 @@ public:
     string predictPartyVictory(string senate) {
         const int N = senate.size();
         queue<int> R, D;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             if (senate[i] == 'R') R.push(i);
             else D.push(i);
         }

@@ -16,7 +16,7 @@ public:
     int missingNumber(vector<int> &nums) {
         const int N = (int)nums.size();
         int x = 0;
-        for (int i = 1; i <= N; ++i) {
+        for (int i = 1; i <= N; i++) {
             x ^= i;
         }
         for (auto num : nums) {

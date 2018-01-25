@@ -28,7 +28,7 @@ private:
         if (start > end) return { NULL };
         // 生成以数字i为根的树，需要两两搭配数字[start,i-1]生成的树和数字[i+1,end]生成的树，start<=i<=end
         vector<TreeNode *> result;
-        for (int i = start; i <= end; ++i) {
+        for (int i = start; i <= end; i++) {
             auto lefts = generateTrees(start, i - 1);
             auto rights = generateTrees(i + 1, end);
             for (auto left : lefts) {

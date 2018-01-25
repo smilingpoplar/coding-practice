@@ -24,7 +24,7 @@ public:
         int minWidth = INT_MAX;
         int foundI = 0;
         unordered_map<char, int> sCount;
-        for (int j = 0; j < s.size(); ++j) { // 伸展尾指针
+        for (int j = 0; j < s.size(); j++) { // 伸展尾指针
             ++sCount[s[j]];
             if (sCount[s[j]] <= tCount[s[j]]) ++found;
             if (found == t.size()) { // 收缩头指针

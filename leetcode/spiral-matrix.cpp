@@ -25,25 +25,25 @@ public:
         while (true) {
             // right
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colBegin; i <= colEnd; ++i) {
+            for (int i = colBegin; i <= colEnd; i++) {
                 result.push_back(matrix[rowBegin][i]);
             }
             ++rowBegin;
             // down
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowBegin; i <= rowEnd; ++i) {
+            for (int i = rowBegin; i <= rowEnd; i++) {
                 result.push_back(matrix[i][colEnd]);
             }
             --colEnd;
             // left
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colEnd; i >= colBegin; --i) {
+            for (int i = colEnd; i >= colBegin; i--) {
                 result.push_back(matrix[rowEnd][i]);
             }
             --rowEnd;
             // up
             if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowEnd; i >= rowBegin; --i) {
+            for (int i = rowEnd; i >= rowBegin; i--) {
                 result.push_back(matrix[i][colBegin]);
             }
             ++colBegin;

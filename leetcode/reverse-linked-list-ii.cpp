@@ -24,13 +24,13 @@ public:
         dummy.next = head;
         
         auto prev = &dummy;
-        for (int i = 1; i < m; ++i) {
+        for (int i = 1; i < m; i++) {
             prev = prev->next;
             if (!prev) return NULL;
         }
         auto p = prev->next;
         auto nNode = p;
-        for (int i = m; i <= n; ++i) {
+        for (int i = m; i <= n; i++) {
             if (!p) return NULL;
             auto next = p->next;
             p->next = prev->next;

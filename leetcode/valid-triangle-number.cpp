@@ -16,10 +16,10 @@ public:
         sort(nums.begin(), nums.end());
         const int N = (int)nums.size();
         int count = 0;
-        for (int i = 0; i < N - 2; ++i) {
+        for (int i = 0; i < N - 2; i++) {
             if (nums[i] == 0) continue;
-            for (int j = i + 1; j < N - 1; ++j) {
-                for (int k = j + 1; k < N && nums[i] + nums[j] > nums[k]; ++k) {
+            for (int j = i + 1; j < N - 1; j++) {
+                for (int k = j + 1; k < N && nums[i] + nums[j] > nums[k]; k++) {
                     count++;
                 }
             }

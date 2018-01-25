@@ -14,7 +14,7 @@ class Solution {
 public:
     vector<int> selfDividingNumbers(int left, int right) {
         vector<int> ans;
-        for (int i = left; i <= right; ++i) {
+        for (int i = left; i <= right; i++) {
             if (isSelfDividingNumber(i)) {
                 ans.push_back(i);
             }

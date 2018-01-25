@@ -17,13 +17,13 @@ public:
         // 子串出现在0s1s交替的边界
         vector<int> groups;
         groups.push_back(1);
-        for (int i = 1; i < s.size(); ++i) {
+        for (int i = 1; i < s.size(); i++) {
             if (s[i] != s[i-1]) groups.push_back(1);
             else ++groups[groups.size() - 1];
         }
         
         int ans = 0;
-        for (int i = 1; i < groups.size(); ++i) {
+        for (int i = 1; i < groups.size(); i++) {
             ans += min(groups[i], groups[i-1]);
         }
         return ans;

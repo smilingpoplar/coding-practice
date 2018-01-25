@@ -18,7 +18,7 @@ public:
         // 保持最大长度为k的滑动窗口
         set<int> window; // 记录元素nums[i,j)，j-i<=k
         int i = 0;
-        for (int j = 0; j < nums.size(); ++j) {
+        for (int j = 0; j < nums.size(); j++) {
             if (j - i > k) {
                 window.erase(nums[i]);
                 ++i;

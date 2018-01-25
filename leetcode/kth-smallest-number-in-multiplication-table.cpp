@@ -30,7 +30,7 @@ public:
     bool enough(int x, int m, int n, int k) {
         // 一行行看乘法表有多少数<=x
         int count = 0;
-        for (int r = 1; r <= m; ++r) {
+        for (int r = 1; r <= m; r++) {
             count += min(x / r, n);
         }
         return count >= k;        

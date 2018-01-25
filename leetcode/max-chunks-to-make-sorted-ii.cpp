@@ -17,12 +17,12 @@ public:
         const int N = arr.size();
         vector<int> rightMin(N, INT_MAX);
         rightMin[N-1] = arr[N-1];
-        for (int i = N-2; i >= 0; --i) {
+        for (int i = N-2; i >= 0; i--) {
             rightMin[i] = min(arr[i], rightMin[i+1]);
         }
         int ans = 1;
         int leftMax = INT_MIN;
-        for (int i = 0; i < N-1; ++i) {
+        for (int i = 0; i < N-1; i++) {
             leftMax = max(leftMax, arr[i]);
             if (leftMax <= rightMin[i+1]) ++ans;
         }

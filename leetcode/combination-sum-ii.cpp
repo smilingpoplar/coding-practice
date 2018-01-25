@@ -28,7 +28,7 @@ private:
             return;
         }
         if (target < 0) return;
-        for (int i = start; i < candiatates.size(); ++i) {
+        for (int i = start; i < candiatates.size(); i++) {
             // 遇到相同数字时，只对数字的第一次出现作递归
             if (i > start && candiatates[i] == candiatates[i - 1]) continue;
             combination.push_back(candiatates[i]);

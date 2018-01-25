@@ -27,13 +27,13 @@ public:
         
         int maxPoints = 0;
         unordered_set<int> dupIndices;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             if (dupIndices.find(i) != dupIndices.end()) continue;
             
             int sameCountI = 1; // 第i点有几个相同的点
             unordered_map<double, int> slopeCountI; // 经过第i点的那些斜率
             int maxSlopeCountI = 0; // 经过第i点的同斜率直线最多有几条
-            for (int j = i + 1; j < N; ++j) {
+            for (int j = i + 1; j < N; j++) {
                 const Point &a = points[i];
                 const Point &b = points[j];
                 

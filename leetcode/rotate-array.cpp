@@ -25,7 +25,7 @@ public:
 private:
     // 反转nums[start,end)
     void reverse(vector<int> &nums, int start, int end) {
-        for (int i = start, j = end - 1; i < j; ++i, --j) {
+        for (int i = start, j = end - 1; i < j; i++, j--) {
             swap(nums[i], nums[j]);
         }
     }

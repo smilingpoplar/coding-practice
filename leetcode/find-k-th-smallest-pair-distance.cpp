@@ -30,7 +30,7 @@ public:
     
     bool enough(int dist, vector<int> &nums, int k) {
         int count = 0;
-        for (int j = 0; j < nums.size(); ++j) {
+        for (int j = 0; j < nums.size(); j++) {
             int i = 0;
             while (nums[j] - nums[i] > dist) ++i;
             // 现在 nums[j] - nums[i] <= dist

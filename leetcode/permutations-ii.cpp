@@ -29,7 +29,7 @@ private:
             return;
         }
         unordered_set<int> selected;
-        for (int i = level; i < nums.size(); ++i) {
+        for (int i = level; i < nums.size(); i++) {
             if (selected.find(nums[i]) != selected.end()) continue;
             selected.insert(nums[i]);
             swap(nums[level], nums[i]);

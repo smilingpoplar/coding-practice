@@ -22,7 +22,7 @@ public:
         if (k < 1 || k > count) return "";
 
         vector<char> letters;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             letters.push_back(i + '1');
         }
         
@@ -41,7 +41,7 @@ public:
 private:
     int factorial(int n) {
         int product = 1;
-        for (int i = 1; i <= n; ++i) {
+        for (int i = 1; i <= n; i++) {
             product *= i;
         }
         return product;

@@ -23,7 +23,7 @@ public:
         vector<int> dp(sum + 1, 0);
         dp[0] = 1;
         for (int num : nums) {
-            for (int j = sum; j >= num; --j) { // 逆序循环
+            for (int j = sum; j >= num; j--) { // 逆序循环
                 dp[j] += dp[j - num];
             }
         }

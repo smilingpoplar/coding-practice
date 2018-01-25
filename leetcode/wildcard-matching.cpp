@@ -49,11 +49,11 @@ public:
         const int N = (int)p.size();
         vector<vector<bool>> f(M + 1, vector<bool>(N + 1, false));
         f[0][0] = true;
-        for (int j = 1; j <= N && p[j - 1] == '*'; ++j) { // 匹配空串
+        for (int j = 1; j <= N && p[j - 1] == '*'; j++) { // 匹配空串
             f[0][j] = true;
         }
-        for (int i = 1; i <= M; ++i) {
-            for (int j = 1; j <= N; ++j) {
+        for (int i = 1; i <= M; i++) {
+            for (int j = 1; j <= N; j++) {
                 if (p[j - 1] == '*') {
                     f[i][j] = f[i][j - 1] || f[i - 1][j];
                 } else {
@@ -84,20 +84,20 @@ public:
         vector<bool> f(N + 1, false);
         vector<bool> prev(N + 1, false);
         prev[0] = f[0] = true;
-        for (int j = 1; j <= N && p[j - 1] == '*'; ++j) { // 匹配空串
+        for (int j = 1; j <= N && p[j - 1] == '*'; j++) { // 匹配空串
             prev[j] = f[j] = true;
         }
         
-        for (int i = 1; i <= M; ++i) {
+        for (int i = 1; i <= M; i++) {
             f[0] = false;
-            for (int j = 1; j <= N; ++j) {
+            for (int j = 1; j <= N; j++) {
                 if (p[j - 1] == '*') {
                     f[j] = f[j - 1] || prev[j];
                 } else {
                     f[j] = (s[i - 1] == p[j - 1] || p[j - 1] == '?') && prev[j - 1];
                 }
             }
-            for (int j = 0; j <= N; ++j) {
+            for (int j = 0; j <= N; j++) {
                 prev[j] = f[j];
             }
         }

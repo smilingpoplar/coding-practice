@@ -20,7 +20,7 @@ public:
         const int N = (int)s.size();
         vector<int> f(N + 1, 0);
         f[0] = 1;
-        for (int i = 1; i <= N; ++i) {
+        for (int i = 1; i <= N; i++) {
             if (isValid(s, i - 1, i - 1)) f[i] += f[i - 1];
             if (isValid(s, i - 2, i - 1)) f[i] += f[i - 2];
         }

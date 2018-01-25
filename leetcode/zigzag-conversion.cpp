@@ -17,7 +17,7 @@ public:
         if (numRows == 1) return s;
         const int zigzag = 2 * numRows - 2;
         string result;
-        for (int i = 0; i < numRows; ++i) {
+        for (int i = 0; i < numRows; i++) {
             for (int j = i; j < s.size(); j += zigzag) {
                 result += s[j];
                 if (i == 0 || i == numRows - 1) continue;

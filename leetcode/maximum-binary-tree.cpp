@@ -28,7 +28,7 @@ public:
     TreeNode* construct(vector<int>& nums, int left, int right) {
         if (left > right) return nullptr;
         int maximum = INT_MIN, idx;
-        for (int i = left; i <= right; ++i) {
+        for (int i = left; i <= right; i++) {
             if (nums[i] > maximum) {
                 maximum = nums[i];
                 idx = i;

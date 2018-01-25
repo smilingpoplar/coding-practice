@@ -19,8 +19,8 @@ public:
         const int N = A.size();
         vector<map<int,int>> dp(N);
         int ans = 0;
-        for (int i = 1; i < N; ++i) {
-            for (int j = 0; j < i; ++j) {
+        for (int i = 1; i < N; i++) {
+            for (int j = 0; j < i; j++) {
                 long d = (long)A[i] - A[j];
                 if (d < INT_MIN || d > INT_MAX) continue; // pass OL
                 dp[i][d] += dp[j][d] + 1; // dp[j][d]来自变长的旧序列，长度>=3

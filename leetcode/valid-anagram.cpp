@@ -31,7 +31,7 @@ public:
         // 计数
         if (s.size() != t.size()) return false;
         auto count = vector<int>(26, 0); // 只有小写字母
-        for (int i = 0; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); i++) {
             ++count[s[i] - 'a'];
             --count[t[i] - 'a'];
         }

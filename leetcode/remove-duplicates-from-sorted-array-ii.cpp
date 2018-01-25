@@ -17,7 +17,7 @@ public:
         const int N = (int)nums.size();
         if (N <= 2) return N;
         int index = 2;
-        for (int i = 2; i < nums.size(); ++i) {
+        for (int i = 2; i < nums.size(); i++) {
             if (nums[i] != nums[index - 2]) {
                 nums[index] = nums[i];
                 ++index;

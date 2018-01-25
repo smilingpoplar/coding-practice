@@ -23,7 +23,7 @@ public:
         dummy.next = head;
         
         auto fast = &dummy;
-        for (int i = 0; i < n && fast; ++i) {
+        for (int i = 0; i < n && fast; i++) {
             fast = fast->next;
         }
         if (!fast) return head;

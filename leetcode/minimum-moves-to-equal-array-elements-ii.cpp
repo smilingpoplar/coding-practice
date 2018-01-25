@@ -16,7 +16,7 @@ public:
         // 让首尾对称位置的元素相遇
         sort(nums.begin(), nums.end());
         int count = 0;
-        for (int i = 0, j = nums.size() - 1; i < j; ++i, --j) {
+        for (int i = 0, j = nums.size() - 1; i < j; i++, j--) {
             count += nums[j] - nums[i];
         }
         return count;

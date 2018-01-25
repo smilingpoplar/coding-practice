@@ -16,7 +16,7 @@ public:
         // 类似找最大连通子图，nums[i]表示i=>nums[i]有边
         vector<bool> visited(nums.size(), false);
         int ans = 0;
-        for (int i = 0; i < nums.size(); ++i) {
+        for (int i = 0; i < nums.size(); i++) {
             if (visited[i]) continue;
             int j = i; // 从i开始新群
             int count = 1;
