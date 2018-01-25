@@ -13,11 +13,11 @@ using namespace std;
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
-        unordered_map<int, int> m;
-        stack<int> s; // 栈顶最小的栈
+        unordered_map<int, int> mp;
+        stack<int> s;
         for (int num : nums) {
             while (!s.empty() && num > s.top()) {
-                m[s.top()] = num;
+                mp[s.top()] = num;
                 s.pop();
             }
             s.push(num);
@@ -25,7 +25,7 @@ public:
         
         vector<int> ans;
         for (int num: findNums) {
-            ans.push_back((m.find(num) != m.end()) ? m[num] : -1);
+            ans.push_back((mp.find(num) != mp.end()) ? mp[num] : -1);
         }
         return ans;        
     }

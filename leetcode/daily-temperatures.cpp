@@ -15,14 +15,14 @@ public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         const int N = temperatures.size();
         vector<int> ans(N, 0);
-        vector<int> stack;
+        stack<int> S;
         for (int i = 0; i < N; ++i) {
-            while (!stack.empty() && temperatures[i] > temperatures[stack.back()]) {
-                int top = stack.back();
-                stack.pop_back();
+            while (!S.empty() && temperatures[i] > temperatures[S.top()]) {
+                int top = S.top();
+                S.pop();
                 ans[top] = i - top;                
             }
-            stack.push_back(i);
+            S.push(i);
         }
         return ans;
     }
