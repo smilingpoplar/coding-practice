@@ -31,10 +31,10 @@ public:
         return root;
     }
     
-    // root是当前节点，depth是当前节点深度
+    // 当前节点root深度depth
     void insert(TreeNode* root, int depth, int v, int d) {
         if (!root) return;
-        if (depth == d - 1) { // 要在当前节点的子节点插入
+        if (depth == d - 1) { // 在当前节点的子节点插入
             auto ln = new TreeNode(v);
             ln->left = root->left;
             root->left = ln;
