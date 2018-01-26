@@ -14,24 +14,20 @@ using namespace std;
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
-        // 伸缩窗口法，不变式：nums[i,j)是索引i开始的sum>=s的最小子数组
+        // 保持不变式：nums[left,i]是sum>=s的最小子数组
         const int N = (int)nums.size();
-        int i = 0;
-        int j = 0;
+        int ans = INT_MAX;
         int sum = 0;
-        int minLen = INT_MAX;
-        while (i < N) {
-            while (j < N && sum < s) {
-                sum += nums[j];
-                ++j;
+        int left = 0;
+        for (int i = 0; i < N; i++) {
+            sum += nums[i];
+            while (sum >= s) { 
+                ans = min(ans, i - left + 1);
+                sum -= nums[left];
+                left++;
             }
-            if (sum >= s) {
-                minLen = min(minLen, j - i);
-            }
-            sum -= nums[i];
-            ++i;
         }
-        return minLen == INT_MAX ? 0 : minLen;
+        return ans != INT_MAX ? ans : 0;
     }
 };
 
