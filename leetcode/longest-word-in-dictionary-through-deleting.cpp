@@ -14,22 +14,22 @@ class Solution {
 public:
     string findLongestWord(string s, vector<string>& d) {
         sort(d.begin(), d.end(), [](const string &a, const string &b) {
-            return (a.size() > b.size()) || (a.size() == b.size() && a < b);
+            return a.size() > b.size() || (a.size() == b.size() && a < b);
         });
-        
+
         for (const string &word : d) {
-            if (isSubsequence(s, word)) return word;
+            if (isSubsequence(word, s)) return word;
         }
         return "";
     }
-    
-    bool isSubsequence(const string &str, const string &sub) {
-        int j = 0;
-        for (int i = 0; i < str.size(); i++) {
-            if (str[i] == sub[j]) j++;
-            if (j == sub.size()) return true;
+
+    bool isSubsequence(const string &sub, const string &str) {
+        int idx = 0;
+        for (char c : str) {
+            if (idx < sub.size() && sub[idx] == c) idx++;
+            if (idx == sub.size()) return true;
         }
-        return false;        
+        return false;
     }
 };
 

@@ -34,8 +34,9 @@ public:
         int idx = 0;
         for (char c : str) {
             if (idx < sub.size() && sub[idx] == c) idx++;
+            if (idx == sub.size()) return true;
         }
-        return idx == sub.size();
+        return false;
     }
 };
 
