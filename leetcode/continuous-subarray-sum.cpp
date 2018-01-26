@@ -13,16 +13,19 @@ using namespace std;
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> m;
-        int runningSum = 0;
-        m[runningSum] = -1; // 初始空集对应map
+        unordered_map<int, int> mp; // runningSum =>pos
+        int runningSum = 0;  // 初始空集和
+        mp[runningSum] = -1;
+        // 在旧runningSum的集合mp中找runningSum-n*k，要找好多个数
+        // 这里的关键在于将全部runningSum%k，状态压缩
+        // 就变成在runningSum%k的集合mp中找(runningSum-n*k)%k=runningSum%k的值
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i];
             if (k) runningSum %= k;
-            if (m.find(runningSum) != m.end()) {
-                if (i - m[runningSum] >= 2) return true;
-            } else {
-                m[runningSum] = i;
+            if (mp.find(runningSum) == mp.end()) {
+                mp[runningSum] = i;
+            } else if (i - mp[runningSum] >= 2) {
+                return true;
             }
         }
         return false;
