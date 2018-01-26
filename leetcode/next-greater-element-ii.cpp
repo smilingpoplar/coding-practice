@@ -14,17 +14,17 @@ class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         const int N = nums.size();
-        vector<int> next(N, -1);
-        stack<int> s; // 栈顶最小的栈，保存相应的下标
-        // 循环数组，nums重复两次
+        vector<int> ans(N, -1);
+        stack<int> s; // 找下一个更大元素，用栈，保存下标
+        // 循环数组，重复处理两次nums
         for (int i = 0; i < 2 * N; i++) {
             while (!s.empty() && nums[i % N] > nums[s.top()]) {
-                next[s.top()] = nums[i % N];
+                ans[s.top()] = nums[i % N];
                 s.pop();
             }
-            if (i < N) s.push(i); // 前n个数才找next
+            if (i < N) s.push(i); // 压栈的数都会在弹出时找到下一个更大元素，前N个数才找
         }
-        return next;
+        return ans;
     }
 };
 
