@@ -14,12 +14,13 @@ using namespace std;
 class TrieNode {
 public:
     // Initialize your data structure here.
-    TrieNode() : next(26, NULL), isWord(false) {}
-    vector<TrieNode *> next;
+    TrieNode() : child(26, NULL), isWord(false) {}
+    vector<TrieNode *> child;
     bool isWord;
 };
 
 class Trie {
+    TrieNode *root;
 public:
     Trie() : root(new TrieNode()) { }
     ~Trie() { deleteNode(root); }
@@ -28,9 +29,9 @@ public:
     void insert(string s) {
         auto node = root;
         for (char c : s) {
-            int index = c - 'a';
-            if (!node->next[index]) node->next[index] = new TrieNode();
-            node = node->next[index];
+            int idx = c - 'a';
+            if (!node->child[idx]) node->child[idx] = new TrieNode();
+            node = node->child[idx];
         }
         node->isWord = true;
     }
@@ -39,9 +40,9 @@ public:
     bool search(string key) {
         auto node = root;
         for (char c : key) {
-            int index = c - 'a';
-            if (!node->next[index]) return false;
-            node = node->next[index];
+            int idx = c - 'a';
+            if (!node->child[idx]) return false;
+            node = node->child[idx];
         }
         return node->isWord;
     }
@@ -51,9 +52,9 @@ public:
     bool startsWith(string prefix) {
         auto node = root;
         for (char c : prefix) {
-            int index = c - 'a';
-            if (!node->next[index]) return false;
-            node = node->next[index];
+            int idx = c - 'a';
+            if (!node->child[idx]) return false;
+            node = node->child[idx];
         }
         return true;
     }
@@ -61,13 +62,11 @@ public:
 private:
     void deleteNode(TrieNode *node) {
         if (!node) return;
-        for (auto next : node->next) {
-            deleteNode(next);
+        for (auto child : node->child) {
+            deleteNode(child);
         }
         delete node;
     }
-    
-    TrieNode *root;
 };
 
 int main(int argc, const char * argv[]) {

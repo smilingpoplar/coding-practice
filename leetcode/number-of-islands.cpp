@@ -28,20 +28,15 @@ public:
                 }
             }
         }
-        
         return count;
     }
-private:
+
     void dfs(int i, int j, const vector<vector<char>> &grid, vector<vector<bool>> &visited) {
-        if (grid.empty()) return;
         const size_t M = grid.size();
         const size_t N = grid[0].size();
-        if (i < 0 || i >= M) return;
-        if (j < 0 || j >= N) return;
-        if (visited[i][j]) return;
-
+        if (i < 0 || i >= M || j < 0 || j >= N 
+            || grid[i][j] == '0' || visited[i][j]) return;
         visited[i][j] = true;
-        if (grid[i][j] == '0') return;
         dfs(i - 1, j, grid, visited);
         dfs(i + 1, j, grid, visited);
         dfs(i, j - 1, grid, visited);
