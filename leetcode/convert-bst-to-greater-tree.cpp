@@ -27,12 +27,11 @@ public:
         return root;
     }
     
-    // sum要用引用，因为要在各方法调用间累加
     void reverseInorder(TreeNode *root, int &sum) {
         if (!root) return;
         reverseInorder(root->right, sum);
-        root->val += sum;
-        sum = root->val;
+        sum += root->val;
+        root->val = sum;
         reverseInorder(root->left, sum);
     }
 };
