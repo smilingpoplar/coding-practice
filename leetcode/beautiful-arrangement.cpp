@@ -14,23 +14,20 @@ class Solution {
 public:
     int countArrangement(int N) {
         vector<int> a(N + 1);
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i <= N; i++)
             a[i] = i;
-        }
         return permute(a, 1);
     }
     
-    int permute(vector<int> &a, int index) {
-        if (index >= a.size()) {
-            return 1;
-        }
+    int permute(vector<int> &a, int idx) {
+        if (idx >= a.size()) return 1; // 得到一个有效解
         int count = 0;
-        for (int i = index; i < a.size(); i++) {
-            swap(a[index], a[i]);
-            if (a[index] % index == 0 || index % a[index] == 0) {
-                count += permute(a, index + 1);
+        for (int i = idx; i < a.size(); i++) {
+            swap(a[idx], a[i]);
+            if (a[idx] % idx == 0 || idx % a[idx] == 0) {
+                count += permute(a, idx + 1);
             }
-            swap(a[index], a[i]);
+            swap(a[idx], a[i]);
         }
         return count;
     }
