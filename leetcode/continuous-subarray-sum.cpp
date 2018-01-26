@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> mp; // runningSum =>pos
+        unordered_map<int, int> mp; // sum =>pos
         int runningSum = 0;  // 初始空集和
         mp[runningSum] = -1;
         // 在旧runningSum的集合mp中找runningSum-n*k，要找好多个数

@@ -13,20 +13,20 @@ using namespace std;
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
-        unordered_map<int, int> m; // sum=>index
-        int runningSum = 0;
-        m[runningSum] = -1; // 初始空集
+        unordered_map<int, int> mp; // sum=>pos
+        int runningSum = 0; // 初始空集和
+        mp[runningSum] = -1;
 
-        int maxlen = 0;
+        int ans = 0;
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i] == 0 ? -1 : 1;
-            if (m.find(runningSum) != m.end()) {
-                maxlen = max(maxlen, i - m[runningSum]);
+            if (mp.find(runningSum) == mp.end()) {
+                mp[runningSum] = i;
             } else {
-                m[runningSum] = i;
+                ans = max(ans, i - mp[runningSum]);
             }
         }
-        return maxlen;
+        return ans;
     }
 };
 
