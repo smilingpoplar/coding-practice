@@ -22,21 +22,21 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> result;
-        queue<TreeNode *> queue;
-        if (root) queue.push(root);
-        while (!queue.empty()) {
-            const int levelSize = (int)queue.size();
+        vector<int> ans;
+        queue<TreeNode *> Q;
+        if (root) Q.push(root);
+        while (!Q.empty()) {
+            const int levelSize = Q.size();
             for (int i = 0; i < levelSize; i++) {
-                auto node = queue.front();
-                queue.pop();
-                if (i == levelSize - 1) result.push_back(node->val);
+                auto node = Q.front();
+                Q.pop();
+                if (i == levelSize - 1) ans.push_back(node->val);
                 
-                if (node->left) queue.push(node->left);
-                if (node->right) queue.push(node->right);
+                if (node->left) Q.push(node->left);
+                if (node->right) Q.push(node->right);
             }
         }
-        return result;
+        return ans;
     }
 };
 
