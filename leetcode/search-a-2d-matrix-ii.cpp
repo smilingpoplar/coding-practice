@@ -18,15 +18,15 @@ public:
         if (matrix.empty()) return false;
         const int M = (int)matrix.size();
         const int N = (int)matrix[0].size();
-        int row = 0;
-        int col = N - 1;
-        while (row < M && col >= 0) {
-            if (target == matrix[row][col]) {
+        int r = 0;
+        int c = N - 1;
+        while (r < M && c >= 0) {
+            if (target == matrix[r][c]) {
                 return true;
-            } else if (target > matrix[row][col]) {
-                ++row;
+            } else if (target > matrix[r][c]) {
+                ++r;
             } else {
-                --col;
+                --c;
             }
         }
         return false;

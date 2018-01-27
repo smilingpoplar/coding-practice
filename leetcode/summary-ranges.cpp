@@ -14,22 +14,17 @@ using namespace std;
 class Solution {
 public:
     vector<string> summaryRanges(vector<int>& nums) {
-        vector<string> result;
-        int start = 0;
-        while (start < nums.size()) {
-            // 输出nums[start,end)范围
-            int end = start + 1;
-            while (end < nums.size() && nums[end] == nums[end - 1] + 1) ++end;
-            
-            string range = to_string(nums[start]);
-            if (end > start + 1) {
-                range += "->" + to_string(nums[end - 1]);
+        vector<string> ans;
+        int left = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (i == nums.size() - 1 || nums[i] != nums[i+1] - 1) {
+                string range = to_string(nums[left]);
+                if (i > left) range += "->" + to_string(nums[i]);
+                ans.push_back(range);
+                left = i + 1;
             }
-            result.push_back(range);
-            
-            start = end;
         }
-        return result;
+        return ans;
     }
 };
 
