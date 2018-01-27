@@ -15,20 +15,18 @@ bool isBadVersion(int version);
 
 class Solution {
 public:
-    // 二分搜索，[0,...,0,1,1,..]找第一个1
-    // x[l]<t<=x[h]，l+1=h是x[h]是要找的数
     int firstBadVersion(int n) {
-        int l = 0;
-        int h = n + 1;
-        while (l + 1 < h) {
-            int mid = l + (h - l) / 2;
+        // 二分搜索，[0,..,0,1,1,..]找第一个1
+        int l = 0, u = n + 1;
+        while (l + 1 < u) {
+            int mid = l + (u - l) / 2;
             if (isBadVersion(mid)) {
-                h = mid;
+                u = mid;
             } else {
                 l = mid;
             }
         }
-        if (isBadVersion(h)) return h;
+        if (isBadVersion(u)) return u;
         return INT_MAX;
     }
 };
