@@ -15,20 +15,20 @@ using namespace std;
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int> &nums, int k, int t) {
-        // 保持最大长度为k的滑动窗口
-        set<int> window; // 记录元素nums[i,j)，j-i<=k
+        set<long> win; // 保持长度<=k的滑动窗口
         int i = 0;
         for (int j = 0; j < nums.size(); j++) {
+            // 考虑插入nums[j]之前
             if (j - i > k) {
-                window.erase(nums[i]);
-                ++i;
+                win.erase(nums[i]);
+                i++;
             }
-            // 看window中是否存在元素x，使nums[j]-t<=x<=nums[j]+t
-            // 只需看>=nums[j]-t的最小元素y是否同时<=nums[j]+t
-            auto it = window.lower_bound(nums[j] - t);
-            if (it != window.end() && *it - t <= nums[j]) return true;
+            // win中是否存在x，使nums[j]-x<=t且x-nums[j]<=t，nums[j]-t<=x<=nums[j]+t
+            // 只要找>=nums[j]-t的数，看它是否满足<=nums[j]+t
+            auto it = win.lower_bound((long)nums[j] - t);
+            if (it != win.end() && *it <= (long)nums[j] + t) return true;
             
-            window.insert(nums[j]);
+            win.insert(nums[j]);            
         }
         return false;
     }
