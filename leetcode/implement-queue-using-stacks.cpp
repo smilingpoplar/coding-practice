@@ -11,53 +11,60 @@
 
 using namespace std;
 
-class Queue {
+class MyQueue {
+    stack<int> in;
+    stack<int> out;
+
+    void moveIfOutStackEmpty() {
+        if (out.empty()) {
+            while (!in.empty()) {
+                out.push(in.top());
+                in.pop();
+            }
+        }
+    }
 public:
-    // Push element x to the back of queue.
+    /** Initialize your data structure here. */
+    MyQueue() {
+        
+    }
+    
+    /** Push element x to the back of queue. */
     void push(int x) {
-        in.push_back(x);
+        in.push(x);
     }
     
-    // Removes the element from in front of queue.
-    void pop(void) {
-        if (out.empty()) {
-            while (!in.empty()) {
-                out.push_back(in.back());
-                in.pop_back();
-            }
-        }
-        if (out.empty()) return;
-        out.pop_back();
-    }
-    
-    // Get the front element.
-    int peek(void) {
-        if (out.empty()) {
-            while (!in.empty()) {
-                out.push_back(in.back());
-                in.pop_back();
-            }
-        }
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+        moveIfOutStackEmpty();
         if (out.empty()) return INT_MIN;
-        return out.back();
+        int ans = out.top();
+        out.pop();
+        return ans;
     }
     
-    // Return whether the queue is empty.
-    bool empty(void) {
+    /** Get the front element. */
+    int peek() {
+        moveIfOutStackEmpty();
+        if (out.empty()) return INT_MIN;
+        return out.top();
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
         return out.empty() && in.empty();
     }
-
-private:
-    vector<int> in;
-    vector<int> out;
 };
 
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * bool param_4 = obj.empty();
+ */
+
 int main(int argc, const char * argv[]) {
-    Queue q;
-    q.push(1);
-    q.push(2);
-    q.pop();
-    cout << q.peek();
-    
     return 0;
 }
