@@ -36,15 +36,15 @@ class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
         // 使用栈的通用图遍历算法就是dfs中的先序遍历
-        vector<TreeNode *> stack;
-        if (root) stack.push_back(root);
-        while (!stack.empty()) {
-            auto node = stack.back();
-            stack.pop_back();
+        stack<TreeNode *> stk;
+        if (root) stk.push(root);
+        while (!stk.empty()) {
+            auto node = stk.top();
+            stk.pop();
             swap(node->left, node->right);
             
-            if (node->left) stack.push_back(node->left);
-            if (node->right) stack.push_back(node->right);
+            if (node->left) stk.push(node->left);
+            if (node->right) stk.push(node->right);
         }
         return root;
     }
