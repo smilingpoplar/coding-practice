@@ -33,7 +33,7 @@ public:
     double findMedian() {
         if (lo.empty()) return 0;
         if (lo.size() == hi.size()) return (lo.top() + hi.top()) * 0.5;
-        else return lo.top();
+        return lo.top();
     }
 };
 
