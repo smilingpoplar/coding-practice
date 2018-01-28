@@ -13,17 +13,16 @@ using namespace std;
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        // 动态规划，设dp[s]表示凑出面值s最少需要的硬币数
-        vector<int> dp(amount + 1, INT_MAX);
+        // 完全背包问题，cost是面值，weight是硬币数1
+        const int theMax = amount + 1;
+        vector<int> dp(amount + 1, theMax);
         dp[0] = 0;
-        for (int i = 1; i <= amount; i++) {
-            for (int j = 0; j < coins.size(); j++) {
-                if (i >= coins[j] && dp[i - coins[j]] != INT_MAX) {
-                    dp[i] = min(dp[i], dp[i - coins[j]] + 1);
-                }
+        for (int coin : coins) {
+            for (int i = coin; i <= amount; i++) { // 正序遍历
+                dp[i] = min(dp[i], dp[i - coin] + 1);
             }
         }
-        return dp[amount] == INT_MAX ? -1 : dp[amount];
+        return (dp[amount] != theMax) ? dp[amount] : -1;
     }
 };
 
