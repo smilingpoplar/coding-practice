@@ -1,6 +1,6 @@
 //
-//  find-all-numbers-disappeared-in-an-array
-//  https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
+//  find-all-duplicates-in-an-array
+//  https://leetcode.com/problems/find-all-duplicates-in-an-array/
 //
 //  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -12,15 +12,15 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> findDisappearedNumbers(vector<int>& nums){
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> ans;
         // 把出现过的数当作索引，把对应索引位置标记为负
         for (int num : nums) {
             int idx = abs(num);
-            nums[idx-1] = -abs(nums[idx-1]);
-        }
-        vector<int> ans;
-        for (int i = 1; i <= nums.size(); i++) {
-            if (nums[i-1] > 0) ans.push_back(i);
+            if (nums[idx-1] < 0) {
+                ans.push_back(idx);
+            }                
+            nums[idx-1] = -nums[idx-1];
         }
         return ans;
     }
