@@ -13,30 +13,30 @@ using namespace std;
 class Solution {
 public:
     bool canPartitionKSubsets(vector<int>& nums, int k) {
+        if (nums.size() < k) return false;
         int sum = 0;
-        for (int num : nums) {
+        for (int num : nums) 
             sum += num;
-        }
         if (sum % k != 0) return false;
         
-        vector<int> subsetSums(k, 0);
-        return search(nums, 0, subsetSums, sum / k);
+        vector<int> subsets(k, 0);
+        sort(nums.begin(), nums.end(), greater<int>()); // 大的先选能更快判断
+        return search(nums, 0, subsets, sum / k);
     }
     
-    bool search(vector<int> &nums, int idx, vector<int> &subsetSums, int targetSum) {
+    bool search(vector<int> &nums, int idx, vector<int> &subsets, int target) {
         if (idx == nums.size()) {
-            for (int j = 0; j < subsetSums.size(); j++) {
-                if (subsetSums[j] != targetSum) return false;
+            for (int subset : subsets) {
+                if (subset != target) return false;                
             }
             return true;
         }
         
-        for (int j = 0; j < subsetSums.size(); j++) {
-            if (subsetSums[j] + nums[idx] > targetSum) continue;
-            subsetSums[j] += nums[idx];
-            if (search(nums, idx + 1, subsetSums, targetSum)) return true;
-            subsetSums[j] -= nums[idx];
-            if (subsetSums[j] == 0) break; // 剪枝：subsetSums初始全是0，第一个0试过不行，后面的0不用再试
+        for (int &subset : subsets) {
+            if (subset + nums[idx] > target) continue;
+            subset += nums[idx];
+            if (search(nums, idx + 1, subsets, target)) return true;
+            subset -= nums[idx];
         }
         return false;
     }
