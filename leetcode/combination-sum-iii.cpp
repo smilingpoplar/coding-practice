@@ -14,23 +14,24 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> combinationSum3(int k, int n) {
-        vector<vector<int>> result;
-        vector<int> combination;
-        dfs(1, k, n, combination, result);
-        return result;
+        vector<vector<int>> ans;
+        vector<int> comb;
+        search(k, n, 1, comb, ans);
+        return ans;
     }
 private:
-    void dfs(int start, int k, int n,
-             vector<int> &combination, vector<vector<int>> &result) {
+    void search(int k, int n, int start, 
+             vector<int> &comb, vector<vector<int>> &ans) {
         if (k == 0 && n == 0) {
-            result.push_back(combination);
+            ans.push_back(comb);
             return;
         }
         if (k <= 0 || n <= 0) return;
+        
         for (int i = start; i <= 9; i++) {
-            combination.push_back(i);
-            dfs(i + 1, k - 1, n - i, combination, result);
-            combination.pop_back();
+            comb.push_back(i);
+            search(k - 1, n - i, i + 1, comb, ans);
+            comb.pop_back();
         }
     }
 };
