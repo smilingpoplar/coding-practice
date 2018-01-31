@@ -11,23 +11,24 @@
 
 using namespace std;
 
+/*
 class Solution {
 public:
     string longestPalindrome(string s) {
-        // 动态规划，设f(i,j)表示s[i,j]是回文串，0<=i<=j<=N-1
-        // f(i,j) = f(i+1,j-1) && s[i]==s[j]，i+1>j-1时是空串f(i+1,j-1)为true
-        // 观察递推式，f(i,j)只依赖于前一组f(i+1,x)，在i的递减循环中设前一组为prev则可降维：
-        // 设f(j)表示s[i,j]是回文串，f(j) = prev(j-1) && s[i]==s[j]，i+1>j-1时是空串f(i+1,j-1)为true
-        // 观察新递推式，f(j)只依赖于前一组的前一项prev(j-1)，在j的递减循环中可不用prev数组：
-        // f(j) = f(j-1) && s[i]==s[j]，i+1>j-1时是空串f(i+1,j-1)为true
-        const int N = (int)s.size();
-        vector<int> f(N, 0);
+        // 设dp[i][j]表示s[i..j]是最长回文串，0<=i<=j<N
+        // dp[i][j] = s[i]==s[j]&&dp[i+1][j-1]
+        // dp[i][j]只依赖下左项，可降维，i从下往上遍历
+        // 降维导致上下行合并，要让下左项不受影响，也就是让合并后左边项不受影响，j从右往左遍历
+        const int N = s.size();
+        vector<bool> dp(N, false);
         int longest = 0;
         string palindrome;
         for (int i = N - 1; i >= 0; i--) {
-            for (int j = N - 1; j >= i; j--) {
-                f[j] = (i + 1 > j - 1 || f[j - 1]) && s[i] == s[j];
-                if (f[j]) {
+            for (int j = N; j >= i; j--) {
+                dp[j] = (s[i] == s[j]);
+                if (i + 1 <= j - 1) dp[j] = dp[j] && dp[j-1];
+
+                if (dp[j]) {
                     int length = j - i + 1;
                     if (length > longest) {
                         longest = length;
@@ -37,6 +38,34 @@ public:
             }
         }
         return palindrome;
+    }
+};
+*/
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        // 从可能的中心往外扩展找回文
+        int longest = 0;
+        int start;
+        for (int i = 0; i < s.size(); i++) {
+            int len1 = expand(s, i, i);
+            int len2 = expand(s, i, i + 1);
+            int len = max(len1, len2);
+            if (len > longest) {
+                longest = len;
+                start = i - (len - 1) / 2;
+            }
+        }
+        return s.substr(start, longest);
+    }
+    
+    int expand(const string &s, int left, int right) {
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            --left;
+            ++right;
+        }
+        return right - left - 1;
     }
 };
 

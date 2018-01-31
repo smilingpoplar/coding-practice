@@ -17,24 +17,24 @@ public:
         if (digits.empty()) return {};
         const vector<string> mapping = {" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
         
-        vector<string> result;
-        string combination;
-        dfs(0, digits, mapping, combination, result);
-        return result;
+        vector<string> ans;
+        string comb;
+        search(digits, 0, mapping, comb, ans);
+        return ans;
     }
 private:
-    void dfs(int index, const string &digits, const vector<string> &mapping,
-             string &combination, vector<string> &result) {
-        if (index == digits.size()) {
-            result.push_back(combination);
+    void search(const string &digits, int idx, const vector<string> &mapping,
+                string &comb, vector<string> &ans) {
+        if (idx == digits.size()) {
+            ans.push_back(comb);
             return;
         }
         
-        const string &letters = mapping[digits[index] - '0'];
+        const string &letters = mapping[digits[idx] - '0'];
         for (char c : letters) {
-            combination.push_back(c);
-            dfs(index + 1, digits, mapping, combination, result);
-            combination.pop_back();
+            comb.push_back(c);
+            search(digits, idx + 1, mapping, comb, ans);
+            comb.pop_back();
         }
     }
 };

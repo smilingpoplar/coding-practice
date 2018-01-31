@@ -14,25 +14,27 @@ using namespace std;
 class Solution {
 public:
     int minCut(string s) {
-        // 设f(i,j)表示s[i,j]是回文串，0<=i<=j<=N-1
-        // f(i,j) = f(i+1,j-1) && s[i]==s[j], 当i+1>j-1时是空串f(i+1,j-1)为true
-        const int N = (int)s.size();
-        vector<vector<bool>> f(N, vector<bool>(N, false));
+        // 设dp[i][j]表示s[i..j]是回文串，0<=i<=j<N
+        // dp[i][j]=s[i]==s[j]&&dp[i+1][j-1]
+        const int N = s.size();
+        vector<vector<bool>> dp(N, vector<bool>(N, false));
         for (int i = N - 1; i >= 0; i--) {
             for (int j = i; j < N; j++) {
-                f[i][j] = (i + 1 > j - 1 || f[i + 1][j - 1]) && s[i] == s[j];
+                bool palindrome = s[i] == s[j];
+                if (i + 1 <= j - 1) palindrome = palindrome && dp[i + 1][j - 1];
+                dp[i][j] = palindrome;
             }
         }
-        // 设cut(i)表示s[0,i]的minCut，0<=i<=N-1，则
-        // cut(i) = 0，当f(0,i)==true
-        // cut(i) = min( cut(k)+1 )，当f(0,i)==false，f(k+1,i)==true，0<=k<=i-1
+        // 设cut[i]表示s[0..i]的minCut，0<=i<N
+        // dp[0][i]==true时，cut[i]=0
+        // dp[0][i]==false时，cut[i]=min( cut[k]+1 )，k满足dp[k+1][i]==true，0<=k<i
         vector<int> cut(N, INT_MAX);
         for (int i = 0; i < N; i++) {
-            if (f[0][i]) {
+            if (dp[0][i]) {
                 cut[i] = 0;
             } else {
                 for (int k = 0; k < i; k++) {
-                    if (f[k + 1][i]) {
+                    if (dp[k + 1][i]) {
                         cut[i] = min(cut[i], cut[k] + 1);
                     }
                 }

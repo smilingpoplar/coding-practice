@@ -15,32 +15,21 @@ class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        vector<vector<int>> result;
+        vector<vector<int>> ans;
         vector<int> subset;
-        subsetsWithDup(0, nums, subset, result);
-        return result;
+        search(nums, 0, subset, ans);
+        return ans;
     }
-private:
-    
-    // 某元素重复dup次，相当于可以选择该元素[0,dup]次
-    void subsetsWithDup(size_t start, const vector<int> &nums, vector<int> &subset, vector<vector<int>> &result) {
-        const size_t N = nums.size();
-        if (start == N) {
-            result.push_back(subset);
-            return;
-        }
+
+    void search(const vector<int> &nums, int idx,
+                vector<int> &subset, vector<vector<int>> &ans) {
+        ans.push_back(subset);
         
-        size_t dup = 1;
-        while (start + dup < N && nums[start + dup] == nums[start]) dup++;
-        
-        for (size_t i = 0; i <= dup; i++) {
-            for (size_t j = 0; j < i; j++) {
-                subset.push_back(nums[start]);
-            }
-            subsetsWithDup(start + dup, nums, subset, result);
-            for (size_t j = 0; j < i; j++) {
-                subset.pop_back();
-            }
+        for (int i = idx; i < nums.size(); i++) {
+            if (i > idx && nums[i] == nums[i-1]) continue;
+            subset.push_back(nums[i]);
+            search(nums, i + 1, subset, ans);
+            subset.pop_back();
         }
     }
 };

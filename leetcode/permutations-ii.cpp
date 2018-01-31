@@ -15,26 +15,23 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        // 搜索树分叉，第0层从nums[0,N-1]中选一个（重复的数只选一次）放到nums[0]，
-        // 第1层从剩下的nums[1,N-1]中选一个（重复的数只选一次）放到nums[1]，依次类推，
-        // 第level层从剩下的nums[level,N-1]中选一个（重复的数只选一次）放到nums[level]，0<=level<N
-        vector<vector<int>> result;
-        dfs(0, nums, result);
-        return result;
+        vector<vector<int>> ans;
+        search(nums, 0, ans);
+        return ans;
     }
-private:
-    void dfs(int level, vector<int> nums, vector<vector<int>> &result) {
-        if (level == nums.size()) {
-            result.push_back(nums);
+
+    void search(vector<int> &nums, int idx, vector<vector<int>> &ans) {
+        if (idx == nums.size()) {
+            ans.push_back(nums);
             return;
         }
         unordered_set<int> selected;
-        for (int i = level; i < nums.size(); i++) {
+        for (int i = idx; i < nums.size(); i++) {
             if (selected.find(nums[i]) != selected.end()) continue;
             selected.insert(nums[i]);
-            swap(nums[level], nums[i]);
-            dfs(level + 1, nums, result);
-            swap(nums[level], nums[i]);
+            swap(nums[idx], nums[i]);
+            search(nums, idx + 1, ans);
+            swap(nums[idx], nums[i]);
         }
     }
 };

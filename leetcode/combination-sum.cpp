@@ -14,24 +14,24 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        sort(candidates.begin(), candidates.end());
-        vector<vector<int>> result;
-        vector<int> combination;
-        dfs(0, candidates, target, combination, result);
-        return result;
+        vector<vector<int>> ans;
+        vector<int> comb;
+        search(candidates, target, 0, comb, ans);
+        return ans;
     }
 private:
-    void dfs(int start, const vector<int> candiatates, int target,
-             vector<int> &combination, vector<vector<int>> &result) {
+    void search(const vector<int> candiatates, int target, int idx,
+                vector<int> &comb, vector<vector<int>> &ans) {
+        if (target < 0) return;
         if (target == 0) {
-            result.push_back(combination);
+            ans.push_back(comb);
             return;
         }
-        if (target < 0) return;
-        for (int i = start; i < candiatates.size(); i++) {
-            combination.push_back(candiatates[i]);
-            dfs(i, candiatates, target - candiatates[i], combination, result);
-            combination.pop_back();
+        
+        for (int i = idx; i < candiatates.size(); i++) {
+            comb.push_back(candiatates[i]);
+            search(candiatates, target - candiatates[i], i, comb, ans);
+            comb.pop_back();
         }
     }
 };

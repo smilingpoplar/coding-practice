@@ -14,34 +14,32 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> partition(string s) {
-        // 设f(i,j)表示s[i,j]是回文串，0<=i<=j<=N-1
-        // f(i,j) = f(i+1,j-1) && s[i]==s[j], 当i+1>j-1时是空串f(i+1,j-1)为true
-        const int N = (int)s.size();
-        vector<vector<bool>> f(N, vector<bool>(N, false));
-        for (int i = N - 1; i >= 0; i--) {
-            for (int j = i; j < N; j++) {
-                f[i][j] = (i + 1 > j - 1 || f[i + 1][j - 1]) && s[i] == s[j];
-            }
-        }
-        vector<vector<string>> result;
+        vector<vector<string>> ans;
         vector<string> partition;
-        dfs(0, s, f, partition, result);
-        return result;
+        search(s, 0, partition, ans);
+        return ans;
     }
-private:
-    void dfs(int start, const string &s, const vector<vector<bool>> &f,
-             vector<string> &partition, vector<vector<string>> &result) {
+
+    void search(const string &s, int start, vector<string> &partition, vector<vector<string>> &ans) {
         if (start == s.size()) {
-            result.push_back(partition);
+            ans.push_back(partition);
             return;
         }
         for (int i = start; i < s.size(); i++) {
-            if (f[start][i]) {
-                partition.push_back(s.substr(start, i - start + 1));
-                dfs(i + 1, s, f, partition, result);
-                partition.pop_back();
-            }
+            if (!isPalindrome(s, start, i)) continue;
+            partition.push_back(s.substr(start, i - start + 1));
+            search(s, i + 1, partition, ans);
+            partition.pop_back();
         }
+    }
+    
+    bool isPalindrome(const string &s, int left, int right) {
+        while (left < right) {
+            if (s[left] != s[right]) return false;
+            ++left;
+            --right;
+        }
+        return true;
     }
 };
 
