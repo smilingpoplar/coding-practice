@@ -33,7 +33,7 @@ public:
             fast = fast->next;
             slow = slow->next;
         }
-        // slow是待删除节点的前驱节点
+        // slow在待删除节点前面
         auto toDelete = slow->next;
         slow->next = toDelete->next;
         delete toDelete;
