@@ -14,14 +14,14 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         if (x < 0) return false;
-        // 看x反转后是否仍为x，反转后溢出的情况仍适用
-        int r = 0;
+        int reverse = 0;
         int tmpX = x;
         while (tmpX) {
-            r = r * 10 + tmpX % 10;
+            reverse = reverse * 10 + tmpX % 10;
             tmpX /= 10;
         }
-        return r == x;
+        // 溢出的话变成负数，返回false
+        return x == reverse;
     }
 };
 

@@ -14,21 +14,16 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        // 若子串含重复字符，则父串也含重复字符，设s[start,i)是无重复子串
-        // 1. 若s[i]是重复字符，则新的无重复子串：s[lastIndex[s[i]]+1,i+1)
-        // 2. 若s[i]不是重复字符，则新的无重复子串：s[start,i+1)
-        const size_t ASCII_SIZE = 256;
-        vector<int> lastIndex(ASCII_SIZE, -1); // 每个字符最后出现的位置
+        unordered_map<char, int> mp; // char=>lastIdx
         int longest = 0;
         for (int i = 0, start = 0; i < s.size(); i++) {
-            if (lastIndex[s[i]] >= start) {
-                start = lastIndex[s[i]] + 1;
+            if (mp.find(s[i]) != mp.end() && mp[s[i]] >= start) {
+                start = mp[s[i]] + 1;                
             } else {
-                longest = max(longest, i + 1 - start);
+                longest = max(longest, i - start + 1);
             }
-            lastIndex[s[i]] = i;
+            mp[s[i]] = i;
         }
-        
         return longest;
     }
 };
