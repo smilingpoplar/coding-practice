@@ -13,29 +13,30 @@ using namespace std;
 
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& h) {
-        // 包含h[i]的最大矩形块，要将i往左往右扩展到高度小于它的位置
-        // 用栈保存h[i]的位置i，从左到右扫描h数组，比较i处的高度和栈顶top处的高度
-        // h[i]>=h[top]就把i入栈，h[i]<h[top]就把top出栈并计算包含h[top]的最大矩形块面积，
-        // 可以计算是因为已知：top处往左，高度小于它的位置是新栈顶位置；top处往右，高度小于它的位置是i
-
-        const int N = (int)h.size();
-        int largestArea = 0;
-        vector<int> stack;
-        int i = 0;
-        while (i <= N) { // i==N是假想的高度为0处
-            if (stack.empty() || (i < N && h[i] >= h[stack.back()])) {
-                stack.push_back(i);
-                ++i;
-            } else {
-                int top = stack.back();
-                stack.pop_back();
-                int newTop = stack.empty() ? -1 : stack.back();
-                int area = h[top] * (i - newTop - 1);
-                largestArea = max(largestArea, area);
-            }
+    int largestRectangleArea(vector<int>& heights) {
+        // 包含heights[i]的最大矩形块，要将i往左往右扩展到高度小于它的位置
+        // 用栈找heights[i]右边小于它的位置，若heights[j]<heights[i]将i弹出栈，这时j是右边小于它的位置，
+        // 而新栈顶正是左边小于它的位置，因此可以计算包含heights[i]的最大矩形面积
+        // 为方便起见，假设首尾有高度为0的块，变成h[]
+        const int N = heights.size();
+        vector<int> h(N + 2); 
+        h[0] = h[N + 1] = 0;
+        for (int i = 0; i < N; i++) {
+            h[i + 1] = heights[i];
         }
-        return largestArea;
+        
+        int ans = 0;
+        stack<int> stack; // 栈中保存坐标
+        for (int i = 0; i < N + 2; i++) {
+            while (!stack.empty() && h[i] < h[stack.top()]) {
+                int top = stack.top();
+                stack.pop();
+                int newTop = stack.top();
+                ans = max(ans, h[top] * (i - newTop - 1));
+            }
+            stack.push(i);
+        }
+        return ans;
     }
 };
 
