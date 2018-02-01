@@ -10,36 +10,25 @@
 #include <vector>
 
 using namespace std;
-
 class Solution {
 public:
     int candy(vector<int>& ratings) {
-        // 比左侧分高的糖果比左侧多，比右侧分高的糖果比右侧多，分从左往右和从右往左两趟扫描分别算出糖果数，取较大值
-        const int N = (int)ratings.size();
+        const int N = ratings.size();
         vector<int> candies(N, 1);
-        // 从左往右扫描
-        for (int i = 1, num = 1; i < N; i++) {
-            if (ratings[i] > ratings[i - 1]) {
-                ++num;
-            } else {
-                num = 1;
+        for (int i = 1; i < N; i++) { // 只考虑比左侧分高的
+            if (ratings[i] > ratings[i-1]) {
+                candies[i] = candies[i-1] + 1;
             }
-            if (num > candies[i]) candies[i] = num;
         }
-        // 从右往左扫描
-        for (int i = N - 2, num = 1; i >= 0; i--) {
-            if (ratings[i] > ratings[i + 1]) {
-                ++num;
-            } else {
-                num = 1;
+        for (int i = N - 2; i >= 0; i--) { // 只考虑比右侧分高的
+            if (ratings[i] > ratings[i+1]) {
+                candies[i] = max(candies[i], candies[i+1] + 1);
             }
-            if (num > candies[i]) candies[i] = num;
         }
-        // 总和
+
         int sum = 0;
-        for (int num : candies) {
-            sum += num;
-        }
+        for (int candy : candies)
+            sum += candy;
         return sum;
     }
 };
