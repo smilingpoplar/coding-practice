@@ -13,9 +13,8 @@ using namespace std;
 class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
-        // 尽可能选择不重叠区间，先根据区间终点排序
+        // 找最多的不重叠区间数，先根据区间终点排序
         sort(pairs.begin(), pairs.end(), [](vector<int> &a, vector<int> &b) {
-            if (a[1] == b[1]) return a[0] > b[0];
             return a[1] < b[1];
         });
         
@@ -23,7 +22,7 @@ public:
         int end = INT_MIN;
         for (auto &p : pairs) {
             if (p[0] > end) {
-                ++ans;
+                ans++;
                 end = p[1];
             }
         }

@@ -20,20 +20,16 @@ public:
             v.push_back(to_string(num));
         }
         
-        sort(v.begin(), v.end(), compare);
+        sort(v.begin(), v.end(), [](const string &s1, const string &s2) {
+            return s1 + s2 > s2 + s1;
+        });
         
         ostringstream oss;
-        for (const auto &str : v) {
-            oss << str;
-        }
-        string result = oss.str();
+        for (auto &str : v) oss << str;
+        string ans = oss.str();
         // 以0开头的特例，如 [0, 0]
-        if (result[0] == '0') result = "0";
-        return result;
-    }
-private:
-    static bool compare(const string &s1, const string &s2) {
-        return s1 + s2 > s2 + s1;
+        if (ans[0] == '0') ans = "0";
+        return ans;
     }
 };
 
