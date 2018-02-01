@@ -13,18 +13,19 @@ using namespace std;
 class Solution {
 public:
     double myPow(double x, int n) {
-        if (n < 0) {
-            if (n == INT_MIN) return 1 / (x * myPow(x, INT_MAX));
-            return 1 / myPow(x, -n);
+        long nl = n; // 防止INT_MIN取负溢出
+        if (nl < 0) {
+            x = 1 / x;
+            nl = -nl;
         }
         
-        double result = 1;
-        while (n) {
-            if (n & 1) result *= x;
+        double ans = 1;
+        while (nl) {
+            if (nl & 1) ans *= x;
             x *= x;
-            n >>= 1;
+            nl >>= 1;
         }
-        return result;
+        return ans;
     }
 };
 
