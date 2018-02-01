@@ -14,34 +14,17 @@ using namespace std;
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        // 假设现在计算了h[l,r]部分的面积，且h[l]<=h[r]，下一步可以把指针l往右移，
-        // 因为所有以l为端点的部分（如h[l,r-1], h[l,r-2]...）的面积都小于h[l,r]（长度：< 高度：<=）
-        // 由此，可用两端夹逼法，高度较小的指针往里移动
-        int l = 0;
-        int r = (int)height.size() - 1;
-        int maxArea = 0;
-        while (l < r) {
-            int area = (r - l) * min(height[l], height[r]);
-            maxArea = max(maxArea, area);
-            if (height[l] <= height[r]) ++l;
-            else --r;
+        // 首尾两指针，向内移动矮的那个
+        // 因为容器高度由短的决定，向内移动高的那个则容器高度不变、宽度更小，结果更差
+        int i = 0, j = height.size() - 1;
+        int ans = 0;
+        while (i < j) {
+            ans = max(ans, min(height[i], height[j]) * (j - i));
+            if (height[i] < height[j]) i++;
+            else j--;
         }
-        return maxArea;
+        return ans;
     }
-    
-    /* 简单解法超时
-    int maxArea(vector<int>& height) {
-        const int N = (int)height.size();
-        int maxArea = 0;
-        for (int i = 0; i < N - 1; i++) {
-            for (int j = i + 1; j < N; j++) {
-                int area = min(height[i], height[j]) * (j - i);
-                maxArea = max(maxArea, area);
-            }
-        }
-        return maxArea;
-    }
-    */
 };
 
 int main(int argc, const char * argv[]) {
