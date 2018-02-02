@@ -25,6 +25,7 @@ public:
         
         vector<int> ans;
         for (int i = buckets.size() - 1; i >= 0 && ans.size() < k; i--) {
+            if (buckets[i].empty()) continue;
             for (int num : buckets[i]) {
                 ans.push_back(num);
                 if (ans.size() == k) break;
