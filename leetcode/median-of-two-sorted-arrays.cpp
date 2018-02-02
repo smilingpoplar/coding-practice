@@ -13,55 +13,41 @@ using namespace std;
 
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int> &a, vector<int> &b) {
-        // 参考：https://leetcode.com/discuss/11174/share-my-iterative-solution-with-o-log-min-n-m
-        // 先找第k=(M+N+1)/2小的数，k从1开始计数。基本想法是 任意a[i]都可以在O(1)时间内判断它是不是第k小的数
-        // 因为若a[i]是第k小的数，它要刚好大于k-1个数，而a[i]已经大于a中它的前i个数，只要它再刚好大于b中前j=k-1-i个数，
-        // 即 b[j-1]<=a[i]<=b[j]，a[i]就是第k小的数；同理，a[i-1]<=b[j]<=a[i]，b[j]就是第k小的数
-        
-        // 对a做二分搜索，不变式：第k小数的候选x a[l]<=x<=a[r] && l<=r
-        // 若a[i]<b[j-1]，a[i]最多大于b中的b[0,j-2]，最多大于总共i+j-1=k-2个数，应继续在a[i+1,M-1]中找（l=i+1，可能找到可能找不到）
-        // 若a[i]>=b[j-1]，a[i]至少大于b中的b[0,j-1]，至少大于总共i+j=k-1个数，应继续在a[0,i]中找（r=i，肯定找得到）
-        
-        // 边界条件 0<=i<=min(k-1,M-1)，代入i=k-1-j，得 max(0,k-M)<=j<=k-1
-        // 要使j有效，需k-1<=N-1，得 M<=N（这里计算的时候取实值k=(M+N)/2），所以当M>N时,交换a和b（重点1）
-        // 直观上，无脑先做M<=N处理，肯定会简化处理逻辑
-        // 确保M<=N后，边界条件成 0<=i<=M-1<=k-1，0<=k-M<=j<=k-1<=N-1
-        
-        const int M = (int)a.size();
-        const int N = (int)b.size();
+    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+        // 数组a在任意位置i分成a1[0..i-1]、a2[i..M-1]两部分，数组b在任意位置j分成b1[0..j-1]、b2[j..N-1]两部分。
+        // 把a1和b1放一起构成整体的left部分，a2和b2放一起构成整体的right部分。我们先找两数组中第k大的数。
+        // 如果能保证：1. len(left)=k，即i+j==k  2. max(left)<=min(right)，即a[i-1]<=b[j]且b[j-1]<=a[i]，
+        // 那么第k大数为 max(left)。现在我们找中位数（或两中位数的第一个），有k=(M+N+1)/2。
+        // 不妨使M<=N，则M<=k<=N。由0<=i<=min(k,M)=M，i+j==k，得0<=k-M<=j<=k<=N，对应j值都合法。
+        // 综上，要在0<=i<=M中找i，j=k-i，使a[i-1]<=b[j]且b[j-1]<=a[i]，用二分搜索。
+        const int M = a.size();
+        const int N = b.size();
         if (M > N) return findMedianSortedArrays(b, a);
         
-        // 二分搜索，为避免-1<=j-1<=N-2的越界问题，改搜第k+1小的数！（重点2）
-        // 这时j=k-i，不变式：第k+1小数的候选y a[l]<=y<=a[r] && l<=r
-        // 若a[i]<b[j-1]，a[i]最多大于总共i+j-1=k-1个数，应继续在a[i+1,M-1]中找
-        // 若a[i]>=b[j-1]，a[i]至少大于总共i+j=k个数，应继续在a[0,i]中找
-        // 边界条件 0<=i<=M-1<=k-1，代入i=k-j，得 1<=k-M+1<=j<=k<=N，j-1边界合格
-        
-        // 为表示第k+1小数的候选y不在a中的情况，引入假想的哨兵 a[M]>=y（重点3）
-        // 因为只有在l=i+1时可能找不到导致越界，所以只需要右边的哨兵a[M]。因为i<r==M，程序并不实际访问到a[M]
         int k = (M + N + 1) / 2;
-        int l = 0;
-        int r = M; // a[M]是哨兵
-        while (l < r) {
-            int i = l + (r - l) / 2;
+        int l = 0, u = M;
+        while (l <= u) {
+            int i = l + (u - l) / 2;
             int j = k - i;
-            if (a[i] < b[j - 1]) {
+            if (i > 0 && a[i-1] > b[j]) { // i>0时 j<N
+                // 需要a[i-1]<=b[j]，现在i太大了，要在左半边找
+                u = i - 1; 
+            } else if (i < M && b[j-1] > a[i]) { // i<M时 j>0
+                // 需要b[j-1]<=a[i]，现在i太小了，要在右半边找
                 l = i + 1;
-            } else {
-                r = i;
+            } else { // 肯定能找到
+                int leftMax = INT_MIN;
+                if (i > 0) leftMax = max(leftMax, a[i-1]);
+                if (j > 0) leftMax = max(leftMax, b[j-1]);
+                if ((M + N) % 2 == 1) return leftMax;
+
+                int rightMin = INT_MAX;
+                if (i < M) rightMin = min(rightMin, a[i]);
+                if (j < N) rightMin = min(rightMin, b[j]);
+                return (leftMax + rightMin) * 0.5;
             }
         }
-        // 最终l==r，l指向第k+1小数的候选（在a中的话）或a[M]（不在a中的话）
-        // 所以，第k+1小的数是a[l]（在a中的话）或b[k-l]（不在a中的话）
-        
-        // 中位数在下面四个数中产生：a[l-1]、b[k-l-1]、a[l]、b[k-l]，0<=l<=M，0<=k-l<=N
-        // 若M+N是奇数，median = max(a[l-1],b[k-l-1])
-        int num1 = max((l >= 1) ? a[l - 1] : INT_MIN, (k - l - 1 >= 0) ? b[k - l - 1] : INT_MIN);
-        if ((M + N) & 0x01) return num1;
-        // 若M+N是偶数，median是四个数的中间两个的平均，median = (max(a[l-1],b[k-l-1]) + min(a[l],b[k-l])) * 0.5
-        int num2 = min(l < M ? a[l] : INT_MAX, k - l < N ? b[k - l] : INT_MAX);
-        return (num1 + num2) * 0.5;
+        return INT_MIN;
     }
 };
 
