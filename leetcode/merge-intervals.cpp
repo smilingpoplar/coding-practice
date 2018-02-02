@@ -21,23 +21,24 @@ struct Interval {
 class Solution {
 public:
     vector<Interval> merge(vector<Interval>& intervals) {
-        sort(intervals.begin(), intervals.end(), compare);
-        vector<Interval> result;
-        int index = -1;
-        for (int i = 0; i < intervals.size(); i++) {
-            if (i > 0 && intervals[i].start <= result[index].end) {
-                result[index].start = min(result[index].start, intervals[i].start);
-                result[index].end = max(result[index].end, intervals[i].end);
+        if (intervals.empty()) return {};
+        // 根据起点排序，避免了合并会修改前面区间起点的问题。起点相同时，不妨先取范围大的。
+        sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) {
+            return a.start < b.start || (a.start == b.start && a.end > b.end);
+        });
+        
+        vector<Interval> ans;
+        auto last = intervals[0];
+        for (int i = 1; i < intervals.size(); i++) {
+            if (intervals[i].start > last.end) {
+                ans.push_back(last);
+                last = intervals[i];
             } else {
-                result.push_back(intervals[i]);
-                ++index;
+                last.end = max(last.end, intervals[i].end);
             }
         }
-        return result;
-    }
-private:
-    static bool compare(const Interval &a, const Interval &b) {
-        return a.start < b.start;
+        ans.push_back(last);
+        return ans;
     }
 };
 
