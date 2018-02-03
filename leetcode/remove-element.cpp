@@ -14,16 +14,13 @@ using namespace std;
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        int n = (int)nums.size();
-        for (int i = 0; i < n;) {
-            if (nums[i] == val) {
-                --n;
-                nums[i] = nums[n];
-            } else {
-                ++i;
+        int write = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != val) {
+                nums[write++] = nums[i];
             }
         }
-        return n;
+        return write;
     }
 };
 

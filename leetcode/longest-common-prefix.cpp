@@ -15,7 +15,7 @@ class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
         if (strs.empty()) return "";
-        int longest = (int)strs[0].size();
+        int longest = strs[0].size();
         for (int i = 1; i < strs.size(); i++) {
             longest = min(longest, (int)strs[i].size());
             for (int j = 0; j < longest; j++) {
