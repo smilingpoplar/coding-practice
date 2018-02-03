@@ -16,7 +16,8 @@ public:
     int nthUglyNumber(int n) {
         vector<int> seq;
         seq.push_back(1);
-        int i2 = 0, i3 = 0, i5 = 0;
+        // 每个因子对应一个要相乘的丑数，用以生成下个丑数
+        int i2 = 0, i3 = 0, i5 = 0; // ix是索引
         for (int i = 1; i < n; i++) {
             int next = min({ seq[i2] * 2, seq[i3] * 3, seq[i5] * 5 });
             seq.push_back(next);
