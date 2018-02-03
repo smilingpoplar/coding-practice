@@ -14,9 +14,9 @@ class Solution {
 public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
         const int N = nums.size();
-        vector<int> cur(N, 0); // cur[]存各数组的当前下标，数组i的当前元素是nums[i][cur[i]]
+        vector<int> idx(N, 0); // idx[]存各数组的当前下标，数组i的当前元素是nums[i][idx[i]]
         auto cmp = [&](int i, int j) { // 优先队列保存数组编号，最小堆，用>
-            return nums[i][cur[i]] > nums[j][cur[j]];
+            return nums[i][idx[i]] > nums[j][idx[j]];
         };
         priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
         int rangeEnd = INT_MIN;
@@ -30,19 +30,18 @@ public:
         vector<int> ans;
         int minRangeSize = INT_MAX;
         while (true) {
-            int minQ = pq.top();
-            pq.pop();
-            int rangeBegin = nums[minQ][cur[minQ]];
+            int minQ = pq.top(); pq.pop();
+            int rangeBegin = nums[minQ][idx[minQ]];
             int rangeSize = rangeEnd - rangeBegin + 1;
             if (rangeSize < minRangeSize) {
                 minRangeSize = rangeSize;
                 ans = { rangeBegin, rangeEnd };
             }
             // 移动指针，下一元素
-            cur[minQ]++;
-            if (cur[minQ] == nums[minQ].size()) break;
+            idx[minQ]++;
+            if (idx[minQ] == nums[minQ].size()) break;
             pq.push(minQ);
-            rangeEnd = max(rangeEnd, nums[minQ][cur[minQ]]);
+            rangeEnd = max(rangeEnd, nums[minQ][idx[minQ]]);
         }
         return ans;
     }

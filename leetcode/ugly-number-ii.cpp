@@ -18,7 +18,7 @@ public:
         seq.push_back(1);
         int i2 = 0, i3 = 0, i5 = 0;
         for (int i = 1; i < n; i++) {
-            int next = min(seq[i2] * 2, min(seq[i3] * 3, seq[i5] * 5));
+            int next = min({ seq[i2] * 2, seq[i3] * 3, seq[i5] * 5 });
             seq.push_back(next);
             if (next == seq[i2] * 2) ++i2;
             if (next == seq[i3] * 3) ++i3;
