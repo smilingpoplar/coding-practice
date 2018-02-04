@@ -11,27 +11,52 @@
 
 using namespace std;
 
+/*
 class Solution {
 public:
     int trap(vector<int>& height) {
-        // 某个bar上方能存得水等于：max(0, min(它左侧最高的bar高，它右侧最高的bar高) - 它自己的bar高)
-        const int N = (int)height.size();
+        if (height.empty()) return 0;
+        // 某个bar上方能存的水为：min(它左侧（含）最高的bar高，它右侧（含）最高的bar高) - 它自己的bar高
+        const int N = height.size();
         vector<int> leftMax(N, 0);
+        leftMax[0] = height[0];
         for (int i = 1; i < N; i++) {
-            leftMax[i] = max(height[i - 1], leftMax[i - 1]);
+            leftMax[i] = max(height[i], leftMax[i-1]);
         }
-        
         vector<int> rightMax(N, 0);
+        rightMax[N-1] = height[N-1];
         for (int i = N - 2; i >= 0; i--) {
-            rightMax[i] = max(height[i + 1], rightMax[i + 1]);
+            rightMax[i] = max(height[i], rightMax[i+1]);
         }
         
-        int water = 0;
+        int ans = 0;
         for (int i = 0; i < N; i++) {
-            water += max(0, min(leftMax[i], rightMax[i]) - height[i]);
+            ans += min(leftMax[i], rightMax[i]) - height[i];
         }
+        return ans;
+    }
+};
+*/
 
-        return water;
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        // 用栈找“低谷”
+        int ans = 0;
+        stack<int> stk;
+        for (int i = 0; i < height.size(); i++) {
+            while (!stk.empty() && height[i] > height[stk.top()]) {
+                int top = stk.top();
+                stk.pop();
+                if (stk.empty()) break;
+                int newTop = stk.top();
+                int w = i - newTop - 1;
+                int h = min(height[i], height[newTop]) - height[top]; 
+                ans += w * h;
+            }
+            stk.push(i);
+        }
+        return ans;
     }
 };
 

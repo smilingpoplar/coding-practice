@@ -14,23 +14,19 @@ using namespace std;
 class Solution {
 public:
     int longestValidParentheses(string s) {
-        vector<int> lefts;  // 未匹配'('的索引
-        int lastRight = -1; // 最后未匹配')'的索引
-        int longest = 0;
+        int ans = 0;
+        stack<int> stk;
+        stk.push(-1); // 不变式：栈顶记录有效串前一个位置
         for (int i = 0; i < s.size(); i++) {
             if (s[i] == '(') {
-                lefts.push_back(i);
+                stk.push(i);
             } else { // ')'
-                if (!lefts.empty()) {
-                    lefts.pop_back(); // 匹配
-                    int lastEnd = !lefts.empty() ? lefts.back() : lastRight;
-                    longest = max(longest, i - lastEnd);
-                } else {
-                    lastRight = i;
-                }
+                stk.pop(); // 正常是匹配掉
+                if (!stk.empty()) ans = max(ans, i - stk.top());
+                else stk.push(i);
             }
         }
-        return longest;
+        return ans;
     }
 };
 

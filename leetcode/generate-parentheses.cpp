@@ -14,28 +14,20 @@ using namespace std;
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
-        vector<string> result;
-        string parenthesis;
-        dfs(0, 0, n, parenthesis, result);
-        return result;
+        vector<string> ans;
+        search(n, n, "", ans);
+        return ans;
     }
-private:
-    void dfs(int leftCount, int rightCount, const int n,
-             string &parenthesis, vector<string> &result) {
-        if (leftCount == n && rightCount == n) {
-            result.push_back(parenthesis);
+    
+    void search(int lefts, int rights, string paren, vector<string> &ans) {
+        // 0 <= 左括号剩余lefts <= 右括号剩余rights
+        if (lefts == 0 && rights == 0) {
+            ans.push_back(paren);
             return;
         }
-        if (leftCount < n) {
-            parenthesis.push_back('(');
-            dfs(leftCount + 1, rightCount, n, parenthesis, result);
-            parenthesis.pop_back();
-        }
-        if (rightCount < leftCount) {
-            parenthesis.push_back(')');
-            dfs(leftCount, rightCount + 1, n, parenthesis, result);
-            parenthesis.pop_back();
-        }
+        
+        if (lefts > 0) search(lefts - 1, rights, paren+'(', ans);
+        if (lefts < rights) search(lefts, rights - 1, paren + ")", ans);
     }
 };
 
