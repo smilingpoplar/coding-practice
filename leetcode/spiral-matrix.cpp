@@ -14,42 +14,41 @@ using namespace std;
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        vector<int> result;
-        if (matrix.empty()) return result;
-        const int M = (int)matrix.size();
-        const int N = (int)matrix[0].size();
-        int rowBegin = 0;
-        int rowEnd = M - 1;
-        int colBegin = 0;
-        int colEnd = N - 1;
+        // 从外层往内层、一层层打印
+        vector<int> ans;
+        if (matrix.empty()) return ans;
+        const int M = matrix.size();
+        const int N = matrix[0].size();
+        // 各层左上角、右下角
+        int r1 = 0, r2 = M - 1;
+        int c1 = 0, c2 = N - 1;
         while (true) {
-            // right
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colBegin; i <= colEnd; i++) {
-                result.push_back(matrix[rowBegin][i]);
+            // r1行
+            for (int c = c1; c <= c2; c++) {
+                ans.push_back(matrix[r1][c]);
             }
-            ++rowBegin;
-            // down
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowBegin; i <= rowEnd; i++) {
-                result.push_back(matrix[i][colEnd]);
+            ++r1;
+            if (r1 > r2) break;
+            // c2列
+            for (int r = r1; r <= r2; r++) {
+                ans.push_back(matrix[r][c2]);
             }
-            --colEnd;
-            // left
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colEnd; i >= colBegin; i--) {
-                result.push_back(matrix[rowEnd][i]);
+            --c2;
+            if (c1 > c2) break;
+            // r2行，从右往左
+            for (int c = c2; c >= c1; c--) {
+                ans.push_back(matrix[r2][c]);
             }
-            --rowEnd;
-            // up
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowEnd; i >= rowBegin; i--) {
-                result.push_back(matrix[i][colBegin]);
+            --r2;
+            if (r1 > r2) break;
+            // c1列，从下往上
+            for (int r = r2; r >= r1; r--) {
+                ans.push_back(matrix[r][c1]);
             }
-            ++colBegin;
+            ++c1;
+            if (c1 > c2) break;
         }
-        
-        return result;
+        return ans;
     }
 };
 

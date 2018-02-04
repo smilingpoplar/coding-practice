@@ -14,14 +14,12 @@ using namespace std;
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        // nums中的数表示最大可跳距离，要能跳到N-1，只要能跳到>=N-1的位置即可
-        const int N = (int)nums.size();
+        const int N = nums.size();
         int reach = 0;
         for (int i = 0; i <= reach; i++) {
             reach = max(reach, i + nums[i]);
             if (reach >= N - 1) return true;
         }
-        
         return false;
     }
 };

@@ -14,46 +14,23 @@ using namespace std;
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        // 分两次分别搜索上下边界
-        return {lowerBound(nums, target), upperBound(nums, target)};
+        int pos = lowerBound(nums, target);
+        if (pos == nums.size() || nums[pos] != target) return { -1, -1 };
+        int end = lowerBound(nums, target + 1) - 1;
+        return { pos, end };
     }
-private:
+
     int lowerBound(const vector<int> &nums, int target) {
-        // 不变式：nums[l]<target<=nums[u]（l<u）（即nums[l,u]是数组中包含target的部分）
-        // 若初始l=0,u=N-1，因l<u，只处理了N>=2的情况，故引进哨兵nums[-1]<target,nums[N]>=target，设初始l=-1,u=N
-        // 当[l,u]范围不断缩小，最终 l + 1 = u，u可能为所求的下边界)
-        const int N = (int)nums.size();
-        int l = -1;
-        int u = N;
-        while (l + 1 != u) {
+        int l = -1, u = nums.size();
+        while (l + 1 < u) {
             int mid = l + (u - l) / 2;
-            if (nums[mid] < target) {
-                l = mid;
-            } else {
+            if (nums[mid] >= target) {
                 u = mid;
+            } else {
+                l = mid;
             }
         }
-        if (u >= N || nums[u] > target) return -1;
         return u;
-    }
-    
-    int upperBound(const vector<int> &nums, int target) {
-        // 不变式：nums[l]<=target<nums[u]（l<u）（即nums[l,u]是数组中包含target的部分）
-        // 若初始l=0,u=N-1，因l<u，只处理了N>=2的情况，故引进哨兵nums[-1]<target,nums[N]>=target，设初始l=-1,u=N
-        // 当[l,u]范围不断缩小，最终 l + 1 = u，l可能为所求的上边界)
-        const int N = (int)nums.size();
-        int l = -1;
-        int u = N;
-        while (l + 1 != u) {
-            int mid = l + (u - l) / 2;
-            if (nums[mid] <= target) {
-                l = mid;
-            } else {
-                u = mid;
-            }
-        }
-        if (l <= -1 || nums[l] < target) return -1;
-        return l;
     }
 };
 
