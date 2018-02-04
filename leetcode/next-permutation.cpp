@@ -14,24 +14,22 @@ using namespace std;
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        // 生成"下一排列"的算法：
-        // 1. 从右到左，找到第一个违反递增趋势的数nums[i]，nums[i] < nums[i+1]
-        // 2. 从右到左，找到第一个大于nums[i]的数nums[j]，nums[j] > nums[i]
-        // 3. 交换nums[i]和nums[j]
-        // 4. 反转nums[i+1,N-1]
-        const int N = (int)nums.size();
+        // 生成"下一排列"：
+        // 1. 从右往左看，找第一个峰顶下来的数，即第一个递减的数nums[i]<nums[i+1]
+        // 2. nums[i]跟它后面刚好稍大的数交换，因为从右往左看后面是个递增序列，找第一个nums[j]>nums[i]
+        // 3. 交换nums[i]和nums[j]，交换后nums[i+1..]的增减特征不变
+        // 4. 反转nums[i+1..]以排序
+        const int N = nums.size();
         int i = N - 2;
-        while (i >= 0) {
-            if (nums[i] < nums[i + 1]) break;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
             --i;
         }
-        if (i < 0) { // 不存在违反从右到左递增趋势的数
+        if (i < 0) { // 后面全是从右往左看的递增序列
             reverse(nums.begin(), nums.end());
             return;
         }
         int j = N - 1;
-        while (j > i) {
-            if (nums[j] > nums[i]) break; // j肯定存在
+        while (j > i && nums[j] <= nums[i]) {
             --j;
         }
         swap(nums[i], nums[j]);
