@@ -14,13 +14,14 @@ using namespace std;
 class Solution {
 public:
     int climbStairs(int n) {
-        // f[n]=f[n-1]+f[n-2]，f[0]=f[1]=1
-        vector<int> f(n + 1);
-        f[0] = f[1] = 1;
-        for (size_t i = 2; i <= n; i++) {
-            f[i] = f[i - 1] + f[i - 2];
+        // dp[n]=dp[n-1]+dp[n-2]，初始dp[0]=dp[1]=1
+        int prev1 = 1, prev2 = 1;
+        for (int i = 2; i <= n; i++) {
+            int curr = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = curr;
         }
-        return f[n];
+        return prev1;
     }
 };
 
