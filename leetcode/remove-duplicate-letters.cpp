@@ -21,7 +21,7 @@ public:
         vector<char> stack; // 让栈中保留递增序列
         for (char c : s) {
             count[c]--;
-            // 当前字母已入栈，忽略掉，因为选新并不能使结果更好
+            // 当前字母已入栈，忽略掉，因为选新的并不能使结果更好
             if (selected.find(c) != selected.end()) continue;
             
             while (!stack.empty() && c < stack.back() && count[stack.back()] > 0) { // 栈顶可弹出
