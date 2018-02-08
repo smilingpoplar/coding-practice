@@ -15,31 +15,18 @@ using namespace std;
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        // 把数都塞到集合里，然后从集合里取出数x看它相邻的x-1,x-2,...,x+1,x+2,...是否也在集合里
+        // 把数都塞到集合里，然后取出无x-1的数x看后序的x+1,x+2,...是否也在集合里
         unordered_set<int> set;
-        for (int num : nums) {
+        for (int num : nums) 
             set.insert(num);
-        }
         
-        int longest = INT_MIN;
+        int longest = 0;
         for (int num : nums) {
-            if (set.find(num) != set.end()) {
-                set.erase(num);
-                int length = 1;
-                int next = num - 1;
-                while (set.find(next) != set.end()) {
-                    set.erase(next);
-                    ++length;
-                    --next;
-                }
-                next = num + 1;
-                while (set.find(next) != set.end()) {
-                    set.erase(next);
-                    ++length;
-                    ++next;
-                }
-                if (length > longest) longest = length;
-            }
+            if (set.find(num - 1) != set.end()) continue;
+            int length = 1;
+            while (set.find(num + length) != set.end())
+                length++;
+            longest = max(longest, length);
         }
         return longest;
     }
