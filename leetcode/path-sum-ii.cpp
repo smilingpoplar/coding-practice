@@ -21,24 +21,20 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode *root, int sum) {
-        vector<vector<int>> allPaths;
+        vector<vector<int>> ans;
         vector<int> path;
-        pathSum(root, sum, path, allPaths);
-        return allPaths;
+        searchFrom(root, sum, path, ans);
+        return ans;
     }
-private:
-    void pathSum(TreeNode *root, int sum, vector<int> &path, vector<vector<int>> &allPaths) {
+    
+    void searchFrom(TreeNode *root, int sum, vector<int> &path, vector<vector<int>> &ans) {
         if (!root) return;
         path.push_back(root->val);
-
-        if (!root->left && !root->right) {
-            if (root->val == sum) {
-                allPaths.push_back(path);
-            }
+        if (!root->left && !root->right && root->val == sum) {
+            ans.push_back(path);
         }
-        pathSum(root->left, sum - root->val, path, allPaths);
-        pathSum(root->right, sum - root->val, path, allPaths);
-
+        searchFrom(root->left, sum - root->val, path, ans);
+        searchFrom(root->right, sum - root->val, path, ans);
         path.pop_back();
     }
 };
