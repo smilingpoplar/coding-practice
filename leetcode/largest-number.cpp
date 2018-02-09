@@ -18,18 +18,16 @@ public:
         vector<string> v;
         for (auto num : nums) {
             v.push_back(to_string(num));
-        }
-        
+        }        
         sort(v.begin(), v.end(), [](const string &s1, const string &s2) {
             return s1 + s2 > s2 + s1;
         });
         
+        // 以0开头的特例，如 [0, 0]
+        if (v[0] == "0") return "0";
         ostringstream oss;
         for (auto &str : v) oss << str;
-        string ans = oss.str();
-        // 以0开头的特例，如 [0, 0]
-        if (ans[0] == '0') ans = "0";
-        return ans;
+        return oss.str();
     }
 };
 
