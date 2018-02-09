@@ -11,25 +11,33 @@
 
 using namespace std;
 
+/*
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        if (nums.empty()) return -1;
-        const int N = (int)nums.size();
-        // 不变式：nums[i,j]中存在peak值，0<=i<=j<N
-        int i = 0;
-        int j = N - 1;
-        while (i < j) {
-            int mid = i + (j - i) / 2;
-            if (nums[mid] > nums[mid + 1]) {
-                // 假设nums[i,mid]中不存在peak值，mid左端的数要一个比一个大，
-                // 这样最终nums[i]肯定是peak值，与假设矛盾，故nums[i,mid]中存在peak值
-                j = mid;
+        // 顺序找到比下一元素大的nums[i]
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (nums[i] > nums[i+1]) return 2;
+        }
+        return nums.size() - 1;
+    }
+};
+ */
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        // 该题的peak元素肯定存在，用二分搜索排除范围
+        int l = 0, u = nums.size() - 1;
+        while (l < u) { // 最后剩一个元素时结束
+            int mid = l + (u - l) / 2;
+            if (nums[mid] < nums[mid+1]) {
+                l = mid + 1;
             } else {
-                i = mid + 1;
+                u = mid;
             }
         }
-        return i; // i==j
+        return l;
     }
 };
 

@@ -16,10 +16,10 @@ class Solution {
 public:
     int maximumGap(vector<int>& nums) {
         if (nums.size() < 2) return 0;
-        
-        // 桶排序，因为 maxGap >= ceiling((max-min)/(n-1))，设后者为bucketLength，则 maxGap >= bucketLength
-        // 因为每个桶是半闭半开的区间，桶内gap < bucketLength <= maxGap，maxGap只能在桶间取得，每个桶只需保留其最大最小值
-        // 桶的个数为 (max-min)/bucketLength + 1（+1是因为桶是半闭半开区间），数num会落在第 (num-min)/bucketLength 个桶中
+        // 因为 maxGap >= ceiling((max-min)/(n-1))，设后者为bucketSize，由于每个桶是半开半闭区间，
+        // 桶内gap < bucketSize <= maxGap，maxGap不可能在桶内取得，只能在桶间取得，每个桶只需保留其最大最小值
+        // 桶的个数为 (max-min)/bucketSize + 1（+1是因为桶是半闭半开区间）
+        // 数num会落在第 (num-min)/bucketSize 个桶中
         
         // min和max
         int min = INT_MAX;
@@ -30,12 +30,12 @@ public:
         }
         if (max == min) return 0;
 
-        int bucketLength = ceil(double(max - min) / (nums.size() - 1));
-        int bucketCount = (max - min) / bucketLength + 1;
-        vector<vector<int>> buckets(bucketCount, vector<int>());
+        int bucketSize = ceil(double(max - min) / (nums.size() - 1));
+        int bucketCount = (max - min) / bucketSize + 1;
+        vector<vector<int>> buckets(bucketCount);
         for (int num : nums) {
-            int bucketIndex = (num - min) / bucketLength;
-            auto &bucket = buckets[bucketIndex];
+            int idx = (num - min) / bucketSize;
+            auto &bucket = buckets[idx];
             // 每个桶只需保留其最大最小值
             if (bucket.empty()) {
                 bucket.push_back(num);
@@ -48,14 +48,13 @@ public:
         
         // 在桶间求maxGap，首桶和尾桶肯定非空
         int maxGap = INT_MIN;
-        size_t prev = 0;
-        for (size_t i = 1; i < bucketCount; i++) {
+        int prev = 0;
+        for (int i = 1; i < bucketCount; i++) {
             if (buckets[i].empty()) continue;
             int gap = buckets[i][0] - buckets[prev][1];
             if (gap > maxGap) maxGap = gap;
             prev = i;
         }
-        
         return maxGap;
     }
 };
