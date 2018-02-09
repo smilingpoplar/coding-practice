@@ -25,7 +25,7 @@ public:
         //   1.左端点排在右端点之前
         //   2.若都是左端点则按y从大到小排（避免currHi发生变化输出多余跃变点）
         //   3.若都是右端点则按y从小到大排（避免currHi发生变化输出多余跃变点）
-        // 排序时，将左端点高度取负可达到上述要求
+        // 排序时，将左端点高度取负既可区分左右端点又可达到上述要求
         vector<pair<int, int>> endpoints; // (x,Hi)
         for (const auto &building : buildings) {
             endpoints.push_back({building[0], -building[2]});
@@ -34,19 +34,19 @@ public:
         sort(endpoints.begin(), endpoints.end());
         
         // 从左到右扫描
-        vector<pair<int, int>> result;
+        vector<pair<int, int>> ans;
         multiset<int> set;
         int prevHi = 0;
-        for (const auto &endpoint : endpoints) {
-            if (endpoint.second < 0) set.insert(-endpoint.second);
-            else set.erase(set.find(endpoint.second));
+        for (const auto &p : endpoints) {
+            if (p.second < 0) set.insert(-p.second);
+            else set.erase(set.find(p.second));
             int currHi = set.empty() ? 0 : *set.rbegin();
             if (currHi != prevHi) {
-                result.push_back({endpoint.first, currHi});
+                ans.push_back({ p.first, currHi });
                 prevHi = currHi;
             }
         }
-        return result;
+        return ans;
     }
 };
 
