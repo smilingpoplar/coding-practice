@@ -17,34 +17,34 @@ public:
         if (denominator == 0) return "NAN";
         if (numerator == 0) return "0";
 
-        string result;
+        string ans;
         bool negative = (numerator ^ denominator) < 0;
-        if (negative) result += "-";
+        if (negative) ans += "-";
 
         auto n = abs((long long)numerator);
         auto d = abs((long long)denominator);
         auto integral = n / d;
-        result += to_string(integral);
+        ans += to_string(integral);
         
         auto remainder = n % d;
-        if (remainder > 0) result += ".";
+        if (remainder > 0) ans += ".";
         
-        unordered_map<long long, ssize_t> m;
+        unordered_map<long long, int> mp; // remainder=>pos
         while (remainder > 0) {
-            if (m.find(remainder) != m.end()) {
-                result.insert(m[remainder], "(");
-                result += ")";
+            if (mp.find(remainder) != mp.end()) {
+                ans.insert(mp[remainder], "(");
+                ans += ")";
                 break;
             }
-            m[remainder] = result.size();
+            mp[remainder] = ans.size();
             
             remainder *= 10;
             auto quotient = remainder / d;
-            result += to_string(quotient);
+            ans += to_string(quotient);
             remainder %= d;
         }
         
-        return result;
+        return ans;
     }
 };
 
