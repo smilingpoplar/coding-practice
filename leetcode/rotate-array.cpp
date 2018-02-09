@@ -15,17 +15,17 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         // 先部分反转，再整体反转
-        const int N = (int)nums.size();
+        const int N = nums.size();
         k %= N;
         if (k == 0) return;
-        reverse(nums, 0, N - k);
-        reverse(nums, N - k, N);
-        reverse(nums, 0, N);
+        reverse(nums, 0, N - k - 1);
+        reverse(nums, N - k, N - 1);
+        reverse(nums, 0, N - 1);
     }
-private:
-    // 反转nums[start,end)
+
+    // 反转nums[start,end]
     void reverse(vector<int> &nums, int start, int end) {
-        for (int i = start, j = end - 1; i < j; i++, j--) {
+        for (int i = start, j = end; i < j; i++, j--) {
             swap(nums[i], nums[j]);
         }
     }
