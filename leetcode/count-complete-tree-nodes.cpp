@@ -17,6 +17,15 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
 public:
     /*
@@ -39,7 +48,7 @@ public:
             int leftHeight = getHeight(root->left);
             int rightHeight = getHeight(root->right);
             if (leftHeight == rightHeight) { // 左子树是满二叉树
-                count += (1 << leftHeight);
+                count += (1 << leftHeight); // 左子树和根节点，(2^h-1)+1
                 root = root->right;
             } else { // 右子树是满二叉树
                 count += (1 << rightHeight);
