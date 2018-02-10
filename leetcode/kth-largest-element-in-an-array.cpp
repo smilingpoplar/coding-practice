@@ -14,31 +14,31 @@ using namespace std;
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        return findKthLargest(nums, 0, (int)nums.size() - 1, k);
+        return findKthLargest(nums, k, 0, nums.size() - 1);
     }
-private:
-    // 在nums[l,r]中选第k大的数
-    int findKthLargest(vector<int> &nums, int l, int r, int k) {
-        if (l > r) return INT_MIN;
-        // 不变式：
-        // |t| > t |  ?  | <= t |
-        // [l      [i   j]     r]
-        int i = l + 1;
-        int j = r;
+
+    int findKthLargest(vector<int>& nums, int k, int l, int u) {
+        int p = partition(nums, l, u);
+        int order = p - l + 1; // nums[p]是第几大的数
+        if (k == order) return nums[p];
+        if (k < order) return findKthLargest(nums, k, l, p - 1);
+        return findKthLargest(nums, k - order, p + 1, u);
+    }
+
+    int partition(vector<int> &nums, int l, int u) {
+        if (l >= u) return l;
+        // 单向划分，将数组分为>t、<=t两段
+        int i = l + 1, j = u; // i指向>t的待写入部分，j指向<=t的待写入部分
         while (i <= j) {
             if (nums[i] > nums[l]) {
                 ++i;
             } else {
-                swap(nums[i], nums[j]); // 往右抛
+                swap(nums[i], nums[j]);
                 --j;
             }
         }
         swap(nums[j], nums[l]);
-        
-        int order = j - l + 1; // nums[j]是第几大的数
-        if (k == order) return nums[j];
-        if (k < order) return findKthLargest(nums, l, j - 1, k);
-        return findKthLargest(nums, j + 1, r, k - order);
+        return j;
     }
 };
 

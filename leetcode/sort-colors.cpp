@@ -23,11 +23,11 @@ public:
         int i2 = N - 1;
         int i = 0;
         while (i <= i2) {
-            if (nums[i] == 0) {
+            if (nums[i] < 1) {
                 swap(nums[i], nums[i0]);
                 ++i0;
                 ++i; // 换过来的是1
-            } else if (nums[i] == 2) {
+            } else if (nums[i] > 1) {
                 swap(nums[i], nums[i2]);
                 --i2;
                 // 换过来的是?，不能++i
@@ -36,21 +36,6 @@ public:
             }
         }
     }
-    
-    /* 计数排序
-    void sortColors(vector<int>& nums) {
-        int count[3] = { 0 };
-        for (auto num : nums) {
-            ++count[num];
-        }
-        for (int i = 0, index = 0; i < 3; i++) {
-            for (int j = 0; j < count[i]; j++) {
-                nums[index] = i;
-                ++index;
-            }
-        }
-    }
-    */
 };
 
 int main(int argc, const char * argv[]) {
