@@ -25,8 +25,8 @@ public:
         if (!head) return NULL;
         ListNode *even = head;
         ListNode *odd = head->next;
-        ListNode *oddHead = odd;
         // 把odd节点单独拎出来
+        ListNode *oddHead = odd;
         while (odd && odd->next) {
             even->next = odd->next;
             even = even->next;
