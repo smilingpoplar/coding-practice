@@ -19,28 +19,49 @@ struct TreeNode {
 };
 
 // 待关注：如果不先O(n)时间预处理bst并在节点中保存leftCount信息，存在O(h)时间查询算法？
-
+/*
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
         // 中序遍历，O(n)时间
-        // 用栈模拟，用current表示调用栈[current,stack]的栈顶
+        // 用栈模拟，用curr表示当前待入栈的元素
         if (k <= 0) return INT_MIN;
-        auto current = root;
-        vector<TreeNode *> stack;
+        auto curr = root;
+        stack<TreeNode *> stk;
         int count = 0;
-        while (current || !stack.empty()) {
-            if (current) { // 首先访问左子节点
-                stack.push_back(current);
-                current = current->left;
-            } else { // 当current为空时从栈中取节点访问
-                current = stack.back();
-                stack.pop_back();
-                if (++count == k) return current->val;
-                current = current->right;
+        while (curr || !stk.empty()) {
+            while (curr) {
+                stk.push(curr);
+                curr = curr->left;
             }
+            curr = stk.top();  stk.pop();
+            count++;
+            if (count == k) return curr->val;
+            curr = curr->right;
         }
         return INT_MAX;
+    }
+};
+*/
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        // 找第k小，用二分搜索
+        if (!root || k <= 0) return INT_MIN;
+        int leftCount = countNodes(root->left);
+        if (k <= leftCount) {
+            return kthSmallest(root->left, k);
+        } else if (k == leftCount + 1) {
+            return root->val;
+        } else {
+            return kthSmallest(root->right, k - leftCount - 1);
+        }
+    }
+    
+    int countNodes(TreeNode *root) {
+        if (!root) return 0;
+        return 1 + countNodes(root->left) + countNodes(root->right);
     }
 };
 
