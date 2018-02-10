@@ -15,39 +15,37 @@ using namespace std;
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        // 一般化，找出现次数大于n/k的元素（最多k-1个，这里k==3）
-        // 找候选的过程：每次删掉k个不同的元素
+        // 一般化，找出现次数>n/k的元素
+        // 算法是：每次删掉k个不同的元素，最后剩下的为候选
         unordered_map<int, int> count;
         for (auto num : nums) {
-            ++count[num];
-            if (count.size() == 3) { // 每次删掉k个不同的元素
+            count[num]++;
+            if (count.size() == 3) {
                 auto it = count.begin();
                 while (it != count.end()) {
-                    --it->second;
+                    it->second--;
                     if (it->second == 0) {
                         it = count.erase(it);
                     } else {
-                        ++it;
+                        it++;
                     }
                 }
             }
         }
-        // 验证候选
-        for (auto &kv : count) {
-            kv.second = 0;
+        // 验证候选的出现次数
+        for (auto &e : count) {
+            e.second = 0; // 准备给候选重新计数
         }
         for (auto num : nums) {
-            if (count.find(num) != count.end()) {
-                ++count[num];
+            if (count.find(num) != count.end()) count[num]++;
+        }
+        vector<int> ans;
+        for (const auto &e : count) {
+            if (e.second > nums.size() / 3) {
+                ans.push_back(e.first);
             }
         }
-        vector<int> result;
-        for (const auto &kv : count) {
-            if (kv.second > nums.size() / 3) {
-                result.push_back(kv.first);
-            }
-        }
-        return result;
+        return ans;
     }
 };
 
