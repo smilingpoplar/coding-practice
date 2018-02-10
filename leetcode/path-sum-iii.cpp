@@ -38,14 +38,5 @@ public:
 };
 
 int main(int argc, const char * argv[]) {
-    Solution solution;
-    auto result = solution.generate(10);
-    for (const auto &row : result) {
-        for (int num : row) {
-            cout << num << " ";
-        }
-        cout << endl;
-    }
-    
     return 0;
 }
