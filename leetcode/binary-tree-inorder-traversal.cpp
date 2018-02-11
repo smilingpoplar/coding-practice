@@ -22,23 +22,19 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        // 中序遍历，用栈模拟，用curr表示调用栈[curr,stack]的栈顶
-        vector<int> result;
-        auto curr = root;
-        vector<TreeNode *> stack;
-        while (curr || !stack.empty()) {
-            if (curr) { // 首先访问左子节点
-                stack.push_back(curr);
+        vector<int> ans;
+        stack<TreeNode *> stk;
+        auto curr = root; // curr表示当前待入栈的元素
+        while (curr || !stk.empty()) {
+            while (curr) {
+                stk.push(curr);
                 curr = curr->left;
-            } else { // 当curr为空时从栈中取节点访问
-                curr = stack.back();
-                stack.pop_back();
-                result.push_back(curr->val);
-                curr = curr->right;
-            }
+            } 
+            curr = stk.top();  stk.pop();
+            ans.push_back(curr->val);  // 出栈时访问
+            curr = curr->right;
         }
-        
-        return result;
+        return ans;
     }
 };
 */
@@ -46,33 +42,33 @@ public:
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        // morris中序遍历，用当前节点的中序遍历前驱节点的右指针prev->right表示左子树是否访问过
-        // prev->right为空 => 左子树未访问过，记住要返回到当前节点，进入左子树
-        // prev->right非空 => 左子树已访问过，清空prev->right，访问当前节点，进入右子树
-        vector<int> result;
-        auto current = root;
+        // morris中序遍历，用中序遍历前驱节点的右指针prev->right表示左子树是否已访问
+        // prev->right为空 => 左子树未访问，记住要返回到当前节点，进入左子树
+        // prev->right非空 => 左子树已访问，清空prev->right，访问当前节点，进入右子树
+        vector<int> ans;
+        auto curr = root;
         TreeNode *prev = NULL;
-        while (current) {
-            if (!current->left) {
-                result.push_back(current->val); // 访问当前节点
-                current = current->right;
+        while (curr) {
+            if (!curr->left) {
+                ans.push_back(curr->val); // 访问当前节点
+                curr = curr->right;
             } else {
                 // 找到中序遍历前驱节点（左子树的最右节点）
-                prev = current->left;
-                while (prev->right && prev->right != current) {
+                prev = curr->left;
+                while (prev->right && prev->right != curr) {
                     prev = prev->right;
                 }
-                if (!prev->right) { // 左子树未访问过
-                    prev->right = current;
-                    current = current->left;
+                if (!prev->right) { // 左子树未访问
+                    prev->right = curr;
+                    curr = curr->left;
                 } else { // 左子树已访问过
                     prev->right = NULL;
-                    result.push_back(current->val);
-                    current = current->right;
+                    ans.push_back(curr->val);
+                    curr = curr->right;
                 }
             }
         }
-        return result;
+        return ans;
     }
 };
 

@@ -22,18 +22,38 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        // 使用栈的通用图遍历算法就是dfs中的先序遍历
-        vector<int> result;
-        vector<TreeNode *> stack;
-        if (root) stack.push_back(root);
-        while (!stack.empty()) {
-            auto node = stack.back();
-            stack.pop_back();
-            result.push_back(node->val);
-            if (node->right) stack.push_back(node->right);
-            if (node->left) stack.push_back(node->left);
+        // 使用栈的图遍历算法就是先序遍历
+        vector<int> ans;
+        stack<TreeNode *> stk;
+        if (root) stk.push(root);
+        while (!stk.empty()) {
+            auto node = stk.top(); stk.pop();
+            ans.push_back(node->val);
+            if (node->right) stk.push(node->right);
+            if (node->left) stk.push(node->left);
         }
-        return result;
+        return ans;
+    }
+};
+*/
+
+/*
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        stack<TreeNode *> stk;
+        auto curr = root; // curr表示当前待入栈的元素
+        while (curr || !stk.empty()) {
+            while (curr) {
+                ans.push_back(curr->val); // 进栈前访问
+                stk.push(curr);
+                curr = curr->left;
+            }
+            auto node = stk.top();  stk.pop();
+            curr = node->right;
+        }
+        return ans;
     }
 };
 */
@@ -42,33 +62,33 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         // morris前序遍历，只是把morris中序遍历里访问当前节点的语句换个位置
-        // 用当前节点的中序遍历前驱节点的右指针prev->righ表示左子树是否访问过
-        // prev->right为空 => 左子树未访问过，访问当前节点，记住要返回到当前节点，进入左子树
-        // prev->right非空 => 左子树已访问过，清空prev->right，进入右子树
-        vector<int> result;
-        auto current = root;
+        // 用中序遍历前驱节点的右指针prev->righ表示左子树是否已访问
+        // prev->right为空 => 左子树未访问，访问当前节点，记住要返回到当前节点，进入左子树
+        // prev->right非空 => 左子树已访问，清空prev->right，进入右子树
+        vector<int> ans;
+        auto curr = root;
         TreeNode *prev = NULL;
-        while (current) {
-            if (!current->left) {
-                result.push_back(current->val);
-                current = current->right;
+        while (curr) {
+            if (!curr->left) {
+                ans.push_back(curr->val);
+                curr = curr->right;
             } else {
                 // 找到中序遍历前驱结点（左子树的最右节点）
-                prev = current->left;
-                while (prev->right && prev->right != current) {
+                prev = curr->left;
+                while (prev->right && prev->right != curr) {
                     prev = prev->right;
                 }
                 if (!prev->right) { // 左子树未访问过
-                    result.push_back(current->val); // 把这句话放到这里
-                    prev->right = current;
-                    current = current->left;
+                    ans.push_back(curr->val); // 把这句话放到这里
+                    prev->right = curr;
+                    curr = curr->left;
                 } else { // 左子树已访问过
                     prev->right = NULL;
-                    current = current->right;
+                    curr = curr->right;
                 }
             }
         }
-        return result;
+        return ans;
     }
 };
 

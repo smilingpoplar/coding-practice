@@ -22,34 +22,25 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
-        // 后序遍历，用栈模拟，通过比较prev和curr来判断遍历方向
-        vector<int> result;
-        vector<TreeNode *> stack;
-        if (root) stack.push_back(root);
+        vector<int> ans;
+        stack<TreeNode *> stk;
+        auto curr = root; // curr是待入栈的节点
         TreeNode *prev = NULL;
-        while (!stack.empty()) {
-            auto curr = stack.back();
-            if (!prev || prev->left == curr || prev->right == curr) { // 正向下遍历
-                if (curr->left) stack.push_back(curr->left);
-                else if (curr->right) stack.push_back(curr->right);
-                else {
-                    result.push_back(curr->val);
-                    stack.pop_back();
-                }
-            } else if (prev == curr->left) { // 从左子树返回
-                if (curr->right) stack.push_back(curr->right);
-                else {
-                    result.push_back(curr->val);
-                    stack.pop_back();
-                }
-            } else if (prev == curr->right) { // 从右子树返回
-                result.push_back(curr->val);
-                stack.pop_back();
+        while (curr || !stk.empty()) {
+            while (curr) {
+                stk.push(curr);
+                curr = curr->left;
             }
-            prev = curr;
+            auto node = stk.top();
+            if (node->right && node->right != prev) { // 不是从右子树返回，则先访问右子树
+                curr = node->right;
+            } else { // 从右子树返回，则出栈时访问
+                stk.pop();
+                ans.push_back(node->val);
+                prev = node;                
+            }
         }
-        
-        return result;
+        return ans;
     }
 };
 */
