@@ -37,12 +37,11 @@ public:
     }
     
     int liveNeighbors(vector<vector<int>> &board, int r, int c) {
-        const int M = board.size();
-        const int N = board[0].size();
-
         int lives = 0;
-        for (int i = max(0, r-1); i <= min(M-1, r+1); i++) {
-            for (int j = max(0, c-1); j <= min(N-1, c+1); j++) {
+        int leftI = max(0, r-1), rightI = min((int)board.size()-1, r+1);
+        int leftJ = max(0, c-1), rightJ = min((int)board[0].size()-1, c+1);
+        for (int i = leftI; i <= rightI; i++) {
+            for (int j = leftJ; j <= rightJ; j++) {
                 lives += board[i][j] & 1;
             }
         }
