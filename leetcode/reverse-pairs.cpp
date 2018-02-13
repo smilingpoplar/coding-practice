@@ -13,47 +13,43 @@ using namespace std;
 class Solution {
 public:
     int reversePairs(vector<int>& nums) {
-        const int N = (int)nums.size();
-        return reversePairs(nums, 0, N - 1);
+        return mergeSort(nums, 0, nums.size() - 1);
     }
     
-    int reversePairs(vector<int>& nums, int l, int h) {
+    int mergeSort(vector<int>& nums, int l, int h) {
         if (l >= h) return 0;
         int mid = l + (h - l) / 2;
-        int ans = reversePairs(nums, l, mid) + reversePairs(nums, mid + 1, h);
+        int ans = mergeSort(nums, l, mid) + mergeSort(nums, mid + 1, h);
         
         // 统计组间逆序数，两指针同向遍历，不妨从数组末开始遍历
-        int i = mid, j = h;
-        while (i >= l) {
-            while (j > mid && nums[i] <= (long)2 * nums[j])
-                --j;
-            // 现在j指向第一个满足的位置
-            ans += j - mid;
-            --i;
+        for (int i = mid, j = h; i >= l; i--) {
+            while (j > mid && nums[i] <= (long)2 * nums[j]) j--;
+            ans += j - mid; // 现在j指向第一个满足的位置
         }
-        
-        // 归并已排序的 nums[l, mid] 和 nums[mid + 1, h]
+        merge(nums, l, mid, h);            
+        return ans;
+    }
+    
+    // 归并已排序的 nums[l, mid] 和 nums[mid + 1, h]
+    void merge(vector<int>& nums, int l, int mid, int h) {
         vector<int> merged(h - l + 1);
-        i = l, j = mid + 1;
-        int k = 0;
+        int i = l, j = mid + 1, k = 0;
         while (i <= mid && j <= h) {
             if (nums[i] < nums[j]) {
-                merged[k++] = nums[i++];
+                merged[k++] = nums[i++];   
             } else {
                 merged[k++] = nums[j++];
             }
         }
         while (i <= mid) {
-            merged[k++] = nums[i++];
+            merged[k++] = nums[i++];               
         }
         while (j <= h) {
-            merged[k++] = nums[j++];
+            merged[k++] = nums[j++];            
         }
         for (int k = 0; k < merged.size(); k++) {
             nums[l + k] = merged[k];
         }
-        
-        return ans;
     }
 };
 
