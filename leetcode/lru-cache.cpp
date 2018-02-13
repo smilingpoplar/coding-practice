@@ -13,16 +13,13 @@
 using namespace std;
 
 class LRUCache{
-    // 1. 用双向链表std::list存储节点，这样移动节点时效率高（单向链表删除节点时查找前驱节点的效率低）
-    // 2. 用哈希表std::unordered_map存储key=>链表节点地址的映射，这样查找节点O(1)时间
-    // 3. 每次把访问的节点移动到链表头，这样当空间不够删除LRU节点时只要删除链表尾节点
-private:
-    struct CacheNode {
-        CacheNode(int k, int v) : key(k), value(v) { }
-        int key;
-        int value;
-    };
-
+    // 1. 按key分桶，每桶只要存KVPair
+    // 2. 用双向链表std::list存储桶，每次访问把桶移到链表头，这样当空间不够时只要删除尾节点
+    // 3. 用哈希表std::unordered_map映射key=>链表节点的iterator，这样O(1)时间查找
+    struct KVPair { int key; int value; };
+    list<KVPair> _list;
+    unordered_map<int, list<KVPair>::iterator> _map;
+    int _capacity;
 public:
     LRUCache(int capacity) {
         _capacity = capacity;
@@ -30,33 +27,37 @@ public:
     
     int get(int key) {
         if (_map.find(key) == _map.end()) return -1;
-        // 把访问的节点移动到链表头，并更新map中该节点的地址
-        _list.splice(_list.begin(), _list, _map[key]);
-        _map[key] = _list.begin();
+        touch(key);
         return _map[key]->value;
     }
     
-    void set(int key, int value) {
+    void put(int key, int value) {
         if (_map.find(key) != _map.end()) {
-            // 更新节点的值，并把节点移动到链表头，更新map中该节点的地址
             _map[key]->value = value;
-            _list.splice(_list.begin(), _list, _map[key]);
-            _map[key] = _list.begin();
+            touch(key);
         } else { // 添加节点
-            if (_list.size() == _capacity) { // 删除链表尾
+            _list.push_front({key, value});
+            _map[key] = _list.begin();
+            if (_list.size() > _capacity) { // 删除链表尾
                 _map.erase(_list.back().key);
                 _list.pop_back();
             }
-            // 在链表头添加节点，更新map中该节点的地址
-            _list.push_front(CacheNode(key, value));
-            _map[key] = _list.begin();
         }
     }
 private:
-    list<CacheNode> _list;
-    unordered_map<int, list<CacheNode>::iterator> _map;
-    int _capacity;
+    void touch(int key) {
+        // 把节点移动到链表头，更新map中该键的映射
+        _list.splice(_list.begin(), _list, _map[key]);
+        _map[key] = _list.begin();        
+    }
 };
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
 
 int main(int argc, const char * argv[]) {
     LRUCache cache(2);

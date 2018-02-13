@@ -18,7 +18,7 @@ class AllOne {
         const int value; 
         unordered_set<string> keys;
     };
-    list<Bucket> buckets;
+    list<Bucket> buckets; // 按值分桶
     unordered_map<string, list<Bucket>::iterator> bucketOfKey;
 public:
     /** Initialize your data structure here. */
@@ -27,7 +27,7 @@ public:
     
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
     void inc(string key) {
-        if (!bucketOfKey.count(key)) { // bucket不存在
+        if (bucketOfKey.find(key) == bucketOfKey.end()) { // bucket不存在
             // 先插入0，待会儿和其他情况一起增1
             bucketOfKey[key] = buckets.insert(buckets.begin(), {0, { key }}); 
         }
@@ -46,7 +46,7 @@ public:
     
     /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
     void dec(string key) {
-        if (!bucketOfKey.count(key)) return;
+        if (bucketOfKey.find(key) == bucketOfKey.end()) return;
         // 减1即将key移入上一桶，并从旧桶删除
         auto bucket = bucketOfKey[key], prevBucket = prev(bucket);
         bucketOfKey.erase(key);
