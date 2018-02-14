@@ -13,12 +13,12 @@
 using namespace std;
 
 class LRUCache{
-    // 1. 按key分桶，每桶只要存KVPair
-    // 2. 用双向链表std::list存储桶，每次访问把桶移到链表头，这样当空间不够时只要删除尾节点
-    // 3. 用哈希表std::unordered_map映射key=>链表节点的iterator，这样O(1)时间查找
-    struct KVPair { int key; int value; };
-    list<KVPair> _list;
-    unordered_map<int, list<KVPair>::iterator> _map;
+    // 1. 按key分桶，每桶只要存key和value
+    // 2. 用双向链表存储桶，每次访问把桶移到链表头，删除lru时只要删除链表尾
+    // 3. 用哈希表映射 key=>指向桶的iterator
+    struct Bucket { int key; int value; };
+    list<Bucket> _buckets;
+    unordered_map<int, list<Bucket>::iterator> _bucketOfKey;
     int _capacity;
 public:
     LRUCache(int capacity) {
@@ -26,29 +26,30 @@ public:
     }
     
     int get(int key) {
-        if (_map.find(key) == _map.end()) return -1;
+        if (_bucketOfKey.find(key) == _bucketOfKey.end()) return -1;
         touch(key);
-        return _map[key]->value;
+        return _bucketOfKey[key]->value;
+    }
+    
+    // 把桶移到链表头，更新哈希表中的映射
+    void touch(int key) {
+        _buckets.splice(_buckets.begin(), _buckets, _bucketOfKey[key]);
+        _bucketOfKey[key] = _buckets.begin();
     }
     
     void put(int key, int value) {
-        if (_map.find(key) != _map.end()) {
-            _map[key]->value = value;
-            touch(key);
-        } else { // 添加节点
-            _list.push_front({key, value});
-            _map[key] = _list.begin();
-            if (_list.size() > _capacity) { // 删除链表尾
-                _map.erase(_list.back().key);
-                _list.pop_back();
+        if (_capacity == 0) return;
+        if (_bucketOfKey.find(key) == _bucketOfKey.end()) {
+            if (_buckets.size() == _capacity) { // 删除链表尾
+                _bucketOfKey.erase(_buckets.back().key);
+                _buckets.pop_back();
             }
+            _buckets.push_front({key, value});
+            _bucketOfKey[key] = _buckets.begin();
+        } else {
+            _bucketOfKey[key]->value = value;
+            touch(key);
         }
-    }
-private:
-    void touch(int key) {
-        // 把节点移动到链表头，更新map中该键的映射
-        _list.splice(_list.begin(), _list, _map[key]);
-        _map[key] = _list.begin();        
     }
 };
 

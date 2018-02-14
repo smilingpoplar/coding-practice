@@ -27,40 +27,40 @@ public:
     
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
     void inc(string key) {
-        if (bucketOfKey.find(key) == bucketOfKey.end()) { // bucket不存在
+        if (bucketOfKey.find(key) == bucketOfKey.end()) {
             // 先插入0，待会儿和其他情况一起增1
             bucketOfKey[key] = buckets.insert(buckets.begin(), {0, { key }}); 
         }
-        // 增1即将key移入下一桶，并从旧桶删除
+        // 增1即将key移入下一桶
         auto bucket = bucketOfKey[key], nextBucket = next(bucket); 
-        if (nextBucket == buckets.end() || nextBucket->value != bucket->value + 1) {
-            nextBucket = buckets.insert(nextBucket, {bucket->value + 1, { }});
+        int nextCount = bucket->value + 1;
+        if (nextBucket == buckets.end() || nextBucket->value != nextCount) {
+            nextBucket = buckets.insert(nextBucket, {nextCount, { }});
         }
         nextBucket->keys.insert(key);
         bucketOfKey[key] = nextBucket;
-        // 从桶删除key        
+        // 从桶中删除key
         bucket->keys.erase(key);
-        if (bucket->keys.empty()) 
-            buckets.erase(bucket);
+        if (bucket->keys.empty()) buckets.erase(bucket);
     }
     
     /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
     void dec(string key) {
         if (bucketOfKey.find(key) == bucketOfKey.end()) return;
-        // 减1即将key移入上一桶，并从旧桶删除
+        // 减1即将key移入上一桶
         auto bucket = bucketOfKey[key], prevBucket = prev(bucket);
         bucketOfKey.erase(key);
         if (bucket->value > 1) {
-            if (bucket == buckets.begin() || prevBucket->value != bucket->value - 1) {
-                prevBucket = buckets.insert(bucket, {bucket->value - 1, { }});
+            int prevCount = bucket->value - 1;
+            if (bucket == buckets.begin() || prevBucket->value != prevCount) {
+                prevBucket = buckets.insert(bucket, {prevCount, { }});
             } 
             prevBucket->keys.insert(key);
             bucketOfKey[key] = prevBucket;
         }
         // 从旧桶删除key
         bucket->keys.erase(key);
-        if (bucket->keys.empty()) 
-            buckets.erase(bucket);
+        if (bucket->keys.empty()) buckets.erase(bucket);
     }
     
     /** Returns one of the keys with maximal value. */
