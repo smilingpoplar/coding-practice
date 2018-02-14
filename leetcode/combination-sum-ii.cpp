@@ -30,7 +30,7 @@ private:
         }
         
         for (int i = idx; i < candiatates.size(); i++) {
-            // 排除相同的组合，在同一个循环中相同数字只作一次递归
+            // 排除重复的组合：某数字选中的递归情况不用管，一旦不选则后面相同数字都不选
             if (i > idx && candiatates[i] == candiatates[i - 1]) continue;
             comb.push_back(candiatates[i]);
             search(candiatates, target - candiatates[i], i + 1, comb, ans);

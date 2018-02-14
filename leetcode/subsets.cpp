@@ -14,25 +14,20 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        vector<vector<int>> result;
+        vector<vector<int>> ans;
         vector<int> subset;
-        subsets(0, nums, subset, result);
-        return result;
+        search(nums, 0, subset, ans);
+        return ans;
     }
 private:
-    void subsets(size_t start, const vector<int> &nums, vector<int> &subset, vector<vector<int>> &result) {
-        const size_t N = nums.size();
-        if (start == N) {
-            result.push_back(subset);
-            return;
+    void search(const vector<int> &nums, int idx, 
+                vector<int> &subset, vector<vector<int>> &ans) {
+        ans.push_back(subset);
+        for (int i = idx; i < nums.size(); i++) {
+            subset.push_back(nums[i]);
+            search(nums, i + 1, subset, ans);
+            subset.pop_back();
         }
-        // 不选
-        subsets(start + 1, nums, subset, result);
-        // 选
-        subset.push_back(nums[start]);
-        subsets(start + 1, nums, subset, result);
-        subset.pop_back();
     }
 };
 
