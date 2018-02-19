@@ -1,5 +1,5 @@
 //
-//  substring-with-concatenation-of-all-words.cpp
+//  substring-with-concatenation-of-all-words
 //  https://leetcode.com/problems/substring-with-concatenation-of-all-words/
 //
 //  Created by smilingpoplar on 15/5/8.
@@ -15,56 +15,36 @@ using namespace std;
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
-        // N个长为M的单词构成长为N*M的子串，子串里的单词一个个地看，
-        // 若某个单词在字典中不存在，则子串中迄今判断过的单词起始位置都不能作为新子串起始
-        // 若某个单词多余重复，则新子串可能从firstIndex[word]+wordSize开始
-        vector<int> result;
-        if (words.empty()) return result;
-        const int wordSize = (int)words[0].size();
-        const int substringSize = (int)(wordSize * words.size());
-        unordered_map<string, int> wordCount;
-        for (const auto &word : words) {
-            ++wordCount[word];
-        }
-        
+        if (s.empty() || words.empty()) return {};
+        const int K = words.size(), M = words[0].size();
         unordered_map<string, int> count;
-        for (int i = 0; i < wordSize; i++) {
-            int substringStart = i;
-            int wordStart = substringStart;
-            count.clear();
-            while (wordStart + wordSize <= s.size()) {
-                string word = s.substr(wordStart, wordSize);
-                if (wordCount.find(word) == wordCount.end()) { // 单词不存在
-                    substringStart = wordStart + wordSize;
-                    wordStart = substringStart;
-                    count.clear();
-                } else {
-                    if (count[word] >= wordCount[word]) { // 多余重复单词
-                        substringStart = firstIndex(s, substringStart, wordStart, word) + wordSize;
-                        wordStart += wordSize;
-                    } else {
-                        ++count[word];
-                        if (wordStart + wordSize == substringStart + substringSize) { // 满足条件
-                            result.push_back(substringStart);
-                            substringStart += wordSize;
-                            wordStart = substringStart;
-                            count.clear();
-                        } else {
-                            wordStart += wordSize;
-                        }
+        for (auto &w : words) count[w]++;
+        int distinct = count.size();
+        
+        vector<int> ans;
+        // s有M个起分点，构成M个序列，看每个序列有哪些子段满足条件
+        for (int m = 0; m < M; m++) {
+            // 滑动窗口，先移动end使窗口有效，再移动start使窗口最小
+            auto theCount = count;
+            auto theDistinct = distinct;
+            int start = m, end = m;
+            while (end + M <= s.size()) {
+                auto endWord = s.substr(end, M);
+                if (theCount.find(endWord) != theCount.end() 
+                    && --theCount[endWord] == 0) theDistinct--;
+                end += M;
+                while (theDistinct == 0) { // 窗口有效
+                    if (end - start == K * M) {
+                        ans.push_back(start);
                     }
+                    auto startWord = s.substr(start, M);
+                    if (theCount.find(startWord) != theCount.end() 
+                        && ++theCount[startWord] == 1) theDistinct++;
+                    start += M;
                 }
             }
         }
-        
-        return result;
-    }
-private:
-    int firstIndex(const string &s, int start, int end, const string &word) {
-        for (int i = start; i < end; i += word.size()) {
-            if (word == s.substr(i, word.size())) return i;
-        }
-        return -1;
+        return ans;
     }
 };
 
