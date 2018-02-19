@@ -14,36 +14,26 @@ using namespace std;
 class Solution {
 public:
     string minWindow(string s, string t) {
-        // 伸缩窗口法，不变式：s[i,j]中含t
         if (s.empty() || s.size() < t.size()) return "";
-        unordered_map<char, int> tCount;
-        for (char c : t) ++tCount[c];
+        unordered_map<char, int> count;
+        for (char c : t) count[c]++;
+        int distinct = count.size();
         
-        int i = 0;
-        int found = 0;
-        int minWidth = INT_MAX;
-        int foundI = 0;
-        unordered_map<char, int> sCount;
-        for (int j = 0; j < s.size(); j++) { // 伸展尾指针
-            ++sCount[s[j]];
-            if (sCount[s[j]] <= tCount[s[j]]) ++found;
-            if (found == t.size()) { // 收缩头指针
-                while (tCount[s[i]] == 0 || sCount[s[i]] > tCount[s[i]]) {
-                    --sCount[s[i]];
-                    ++i;
+        int minWidth = INT_MAX, ansStart;
+        int start = 0, end = 0;
+        while (end < s.size()) {
+            if (count.find(s[end]) != count.end() && --count[s[end]] == 0) distinct--;
+            end++;
+            while (distinct == 0) {
+                if (end - start < minWidth) {
+                    minWidth = end - start;
+                    ansStart = start;
                 }
-                // s[i,j]中含t
-                if (j - i + 1 < minWidth) {
-                    minWidth = j - i + 1;
-                    foundI = i;
-                }
-                // 头指针再缩一格
-                --sCount[s[i]];
-                ++i;
-                --found;
+                if (count.find(s[start]) != count.end() && ++count[s[start]] == 1) distinct++;
+                start++;
             }
         }
-        return minWidth == INT_MAX ? "" : s.substr(foundI, minWidth);
+        return minWidth != INT_MAX ? s.substr(ansStart, minWidth) : "";
     }
 };
 

@@ -11,20 +11,41 @@
 
 using namespace std;
 
+/*
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> mp; // char=>lastIdx
-        int longest = 0;
-        for (int i = 0, start = 0; i < s.size(); i++) {
-            if (mp.find(s[i]) != mp.end() && mp[s[i]] >= start) {
-                start = mp[s[i]] + 1;                
-            } else {
-                longest = max(longest, i - start + 1);
+        unordered_map<char, int> count; // 用map记录各字符出现几次
+        int start = 0, end = 0, repeat = 0;
+        int ans = 0;
+        while (end < s.size()) {
+            if (++count[s[end]] > 1) repeat++;
+            end++;
+            while (repeat > 0) {
+                if (--count[s[start]] > 0) repeat--;
+                start++;
             }
-            mp[s[i]] = i;
+            ans = max(ans, end - start);
         }
-        return longest;
+        return ans;
+    }
+};
+*/
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> mp; // 用map记录滑动窗口内的char=>lastIdx
+        int ans = 0;
+        int start = 0;
+        for (int end = 0; end < s.size(); end++) {
+            if (mp.find(s[end]) != mp.end()) {
+                start = max(start, mp[s[end]] + 1);
+            }
+            ans = max(ans, end - start + 1);
+            mp[s[end]] = end;
+        }
+        return ans;
     }
 };
 
