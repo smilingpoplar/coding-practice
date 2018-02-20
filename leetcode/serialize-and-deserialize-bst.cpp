@@ -1,6 +1,6 @@
 //
-//  serialize-and-deserialize-binary-tree
-//  https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+//  serialize-and-deserialize-bst
+//  https://leetcode.com/problems/serialize-and-deserialize-bst/
 //
 //  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -20,6 +20,7 @@ using namespace std;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Codec {
 public:
 
@@ -29,13 +30,10 @@ public:
         encode(root, oss);
         return oss.str();
     }
-    
-    void encode(TreeNode *root, ostringstream &oss) {
-        if (!root) {
-            oss << "x ";
-            return;
-        } 
 
+    // 和serialize-and-deserialize-binary-tree的区别是，为了更紧凑不再序列化NULL
+    void encode(TreeNode *root, ostringstream &oss) {
+        if (!root) return;
         oss << root->val << " ";
         encode(root->left, oss);
         encode(root->right, oss);
@@ -44,18 +42,25 @@ public:
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
         istringstream iss(data);
-        return decode(iss);
+        return decode(iss, INT_MIN, INT_MAX);
     }
     
-    TreeNode* decode(istringstream &iss) {
+    // 利用上下边界[minValue, maxValue]反序列化
+    TreeNode* decode(istringstream &iss, int minValue, int maxValue) {
+        auto pos = iss.tellg();
         string s;
         iss >> s;
         if (!iss) return NULL;
-        if (s == "x") return NULL;
 
-        auto root = new TreeNode(stoi(s));
-        root->left = decode(iss);
-        root->right = decode(iss);
+        int val = stoi(s);
+        if (val < minValue || val > maxValue) {
+            iss.seekg(pos);
+            return NULL;
+        }
+        
+        auto root = new TreeNode(val);
+        root->left = decode(iss, minValue, val);
+        root->right = decode(iss, val, maxValue);
         return root;
     }
 };
