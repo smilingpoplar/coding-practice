@@ -1,5 +1,5 @@
 //
-//  valid-parentheses.cpp
+//  valid-parentheses
 //  https://leetcode.com/problems/valid-parentheses/
 //
 //  Created by smilingpoplar on 15/5/4.

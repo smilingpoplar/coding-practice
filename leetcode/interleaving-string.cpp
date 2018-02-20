@@ -1,5 +1,5 @@
 //
-//  interleaving-string.cpp
+//  interleaving-string
 //  https://leetcode.com/problems/interleaving-string/
 //
 //  Created by smilingpoplar on 15/5/2.

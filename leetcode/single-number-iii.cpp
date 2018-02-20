@@ -1,5 +1,5 @@
 //
-//  single-number-iii.cpp
+//  single-number-iii
 //  https://leetcode.com/problems/single-number-iii/
 //
 //  Created by smilingpoplar on 15/5/21.

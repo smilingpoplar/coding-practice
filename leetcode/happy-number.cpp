@@ -1,5 +1,5 @@
 //
-//  happy-number.cpp
+//  happy-number
 //  https://leetcode.com/problems/happy-number/
 //
 //  Created by smilingpoplar on 15/5/4.

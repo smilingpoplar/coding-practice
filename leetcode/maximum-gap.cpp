@@ -1,5 +1,5 @@
 //
-//  maximum-gap.cpp
+//  maximum-gap
 //  https://leetcode.com/problems/maximum-gap/
 //
 //  Created by smilingpoplar on 15/5/1.

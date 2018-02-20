@@ -1,5 +1,5 @@
 //
-//  word-break-ii.cpp
+//  word-break-ii
 //  https://leetcode.com/problems/word-break-ii/
 //
 //  Created by smilingpoplar on 15/5/1.

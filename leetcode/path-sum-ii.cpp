@@ -1,5 +1,5 @@
 //
-//  path-sum-ii.cpp
+//  path-sum-ii
 //  https://leetcode.com/problems/path-sum-ii/
 //
 //  Created by smilingpoplar on 15/4/30.

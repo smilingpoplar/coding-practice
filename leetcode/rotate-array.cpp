@@ -1,5 +1,5 @@
 //
-//  rotate-array.cpp
+//  rotate-array
 //  https://leetcode.com/problems/rotate-array/
 //
 //  Created by smilingpoplar on 15/5/21.

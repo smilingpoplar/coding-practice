@@ -1,5 +1,5 @@
 //
-//  container-with-most-water.cpp
+//  container-with-most-water
 //  https://leetcode.com/problems/container-with-most-water/
 //
 //  Created by smilingpoplar on 15/5/21.

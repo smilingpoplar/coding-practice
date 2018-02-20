@@ -1,5 +1,5 @@
 //
-//  minimum-depth-of-binary-tree.cpp
+//  minimum-depth-of-binary-tree
 //  https://leetcode.com/problems/minimum-depth-of-binary-tree/
 //
 //  Created by smilingpoplar on 15/4/30.

@@ -1,5 +1,5 @@
 //
-//  implement-trie-prefix-tree.cpp
+//  implement-trie-prefix-tree
 //  https://leetcode.com/problems/implement-trie-prefix-tree/
 //
 //  Created by smilingpoplar on 15/5/21.

@@ -1,5 +1,5 @@
 //
-//  n-queens.cpp
+//  n-queens
 //  https://leetcode.com/problems/n-queens/
 //
 //  Created by smilingpoplar on 15/4/30.

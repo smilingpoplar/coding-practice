@@ -1,5 +1,5 @@
 //
-//  maximum-depth-of-binary-tree.cpp
+//  maximum-depth-of-binary-tree
 //  https://leetcode.com/problems/maximum-depth-of-binary-tree/
 //
 //  Created by smilingpoplar on 15/4/30.

@@ -1,5 +1,5 @@
 //
-//  single-number-ii.cpp
+//  single-number-ii
 //  https://leetcode.com/problems/single-number-ii/
 //
 //  Created by smilingpoplar on 15/5/2.

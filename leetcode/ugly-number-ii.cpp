@@ -1,5 +1,5 @@
 //
-//  ugly-number-ii.cpp
+//  ugly-number-ii
 //  https://leetcode.com/problems/ugly-number-ii/
 //
 //  Created by smilingpoplar on 15/5/21.

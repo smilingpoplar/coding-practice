@@ -1,5 +1,5 @@
 //
-//  largest-number.cpp
+//  largest-number
 //  https://leetcode.com/problems/largest-number/
 //
 //  Created by smilingpoplar on 15/4/30.

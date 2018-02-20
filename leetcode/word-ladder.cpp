@@ -1,5 +1,5 @@
 //
-//  word-ladder.cpp
+//  word-ladder
 //  https://leetcode.com/problems/word-ladder/
 //
 //  Created by smilingpoplar on 15/4/28.

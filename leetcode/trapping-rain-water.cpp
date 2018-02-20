@@ -1,5 +1,5 @@
 //
-//  trapping-rain-water.cpp
+//  trapping-rain-water
 //  https://leetcode.com/problems/trapping-rain-water/
 //
 //  Created by smilingpoplar on 15/5/21.

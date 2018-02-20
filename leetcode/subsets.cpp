@@ -1,5 +1,5 @@
 //
-//  subsets.cpp
+//  subsets
 //  https://leetcode.com/problems/subsets/
 //
 //  Created by smilingpoplar on 15/5/2.

@@ -1,5 +1,5 @@
 //
-//  find-minimum-in-rotated-sorted-array-ii.cpp
+//  find-minimum-in-rotated-sorted-array-ii
 //  https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
 //
 //  Created by smilingpoplar on 15/5/21.

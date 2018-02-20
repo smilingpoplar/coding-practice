@@ -1,5 +1,5 @@
 //
-//  dungeon-game.cpp
+//  dungeon-game
 //  https://leetcode.com/problems/dungeon-game/
 //
 //  Created by smilingpoplar on 15/4/30.

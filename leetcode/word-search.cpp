@@ -1,5 +1,5 @@
 //
-//  word-search.cpp
+//  word-search
 //  https://leetcode.com/problems/word-search/
 //
 //  Created by smilingpoplar on 15/5/2.
