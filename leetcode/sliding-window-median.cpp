@@ -11,7 +11,7 @@
 using namespace std;
 
 class MedianQueue {
-    // 两个优先队列的方法，因为c++的priority_queue没法删除元素，只好用两个multiset替代
+    // 两个优先队列构成中位数队列，因为c++的priority_queue没法删除元素，只好用两个multiset
     multiset<int, greater<int>> lo;
     multiset<int> hi;
 
@@ -71,7 +71,7 @@ public:
         ans.push_back(mq.median());
         for (int i = k; i < nums.size(); i++) {
             mq.push(nums[i]);
-            mq.remove(nums[i - k]);
+            mq.remove(nums[i-k]);
             ans.push_back(mq.median());
         }
         return ans;
