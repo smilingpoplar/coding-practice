@@ -22,13 +22,13 @@ public:
         // 先移动end找到合法窗口，再移动start缩小窗口
         int start = 0, end = 0;
         while (end < s.size()) {
-            if (count.find(s[end]) != count.end() && --count[s[end]] == 0) distinct--;
+            if (--count[s[end]] == 0) distinct--;
             end++;
             while (distinct == 0) { // 合法窗口
                 if (end - start == p.size()) {
                     ans.push_back(start);
                 }
-                if (count.find(s[start]) != count.end() && ++count[s[start]] == 1) distinct++;
+                if (++count[s[start]] == 1) distinct++;
                 start++;
             }
         }

@@ -30,16 +30,14 @@ public:
             int start = m, end = m;
             while (end + M <= s.size()) {
                 auto endWord = s.substr(end, M);
-                if (theCount.find(endWord) != theCount.end() 
-                    && --theCount[endWord] == 0) theDistinct--;
+                if (--theCount[endWord] == 0) theDistinct--;
                 end += M;
                 while (theDistinct == 0) { // 窗口有效
                     if (end - start == K * M) {
                         ans.push_back(start);
                     }
                     auto startWord = s.substr(start, M);
-                    if (theCount.find(startWord) != theCount.end() 
-                        && ++theCount[startWord] == 1) theDistinct++;
+                    if (++theCount[startWord] == 1) theDistinct++;
                     start += M;
                 }
             }

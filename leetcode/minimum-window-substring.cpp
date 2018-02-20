@@ -22,14 +22,14 @@ public:
         int minWidth = INT_MAX, ansStart;
         int start = 0, end = 0;
         while (end < s.size()) {
-            if (count.find(s[end]) != count.end() && --count[s[end]] == 0) distinct--;
+            if (--count[s[end]] == 0) distinct--;
             end++;
             while (distinct == 0) {
                 if (end - start < minWidth) {
                     minWidth = end - start;
                     ansStart = start;
                 }
-                if (count.find(s[start]) != count.end() && ++count[s[start]] == 1) distinct++;
+                if (++count[s[start]] == 1) distinct++;
                 start++;
             }
         }
