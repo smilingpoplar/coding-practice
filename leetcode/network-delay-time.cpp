@@ -13,39 +13,39 @@ using namespace std;
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
-        map<int, map<int, int>> adj;
+        unordered_map<int, unordered_map<int, int>> adj;
         for (auto &e : times) {
             adj[e[0]][e[1]] = e[2];
         }
-        vector<int> dist(N + 1, INT_MAX);
-        dist[K] = 0;
+        vector<int> dists(N + 1, INT_MAX);
+        dists[K] = 0;
         
         // vector<int> visited(N + 1, false);
-        auto cmp = [&dist](int i, int j) {
-            return dist[i] > dist[j];
+        auto cmp = [](vector<int> &a, vector<int> &b) { // {node, dist}
+            return a[1] > b[1];
         };
-        priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
-        pq.push(K);
+        priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
+        pq.push({K, dists[K]});
         while (!pq.empty()) {
-            int u = pq.top(); pq.pop();
+            auto info = pq.top(); pq.pop();
+            int u = info[0], dist = info[1];
             // if (visited[u]) continue;
             // visited[u] = true;
             for (auto &e : adj[u]) { // 遍历u的所有邻接点
-                int v = e.first;
-                int newdist = dist[u] + e.second;
-                if (newdist < dist[v]) {
-                    dist[v] = newdist;
-                    pq.push(v); // pq中将可能有多个v值，但后续v值对结果没影响。可用visited[]来排除。
+                int v = e.first, cost = e.second;
+                int newdist = dist + cost;
+                if (newdist < dists[v]) {
+                    dists[v] = newdist;
+                    pq.push({v, newdist}); // pq中将可能有多个v值，但后续v值对结果没影响。可用visited[]来排除。
                 }
             }
         }
         
         int ans = INT_MIN;
-        for (int i = 1; i < dist.size(); i++) {
-            ans = max(ans, dist[i]);
+        for (int i = 1; i < dists.size(); i++) {
+            ans = max(ans, dists[i]);
         }
-        if (ans == INT_MAX) return -1;
-        return ans;
+        return (ans != INT_MAX) ? ans : -1;
     }
 };
 
