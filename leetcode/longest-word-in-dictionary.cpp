@@ -20,7 +20,17 @@ struct TrieNode {
 class Trie {
     TrieNode root;
 public:
-    bool incInsert(const string &word) {
+    void insert(const string &word) {
+        auto p = &root;
+        for (char c : word) {
+            int idx = c - 'a';
+            if (!p->child[idx]) p->child[idx] = new TrieNode();
+            p = p->child[idx];
+        }
+        p->isWord = true;
+    }
+    
+    bool searchWithoutLastChar(const string &word) {
         if (word.empty()) return false;
         auto p = &root;        
         for (int i = 0; i < word.size() - 1; i++) {
@@ -29,11 +39,6 @@ public:
             p = p->child[idx];
             if (!p->isWord) return false;
         }
-        int idx = word.back() - 'a';
-        if (p->child[idx]) return false;
-        p->child[idx] = new TrieNode();
-        p = p->child[idx];        
-        p->isWord = true;
         return true;
     }
 };
@@ -45,8 +50,10 @@ public:
         string ans;
         Trie trie;
         for (auto &word : words) {
-            if (trie.incInsert(word) && word.size() > ans.size()) 
-              ans = word;
+            if (trie.searchWithoutLastChar(word)) {
+                trie.insert(word);
+                if (word.size() > ans.size()) ans = word;
+            }
         }
         return ans;
     }
