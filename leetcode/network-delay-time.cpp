@@ -49,6 +49,30 @@ public:
     }
 };
 
+/*
+class Solution {
+public:
+    int networkDelayTime(vector<vector<int>>& times, int N, int K) {
+        // bellman ford算法，对所有边做V-1次松弛
+        const int INF = 1e9;
+        vector<int> dist(N + 1, INF);
+        dist[K] = 0;
+        for (int i = 0; i < N; i++) {
+            auto prev = dist;
+            for (auto &e : times) {
+                int u = e[0], v = e[1], cost = e[2];
+                dist[v] = min(dist[v], prev[u] + cost);
+            }
+        }
+        int ans = INT_MIN;
+        for (int i = 1; i <= N; i++) {
+            ans = max(ans, dist[i]);
+        }
+        return (ans != INF) ? ans : -1;
+    }
+};
+ */
+
 int main(int argc, const char * argv[]) {    
     return 0;
 }

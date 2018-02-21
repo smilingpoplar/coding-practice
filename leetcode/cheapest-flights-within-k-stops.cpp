@@ -59,8 +59,7 @@ public:
             auto prev = dist;
             for (auto &e : flights) {
                 int u = e[0], v = e[1], cost = e[2];
-                int newdist = prev[u] + cost;
-                if (newdist < dist[v]) dist[v] = newdist;
+                dist[v] = min(dist[v], prev[u] + cost);
             }
         }
         return (dist[dst] != INF) ? dist[dst] : -1;
