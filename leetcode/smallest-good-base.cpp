@@ -21,7 +21,7 @@ public:
         long long num = stoll(n);
         for (int x = log2(num + 1); x >= 2; x--) {
             int b = pow(num, 1.0 /(x - 1));
-            // 对特定x和b计算累加和n
+            // 对特定x和b计算等比级数n。不直接用等比级数公式因为pow()计算有精度问题。
             long long sum = 1, curr = 1;
             for (int i = 1; i <= x - 1; i++) {
                 curr *= b;
