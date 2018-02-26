@@ -15,30 +15,30 @@ class Solution {
 public:
     vector<string> removeComments(vector<string>& source) {
         bool inBlock = false;
+        string newLine;
         vector<string> ans;
-        string line;
-        for (auto &s : source) {
-            int len = s.size();
+        for (auto &line : source) {
+            int len = line.size();
             for (int i = 0; i < len; i++) {
                 if (!inBlock) {
-                    if (s[i] == '/' && i + 1 < len && s[i+1] == '*') {
+                    if (line[i] == '/' && i + 1 < len && line[i+1] == '*') {
                         inBlock = true;
                         i++;
-                    } else if (s[i] == '/' && i + 1 < len && s[i+1] == '/') {
+                    } else if (line[i] == '/' && i + 1 < len && line[i+1] == '/') {
                         break;
                     } else {
-                        line.push_back(s[i]);
+                        newLine.push_back(line[i]);
                     }       
                 } else {
-                    if (s[i] == '*' && i + 1 < len && s[i+1] == '/') {
+                    if (line[i] == '*' && i + 1 < len && line[i+1] == '/') {
                         inBlock = false;
                         i++;
                     }
                 }
             }
-            if (!inBlock && !line.empty()) {
-                ans.push_back(line);
-                line.clear();
+            if (!inBlock && !newLine.empty()) {
+                ans.push_back(newLine);
+                newLine.clear();
             }
         }
         return ans;
