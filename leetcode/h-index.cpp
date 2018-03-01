@@ -13,17 +13,18 @@ using namespace std;
 class Solution {
 public:
     int hIndex(vector<int>& citations) {   
-        // h指某个论文引用数，0<=h<=N
+        // h-index定义：(引用数>=h的论文)的数量>=h
+        // 按引用数分桶，>N的都算到count[N]上
         const int N = citations.size();
-        vector<int> count(N + 1, 0); // 各引用数有几篇论文，>N的引用数都算到count[N]上
-        for (int citation : citations) {
-            if (citation >= N) count[N]++;
-            else count[citation]++;
+        vector<int> count(N + 1, 0);
+        for (int c : citations) {
+            if (c >= N) count[N]++;
+            else count[c]++;
         }
         int sum = 0;
-        for (int i = N; i >= 0; i--) {
-            sum += count[i];
-            if (sum >= i) return i;
+        for (int h = N; h >= 0; h--) { // h>=0、N-h>=0
+            sum += count[h];
+            if (sum >= h) return h;
         }
         return 0;
     }
