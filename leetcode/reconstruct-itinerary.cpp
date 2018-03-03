@@ -14,15 +14,15 @@ using namespace std;
 class Solution {
 public:
     vector<string> findItinerary(vector<pair<string, string>> tickets) {
-        // dfs的后序编号=>逆拓扑排序
-        // 但这里允许有环，要在访问邻接点前把邻接点从当前点的邻接列表中拿掉
-        unordered_map<string, multiset<string>> adj; // 用multiset是因为可有相同目的地的多张机票
+        // 一张机票一条边，求遍历所有边的欧拉路径
+        // 已知欧拉路径存在且从JFK开始，只要用边的后序遍历求逆欧拉路径
+        unordered_map<string, multiset<string>> adj;
         for (auto &ticket : tickets)
             adj[ticket.first].insert(ticket.second);
         
         vector<string> ans;
         dfs("JFK", adj, ans);
-        reverse(ans.begin(), ans.end()); // 逆拓扑排序=>拓扑排序
+        reverse(ans.begin(), ans.end()); // 逆欧拉路径
         return ans;
     }
     
@@ -30,10 +30,10 @@ public:
         auto &tos = adj[from];
         while (!tos.empty()) {
             auto next = *tos.begin();
-            tos.erase(tos.begin()); // 要在访问邻接点前把邻接点从当前点的邻接列表中拿掉
+            tos.erase(tos.begin()); // 相当于把边(from,to)放进visited[]数组
             dfs(next, adj, ans);
         }
-        ans.push_back(from); // dfs的后序编号
+        ans.push_back(from); // 后序遍历
     }
 };
 
