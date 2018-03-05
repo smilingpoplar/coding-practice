@@ -11,16 +11,6 @@
 
 using namespace std;
 
-/**
- * Definition for an interval.
- * struct Interval {
- *     int start;
- *     int end;
- *     Interval() : start(0), end(0) {}
- *     Interval(int s, int e) : start(s), end(e) {}
- * };
- */
-
 class SummaryRanges {
 public:
     /** Initialize your data structure here. */
@@ -28,10 +18,9 @@ public:
     }
     
     void addNum(int val) {
+        // 合并所有与待插入区间curr重叠的区间
         Interval curr = { val, val };
-        // 待插入区间[start,end]看与前后区间是否重叠，重叠就更新待插入区间、并删掉重叠的
-        auto it = st.lower_bound(curr);
-        if (it != st.begin() && isOverlap(*prev(it), curr)) --it;
+        auto it = st.lower_bound({INT_MIN, val - 1}); // 最左的重叠区间右端是val-1
         while (it != st.end() && isOverlap(*it, curr)) {
             curr.start = min(curr.start, it->start);
             curr.end = max(curr.end, it->end);
@@ -45,7 +34,7 @@ public:
     }
 private:
     struct Cmp {
-        bool operator()(const Interval &a, const Interval &b) { return a.start < b.start; }
+        bool operator()(const Interval &a, const Interval &b) { return a.end < b.end; }
     };
     set<Interval, Cmp> st;
 
