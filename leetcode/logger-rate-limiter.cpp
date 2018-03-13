@@ -11,10 +11,38 @@
 
 using namespace std;
 
+/*
+// 解法同：https://leetcode.com/problems/design-hit-counter/
 class Logger {
-    static const int SECONDS = 10; // 只保留最近10秒的消息，按时间分桶
-    int timestamps[SECONDS] = { 0 };
-    set<string> msgs[SECONDS];
+    // 按时间分桶，对应的times[i]和msgs[i]构成逻辑上的buckets[i]，用循环数组方式
+    const int SECONDS = 10; // 只保留最近10s的消息
+    vector<int> times;
+    vector<set<string>> msgs;
+public:
+    Logger() : times(SECONDS, 0), msgs(SECONDS) {
+    }
+    
+    bool shouldPrintMessage(int timestamp, string message) {
+        int idx = timestamp % SECONDS;
+        if (times[idx] != timestamp) { // 对应桶已无效
+            times[idx] = timestamp;
+            msgs[idx].clear();
+        }
+        // 查找所有桶，看10s内是否输出过该消息
+        for (int i = 0; i < times.size(); i++) {
+            if (timestamp - times[i] < SECONDS && msgs[i].count(message)) return false;
+        }
+        msgs[idx].insert(message); // 更新对应桶
+        return true;
+    }
+};
+*/
+
+// 因为时间递增，用队列
+class Logger {
+    const int SECONDS = 10; // 只保留最近10s的消息
+    queue<pair<int, string>> q;
+    set<string> msgs; // 判断重复消息
 public:
     /** Initialize your data structure here. */
     Logger() {
@@ -24,16 +52,14 @@ public:
         If this method returns false, the message will not be printed.
         The timestamp is in seconds granularity. */
     bool shouldPrintMessage(int timestamp, string message) {
-        int idx = timestamp % SECONDS;
-        if (timestamps[idx] != timestamp) { // 对应桶无效了
-            timestamps[idx] = timestamp;
-            msgs[idx].clear();
+        while (!q.empty() && timestamp - q.front().first >= SECONDS) {
+            msgs.erase(q.front().second);
+            q.pop();
         }
-        // 查找所有桶
-        for (int i = 0; i < SECONDS; i++) {
-            if (timestamp - timestamps[i] <= SECONDS && msgs[i].count(message)) return false;
-        }
-        msgs[idx].insert(message); // 更新对应桶
+        // 剩下的都是10s内
+        if (msgs.find(message) != msgs.end()) return false;
+        q.push({timestamp, message});
+        msgs.insert(message);
         return true;
     }
 };
