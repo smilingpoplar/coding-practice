@@ -24,7 +24,7 @@ public:
         
         const int N = dict.size();
         for (int i = 0; i < N - 1; i++) {
-            // 看abbrs[i]后面有哪些跟它冲突
+            // 看abbrs[i]跟后面哪些有冲突
             while (true) {
                 set<int> dup;
                 for (int j = i + 1; j < N; j++) {
