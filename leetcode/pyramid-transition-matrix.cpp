@@ -25,7 +25,7 @@ public:
     bool canPyramid(string &bottom, unordered_map<string, string> &trans) {
         if (bottom.size() == 1) return true;
         for (int i = 0; i < bottom.size() - 1; i++) {
-            if (trans.find(bottom.substr(i, 2)) == trans.end()) return false;
+            if (!trans.count(bottom.substr(i, 2))) return false;
         }
         vector<string> nexts;
         string next;

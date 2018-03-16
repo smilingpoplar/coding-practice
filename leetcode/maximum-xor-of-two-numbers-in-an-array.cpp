@@ -28,7 +28,7 @@ public:
             
             int candidate = maxXor | (1 << i);
             for (int prefix : st) {
-                if (st.find(prefix ^ candidate) != st.end()) {
+                if (st.count(prefix ^ candidate)) {
                     maxXor = candidate;
                     break;
                 }                 

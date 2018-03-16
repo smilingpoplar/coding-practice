@@ -23,7 +23,7 @@ public:
     bool winnable(int maxChoosableInteger, int desiredTotal,
                   int used, unordered_map<int, bool> &memo) {
         if (desiredTotal <= 0) return false; // 对方已赢
-        if (memo.find(used) != memo.end()) return memo[used];
+        if (memo.count(used)) return memo[used];
         for (int i = 1; i <= maxChoosableInteger; i++) {
             if ((used & 1 << i) == 0) { // 可选择i
                 if (!winnable(maxChoosableInteger, desiredTotal - i, used | 1 << i, memo)) {

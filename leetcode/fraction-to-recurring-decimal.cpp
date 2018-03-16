@@ -31,7 +31,7 @@ public:
         
         unordered_map<long long, int> mp; // remainder=>pos
         while (remainder > 0) {
-            if (mp.find(remainder) != mp.end()) {
+            if (mp.count(remainder)) {
                 ans.insert(mp[remainder], "(");
                 ans += ")";
                 break;

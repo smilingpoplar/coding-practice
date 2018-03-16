@@ -16,15 +16,15 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         // 把数都塞到集合里，然后取出无x-1的数x看后序的x+1,x+2,...是否也在集合里
-        unordered_set<int> set;
+        unordered_set<int> st;
         for (int num : nums) 
-            set.insert(num);
+            st.insert(num);
         
         int longest = 0;
         for (int num : nums) {
-            if (set.find(num - 1) != set.end()) continue;
+            if (st.count(num - 1)) continue;
             int length = 1;
-            while (set.find(num + length) != set.end())
+            while (st.count(num + length))
                 length++;
             longest = max(longest, length);
         }

@@ -24,9 +24,9 @@ public:
         while (!q.empty()) {
             for (int n = q.size(); n > 0; n--) {
                 auto node = q.front();  q.pop();
-                if (visited.find(node) != visited.end()) continue;
+                if (visited.count(node)) continue;
                 visited.insert(node);
-                if (dead.find(node) != dead.end()) continue;
+                if (dead.count(node)) continue;
                 if (node == target) return turn;
                 
                 for (int i = 0; i < 4; i++) {

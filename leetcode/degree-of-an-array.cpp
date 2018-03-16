@@ -21,9 +21,7 @@ public:
         for (int i = 0; i < nums.size(); i++) {
             int x = nums[i];
             ++count[x];
-            if (left.find(x) == left.end()) {
-                left[x] = i;
-            }
+            if (!left.count(x)) left[x] = i;
             right[x] = i;
         }
         

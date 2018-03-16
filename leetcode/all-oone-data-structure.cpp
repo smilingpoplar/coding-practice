@@ -27,7 +27,7 @@ public:
     
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
     void inc(string key) {
-        if (bucketOfKey.find(key) == bucketOfKey.end()) {
+        if (!bucketOfKey.count(key)) {
             // 先插入0，待会儿和其他情况一起增1
             bucketOfKey[key] = buckets.insert(buckets.begin(), {0, { key }}); 
         }
@@ -46,7 +46,7 @@ public:
     
     /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
     void dec(string key) {
-        if (bucketOfKey.find(key) == bucketOfKey.end()) return;
+        if (!bucketOfKey.count(key)) return;
         // 减1即将key移入上一桶
         auto bucket = bucketOfKey[key], prevBucket = prev(bucket);
         bucketOfKey.erase(key);

@@ -1,56 +1,45 @@
 //
-//  fraction-to-recurring-decimal
-//  https://leetcode.com/problems/fraction-to-recurring-decimal/
+//  divide-two-integers
+//  https://leetcode.com/problems/divide-two-integers/
 //
 //  Created by smilingpoplar on 15/6/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 
 #include <iostream>
-#include <unordered_map>
 
 using namespace std;
 
 class Solution {
 public:
-    string fractionToDecimal(int numerator, int denominator) {
-        if (denominator == 0) return "NAN";
-        if (numerator == 0) return "0";
+    int divide(int dividend, int divisor) {
+        if (divisor == 0) return INT_MAX;
+        if (dividend == INT_MIN && divisor == -1) return INT_MAX;
         
-        string result;
-        if ((numerator < 0) ^ (denominator < 0)) {
-            result += "-";
-        }
-        // abs(INT_MIN)溢出为INT_MIN，用"long long"避免溢出
-        auto llNumerator = abs((long long)numerator);
-        auto llDenominator = abs((long long)denominator);
-        auto quotient = llNumerator / llDenominator;
-        result += to_string(quotient);
-        auto remainder = llNumerator % llDenominator;
-        if (remainder == 0) return result;
-        result += ".";
+        int sign = ((dividend > 0) ^ (divisor > 0)) ? -1 : 1;
+        // abs(INT_MIN)溢出成INT_MIN，用"unsigned int"避免int溢出
+        unsigned int uDividend = abs(dividend);
+        unsigned int uDivisor = abs(divisor);
         
-        unordered_map<long long, size_t> m; // 记录remainder的商在结果串中的位置
-        while (remainder) {
-            if (m.find(remainder) != m.end()) { // remainder曾出现过
-                auto pos = m[remainder];
-                result.insert(pos, "(");
-                result += ")";
-                break;
+        int result = 0;
+        while (uDivisor <= uDividend) {
+            unsigned int d = uDivisor;
+            int multiple = 1;
+            while (d <= (uDividend >> 1)) { // (d<<1)<=uDividend可能溢出
+                d <<= 1;
+                multiple <<= 1;
             }
-            m[remainder] = result.size();
-            remainder *= 10;
-            result += to_string(remainder / llDenominator);
-            remainder %= llDenominator;
+            uDividend -= d;
+            result += multiple;
         }
         
-        return result;
+        return sign * result;
     }
 };
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    cout << solution.fractionToDecimal(-1, INT_MIN);
+    cout << solution.divide(INT_MAX, 3);
     
     return 0;
 }

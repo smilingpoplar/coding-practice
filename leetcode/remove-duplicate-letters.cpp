@@ -18,21 +18,21 @@ public:
             count[c]++;
         
         unordered_set<char> selected;
-        vector<char> stack; // 让栈中保留递增序列
+        vector<char> stk; // 让栈中保留递增序列
         for (char c : s) {
             count[c]--;
             // 当前字母已入栈，忽略掉，因为选新的并不能使结果更好
-            if (selected.find(c) != selected.end()) continue;
+            if (selected.count(c)) continue;
             
-            while (!stack.empty() && c < stack.back() && count[stack.back()] > 0) { // 栈顶可弹出
-                int top = stack.back();
-                stack.pop_back();
+            while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) { // 栈顶可弹出
+                int top = stk.back();
+                stk.pop_back();
                 selected.erase(top);
             }
-            stack.push_back(c);
+            stk.push_back(c);
             selected.insert(c);
         }
-        return string(stack.begin(), stack.end());
+        return string(stk.begin(), stk.end());
     }
 };
 
