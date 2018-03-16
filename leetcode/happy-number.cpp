@@ -21,11 +21,11 @@ public:
         while (true) {
             result = calc(result);
             if (result == 1) return true;
-            if (results.find(result) != results.end()) return false;
+            if (results.count(result)) return false;
             results.insert(result);
         }
     }
-private:
+
     int calc(int n) {
         int sum = 0;
         while (n) {

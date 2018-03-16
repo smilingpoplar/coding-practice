@@ -26,8 +26,8 @@ public:
         for (int i = 0; i < pattern.size(); i++) {
             char p = pattern[i];
             const string &w = words[i];
-            bool patternMatched = p2w.find(p) != p2w.end();
-            bool wordMatched = w2p.find(w) != w2p.end();
+            bool patternMatched = p2w.count(p);
+            bool wordMatched = w2p.count(w);
             if (!patternMatched && !wordMatched) {
                 p2w[pattern[i]] = words[i];
                 w2p[words[i]] = pattern[i];

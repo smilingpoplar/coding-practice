@@ -26,7 +26,7 @@ public:
         if (i == pattern.size() || j == str.size()) return false; // 只一个匹配完
         
         char patternChar = pattern[i];
-        if (mp.find(patternChar) != mp.end()) {
+        if (mp.count(patternChar)) {
             auto mappingStr = mp[patternChar];
             if (!startsWith(mappingStr, str, j)) return false;
             return match(pattern, i + 1, str, j + mappingStr.size(), mp, st);
@@ -35,7 +35,7 @@ public:
         // 回溯，尝试匹配str[j..k]
         for (int k = j; k < str.size(); k++) {
             auto mappingStr = str.substr(j, k - j + 1);
-            if (st.find(mappingStr) != st.end()) continue;
+            if (st.count(mappingStr)) continue;
             mp[patternChar] = mappingStr;
             st.insert(mappingStr);
             if (match(pattern, i + 1, str, k + 1, mp, st)) return true;

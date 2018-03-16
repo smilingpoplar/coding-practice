@@ -30,7 +30,7 @@ public:
     
     int robSub(TreeNode *root, unordered_map<TreeNode *, int> &memo) {
         if (!root) return 0;
-        if (memo.find(root) != memo.end()) return memo[root];
+        if (memo.count(root)) return memo[root];
         
         int robRoot = root->val;
         if (root->left) {

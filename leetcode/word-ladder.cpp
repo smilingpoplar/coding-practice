@@ -14,98 +14,86 @@ using namespace std;
 
 class Solution {
 public:
-    // 广义图搜索可以找到一条最短路径，不能找到所有最短路径：
-    // 1. 顶点进队列时进行标记
-    // 2. 顶点出队列时更新回溯用的搜索树
-    int ladderLength(string start, string end, unordered_set<string> &dict) {
-        queue<string> queue;
-        queue.push(start);
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> dict;
+        for (auto &word : wordList) {
+            dict.insert(word);
+        }
+        queue<string> Q;
+        Q.push(beginWord);
         unordered_set<string> visited;
-        visited.insert(start); // 1. 顶点进队列时进行标记
+        visited.insert(beginWord);
         
         int level = 0;
-        while (!queue.empty()) {
+        while (!Q.empty()) {
             level++;
-            size_t levelSize = queue.size();
-            for (size_t i = 0; i < levelSize; i++) { // 按层遍历
-                auto word = queue.front();
-                queue.pop();
-                // 2. 顶点出队列时更新回溯用的搜索树：这里不需要
+            for (int sz = Q.size(); sz > 0; sz--) { // 按层遍历
+                auto word = Q.front(); Q.pop();
                 
-                auto words = nextWords(word, end, dict);
-                for (const auto &nextWord : words) {
-                    if (visited.find(nextWord) == visited.end()) {
-                        queue.push(nextWord);
-                        visited.insert(nextWord); // 1. 顶点进队列时进行标记
-                        if (nextWord == end) return level + 1;
+                auto nextWords = getNextWords(word, endWord, dict);
+                for (auto &nextWord : nextWords) {
+                    if (!visited.count(nextWord)) {
+                        Q.push(nextWord);
+                        visited.insert(nextWord); // 要在进队列时设visited[]，这样取出时同层词都设置过，避免向同层词扩展
+                        if (nextWord == endWord) return level + 1;
                     }
                 }
             }
         }
-        
         return 0;
     }
-    
+
     /*
-    // 双队列写法
-    int ladderLength(string start, string end, unordered_set<string> &dict) {
-        unordered_set<string> currentLevel, nextLevel;
-        currentLevel.insert(start);
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> dict;
+        for (auto &word : wordList) {
+            dict.insert(word);
+        }
         
+        unordered_set<string> currLevel;
+        currLevel.insert(beginWord);
         unordered_set<string> visited;
+
         int level = 0;
-        while (!currentLevel.empty()) {
+        while (!currLevel.empty()) {
             level++;
-            // 先将本层全部置为已访问，防止同层之间互相指向
-            for (const auto &word : currentLevel) {
+            // 先将本层visited[]全部设置，避免向同层词扩展
+            for (auto &word : currLevel) {
                 visited.insert(word);
             }
-            for (const auto &word : currentLevel) {
-                auto words = nextWords(word, end, dict);
-                for (const auto &nextWord : words) {
-                    if (visited.find(nextWord) == visited.end()) {
+            unordered_set<string> nextLevel;
+            for (auto &word : currLevel) {
+                auto nextWords = getNextWords(word, endWord, dict);
+                for (auto &nextWord : nextWords) {
+                    if (!visited.count(nextWord)) {
                         nextLevel.insert(nextWord);
-                        if (nextWord == end) return level + 1;
+                        if (nextWord == endWord) return level + 1;
                     }
                 }
             }
-            currentLevel.clear();
-            swap(currentLevel, nextLevel);
+            swap(nextLevel, currLevel);
         }
-        
         return 0;
     }
     */
     
-private:
-    unordered_set<string> nextWords(const string &word, const string &end, const unordered_set<string> &dict) {
-        unordered_set<string> result;
+    unordered_set<string> getNextWords(const string &word, 
+                const string &endWord, const unordered_set<string> &dict) {
+        unordered_set<string> ans;
         for (size_t i = 0; i < word.size(); i++) {
-            string newWord = word;
+            string newWord(word);
             for (char c = 'a'; c <= 'z'; c++) {
-                if (newWord[i] != c) {
-                    swap(c, newWord[i]);
-                    
-                    if (dict.find(newWord) != dict.end() || newWord == end) {
-                        result.insert(newWord);
-                    }
-                    
-                    swap(c, newWord[i]);
-                }
+                if (newWord[i] == c) continue;
+
+                swap(c, newWord[i]);                    
+                if (dict.count(newWord)) ans.insert(newWord);
+                swap(c, newWord[i]);
             }
         }
-        return result;
+        return ans;
     }
 };
 
 int main(int argc, const char * argv[]) {
-    string beginWord = "hit";
-    string endWord = "cog";
-    unordered_set<string> wordDict = { "hot", "dot", "dog", "lot", "log" };
-    
-    Solution solution;
-    int ladders = solution.ladderLength(beginWord, endWord, wordDict);
-    cout << ladders << endl;
-    
     return 0;
 }

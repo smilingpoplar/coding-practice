@@ -22,7 +22,7 @@ public:
     
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     bool insert(int val) {
-        if (mp.find(val) != mp.end()) return false;
+        if (mp.count(val)) return false;
         mp[val] = nums.size();
         nums.push_back(val);
         return true;
@@ -30,7 +30,7 @@ public:
     
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     bool remove(int val) {
-        if (mp.find(val) == mp.end()) return false;
+        if (!mp.count(val)) return false;
         // 找到val的位置pos，若pos是nums的最后元素就直接删除，否则用nums的最后元素替换它
         int pos = mp[val];
         mp.erase(val);
