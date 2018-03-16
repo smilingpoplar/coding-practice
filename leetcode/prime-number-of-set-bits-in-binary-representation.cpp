@@ -17,9 +17,7 @@ public:
         int ans = 0;
         set<int> primes = { 2, 3, 5, 7, 11, 13, 17, 19 };
         for (int i = L; i <= R; i++) {
-            if (primes.find(count1s(i)) != primes.end()) {
-                ++ans;
-            }
+            if (primes.count(count1s(i))) ans++;
         }
         return ans;
     }

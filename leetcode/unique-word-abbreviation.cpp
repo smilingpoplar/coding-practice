@@ -24,8 +24,7 @@ public:
     
     bool isUnique(string word) {
         auto abbr = toAbbr(word);
-        return (mp.find(abbr) == mp.end() || 
-                (mp[abbr].size() == 1 && mp[abbr].find(word) != mp[abbr].end()));
+        return (mp.find(abbr) == mp.end() || (mp[abbr].size() == 1 && mp[abbr].count(word)));
     }
     
     string toAbbr(const string &word) {

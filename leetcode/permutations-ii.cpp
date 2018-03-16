@@ -27,7 +27,7 @@ public:
         }
         unordered_set<int> selected;
         for (int i = idx; i < nums.size(); i++) {
-            if (selected.find(nums[i]) != selected.end()) continue;
+            if (selected.count(nums[i])) continue;
             selected.insert(nums[i]);
             swap(nums[idx], nums[i]);
             search(nums, idx + 1, ans);

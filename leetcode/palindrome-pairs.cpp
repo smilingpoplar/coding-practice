@@ -26,7 +26,7 @@ public:
                 // left|right + reverse_left
                 if (isPalindrome(word, j, word.size() - 1)) {
                     string left = word.substr(0, j);
-                    if (mp.find(left) != mp.end() && mp[left] != i) {
+                    if (mp.count(left) && mp[left] != i) {
                         ans.push_back({i, mp[left]});                    
                     }
                 }
@@ -39,7 +39,7 @@ public:
                 // reverse_right + left|right
                 if (isPalindrome(word, 0, j - 1)) {
                     string right = word.substr(j);
-                    if (mp.find(right) != mp.end() && mp[right] != i) {
+                    if (mp.count(right) && mp[right] != i) {
                         ans.push_back({mp[right], i});                     
                     }
                 }                                
@@ -55,6 +55,7 @@ public:
         return true;
     }
 };
+
 int main(int argc, const char * argv[]) {    
     return 0;
 }

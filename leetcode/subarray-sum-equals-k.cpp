@@ -20,7 +20,7 @@ public:
         for (int num : nums) {
             runningSum += num;
             int toFind = runningSum - k;
-            if (m.find(toFind) != m.end()) {
+            if (m.count(toFind)) {
                 total += m[toFind];
             }
             m[runningSum]++;

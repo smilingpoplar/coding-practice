@@ -30,7 +30,7 @@ public:
         while (!q.empty()) {
             for (int n = q.size(); n > 0; n--) {
                 auto state = q.front(); q.pop();
-                if (visited.find(state) != visited.end()) continue;
+                if (visited.count(state)) continue;
                 visited.insert(state);
                 
                 if (state == target) return move;

@@ -36,10 +36,10 @@ public:
 
         return (right - left) * (top - bottom) == sumArea
             && st.size() == 4
-            && st.find({left, bottom}) != st.end()
-            && st.find({left, top}) != st.end()
-            && st.find({right, bottom}) != st.end()
-            && st.find({right, top}) != st.end();
+            && st.count({left, bottom})
+            && st.count({left, top})
+            && st.count({right, bottom})
+            && st.count({right, top});
     }
 };
 
