@@ -42,10 +42,10 @@ public:
         for (int i = 0; i < nums.size(); i++) {            
             auto idx = bucketIndex(nums[i], t);
             // 重复发生在自己桶中
-            if (buckets.find(idx) != buckets.end()) return true;
+            if (buckets.count(idx)) return true;
             // 重复发生在左右相邻两桶
-            if (buckets.find(idx - 1) != buckets.end() && nums[i] - buckets[idx - 1] <= t) return true;
-            if (buckets.find(idx + 1) != buckets.end() && buckets[idx + 1] - nums[i] <= t) return true;
+            if (buckets.count(idx - 1) && nums[i] - buckets[idx - 1] <= t) return true;
+            if (buckets.count(idx + 1) && buckets[idx + 1] - nums[i] <= t) return true;
 
             buckets[idx] = nums[i];
             // 保证buckets.size()<=k，有效范围[left,i]，i-left+1<=k，left>=i-k+1

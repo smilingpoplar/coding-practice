@@ -19,7 +19,7 @@ public:
     }
     
     bool canWin(string &s, unordered_map<string, bool> &memo) {
-        if (memo.find(s) != memo.end()) return memo[s];
+        if (memo.count(s)) return memo[s];
         // 回溯法
         for (int i = 0; i + 1 < s.size(); i++) {
             if (s[i] == '+' && s[i+1] == '+') {

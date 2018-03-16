@@ -30,7 +30,7 @@ public:
         for (int i = 0; i < k; i++) {
             auto s = to_string(i);
             auto edge = state + s;
-            if (visited.find(edge) != visited.end()) continue;
+            if (visited.count(edge)) continue;
             visited.insert(edge);
             dfs(edge.substr(1), k, visited, ans);
             ans.append(s); // 用后序遍历

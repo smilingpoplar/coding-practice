@@ -24,7 +24,7 @@ public:
         vector<double> ans;
         for (auto &query : queries) {
             auto &from = query.first, &to = query.second;
-            if (adj.find(from) == adj.end() || adj.find(to) == adj.end()) {
+            if (!adj.count(from) || !adj.count(to)) {
                 ans.push_back(-1);
             } else {
                 unordered_set<string> visited;
@@ -44,7 +44,7 @@ public:
             ans.push_back(prod);
             return;
         }
-        if (visited.find(src) != visited.end()) return;
+        if (visited.count(src)) return;
         visited.insert(src);
         
         for (auto &e : adj[src]) {

@@ -23,7 +23,7 @@ public:
         for (int c : C) {
             for (int d : D) {
                 int sum = c + d;
-                if (count.find(-sum) != count.end()) {
+                if (count.count(-sum)) {
                     ans += count[-sum];
                 }
             }
