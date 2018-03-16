@@ -20,7 +20,7 @@ public:
         mp[nums[0]] = 0;
         for (int i = 1; i < nums.size(); i++) {
             int toFind = target - nums[i];
-            if (mp.find(toFind) != mp.end()) {
+            if (mp.count(toFind)) {
                 return { mp[toFind], i };
             }
             mp[nums[i]] = i;

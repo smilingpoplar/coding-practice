@@ -27,7 +27,7 @@ public:
         dp[0] = true;
         for (int i = 1; i <= N; i++) {
             for (int j = 0; j < i; j++) {
-                if (dp[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+                if (dp[j] && dict.count(s.substr(j, i - j))) {
                     dp[i] = true;
                     break;
                 }

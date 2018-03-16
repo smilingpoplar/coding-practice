@@ -28,7 +28,7 @@ public:
     
     bool dfs(TreeNode* root, int k, set<int> &s) {
         if (!root) return false;
-        if (s.find(k - root->val) != s.end()) return true;
+        if (s.count(k - root->val)) return true;
         s.insert(root->val);
         return dfs(root->left, k, s) || dfs(root->right, k, s);
     }
