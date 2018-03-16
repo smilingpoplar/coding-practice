@@ -13,15 +13,15 @@ using namespace std;
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        unordered_set<int> S;
+        unordered_set<int> st;
         for (int num : nums1)
-            S.insert(num);
+            st.insert(num);
         
         vector<int> ans;
         for (int num : nums2) {
-            if (S.find(num) != S.end()) {
+            if (st.count(num)) {
                 ans.push_back(num);
-                S.erase(num);
+                st.erase(num);
             }
         }
         return ans;

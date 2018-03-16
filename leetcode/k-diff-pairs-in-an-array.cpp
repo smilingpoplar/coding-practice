@@ -21,7 +21,7 @@ public:
         int ans = 0;
         for (auto &e : count) {
             if (k == 0) ans += (e.second > 1);
-            else ans += (count.find(e.first + k) != count.end());
+            else ans += (count.count(e.first + k));
         }
         return ans;
     }

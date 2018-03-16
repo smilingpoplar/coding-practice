@@ -20,7 +20,7 @@ public:
         
         int ans = 0;
         for (char s : S) {
-            if (jewels.find(s) != jewels.end()) ans++;
+            if (jewels.count(s)) ans++;
         }
         return ans;
     }

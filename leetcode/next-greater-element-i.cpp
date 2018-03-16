@@ -1,6 +1,6 @@
 //
-//  reverse-pairs
-//  https://leetcode.com/problems/reverse-pairs/
+//  next-greater-element-i
+//  https://leetcode.com/problems/next-greater-element-i/
 //
 //  Created by smilingpoplar on 17/11/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -25,7 +25,7 @@ public:
         
         vector<int> ans;
         for (int num: findNums) {
-            ans.push_back((mp.find(num) != mp.end()) ? mp[num] : -1);
+            ans.push_back(mp.count(num) ? mp[num] : -1);
         }
         return ans;        
     }

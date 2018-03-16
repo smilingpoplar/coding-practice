@@ -25,12 +25,12 @@ public:
     // 为s[idx..]生成句子
     vector<string> search(const string &s, int idx, unordered_set<string>& dict,
                           unordered_map<int, vector<string>> &memo) {
-        if (memo.find(idx) != memo.end()) return memo[idx];
+        if (memo.count(idx)) return memo[idx];
         
         vector<string> ans;
         for (int i = idx; i < s.size(); i++) {
             auto word = s.substr(idx, i - idx + 1);
-            if (dict.find(word) == dict.end()) continue;
+            if (!dict.count(word)) continue;
             if (i == s.size() - 1) {
                 ans.push_back(word);
             } else {

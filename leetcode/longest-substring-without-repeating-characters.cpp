@@ -39,7 +39,7 @@ public:
         int ans = 0;
         int start = 0;
         for (int end = 0; end < s.size(); end++) {
-            if (mp.find(s[end]) != mp.end()) {
+            if (mp.count(s[end])) {
                 start = max(start, mp[s[end]] + 1);
             }
             ans = max(ans, end - start + 1);

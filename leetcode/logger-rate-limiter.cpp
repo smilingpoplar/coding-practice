@@ -57,7 +57,7 @@ public:
             q.pop();
         }
         // 剩下的都是10s内
-        if (msgs.find(message) != msgs.end()) return false;
+        if (msgs.count(message)) return false;
         q.push({timestamp, message});
         msgs.insert(message);
         return true;
