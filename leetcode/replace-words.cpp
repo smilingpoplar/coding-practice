@@ -11,38 +11,38 @@
 
 using namespace std;
 
-struct TrieNode {
-    string word;
-    vector<TrieNode *> child;
-    TrieNode() : child(26, NULL) { }
-};
-
-class Trie {
-    TrieNode root;
-public:
-    void insert(const string &word) {
-        auto p = &root;
-        for (char c : word) {
-            int idx = c - 'a';
-            if (!p->child[idx]) p->child[idx] = new TrieNode();
-            p = p->child[idx];
-        }
-        p->word = word;
-    }
-    
-    string shortestPrefix(const string &word) {
-        auto p = &root;
-        for (char c : word) {
-            int idx = c - 'a';
-            if (!p->child[idx]) break;
-            p = p->child[idx];
-            if (!p->word.empty()) return p->word;
-        }
-        return word;
-    }
-};
-
 class Solution {
+    struct TrieNode {
+        string word;
+        vector<TrieNode *> child;
+        TrieNode() : child(26, NULL) { }
+    };
+
+    class Trie {
+        TrieNode root;
+    public:
+        void insert(const string &word) {
+            auto p = &root;
+            for (char c : word) {
+                int idx = c - 'a';
+                if (!p->child[idx]) p->child[idx] = new TrieNode();
+                p = p->child[idx];
+            }
+            p->word = word;
+        }
+
+        string shortestPrefix(const string &word) {
+            auto p = &root;
+            for (char c : word) {
+                int idx = c - 'a';
+                if (!p->child[idx]) break;
+                p = p->child[idx];
+                if (!p->word.empty()) return p->word;
+            }
+            return word;
+        }
+    };
+    
 public:
     string replaceWords(vector<string>& dict, string sentence) {
         Trie trie;

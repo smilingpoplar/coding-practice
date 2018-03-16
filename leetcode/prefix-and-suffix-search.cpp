@@ -11,38 +11,38 @@
 
 using namespace std;
 
-struct TrieNode {
-    vector<int> wordIdx;
-    vector<TrieNode *> child;
-    TrieNode() : child(26, NULL) { }
-};
-
-class Trie {
-    TrieNode root;
-public:
-    void insert(const string &word, int index) {
-        auto p = &root;
-        p->wordIdx.push_back(index); // ""前缀可对应单词
-        for (char c : word) {
-            int idx = c - 'a';
-            if (!p->child[idx]) p->child[idx] = new TrieNode();
-            p = p->child[idx];
-            p->wordIdx.push_back(index);
-        }
-    }
-    
-    vector<int> search(const string &prefix) {
-        auto p = &root;        
-        for (char c : prefix) {
-            int idx = c - 'a';
-            if (!p->child[idx]) return {};
-            p = p->child[idx];
-        }
-        return p->wordIdx;
-    }
-};
-
 class WordFilter {
+    struct TrieNode {
+        vector<int> wordIdx;
+        vector<TrieNode *> child;
+        TrieNode() : child(26, NULL) { }
+    };
+
+    class Trie {
+        TrieNode root;
+    public:
+        void insert(const string &word, int index) {
+            auto p = &root;
+            p->wordIdx.push_back(index); // ""前缀可对应单词
+            for (char c : word) {
+                int idx = c - 'a';
+                if (!p->child[idx]) p->child[idx] = new TrieNode();
+                p = p->child[idx];
+                p->wordIdx.push_back(index);
+            }
+        }
+
+        vector<int> search(const string &prefix) {
+            auto p = &root;        
+            for (char c : prefix) {
+                int idx = c - 'a';
+                if (!p->child[idx]) return {};
+                p = p->child[idx];
+            }
+            return p->wordIdx;
+        }
+    };
+    
     Trie forward;
     Trie backward;
 public:

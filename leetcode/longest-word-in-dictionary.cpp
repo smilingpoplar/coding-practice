@@ -11,39 +11,38 @@
 
 using namespace std;
 
-struct TrieNode {
-    bool isWord;
-    vector<TrieNode *> child;
-    TrieNode() : child(26, NULL) { }
-};
-
-class Trie {
-    TrieNode root;
-public:
-    void insert(const string &word) {
-        auto p = &root;
-        for (char c : word) {
-            int idx = c - 'a';
-            if (!p->child[idx]) p->child[idx] = new TrieNode();
-            p = p->child[idx];
-        }
-        p->isWord = true;
-    }
-    
-    bool searchWithoutLastChar(const string &word) {
-        if (word.empty()) return false;
-        auto p = &root;        
-        for (int i = 0; i < word.size() - 1; i++) {
-            int idx = word[i] - 'a';
-            if (!p->child[idx]) return false;
-            p = p->child[idx];
-            if (!p->isWord) return false;
-        }
-        return true;
-    }
-};
-
 class Solution {
+    struct TrieNode {
+        bool isWord;
+        vector<TrieNode *> child;
+        TrieNode() : child(26, NULL) { }
+    };
+
+    class Trie {
+        TrieNode root;
+    public:
+        void insert(const string &word) {
+            auto p = &root;
+            for (char c : word) {
+                int idx = c - 'a';
+                if (!p->child[idx]) p->child[idx] = new TrieNode();
+                p = p->child[idx];
+            }
+            p->isWord = true;
+        }
+        
+        bool searchWithoutLastChar(const string &word) {
+            if (word.empty()) return false;
+            auto p = &root;        
+            for (int i = 0; i < word.size() - 1; i++) {
+                int idx = word[i] - 'a';
+                if (!p->child[idx]) return false;
+                p = p->child[idx];
+                if (!p->isWord) return false;
+            }
+            return true;
+        }
+    };
 public:
     string longestWord(vector<string>& words) {
         sort(words.begin(), words.end());
