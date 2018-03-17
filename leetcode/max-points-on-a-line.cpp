@@ -30,13 +30,13 @@ public:
         for (int i = 0; i < N; i++) {
             if (dups.count(i)) continue;
             
-            int sameICnt = 1; // 与第i点相同的有几个
+            int sameICnt = 1; // 与第i点相同的多少个
             map<pair<int, int>, int> slopeICnt; // 过i点的那些斜率
             int maxSlopeICnt = 0; // 过i点的同斜率直线最多有几条
             for (int j = i + 1; j < N; j++) {
                 auto &a = points[i], &b = points[j];
                 if (a.x == b.x && a.y == b.y) {
-                    dups.insert(j);
+                    dups.insert(j); // 记录重复的点，后面循环不再处理
                     ++sameICnt;
                     continue;
                 }
@@ -50,7 +50,7 @@ public:
                 slopeICnt[slope]++;
                 maxSlopeICnt = max(maxSlopeICnt, slopeICnt[slope]);
             }
-            // 过i点同斜率的直线多少条，就是除i外同直线的点有多少个，再加上i点的个数就是与i有关的同直线的点
+            // 过i点同斜率的直线几条、就是除i外同直线的点有几个，再加上i点的个数，就是与i有关的同直线的点有几个
             ans = max(ans, maxSlopeICnt + sameICnt);
         }
         return ans;
