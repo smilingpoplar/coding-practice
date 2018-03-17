@@ -11,63 +11,61 @@
 
 using namespace std;
 
-class TrieNode {
-public:
-    // Initialize your data structure here.
-    TrieNode() : child(26, NULL), isWord(false) {}
-    vector<TrieNode *> child;
-    bool isWord;
-};
-
 class Trie {
-    TrieNode *root;
+    struct TrieNode {
+        vector<TrieNode *> child;
+        bool isWord;
+        TrieNode() : child(26, NULL), isWord(false) { }
+    };
+    
+    TrieNode root;
 public:
-    Trie() : root(new TrieNode()) { }
-    ~Trie() { deleteNode(root); }
-    
-    // Inserts a word into the trie.
-    void insert(string s) {
-        auto node = root;
-        for (char c : s) {
-            int idx = c - 'a';
-            if (!node->child[idx]) node->child[idx] = new TrieNode();
-            node = node->child[idx];
-        }
-        node->isWord = true;
+    /** Initialize your data structure here. */
+    Trie() {
+        
     }
     
-    // Returns if the word is in the trie.
-    bool search(string key) {
-        auto node = root;
-        for (char c : key) {
+    /** Inserts a word into the trie. */
+    void insert(string word) {
+        auto p = &root;
+        for (char c : word) {
             int idx = c - 'a';
-            if (!node->child[idx]) return false;
-            node = node->child[idx];
+            if (!p->child[idx]) p->child[idx] = new TrieNode();
+            p = p->child[idx];
         }
-        return node->isWord;
+        p->isWord = true;
     }
     
-    // Returns if there is any word in the trie
-    // that starts with the given prefix.
+    /** Returns if the word is in the trie. */
+    bool search(string word) {
+        auto p = &root;
+        for (char c : word) {
+            int idx = c - 'a';
+            if (!p->child[idx]) return false;
+            p = p->child[idx];
+        }
+        return p->isWord;
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
     bool startsWith(string prefix) {
-        auto node = root;
+        auto p = &root;
         for (char c : prefix) {
             int idx = c - 'a';
-            if (!node->child[idx]) return false;
-            node = node->child[idx];
+            if (!p->child[idx]) return false;
+            p = p->child[idx];
         }
         return true;
     }
-    
-private:
-    void deleteNode(TrieNode *node) {
-        if (!node) return;
-        for (auto child : node->child) {
-            deleteNode(child);
-        }
-        delete node;
-    }
 };
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * bool param_2 = obj.search(word);
+ * bool param_3 = obj.startsWith(prefix);
+ */
 
 int main(int argc, const char * argv[]) {
     Trie trie;

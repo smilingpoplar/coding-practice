@@ -11,8 +11,9 @@
 using namespace std;
 
 struct TrieNode {
-    unordered_map<char, TrieNode *> child;
+    vector<TrieNode *> child;
     int sum = 0;
+    TrieNode() : child(26, NULL) {}
 };
 
 class MapSum {
@@ -26,21 +27,22 @@ public:
     void insert(string key, int val) {
         int delta = val - mp[key];
         mp[key] = val;
-        TrieNode *cur = &root;
+        auto p = &root;
         for (char c : key) {
-            if (!cur->child[c]) cur->child[c] = new TrieNode();
-            cur = cur->child[c];
-            cur->sum += delta;
+            int idx = c - 'a';
+            if (!p->child[idx]) p->child[idx] = new TrieNode();
+            p = p->child[idx];
+            p->sum += delta;
         }
     }
     
     int sum(string prefix) {
-        TrieNode *cur = &root;
+        auto p = &root;
         for (char c : prefix) {
-            cur = cur->child[c];
-            if (!cur) return 0;
+            p = p->child[c - 'a'];
+            if (!p) return 0;
         }
-        return cur->sum;
+        return p->sum;
     }
 };
 

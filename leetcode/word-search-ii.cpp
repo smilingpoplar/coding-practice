@@ -12,8 +12,7 @@
 using namespace std;
 
 class Solution {
-    class TrieNode {
-    public:
+    struct TrieNode {
         vector<TrieNode *> child;
         string word;
         TrieNode() : child(26, NULL) {}

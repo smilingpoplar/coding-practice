@@ -12,61 +12,51 @@
 using namespace std;
 
 class WordDictionary {
-    class TrieNode {
-    public:
-        TrieNode() : next(26, NULL), isWord(false) { }
-        vector<TrieNode *> next;
+    struct TrieNode {
+        vector<TrieNode *> child;
         bool isWord;
+        TrieNode() : child(26, NULL), isWord(false) { }
     };
+    TrieNode root;
 public:
-    WordDictionary() : _root(new TrieNode()) { }
-    ~WordDictionary() { deleteNode(_root); }
+    /** Initialize your data structure here. */
+    WordDictionary() {  
+    }
     
-    // Adds a word into the data structure.
+    /** Adds a word into the data structure. */
     void addWord(string word) {
-        auto node = _root;
+        auto p = &root;
         for (char c : word) {
-            int index = c - 'a' ;
-            if (!node->next[index]) node->next[index] = new TrieNode();
-            node = node->next[index];
+            int idx = c - 'a' ;
+            if (!p->child[idx]) p->child[idx] = new TrieNode();
+            p = p->child[idx];
         }
-        node->isWord = true;
+        p->isWord = true;
     }
     
-    // Returns if the word is in the data structure. A word could
-    // contain the dot character '.' to represent any one letter.
+    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
     bool search(string word) {
-        return search(_root, word);
+        return rSearch(&root, word);
     }
-private:
-    bool search(TrieNode *root, const string &word) {
-        if (!root) return false;
-        auto node = root;
+    
+    bool rSearch(TrieNode *node, string word) {
+        if (!node) return false;
+        auto p = node;
         for (int i = 0; i < word.size(); i++) {
             char c = word[i];
             if (c == '.') {
                 string substr = word.substr(i + 1);
-                for (auto next : node->next) {
-                    if (search(next, substr)) return true;
+                for (auto child : p->child) {
+                    if (rSearch(child, substr)) return true;
                 }
                 return false;
             }
-            int index = c - 'a';
-            if (!node->next[index]) return false;
-            node = node->next[index];
+            int idx = c - 'a';
+            if (!p->child[idx]) return false;
+            p = p->child[idx];
         }
-        return node->isWord;
+        return p->isWord;
     }
-    
-    void deleteNode(TrieNode *node) {
-        if (!node) return;
-        for (auto next : node->next) {
-            deleteNode(next);
-        }
-        delete node;
-    }
-    
-    TrieNode *_root;
 };
 
 int main(int argc, const char * argv[]) {
