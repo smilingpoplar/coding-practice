@@ -8,55 +8,64 @@
 
 #include <iostream>
 #include <vector>
-#include <unordered_map>
-#include <unordered_set>
 
 using namespace std;
 
-struct Point {
-    int x;
-    int y;
-    Point() : x(0), y(0) {}
-    Point(int a, int b) : x(a), y(b) {}
-};
-
+/**
+ * Definition for a point.
+ * struct Point {
+ *     int x;
+ *     int y;
+ *     Point() : x(0), y(0) {}
+ *     Point(int a, int b) : x(a), y(b) {}
+ * };
+ */
 class Solution {
 public:
     int maxPoints(vector<Point>& points) {
-        const int N = (int)points.size();
-        
-        int maxPoints = 0;
-        unordered_set<int> dupIndices;
+        const int N = points.size();
+        int ans = 0;
+        unordered_set<int> dups; // 重复出现的点
+        // 每个点跟它后面的点比较，看相同斜率的有多少，斜率用最简分数表示
         for (int i = 0; i < N; i++) {
-            if (dupIndices.find(i) != dupIndices.end()) continue;
+            if (dups.count(i)) continue;
             
-            int sameCountI = 1; // 第i点有几个相同的点
-            unordered_map<double, int> slopeCountI; // 经过第i点的那些斜率
-            int maxSlopeCountI = 0; // 经过第i点的同斜率直线最多有几条
+            int sameICnt = 1; // 与第i点相同的有几个
+            map<pair<int, int>, int> slopeICnt; // 过i点的那些斜率
+            int maxSlopeICnt = 0; // 过i点的同斜率直线最多有几条
             for (int j = i + 1; j < N; j++) {
-                const Point &a = points[i];
-                const Point &b = points[j];
-                
+                auto &a = points[i], &b = points[j];
                 if (a.x == b.x && a.y == b.y) {
-                    dupIndices.insert(j);
-                    ++sameCountI;
-                } else {
-                    double slope = (a.x == b.x) ? numeric_limits<double>::infinity() : double(a.y - b.y) / (a.x - b.x);
-                    ++slopeCountI[slope];
-                    maxSlopeCountI = max(maxSlopeCountI, slopeCountI[slope]);
+                    dups.insert(j);
+                    ++sameICnt;
+                    continue;
                 }
+                pair<int, int> slope = {0, 0}; // 不妨用{0,0}记垂直线的无效斜率
+                if (a.x != b.x) {
+                    int diffX = a.x - b.x, diffY = a.y - b.y;
+                    int g = getGcd(diffX, diffY);
+                    diffX /= g, diffY /= g;
+                    slope = {diffX, diffY};
+                }
+                slopeICnt[slope]++;
+                maxSlopeICnt = max(maxSlopeICnt, slopeICnt[slope]);
             }
-            maxPoints = max(maxPoints, maxSlopeCountI + sameCountI);
+            // 过i点同斜率的直线多少条，就是除i外同直线的点有多少个，再加上i点的个数就是与i有关的同直线的点
+            ans = max(ans, maxSlopeICnt + sameICnt);
         }
-        
-        return maxPoints;
+        return ans;
+    }
+    
+    int getGcd(int a, int b) {
+        while (b) {
+            int tmp = a % b;
+            a = b;
+            b = tmp;
+        }
+        return a;
     }
 };
 
 int main(int argc, const char * argv[]) {
-    vector<Point> points = { {0,0}, {-1,-1}, {2,2} };
-    Solution solution;
-    cout << solution.maxPoints(points);
-
     return 0;
 }
