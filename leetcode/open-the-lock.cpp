@@ -16,24 +16,27 @@ public:
     int openLock(vector<string>& deadends, string target) {
         // "0000"->"9999"共1w个节点的图，4个数字都可正反转动，所以每节点有8个邻居，bfs找最短路径
         set<string> dead(deadends.begin(), deadends.end());
-        set<string> visited;
         queue<string> q;
-        q.push("0000");
+        auto start = "0000";
+        q.push(start);
+        set<string> visited;
+        visited.insert(start);
 
         int turn = 0;
         while (!q.empty()) {
-            for (int n = q.size(); n > 0; n--) {
-                auto node = q.front();  q.pop();
-                if (visited.count(node)) continue;
-                visited.insert(node);
+            for (int sz = q.size(); sz > 0; sz--) {
+                auto node = q.front(); q.pop();
                 if (dead.count(node)) continue;
                 if (node == target) return turn;
                 
                 for (int i = 0; i < 4; i++) {
                     for (int d = -1; d <= 1; d += 2) {
-                        auto neighbor = node;
+                        string neighbor(node);
                         neighbor[i] = (node[i] - '0' + d + 10) % 10 + '0';
-                        q.push(neighbor);
+                        if (!visited.count(neighbor)) {
+                            q.push(neighbor);
+                            visited.insert(neighbor);
+                        }
                     }
                 }
             }

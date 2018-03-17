@@ -20,23 +20,22 @@ public:
         vector<int> dist(N + 1, INT_MAX);
         dist[K] = 0;
         
-        // vector<int> visited(N + 1, false);
         auto cmp = [](vector<int> &a, vector<int> &b) { // {node, dist}
             return a[1] > b[1];
         };
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
         pq.push({K, dist[K]});
+        
         while (!pq.empty()) {
             auto info = pq.top(); pq.pop();
             int u = info[0], d = info[1];
-            // if (visited[u]) continue;
-            // visited[u] = true;
             for (auto &e : adj[u]) { // 遍历u的所有邻接点
                 int v = e.first, cost = e.second;
+
                 int newdist = d + cost;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
-                    pq.push({v, newdist}); // pq中将可能有多个v值，但后续v值对结果没影响。可用visited[]来排除。
+                    pq.push({v, newdist}); // pq中将可能有多个v值，但后续v值对结果没影响
                 }
             }
         }

@@ -15,7 +15,7 @@ class Solution {
 public:
     // 求连通图的个数，dfs
     int findCircleNum(vector<vector<int>>& M) {
-        const int n = (int)M.size();
+        const int n = M.size();
         vector<bool> visited(n, false);
         int count = 0;
         for (int i = 0; i < n; i++) {

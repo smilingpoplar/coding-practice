@@ -48,23 +48,25 @@ public:
         const int M = grid.size();
         const int N = grid[0].size();
         const vector<vector<int>> dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        vector<vector<bool>> visited(M, vector<bool>(N, false));
+
         queue<pair<int, int>> q;
         q.push({row, col});
+        vector<vector<bool>> visited(M, vector<bool>(N, false));
+        visited[row][col] = true;
 
         int level = 0;
         while (!q.empty()) {
             level++;
-            for (int levelSize = q.size(); levelSize > 0; levelSize--) {
+            for (int sz = q.size(); sz > 0; sz--) {
                 auto curr = q.front(); q.pop();
                 for (auto &dir : dirs) {
                     int r = curr.first + dir[0], c = curr.second + dir[1];
                     if (r < 0 || r >= M || c < 0 || c >= N || grid[r][c] != 0 || visited[r][c]) continue;
-                    
-                    visited[r][c] = true;
+
                     dist[r][c] += level;
                     reach[r][c]++;                    
                     q.push({r, c});
+                    visited[r][c] = true;                    
                 }                
             }
         }        

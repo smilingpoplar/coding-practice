@@ -14,13 +14,13 @@ using namespace std;
 class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word) {
-        const size_t M = board.size();
-        const size_t N = board[0].size();
+        const int M = board.size();
+        const int N = board[0].size();
         vector<vector<bool>> visited(M, vector<bool>(N, false));
-        w
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (exist(board, i, j, word, 0, visited)) {
+        
+        for (int r = 0; r < M; r++) {
+            for (int c = 0; c < N; c++) {
+                if (dfs(board, r, c, word, 0, visited)) {
                     return true;
                 }
             }
@@ -28,25 +28,23 @@ public:
         return false;
     }
 private:
-    bool exist(const vector<vector<char>>& board, int row, int column, const string &word, int index, vector<vector<bool>> &visited) {
+    bool dfs(const vector<vector<char>>& board, int row, int col, const string &word, int idx, vector<vector<bool>> &visited) {
         if (board.empty()) return false;
-        const size_t M = board.size();
-        const size_t N = board[0].size();
-        if (index >= word.size()) return true;
+        const int M = board.size();
+        const int N = board[0].size();
+        if (idx >= word.size()) return true;
 
-        if (row < 0 || row >= M) return false;
-        if (column < 0 || column >= N) return false;
-        if (visited[row][column]) return false;
-        if (board[row][column] != word[index]) return false;
+        if (row < 0 || row >= M || col < 0 || col >= N || 
+            visited[row][col] || board[row][col] != word[idx]) return false;
 
-        visited[row][column] = true;
-        bool result = exist(board, row - 1, column, word, index + 1, visited)
-        || exist(board, row + 1, column, word, index + 1, visited)
-        || exist(board, row, column - 1, word, index + 1, visited)
-        || exist(board, row, column + 1, word, index + 1, visited);
-        visited[row][column] = false;
+        visited[row][col] = true;
+        bool ans = dfs(board, row - 1, col, word, idx + 1, visited)
+                || dfs(board, row + 1, col, word, idx + 1, visited)
+                || dfs(board, row, col - 1, word, idx + 1, visited)
+                || dfs(board, row, col + 1, word, idx + 1, visited);
+        visited[row][col] = false;
         
-        return result;
+        return ans;
     }
 };
 

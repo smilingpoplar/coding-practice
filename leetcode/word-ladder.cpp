@@ -34,7 +34,7 @@ public:
                 for (auto &nextWord : nextWords) {
                     if (!visited.count(nextWord)) {
                         Q.push(nextWord);
-                        visited.insert(nextWord); // 要在进队列时设visited[]，这样取出时同层词都设置过，避免向同层词扩展
+                        visited.insert(nextWord);
                         if (nextWord == endWord) return level + 1;
                     }
                 }

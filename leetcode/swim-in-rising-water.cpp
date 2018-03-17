@@ -28,18 +28,18 @@ public:
         
         int ans = 0;
         pq.push({0,0});
+        visited[0][0] = true;
         while (!pq.empty()) {
             auto top = pq.top();  pq.pop();
             int r = top[0], c = top[1];
-            visited[r][c] = true;
             ans = max(ans, grid[r][c]);
             if (r == M - 1 && c == N - 1) return ans;
 
             for (auto &dir : dirs) {
                 int nr = r + dir[0], nc = c + dir[1];
-                if (0 <= nr && nr < M && 0 <= nc && nc < N && !visited[nr][nc]) {
-                    pq.push({nr, nc});
-                }
+                if (nr < 0 || nr >= M || nc < 0 || nc >= N || visited[nr][nc]) continue;
+                pq.push({nr, nc});
+                visited[nr][nc] = true;
             }
         }
         return -1;

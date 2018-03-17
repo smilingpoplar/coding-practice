@@ -23,23 +23,25 @@ public:
         }
         string target = "123450";
 
-        set<string> visited;
         queue<string> q;
         q.push(src);
+        set<string> visited;
+        visited.insert(src);
+        
         int move = 0;
         while (!q.empty()) {
-            for (int n = q.size(); n > 0; n--) {
+            for (int sz = q.size(); sz > 0; sz--) {
                 auto state = q.front(); q.pop();
-                if (visited.count(state)) continue;
-                visited.insert(state);
-                
                 if (state == target) return move;
                 
                 int pos = state.find('0');
                 auto swapable = swapableIndice(pos);
                 for (int idx : swapable) {
                     swap(state[pos], state[idx]);
-                    q.push(state);
+                    if (!visited.count(state)) {
+                        q.push(state);
+                        visited.insert(state);
+                    }
                     swap(state[pos], state[idx]);
                 }                
             }

@@ -24,31 +24,32 @@ public:
         vector<vector<bool>> zeros(M, vector<bool>(N, false));
         vector<vector<bool>> visited(M, vector<bool>(N, false));
         queue<pair<int, int>> q;
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (i == 0 || i == M - 1 || j == 0 || j == N - 1) {
-                    q.push({i, j});
+        for (int r = 0; r < M; r++) {
+            for (int c = 0; c < N; c++) {
+                if (r == 0 || r == M - 1 || c == 0 || c == N - 1) {
+                    q.push({r, c});
+                    visited[r][c] = true;
                 }
             }
         }
         while (!q.empty()) {
-            int i = q.front().first;
-            int j = q.front().second;
-            q.pop();
-            if (i < 0 || i >= M || j < 0 || j >= N || visited[i][j]) continue;
-            visited[i][j] = true;
-            if (board[i][j] == 'X') continue;
+            auto curr = q.front(); q.pop();
+            int r = curr.first, c = curr.second;
+            if (board[r][c] == 'X') continue;
             
-            zeros[i][j] = true;
-            if (i - 1 >= 0) q.push({i - 1, j});
-            if (i + 1 < M) q.push({i + 1, j});
-            if (j - 1 >= 0) q.push({i, j - 1});
-            if (j + 1 < N) q.push({i, j + 1});
+            zeros[r][c] = true;
+            vector<pair<int,int>> nexts = {{r - 1, c}, {r + 1, c}, {r, c - 1}, {r, c + 1}};
+            for (auto &next : nexts) {
+                int nr = next.first, nc = next.second;
+                if (nr < 0 || nr >= M || nc < 0 || nc >= N || visited[nr][nc]) continue;
+                q.push(next);
+                visited[nr][nc] = true;
+            }
         }
         
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (!zeros[i][j]) board[i][j] = 'X';
+        for (int r = 0; r < M; r++) {
+            for (int c = 0; c < N; c++) {
+                if (!zeros[r][c]) board[r][c] = 'X';
             }
         }
     }

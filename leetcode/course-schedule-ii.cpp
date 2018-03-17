@@ -75,19 +75,18 @@ public:
             }
         }
         // 源点队列
-        queue<int> source;
+        queue<int> Q;
         for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) source.push(i);
+            if (indegree[i] == 0) Q.push(i);
         }
         // 不断删除源点
         vector<int> topo;
-        while (!source.empty()) {
-            int v = source.front();
-            source.pop();
-            topo.push_back(v);
-            for (int to : graph[v]) {
+        while (!Q.empty()) {
+            int u = Q.front(); Q.pop();
+            topo.push_back(u);
+            for (int to : graph[u]) {
                 --indegree[to];
-                if (indegree[to] == 0) source.push(to);
+                if (indegree[to] == 0) Q.push(to);
             }
         }
         if (topo.size() != numCourses) return {};

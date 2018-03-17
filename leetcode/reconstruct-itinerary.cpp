@@ -15,7 +15,7 @@ class Solution {
 public:
     vector<string> findItinerary(vector<pair<string, string>> tickets) {
         // 一张机票一条边，求遍历所有边的欧拉路径
-        // 已知欧拉路径存在且从JFK开始，只要用边的后序遍历求逆欧拉路径
+        // 已知欧拉路径存在且从JFK开始，只要用 边的后序遍历 求 逆欧拉路径
         unordered_map<string, multiset<string>> adj;
         for (auto &ticket : tickets)
             adj[ticket.first].insert(ticket.second);

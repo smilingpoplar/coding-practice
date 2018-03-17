@@ -14,15 +14,16 @@ class Solution {
 public:
     int arrayNesting(vector<int>& nums) {
         // 类似找最大连通子图，nums[i]表示i=>nums[i]有边
-        vector<bool> visited(nums.size(), false);
+        const int N = nums.size();
+        vector<bool> visited(N, false);
         int ans = 0;
-        for (int i = 0; i < nums.size(); i++) {
+        for (int i = 0; i < N; i++) {
             if (visited[i]) continue;
             int j = i; // 从i开始新群
             int count = 1;
             while (nums[j] != i) {
                 visited[j] = true;
-                ++count;
+                count++;
                 j = nums[j];
             }
             ans = max(ans, count);

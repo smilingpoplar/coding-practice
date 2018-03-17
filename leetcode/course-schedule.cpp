@@ -57,7 +57,7 @@ public:
         // 有向图无环，即bfs不断删除源点能完成所有点的拓扑排序，见图算法3.6章（源点：入度为0的点）
         // 生成图
         vector<unordered_set<int>> graph(numCourses);
-        for (const auto &edge : prerequisites) {
+        for (auto &edge : prerequisites) {
             graph[edge.second].insert(edge.first);
         }
         // 计算入度
@@ -68,19 +68,18 @@ public:
             }
         }
         // 源点队列
-        queue<int> source;
+        queue<int> Q;
         for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) source.push(i);
+            if (indegree[i] == 0) Q.push(i);
         }
         // 不断删除源点
         int count = 0;
-        while (!source.empty()) {
-            int v = source.front();
-            source.pop();
-            ++count;
-            for (int to : graph[v]) {
+        while (!Q.empty()) {
+            int u = Q.front(); Q.pop();
+            count++;
+            for (int to : graph[u]) {
                 --indegree[to];
-                if (indegree[to] == 0) source.push(to);
+                if (indegree[to] == 0) Q.push(to);
             }
         }
         return count == numCourses;
