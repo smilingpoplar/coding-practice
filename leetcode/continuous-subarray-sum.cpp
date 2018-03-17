@@ -22,7 +22,7 @@ public:
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i];
             if (k) runningSum %= k;
-            if (mp.find(runningSum) == mp.end()) {
+            if (!mp.count(runningSum)) {
                 mp[runningSum] = i;
             } else if (i - mp[runningSum] >= 2) {
                 return true;

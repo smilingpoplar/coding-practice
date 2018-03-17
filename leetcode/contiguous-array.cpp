@@ -20,7 +20,7 @@ public:
         int ans = 0;
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i] == 0 ? -1 : 1;
-            if (mp.find(runningSum) == mp.end()) {
+            if (!mp.count(runningSum)) {
                 mp[runningSum] = i;
             } else {
                 ans = max(ans, i - mp[runningSum]);

@@ -17,7 +17,7 @@ public:
         unordered_map<char, char> mp = {{'0','0'}, {'1','1'}, {'6','9'}, {'8','8'}, {'9', '6'}};
         int i = 0, j = (int)num.size() - 1;
         while (i <= j) {
-            if (mp.find(num[i]) == mp.end()) return false;
+            if (!mp.count(num[i])) return false;
             if (mp[num[i]] != num[j]) return false;
             i++, j--;
         }

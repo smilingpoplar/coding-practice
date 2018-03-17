@@ -1,6 +1,6 @@
 //
-//  sort-list
-//  https://leetcode.com/problems/sort-list/
+//  lru-cache
+//  https://leetcode.com/problems/lru-cache/
 //
 //  Created by smilingpoplar on 15/6/5.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -26,7 +26,7 @@ public:
     }
     
     int get(int key) {
-        if (_bucketOfKey.find(key) == _bucketOfKey.end()) return -1;
+        if (!_bucketOfKey.count(key)) return -1;
         touch(key);
         return _bucketOfKey[key]->value;
     }
@@ -39,7 +39,7 @@ public:
     
     void put(int key, int value) {
         if (_capacity == 0) return;
-        if (_bucketOfKey.find(key) == _bucketOfKey.end()) {
+        if (!_bucketOfKey.count(key)) {
             if (_buckets.size() == _capacity) { // 删除链表尾
                 _bucketOfKey.erase(_buckets.back().key);
                 _buckets.pop_back();

@@ -17,7 +17,7 @@ public:
         map<int, int> diag; // r1-c1值相等的对角线上的值
         for (int r = 0; r < matrix.size(); r++) {
             for (int c = 0; c < matrix[0].size(); c++) {
-                if (diag.find(r-c) == diag.end()) {
+                if (!diag.count(r - c)) {
                     diag[r-c] = matrix[r][c];
                 } else if (diag[r-c] != matrix[r][c]) {
                     return false;

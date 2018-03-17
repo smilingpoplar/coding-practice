@@ -20,7 +20,7 @@ public:
         vector<string> ans;
         int minIndexSum = INT_MAX;
         for (int j = 0; j < list2.size(); j++) {
-            if (mp.find(list2[j]) == mp.end()) continue;
+            if (!mp.count(list2[j])) continue;
             
             int indexSum = mp[list2[j]] + j;
             if (indexSum < minIndexSum) {

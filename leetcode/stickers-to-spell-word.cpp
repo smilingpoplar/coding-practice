@@ -26,21 +26,18 @@ public:
     
     int minStickers(string target, unordered_map<string, int> &dp, 
                     const vector<vector<int>> &stickerCharsArray) {
-        if (dp.find(target) == dp.end()) {
-            int ans = INT_MAX;
-            auto targetChars = countChars(target);
-            for (const auto &stickerChars : stickerCharsArray) {
-                if (stickerChars[target[0] - 'a'] <= 0) continue;
-                string reduced = reduceTarget(targetChars, stickerChars);
-                int subAns = minStickers(reduced, dp, stickerCharsArray);
-                if (subAns != -1) {
-                    ans = min(ans, 1 + subAns);
-                }
-            }
-            if (ans == INT_MAX) ans = -1;
-            dp[target] = ans;    
+        if (dp.count(target)) return dp[target];
+        int ans = INT_MAX;
+        auto targetChars = countChars(target);
+        for (auto &stickerChars : stickerCharsArray) {
+            if (stickerChars[target[0] - 'a'] <= 0) continue;
+            string reduced = reduceTarget(targetChars, stickerChars);
+            int subAns = minStickers(reduced, dp, stickerCharsArray);
+            if (subAns != -1) ans = min(ans, 1 + subAns);
         }
-        return dp[target];
+        if (ans == INT_MAX) ans = -1;
+        dp[target] = ans;    
+        return ans;
     }
     
     vector<int> countChars(const string &s) {

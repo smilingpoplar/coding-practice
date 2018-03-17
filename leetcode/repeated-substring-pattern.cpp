@@ -15,7 +15,7 @@ class Solution {
 public:
     bool repeatedSubstringPattern(string s) {
         // 如果s是由子串重复而得，那s[1:]（去掉开头重复子串）、s[:-1]（去掉末尾重复子串）拼合后，ss[1:-1]应包含s
-        return (s + s).substr(1, 2 * s.size() - 2).find(s) != -1;        
+        return (s + s).substr(1, 2 * s.size() - 2).find(s) != string::npos;        
     }
 };
 

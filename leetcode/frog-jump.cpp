@@ -21,11 +21,11 @@ public:
         jump[0].insert(1);
         
         for (int stone : stones) {
-            if (jump.find(stone) == jump.end()) continue;
+            if (!jump.count(stone)) continue;
             
             for (int k : jump[stone]) {
                 int next = stone + k;
-                if (S.find(next) == S.end()) continue;
+                if (!S.count(next)) continue;
                 if (next == stones.back()) return true;
                 if (k - 1 > 0) jump[next].insert(k - 1);
                 jump[next].insert(k);

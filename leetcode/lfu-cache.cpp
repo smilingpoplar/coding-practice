@@ -25,7 +25,7 @@ public:
     }
     
     int get(int key) {
-        if (_infoOfKey.find(key) == _infoOfKey.end()) return -1;
+        if (!_infoOfKey.count(key)) return -1;
         increaseFreq(key);
         return _infoOfKey[key].value;
     }
@@ -47,7 +47,7 @@ public:
     
     void put(int key, int value) {
         if (_capacity == 0) return;
-        if (_infoOfKey.find(key) == _infoOfKey.end()) {
+        if (!_infoOfKey.count(key)) {
             if (_infoOfKey.size() == _capacity) evict();
             // 应插入频率为1的行。这里先设频率为0，然后和后面情况一起处理。
             auto bucket = _buckets.insert(_buckets.begin(), { 0, { key } });

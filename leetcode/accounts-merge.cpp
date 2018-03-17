@@ -10,27 +10,27 @@
 
 using namespace std;
 
-class DisjointSetUnion {
-    vector<int> parent;
-public:
-    DisjointSetUnion(int N) : parent(N) {
-        for (int i = 0; i < N; i++) {
-            parent[i] = i;
-        }
-    }
-    
-    int find(int x) {
-        if (parent[x] != x) parent[x] = find(parent[x]);
-        return parent[x];
-    }
-    
-    // union
-    void merge(int x, int y) { 
-        parent[find(x)] = find(y);
-    }
-};
-
 class Solution {
+    class DisjointSetUnion {
+        vector<int> parent;
+    public:
+        DisjointSetUnion(int N) : parent(N) {
+            for (int i = 0; i < N; i++) {
+                parent[i] = i;
+            }
+        }
+        
+        int find(int x) {
+            if (parent[x] != x) 
+                parent[x] = find(parent[x]);
+            return parent[x];
+        }
+        
+        // union
+        void merge(int x, int y) { 
+            parent[find(x)] = find(y);
+        }
+    };
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         int mailCount = 0;
@@ -39,7 +39,7 @@ public:
         for (auto &account : accounts) {
             for (int i = 1; i < account.size(); i++) {
                 const string &mail = account[i];
-                if (mailToId.find(mail) == mailToId.end()) {
+                if (!mailToId.count(mail)) {
                     mailToId[mail] = mailCount++;
                 }
                 int id = mailToId[mail];

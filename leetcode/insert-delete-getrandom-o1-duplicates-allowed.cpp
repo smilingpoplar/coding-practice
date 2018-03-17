@@ -22,7 +22,7 @@ public:
     
     /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
     bool insert(int val) {
-        bool ans = mp.find(val) == mp.end();
+        bool ans = !mp.count(val);
         mp[val].insert(nums.size());
         nums.push_back(val);
         return ans;
@@ -30,7 +30,7 @@ public:
     
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */
     bool remove(int val) {
-        if (mp.find(val) == mp.end()) return false;
+        if (!mp.count(val)) return false;
         // 找到val的一个位置pos，若pos是nums的最后元素就直接删除，否则用nums的最后元素替换它
         int pos = *mp[val].begin();
         mp[val].erase(pos);

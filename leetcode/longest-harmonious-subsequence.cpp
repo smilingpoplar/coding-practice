@@ -20,7 +20,7 @@ public:
         int ans = 0;
         for (auto &e : mp) {
             int x = e.first;
-            if (mp.find(x+1) == mp.end()) continue;
+            if (!mp.count(x+1)) continue;
             ans = max(ans, mp[x] + mp[x+1]);
         }
         return ans;
