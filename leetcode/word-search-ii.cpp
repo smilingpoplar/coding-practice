@@ -14,71 +14,59 @@ using namespace std;
 class Solution {
     class TrieNode {
     public:
-        TrieNode() : next(26, NULL) { }
-        vector<TrieNode *> next;
+        vector<TrieNode *> child;
         string word;
+        TrieNode() : child(26, NULL) {}
     };
 
-    class Trie {
-    public:
-        Trie() : root(new TrieNode()) { }
-        ~Trie() { deleteNode(root); }
-
-        void insert(const string &word) {
-            auto node = root;
-            for (char c : word) {
-                int index = c - 'a';
-                if (!node->next[index]) node->next[index] = new TrieNode();
-                node = node->next[index];
-            }
-            node->word = word;
-        }
-
-        TrieNode *root;
-    private:
-        void deleteNode(TrieNode *node) {
-            for (auto child : node->next) {
-                if (child) deleteNode(child);
-            }
-            delete node;
-        }
-    };
+    TrieNode root;
 public:
     vector<string> findWords(vector<vector<char>> &board, vector<string> &words) {
         if (board.empty()) return {};
-        const int M = (int)board.size();
-        const int N = (int)board[0].size();
+        const int M = board.size();
+        const int N = board[0].size();
         vector<vector<bool>> visited(M, vector<bool>(N, false));
-        Trie wordsToFind;
-        for (const auto &word : words) {
-            wordsToFind.insert(word);
+        for (auto &word : words) {
+            insert(word);
         }
+
         vector<string> ans;
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                dfs(board, i, j, visited, wordsToFind.root, ans);
+        for (int r = 0; r < M; r++) {
+            for (int c = 0; c < N; c++) {
+                dfs(r, c, board, visited, &root, ans);
             }
         }
         return ans;
     }
 
-    void dfs(const vector<vector<char>> &board, int i, int j, vector<vector<bool>> &visited,
-             TrieNode *trieNode, vector<string> &ans) {
-        if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size()) return;
-        if (visited[i][j]) return;
-        visited[i][j] = true;
-        auto node = trieNode->next[board[i][j] - 'a'];
-        if (node) {
-            if (!node->word.empty()) {
-                ans.push_back(node->word);
-                node->word.clear(); // 不再搜索这个词
-            }
-            dfs(board, i - 1, j, visited, node, ans);
-            dfs(board, i + 1, j, visited, node, ans);
-            dfs(board, i, j - 1, visited, node, ans);
-            dfs(board, i, j + 1, visited, node, ans);
+    void insert(const string &word) {
+        auto p = &root;
+        for (char c : word) {
+            int idx = c - 'a';
+            if (!p->child[idx]) p->child[idx] = new TrieNode();
+            p = p->child[idx];
         }
-        visited[i][j] = false;
+        p->word = word;
+    }
+
+    void dfs(int r, int c, const vector<vector<char>> &board, 
+             vector<vector<bool>> &visited, TrieNode *node, vector<string> &ans) {
+        if (r < 0 || r >= board.size() || c < 0 || c >= board[0].size()) return;
+        if (visited[r][c]) return;
+        // 回溯法，在trie中搜索board[r][c]
+        auto p = node->child[board[r][c] - 'a'];
+        visited[r][c] = true;
+        if (p) {
+            if (!p->word.empty()) {
+                ans.push_back(p->word);
+                p->word.clear(); // 不再搜索这个词
+            }
+            dfs(r - 1, c, board, visited, p, ans);
+            dfs(r + 1, c, board, visited, p, ans);
+            dfs(r, c - 1, board, visited, p, ans);
+            dfs(r, c + 1, board, visited, p, ans);
+        }
+        visited[r][c] = false;
     }
 };
 
