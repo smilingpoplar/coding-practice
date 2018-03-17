@@ -15,73 +15,76 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
-        unordered_set<string> currentLevel, nextLevel;
-        currentLevel.insert(start);
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> dict;
+        for (auto &word : wordList) {
+            dict.insert(word);
+        }
         
+        unordered_set<string> currLevel;
+        currLevel.insert(beginWord);
         unordered_set<string> visited;
-        unordered_map<string, unordered_set<string>> parents;
+
+        unordered_map<string, unordered_set<string>> prevs;
         bool found = false;
-        while (!currentLevel.empty()) {
-            // 先将本层全部置为已访问，防止同层之间互相指向
-            for (const auto &word : currentLevel) {
+        while (!currLevel.empty()) {
+            // 将同层词的visited[]全部设置，避免向同层词扩展
+            for (auto &word : currLevel) {
                 visited.insert(word);
             }
-            for (const auto &word : currentLevel) {
-                auto words = nextWords(word, end, dict);
-                for (const auto &nextWord : words) {
-                    if (visited.find(nextWord) == visited.end()) {
+            unordered_set<string> nextLevel;
+            for (auto &word : currLevel) {
+                auto nextWords = getNextWords(word, endWord, dict);
+                for (auto &nextWord : nextWords) {
+                    if (!visited.count(nextWord)) {
                         nextLevel.insert(nextWord);
-                        parents[nextWord].insert(word);
-                        if (nextWord == end) found = true;
+                        prevs[nextWord].insert(word);
+                        if (nextWord == endWord) found = true;
                     }
                 }
             }
-            currentLevel.clear();
-            swap(currentLevel, nextLevel);
+            swap(nextLevel, currLevel);
             // BFS时如果找到一条最短路径，那么所有最短路径一定都在这一层，不再考虑下一层
             if (found) break;
         }
         
-        return generatePaths(end, start, parents);
+        return genPaths(endWord, beginWord, prevs);
     }
     
 private:
-    unordered_set<string> nextWords(const string &word, const string &end, const unordered_set<string> &dict) {
-        unordered_set<string> result;
+    unordered_set<string> getNextWords(const string &word, 
+                const string &endWord, const unordered_set<string> &dict) {
+        unordered_set<string> ans;
         for (size_t i = 0; i < word.size(); i++) {
-            string newWord = word;
+            string newWord(word);
             for (char c = 'a'; c <= 'z'; c++) {
-                if (newWord[i] != c) {
-                    swap(c, newWord[i]);
-                    
-                    if (dict.find(newWord) != dict.end() || newWord == end) {
-                        result.insert(newWord);
-                    }
-                    
-                    swap(c, newWord[i]);
-                }
+                if (newWord[i] == c) continue;
+
+                swap(c, newWord[i]);                    
+                if (dict.count(newWord)) ans.insert(newWord);
+                swap(c, newWord[i]);
             }
         }
-        return result;
+        return ans;
     }
     
-    vector<vector<string>> generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &parents) {
-        vector<vector<string>> result;
+    vector<vector<string>> genPaths(const string &word, const string &beginWord, 
+                                    unordered_map<string, unordered_set<string>> &prevs) {
+        vector<vector<string>> ans;
         vector<string> path;
-        generatePaths(word, start, parents, path, result);
-        return result;
+        rGenPaths(word, beginWord, prevs, path, ans);
+        return ans;
     }
     
-    void generatePaths(const string &word, const string &start, unordered_map<string, unordered_set<string>> &parents,
-                       vector<string> &path, vector<vector<string>> &result) {
-        path.push_back(word);
-        if (word == start) {
-            result.push_back(path);
-            reverse(result.back().begin(), result.back().end());
+    void rGenPaths(const string &word, const string &beginWord, 
+                unordered_map<string, unordered_set<string>> &prevs,
+                vector<string> &path, vector<vector<string>> &ans) {
+        path.push_back(word); // 先反向存，最后reverse
+        if (word == beginWord) {
+            ans.push_back(vector<string>(path.rbegin(), path.rend()));
         } else {
-            for (const auto &prev : parents[word]) {
-                generatePaths(prev, start, parents, path, result);
+            for (auto &p : prevs[word]) {
+                rGenPaths(p, beginWord, prevs, path, ans);
             }
         }
         path.pop_back();
@@ -89,18 +92,5 @@ private:
 };
 
 int main(int argc, const char * argv[]) {
-    string beginWord = "hit";
-    string endWord = "cog";
-    unordered_set<string> wordDict = { "hot","dot","dog","lot","log" };
-    
-    Solution solution;
-    auto ladders = solution.findLadders(beginWord, endWord, wordDict);
-    for (const auto &ladder : ladders) {
-        for (const auto &word : ladder) {
-            cout << word << " ";
-        }
-        cout << endl;
-    }
-    
     return 0;
 }

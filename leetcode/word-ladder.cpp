@@ -57,7 +57,7 @@ public:
         int level = 0;
         while (!currLevel.empty()) {
             level++;
-            // 先将本层visited[]全部设置，避免向同层词扩展
+            // 将同层词的visited[]全部设置，避免向同层词扩展
             for (auto &word : currLevel) {
                 visited.insert(word);
             }
