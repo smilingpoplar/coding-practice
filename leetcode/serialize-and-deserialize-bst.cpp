@@ -23,7 +23,6 @@ using namespace std;
 
 class Codec {
 public:
-
     // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
         ostringstream oss;
@@ -45,22 +44,22 @@ public:
         return decode(iss, INT_MIN, INT_MAX);
     }
     
-    // 利用上下边界[minValue, maxValue]反序列化
-    TreeNode* decode(istringstream &iss, int minValue, int maxValue) {
+    // 利用上下边界[lower, upper]反序列化
+    TreeNode* decode(istringstream &iss, int lower, int upper) {
         auto pos = iss.tellg();
         string s;
         iss >> s;
         if (!iss) return NULL;
 
         int val = stoi(s);
-        if (val < minValue || val > maxValue) {
+        if (val < lower || val > upper) {
             iss.seekg(pos);
             return NULL;
         }
         
         auto root = new TreeNode(val);
-        root->left = decode(iss, minValue, val);
-        root->right = decode(iss, val, maxValue);
+        root->left = decode(iss, lower, val);
+        root->right = decode(iss, val, upper);
         return root;
     }
 };
