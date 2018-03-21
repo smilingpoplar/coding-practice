@@ -1,6 +1,6 @@
 //
-//  binary-tree-longest-consecutive-sequence
-//  https://leetcode.com/problems/binary-tree-longest-consecutive-sequence/
+//  binary-tree-longest-consecutive-sequence-ii
+//  https://leetcode.com/problems/binary-tree-longest-consecutive-sequence-ii/
 //
 //  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -21,6 +21,10 @@ using namespace std;
  * };
  */
 class Solution {
+    struct Info {
+        int incLen;
+        int decLen;
+    };
 public:
     int longestConsecutive(TreeNode* root) {
         int ans = 0;
@@ -28,24 +32,28 @@ public:
         return ans;
     }
     
-    // 从root开始到向下路径长
-    int arrowLen(TreeNode *root, int &ans) {
-        if (!root) return 0;
-        int len = 1;
+    // 从root开始往下递增或递减的路径长
+    Info arrowLen(TreeNode *root, int &ans) {
+        if (!root) return {0, 0};
+        int incLen = 1, decLen = 1;
         if (root->left) {
             auto left = arrowLen(root->left, ans);
             if (root->left->val == root->val + 1) {
-                len = max(len, 1 + left);
+                incLen = max(incLen, left.incLen + 1);
+            } else if (root->left->val == root->val - 1) {
+                decLen = max(decLen, left.decLen + 1);
             }
         }
         if (root->right) {
             auto right = arrowLen(root->right, ans);
             if (root->right->val == root->val + 1) {
-                len = max(len, 1 + right);
+                incLen = max(incLen, right.incLen + 1);                
+            } else if (root->right->val == root->val - 1) {
+                decLen = max(decLen, right.decLen + 1);
             }
         }
-        ans = max(ans, len);
-        return len;
+        ans = max(ans, incLen + decLen - 1);
+        return {incLen, decLen};
     }
 };
 
