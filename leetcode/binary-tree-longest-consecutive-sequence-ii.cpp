@@ -35,9 +35,11 @@ public:
     // 从root开始往下递增或递减的路径长
     Info arrowLen(TreeNode *root, int &ans) {
         if (!root) return {0, 0};
-        int incLen = 1, decLen = 1;
+        // 后序遍历
+        auto left = arrowLen(root->left, ans);
+        auto right = arrowLen(root->right, ans);
+        int incLen = 1, decLen = 1;        
         if (root->left) {
-            auto left = arrowLen(root->left, ans);
             if (root->left->val == root->val + 1) {
                 incLen = max(incLen, left.incLen + 1);
             } else if (root->left->val == root->val - 1) {
@@ -45,9 +47,8 @@ public:
             }
         }
         if (root->right) {
-            auto right = arrowLen(root->right, ans);
             if (root->right->val == root->val + 1) {
-                incLen = max(incLen, right.incLen + 1);                
+                incLen = max(incLen, right.incLen + 1);
             } else if (root->right->val == root->val - 1) {
                 decLen = max(decLen, right.decLen + 1);
             }
