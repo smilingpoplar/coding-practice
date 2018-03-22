@@ -34,7 +34,6 @@ public:
         // 后序遍历
         auto left = arrowLen(root->left, ans);
         auto right = arrowLen(root->right, ans);
-
         int len = 1;
         if (root->left && root->left->val == root->val + 1)
             len = max(len, 1 + left);
