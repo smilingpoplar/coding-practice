@@ -14,7 +14,6 @@ using namespace std;
 class Solution {
 public:
     bool isOneEditDistance(string s, string t) {
-        // 单字母替换、添加或删除
         const int M = s.size();
         const int N = t.size();
         if (abs(M - N) > 1) return false;
@@ -22,6 +21,7 @@ public:
         int maxI = min(M, N);
         for (int i = 0; i < maxI; i++) {
             if (s[i] == t[i]) continue;
+            // 单字母替换、添加或删除
             if (M == N) return s.substr(i+1) == t.substr(i+1);
             if (M < N) return s.substr(i) == t.substr(i+1);
             return s.substr(i+1) == t.substr(i);
