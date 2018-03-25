@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int shortestDistance(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination) {
-        // dijkstra算法，用优先队列，下一位置是向四个方向前进到碰墙处
+        // dijkstra法，用优先队列，下一位置是向四个方向前进到碰墙处
         if (maze.empty()) return false;
         const int M = maze.size();
         const int N = maze[0].size();
@@ -23,20 +23,19 @@ public:
         };
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
         pq.push({start[0], start[1], 0});
-        vector<vector<int>> dist(M, vector<int>(N, INT_MAX));
-        dist[start[0]][start[1]] = 0;
+        vector<vector<bool>> visited(M, vector<bool>(N, false));
         const vector<vector<int>> dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         
         while (!pq.empty()) {
             auto curr = pq.top(); pq.pop();
-            if (curr[0] == destination[0] && curr[1] == destination[1]) return curr[2];
+            int r = curr[0], c = curr[1];
+            if (visited[r][c]) continue;
+            visited[r][c] = true;
+            if (r == destination[0] && c == destination[1]) return curr[2];
+            
             for (auto &dir : dirs) {
                 auto next = getNext(curr, dir, maze);
-                int nr = next[0], nc = next[1], nd = next[2];
-                if (nd < dist[nr][nc]) {
-                    dist[nr][nc] = nd;
-                    pq.push(next); 
-                }
+                pq.push(next); 
             }
         }
         return -1;
