@@ -13,6 +13,7 @@ using namespace std;
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
+        // dijkstra算法
         unordered_map<int, unordered_map<int, int>> adj;
         for (auto &e : times) {
             adj[e[0]][e[1]] = e[2];

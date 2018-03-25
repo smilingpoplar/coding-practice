@@ -29,9 +29,10 @@ public:
             if (top[0] == destination[0] && top[1] == destination[1]) return true;
             for (auto &dir : dirs) {
                 auto next = getNext(top, dir, maze);
-                if (visited[next[0]][next[1]]) continue;
+                int nr = next[0], nc = next[1];
+                if (visited[nr][nc]) continue;
+                visited[nr][nc] = true;
                 q.push(next);
-                visited[next[0]][next[1]] = true;
             }
         }
         return false;
