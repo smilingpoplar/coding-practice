@@ -30,16 +30,16 @@ public:
         pq.push({0,0});
         visited[0][0] = true;
         while (!pq.empty()) {
-            auto top = pq.top();  pq.pop();
-            int r = top[0], c = top[1];
+            auto curr = pq.top();  pq.pop();
+            int r = curr[0], c = curr[1];
             ans = max(ans, grid[r][c]);
             if (r == M - 1 && c == N - 1) return ans;
 
             for (auto &dir : dirs) {
                 int nr = r + dir[0], nc = c + dir[1];
                 if (nr < 0 || nr >= M || nc < 0 || nc >= N || visited[nr][nc]) continue;
-                pq.push({nr, nc});
                 visited[nr][nc] = true;
+                pq.push({nr, nc});
             }
         }
         return -1;
