@@ -19,7 +19,7 @@ public:
         // 求拓扑排序，即求逆图上的逆拓扑排序，而逆拓扑排序又由后序编号生成，所以先求逆图上的后序编号
         // 生成逆图
         vector<unordered_set<int>> graph(numCourses);
-        for (const auto &edge : prerequisites) {
+        for (auto &edge : prerequisites) {
             graph[edge.first].insert(edge.second);
         }
         // 遍历图，dfs时若存在回边则有环（回边：访问后序编号较大的节点）
@@ -61,36 +61,34 @@ private:
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 通过bfs不断删除源点（入度为0的点）来拓扑排序，若完不成所有点的拓扑排序则有环
+        // 拓扑排序，bfs不断删除入度为0的点，若完不成所有点的拓扑排序则有环
         // 生成图
-        vector<unordered_set<int>> graph(numCourses);
-        for (const auto &edge : prerequisites) {
-            graph[edge.second].insert(edge.first);
+        vector<unordered_set<int>> adj(numCourses);
+        for (auto &edge : prerequisites) {
+            adj[edge.second].insert(edge.first);
         }
         // 计算入度
         vector<int> indegree(numCourses, 0);
         for (int i = 0; i < numCourses; i++) {
-            for (int to : graph[i]) {
-                ++indegree[to];
+            for (int to : adj[i]) {
+                indegree[to]++;
             }
         }
-        // 源点队列
+
+        vector<int> ans;
         queue<int> Q;
         for (int i = 0; i < numCourses; i++) {
             if (indegree[i] == 0) Q.push(i);
         }
-        // 不断删除源点
-        vector<int> topo;
         while (!Q.empty()) {
             int u = Q.front(); Q.pop();
-            topo.push_back(u);
-            for (int to : graph[u]) {
-                --indegree[to];
-                if (indegree[to] == 0) Q.push(to);
+            ans.push_back(u);
+            for (int to : adj[u]) {
+                if (--indegree[to] == 0) Q.push(to);
             }
         }
-        if (topo.size() != numCourses) return {};
-        return topo;
+        if (ans.size() != numCourses) return {};
+        return ans;
     }
 };
 
