@@ -14,15 +14,10 @@ using namespace std;
 class Solution {
 public:
     int calculate(string s) {
-        int i = 0;
-        return parseExpr(s, i);
-    }
-    
-    int parseExpr(const string &s, int &i) {
         const int N = s.size();
         char op = '+'; // 上一个未处理操作
         vector<int> nums;
-        for (; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             if (s[i] == ' ') continue;
             int num = 0;
             if (isdigit(s[i])) {
@@ -43,7 +38,6 @@ public:
         return ans;
     }
 };
-
 
 int main(int argc, const char * argv[]) {
     Solution solution;
