@@ -1,13 +1,12 @@
 //
-//  basic-calculator
-//  https://leetcode.com/problems/basic-calculator/
+//  basic-calculator-iii
+//  https://leetcode.com/problems/basic-calculator-iii/
 //
-//  Created by smilingpoplar on 15/6/22.
+//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 
 #include <iostream>
-#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -36,6 +35,8 @@ public:
             // 遇到新操作+-*/或结束，处理上一个操作op
             if (op == '+') nums.push_back(num);
             else if (op == '-') nums.push_back(-num);
+            else if (op == '*') nums.back() *= num;
+            else if (op == '/') nums.back() /= num;
             op = s[i];
         }
         
@@ -47,8 +48,5 @@ public:
 };
 
 int main(int argc, const char * argv[]) {
-    Solution solution;
-    cout << solution.calculate("(1 +(4+5+2)- 3)+(6+8)" );
-    
     return 0;
 }
