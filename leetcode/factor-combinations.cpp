@@ -27,6 +27,7 @@ public:
         }
         
         for (int i = start; i <= n; i++) {
+            if (i > sqrt(n)) i = n; // (sqrt(n)..n)的值不可能是因子    
             if (n % i == 0) {
                 comb.push_back(i);
                 search(n / i, i, comb, ans);
