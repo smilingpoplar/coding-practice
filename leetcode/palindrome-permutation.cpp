@@ -15,13 +15,13 @@ class Solution {
 public:
     bool canPermutePalindrome(string s) {
         unordered_map<char, int> mp;
-        int count = 0;
+        int oddCnt = 0;
         for (char c : s) {
             mp[c]++;
-            if (mp[c] % 2 == 1) count++;
-            else count--;
+            if (mp[c] % 2 == 1) oddCnt++;
+            else oddCnt--;
         }
-        return count <= 1;
+        return oddCnt <= 1;
     }
 };
 
