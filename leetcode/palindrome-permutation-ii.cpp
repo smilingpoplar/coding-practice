@@ -41,6 +41,7 @@ public:
             ans.push_back(half + mid + string(half.rbegin(), half.rend()));
             return;
         }
+        
         unordered_set<char> selected;
         for (int i = idx; i < half.size(); i++) {
             if (selected.count(half[i])) continue;
