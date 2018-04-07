@@ -12,70 +12,47 @@
 using namespace std;
 
 class Solution {
-    class UnionFind {
-        vector<int> parent;
-        vector<int> rank;
-    public:
-        UnionFind(int sz) : parent(sz), rank(sz, 0) {
-            for (int i = 0; i < sz; i++)
-                parent[i] = i;
-        }
-        
-        int find(int x) {
-            if (parent[x] != x) 
-                parent[x] = find(parent[x]);
-            return parent[x];
-        }
-        
-        void unite(int x, int y) { 
-            int px = find(x), py = find(y);
-            if (px == py) return;
-            if (rank[px] < rank[py]) {
-                parent[px] = py;
-            } else if (rank[py] < rank[px]) {
-                parent[py] = px;
-            } else {
-                parent[px] = py;
-                rank[py]++;
-            }
-        }
-    };
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
-        int mailCount = 0;
-        unordered_map<string, int> mailToId;
-        unordered_map<int, string> idToName;
+        // 并查集，直接用mail作key
+        unordered_map<string, string> parent;
+        unordered_map<string, string> owner;
         for (auto &account : accounts) {
             for (int i = 1; i < account.size(); i++) {
                 auto &mail = account[i];
-                if (!mailToId.count(mail)) {
-                    mailToId[mail] = mailCount++;
-                }
-                int id = mailToId[mail];
-                idToName[id] = account[0];
-            }
-        }        
-        
-        // 并查集
-        UnionFind uf(mailCount);
-        for (auto &account : accounts) {
-            for (int i = 2; i < account.size(); i++) {
-                uf.unite(mailToId[account[1]], mailToId[account[i]]);
+                parent[mail] = mail; // init
+                owner[mail] = account[0];
             }
         }
-        // 同集合的mail合并
-        unordered_map<int, vector<string>> mp;
-        for (auto &e : mailToId) {
-            mp[uf.find(e.second)].push_back(e.first);
+        for (auto &account : accounts) {
+            auto px = find(account[1], parent);
+            for (int i = 2; i < account.size(); i++) {
+                auto py = find(account[i], parent);
+                if (px != py) parent[py] = px; // unite
+            }
+        }
+        
+        // 同用户的mail合并
+        unordered_map<string, vector<string>> mp;
+        for (auto &e : parent) {
+            auto &x = e.first;
+            auto px = find(e.second, parent);
+            mp[px].push_back(x);
         }
         vector<vector<string>> ans;
         for (auto &e : mp) {
-            auto mails = e.second;
+            auto &mails = e.second;
             sort(mails.begin(), mails.end());
-            mails.insert(mails.begin(), idToName[e.first]);
+            mails.insert(mails.begin(), owner[e.first]);
             ans.push_back(mails);
         }
         return ans;
+    }
+    
+    string find(const string &mail, unordered_map<string, string> &parent) {
+        if (parent[mail] != mail)
+            parent[mail] = find(parent[mail], parent);
+        return parent[mail];
     }
 };
 
