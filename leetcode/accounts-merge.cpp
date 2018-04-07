@@ -7,14 +7,16 @@
 //
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Solution {
     class UnionFind {
         vector<int> parent;
+        vector<int> rank;
     public:
-        UnionFind(int sz) : parent(sz) {
+        UnionFind(int sz) : parent(sz), rank(sz, 0) {
             for (int i = 0; i < sz; i++)
                 parent[i] = i;
         }
@@ -26,7 +28,16 @@ class Solution {
         }
         
         void unite(int x, int y) { 
-            parent[find(x)] = find(y);
+            int px = find(x), py = find(y);
+            if (px == py) return;
+            if (rank[px] < rank[py]) {
+                parent[px] = py;
+            } else if (rank[py] < rank[px]) {
+                parent[py] = px;
+            } else {
+                parent[px] = py;
+                rank[py]++;
+            }
         }
     };
 public:
