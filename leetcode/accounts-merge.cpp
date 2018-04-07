@@ -11,13 +11,12 @@
 using namespace std;
 
 class Solution {
-    class DisjointSetUnion {
+    class UnionFind {
         vector<int> parent;
     public:
-        DisjointSetUnion(int N) : parent(N) {
-            for (int i = 0; i < N; i++) {
+        UnionFind(int sz) : parent(sz) {
+            for (int i = 0; i < sz; i++)
                 parent[i] = i;
-            }
         }
         
         int find(int x) {
@@ -26,8 +25,7 @@ class Solution {
             return parent[x];
         }
         
-        // union
-        void merge(int x, int y) { 
+        void unite(int x, int y) { 
             parent[find(x)] = find(y);
         }
     };
@@ -38,7 +36,7 @@ public:
         unordered_map<int, string> idToName;
         for (auto &account : accounts) {
             for (int i = 1; i < account.size(); i++) {
-                const string &mail = account[i];
+                auto &mail = account[i];
                 if (!mailToId.count(mail)) {
                     mailToId[mail] = mailCount++;
                 }
@@ -48,16 +46,16 @@ public:
         }        
         
         // 并查集
-        DisjointSetUnion dsu(mailCount);
+        UnionFind uf(mailCount);
         for (auto &account : accounts) {
             for (int i = 2; i < account.size(); i++) {
-                dsu.merge(mailToId[account[1]], mailToId[account[i]]);
+                uf.unite(mailToId[account[1]], mailToId[account[i]]);
             }
         }
         // 同集合的mail合并
         unordered_map<int, vector<string>> mp;
         for (auto &e : mailToId) {
-            mp[dsu.find(e.second)].push_back(e.first);
+            mp[uf.find(e.second)].push_back(e.first);
         }
         vector<vector<string>> ans;
         for (auto &e : mp) {
