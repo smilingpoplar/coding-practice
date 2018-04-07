@@ -11,6 +11,7 @@
 
 using namespace std;
 
+/*
 class Solution {
     class UnionFind {
         vector<int> parent;
@@ -43,7 +44,7 @@ class Solution {
 public:
     bool areSentencesSimilarTwo(vector<string>& words1, vector<string>& words2, vector<pair<string, string>> pairs) {
         if (words1.size() != words2.size()) return false;
-        // 并查集，要把word映射到数字id
+        // 并查集，把word映射到数字id
         UnionFind uf(pairs.size() * 2);
         unordered_map<string, int> ids;
         int cnt = 0;
@@ -60,6 +61,36 @@ public:
             if (uf.find(ids[w1]) != uf.find(ids[w2])) return false; 
         }
         return true;
+    }
+};
+*/
+
+class Solution {
+public:
+    bool areSentencesSimilarTwo(vector<string>& words1, vector<string>& words2, vector<pair<string, string>> pairs) {
+        if (words1.size() != words2.size()) return false;
+        // 并查集，直接用word作为key
+        unordered_map<string, string> parent;
+        for (auto &p : pairs) {
+            // unite
+            auto pw1 = find(p.first, parent), pw2 = find(p.second, parent);
+            if (pw1 != pw2) parent[pw1] = pw2;
+        }
+        
+        for (int i = 0; i < words1.size(); i++) {
+            auto &w1 = words1[i], &w2 = words2[i];
+            if (w1 != w2 && find(w1, parent) != find(w2, parent)) return false;
+        }
+        return true;
+    }
+    
+    string find(string s, unordered_map<string, string> &parent) {
+        if (!parent.count(s)) 
+            parent[s] = s;
+        
+        if (parent[s] != s) 
+            parent[s] = find(parent[s], parent);
+        return parent[s];
     }
 };
 
