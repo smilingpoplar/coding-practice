@@ -14,7 +14,7 @@ using namespace std;
 /*
 class NumMatrix {
     int M, N;
-    vector<vector<int>> _matrix;
+    vector<vector<int>> matrix;
     // 2D二叉索引树，tree[i][j]保存子矩阵(i-i&-i, i], (j-j&-j, j]的和
     vector<vector<int>> tree;
 public:
@@ -22,7 +22,7 @@ public:
         if (matrix.empty()) return;
         M = matrix.size();
         N = matrix[0].size();
-        _matrix = vector<vector<int>>(M, vector<int>(N, 0));
+        this->matrix = vector<vector<int>>(M, vector<int>(N, 0));
         tree = vector<vector<int>>(M + 1, vector<int>(N + 1, 0));
         for (int r = 0; r < M; r++) {
             for (int c = 0; c < N; c++) {
@@ -33,8 +33,8 @@ public:
     
     void update(int row, int col, int val) {
         if (M == 0 || N == 0) return;
-        int delta = val - _matrix[row][col];
-        _matrix[row][col] = val;
+        int delta = val - matrix[row][col];
+        matrix[row][col] = val;
         for (int r = row + 1; r <= M; r += r & -r) {
             for (int c = col + 1; c <= N; c += c & -c) {
                 tree[r][c] += delta;
@@ -61,10 +61,10 @@ public:
 */
 
 class NumMatrix {
-    vector<vector<int>> _matrix;
+    vector<vector<int>> matrix;
     vector<vector<int>> colSums; // colSums[r][c]表示第c列前r行的和
 public:
-    NumMatrix(vector<vector<int>> matrix) : _matrix(matrix) {
+    NumMatrix(vector<vector<int>> matrix) : matrix(matrix) {
         if (matrix.empty()) return;
         const int M = matrix.size();
         const int N = matrix[0].size();
@@ -77,9 +77,9 @@ public:
     }
     
     void update(int row, int col, int val) {
-        int delta = val - _matrix[row][col];
-        _matrix[row][col] = val;
-        for (int r = row + 1; r <= _matrix.size(); r++) {
+        int delta = val - matrix[row][col];
+        matrix[row][col] = val;
+        for (int r = row + 1; r <= matrix.size(); r++) {
             colSums[r][col] += delta;
         }
     }

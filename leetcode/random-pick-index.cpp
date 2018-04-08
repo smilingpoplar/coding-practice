@@ -12,18 +12,17 @@
 using namespace std;
 
 class Solution {
-    vector<int> _nums;
+    vector<int> nums;
 public:
-    Solution(vector<int> nums) {
-        _nums = nums;
+    Solution(vector<int> nums) : nums(nums) {
         srand(time(NULL));
     }
     
     int pick(int target) {        
         int ans = -1;
         int count = 0;
-        for (int i = 0; i < _nums.size(); i++) {
-            if (_nums[i] == target) {
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == target) {
                 count++;
                 if (rand() % count == 0) { // 以1/count概率替换已选的
                     ans = i;
