@@ -31,14 +31,10 @@ class Solution {
         void unite(int x, int y) {
             int px = find(x), py = find(y);
             if (px == py) return;
-            if (rank[px] < rank[py]) {
-                parent[px] = py;
-            } else if (rank[py] < rank[px]) {
-                parent[py] = px;
-            } else {
-                parent[px] = py;
-                rank[py]++;
-            }
+            
+            if (rank[px] < rank[py]) swap(px, py);
+            if (rank[px] == rank[py]) rank[px]++;
+            parent[py] = px;
         }
     };
 public:

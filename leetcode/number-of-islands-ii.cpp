@@ -27,7 +27,8 @@ class Solution {
         }
 
         int find(int x) {
-            if (parent[x] != -1 && parent[x] != x)
+            if (parent[x] == -1) return -1;
+            if (parent[x] != x)
                 parent[x] = find(parent[x]);
             return parent[x];
         }
@@ -35,14 +36,10 @@ class Solution {
         void unite(int x, int y) {
             int px = find(x), py = find(y);
             if (px == py) return;
-            if (rank[px] < rank[py]) {
-                parent[px] = py;
-            } else if (rank[py] < rank[px]) {
-                parent[py] = px;
-            } else {
-                parent[px] = py;
-                rank[py]++;
-            }
+            
+            if (rank[px] < rank[py]) swap(px, py);
+            if (rank[px] == rank[py]) rank[px]++;
+            parent[py] = px;
             cnt--;
         }
         
