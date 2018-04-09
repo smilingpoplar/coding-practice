@@ -14,14 +14,14 @@ class Solution {
 public:
     int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
         if (matrix.empty()) return 0;
-        const int M = matrix.size();
-        const int N = matrix[0].size();
+        const int R = matrix.size();
+        const int C = matrix[0].size();
         
         int ans = INT_MIN;
-        for (int r1 = 0; r1 < M; r1++) {
-            vector<int> sum(N, 0);
-            for (int r2 = r1; r2 < M; r2++) {
-                for (int c = 0; c < N; c++) {
+        for (int r1 = 0; r1 < R; r1++) {
+            vector<int> sum(C, 0);
+            for (int r2 = r1; r2 < R; r2++) {
+                for (int c = 0; c < C; c++) {
                     sum[c] += matrix[r2][c];
                 }
                 
