@@ -17,11 +17,11 @@ public:
     void wallsAndGates(vector<vector<int>>& rooms) {
         // bfs，各门先入队
         if (rooms.empty()) return;
-        const int M = rooms.size();
-        const int N = rooms[0].size();
+        const int R = rooms.size();
+        const int C = rooms[0].size();
         queue<pair<int,int>> q;
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 if (rooms[r][c] == 0) {
                     q.push({r, c});
                 }
@@ -34,7 +34,7 @@ public:
             int r = curr.first, c = curr.second;
             for (auto &dir : dirs) {
                 int nr = r + dir[0], nc = c + dir[1];
-                if (nr < 0 || nr >= M || nc < 0 || nc >= N || rooms[nr][nc] != INF) continue;
+                if (nr < 0 || nr >= R || nc < 0 || nc >= C || rooms[nr][nc] != INF) continue;
                 rooms[nr][nc] = rooms[r][c] + 1;
                 q.push({nr, nc});
             }

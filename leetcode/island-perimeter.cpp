@@ -17,15 +17,15 @@ public:
         // 周长 = 4*块的个数 - 2*内边的个数
         // 每块只要看和右块、和下块有没重叠
         if (grid.empty()) return 0;
-        const int M = grid.size();
-        const int N = grid[0].size();
+        const int R = grid.size();
+        const int C = grid[0].size();
         int count = 0, internal = 0;
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 if (grid[r][c] == 1) {
                     count++;
-                    if (r < M - 1 && grid[r+1][c] == 1) internal++;
-                    if (c < N - 1 && grid[r][c+1] == 1) internal++;
+                    if (r + 1 < R && grid[r+1][c]) internal++;
+                    if (c + 1 < C && grid[r][c+1]) internal++;
                 }
             }
         }

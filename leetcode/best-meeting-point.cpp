@@ -16,13 +16,13 @@ public:
     int minTotalDistance(vector<vector<int>>& grid) {
         // 分维度考虑，在一个维度上（x维或y维）各点相遇，可算出这个维度上所有点的距离
         if (grid.empty()) return 0;
-        const int M = grid.size();
-        const int N = grid[0].size();
+        const int R = grid.size();
+        const int C = grid[0].size();
         vector<int> X;
         vector<int> Y;
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
-                if (grid[r][c] == 1) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
+                if (grid[r][c]) {
                     X.push_back(c);
                     Y.push_back(r);
                 }

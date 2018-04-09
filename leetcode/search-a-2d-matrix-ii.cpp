@@ -16,17 +16,16 @@ public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
         // 线性搜索，O(m+n)，从右上角开始找（或从左下角开始找）
         if (matrix.empty()) return false;
-        const int M = (int)matrix.size();
-        const int N = (int)matrix[0].size();
-        int r = 0;
-        int c = N - 1;
-        while (r < M && c >= 0) {
+        const int R = (int)matrix.size();
+        const int C = (int)matrix[0].size();
+        int r = 0, c = C - 1;
+        while (r < R && c >= 0) {
             if (target == matrix[r][c]) {
                 return true;
             } else if (target > matrix[r][c]) {
                 ++r;
             } else {
-                --c;
+                c--;
             }
         }
         return false;
@@ -38,9 +37,9 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
         if (matrix.empty()) return false;
-        const int M = (int)matrix.size();
-        const int N = (int)matrix[0].size();
-        return searchMatrix(matrix, target, 0, M - 1, 0, N - 1);
+        const int R = (int)matrix.size();
+        const int C = (int)matrix[0].size();
+        return searchMatrix(matrix, target, 0, R - 1, 0, C - 1);
     }
 private:
     // 在matrix[rowStart,rowEnd][colStart,colEnd]中搜索target

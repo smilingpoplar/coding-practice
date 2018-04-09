@@ -13,37 +13,37 @@ using namespace std;
 
 /*
 class NumMatrix {
-    int M, N;
+    int R, C;
     vector<vector<int>> matrix;
     // 2D二叉索引树，tree[i][j]保存子矩阵(i-i&-i, i], (j-j&-j, j]的和
     vector<vector<int>> tree;
 public:
     NumMatrix(vector<vector<int>> matrix) {
         if (matrix.empty()) return;
-        M = matrix.size();
-        N = matrix[0].size();
-        this->matrix = vector<vector<int>>(M, vector<int>(N, 0));
-        tree = vector<vector<int>>(M + 1, vector<int>(N + 1, 0));
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        R = matrix.size();
+        C = matrix[0].size();
+        this->matrix = vector<vector<int>>(R, vector<int>(C, 0));
+        tree = vector<vector<int>>(R + 1, vector<int>(C + 1, 0));
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 update(r, c, matrix[r][c]);
             }
         }
     }
     
     void update(int row, int col, int val) {
-        if (M == 0 || N == 0) return;
+        if (R == 0 || C == 0) return;
         int delta = val - matrix[row][col];
         matrix[row][col] = val;
-        for (int r = row + 1; r <= M; r += r & -r) {
-            for (int c = col + 1; c <= N; c += c & -c) {
+        for (int r = row + 1; r <= R; r += r & -r) {
+            for (int c = col + 1; c <= C; c += c & -c) {
                 tree[r][c] += delta;
             }
         }
     }
     
     int sumRegion(int row1, int col1, int row2, int col2) {
-        if (M == 0 || N == 0) return 0;
+        if (R == 0 || C == 0) return 0;
         return getSum(row2, col2) - getSum(row1 - 1, col2) 
             - getSum(row2, col1 - 1) + getSum(row1 - 1, col1 - 1);
     }
@@ -66,11 +66,11 @@ class NumMatrix {
 public:
     NumMatrix(vector<vector<int>> matrix) : matrix(matrix) {
         if (matrix.empty()) return;
-        const int M = matrix.size();
-        const int N = matrix[0].size();
-        colSums = vector<vector<int>>(M + 1, vector<int>(N, 0));
-        for (int c = 0; c < N; c++) {
-            for (int r = 1; r <= M; r++) {
+        const int R = matrix.size();
+        const int C = matrix[0].size();
+        colSums = vector<vector<int>>(R + 1, vector<int>(C, 0));
+        for (int c = 0; c < C; c++) {
+            for (int r = 1; r <= R; r++) {
                 colSums[r][c] = colSums[r-1][c] + matrix[r-1][c];
             }
         }

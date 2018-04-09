@@ -16,10 +16,10 @@ public:
     void gameOfLife(vector<vector<int>>& board) {
         // board[r][c]用第0位表示当前状态，第1位表示下一状态
         if (board.empty()) return;
-        const int M = board.size();
-        const int N = board[0].size();
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        const int R = board.size();
+        const int C = board[0].size();
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 int lives = liveNeighbors(board, r, c);
                 if (board[r][c] & 1) {
                     if (2 <= lives && lives <= 3) board[r][c] |= 2;
@@ -29,8 +29,8 @@ public:
             }
         }
         
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 board[r][c] >>= 1;
             }
         }

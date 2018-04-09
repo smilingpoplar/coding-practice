@@ -15,12 +15,12 @@ class Solution {
 public:
     int numDistinctIslands2(vector<vector<int>>& grid) {
         if (grid.empty()) return 0;
-        const int M = grid.size();
-        const int N = grid[0].size();
-        vector<vector<bool>> visited(M, vector<bool>(N, false));
+        const int R = grid.size();
+        const int C = grid[0].size();
+        vector<vector<bool>> visited(R, vector<bool>(C, false));
         set<vector<pair<int,int>>> islands; // pair:<x,y>
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 if (grid[r][c] != 1 || visited[r][c]) continue;
                 vector<pair<int,int>> island;
                 dfs(grid, r, c, visited, island);

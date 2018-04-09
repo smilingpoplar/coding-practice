@@ -15,11 +15,11 @@ class Solution {
 public:
     int cutOffTree(vector<vector<int>>& forest) {
         if (forest.empty()) return 0;
-        const int M = forest.size();
-        const int N = forest[0].size();
+        const int R = forest.size();
+        const int C = forest[0].size();
         vector<vector<int>> indices;
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 if (forest[r][c] > 0) 
                     indices.push_back({r, c});
             }
@@ -41,10 +41,10 @@ public:
     
     int dist(int sr, int sc, int tr, int tc, vector<vector<int>>& forest) {
         // bst求最短距离
-        const int M = forest.size();
-        const int N = forest[0].size();
+        const int R = forest.size();
+        const int C = forest[0].size();
         vector<vector<int>> dirs = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        vector<vector<bool>> visited(M, vector<bool>(N, false));
+        vector<vector<bool>> visited(R, vector<bool>(C, false));
         queue<pair<int, int>> q;
         q.push({sr, sc});
         visited[sr][sc] = true;
@@ -58,7 +58,7 @@ public:
                 
                 for (auto &dir : dirs) {
                     int nr = r + dir[0], nc = c + dir[1];
-                    if (nr < 0 || nr >= M || nc < 0 || nc >= N || visited[nr][nc] || forest[nr][nc] == 0) continue;
+                    if (nr < 0 || nr >= R || nc < 0 || nc >= C || visited[nr][nc] || forest[nr][nc] == 0) continue;
                     q.push({nr, nc});
                     visited[nr][nc] = true;
                 }

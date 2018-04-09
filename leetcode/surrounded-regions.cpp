@@ -18,15 +18,15 @@ public:
         // 只有边缘的0不会被填充，找到这些0
         // 递归dfs会导致栈溢出，可用迭代写法，就这题来说，用bfs更好（全是0的最坏情况，dfs占n^2空间，bfs占4n空间）
         if (board.empty()) return;
-        const int M = (int)board.size();
-        const int N = (int)board[0].size();
+        const int R = (int)board.size();
+        const int C = (int)board[0].size();
         
-        vector<vector<bool>> zeros(M, vector<bool>(N, false));
-        vector<vector<bool>> visited(M, vector<bool>(N, false));
+        vector<vector<bool>> zeros(R, vector<bool>(C, false));
+        vector<vector<bool>> visited(R, vector<bool>(C, false));
         queue<pair<int, int>> q;
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
-                if (r == 0 || r == M - 1 || c == 0 || c == N - 1) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
+                if (r == 0 || r == R - 1 || c == 0 || c == C - 1) {
                     q.push({r, c});
                     visited[r][c] = true;
                 }
@@ -41,14 +41,14 @@ public:
             vector<pair<int,int>> nexts = {{r - 1, c}, {r + 1, c}, {r, c - 1}, {r, c + 1}};
             for (auto &next : nexts) {
                 int nr = next.first, nc = next.second;
-                if (nr < 0 || nr >= M || nc < 0 || nc >= N || visited[nr][nc]) continue;
+                if (nr < 0 || nr >= R || nc < 0 || nc >= C || visited[nr][nc]) continue;
                 q.push(next);
                 visited[nr][nc] = true;
             }
         }
         
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 if (!zeros[r][c]) board[r][c] = 'X';
             }
         }

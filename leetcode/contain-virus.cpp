@@ -20,16 +20,16 @@ class Solution {
 public:
     int containVirus(vector<vector<int>>& grid) {
         if (grid.empty()) return 0;
-        const int M = grid.size();
-        const int N = grid[0].size();
+        const int R = grid.size();
+        const int C = grid[0].size();
         
         int walls = 0;
         while (true) {
             // 找出各个区域
-            vector<vector<bool>> visited(M, vector<bool>(N, false));
+            vector<vector<bool>> visited(R, vector<bool>(C, false));
             vector<Area> areas;
-            for (int r = 0; r < M; r++) {
-                for (int c = 0; c < N; c++) {
+            for (int r = 0; r < R; r++) {
+                for (int c = 0; c < C; c++) {
                     if (!visited[r][c] && grid[r][c] == 1) {
                         Area area;
                         dfs(r, c, grid, visited, area);

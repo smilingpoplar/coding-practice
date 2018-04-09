@@ -15,38 +15,38 @@ class Solution {
 public:
     int maxKilledEnemies(vector<vector<char>>& grid) {
         if (grid.empty()) return 0;
-        const int M = grid.size();
-        const int N = grid[0].size();
-        vector<vector<int>> cnt(M, vector<int>(N, 0));
+        const int R = grid.size();
+        const int C = grid[0].size();
+        vector<vector<int>> cnt(R, vector<int>(C, 0));
         int ans = 0;
         
         // 对每行，从左往右扫、从右往左扫
         int count;
-        for (int r = 0; r < M; r++) {
+        for (int r = 0; r < R; r++) {
             count = 0;
-            for (int c = 0; c < N; c++) {
+            for (int c = 0; c < C; c++) {
                 // 下面的循环体都一样
                 if (grid[r][c] == 'W') count = 0;
                 else if (grid[r][c] == 'E') count++;
                 else cnt[r][c] += count;
             }
             count = 0;
-            for (int c = N - 1; c >= 0; c--) {
+            for (int c = C - 1; c >= 0; c--) {
                 if (grid[r][c] == 'W') count = 0;
                 else if (grid[r][c] == 'E') count++;
                 else cnt[r][c] += count;
             }
         }
         // 对每列，从上往下扫、从下往上扫
-        for (int c = 0; c < N; c++) {
+        for (int c = 0; c < C; c++) {
             count = 0;
-            for (int r = 0; r < M; r++) {
+            for (int r = 0; r < R; r++) {
                 if (grid[r][c] == 'W') count = 0;
                 else if (grid[r][c] == 'E') count++;
                 else cnt[r][c] += count;
             }
             count = 0;
-            for (int r = M - 1; r >= 0; r--) {
+            for (int r = R - 1; r >= 0; r--) {
                 if (grid[r][c] == 'W') count = 0;
                 else if (grid[r][c] == 'E') count++;
                 else cnt[r][c] += count;

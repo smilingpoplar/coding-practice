@@ -1,6 +1,6 @@
 //
 //  minesweeper
-//  https://leetcode.com/problems/minesweeper/
+    //  https://leetcode.com/problems/minesweeper/
 //
 //  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -22,8 +22,8 @@ public:
     
     void dfs(vector<vector<char>>& board, int r, int c, vector<vector<bool>> &visited) {
         if (board.empty()) return;
-        const int M = board.size(), N = board[0].size();
-        if (!isValidIndex(r, c, M, N) || visited[r][c]) return;
+        const int R = board.size(), C = board[0].size();
+        if (!isValidIndex(r, c, R, C) || visited[r][c]) return;
         visited[r][c] = true;
         
         if (board[r][c] == 'M') {
@@ -35,7 +35,7 @@ public:
         int mines = 0;
         for (auto &d : dirs) {
             int nr = r + d[0], nc = c + d[1];
-            if (isValidIndex(nr, nc, M, N) && board[nr][nc] == 'M') mines++;
+            if (isValidIndex(nr, nc, R, C) && board[nr][nc] == 'M') mines++;
         }
         if (mines > 0) {
             board[r][c] = '0' + mines;
@@ -47,8 +47,8 @@ public:
         }
     }
     
-    bool isValidIndex(int r, int c, int M, int N) {
-        return 0 <= r && r < M && 0 <= c && c < N;
+    bool isValidIndex(int r, int c, int R, int C) {
+        return 0 <= r && r < R && 0 <= c && c < C;
     }
 };
 

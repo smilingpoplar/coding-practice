@@ -14,12 +14,12 @@ using namespace std;
 class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word) {
-        const int M = board.size();
-        const int N = board[0].size();
-        vector<vector<bool>> visited(M, vector<bool>(N, false));
+        const int R = board.size();
+        const int C = board[0].size();
+        vector<vector<bool>> visited(R, vector<bool>(C, false));
         
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 if (dfs(board, r, c, word, 0, visited)) {
                     return true;
                 }
@@ -30,11 +30,11 @@ public:
 private:
     bool dfs(const vector<vector<char>>& board, int row, int col, const string &word, int idx, vector<vector<bool>> &visited) {
         if (board.empty()) return false;
-        const int M = board.size();
-        const int N = board[0].size();
+        const int R = board.size();
+        const int C = board[0].size();
         if (idx >= word.size()) return true;
 
-        if (row < 0 || row >= M || col < 0 || col >= N || 
+        if (row < 0 || row >= R || col < 0 || col >= C || 
             visited[row][col] || board[row][col] != word[idx]) return false;
 
         visited[row][col] = true;

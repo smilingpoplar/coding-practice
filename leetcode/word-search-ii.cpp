@@ -22,16 +22,16 @@ class Solution {
 public:
     vector<string> findWords(vector<vector<char>> &board, vector<string> &words) {
         if (board.empty()) return {};
-        const int M = board.size();
-        const int N = board[0].size();
-        vector<vector<bool>> visited(M, vector<bool>(N, false));
+        const int R = board.size();
+        const int C = board[0].size();
+        vector<vector<bool>> visited(R, vector<bool>(C, false));
         for (auto &word : words) {
             insert(word);
         }
 
         vector<string> ans;
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 dfs(r, c, board, visited, &root, ans);
             }
         }
