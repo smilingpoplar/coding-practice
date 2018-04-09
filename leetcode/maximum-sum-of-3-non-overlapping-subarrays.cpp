@@ -49,7 +49,7 @@ public:
         // 选三个数(ia,ib,ic), ia+k<=ib, ib+k<=ic
         int maxSum = INT_MIN;
         vector<int> ans = { -1, -1, -1 };
-        for (int ib = k; ib < W.size() - k; ++ib) {
+        for (int ib = k; ib < W.size() - k; ib++) {
             int sum = W[left[ib-k]] + W[ib] + W[right[ib+k]];
             if (sum > maxSum) {
                 maxSum = sum;

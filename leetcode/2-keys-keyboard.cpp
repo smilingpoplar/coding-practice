@@ -21,7 +21,7 @@ public:
                 ans += factor;
                 n /= factor;
             }
-            ++factor;
+            factor++;
         }
         return ans;
     }
