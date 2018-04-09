@@ -14,42 +14,41 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> result;
-        const int N = (int)nums.size();
-        if (N < 3) return result;
+        const int N = nums.size();
+        if (N < 3) return {};
         sort(nums.begin(), nums.end()); // 先排序再两端夹逼
-        
-        for (int first = 0; first < N - 2; ++first) {
-            while (0 < first && first < N - 2 && nums[first] == nums[first - 1]) ++first;
-            int second = first + 1;
-            int third = N - 1;
+
+        vector<vector<int>> ans;        
+        for (int a = 0; a < N - 2; a++) {
+            while (0 < a && a < N - 2 && nums[a] == nums[a - 1]) a++;
+            int b = a + 1, c = N - 1;
             int target = 0;
-            while (second < third) {
-                int sum  = nums[first] + nums[second] + nums[third];
+            while (b < c) {
+                int sum  = nums[a] + nums[b] + nums[c];
                 if (sum == target) {
-                    result.push_back({nums[first], nums[second], nums[third]});
-                    ++second;
-                    while (second < third && nums[second] == nums[second - 1]) ++second;
-                    --third;
-                    while (second < third && nums[third] == nums[third + 1]) --third;
+                    ans.push_back({nums[a], nums[b], nums[c]});
+                    b++;
+                    while (b < c && nums[b] == nums[b - 1]) b++;
+                    c--;
+                    while (b < c && nums[c] == nums[c + 1]) c--;
                 } else if (sum < target) {
-                    ++second;
-                    while (second < third && nums[second] == nums[second - 1]) ++second;
+                    b++;
+                    while (b < c && nums[b] == nums[b - 1]) b++;
                 } else {
-                    --third;
-                    while (second < third && nums[third] == nums[third + 1]) --third;
+                    c--;
+                    while (b < c && nums[c] == nums[c + 1]) c--;
                 }
             }
         }
-        return result;
+        return ans;
     }
 };
 
 int main(int argc, const char * argv[]) {
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
     Solution solution;
-    auto result = solution.threeSum(nums);
-    for (const auto &threeNums : result) {
+    auto ans = solution.threeSum(nums);
+    for (const auto &threeNums : ans) {
         for (int num: threeNums) {
             cout << num << " ";
         }

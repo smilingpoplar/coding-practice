@@ -18,28 +18,27 @@ public:
         // assert(N >= 3);
         sort(nums.begin(), nums.end()); // 先排序再两端夹逼
         
-        int minDistance = INT_MAX;
-        int result;
-        for (int first = 0; first < N - 2; ++first) {
-            int second = first + 1;
-            int third = N - 1;
-            while (second < third) {
-                int sum  = nums[first] + nums[second] + nums[third];
-                int distance = abs(sum - target);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    result = sum;
+        int minDist = INT_MAX;
+        int ans;
+        for (int a = 0; a < N - 2; a++) {
+            int b = a + 1, c = N - 1;
+            while (b < c) {
+                int sum  = nums[a] + nums[b] + nums[c];
+                int dist = abs(sum - target);
+                if (dist < minDist) {
+                    minDist = dist;
+                    ans = sum;
                 }
                 if (sum == target) {
                     return sum;
                 } else if (sum < target) {
-                    ++second;
+                    b++;
                 } else {
-                    --third;
+                    c--;
                 }
             }
         }
-        return result;
+        return ans;
     }
 };
 

@@ -18,11 +18,11 @@ public:
         // 2. 每行或每列01的个数相等或差1
         const int N = board.size();
         vector<int> rows(N, 0), cols(N, 0);
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (board[i][j] == 1) {
-                    rows[i] |= 1 << j;
-                    cols[j] |= 1 << i;
+        for (int r = 0; r < N; r++) {
+            for (int c = 0; c < N; c++) {
+                if (board[r][c] == 1) {
+                    rows[r] |= 1 << c;
+                    cols[c] |= 1 << r;
                 }
             }
         }
