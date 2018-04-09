@@ -14,23 +14,23 @@ using namespace std;
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
-        // 设dp[i][j]表示从左上角到grid[i][j]的最小路径和，0<=i<M，0<=j<N
-        // 可以往右往下走，dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+        // 设dp[r][c]表示从左上角到grid[r][c]的最小路径和，0<=r<R，0<=c<C
+        // 可以往右往下走，dp[r][c] = min(dp[r-1][c], dp[r][c-1]) + grid[r][c]
         if (grid.empty()) return 0;
-        const int M = grid.size();
-        const int N = grid[0].size();
-        vector<vector<int>> dp(M, vector<int>(N, 0));
+        const int R = grid.size();
+        const int C = grid[0].size();
+        vector<vector<int>> dp(R, vector<int>(C, 0));
         dp[0][0] = grid[0][0];
-        for (int i = 1; i < M; i++) 
-            dp[i][0] = dp[i-1][0] + grid[i][0];
-        for (int j = 1; j < N; j++)
-            dp[0][j] = dp[0][j-1] + grid[0][j];
-        for (int i = 1; i < M; i++) {
-            for (int j = 1; j < N; j++) {
-                dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+        for (int r = 1; r < R; r++) 
+            dp[r][0] = dp[r-1][0] + grid[r][0];
+        for (int c = 1; c < C; c++)
+            dp[0][c] = dp[0][c-1] + grid[0][c];
+        for (int r = 1; r < R; r++) {
+            for (int c = 1; c < C; c++) {
+                dp[r][c] = min(dp[r-1][c], dp[r][c-1]) + grid[r][c];
             }
         }
-        return dp[M-1][N-1];
+        return dp[R-1][C-1];
     }
 };
 

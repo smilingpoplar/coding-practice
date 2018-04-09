@@ -12,27 +12,27 @@ using namespace std;
 
 class NumMatrix {
     vector<vector<int>> sum;
-    int M, N;
+    int R, C;
 public:
     NumMatrix(vector<vector<int>> matrix) {
         if (matrix.empty()) return;
-        M = matrix.size();
-        N = matrix[0].size();
-        sum = vector<vector<int>>(M, vector<int>(N, 0));
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                int value = matrix[i][j];
-                if (i > 0) value += sum[i-1][j];
-                if (j > 0) value += sum[i][j-1];
-                if (i > 0 && j > 0) value -= sum[i-1][j-1];
-                sum[i][j] = value;
+        R = matrix.size();
+        C = matrix[0].size();
+        sum = vector<vector<int>>(R, vector<int>(C, 0));
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
+                int value = matrix[r][c];
+                if (r > 0) value += sum[r-1][c];
+                if (c > 0) value += sum[r][c-1];
+                if (r > 0 && c > 0) value -= sum[r-1][c-1];
+                sum[r][c] = value;
             }
         }
     }
     
     int sumRegion(int row1, int col1, int row2, int col2) {
-        if (!(0 <= row1 && row1 <= row2 && row2 < M 
-              && 0 <= col1 && col1 <= col2 && col2 < N)) return 0;
+        if (!(0 <= row1 && row1 <= row2 && row2 < R 
+              && 0 <= col1 && col1 <= col2 && col2 < C)) return 0;
         int ans = sum[row2][col2];
         if (row1 > 0) ans -= sum[row1-1][col2];
         if (col1 > 0) ans -= sum[row2][col1-1];

@@ -16,48 +16,48 @@ public:
     void setZeroes(vector<vector<int>>& matrix) {
         // 用第0行记录某一列是否有0，用第0列记录某一行是否有0
         if (matrix.empty()) return;
-        const int M = (int)matrix.size();
-        const int N = (int)matrix[0].size();
+        const int R = matrix.size();
+        const int C = matrix[0].size();
 
         bool zeroInRow0 = false;
-        for (int j = 0; j < N; j++) {
-            if (matrix[0][j] == 0) {
+        for (int c = 0; c < C; c++) {
+            if (matrix[0][c] == 0) {
                 zeroInRow0 = true;
                 break;
             }
         }
-        bool zeroInColumn0 = false;
-        for (int i = 0; i < M; i++) {
-            if (matrix[i][0] == 0) {
-                zeroInColumn0 = true;
+        bool zeroInCol0 = false;
+        for (int r = 0; r < R; r++) {
+            if (matrix[r][0] == 0) {
+                zeroInCol0 = true;
                 break;
             }
         }
         
-        for (int i = 1; i < M; i++) {
-            for (int j = 1; j < N; j++) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+        for (int r = 1; r < R; r++) {
+            for (int c = 1; c < C; c++) {
+                if (matrix[r][c] == 0) {
+                    matrix[r][0] = 0;
+                    matrix[0][c] = 0;
                 }
             }
         }
         // 清零
-        for (int i = 1; i < M; i++) {
-            for (int j = 1; j < N; j++) {
-                if (matrix[0][j] == 0 || matrix[i][0] == 0) {
-                    matrix[i][j] = 0;
+        for (int r = 1; r < R; r++) {
+            for (int c = 1; c < C; c++) {
+                if (matrix[0][c] == 0 || matrix[r][0] == 0) {
+                    matrix[r][c] = 0;
                 }
             }
         }
         if (zeroInRow0) {
-            for (int j = 0; j < N; j++) {
-                matrix[0][j] = 0;
+            for (int c = 0; c < C; c++) {
+                matrix[0][c] = 0;
             }
         }
-        if (zeroInColumn0) {
-            for (int i = 0; i < M; i++) {
-                matrix[i][0] = 0;
+        if (zeroInCol0) {
+            for (int r = 0; r < R; r++) {
+                matrix[r][0] = 0;
             }
         }
     }

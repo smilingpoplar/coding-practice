@@ -16,21 +16,20 @@ public:
     int maximalRectangle(vector<vector<char>>& matrix) {
         // 把M行N列的矩阵看作M个以第i行为底的直方图，直方图从底往上计算高度直到碰见0
         if (matrix.empty()) return 0;
-        const int M = (int)matrix.size();
-        const int N = (int)matrix[0].size();
-        int largestRectangle = 0;
-        vector<int> h(N, 0);
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (matrix[i][j] == '0') h[j] = 0;
-                else ++h[j];
+        const int R = matrix.size();
+        const int C = matrix[0].size();
+        int ans = 0;
+        vector<int> h(C, 0);
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
+                if (matrix[r][c] == '0') h[c] = 0;
+                else ++h[c];
             }
-            largestRectangle = max(largestRectangle, largestRectangleInHistogram(h));
+            ans = max(ans, largestRectangleInHistogram(h));
         }
-        return largestRectangle;
+        return ans;
     }
 
-private:
     int largestRectangleInHistogram(const vector<int> &h) {
         // 同https://leetcode.com/problems/largest-rectangle-in-histogram/
         // 包含h[i]的最大矩形块，要将i往左往右扩展到高度小于它的位置
@@ -38,7 +37,7 @@ private:
         // h[i]>=h[top]就把i入栈，h[i]<h[top]就把top出栈并计算包含h[top]的最大矩形块面积，
         // 可以计算是因为已知：top处往左，高度小于它的位置是新栈顶位置；top处往右，高度小于它的位置是i
         
-        const int N = (int)h.size();
+        const int N = h.size();
         int largestArea = 0;
         vector<int> stack;
         int i = 0;

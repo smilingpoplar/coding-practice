@@ -15,31 +15,31 @@ class Solution {
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
         if (board.empty()) return true;
-        const int M = (int)board.size();
-        const int N = (int)board[0].size();
+        const int R = board.size();
+        const int C = board[0].size();
         
         vector<bool> used(9, false); // 数[1,9]是否被用过
         // 检查行
-        for (int i = 0; i < M; i++) {
+        for (int r = 0; r < R; r++) {
             fill(used.begin(), used.end(), false);
-            for (int j = 0; j < N; j++) {
-                if (!isValid(board[i][j], used)) return false;
+            for (int c = 0; c < C; c++) {
+                if (!isValid(board[r][c], used)) return false;
             }
         }
         // 检查列
-        for (int j = 0; j < N; j++) {
+        for (int c = 0; c < C; c++) {
             fill(used.begin(), used.end(), false);
-            for (int i = 0; i < M; i++) {
-                if (!isValid(board[i][j], used)) return false;
+            for (int r = 0; r < R; r++) {
+                if (!isValid(board[r][c], used)) return false;
             }
         }
         // 检查小格
-        for (int startI = 0; startI < M; startI += 3) {
-            for (int startJ = 0; startJ < N; startJ += 3) {
+        for (int startR = 0; startR < R; startR += 3) {
+            for (int startC = 0; startC < C; startC += 3) {
                 fill(used.begin(), used.end(), false);
-                for (int i = startI; i < startI + 3; i++) {
-                    for (int j = startJ; j < startJ + 3; j++) {
-                        if (!isValid(board[i][j], used)) return false;
+                for (int r = startR; r < startR + 3; r++) {
+                    for (int c = startC; c < startC + 3; c++) {
+                        if (!isValid(board[r][c], used)) return false;
                     }
                 }
             }

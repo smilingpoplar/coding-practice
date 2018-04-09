@@ -14,19 +14,19 @@ using namespace std;
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // 矩阵旋转90度的问题先转置再观察，观察知应转置后再把行反转，(i,j)=>(j,N-1-i)
-        // 置换组：(i,j) => (j,N-1-i) => (N-1-i,N-1-j) => (N-1-j,i) => (i,j)
+        // 矩阵旋转90度的问题先转置再观察，观察知应转置后再把行反转，(r,c)=>(c,C-1-r)
+        // 置换组：(r,c) => (c,C-1-r) => (C-1-r,C-1-c) => (C-1-c,r) => (r,c)
         // 取倒三角形的1/4矩阵进行置换
         if (matrix.empty()) return;
-        const int M = (int)matrix.size();
-        const int N = (int)matrix[0].size();
-        for (int i = 0; i < M / 2; i++) {
-            for (int j = i; j < N - 1 - i; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[N - 1 - j][i];
-                matrix[N - 1 - j][i] = matrix[N - 1 - i][N - 1 - j];
-                matrix[N - 1 - i][N - 1 - j] = matrix[j][N - 1 - i];
-                matrix[j][N - 1 - i] = temp;
+        const int R = matrix.size();
+        const int C = matrix[0].size();
+        for (int r = 0; r < R / 2; r++) {
+            for (int c = r; c < C - 1 - r; c++) {
+                int tmp = matrix[r][c];
+                matrix[r][c] = matrix[C - 1 - c][r];
+                matrix[C - 1 - c][r] = matrix[C - 1 - r][C - 1 - c];
+                matrix[C - 1 - r][C - 1 - c] = matrix[c][C - 1 - r];
+                matrix[c][C - 1 - r] = tmp;
             }
         }
     }
@@ -41,9 +41,9 @@ int main(int argc, const char * argv[]) {
     
     Solution solution;
     solution.rotate(matrix);
-    for (int i = 0; i < matrix.size(); i++) {
-        for (int j = 0; j < matrix[0].size(); j++) {
-            cout << matrix[i][j] << " ";
+    for (int r = 0; r < matrix.size(); r++) {
+        for (int c = 0; c < matrix[0].size(); c++) {
+            cout << matrix[r][c] << " ";
         }
         cout << endl;
     }

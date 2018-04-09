@@ -21,8 +21,8 @@ public:
         vector<vector<int>> matrix(r, vector<int>(c));
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
-                int index = i * N + j;
-                matrix[index / c][index % c] = nums[i][j];
+                int idx = i * N + j;
+                matrix[idx / c][idx % c] = nums[i][j];
             }
         }
         return matrix;

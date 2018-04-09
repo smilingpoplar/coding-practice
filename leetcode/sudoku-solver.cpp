@@ -20,16 +20,16 @@ public:
 private:
     bool solve(vector<vector<char>> &board) {
         // 尝试填空格，然后测试是否合法
-        const int M = (int)board.size();
-        const int N = (int)board[0].size();
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (board[i][j] == '.') {
-                    for (char c = '1'; c <= '9'; c++) {
-                        board[i][j] = c;
-                        if (isValid(i, j, board) && solve(board)) return true;
+        const int R = board.size();
+        const int C = board[0].size();
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
+                if (board[r][c] == '.') {
+                    for (char ch = '1'; ch <= '9'; ch++) {
+                        board[r][c] = ch;
+                        if (isValid(r, c, board) && solve(board)) return true;
                     }
-                    board[i][j] = '.';
+                    board[r][c] = '.';
                     return false;
                 }
             }
@@ -37,22 +37,22 @@ private:
         return true;
     }
     
-    bool isValid(int x, int y, const vector<vector<char>> &board) {
+    bool isValid(int row, int col, const vector<vector<char>> &board) {
         if (board.empty()) return false;
-        const int M = (int)board.size();
-        const int N = (int)board[0].size();
+        const int R = board.size();
+        const int C = board[0].size();
         // 检查行
-        for (int i = 0; i < N; i++) {
-            if (i != y && board[x][i] == board[x][y]) return false;
+        for (int c = 0; c < C; c++) {
+            if (c != col && board[row][c] == board[row][col]) return false;
         }
         // 检查列
-        for (int i = 0; i < M; i++) {
-            if (i != x && board[i][y] == board[x][y]) return false;
+        for (int r = 0; r < R; r++) {
+            if (r != row && board[r][col] == board[row][col]) return false;
         }
         // 检查小格
-        for (int startI = x / 3 * 3, i = startI; i < startI + 3; i++) {
-            for (int startJ = y / 3 * 3, j = startJ; j < startJ + 3; j++) {
-                if ((i != x || j != y) && board[i][j] == board[x][y]) return false;
+        for (int startR = row / 3 * 3, r = startR; r < startR + 3; r++) {
+            for (int startC = col / 3 * 3, c = startC; c < startC + 3; c++) {
+                if ((r != row || c != col) && board[r][c] == board[row][col]) return false;
             }
         }
         return true;
