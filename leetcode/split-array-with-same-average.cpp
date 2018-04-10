@@ -31,7 +31,7 @@ public:
         dp[0][0] = true;
         for (int num : A) {
             for (int v = sum; v >= num; v--) { // 01背包，逆序遍历
-                for (int k = 1; k <= N / 2; k++) { // 只选择k个
+                for (int k = 1; k <= N / 2; k++) { // 最内层加个循环，只选择k个
                     dp[k][v] = dp[k][v] || dp[k-1][v-num];
                 }
             }
