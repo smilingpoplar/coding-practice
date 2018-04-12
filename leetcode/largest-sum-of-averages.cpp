@@ -29,7 +29,7 @@ public:
         for (int i = 0; i < N; i++) {
             dp[i] = sum[i] / (i + 1); // 不分段k=1
         }
-        for (int k = 0; k < K - 1; k++) { // 最多再分K-1次
+        for (int k = 2; k <= K; k++) {
             for (int i = N - 1; i >= 0; i--) {
                 for (int j = 0; j < i; j++) {
                     dp[i] = max(dp[i], dp[j] + (sum[i] - sum[j]) / (i - j));
