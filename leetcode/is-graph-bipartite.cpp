@@ -17,16 +17,16 @@ public:
         const int N = graph.size();
         vector<int> color(N, -1);
         for (int i = 0; i < N; i++) {
-            if (color[i] == -1 && !dfs(i, 0, graph, color)) return false;
+            if (color[i] == -1 && !validColor(i, 0, graph, color)) return false;
         }
         return true;
     }
     
-    bool dfs(int node, int c, vector<vector<int>>& graph, vector<int> &color) {
+    bool validColor(int node, int c, vector<vector<int>>& graph, vector<int> &color) {
         if (color[node] != -1) return color[node] == c;
         color[node] = c;
         for (int neighbor : graph[node]) {
-            if (!dfs(neighbor, 1 - c, graph, color)) return false;
+            if (!validColor(neighbor, 1 - c, graph, color)) return false;
         }
         return true;
     }
