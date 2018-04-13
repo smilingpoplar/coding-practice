@@ -34,8 +34,7 @@ public:
             vector<int> newLeaves;
             for (int u : leaves) {
                 for (int v : adj[u]) {
-                    degree[v]--;
-                    if (degree[v] == 1) newLeaves.push_back(v);
+                    if (--degree[v] == 1) newLeaves.push_back(v);
                 }
             }
             swap(leaves, newLeaves);
