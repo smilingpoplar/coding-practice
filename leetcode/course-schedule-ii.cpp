@@ -23,27 +23,23 @@ public:
         }
         // 0: UNVISITED, 1: VISITING, 2: VISITED
         vector<int> color(numCourses, 0);
-        stack<int> stk;
-        for (int i = 0; i < numCourses; i++) {
-            if (hasCycle(i, graph, color, stk)) return {};
-        }
         vector<int> ans;
-        while (!stk.empty()) {
-            ans.push_back(stk.top());
-            stk.pop();
+        for (int i = 0; i < numCourses; i++) {
+            if (hasCycle(i, graph, color, ans)) return {};
         }
+        reverse(ans.begin(), ans.end()); // 逆拓扑排序
         return ans;
     }
 private:
     bool hasCycle(int u, const vector<unordered_set<int>> &graph, 
-                  vector<int> &color, stack<int> &stk) {
+                  vector<int> &color, vector<int> &ans) {
         if (color[u] != 0) return color[u] == 1;
         color[u] = 1;
         for (int v : graph[u]) {
-            if (hasCycle(v, graph, color, stk)) return true;
+            if (hasCycle(v, graph, color, ans)) return true;
         }
         color[u] = 2;
-        stk.push(u);
+        ans.push_back(u);
         return false;
     }
 };
