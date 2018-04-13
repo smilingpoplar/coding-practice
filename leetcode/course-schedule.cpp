@@ -16,34 +16,26 @@ using namespace std;
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 有向图无环，即dfs时不存在回边，见图算法3.2章（回边：访问后序编号较大的节点）
-        // 生成图
+        // 每个节点用dfs查环，即dfs时遇到标记为VISITING的节点
+        // 0: UNVISITED, 1: VISITING, 2: VISITED
         vector<unordered_set<int>> graph(numCourses);
         for (const auto &edge : prerequisites) {
             graph[edge.second].insert(edge.first);
         }
-        // 遍历图
-        vector<bool> visited(numCourses, false);
-        vector<int> post(numCourses, -1);
-        int order = 0;
+        vector<int> color(numCourses, 0);
         for (int i = 0; i < numCourses; i++) {
-            if (!visited[i]) {
-                if (hasCycle(i, graph, visited, post, order)) return false;
-            }
+            if (hasCycle(i, graph, color)) return false;
         }
         return true;
     }
 private:
-    bool hasCycle(int v, const vector<unordered_set<int>> &graph, vector<bool> &visited, vector<int> &post, int &order) {
-        visited[v] = true;
-        for (int next : graph[v]) {
-            if (!visited[next]) {
-                if (hasCycle(next, graph, visited, post, order)) return true;
-            } else if (post[next] == -1) {
-                return true; // 回边
-            }
+    bool hasCycle(int u, const vector<unordered_set<int>> &graph, vector<int> &color) {
+        if (color[u] != 0) return color[u] == 1;
+        color[u] = 1;
+        for (int v : graph[u]) {
+            if (hasCycle(v, graph, color)) return true;
         }
-        post[v] = order++;
+        color[u] = 2;
         return false;
     }
 };
@@ -54,32 +46,23 @@ private:
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 有向图无环，即bfs不断删除源点能完成所有点的拓扑排序，见图算法3.6章（源点：入度为0的点）
-        // 生成图
+        // 拓扑排序：不断删除入度为0的点，其实就是bfs
         vector<unordered_set<int>> graph(numCourses);
+        vector<int> indegree(numCourses, 0);
         for (auto &edge : prerequisites) {
             graph[edge.second].insert(edge.first);
+            indegree[edge.first]++;
         }
-        // 计算入度
-        vector<int> indegree(numCourses, 0);
+        queue<int> q;
         for (int i = 0; i < numCourses; i++) {
-            for (int to : graph[i]) {
-                ++indegree[to];
-            }
+            if (indegree[i] == 0) q.push(i);
         }
-        // 源点队列
-        queue<int> Q;
-        for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) Q.push(i);
-        }
-        // 不断删除源点
         int count = 0;
-        while (!Q.empty()) {
-            int u = Q.front(); Q.pop();
+        while (!q.empty()) {
+            int u = q.front(); q.pop();
             count++;
             for (int to : graph[u]) {
-                --indegree[to];
-                if (indegree[to] == 0) Q.push(to);
+                if (--indegree[to] == 0) q.push(to);
             }
         }
         return count == numCourses;

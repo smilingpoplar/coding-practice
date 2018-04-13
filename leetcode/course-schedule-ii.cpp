@@ -16,41 +16,34 @@ using namespace std;
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
-        // 求拓扑排序，即求逆图上的逆拓扑排序，而逆拓扑排序又由后序编号生成，所以先求逆图上的后序编号
-        // 生成逆图
+        // dfs后序编号是逆拓扑排序
         vector<unordered_set<int>> graph(numCourses);
         for (auto &edge : prerequisites) {
-            graph[edge.first].insert(edge.second);
+            graph[edge.second].insert(edge.first);
         }
-        // 遍历图，dfs时若存在回边则有环（回边：访问后序编号较大的节点）
-        vector<bool> visited(numCourses, false);
-        vector<int> post(numCourses, -1);
-        int order = 0;
+        // 0: UNVISITED, 1: VISITING, 2: VISITED
+        vector<int> color(numCourses, 0);
+        stack<int> stk;
         for (int i = 0; i < numCourses; i++) {
-            if (!visited[i]) {
-                if (hasCycle(i, graph, visited, post, order)) {
-                    return {};
-                }
-            }
+            if (hasCycle(i, graph, color, stk)) return {};
         }
-        // 由后序编号生成逆拓扑排序
-        vector<int> topoI(numCourses);
-        for (int i = 0; i < numCourses; i++) {
-            topoI[post[i]] = i;  // 课程i在第post[i]个学
+        vector<int> ans;
+        while (!stk.empty()) {
+            ans.push_back(stk.top());
+            stk.pop();
         }
-        return topoI;
+        return ans;
     }
 private:
-    bool hasCycle(int v, const vector<unordered_set<int>> &graph, vector<bool> &visited, vector<int> &post, int &order) {
-        visited[v] = true;
-        for (int next : graph[v]) {
-            if (!visited[next]) {
-                if (hasCycle(next, graph, visited, post, order)) return true;
-            } else if (post[next] == -1) {
-                return true; // 回边
-            }
+    bool hasCycle(int u, const vector<unordered_set<int>> &graph, 
+                  vector<int> &color, stack<int> &stk) {
+        if (color[u] != 0) return color[u] == 1;
+        color[u] = 1;
+        for (int v : graph[u]) {
+            if (hasCycle(v, graph, color, stk)) return true;
         }
-        post[v] = order++;
+        color[u] = 2;
+        stk.push(u);
         return false;
     }
 };
@@ -62,29 +55,23 @@ class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
         // 拓扑排序，bfs不断删除入度为0的点，若完不成所有点的拓扑排序则有环
-        // 生成图
         vector<unordered_set<int>> adj(numCourses);
-        for (auto &edge : prerequisites) {
-            adj[edge.second].insert(edge.first);
-        }
-        // 计算入度
         vector<int> indegree(numCourses, 0);
-        for (int i = 0; i < numCourses; i++) {
-            for (int to : adj[i]) {
-                indegree[to]++;
-            }
+        for (const auto &edge : prerequisites) {
+            adj[edge.second].insert(edge.first);
+            indegree[edge.first]++;
         }
 
         vector<int> ans;
-        queue<int> Q;
+        queue<int> q;
         for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) Q.push(i);
+            if (indegree[i] == 0) q.push(i);
         }
-        while (!Q.empty()) {
-            int u = Q.front(); Q.pop();
+        while (!q.empty()) {
+            int u = q.front(); q.pop();
             ans.push_back(u);
             for (int to : adj[u]) {
-                if (--indegree[to] == 0) Q.push(to);
+                if (--indegree[to] == 0) q.push(to);
             }
         }
         if (ans.size() != numCourses) return {};
