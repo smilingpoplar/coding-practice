@@ -19,7 +19,7 @@ public:
         int distinct = 0, start = 0, ans = 0;
         for (int end = 0; end < s.size(); end++) {
             if (cnt[s[end]]++ == 0) distinct++;
-            while (distinct > k) { // 不满足条件时缩小窗口
+            while (distinct > k) { // 若是无效窗口、再移动start缩小窗口
                 if (--cnt[s[start]] == 0) distinct--;
                 start++;
             }

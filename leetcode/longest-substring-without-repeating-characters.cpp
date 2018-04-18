@@ -19,7 +19,7 @@ public:
         int start = 0, repeat = 0, ans = 0;
         for (int end = 0; end < s.size(); end++) {
             if (count[s[end]]++ > 0) repeat++;
-            while (repeat > 0) {
+            while (repeat > 0) { // 若是无效窗口、再移动start缩小窗口
                 if (--count[s[start]] > 0) repeat--;
                 start++;
             }
