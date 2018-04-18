@@ -13,17 +13,17 @@ using namespace std;
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> cnt; // sum=>count
         int runningSum = 0;
-        map<int, int> m; // sum=>count
-        m[runningSum] = 1; // 初始空集
+        cnt[runningSum] = 1; // 初始空集
         int total = 0;
         for (int num : nums) {
             runningSum += num;
             int toFind = runningSum - k;
-            if (m.count(toFind)) {
-                total += m[toFind];
+            if (cnt.count(toFind)) {
+                total += cnt[toFind];
             }
-            m[runningSum]++;
+            cnt[runningSum]++;
         }
         return total;
     }

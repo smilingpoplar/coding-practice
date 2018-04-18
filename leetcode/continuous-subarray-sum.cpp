@@ -14,11 +14,11 @@ class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
         unordered_map<int, int> mp; // sum =>pos
-        int runningSum = 0;  // 初始空集和
-        mp[runningSum] = -1;
-        // 在旧runningSum的集合mp中找runningSum-n*k，要找好多个数
-        // 这里的关键在于将全部runningSum%k，状态压缩
-        // 就变成在runningSum%k的集合mp中找(runningSum-n*k)%k=runningSum%k的值
+        int runningSum = 0;
+        mp[runningSum] = -1; // 初始空集
+        // 在旧runningSum的集合mp中找runningSum-n*k，要找好多个数。
+        // 这里的关键在于将全部runningSum%k，状态压缩。
+        // 这样就变成在runningSum%k的集合mp中找(runningSum-n*k)%k=runningSum%k
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i];
             if (k) runningSum %= k;
