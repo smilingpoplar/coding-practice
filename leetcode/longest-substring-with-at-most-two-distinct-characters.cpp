@@ -18,7 +18,7 @@ public:
         vector<int> cnt(128, 0);
         int distinct = 0, start = 0, ans = 0;
         for (int end = 0; end < s.size(); end++) {
-            if (++cnt[s[end]] == 1) distinct++;
+            if (cnt[s[end]]++ == 0) distinct++;
             while (distinct > 2) { // 不满足条件时缩小窗口
                 if (--cnt[s[start]] == 0) distinct--;
                 start++;

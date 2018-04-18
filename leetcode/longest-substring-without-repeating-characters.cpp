@@ -15,17 +15,15 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> count; // 用map记录各字符出现几次
-        int start = 0, end = 0, repeat = 0;
-        int ans = 0;
-        while (end < s.size()) {
-            if (++count[s[end]] > 1) repeat++;
-            end++;
+        unordered_map<char, int> count;
+        int start = 0, repeat = 0, ans = 0;
+        for (int end = 0; end < s.size(); end++) {
+            if (count[s[end]]++ > 0) repeat++;
             while (repeat > 0) {
                 if (--count[s[start]] > 0) repeat--;
                 start++;
             }
-            ans = max(ans, end - start);
+            ans = max(ans, end - start + 1);
         }
         return ans;
     }
