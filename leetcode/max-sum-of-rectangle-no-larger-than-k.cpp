@@ -26,15 +26,15 @@ public:
                 }
                 
                 // 在sum[]中找<=k的子段和
-                int runningSum = 0; // 初始空集和
-                set<int> S;
-                S.insert(runningSum);
+                int runningSum = 0;
+                set<int> st;
+                st.insert(runningSum); // 初始空集
                 for (int num : sum) {
                     runningSum += num;
-                    // 在S中找最小的x，使runningSum-x<=k，x>=runningSum-k
-                    auto it = S.lower_bound(runningSum - k);
-                    if (it != S.end()) ans = max(ans, runningSum - *it);
-                    S.insert(runningSum);
+                    // 在set中找最小的x，使runningSum-x<=k，x>=runningSum-k
+                    auto it = st.lower_bound(runningSum - k);
+                    if (it != st.end()) ans = max(ans, runningSum - *it);
+                    st.insert(runningSum);
                 }
             }           
         }
