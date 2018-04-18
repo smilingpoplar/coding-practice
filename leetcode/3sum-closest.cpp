@@ -14,12 +14,11 @@ using namespace std;
 class Solution {
 public:
     int threeSumClosest(vector<int>& nums, int target) {
-        const int N = (int)nums.size();
-        // assert(N >= 3);
+        const int N = nums.size();
+        if (N < 3) return INT_MAX;
         sort(nums.begin(), nums.end()); // 先排序再两端夹逼
         
-        int minDist = INT_MAX;
-        int ans;
+        int minDist = INT_MAX, ans;
         for (int a = 0; a < N - 2; a++) {
             int b = a + 1, c = N - 1;
             while (b < c) {

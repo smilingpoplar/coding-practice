@@ -20,7 +20,7 @@ public:
         const int N = nums.size();
         int ans = 0;
         for (int i = 0; i < N - 2; i++) {
-            // 两端指针法
+            // 两指针法
             int j = i + 1, k = N - 1;
             while (j < k) {
                 if (nums[j] + nums[k] < target - nums[i]) {

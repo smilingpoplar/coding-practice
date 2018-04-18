@@ -28,15 +28,15 @@ public:
                 if (sum == target) {
                     ans.push_back({nums[a], nums[b], nums[c]});
                     b++;
-                    while (b < c && nums[b] == nums[b - 1]) b++;
+                    while (b < c && nums[b] == nums[b-1]) b++;
                     c--;
-                    while (b < c && nums[c] == nums[c + 1]) c--;
+                    while (b < c && nums[c] == nums[c+1]) c--;
                 } else if (sum < target) {
                     b++;
-                    while (b < c && nums[b] == nums[b - 1]) b++;
+                    while (b < c && nums[b] == nums[b-1]) b++;
                 } else {
                     c--;
-                    while (b < c && nums[c] == nums[c + 1]) c--;
+                    while (b < c && nums[c] == nums[c+1]) c--;
                 }
             }
         }

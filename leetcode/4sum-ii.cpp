@@ -13,19 +13,18 @@ using namespace std;
 class Solution {
 public:
     int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
-        map<int, int> count; // sum=>count
+        unordered_map<int, int> cnt; // sum=>count
         for (int a : A) {
             for (int b : B) {
-                count[a + b]++;
+                cnt[a + b]++;
             }
         }
+
         int ans = 0;
         for (int c : C) {
             for (int d : D) {
-                int sum = c + d;
-                if (count.count(-sum)) {
-                    ans += count[-sum];
-                }
+                int sum = c + d, toFind = -sum;
+                if (cnt.count(toFind)) ans += cnt[toFind];
             }
         }
         return ans;
