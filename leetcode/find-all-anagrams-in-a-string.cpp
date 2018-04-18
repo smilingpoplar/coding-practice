@@ -19,16 +19,16 @@ public:
         int distinct = count.size(); // 要找多少个不同的字符
         
         vector<int> ans;
-        // 先移动end找到合法窗口，再移动start缩小窗口
+        // 每次移动一步end：若找到有效窗口、再移动start使窗口无效
         int start = 0, end = 0;
         while (end < s.size()) {
             if (--count[s[end]] == 0) distinct--;
             end++;
-            while (distinct == 0) { // 合法窗口
+            while (distinct == 0) { // 有效窗口
                 if (end - start == p.size()) {
                     ans.push_back(start);
                 }
-                if (++count[s[start]] == 1) distinct++;
+                if (count[s[start]]++ == 0) distinct++;
                 start++;
             }
         }

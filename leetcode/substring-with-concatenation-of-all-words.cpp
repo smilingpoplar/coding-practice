@@ -24,7 +24,7 @@ public:
         vector<int> ans;
         // s有M个起分点，构成M个序列，看每个序列有哪些子段满足条件
         for (int m = 0; m < M; m++) {
-            // 滑动窗口，先移动end使窗口有效，再移动start使窗口最小
+            // 滑动窗口，每次移动一步end：若找到有效窗口、再移动start使窗口无效
             auto theCount = count;
             auto theDistinct = distinct;
             int start = m, end = m;
@@ -32,12 +32,12 @@ public:
                 auto endWord = s.substr(end, M);
                 if (--theCount[endWord] == 0) theDistinct--;
                 end += M;
-                while (theDistinct == 0) { // 窗口有效
+                while (theDistinct == 0) { // 有效窗口
                     if (end - start == K * M) {
                         ans.push_back(start);
                     }
                     auto startWord = s.substr(start, M);
-                    if (++theCount[startWord] == 1) theDistinct++;
+                    if (theCount[startWord]++ == 0) theDistinct++;
                     start += M;
                 }
             }

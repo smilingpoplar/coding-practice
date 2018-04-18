@@ -38,7 +38,7 @@ public:
             }
             parent[pu] = pv; // unite
         }
-        return candB; // 无环，去掉后加入的导致两个父节点的边
+        return candB; // 无环，去掉后加入的导致出现两个父节点的边
     }
     
     int find(int x, vector<int> &parent) {

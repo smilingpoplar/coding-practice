@@ -29,7 +29,7 @@ public:
                     minWidth = end - start;
                     ansStart = start;
                 }
-                if (++count[s[start]] == 1) distinct++;
+                if (count[s[start]]++ == 0) distinct++;
                 start++;
             }
         }
