@@ -28,17 +28,18 @@ public:
     }
     
     vector<int> maxNumber(vector<int>& nums, int k) {
+        // 使组成的数最大：尽量取下一个更大的数；
+        // 取k个数：当栈内数字个数+剩余可压栈数字个数>k时才可pop()，栈内数字个数<k个时才可push()。
         const int N = nums.size();
-        vector<int> ans;
+        vector<int> stk;
         for (int i = 0; i < N; i++) {
-            // 栈内数字>=递减，当前数<=栈顶时入栈，所以栈顶<当前数时弹出
-            while (!ans.empty() && nums[i] > ans.back()
-                   && ans.size() + (N - i) > k) { // N-i是[i,N)的可压栈数字个数
-                ans.pop_back();
+            while (!stk.empty() && nums[i] > stk.back()
+                   && stk.size() + (N - i) > k) { // N-i是[i,N)的可压栈数字个数
+                stk.pop_back();
             }
-            if (ans.size() < k) ans.push_back(nums[i]);
+            if (stk.size() < k) stk.push_back(nums[i]);
         }
-        return ans;
+        return stk;
     }
     
     vector<int> merge(vector<int> &nums1, vector<int> &nums2) {
