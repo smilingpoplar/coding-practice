@@ -13,26 +13,24 @@ using namespace std;
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        unordered_map<char, int> count;
-        for (char c : s)
-            count[c]++;
+        vector<int> count(128);
+        for (char c : s) count[c]++;
         
-        unordered_set<char> selected;
-        vector<char> stk; // 让栈中保留递增序列
+        vector<bool> visited(128);
+        string stk; // 让栈中保留递增序列，对应"波峰"左侧，对应找下一个更小的数
         for (char c : s) {
             count[c]--;
-            // 当前字母已入栈，忽略掉，因为选新的并不能使结果更好
-            if (selected.count(c)) continue;
-            
-            while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) { // 栈顶可弹出
-                int top = stk.back();
+            if (visited[c]) continue; // 保证每个字母最多选一次
+            // count[stk.back()]>0时才弹出，说明字母有富余时才弹出，保证每个字母最少选一次
+            while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) {
+                int pop = stk.back();
                 stk.pop_back();
-                selected.erase(top);
+                visited[pop] = false;
             }
             stk.push_back(c);
-            selected.insert(c);
+            visited[c] = true;
         }
-        return string(stk.begin(), stk.end());
+        return stk;
     }
 };
 
