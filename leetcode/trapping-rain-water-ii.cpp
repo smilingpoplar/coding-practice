@@ -17,7 +17,7 @@ public:
         // 用优先队列的遍历算法
         if (heightMap.empty()) return 0;
         const int R = heightMap.size();
-        const int C = heightMap[0].size();        
+        const int C = heightMap[0].size();
         // 队列元素int[3]: { row, col, heightWithWater }
         // 高度最小的先出队处理
         auto cmp = [&](vector<int> &a, vector<int> &b) {

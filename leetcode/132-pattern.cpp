@@ -15,23 +15,26 @@ using namespace std;
 class Solution {
 public:
     bool find132pattern(vector<int>& nums) {
-        const int N = (int)nums.size();
+        const int N = nums.size();
         if (N < 3) return false;
-        // 左边找最小值
+        // 当前数左边找最小数
         vector<int> leftMin(N);
         leftMin[0] = INT_MAX;
         for (int i = 1; i < N; i++) {
-            leftMin[i] = min(nums[i - 1], leftMin[i - 1]);
+            leftMin[i] = min(nums[i-1], leftMin[i-1]);
         }
-        // 右边小于当前值的最大值，相当于从右往左找下一个更大的数，用栈
-        stack<int> S;
-        for (int j = N - 1; j >= 0; j--) {
+        // 当前数右边找小于它的最大数，相当于从右往左找下一个更大的数，用栈
+        stack<int> stk;
+        for (int j = N - 1; j >= 0; --j) {
             int rMax = INT_MIN;
-            while (!S.empty() && nums[j] > S.top()) {
-                rMax = S.top();
-                S.pop();
+            while (!stk.empty() && nums[j] > stk.top()) {
+                // 对弹出数来说，当前数nums[j]是下一个更大的数
+                // 对当前数来说，弹出数是小于它的数，且最后弹出的是其中的最大值
+                rMax = stk.top();
+                stk.pop();
             }
-            S.push(nums[j]);
+            stk.push(nums[j]);
+            
             if (leftMin[j] < rMax) return true;
         }
         return false;

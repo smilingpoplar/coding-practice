@@ -41,17 +41,17 @@ public:
 class Solution {
 public:
     int trap(vector<int>& height) {
-        // 用栈找“低谷”
+        // 用栈找"波谷"
         int ans = 0;
         stack<int> stk;
         for (int i = 0; i < height.size(); i++) {
             while (!stk.empty() && height[i] > height[stk.top()]) {
-                int top = stk.top();
-                stk.pop();
+                int valley = stk.top(); stk.pop();
                 if (stk.empty()) break;
-                int newTop = stk.top();
-                int w = i - newTop - 1;
-                int h = min(height[i], height[newTop]) - height[top]; 
+                int left = stk.top();
+                // "波谷"的右i和左left都比它高，贡献一个水层
+                int w = i - left - 1;
+                int h = min(height[i], height[left]) - height[valley];
                 ans += w * h;
             }
             stk.push(i);
