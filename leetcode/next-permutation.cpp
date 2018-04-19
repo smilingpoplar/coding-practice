@@ -15,23 +15,19 @@ class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
         // 生成"下一排列"：
-        // 1. 从右往左看，找第一个峰顶下来的数，即第一个递减的数nums[i]<nums[i+1]
-        // 2. nums[i]跟它后面刚好稍大的数交换，因为从右往左看后面是个递增序列，找第一个nums[j]>nums[i]
-        // 3. 交换nums[i]和nums[j]，交换后nums[i+1..]的增减特征不变
-        // 4. 反转nums[i+1..]以排序
+        // 1. 从右往左看，找第一个波峰前的数，即找第一个nums[i]<nums[i+1]的位置i
+        // 2. 在i右边、从波峰往右是个递减序列，从右往左找第一个比nums[i]大的数，即找第一个nums[j]>nums[i]的位置j
+        // 3. 交换nums[i]和nums[j]，交换后从波峰往右仍是个递减序列
+        // 4. 反转从波峰往右这个递减序列
         const int N = nums.size();
         int i = N - 2;
-        while (i >= 0 && nums[i] >= nums[i + 1]) {
-            --i;
-        }
-        if (i < 0) { // 后面全是从右往左看的递增序列
+        while (i >= 0 && nums[i] >= nums[i+1]) i--;
+        if (i < 0) {
             reverse(nums.begin(), nums.end());
             return;
         }
         int j = N - 1;
-        while (j > i && nums[j] <= nums[i]) {
-            --j;
-        }
+        while (j > i && nums[j] <= nums[i]) j--;
         swap(nums[i], nums[j]);
         reverse(nums.begin() + i + 1, nums.end());
     }

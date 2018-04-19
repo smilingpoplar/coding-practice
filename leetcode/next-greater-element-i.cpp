@@ -14,13 +14,13 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
         unordered_map<int, int> mp;
-        stack<int> s;
+        stack<int> stk;
         for (int num : nums) {
-            while (!s.empty() && num > s.top()) {
-                mp[s.top()] = num;
-                s.pop();
+            while (!stk.empty() && num > stk.top()) {
+                mp[stk.top()] = num;
+                stk.pop();
             }
-            s.push(num);
+            stk.push(num);
         }
         
         vector<int> ans;
