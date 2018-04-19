@@ -7,44 +7,45 @@
 //
 
 #include <iostream>
-#include <vector>
+#include <stack>
 
 using namespace std;
 
 class MinStack {
+    stack<int> stk;    // 存储所有值
+    stack<int> minStk; // 存储当前最小值
 public:
-    // 用两个栈，一个栈存储所有值，一个栈存储当前最小值
+    /** initialize your data structure here. */
+    MinStack() {    
+    }
+
     void push(int x) {
-        if (minStack.empty() || x <= minStack.back()) minStack.push_back(x);
-        stack.push_back(x);
+        if (minStk.empty() || x <= minStk.top()) minStk.push(x);
+        stk.push(x);
     }
     
     void pop() {
-        if (stack.back() == minStack.back()) minStack.pop_back();
-        stack.pop_back();
+        if (stk.top() == minStk.top()) minStk.pop();
+        stk.pop();
     }
     
     int top() {
-        return stack.back();
+        return stk.top();
     }
     
     int getMin() {
-        return minStack.back();
+        return minStk.top();
     }
-    
-private:
-    vector<int> stack;    // 存储所有值
-    vector<int> minStack; // 存储当前最小值
 };
 
 int main(int argc, const char * argv[]) {
-    MinStack minStack;
-    minStack.push(1);
-    minStack.push(2);
-    minStack.push(3);
-    minStack.pop();
-    cout << minStack.top() << endl;
-    cout << minStack.getMin() << endl;
+    MinStack minStk;
+    minStk.push(1);
+    minStk.push(2);
+    minStk.push(3);
+    minStk.pop();
+    cout << minStk.top() << endl;
+    cout << minStk.getMin() << endl;
     
     return 0;
 }
