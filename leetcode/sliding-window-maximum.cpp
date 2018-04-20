@@ -15,23 +15,19 @@ using namespace std;
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        // sliding window maximum/minimum = monotonic queue
-        // 用dequeue保存nums索引，索引i进队列前从队尾不断弹出 对应元素<nums[i]的索引x
-        // 因为nums[x]<nums[i]不可能是窗口[i-k+1,i]及后续窗口的最大元素（nums[i]是更好的选择）
-        // dequeue始终保存着单调递减序列的索引，队头是当前窗口最大值的索引
-        // 参考：https://leetcode.com/discuss/46578/java-o-n-solution-using-deque-with-explanation
-        
-        vector<int> result;
+        // 双端队列deque保存当前窗口中最大值的下标，当前窗口指右端为i的窗口nums[i-k+1..i]
+        // 当前数>队尾时，队尾不可能是最大值，队尾可弹出。
+        // 当前数>队尾 <=> 找波谷 <=> deque对应波谷左侧、是递减序列 <=> 队头是当前窗口的最大值
+        vector<int> ans;
         deque<int> dq;
         for (int i = 0; i < nums.size(); i++) {
-            if (!dq.empty() && dq.front() == i - k) dq.pop_front();
-            while (!dq.empty() && nums[dq.back()] < nums[i]) {
+            if (!dq.empty() && i - dq.front() + 1 > k) dq.pop_front();
+            while (!dq.empty() && nums[i] > nums[dq.back()]) 
                 dq.pop_back();
-            }
             dq.push_back(i);
-            if (i >= k - 1) result.push_back(nums[dq.front()]);
+            if (i - k + 1 >= 0) ans.push_back(nums[dq.front()]);
         }
-        return result;
+        return ans;
     }
 };
 
