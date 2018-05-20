@@ -21,7 +21,7 @@ public:
         for (char c : s) {
             count[c]--;
             if (visited[c]) continue; // 保证每个字母最多选一次
-            // count[stk.back()]>0时才弹出，说明字母有富余时才弹出，保证每个字母最少选一次
+            // 字母有富余count[stk.top()]>0时才弹出，保证每个字母最少选一次
             while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) {
                 int pop = stk.back();
                 stk.pop_back();
