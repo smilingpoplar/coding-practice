@@ -22,16 +22,17 @@ public:
         // 子集和问题是01背包问题
         // 设dp[i][k][v]表示能否从前i个数中取k个数，它们的子集和等于v。
         // 考虑第i个数，dp[i][k][v] = dp[i-1][k][v]/*不取第i个数*/ || dp[i-1][k-1][v-num] /*取第i个数*/
-        // dp[i][k][]只依赖于前一项dp[i-1][][]，可省掉i这一维
-        // dp[k][v] = dp[k][v] || dp[k-1][v-num]
+        // dp[i][][]只依赖于前一项dp[i-1][][]，可省掉i这一维。
+        // 01背包问题，逆序遍历k和v：dp[k][v] = dp[k][v] || dp[k-1][v-num]
         int sum = 0;
         for (int num : A) sum += num;
         const int N = A.size();
         vector<vector<bool>> dp(N / 2 + 1, vector<bool>(sum + 1, false));
         dp[0][0] = true;
-        for (int num : A) {
-            for (int v = sum; v >= num; v--) { // 01背包，逆序遍历
-                for (int k = 1; k <= N / 2; k++) { // 最内层加个循环，只选择k个
+        for (int num : A) { 
+            // 01背包，逆序遍历k和v
+            for (int k = N / 2; k >= 1; k--) {
+                for (int v = sum; v >= num; v--) {
                     dp[k][v] = dp[k][v] || dp[k-1][v-num];
                 }
             }

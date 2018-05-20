@@ -24,7 +24,7 @@ public:
         dp[0] = 1;
         for (int num : nums) {
             for (int j = sum; j >= num; j--) { // 逆序循环
-                dp[j] += dp[j - num];
+                dp[j] += dp[j-num];
             }
         }
         return dp[sum];

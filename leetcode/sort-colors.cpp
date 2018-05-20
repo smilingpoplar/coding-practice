@@ -16,23 +16,21 @@ public:
     void sortColors(vector<int>& nums) {
         // 一遍扫描，把0都堆到[0,i0)，把2都堆到(i2,N-1]
         // 不变式：
-        // | == 0 | == 1 |  ?  | == 2 |
-        // [0     [i0    [i  i2]   N-1]
+        // | = 0 | = 1 |  ?  | = 2 |
+        // [0    [i0   [i  i2]  N-1]
         const int N = (int)nums.size();
-        int i0 = 0;
-        int i2 = N - 1;
-        int i = 0;
+        int i0 = 0, i = 0, i2 = N - 1;
         while (i <= i2) {
             if (nums[i] < 1) {
                 swap(nums[i], nums[i0]);
-                ++i0;
-                ++i; // 换过来的是1
+                i0++;
+                i++; // 换过来的是1
             } else if (nums[i] > 1) {
                 swap(nums[i], nums[i2]);
-                --i2;
-                // 换过来的是?，不能++i
+                i2--;
+                // 换过来的是?，不能i++
             } else {
-                ++i;
+                i++;
             }
         }
     }

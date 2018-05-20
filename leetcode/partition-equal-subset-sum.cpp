@@ -26,7 +26,7 @@ public:
         dp[0] = true;
         for (int num : nums) {
             for (int j = sum; j >= num; j--) {
-                dp[j] = dp[j] || dp[j - num];
+                dp[j] = dp[j] || dp[j-num];
             }
         }
         return dp[sum];
