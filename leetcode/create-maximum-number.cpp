@@ -22,14 +22,14 @@ public:
             auto maxNum1 = maxNumber(nums1, i);
             auto maxNum2 = maxNumber(nums2, k - i);
             auto merged = merge(maxNum1, maxNum2);
-            if (isLarger(merged, 0, ans, 0)) ans = merged;
+            if (isLargerOrEqual(merged, 0, ans, 0)) ans = merged;
         }
         return ans;
     }
     
     vector<int> maxNumber(vector<int>& nums, int k) {
-        // 使组成的数最大：尽量取下一个更大的数；
-        // 取k个数：当栈内数字个数+剩余可压栈数字个数>k时才可pop()，栈内数字个数<k个时才可push()。
+        // 使组成的数最大：栈中是递减序列，对应取下一个更大的数；
+        // 取k个数：当栈内数字个数+剩余可压栈个数>k时才可pop()，栈内数字个数<k个时才可push()
         const int N = nums.size();
         vector<int> stk;
         for (int i = 0; i < N; i++) {
@@ -46,14 +46,14 @@ public:
         vector<int> ans;
         int size = nums1.size() + nums2.size();
         for (int i = 0, j = 0, k = 0; k < size; k++) {
-            if (isLarger(nums1, i, nums2, j)) ans.push_back(nums1[i++]);
+            if (isLargerOrEqual(nums1, i, nums2, j)) ans.push_back(nums1[i++]);
             else ans.push_back(nums2[j++]);
         }
         return ans;
     }
        
     // 比较nums1[i1..]和nums2[i2..]的大小
-    bool isLarger(vector<int> &nums1, int i1, vector<int> &nums2, int i2) {
+    bool isLargerOrEqual(vector<int> &nums1, int i1, vector<int> &nums2, int i2) {
         while (i1 < nums1.size() && i2 < nums2.size() && nums1[i1] == nums2[i2]) {
             i1++;
             i2++;
