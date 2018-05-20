@@ -23,13 +23,11 @@ public:
         for (int i = 1; i < N; i++) {
             leftMin[i] = min(nums[i-1], leftMin[i-1]);
         }
-        // 当前数右边找小于它的最大数，相当于从右往左找下一个更大的数，用栈
+        // 当前数右边找小于它的最大数，相当于：从右往左找下一个更大的数时，记录最后弹出的数
         stack<int> stk;
-        for (int j = N - 1; j >= 0; --j) {
+        for (int j = N - 1; j >= 0; j--) {
             int rMax = INT_MIN;
             while (!stk.empty() && nums[j] > stk.top()) {
-                // 对弹出数来说，当前数nums[j]是下一个更大的数
-                // 对当前数来说，弹出数是小于它的数，且最后弹出的是其中的最大值
                 rMax = stk.top();
                 stk.pop();
             }
