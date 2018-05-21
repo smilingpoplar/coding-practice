@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        // 找第一个 nums[mid] != nums[mid^1] 的数
+        // 每两个数配对，找第一个不配对的数，即找第一个 nums[mid]!=nums[mid^1] 的数
         int l = 0, u = nums.size() - 1;
         while (l <= u) {
             int mid = l + (u - l) / 2;
