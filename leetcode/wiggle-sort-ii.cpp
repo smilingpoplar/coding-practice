@@ -15,13 +15,10 @@ class Solution {
 public:
     void wiggleSort(vector<int>& nums) {
         const int N = nums.size();
-        int median = findKthLargest(nums, (N + 1) / 2, 0, N - 1);
-        // 虚拟索引，见 https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)+O(1)-after-median-Virtual-Indexing
-        // [0 1 2 3 4 5 ...] => [1 3 5 ...0 2 4 ...]，映射关系：i => (2*i+1) % (N|1)
-        // 为什么是 % (N|1)，用例子推导得到，这映射关系只适用于降序划分
-        auto idx = [&](int i) { 
-            return (2*i+1) % (N|1);
-        };
+        int median = findKthLargest(nums, 0, N - 1, (N + 1) / 2);
+        // 虚拟下标映射：i => (2*i+1) % (N|1)
+        // 见 https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)+O(1)-after-median-Virtual-Indexing
+        auto idx = [&](int i) { return (2*i+1) % (N|1); };
         // 三路划分：>median、==median、<median
         int i = 0, j = 0, k = nums.size() - 1;
         while (j <= k) {
@@ -38,29 +35,26 @@ public:
         }
     }
 
-    int findKthLargest(vector<int>& nums, int k, int l, int u) {
+    int findKthLargest(vector<int>& nums, int l, int u, int k) {
         int p = partition(nums, l, u);
         int order = p - l + 1; // nums[p]是第几大的数
         if (k == order) return nums[p];
-        if (k < order) return findKthLargest(nums, k, l, p - 1);
-        return findKthLargest(nums, k - order, p + 1, u);
+        if (k < order) return findKthLargest(nums, l, p - 1, k);
+        return findKthLargest(nums, p + 1, u, k - order);
     }
 
-    // 单向划分：>t、<=t
     int partition(vector<int> &nums, int l, int u) {
         if (l >= u) return l;
-        int i = l + 1, j = u; // i指向>t的待写入部分，j指向<=t的待写入部分
-        while (i <= j) {
+        // 单向划分，将数组分为>t、<=t、?三段
+        int m = l; // m指向第一段末尾、i指向第三段开头
+        for (int i = l + 1; i <= u; i++) {
             if (nums[i] > nums[l]) {
-                ++i;
-            } else {
-                swap(nums[i], nums[j]);
-                --j;
+                swap(nums[i], nums[++m]);
             }
         }
-        swap(nums[j], nums[l]);
-        return j;
-    }    
+        swap(nums[m], nums[l]);
+        return m;
+    }   
 };
 
 int main(int argc, const char * argv[]) {
