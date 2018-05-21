@@ -17,13 +17,11 @@ public:
         if (matrix.empty()) return INT_MIN;
         const int M = matrix.size();
         const int N = matrix[0].size();
-        // 在值[matrix[0][0]..matrix[M-1][N-1]]中二分搜索找第k大的
-        // 二分搜索要在[false,...,false,true,true...]中找第一个true
-        // 函数kthOrLarger(value)判断value是否第k大或更大
+        // 在值[matrix[0][0]..matrix[M-1][N-1]]中二分搜索找第k小的
         int l = matrix[0][0], u = matrix[M-1][N-1];
         while (l <= u) {
             int mid = l + (u - l) / 2;
-            if (kthOrLarger(matrix, mid, k)) {
+            if (enough(matrix, mid, k)) {
                 u = mid - 1;
             } else {
                 l = mid + 1;
@@ -32,7 +30,7 @@ public:
         return l;
     }
     
-    bool kthOrLarger(vector<vector<int>>& matrix, int value, int k) {
+    bool enough(vector<vector<int>>& matrix, int value, int k) {
         int count = 0;
         for (auto &row : matrix) {
             // 看每行<=value的数有几个
@@ -46,10 +44,10 @@ public:
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        // 每行是个有序数组，这题相当于在n个有序数组中找第k个大元素
+        // 每行是个有序数组，相当于在N个有序数组中找第k小的数
+        // 用N元最小堆保存行编号，用N元数组保存各行的列索引
         const int N = matrix.size();
         vector<int> colIdx(N, 0);
-        // 用N元最小堆保存行索引
         auto cmp = [&](int r1, int r2) { // 哪一行的当前元素较小
             if (colIdx[r1] == N) return true; // 相当于r1行元素无穷大
             if (colIdx[r2] == N) return false;
