@@ -32,9 +32,9 @@ public:
         int count = 0;
         for (int j = 0; j < nums.size(); j++) {
             int i = 0;
-            while (nums[j] - nums[i] > dist) ++i;
+            while (nums[j] - nums[i] > dist) i++;
             // 现在 nums[j] - nums[i] <= dist
-            count += j - i; // 又多了些比dist小的距离
+            count += j - i; // [i..j)
         }
         return count >= k;
     }
