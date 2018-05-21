@@ -13,11 +13,11 @@ using namespace std;
 class Solution {
 public:
     bool isPerfectSquare(int num) {
-        // 找到x*x>=num的第一个数，二分搜索
+        // 找到使x*x>=num的第一个x，二分搜索
         int l = 1, u = num;
         while (l <= u) {
             int mid = l + (u - l) / 2;
-            if (mid >= num / mid) {
+            if (mid >= num / mid) { // mid*mid >= num
                 u = mid - 1;
             } else {
                 l= mid + 1;
