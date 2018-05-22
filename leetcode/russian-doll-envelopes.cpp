@@ -36,7 +36,7 @@ class Solution {
 public:
     int maxEnvelopes(vector<pair<int, int>>& envelopes) {
         // 按width排序，width相等时按照height递减排序。
-        // 这样后面只看height找递增，也能避免选中width相等的不该选情况。
+        // 然后只看height找递增，也能避免选中[3,4],[3,5]这种width相等的情况。
         sort(envelopes.begin(), envelopes.end(), [](pair<int, int> &a, pair<int, int> &b) {
             return a.first < b.first || (a.first == b.first && a.second > b.second);
         });
@@ -45,11 +45,8 @@ public:
         for (auto &e : envelopes) {
             int height = e.second;
             auto it = lower_bound(tails.begin(), tails.end(), height);
-            if (it == tails.end()) {
-                tails.push_back(height);
-            } else {
-                *it = height;
-            }
+            if (it != tails.end()) *it = height;
+            else tails.push_back(height);
         }
         return tails.size();
     }
