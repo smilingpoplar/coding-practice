@@ -18,7 +18,7 @@ public:
         // 类似最长递增子序列LIS的dp解法
         // 设dp[i]表示以nums[i]结尾的nums[0..i]的最大可整除子序列长
         vector<int> dp(N, 1);
-        vector<int> prev(N, -1);
+        vector<int> prev(N, -1); // 记录以nums[i]结尾LIS的前一元素
         int maxlen = 0, maxidx = -1;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {

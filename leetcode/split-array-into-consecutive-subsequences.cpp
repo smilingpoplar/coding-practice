@@ -14,16 +14,15 @@ class Solution {
 public:
     bool isPossible(vector<int>& nums) {
         unordered_map<int, int> count; // x有几个
-        unordered_map<int, int> need;  // x作为序列尾的需求
-
         for (int x : nums) {
             ++count[x];
         }
-        
+
+        unordered_map<int, int> need;  // x作为序列尾的需求        
         for (int x : nums) {
             if (count[x] == 0) continue;
             
-            if (need[x] > 0) { // x优先作为序列尾
+            if (need[x] > 0) { // x优先作为旧序列尾
                 --count[x];
                 --need[x];
                 ++need[x+1];

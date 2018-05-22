@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& A) {
-        // 设dp[i]表示A[0..i]以A[i]结尾的等差数列数，
+        // 设dp[i]表示A[0..i]以A[i]结尾的等差子段数，
         // 当A[i]-A[i-1]=A[i-1]-A[i-2]时，dp[i]=dp[i-1]+1；否则，dp[i]=0。初始dp[1]=0
         int ans = 0;
         int dp = 0;

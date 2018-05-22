@@ -24,7 +24,7 @@ public:
         // 统计组间逆序数，两指针同向遍历，不妨从数组末开始遍历
         for (int i = mid, j = h; i >= l; i--) {
             while (j > mid && nums[i] <= (long)2 * nums[j]) j--;
-            ans += j - mid; // 现在j指向第一个满足的位置
+            ans += j - mid; // 位置[mid+1..j]与i逆序
         }
         merge(nums, l, mid, h);            
         return ans;
