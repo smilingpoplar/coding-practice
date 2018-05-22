@@ -13,7 +13,8 @@ using namespace std;
 class Solution {
 public:
     int splitArray(vector<int>& nums, int m) {
-        // 二分法找这个最小化的最大和mid，取值范围是[max(nums), sum(sums)]
+        // 猜这个“子数组和的最大值”mid，mid越大、子数组可越长、m越小
+        // mid取值范围是[max(nums), sum(nums)]
         int mx = INT_MIN;
         int sum = 0;
         for (int num : nums) {
@@ -32,10 +33,10 @@ public:
         return l;        
     }
     
-    // mid太小将分成>m个子数组，这时valid(mid)应返回false
-    // mid取刚好时将分成m个子数组，valid(mid)返回true
-    // mid太大时将分成<m个数组，valid(mid)继续返回true
-    // 所以valid(mid)返回true的条件是 分成的数组数<=m
+    // 要构造返回[false, ..., false, true, ..., true]条件式，再用二分搜索找第一个true。
+    // mid太小将分成>m个子数组，这时valid(mid)返回false；mid刚好时将分成=m个子数组，valid(mid)返回true
+    // mid太大时将分成<m个数组，valid(mid)继续返回true。所以valid(x)表示分成的<=m个子数组。
+    // 在valid(x)中要统计子数组数count。
     bool valid(int mid, vector<int> &nums, int m) {
         int count = 1;
         int total = 0;

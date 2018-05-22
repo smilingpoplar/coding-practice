@@ -18,19 +18,19 @@ public:
         // a[i]+a[i+1]+...+a[j] <= x∗(j−i+1)，(a[i]−x)+(a[i+1]−x)+...+(a[j]−x)<=0
         // 转化成"存在"条件：如果x不是最大均值，"存在"长>=k的子数组，使(a[i]−x)+(a[i+1]−x)+...+(a[j]−x)>0
         // 用二分搜索来猜最大均值。如果mid满足上述"存在"条件，则mid不是最大均值，mid可猜大点；否则，mid可猜小点。
-        // 当abs(right-left)<=10^-5时收敛停止。
-        // 这个"存在"条件可用累加数组sum[]判断，只要判断存在sum[i] - min{sum[j]} > 0, j=[0..i-k]。
-        double left = INT_MAX, right = INT_MIN;
+        // 当abs(u-l)<=10^-5时收敛停止。
+        // 这个"存在"条件可用累加数组sum[]判断，只要判断sum[i] - min{sum[j]} > 0, j=[0..i-k]。
+        double l = INT_MAX, u = INT_MIN;
         for (double num : nums) {
-            left = min(left, num);
-            right = max(right, num);
+            l = min(l, num);
+            u = max(u, num);
         }
-        while (right - left > 0.00001) {
-            double mid = (left + right) / 2;
-            if (guess(mid, nums, k)) left = mid;
-            else right = mid;
+        while (u - l > 0.00001) {
+            double mid = (l + u) / 2;
+            if (guess(mid, nums, k)) l = mid;
+            else u = mid;
         }
-        return right;
+        return u;
     }
     
     bool guess(double x, vector<int> &nums, int k) {
