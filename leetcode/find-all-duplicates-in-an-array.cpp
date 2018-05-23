@@ -14,7 +14,7 @@ class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
         vector<int> ans;
-        // 把出现过的数当作索引，把对应索引位置标记为负
+        // 把出现过的数当作索引，把对应索引位置变为负
         for (int num : nums) {
             int idx = abs(num);
             if (nums[idx-1] < 0) {

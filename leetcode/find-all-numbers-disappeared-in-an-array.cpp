@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums){
-        // 把出现过的数当作索引，把对应索引位置标记为负
+        // 把出现过的数当作索引，把对应索引位置变为负
         for (int num : nums) {
             int idx = abs(num);
             nums[idx-1] = -abs(nums[idx-1]);
