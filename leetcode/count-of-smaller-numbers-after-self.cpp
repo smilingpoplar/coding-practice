@@ -31,11 +31,11 @@ public:
         mergeSort(nums, idx, mid + 1, r, ans);
         
         vector<int> merged(r - l + 1);
+        // 从两数组末端开始比较
         int i = mid, j = r, k = r - l;
         while (i >= l && j > mid) {
-            // 从两数组末端开始比较
             if (nums[idx[i]] > nums[idx[j]]) {
-                ans[idx[i]] += j - mid;
+                ans[idx[i]] += j - mid; // 位置[mid+1..j]与i逆序
                 merged[k--] = idx[i--];
             } else {
                 merged[k--] = idx[j--];
