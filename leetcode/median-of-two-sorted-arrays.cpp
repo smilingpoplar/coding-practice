@@ -18,8 +18,8 @@ public:
         // 把a1和b1放一起构成整体的left部分，a2和b2放一起构成整体的right部分。我们先找两数组中第k大的数。
         // 如果能保证：1. len(left)=k，即i+j==k  2. max(left)<=min(right)，即a[i-1]<=b[j]且b[j-1]<=a[i]，
         // 那么第k大数为 max(left)。现在我们找中位数（或两中位数的第一个），有k=(M+N+1)/2。
-        // 不妨使M<=N，则M<=k<=N。由0<=i<=min(k,M)=M，i+j==k，得0<=k-M<=j<=k<=N，对应j值都合法。
         // 综上，要在0<=i<=M中找i，j=k-i，使a[i-1]<=b[j]且b[j-1]<=a[i]，用二分搜索。
+        // 不妨使M<=N，则M<=k<=N。由0<=i<=min(k,M)=M，i+j==k，得0<=k-M<=j<=k<=N，对应j值都合法。
         const int M = a.size();
         const int N = b.size();
         if (M > N) return findMedianSortedArrays(b, a);
