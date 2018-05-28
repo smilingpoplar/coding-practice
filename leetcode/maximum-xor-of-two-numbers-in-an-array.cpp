@@ -14,24 +14,24 @@ using namespace std;
 class Solution {
 public:
     int findMaximumXOR(vector<int>& nums) {
-        // 假设存在两数A和B，maxXor=A^B，那么B=A^maxXor。如果只考虑前i位，同样有prefixMaxXor=prefixA^prefixB，
-        // prefixB=prefixA^prefixMaxXor。现在把所有数的前i位prefix放进集合set，要检验maxXor的第i位是否为1。
-        // 让candidate=第i位设为1的prefixMaxXor，对set中每个prefix，看prefixA^candidate==prefixB是否也在set中。
-        // 如果prefixB也在，说明prefixMaxXor的第i位为1可行。
-        int maxXor = 0, mask = 0;
+        // 假设maxXor=A^B，如果只考虑前缀i位，同样有prefixMaxXor=prefixA^prefixB。
+        // 就像两数和的问题中，问是否存在两数a+b=sum，就是遍历数a看sum-a在数中是否存在。这里要问maxXor的第i位是否为1，
+        // 假设guess=第i位为1的prefixMaxXor，就是问是否存在两数prefixA^prefixB=guess，
+        // 就是遍历prefix看prefix^guess在前缀中是否存在。若存在，说明maxXor的第i位为1。
+        int mask = 0, maxXor = 0;
         for (int i = 31; i >= 0; i--) {
             unordered_set<int> st;
             mask |= (1 << i);
             for (int num : nums) {
                 st.insert(num & mask);
             }
-            
-            int candidate = maxXor | (1 << i);
+
+            int guess = maxXor | (1 << i); // 先猜maxXor的第i位为1，再看可不可行
             for (int prefix : st) {
-                if (st.count(prefix ^ candidate)) {
-                    maxXor = candidate;
+                if (st.count(prefix ^ guess)) { // 可行
+                    maxXor = guess;
                     break;
-                }                 
+                }
             }
         }
         return maxXor;
