@@ -15,7 +15,7 @@ public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
         const int N = nums.size();
         vector<int> idx(N, 0); // idx[]存各数组的当前下标，数组i的当前元素是nums[i][idx[i]]
-        auto cmp = [&](int i, int j) { // 优先队列保存数组编号，最小堆，用>
+        auto cmp = [&](int i, int j) { // 最小堆保存数组编号
             return nums[i][idx[i]] > nums[j][idx[j]];
         };
         priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
