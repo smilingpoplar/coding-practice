@@ -18,10 +18,10 @@ public:
         unordered_map<char, int> count;
         int start = 0, end = 0, repeat = 0, ans = 0;
         while (end < s.size()) {
-            if (count[s[end]]++ > 0) repeat++;
+            if (++count[s[end]] >= 2) repeat++;
             end++;
             while (repeat > 0) {
-                if (--count[s[start]] > 0) repeat--;
+                if (count[s[start]]-- >= 2) repeat--;
                 start++;
             }
             ans = max(ans, end - start);
