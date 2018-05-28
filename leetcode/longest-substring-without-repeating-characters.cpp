@@ -38,8 +38,8 @@ public:
         int ans = 0;
         int start = 0;
         for (int end = 0; end < s.size(); end++) {
-            if (mp.count(s[end])) {
-                start = max(start, mp[s[end]] + 1);
+            if (mp.count(s[end]) && mp[s[end]] >= start) { // s[end]重复出现且有效
+                start = mp[s[end]] + 1;
             }
             ans = max(ans, end - start + 1);
             mp[s[end]] = end;
