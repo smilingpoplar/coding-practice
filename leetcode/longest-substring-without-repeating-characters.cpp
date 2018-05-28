@@ -16,14 +16,15 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         unordered_map<char, int> count;
-        int start = 0, repeat = 0, ans = 0;
-        for (int end = 0; end < s.size(); end++) {
+        int start = 0, end = 0, repeat = 0, ans = 0;
+        while (end < s.size()) {
             if (count[s[end]]++ > 0) repeat++;
-            while (repeat > 0) { // 若是无效窗口、再移动start缩小窗口
+            end++;
+            while (repeat > 0) {
                 if (--count[s[start]] > 0) repeat--;
                 start++;
             }
-            ans = max(ans, end - start + 1);
+            ans = max(ans, end - start);
         }
         return ans;
     }
