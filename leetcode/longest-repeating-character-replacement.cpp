@@ -15,8 +15,8 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         unordered_map<char, int> count;
-        int maxSameTillNow = 0; // 最长有效窗口是 maxSameTillNow+k
-        int start = 0, end = 0, ans = 0;
+        int maxSameTillNow = 0; // 有效窗口最长是 maxSameTillNow+k
+        int start = 0, end = 0;
         while (end < s.size()) {
             maxSameTillNow = max(maxSameTillNow, ++count[s[end]]);
             end++;
