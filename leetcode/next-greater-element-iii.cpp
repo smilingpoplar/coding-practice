@@ -13,10 +13,10 @@ using namespace std;
 class Solution {
 public:
     int nextGreaterElement(int n) {
-        // 1. 从右往左看，找第一个波峰前的数，即找第一个nums[i]<nums[i+1]的位置i
-        // 2. 在i右边、从波峰往右是个递减序列，从右往左找第一个比nums[i]大的数，即找第一个nums[j]>nums[i]的位置j
+        // 1. 从右往左找第一个波峰前的数，即找第一个nums[i]<nums[i+1]的位置i
+        // 2. 在i右边、从波峰往右是个递减序列，从右往左肯定能找到第一个nums[j]>nums[i]的位置j
         // 3. 交换nums[i]和nums[j]，交换后从波峰往右仍是个递减序列
-        // 4. 反转从波峰往右这个递减序列
+        // 4. 反转这个递减序列
         string s = to_string(n);
         int i = s.size() - 2;
         while (i >= 0 && s[i] >= s[i+1]) i--;

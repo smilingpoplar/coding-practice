@@ -15,18 +15,18 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         unordered_map<char, int> count;
-        int maxSameTillNow = 0; // 有效窗口最长是 maxSameTillNow+k
-        int start = 0, end = 0;
+        int maxSameTillNow = 0; // 至今为止的有效窗口中最大字符数，最长有效窗口是 maxSameTillNow + k
+        int start = 0, end = 0, ans = 0;
         while (end < s.size()) {
             maxSameTillNow = max(maxSameTillNow, ++count[s[end]]);
             end++;
-            // 若是无效窗口、再移动start使窗口有效
-            if (end - start > maxSameTillNow + k) {
+            if (end - start > maxSameTillNow + k) { // 若是无效窗口、再移动start使窗口有效
                 count[s[start]]--;
                 start++;
             }
+            ans = max(ans, end - start);
         }
-        return end - start;
+        return ans;
     }
 };
 
