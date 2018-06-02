@@ -14,12 +14,12 @@ using namespace std;
 class Solution {
 public:
     int numSubarrayBoundedMax(vector<int>& A, int L, int R) {
-        // (left, right]是以A[right]结尾的 L<=子数组最大元素<=R的 最长子数组
-        int ans = 0, left = -1, right = -1;
+        // 设[left..right]是以A[right]结尾的 L<=子数组最大值<=R 的最长子数组
+        int left = 0, right = -1, ans = 0;
         for (int i = 0; i < A.size(); i++) {
-            if (A[i] > R) left = i; // 子数组中不能包含A[i]
-            if (A[i] >= L) right = i; // A[i]>R时 right-i==0
-            ans += right - left;
+            if (A[i] > R) left = i + 1; // 子数组中不能包含A[i]
+            if (A[i] >= L) right = i;
+            ans += right - left + 1;
         }
         return ans;
     }
