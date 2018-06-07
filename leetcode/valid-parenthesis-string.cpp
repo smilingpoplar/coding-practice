@@ -17,9 +17,12 @@ public:
         for (char c : s) {
             lo += (c == '(') ? 1 : -1;
             hi += (c == ')') ? -1 : 1;
+            // 在这过程中，hi一旦小于0，[lo, hi]没有>=0的有效值，串无效；
+            // 而lo小于0的值可以舍弃，lo=max(lo, 0)
             if (hi < 0) return false;
             lo = max(lo, 0);
         }
+        // 最终[lo,hi]含0串才有
         return lo == 0;
     }
 };

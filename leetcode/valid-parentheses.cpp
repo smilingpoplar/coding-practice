@@ -14,21 +14,18 @@ using namespace std;
 class Solution {
 public:
     bool isValid(string s) {
-        const string left = "([{";
-        const string right = ")]}";
-        stack<char> stack;
+        unordered_map<char, char> mp = {{'(', ')'}, {'[', ']'}, {'{', '}'}};
+        stack<char> stk;
         for (char c : s) {
-            if (left.find(c) != string::npos) {
-                stack.push(c);
+            if (mp.count(c)) {
+                stk.push(mp[c]);
             } else {
-                if (stack.empty()) return false;
-                char top = stack.top();
-                stack.pop();
-                if (top != left[right.find(c)]) return false;
+                if (stk.empty()) return false;
+                char top = stk.top(); stk.pop();
+                if (top != c) return false;
             }
         }
-        
-        return stack.empty();
+        return stk.empty();
     }
 };
 
