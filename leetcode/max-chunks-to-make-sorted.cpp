@@ -13,12 +13,12 @@ using namespace std;
 class Solution {
 public:
     int maxChunksToSorted(vector<int>& arr) {
-        // arr[0..i]是[0..i]的排列，则新开个chunk
+        // 若要前i+1个数一定是[0..i]，只需leftMax[i]（含arr[i]）==i
         int ans = 0;
         int leftMax = INT_MIN;
         for (int i = 0; i < arr.size(); i++) {
             leftMax = max(leftMax, arr[i]);
-            if (i == leftMax) ++ans;
+            if (i == leftMax) ans++;
         }
         return ans;
     }

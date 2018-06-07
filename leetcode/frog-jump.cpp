@@ -13,9 +13,9 @@ using namespace std;
 class Solution {
 public:
     bool canCross(vector<int>& stones) {
-        set<int> S; // 记录各石头是否存在
+        set<int> st; // 记录各石头是否存在
         for (int stone : stones)
-            S.insert(stone);
+            st.insert(stone);
         
         unordered_map<int, set<int>> jump; // 记录各石头上可以跳几步
         jump[0].insert(1);
@@ -25,7 +25,7 @@ public:
             
             for (int k : jump[stone]) {
                 int next = stone + k;
-                if (!S.count(next)) continue;
+                if (!st.count(next)) continue;
                 if (next == stones.back()) return true;
                 if (k - 1 > 0) jump[next].insert(k - 1);
                 jump[next].insert(k);

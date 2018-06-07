@@ -22,7 +22,8 @@ class Solution {
 public:
     vector<Interval> merge(vector<Interval>& intervals) {
         if (intervals.empty()) return {};
-        // 根据起点排序，避免了合并会修改前面区间起点的问题。起点相同时，不妨先取范围大的。
+        // 若按终点排，当后面的大区间要合并前面多个小区间时，合并较麻烦
+        // 按起点排，就不存在合并前面多个小区间的问题。起点相同时，不妨先取范围大的。
         sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) {
             return a.start < b.start || (a.start == b.start && a.end > b.end);
         });

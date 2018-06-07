@@ -48,8 +48,8 @@ public:
     }
     
     void removeRange(int left, int right) {
-        auto it = st.lower_bound({INT_MIN, left});
         Interval toRemove = {left, right};
+        auto it = st.lower_bound({INT_MIN, left});
         vector<Interval> toInsert;
         while (it != st.end() && isOverlap(*it, toRemove)) {
             if (it->left < toRemove.left) toInsert.push_back({it->left, toRemove.left});

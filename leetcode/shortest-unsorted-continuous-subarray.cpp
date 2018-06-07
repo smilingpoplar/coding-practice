@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
-        const int N = (int)nums.size();
+        const int N = nums.size();
         int maxL = INT_MIN, minR = INT_MAX;
         int l = 0, r = -1;
         for (int i = 0, j = N - 1; i < N; i++, j--) {
@@ -32,12 +32,12 @@ public:
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
-        const int N = (int)nums.size();
-        // 先从两端向内找到第一个无序的位置
+        const int N = nums.size();
+        // 先从两端向内找到第一个无序的位置（靠内）
         int i = 0, j = N - 1;
-        while (i < N - 1 && nums[i] <= nums[i + 1])
+        while (i < N - 1 && nums[i] <= nums[i+1])
             i++;
-        while (j > 0 && nums[j - 1] <= nums[j])
+        while (j > 0 && nums[j-1] <= nums[j])
             j--;
         if (i >= j) return 0;
         // 在nums[i..j]中找到minNum和maxNum
@@ -47,9 +47,9 @@ public:
             maxNum = max(maxNum, nums[k]);
         }
         // 根据nums[i-1]<=minNum、nums[j+1]>=maxNum向外扩展
-        while (i >= 1 && nums[i - 1] > minNum)
+        while (i >= 1 && nums[i-1] > minNum)
             i--;
-        while (j < N - 1 && nums[j + 1] < maxNum)
+        while (j < N - 1 && nums[j+1] < maxNum)
             j++;
         
         return j - i + 1;

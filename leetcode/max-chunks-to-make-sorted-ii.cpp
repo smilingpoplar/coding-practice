@@ -13,9 +13,9 @@ using namespace std;
 class Solution {
 public:
     int maxChunksToSorted(vector<int>& arr) {
-        // arr[i]在排序后该在的位置上，leftMax[i]<=rightMin[i+1]，则加个chunk
+        // arr[0..i]是排序后该有的那些数，leftMax[i]<=rightMin[i+1]
         const int N = arr.size();
-        vector<int> rightMin(N, INT_MAX);
+        vector<int> rightMin(N);
         rightMin[N-1] = arr[N-1];
         for (int i = N-2; i >= 0; i--) {
             rightMin[i] = min(arr[i], rightMin[i+1]);
@@ -24,7 +24,7 @@ public:
         int leftMax = INT_MIN;
         for (int i = 0; i < N-1; i++) {
             leftMax = max(leftMax, arr[i]);
-            if (leftMax <= rightMin[i+1]) ++ans;
+            if (leftMax <= rightMin[i+1]) ans++;
         }
         return ans;
     }

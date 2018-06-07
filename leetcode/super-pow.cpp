@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int superPow(int a, vector<int>& b) {
-        // 37^213 mod k = 37^(210+3) mod k = ((37^21 mod k)^10 mod k) * (37^3 mod k)
+        // 37^213 mod k = 37^(21*10+3) mod k = ((37^21 mod k)^10 mod k) * (37^3 mod k)
         if (b.empty()) return 1;
         const int k = 1337;
         int lastDigit = b.back();

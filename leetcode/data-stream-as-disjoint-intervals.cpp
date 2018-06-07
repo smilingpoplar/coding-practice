@@ -26,7 +26,7 @@ public:
             curr.end = max(curr.end, it->end);
             it = st.erase(it);
         }
-        st.insert(it, curr);
+        st.insert(curr);
     }
     
     vector<Interval> getIntervals() {
