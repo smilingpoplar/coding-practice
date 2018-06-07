@@ -26,7 +26,7 @@ public:
             return;
         }
         
-        if (lefts > 0) search(lefts - 1, rights, paren+'(', ans);
+        if (lefts > 0) search(lefts - 1, rights, paren + '(', ans);
         if (lefts < rights) search(lefts, rights - 1, paren + ")", ans);
     }
 };
