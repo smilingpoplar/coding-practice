@@ -28,11 +28,11 @@ public:
             if (leftDiff >= 0) continue;
             // i前面有个')'要删除，只删除连续')'的第一个
             for (int j = lastRmIdx; j <= i; j++) {
-                if (s[j] == paren[1] && (j == lastRmIdx || s[j-1] != paren[1])) {
-                    search(s.substr(0, j) + s.substr(j + 1), i, j, paren, ans);
+                if (s[j] == paren[1] && (j == lastRmIdx || s[j-1] != s[j])) {
+                    search(s.substr(0, j) + s.substr(j + 1), i, j, paren, ans); // 删除')'，并进入子问题
                 }
             }
-            return; // 不删除')'的话，后面已无效不用考虑
+            return; // 不删除')'的话，后面已无效
         }
 
         string reversed(s.rbegin(), s.rend());

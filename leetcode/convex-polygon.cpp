@@ -17,12 +17,12 @@ public:
         const int N = points.size();
         if (N < 3) return false;
         
-        int dir = 0;
+        int prev = 0;
         for (int i = 0; i < N; i++) {
             int curr = getDirection(points[i], points[(i+1) % N], points[(i+2) % N]);
             if (curr == 0) continue;
-            if (dir == 0) dir = curr;
-            else if (curr != dir) return false;
+            if (prev == 0) prev = curr;
+            else if (curr != prev) return false;
         }
         return true;
     }
