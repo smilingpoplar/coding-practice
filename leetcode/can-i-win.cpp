@@ -16,18 +16,21 @@ public:
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
         if (maxChoosableInteger >= desiredTotal) return true;
         if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 < desiredTotal) return false;
-        unordered_map<int, bool> memo;
-        return winnable(maxChoosableInteger, desiredTotal, 0, memo);
+        unordered_map<unsigned, bool> memo;
+        return canIWin(maxChoosableInteger, desiredTotal, 0, memo);
     }
     
-    bool winnable(int maxChoosableInteger, int desiredTotal,
-                  int used, unordered_map<int, bool> &memo) {
+    bool canIWin(int maxChoosableInteger, int desiredTotal,
+                 int used, unordered_map<unsigned, bool> &memo) {
         if (desiredTotal <= 0) return false; // 对方已赢
         if (memo.count(used)) return memo[used];
         for (int i = 1; i <= maxChoosableInteger; i++) {
-            if ((used & (1 << i)) == 0) { // 可选择i
-                if (!winnable(maxChoosableInteger, desiredTotal - i, used | (1 << i), memo))
+            unsigned mask = 1 << i;
+            if ((used & mask) == 0) { // 可选择i
+                if (!canIWin(maxChoosableInteger, desiredTotal - i, used | mask, memo)) {
+                    memo[used] = true;
                     return true;
+                }
             }
         }
         memo[used] = false;
