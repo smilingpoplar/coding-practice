@@ -51,7 +51,7 @@ class Solution {
 public:
     // https://leetcode.com/problems/house-robber-iii/discuss/79330/Step-by-step-tackling-of-the-problem
     int rob(TreeNode* root) {
-        // 问题只有两种状态，抢没抢root，也只需子问题的这两种状态
+        // 问题只有两种状态：抢没抢root，子问题也需返回这两种状态
         auto ans = robSub(root);
         return max(ans[0], ans[1]);
     }
