@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        // 设dp[i]表示s[0..i-1]是否可分成一个或多个词，
+        // 设dp[i]表示s[0..i-1]可分成一个或多个单词，
         // dp[i] = dp[j] && isWord(s[j..i-1])，0<=j<i
         // 初始设 dp[0]=true
         unordered_set<string> dict;

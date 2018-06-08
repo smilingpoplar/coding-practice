@@ -19,32 +19,32 @@ public:
         
         vector<string> ans;
         unordered_set<string> shorterWords;
-        for (const string &word : words) {
-            if (wrodBreak(word, shorterWords)) {
+        for (auto &word : words) {
+            if (wordBreak(word, shorterWords)) {
                 ans.push_back(word);
             }
             shorterWords.insert(word);
         }
         return ans;
     }
-    
-    bool wrodBreak(const string &s, unordered_set<string> &dict) {
+
+    bool wordBreak(const string &s, unordered_set<string> &dict) {
         if (dict.empty()) return false;
-        // 设dp[i]表示s[i..N-1]可分成一个多个单词，0<=i<=N
-        // dp[i] = isWord(s[i..k-1]) && dp[k]，i<k<=N
-        // 初始设dp[N]=true
+        // 设dp[i]表示s[0..i-1]可分成一个或多个单词，
+        // dp[i] = dp[j] && isWord(s[j..i-1])，0<=j<i
+        // 初始设 dp[0]=true
         const int N = s.size();
         vector<bool> dp(N + 1, false);
-        dp[N] = true;
-        for (int i = N - 1; i >= 0; i--) {
-            for (int k = N; k > i; k--) {
-                if (dp[k] && dict.count(s.substr(i, k - i))) {
+        dp[0] = true;
+        for (int i = 1; i <= N; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && dict.count(s.substr(j, i - j))) {
                     dp[i] = true;
                     break;
                 }
             }
         }
-        return dp[0];
+        return dp[N];
     }
 };
 
