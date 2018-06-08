@@ -16,7 +16,7 @@ public:
     int cherryPickup(vector<vector<int>>& grid) {
         // (0,0)=>(N-1,N-1)的两条路径同时走k步，分别走到(r1,k-r1)、(r2,k-r2)，
         // 设dp[k][r1][r2]表示从(0,0)走到(r1,k-r1)、(r2,k-r2)可摘草莓的最大数。
-        // dp[k][r1][r2] = grid[r1][k-r1] + grid[r2][k-r2]
+        // dp[k][r1][r2] = grid[r1][k-r1] + grid[r2][k-r2] /*r1==r2时不重复统计这项*/
         //      + max{ dp[k-1][r1][r2], dp[k-1][r1][r2-1], dp[k-1][r1-1][r2], dp[k-1][r1-1][r2-1] }
         // max{...}里面表示两条路径同时走一步的四种情况：c1、c2走一步，c1、r2走一步、r1、c2走一步、r1、r2走一步
         // 0<=k<=2*(N-1)；0<=r1<=N-1、0<=k-r1<=N-1；r2取值范围类似r1
