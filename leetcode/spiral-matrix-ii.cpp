@@ -15,36 +15,34 @@ class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
         vector<vector<int>> matrix(n, vector<int>(n));
-        int rowBegin = 0;
-        int rowEnd = n - 1;
-        int colBegin = 0;
-        int colEnd = n - 1;
+        int r1 = 0, r2 = n - 1;
+        int c1 = 0, c2 = n - 1;
         int count = 0;
         while (true) {
             // right
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colBegin; i <= colEnd; i++) {
-                matrix[rowBegin][i] = ++count;
+            if (r1 > r2 || c1 > c2) break;
+            for (int c = c1; c <= c2; c++) {
+                matrix[r1][c] = ++count;
             }
-            ++rowBegin;
+            r1++;
             // down
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowBegin; i <= rowEnd; i++) {
-                matrix[i][colEnd] = ++count;
+            if (r1 > r2 || c1 > c2) break;
+            for (int r = r1; r <= r2; r++) {
+                matrix[r][c2] = ++count;
             }
-            --colEnd;
+            c2--;
             // left
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = colEnd; i >= colBegin; i--) {
-                matrix[rowEnd][i] = ++count;
+            if (r1 > r2 || c1 > c2) break;
+            for (int c = c2; c >= c1; c--) {
+                matrix[r2][c] = ++count;
             }
-            --rowEnd;
+            r2--;
             // up
-            if (rowBegin > rowEnd || colBegin > colEnd) break;
-            for (int i = rowEnd; i >= rowBegin; i--) {
-                matrix[i][colBegin] = ++count;
+            if (r1 > r2 || c1 > c2) break;
+            for (int r = r2; r >= r1; r--) {
+                matrix[r][c1] = ++count;
             }
-            ++colBegin;
+            c1++;
         }
         
         return matrix;
