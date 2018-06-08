@@ -14,20 +14,22 @@ using namespace std;
 class Solution {
 public:
     int lastRemaining(int n) {
-        // 设f(x)表示对x个人从1到x重新编号
-        // n是奇数时，删除后重新编号的位置f(i)跟原来位置f(2i+1)关系是 2*f(i) => f(2i+1)
-        // n是偶数时，从左往右删，则2*f(i) => f(2i)；从右往左删，则2*f(i)-1 => f(2i)
-        // 综上，n是奇数或从左往右删时，f(n)=2*f(n/2)；否则，f(n)=2*f(n/2)-1
-        return f(n, true);
-    }
-    
-    int f(int n, bool fromLeft) {
-        if (n == 1) return n;
-        if (n % 2 == 1 || fromLeft) {
-            return 2 * f(n/2, !fromLeft);
+        // n是奇数或从左到右删，head前进一个step；否则，head不变
+        // 比如：
+        // 1 2 3 4 5 6 7 8 9
+        //   2   4   6   8
+        //   2       6
+        //           6
+        int head = 1, remaining = n, step = 1;
+        bool fromLeft = true;
+        while (remaining > 1) {
+            if (remaining % 2 == 1 || fromLeft) head += step;
+            remaining /= 2;
+            step *= 2;
+            fromLeft = !fromLeft;
         }
-        return 2 * f(n/2, !fromLeft) - 1;
-    }
+        return head;
+    }    
 };
 
 int main(int argc, const char * argv[]) {
