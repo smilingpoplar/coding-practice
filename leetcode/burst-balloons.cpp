@@ -24,8 +24,8 @@ public:
         // 设dp[i][j]表示a[i..j]戳气球的最大得分
         // 考虑最后一戳i<=k<=j，得分a[i-1]*a[k]*a[j+1]，还把数组分成两段dp[i][k-1]和dp[k+1][j]
         vector<vector<int>> dp(N, vector<int>(N, 0));
-        for (int i = N - 2; i >= 1; i--) { // dp[i,..]依赖于它右边的值，逆序遍历
-            for (int j = i; j < N - 1; j++) { // dp[..,j]依赖于它左边的值，正序遍历
+        for (int i = N - 2; i >= 1; i--) {
+            for (int j = i; j < N - 1; j++) {
                 for (int k = i; k <= j; k++) {
                     dp[i][j] = max(dp[i][j], a[i-1] * a[k] * a[j+1] + dp[i][k-1] + dp[k+1][j]);
                 }
