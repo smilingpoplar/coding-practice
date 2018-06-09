@@ -53,7 +53,7 @@ public:
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
-        // bellman ford算法，对所有边做V-1次松弛
+        // bellman ford算法，对所有边做N-1次松弛
         const int INF = 1e9;
         vector<int> dist(N + 1, INF);
         dist[K] = 0;
