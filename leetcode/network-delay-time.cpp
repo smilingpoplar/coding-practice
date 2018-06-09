@@ -18,7 +18,7 @@ public:
         for (auto &e : times) {
             adj[e[0]][e[1]] = e[2];
         }
-        vector<int> dist(N + 1, INT_MAX);
+        vector<int> dist(N + 1, INT_MAX); // 节点1..N
         dist[K] = 0;
         
         auto cmp = [](vector<int> &a, vector<int> &b) { // {node, dist}
@@ -42,7 +42,7 @@ public:
         }
         
         int ans = INT_MIN;
-        for (int i = 1; i < dist.size(); i++) {
+        for (int i = 1; i <= N; i++) {
             ans = max(ans, dist[i]);
         }
         return (ans != INT_MAX) ? ans : -1;
