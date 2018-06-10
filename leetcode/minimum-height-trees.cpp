@@ -27,7 +27,7 @@ public:
             if (degree[i] == 1) leaves.push_back(i);
         }
         
-        // 一层一层bfs，不断删除度为1的叶节点，直到剩下1或2个节点
+        // bfs不断删除度为1的叶节点，直到剩下1或2个节点
         int remain = n;
         while (remain > 2) {
             remain -= leaves.size();
