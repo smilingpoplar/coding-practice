@@ -40,10 +40,8 @@ public:
         while (!q.empty()) {
             char c = q.front(); q.pop();
             ans += c;
-            for (char neighbor : adj[c]) {
-                if (--indegree[neighbor] == 0) {
-                    q.push(neighbor);
-                }
+            for (char next : adj[c]) {
+                if (--indegree[next] == 0) q.push(next);
             }
         }
         return ans.size() == indegree.size() ? ans : "";
