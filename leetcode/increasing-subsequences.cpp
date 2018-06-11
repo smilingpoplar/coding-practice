@@ -14,17 +14,22 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> findSubsequences(vector<int>& nums) {
-        set<vector<int>> ans;
+        vector<vector<int>> ans;
         vector<int> seq;
         search(nums, 0, seq, ans);
-        return vector<vector<int>>(ans.begin(), ans.end());
+        return ans;
     }
     
-    void search(vector<int>& nums, int idx, vector<int> &seq, set<vector<int>> &ans) {
-        if (seq.size() >= 2) ans.insert(seq);
+    void search(vector<int>& nums, int idx, vector<int> &seq, vector<vector<int>> &ans) {
+        if (seq.size() >= 2) ans.push_back(seq);
 
+        // 有重复元素，相同元素只选第一个；不能排序数组
+        unordered_set<int> selected;
         for (int i = idx; i < nums.size(); i++) {
-            if (!seq.empty() && nums[i] < seq.back()) continue;
+            if (selected.count(nums[i])) continue;
+            selected.insert(nums[i]);
+
+            if (!seq.empty() && nums[i] < seq.back()) continue; // 确保递增
             seq.push_back(nums[i]);
             search(nums, i + 1, seq, ans);
             seq.pop_back();

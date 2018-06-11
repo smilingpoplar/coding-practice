@@ -26,7 +26,7 @@ public:
         ans.push_back(subset);
         
         for (int i = idx; i < nums.size(); i++) {
-            // 排除重复的组合：某数字选中的递归情况不用管，一旦不选则后面相同数字都不选
+            // 元素有重复，相同元素只选第一个
             if (i > idx && nums[i] == nums[i-1]) continue;
             subset.push_back(nums[i]);
             search(nums, i + 1, subset, ans);

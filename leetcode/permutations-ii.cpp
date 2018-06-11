@@ -25,10 +25,13 @@ public:
             ans.push_back(nums);
             return;
         }
+
+        // 有重复元素，相同元素只选第一个；不能排序数组
         unordered_set<int> selected;
         for (int i = idx; i < nums.size(); i++) {
             if (selected.count(nums[i])) continue;
             selected.insert(nums[i]);
+
             swap(nums[idx], nums[i]);
             search(nums, idx + 1, ans);
             swap(nums[idx], nums[i]);
