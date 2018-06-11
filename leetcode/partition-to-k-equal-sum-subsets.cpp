@@ -19,24 +19,20 @@ public:
             sum += num;
         if (sum % k != 0) return false;
         
-        vector<int> subsets(k, 0);
-        sort(nums.begin(), nums.end(), greater<int>()); // 大的先选能更快判断
-        return search(nums, 0, subsets, sum / k);
+        vector<bool> visited(nums.size(), false);
+        return search(nums, k, 0, visited, 0, sum / k);
     }
     
-    bool search(vector<int> &nums, int idx, vector<int> &subsets, int target) {
-        if (idx == nums.size()) {
-            for (int subset : subsets) {
-                if (subset != target) return false;                
-            }
-            return true;
-        }
+    bool search(vector<int> &nums, int k, int idx, vector<bool> &visited, int subSum, int target) {
+        if (k == 1) return true; // 前面k-1个子集和都是sum/k，最后1个肯定是sum/k
+        if (subSum == target) return search(nums, k - 1, 0, visited, 0, target);
         
-        for (int &subset : subsets) {
-            if (subset + nums[idx] > target) continue;
-            subset += nums[idx];
-            if (search(nums, idx + 1, subsets, target)) return true;
-            subset -= nums[idx];
+        for (int i = idx; i < nums.size(); i++) {
+            if (visited[i] || subSum + nums[i] > target) continue;
+
+            visited[i] = true;
+            if (search(nums, k, i + 1, visited, subSum + nums[i], target)) return true;
+            visited[i] = false;
         }
         return false;
     }
