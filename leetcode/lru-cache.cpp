@@ -14,8 +14,8 @@ using namespace std;
 
 class LRUCache{
     // 1. 按key分桶，每桶只要存key和value
-    // 2. 用双向链表存储桶，每次访问把桶移到链表头，删除lru时只要删除链表尾
-    // 3. 用哈希表映射 key=>指向桶的iterator
+    // 2. 映射：key=>列表中的key桶
+    // 3. 每次访问把桶移到列表头，删除lru时只要删除表尾
     struct Bucket { int key; int value; };
     list<Bucket> buckets;
     unordered_map<int, list<Bucket>::iterator> bucketOfKey;
@@ -31,8 +31,9 @@ public:
         return bucketOfKey[key]->value;
     }
     
-    // 把桶移到链表头，更新哈希表中的映射
+    // 把桶移到列表头，更新哈希表中的映射
     void touch(int key) {
+        // toList.splice(toListIterator, fromList, fromListSingleIterator)
         buckets.splice(buckets.begin(), buckets, bucketOfKey[key]);
         bucketOfKey[key] = buckets.begin();
     }
