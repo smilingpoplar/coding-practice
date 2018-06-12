@@ -33,9 +33,9 @@ public:
         }
         // 增1即将key移入下一桶
         auto bucket = bucketOfKey[key], nextBucket = next(bucket); 
-        int nextCount = bucket->value + 1;
-        if (nextBucket == buckets.end() || nextBucket->value != nextCount) {
-            nextBucket = buckets.insert(nextBucket, {nextCount, { }});
+        int nextValueNeeded = bucket->value + 1;
+        if (nextBucket == buckets.end() || nextBucket->value != nextValueNeeded) {
+            nextBucket = buckets.insert(nextBucket, {nextValueNeeded, { }});
         }
         nextBucket->keys.insert(key);
         bucketOfKey[key] = nextBucket;
@@ -49,14 +49,15 @@ public:
         if (!bucketOfKey.count(key)) return;
         // 减1即将key移入上一桶
         auto bucket = bucketOfKey[key], prevBucket = prev(bucket);
-        bucketOfKey.erase(key);
         if (bucket->value > 1) {
-            int prevCount = bucket->value - 1;
-            if (bucket == buckets.begin() || prevBucket->value != prevCount) {
-                prevBucket = buckets.insert(bucket, {prevCount, { }});
+            int prevValueNeeded = bucket->value - 1;
+            if (bucket == buckets.begin() || prevBucket->value != prevValueNeeded) {
+                prevBucket = buckets.insert(bucket, {prevValueNeeded, { }});
             } 
             prevBucket->keys.insert(key);
             bucketOfKey[key] = prevBucket;
+        } else {
+            bucketOfKey.erase(key);
         }
         // 从旧桶删除key
         bucket->keys.erase(key);
