@@ -21,7 +21,7 @@ public:
     bool isMatch(const string &s, int si, string &p, int pi) {
         if (pi == p.size()) return si == s.size();
         bool matchOne = si < s.size() && (s[si] == p[pi] || p[pi] == '.');
-        if (pi + 1 < p.size() && p[pi + 1] == '*') {
+        if (pi + 1 < p.size() && p[pi+1] == '*') {
             return isMatch(s, si, p, pi + 2) || (matchOne && isMatch(s, si + 1, p, pi));
         }
         return matchOne && isMatch(s, si + 1, p, pi + 1);

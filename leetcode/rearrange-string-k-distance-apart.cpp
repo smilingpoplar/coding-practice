@@ -15,11 +15,11 @@ class Solution {
 public:
     using Pair = pair<char, int>;
     string rearrangeString(string s, int k) {
-        // 贪婪法，优先选择剩余最多的字母；再用个freezed队列存放暂不能输出的字母
+        // 贪婪法，优先选择剩余最多的字母；每个字母输出后进入freezed队列，冻住>=k个字母时队头解冻
         unordered_map<char, int> count;
         for (char c : s) count[c]++;
         auto cmp = [](const Pair &a, const Pair &b) {
-            return a.second < b.second;
+            return a.second < b.second; // 最大堆
         };
         priority_queue<Pair, vector<Pair>, decltype(cmp)> pq(cmp);
         for (auto &e : count) pq.push(e);
@@ -29,10 +29,10 @@ public:
         while (!pq.empty()) {
             auto top = pq.top(); pq.pop();
             ans += top.first;
-            // 字母输出后放入freezed队列
             top.second--;
+            // 每个字母输出后进入freezed队列，包括{c,0}
             freezed.push(top);
-            if (freezed.size() >= k) {
+            if (freezed.size() >= k) { // 冻住>=k个字母时队头解冻
                 auto release = freezed.front(); freezed.pop();
                 if (release.second > 0) pq.push(release);
             }

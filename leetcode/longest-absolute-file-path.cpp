@@ -21,7 +21,7 @@ public:
         while (getline(iss, line)) {
             int indent = 0;
             while (line[indent] == '\t') indent++;
-            while (indent < stk.size()) stk.pop(); // indent对应着栈深度
+            while (stk.size() > indent) stk.pop(); // 确保压栈时紧接着父目录位置
             int filelen = line.size() - indent;
             int pathlen = (stk.empty() ? 0 : stk.top() + 1) + filelen; // 1是分隔符长
             stk.push(pathlen);

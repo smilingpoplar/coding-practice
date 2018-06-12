@@ -13,7 +13,7 @@ using namespace std;
 
 class RandomizedCollection {
     vector<int> nums;
-    unordered_map<int, unordered_set<int>> mp; // num => pos_set
+    unordered_map<int, unordered_set<int>> mp; // num => idx_set
 public:
     /** Initialize your data structure here. */
     RandomizedCollection() {
@@ -23,6 +23,7 @@ public:
     /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
     bool insert(int val) {
         bool ans = !mp.count(val);
+        // 关注两点：把数放到位置、记录这个位置
         mp[val].insert(nums.size());
         nums.push_back(val);
         return ans;
@@ -31,17 +32,17 @@ public:
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */
     bool remove(int val) {
         if (!mp.count(val)) return false;
-        // 找到val的一个位置pos，若pos是nums的最后元素就直接删除，否则用nums的最后元素替换它
-        int pos = *mp[val].begin();
-        mp[val].erase(pos);
+        // 找到val的一个位置idx，若idx是nums的最后元素就直接删除，否则用nums的最后元素替换它
+        int idx = *mp[val].begin();
+        mp[val].erase(idx);
         if (mp[val].empty()) mp.erase(val);
 
         int lastIdx = nums.size() - 1;
-        if (pos != lastIdx) {
+        if (idx != lastIdx) {
             int lastVal = nums.back();
             mp[lastVal].erase(lastIdx);
-            nums[pos] = lastVal;
-            mp[lastVal].insert(pos);
+            nums[idx] = lastVal;
+            mp[lastVal].insert(idx);
         }
         nums.pop_back();
         return true;

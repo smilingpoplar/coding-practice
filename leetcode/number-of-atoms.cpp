@@ -38,10 +38,7 @@ public:
                     count[e.first] += e.second * num;                    
                 }
             } else {
-                int start = pos;
-                pos++; // upper case
-                while (pos < N && islower(formula[pos])) pos++;
-                auto name = formula.substr(start, pos - start);
+                auto name = parseName(formula, pos);
                 int num = parseNum(formula, pos);
                 count[name] += num;
             }
@@ -55,6 +52,13 @@ public:
         while (pos < formula.size() && isdigit(formula[pos])) pos++;
         if (pos == start) return 1;
         return stoi(formula.substr(start, pos - start));
+    }
+    
+    string parseName(const string &formula, int &pos) {
+        int start = pos;
+        pos++; // upper case
+        while (pos < formula.size() && islower(formula[pos])) pos++;
+        return formula.substr(start, pos - start);
     }
 };
 */

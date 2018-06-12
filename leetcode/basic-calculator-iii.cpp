@@ -18,7 +18,7 @@ public:
         return parseExpr(s, i);
     }
     
-    // 能解析一层括号
+    // 解析一层括号
     int parseExpr(const string &s, int &i) {
         const int N = s.size();
         char op = '+'; // 上一个未处理操作

@@ -15,9 +15,9 @@ class Solution {
 public:
     string licenseKeyFormatting(string S, int K) {
         string ans;
+        // 从后往前，数到第K+1个字符时先输出个'-'
         for (int i = S.size() - 1; i >= 0; i--) {
             if (S[i] == '-') continue;
-            // 算上'-'，K+1个一组
             if (ans.size() % (K+1) == K) ans.push_back('-');
             ans.push_back(toupper(S[i]));
         }
