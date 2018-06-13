@@ -12,12 +12,11 @@
 using namespace std;
 
 class LFUCache {
-    struct Bucket { int freq; list<int> keys; };
+    struct KV { int key; int value; };
+    struct Bucket { int freq; list<KV> kvs; };
     list<Bucket> buckets; // 按频率分桶
-    typedef list<Bucket>::iterator BucketPtr;
-    typedef list<int>::iterator KeyPtr;
-    struct Info { BucketPtr bp; KeyPtr kp; int value; };
-    unordered_map<int, Info> infoOfKey; // key=>(桶指针，键指针，value)
+    struct Info { list<Bucket>::iterator bp; list<KV>::iterator kvp; };
+    unordered_map<int, Info> infoOfKey;
     int capacity;
 public:
     LFUCache(int capacity) {
@@ -27,22 +26,20 @@ public:
     int get(int key) {
         if (!infoOfKey.count(key)) return -1;
         increaseFreq(key);
-        return infoOfKey[key].value;
+        return infoOfKey[key].kvp->value;
     }
     
-    // 将key从原行删除、插入"频率+1"行
+    // 将kv从原行删除、插入"频率+1"行
     void increaseFreq(int key) {
         auto info = infoOfKey[key];
         auto bucket = info.bp, nextBucket = next(bucket);
-        int nextFreq = bucket->freq + 1;
-        if (nextBucket == buckets.end() || nextBucket->freq != nextFreq) { // 插入新行
-            nextBucket = buckets.insert(nextBucket, { nextFreq, { }});
+        int nextFreqNeeded = bucket->freq + 1;
+        if (nextBucket == buckets.end() || nextBucket->freq != nextFreqNeeded) { // 插入新行
+            nextBucket = buckets.insert(nextBucket, { nextFreqNeeded, { }});
         }
-        bucket->keys.erase(info.kp);
-        if (bucket->keys.empty()) buckets.erase(bucket);
-
-        nextBucket->keys.push_front(key);
-        infoOfKey[key] = { nextBucket, nextBucket->keys.begin(), info.value };
+        nextBucket->kvs.splice(nextBucket->kvs.begin(), bucket->kvs, info.kvp);
+        if (bucket->kvs.empty()) buckets.erase(bucket);
+        infoOfKey[key] = { nextBucket, nextBucket->kvs.begin() };
     }
     
     void put(int key, int value) {
@@ -50,21 +47,21 @@ public:
         if (!infoOfKey.count(key)) {
             if (infoOfKey.size() == capacity) evict();
             // 应插入频率为1的行。这里先设频率为0，然后和后面情况一起处理。
-            auto bucket = buckets.insert(buckets.begin(), { 0, { key } });
-            infoOfKey[key] = { bucket, bucket->keys.begin(), value };
+            auto bucket = buckets.insert(buckets.begin(), { 0, {{key, value}} });
+            infoOfKey[key] = { bucket, bucket->kvs.begin() };
         } else {
-            infoOfKey[key].value = value;
+            infoOfKey[key].kvp->value = value;
         }
         increaseFreq(key);
     }
     
-    // 删除最小频率lfu的桶中最少最近使用lru的key
+    // 删除最小频率lfu的桶中最少最近使用lru项
     void evict() {
         if (buckets.empty()) return;
-        auto &keysInBucket = buckets.begin()->keys;
-        infoOfKey.erase(keysInBucket.back());
-        keysInBucket.pop_back();
-        if (keysInBucket.empty()) buckets.erase(buckets.begin());
+        auto lfu = buckets.begin();
+        infoOfKey.erase(lfu->kvs.back().key);
+        lfu->kvs.pop_back();
+        if (lfu->kvs.empty()) buckets.erase(lfu);
     }
 };
 
