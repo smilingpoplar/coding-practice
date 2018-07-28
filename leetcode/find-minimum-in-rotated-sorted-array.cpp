@@ -18,14 +18,14 @@ public:
 
         int l = 0;
         int r = (int)nums.size() - 1;
-        while (l + 1 < r) { // 至少3个元素，mid可以和l比较
+        while (l + 1 < r) { // 至少3个元素，mid和l、r不同
             if (nums[l] < nums[r]) return nums[l];
 
-            // 旋转数组对半分，一半旋转一半有序        
+            // 旋转数组对半分，一半旋转一半有序，最小值在旋转那一半
             int mid = l + (r - l) / 2;
-            if (nums[mid] > nums[l]) { // 左半有序，那么右半旋转
+            if (nums[l] < nums[mid]) { // 左半有序、右半旋转，在右半找
                 l = mid;
-            } else { // nums[mid] < nums[l]，左半旋转
+            } else { // nums[l] > nums[mid]，左半旋转
                 r = mid;
             }
         }

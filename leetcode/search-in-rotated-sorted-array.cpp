@@ -20,7 +20,7 @@ public:
         while (l <= r) {
             int mid = l + (r - l) / 2;
             if (nums[mid] == target) return mid;
-            if (nums[mid] >= nums[l]) { // 左半有序
+            if (nums[l] <= nums[mid]) { // 左半有序
                 if (nums[l] <= target && target < nums[mid]) {
                     r = mid - 1;
                 } else {
