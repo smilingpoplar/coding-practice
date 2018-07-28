@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
-        // 保持不变式：nums[left,i]是sum>=s的最小子数组
+        // 滑动窗口法。保持不变式：nums[left,i]是sum>=s的最小子数组
         const int N = (int)nums.size();
         int ans = INT_MAX;
         int sum = 0;
