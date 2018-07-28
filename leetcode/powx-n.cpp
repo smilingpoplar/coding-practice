@@ -19,6 +19,7 @@ public:
             nl = -nl;
         }
         
+        // 取幂的二进制的最后一位，累乘
         double ans = 1;
         while (nl) {
             if (nl & 1) ans *= x;

@@ -23,6 +23,7 @@ public:
         
         int ans = 0;
         while (uDivisor <= uDividend) {
+            // 看uDivisor能翻几倍，累加 
             unsigned d = uDivisor;
             int multiple = 1;
             while (d <= (uDividend >> 1)) { // (d<<1)<=uDividend可能溢出

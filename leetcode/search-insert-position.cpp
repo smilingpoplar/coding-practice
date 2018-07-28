@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        // 不变式：nums[i]<=target<=nums[u]（l<=u）（即nums[l,u]是数组中包含target的部分）
+        // 找>=target的第一个位置
         int l = 0;
         int u = (int)nums.size() - 1;
         while (l <= u) {

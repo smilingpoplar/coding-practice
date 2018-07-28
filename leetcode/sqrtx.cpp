@@ -31,18 +31,15 @@ public:
 class Solution {
 public:
     int mySqrt(int x) {
-        if (x < 0) return -1;
-        // 二分搜索
-        // 不变式：y是满足y^2<=x的最大数，l<=y<r && l<r
         if (x <= 1) return x;
-        int l = 0;
-        int r = x;
-        while (l + 1 < r) {
-            int mid = l + (r - l) / 2;
-            if (mid <= x / mid) { // mid*mid<=x可能溢出
+        // 找满足t^2<=x的最大整数t，相当于找[1 1 1 0 0]的最后一个1
+        int l = 0, u = x;
+        while (l + 1 < u) {
+            int mid = l + (u - l) / 2;
+            if (mid <= x / mid) { // mid*mid <= x可能溢出
                 l = mid;
             } else {
-                r = mid;
+                u = mid;
             }
         }
         return l;
