@@ -27,9 +27,11 @@ public:
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        // 该题的peak元素肯定存在，用二分搜索排除范围
-        int l = 0, u = nums.size() - 1;
-        while (l < u) { // 最后剩一个元素时结束
+        // 该题中peak元素肯定存在，用二分搜索排除范围
+        // nums[mid]要跟nums[mid+1]比较，要保证[l,u]最少两个元素
+        // 因此把条件式的l<=u改l<u
+        int l = 0, u = (int)nums.size() - 1;
+        while (l < u) {
             int mid = l + (u - l) / 2;
             if (nums[mid] < nums[mid+1]) {
                 l = mid + 1;
@@ -37,7 +39,7 @@ public:
                 u = mid;
             }
         }
-        return l;
+        return u;
     }
 };
 
