@@ -16,14 +16,14 @@ public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
         // 线性搜索，O(m+n)，从右上角开始找（或从左下角开始找）
         if (matrix.empty()) return false;
-        const int R = (int)matrix.size();
-        const int C = (int)matrix[0].size();
+        const int R = matrix.size();
+        const int C = matrix[0].size();
         int r = 0, c = C - 1;
         while (r < R && c >= 0) {
             if (target == matrix[r][c]) {
                 return true;
             } else if (target > matrix[r][c]) {
-                ++r;
+                r++;
             } else {
                 c--;
             }
@@ -37,26 +37,26 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
         if (matrix.empty()) return false;
-        const int R = (int)matrix.size();
-        const int C = (int)matrix[0].size();
+        const int R = matrix.size();
+        const int C = matrix[0].size();
         return searchMatrix(matrix, target, 0, R - 1, 0, C - 1);
     }
 private:
-    // 在matrix[rowStart,rowEnd][colStart,colEnd]中搜索target
+    // 在matrix[r1,r2][c1,c2]中搜索target
     // 四分后去一，复杂度递推式 T(n)=3T(n/2)+c，复杂度 O(n^log2{3})=O(n^1.58)
     // 可参考：http://articles.leetcode.com/2010/10/searching-2d-sorted-matrix-part-ii.html
-    bool searchMatrix(vector<vector<int>> &matrix, int target, int rowStart, int rowEnd, int colStart, int colEnd) {
-        if (rowStart > rowEnd || colStart > colEnd) return false;
-        int row = (rowStart + rowEnd) / 2;
-        int col = (colStart + colEnd) / 2;
+    bool searchMatrix(vector<vector<int>> &matrix, int target, int r1, int r2, int c1, int c2) {
+        if (r1 > r2 || c1 > c2) return false;
+        int row = (r1 + r2) / 2;
+        int col = (c1 + c2) / 2;
         if (target == matrix[row][col]) {
             return true;
         } else if (target < matrix[row][col]) { // 四分，包含matrix[row][col]的右下矩阵不用再找
-            return searchMatrix(matrix, target, rowStart, row - 1, colStart, colEnd)
-            || searchMatrix(matrix, target, row, rowEnd, colStart, col - 1);
+            return searchMatrix(matrix, target, r1, row - 1, c1, c2)
+            || searchMatrix(matrix, target, row, r2, c1, col - 1);
         } else { // 四分，包含matrix[row][col]的左上矩阵不用再找
-            return searchMatrix(matrix, target, rowStart, row, col + 1, colEnd)
-            || searchMatrix(matrix, target, row + 1, rowEnd, colStart, colEnd);
+            return searchMatrix(matrix, target, r1, row, col + 1, c2)
+            || searchMatrix(matrix, target, row + 1, r2, c1, c2);
         }
     }
 };
