@@ -15,20 +15,20 @@ class Solution {
 public:
     int calculateMinimumHP(vector<vector<int>> &dungeon) {
         // 动态规划，从右下角的P处往上往左倒推
-        // 某处需要的hp：hp(i,j) = max(1, min(hp(i+1,j), hp(i,j+1)) - dungeon[i,j])
-        const int M = (int)dungeon.size();
-        const int N = (int)dungeon[0].size();
+        // 某处需要的最小血量hp：hp(i,j) = max(1, min(hp(i+1,j), hp(i,j+1)) - dungeon[i,j])
+        const int M = dungeon.size();
+        const int N = dungeon[0].size();
         vector<vector<int>> hp(M, vector<int>(N, 0));
-        hp[M - 1][N - 1] = max(1, 1 - dungeon[M - 1][N - 1]);
-        for (int i = M - 2; i >= 0; i--) {
-            hp[i][N - 1] = max(1, hp[i + 1][N - 1] - dungeon[i][N - 1]);
+        hp[M-1][N-1] = max(1, 1 - dungeon[M-1][N-1]);
+        for (int i = M - 2; i >= 0; i--) { // right
+            hp[i][N-1] = max(1, hp[i+1][N-1] - dungeon[i][N-1]);
         }
-        for (int j = N - 2; j >= 0; j--) {
-            hp[M - 1][j] = max(1, hp[M - 1][j + 1] - dungeon[M - 1][j]);
+        for (int j = N - 2; j >= 0; j--) { // bottom
+            hp[M-1][j] = max(1, hp[M-1][j+1] - dungeon[M-1][j]);
         }
         for (int i = M - 2; i >= 0; i--) {
             for (int j = N - 2; j >= 0; j--) {
-                hp[i][j] = max(1, min(hp[i + 1][j], hp[i][j + 1]) - dungeon[i][j]);
+                hp[i][j] = max(1, min(hp[i+1][j], hp[i][j+1]) - dungeon[i][j]);
             }
         }
         return hp[0][0];
