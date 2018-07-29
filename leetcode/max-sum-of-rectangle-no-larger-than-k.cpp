@@ -31,7 +31,7 @@ public:
                 st.insert(runningSum); // 初始空集
                 for (int num : sum) {
                     runningSum += num;
-                    // 在set中找最小的x，使runningSum-x<=k，x>=runningSum-k
+                    // 在set中找x使runningSum-x<=k，x>=runningSum-k
                     auto it = st.lower_bound(runningSum - k);
                     if (it != st.end()) ans = max(ans, runningSum - *it);
                     st.insert(runningSum);

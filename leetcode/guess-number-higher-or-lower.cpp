@@ -21,7 +21,7 @@ public:
         int l = 1, u = n;
         while (l <= u) {
             int mid = l + (u - l) / 2;
-            if (guess(mid) <= 0) { // guess(): 1 1 0 -1 -1 变成返回 0 0 1 1 1
+            if (guess(mid) <= 0) { // guess()的[1 1 0 -1 -1] 变成返回 [0 0 1 1 1]
                 u = mid - 1;
             } else {
                 l = mid + 1;

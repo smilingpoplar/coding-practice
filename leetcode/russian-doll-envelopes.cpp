@@ -35,8 +35,8 @@ public:
 class Solution {
 public:
     int maxEnvelopes(vector<pair<int, int>>& envelopes) {
-        // 按width排序，width相等时按照height递减排序。
-        // 然后只看height找递增，也能避免选中[3,4],[3,5]这种width相等的情况。
+        // 按width排序，width相等时按照height递减排序，然后根据height找最长递增子序列，
+        // 能避免选中[3,4],[3,5]这种width相等的不该选情况。
         sort(envelopes.begin(), envelopes.end(), [](pair<int, int> &a, pair<int, int> &b) {
             return a.first < b.first || (a.first == b.first && a.second > b.second);
         });

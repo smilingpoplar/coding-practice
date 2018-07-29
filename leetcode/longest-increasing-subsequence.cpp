@@ -34,8 +34,7 @@ public:
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        // 用tails[]保存各长度LIS的最小末尾
-        vector<int> tails;
+        vector<int> tails; // 各长度LIS的最小尾元素
         for (int num : nums) {
             auto it = lower_bound(tails.begin(), tails.end(), num);
             if (it != tails.end()) *it = num;
