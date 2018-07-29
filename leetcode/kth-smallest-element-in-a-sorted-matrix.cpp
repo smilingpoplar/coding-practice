@@ -30,6 +30,7 @@ public:
         return l;
     }
     
+    // matrix中<=value的数有k个吗？随着value增大，输出[0 0 .. 0 1 1 1 ...]
     bool enough(vector<vector<int>>& matrix, int value, int k) {
         int count = 0;
         for (auto &row : matrix) {
@@ -45,7 +46,7 @@ class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
         // 每行是个有序数组，相当于在N个有序数组中找第k小的数
-        // 用N元最小堆保存行编号，用N元数组保存各行的列索引
+        // 用N元最小堆保存行索引，用N元数组保存各行的列索引
         const int N = matrix.size();
         vector<int> colIdx(N, 0);
         auto cmp = [&](int r1, int r2) { // 哪一行的当前元素较小

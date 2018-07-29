@@ -28,8 +28,7 @@ class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
         // 该题中peak元素肯定存在，用二分搜索排除范围
-        // nums[mid]要跟nums[mid+1]比较，要保证[l,u]最少两个元素
-        // 因此把条件式的l<=u改l<u
+        // nums[mid]要跟nums[mid+1]比较，要保证[l,u]最少两个元素，条件式l<=u要改为l<u
         int l = 0, u = (int)nums.size() - 1;
         while (l < u) {
             int mid = l + (u - l) / 2;

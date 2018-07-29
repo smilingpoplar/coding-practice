@@ -26,18 +26,18 @@ public:
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
-        // follow up，预处理t
+        // follow up，预处理t，记录个字母出现的位置列表
         vector<vector<int>> pos(26);
         for (int i = 0; i < t.size(); i++) {
             pos[t[i] - 'a'].push_back(i);
         }
         
-        int idx = -1;
+        int lastIdx = -1;
         for (char c : s) {
             auto &list = pos[c - 'a'];
-            auto it = upper_bound(list.begin(), list.end(), idx);
+            auto it = upper_bound(list.begin(), list.end(), lastIdx);
             if (it == list.end()) return false;
-            idx = *it;
+            lastIdx = *it;
         }
         return true;
     }
