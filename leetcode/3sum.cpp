@@ -20,7 +20,7 @@ public:
 
         vector<vector<int>> ans;        
         for (int a = 0; a < N - 2; a++) {
-            while (0 < a && a < N - 2 && nums[a] == nums[a - 1]) a++;
+            while (0 < a && a < N - 2 && nums[a] == nums[a-1]) a++;
             int b = a + 1, c = N - 1;
             int target = 0;
             while (b < c) {

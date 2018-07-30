@@ -13,7 +13,6 @@ using namespace std;
 class Solution {
 public:
     int findKthNumber(int m, int n, int k) {
-        // enough(x)表示x至少是第k小的数
         // x范围[1..m*n]
         int l = 0, u = m * n + 1;
         while (l + 1 < u) {
@@ -27,6 +26,8 @@ public:
         return u;
     }
     
+    // 二分搜索需要返回[0 0 ... 0 1 1 ...]，enough(x)表示x是至少第k大的数吗，
+    // 故enough(x)中需要统计<=x的数有多少个
     bool enough(int x, int m, int n, int k) {
         // 一行行看乘法表有多少数<=x
         int count = 0;
