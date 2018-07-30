@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int findLength(vector<int>& A, vector<int>& B) {
-        // 设dp[i][j]表示A[0..i-1]以A[i-1]结尾、B[0..j-1]以B[j-1]结尾的最长公共子数组的长度
+        // 设dp[i][j]表示A[0..i-1]以A[i-1]结尾、B[0..j-1]以B[j-1]结尾的最长公共子段长
         // 如果A[i-1]==B[j-1]，dp[i][j]=1+dp[i-1][j-1]；否则dp[i][j]=0
         // 初始dp[0][j]=0，dp[i][0]=0
         const int M = A.size();
