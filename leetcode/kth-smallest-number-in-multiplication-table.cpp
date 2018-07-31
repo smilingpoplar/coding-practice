@@ -26,8 +26,8 @@ public:
         return u;
     }
     
-    // 二分搜索需要返回[0 0 ... 0 1 1 ...]，enough(x)表示x是至少第k大的数吗，
-    // 故enough(x)中需要统计<=x的数有多少个
+    // 二分搜索需要返回[0 0 ... 0 1 1 ...]，enough(x)表示x>=第k大的数吗，
+    // 故enough(x)中需要统计x是第几大的数，即统计<=x的数有多少个
     bool enough(int x, int m, int n, int k) {
         // 一行行看乘法表有多少数<=x
         int count = 0;

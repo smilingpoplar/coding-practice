@@ -32,10 +32,9 @@ public:
     bool enough(int x, vector<int> &nums, int k) {
         int count = 0;
         for (int j = 1; j < nums.size(); j++) {
-            int i = 0;
-            while (nums[j] - nums[i] > x) i++;
-            // 现在 nums[j] - nums[i] <= x
-            count += j - i; // [i..j)
+            // 找 nums[j] - nums[i] <= x，nums[i] >= nums[j] - x
+            int i  = lower_bound(nums.begin(), nums.end(), nums[j] - x) - nums.begin();
+            count += j - i;
         }
         return count >= k;
     }

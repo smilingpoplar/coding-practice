@@ -39,9 +39,7 @@ public:
 class Solution {
 public:
     double minmaxGasDist(vector<int>& stations, int K) {
-        // 用二分法猜D值，猜log(maxGuess-minGuess)次。对某个D值，要使所有的站间距离d<=D，
-        // 原来的区间i中要添加 ceil(interval[i]/D) -1 = floor(interval[i]/D) 个站，O(n)时间知道总共添加多少站。
-        // 设possible(D)为真表示添加<=K个站可使所有站间距离<=D。
+        // 用二分法猜D值
         double lo = 0, hi = 1e8;
         while (hi - lo > 1e-6) {
             double mid = (hi + lo) / 2;
@@ -53,10 +51,13 @@ public:
         }
         return hi;
     }
-    
+
+    // 添加K个站能否使所有站间距离<=D？
     bool possible(double D, vector<int>& stations, int K) {
         int count = 0;
         for (int i = 0; i + 1 < stations.size(); i++) {
+            // 要使所有的站间距离d<=D，区间i要变成ceil(interval[i]/D)个区间，
+            // 需要添加ceil(interval[i]/D)-1 = floor(interval[i]/D) 个站
             count += (stations[i+1] - stations[i]) / D;
         }
         return count <= K;

@@ -19,19 +19,20 @@ public:
         // 1/3  2/3
         // 1/2
         
-        // 优先队列里存行列坐标，第一列先进队列
+        // 最小堆里存行列坐标，第一列先进队列
         const int N = A.size();
-        auto cmp = [&A](vector<int> &a, vector<int> &b) { // 最小堆
+        auto cmp = [&A](vector<int> &a, vector<int> &b) {
             return A[a[0]] * A[b[1]] > A[b[0]] * A[a[1]];
         };
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
         for (int i = 1; i < N; i++) pq.push({0, i});
-        int k = 0;
-        while (!pq.empty()) {
+
+        while (--K) { // (0,K)，弹出K-1个数
             auto idx = pq.top(); pq.pop();
-            if (++k == K) return {A[idx[0]], A[idx[1]]};
             if (idx[0] + 1 < idx[1]) pq.push({idx[0] + 1, idx[1]});
         }
+        auto idx = pq.top(); pq.pop();
+        return {A[idx[0]], A[idx[1]]};
     }
 };
 

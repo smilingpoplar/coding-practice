@@ -14,7 +14,8 @@ class Solution {
 public:
     vector<pair<int, int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         if (nums1.empty() || nums2.empty()) return {};
-        // 用最小堆保存两数组索引
+        // 相当于nums1的数作行、nums2的数作列、两数和作为矩阵元素，构成行列分别有序的矩阵
+        // 用最小堆保存行列索引
         auto cmp = [&](pair<int, int> &p1, pair<int, int> &p2) {
             return nums1[p1.first] + nums2[p1.second] > nums1[p2.first] + nums2[p2.second];
         };
