@@ -14,15 +14,13 @@ using namespace std;
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        // 设f(i)表示nums[?,i]的最大和，则 f(i) = max( f(i-1)+nums[i], nums[i] )
-        // 递推式只依赖于前一项，在i的递增循环中降维，设f表示nums[?,i]的最大和，则 f = max( f+nums[i], nums[i] )
-        int maxSum = INT_MIN;
-        int f = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            f = max(f + nums[i], nums[i]);
-            if (f > maxSum) maxSum = f;
+        // O(n)，可来自dp的降维写法
+        int maxendinghere = 0, maxsofar = INT_MIN;
+        for (int num : nums) {
+            maxendinghere = max(maxendinghere + num, num);
+            maxsofar = max(maxsofar, maxendinghere);
         }
-        return maxSum;
+        return maxsofar;
     }
 };
 

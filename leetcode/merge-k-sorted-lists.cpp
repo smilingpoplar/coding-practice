@@ -21,22 +21,22 @@ struct ListNode {
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        // k路归并，用个最小堆
+        // 用最小堆k路归并
         auto cmp = [](ListNode *l1, ListNode *l2) {
             return l1->val > l2->val;
         };
-        priority_queue<ListNode *, vector<ListNode *>, decltype(cmp)> queue(cmp);
+        priority_queue<ListNode *, vector<ListNode *>, decltype(cmp)> Q(cmp);
         for (auto list : lists) {
-            if (list) queue.push(list);
+            if (list) Q.push(list);
         }
+
         ListNode dummy(-1);
         auto p = &dummy;
-        while (!queue.empty()) {
-            auto node = queue.top();
-            queue.pop();
+        while (!Q.empty()) {
+            auto node = Q.top(); Q.pop();
             p->next = node;
             p = node;
-            if (node->next) queue.push(node->next);
+            if (node->next) Q.push(node->next);
         }
         return dummy.next;
     }
