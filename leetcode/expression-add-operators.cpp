@@ -1,6 +1,6 @@
 //
-//  pascals-triangle
-//  https://leetcode.com/problems/pascals-triangle/
+//  expression-add-operators
+//  https://leetcode.com/problems/expression-add-operators/
 //
 //  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -19,8 +19,8 @@ public:
         return ans;
     }
     
-    void search(string num, int target, int idx, string exprStr, long exprEval, 
-                long prevNum, vector<string> &ans) {
+    void search(string num, int target, int idx, string exprStr, 
+                long exprEval, long prevNum, vector<string> &ans) {
         if (idx == num.size()) {
             if (exprEval == target) ans.push_back(exprStr);
             return;
@@ -34,8 +34,10 @@ public:
             if (idx == 0) {
                 search(num, target, i + 1, currStr, currNum, currNum, ans);
             } else {
-                search(num, target, i + 1, exprStr + "+" + currStr, exprEval + currNum, currNum, ans);
-                search(num, target, i + 1, exprStr + "-" + currStr, exprEval - currNum, -currNum, ans);
+                search(num, target, i + 1, exprStr + "+" + currStr, 
+                       exprEval + currNum, currNum, ans);
+                search(num, target, i + 1, exprStr + "-" + currStr, 
+                       exprEval - currNum, -currNum, ans);
                 // 比如 exprEval=1+2+3，现在遇到*4，要exprEval-3+3*4
                 search(num, target, i + 1, exprStr + "*" + currStr, 
                        exprEval - prevNum + prevNum * currNum, prevNum * currNum, ans);
