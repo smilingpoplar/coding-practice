@@ -14,15 +14,13 @@ using namespace std;
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        return findKthLargest(nums, 0, nums.size() - 1, k);
-    }
-
-    int findKthLargest(vector<int>& nums, int l, int u, int k) {
-        int p = partition(nums, l, u);
-        int order = p - l + 1; // nums[p]是第几大的数
-        if (k == order) return nums[p];
-        if (k < order) return findKthLargest(nums, l, p - 1, k);
-        return findKthLargest(nums, p + 1, u, k - order);
+        int l = 0, u = (int)nums.size() - 1;
+        while (l <= u) {
+            int p = partition(nums, l, u); // p跟下标k-1比较，因为第k大数的下标应该是k-1
+            if (k - 1 == p) return nums[p];
+            if (k - 1 < p) u = p - 1;
+            else l = p + 1;
+        }
     }
 
     int partition(vector<int> &nums, int l, int u) {
