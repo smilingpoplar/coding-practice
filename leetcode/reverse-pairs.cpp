@@ -21,7 +21,7 @@ public:
         int mid = l + (h - l) / 2;
         int ans = mergeSort(nums, l, mid) + mergeSort(nums, mid + 1, h);
         
-        // 统计组间逆序数，两指针同向遍历，不妨从数组末开始遍历
+        // 统计组间逆序数，不妨从数组末往前数
         for (int i = mid, j = h; i >= l; i--) {
             while (j > mid && nums[i] <= (long)2 * nums[j]) j--;
             ans += j - mid; // 位置[mid+1..j]与i逆序
@@ -41,12 +41,8 @@ public:
                 merged[k++] = nums[j++];
             }
         }
-        while (i <= mid) {
-            merged[k++] = nums[i++];               
-        }
-        while (j <= h) {
-            merged[k++] = nums[j++];            
-        }
+        while (i <= mid) merged[k++] = nums[i++];
+        while (j <= h) merged[k++] = nums[j++];            
         for (int k = 0; k < merged.size(); k++) {
             nums[l + k] = merged[k];
         }

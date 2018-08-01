@@ -18,13 +18,12 @@ public:
             mp[ring[i]].push_back(i);
         }
         vector<vector<int>> memo(ring.size(), vector<int>(key.size(), -1));
-        return search(ring, key, 0, 0, mp, memo);
+        return search(ring, 0, key, 0, mp, memo);
     }
     
-    int search(const string &ring, const string &key, 
-               int rIdx, int kIdx, unordered_map<char, vector<int>> &mp, 
-               vector<vector<int>> &memo) {
-        // 原先ring[rIdx]正对12点，现在要变成key[kIdx]这个字符正对12点
+    // 原先ring[rIdx]正对12点，现在要变成key[kIdx]这个字符正对12点
+    int search(const string &ring, int rIdx, const string &key, int kIdx, 
+               unordered_map<char, vector<int>> &mp, vector<vector<int>> &memo) {
         if (kIdx == key.size()) return 0;
         if (memo[rIdx][kIdx] != -1) return memo[rIdx][kIdx];
         
@@ -33,7 +32,7 @@ public:
             int steps = abs(rIdx - rNext);
             steps = min(steps, (int)ring.size() - steps);
             steps++; // press button;
-            steps += search(ring, key, rNext, kIdx + 1, mp, memo);
+            steps += search(ring, rNext, key, kIdx + 1, mp, memo);
             ans = min(ans, steps);
         }
         memo[rIdx][kIdx] = ans;

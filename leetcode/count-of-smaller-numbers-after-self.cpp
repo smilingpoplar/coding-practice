@@ -41,12 +41,8 @@ public:
                 merged[k--] = idx[j--];
             }
         }
-        while (i >= l) {
-            merged[k--] = idx[i--];
-        }
-        while (j > mid) {
-            merged[k--] = idx[j--];
-        }
+        while (i >= l) merged[k--] = idx[i--];
+        while (j > mid) merged[k--] = idx[j--];
         for (int k = 0; k < merged.size(); k++) {
             idx[l + k] = merged[k];
         }
