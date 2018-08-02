@@ -15,16 +15,16 @@ using namespace std;
 class Solution {
 public:
     string longestPalindrome(string s) {
-        // 设dp[i][j]表示s[i..j]是最长回文串，0<=i<=j<N
-        // dp[i][j] = s[i]==s[j]&&dp[i+1][j-1]
-        // dp[i][j]只依赖下左项，可降维，i从下往上遍历
-        // 降维导致上下行合并，要让下左项不受影响，也就是让合并后左边项不受影响，j从右往左遍历
+        // 设dp[i][j]表示s[i..j]是否是回文串，0<=i<=j<N
+        // dp[i][j] = s[i]==s[j] && dp[i+1][j-1]，若dp[i][j]是回文串则回文串长为j-i+1
+        // 由递推式，dp[i][j]只依赖下左项，可省掉i维，i仍从下往上遍历
+        // 降维导致上下行合并，要让dp[j-1]表示旧值dp[i+1][j-1]，j从右往左遍历
         const int N = s.size();
         vector<bool> dp(N, false);
         int longest = 0;
         string palindrome;
         for (int i = N - 1; i >= 0; i--) {
-            for (int j = N; j >= i; j--) {
+            for (int j = N - 1; j >= i; j--) {
                 dp[j] = (s[i] == s[j]);
                 if (i + 1 <= j - 1) dp[j] = dp[j] && dp[j-1];
 
@@ -46,8 +46,7 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         // 从可能的中心往外扩展找回文
-        int longest = 0;
-        int start;
+        int start = 0, longest = 0;
         for (int i = 0; i < s.size(); i++) {
             int len1 = expand(s, i, i);
             int len2 = expand(s, i, i + 1);
@@ -60,12 +59,12 @@ public:
         return s.substr(start, longest);
     }
     
-    int expand(const string &s, int left, int right) {
-        while (left >= 0 && right < s.size() && s[left] == s[right]) {
-            --left;
-            ++right;
+    int expand(const string &s, int l, int r) {
+        while (l >= 0 && r < s.size() && s[l] == s[r]) {
+            l--;
+            r++;
         }
-        return right - left - 1;
+        return r - l - 1; // (l,r)
     }
 };
 
