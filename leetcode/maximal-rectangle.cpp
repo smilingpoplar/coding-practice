@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
-        // 把M行N列的矩阵看作M个以第i行为底的直方图，直方图从底往上计算高度直到碰见0
+        // 把R行C列的矩阵看作R个以第i行为底的直方图，直方图从底往上计算高度直到碰见0
         if (matrix.empty()) return 0;
         const int R = matrix.size();
         const int C = matrix[0].size();

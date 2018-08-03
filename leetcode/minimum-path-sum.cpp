@@ -14,11 +14,10 @@ using namespace std;
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
-        // 设dp[r][c]表示从左上角到grid[r][c]的最小路径和，0<=r<R，0<=c<C
+        // 设dp[r][c]表示[0,0]到[r,c]的最小路径和，0<=r<R，0<=c<C
         // 可以往右往下走，dp[r][c] = min(dp[r-1][c], dp[r][c-1]) + grid[r][c]
         if (grid.empty()) return 0;
-        const int R = grid.size();
-        const int C = grid[0].size();
+        const int R = grid.size(), C = grid[0].size();
         vector<vector<int>> dp(R, vector<int>(C, 0));
         dp[0][0] = grid[0][0];
         for (int r = 1; r < R; r++) 
