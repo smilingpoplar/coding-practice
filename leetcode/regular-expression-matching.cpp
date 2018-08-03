@@ -19,12 +19,14 @@ public:
     }
     
     bool isMatch(const string &s, int si, string &p, int pi) {
-        if (pi == p.size()) return si == s.size();
-        bool matchOne = si < s.size() && (s[si] == p[pi] || p[pi] == '.');
-        if (pi + 1 < p.size() && p[pi+1] == '*') {
+        const int M = s.size(), N = p.size();
+        if (pi == N) return si == M;
+        bool matchOne = si < M && (s[si] == p[pi] || p[pi] == '.');
+        if (pi + 1 < N && p[pi+1] == '*') {
             return isMatch(s, si, p, pi + 2) || (matchOne && isMatch(s, si + 1, p, pi));
+        } else {
+            return matchOne && isMatch(s, si + 1, p, pi + 1);
         }
-        return matchOne && isMatch(s, si + 1, p, pi + 1);
     }
 };
 */
@@ -48,7 +50,7 @@ public:
         for (int i = M; i >= 0; i--) {
             for (int j = N - 1; j >= 0; j--) {
                 bool matchOne = i < M && (s[i] == p[j] || p[j] == '.');
-                if (j + 1 < N && p[j+1] == '*') {
+                if (j + 1 < N && p[j+1] == '*') { // look ahead
                     dp[i][j] = dp[i][j+2] || (matchOne && dp[i+1][j]);
                 } else {
                     dp[i][j] = matchOne && dp[i+1][j+1];
