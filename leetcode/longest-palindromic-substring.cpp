@@ -18,7 +18,7 @@ public:
         // 设dp[i][j]表示s[i..j]是否是回文串，0<=i<=j<N
         // dp[i][j] = s[i]==s[j] && dp[i+1][j-1]，若dp[i][j]是回文串则回文串长为j-i+1
         // 由递推式，dp[i][j]只依赖下左项，可省掉i维，i仍从下往上遍历
-        // 要让dp[j-1]表示降维前旧值dp[i+1][j-1]，j从右往左遍历
+        // 要让dp[j-1]表示旧状态dp[i+1][j-1]，j从右往左遍历
         const int N = s.size();
         vector<bool> dp(N, false);
         int longest = 0;

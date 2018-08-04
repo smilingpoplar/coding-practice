@@ -16,7 +16,7 @@ public:
         // 设dp[i][j]表示从子矩阵右下角[i-1,j-1]能向上向左扩展的最大方形边长。
         // 当matrix[i-1][j-1]==1时，dp[i][j] = 1 /*右下角的'1'*/
         //                          + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) /*即左、上、左上矩阵*/
-        // 初始dp[0][x]=dp[x][0]=0
+        // 初始dp[0][..]=dp[..][0]=0
         if (matrix.empty()) return 0;
         const int M = matrix.size(), N = matrix[0].size();
         vector<vector<int>> dp(M + 1, vector<int>(N + 1, 0));

@@ -18,7 +18,7 @@ public:
         // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i] /*卖股票*/)
         // dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] /*买股票*/)
         // 初始dp[-1][0]=0，dp[-1][1]=INT_MIN（不合法）
-        // dp[i][]只依赖dp[i-1][]，去掉i这维
+        // dp在i这维上只依赖i-1项，去掉i这维
         vector<int> dp = { 0, INT_MIN };
         for (int price : prices) {
             int dp0 = dp[0];
