@@ -14,11 +14,10 @@ using namespace std;
 class Solution {
 public:
     bool isInterleave(string s1, string s2, string s3) {
-        // 设dp[i][j]表示s1[0..i-1]和s2[0..j-1]能否编织出s3[0..i+j-1]
+        // 设dp[i][j]表示s1[0..i)和s2[0..j)能否交错出s3[0..i+j)
         // 若s1[i-1]==s3[i+j-1]，dp[i][j]=dp[i-1][j]；若s2[j-1]==s3[i+j-1]，dp[i][j]=dp[i][j-1]；
         // 否则dp[i][j]=false。初始dp[0][0]=true
-        const int M = s1.size();
-        const int N = s2.size();
+        const int M = s1.size(), N = s2.size();
         if (s3.size() != M + N) return false;
         
         vector<vector<bool>> dp(M + 1, vector<bool>(N + 1, false));
@@ -31,7 +30,6 @@ public:
                 }
                 if (j > 0 && s2[j-1] == s3[i+j-1]) {
                     dp[i][j] = dp[i][j-1];
-                    if (dp[i][j]) continue;
                 }
             }
         }
