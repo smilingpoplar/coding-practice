@@ -15,29 +15,29 @@ class Solution {
 public:
     vector<vector<string>> partition(string s) {
         vector<vector<string>> ans;
-        vector<string> partition;
-        search(s, 0, partition, ans);
+        vector<string> parts;
+        search(s, 0, parts, ans);
         return ans;
     }
 
-    void search(const string &s, int start, vector<string> &partition, vector<vector<string>> &ans) {
+    void search(const string &s, int start, vector<string> &parts, vector<vector<string>> &ans) {
         if (start == s.size()) {
-            ans.push_back(partition);
+            ans.push_back(parts);
             return;
         }
         for (int i = start; i < s.size(); i++) {
             if (!isPalindrome(s, start, i)) continue;
-            partition.push_back(s.substr(start, i - start + 1));
-            search(s, i + 1, partition, ans);
-            partition.pop_back();
+            parts.push_back(s.substr(start, i - start + 1));
+            search(s, i + 1, parts, ans);
+            parts.pop_back();
         }
     }
     
     bool isPalindrome(const string &s, int left, int right) {
         while (left < right) {
             if (s[left] != s[right]) return false;
-            ++left;
-            --right;
+            left++;
+            right--;
         }
         return true;
     }
