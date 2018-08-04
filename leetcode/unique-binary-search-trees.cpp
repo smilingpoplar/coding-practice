@@ -14,19 +14,20 @@ using namespace std;
 class Solution {
 public:
     int numTrees(int n) {
-        // 设f(k)表示k个节点时bst的排列数，当bst以数字i作根节点时，左子树[1,i-1]有f(i-1)种排列数，右子树[i+1,k]有f(k-i)种排列数，
-        // 故 f(k) = sum( f(i-1)*f(k-i) ) 1<=i<=k
-        vector<int> f(n + 1, 0);
-        f[0] = 1;
+        // 设dp[k]表示k个节点时bst的结构数，1<=k<=n
+        // 当bst以数字i作根节点时，左子树[1,i-1]有dp[i-1]种，右子树[i+1,k]有dp[k-i]种，
+        // 故 dp[k] = sum( dp[i-1]*dp[k-i] ) 1<=i<=k
+        vector<int> dp(n + 1, 0);
+        dp[0] = 1;
         for (int k = 1; k <= n; k++) {
             int sum = 0;
             for (int i = 1; i <= k; i++) {
-                sum += f[i - 1] * f[k - i];
+                sum += dp[i-1] * dp[k-i];
             }
-            f[k] = sum;
+            dp[k] = sum;
         }
         
-        return f[n];
+        return dp[n];
     }
 };
 
