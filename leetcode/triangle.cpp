@@ -14,29 +14,31 @@ using namespace std;
 class Solution {
 public:
     int minimumTotal(vector<vector<int> > &triangle) {
-        // 动态规划，f(i,j)表示从t[0][0]到t[i][j]的最小路径和，
-        // f(i,j) = min( f(i-1,j-1), f(i-1,j) ) + t[i][j]，1<=j<i<=N-1
-        // f(i,j) = f(i-1,j) + t[i][j]，j==0；f(i,j) = f(i-1,j-1) + t[i][j]，j==i
-        // 通项式只依赖于前一组，在i的递增循环j的递减循环中降维，
-        // f(j) = min( f(j-1),f(j) ) + t[i][j]，1<=j<i<=N-1
-        // f(j) = f(j) + t[i][j]，j==0；f(j) = f(j-1) + t[i][j]，j==i
+        // 考查到t[i][j]的路径，可来自上一行的t[i-1][j-1]或t[i-1][j]
+        // 设dp[i,j]表示从t[0][0]到t[i][j]的最小路径和，则
+        // dp[i,j] = min( dp[i-1,j-1], dp[i-1,j] ) + t[i][j]，0<j<i<N（不含边界j==0和j==i）
+        // 当j==0时，dp[i,j] = dp[i-1,j] + t[i][j]；当j==i时，dp[i,j] = dp[i-1,j-1] + t[i][j]
+        // 在i这一维上递推式只依赖于i-1项，可省略i这一维，保持i从左往右遍历
+        // 要让dp[j-1]表示降维前旧值dp[i-1][j-1]，j从右往左遍历
+        // dp[j] = min(dp[j-1], dp[j]) + t[i][j]
         if (triangle.empty()) return 0;
-        const int N = (int)triangle.size();
-        vector<int> f(N, 0);
-        f[0] = triangle[0][0];
+        const int N = triangle.size();
+        vector<int> dp(N, 0); // 对应i==0
+        dp[0] = triangle[0][0];
+
         for (int i = 1; i < N; i++) {
-            f[i] = f[i - 1] + triangle[i][i]; // j==i
-            for (int j = i - 1; j >= 1; j--) { // i>=2进循环
-                f[j] = min(f[j - 1], f[j]) + triangle[i][j];
+            dp[i] = dp[i-1] + triangle[i][i]; // j==i
+            for (int j = i - 1; j >= 1; j--) {
+                dp[j] = min(dp[j-1], dp[j]) + triangle[i][j];
             }
-            f[0] = f[0] + triangle[i][0]; //j==0
+            dp[0] = dp[0] + triangle[i][0]; // j==0
         }
 
-        int minTotal = INT_MAX;
+        int ans = INT_MAX;
         for (int j = 0; j < N; j++) {
-            if (f[j] < minTotal) minTotal = f[j];
+            ans = min(ans, dp[j]);
         }
-        return minTotal;
+        return ans;
     }
 };
 
