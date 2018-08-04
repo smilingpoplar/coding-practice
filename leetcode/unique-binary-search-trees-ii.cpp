@@ -21,26 +21,27 @@ struct TreeNode {
 class Solution {
 public:
     vector<TreeNode *> generateTrees(int n) {
+        if (n == 0) return {};
         return generateTrees(1, n);
     }
-private:
+
     vector<TreeNode *> generateTrees(int start, int end) {
         if (start > end) return { NULL };
-        // 生成以数字i为根的树，需要两两搭配数字[start,i-1]生成的树和数字[i+1,end]生成的树，start<=i<=end
-        vector<TreeNode *> result;
+        // 生成数字i为根的树，start<=i<=end，左子树对应[start,i-1]、右子树对应[i+1,end]
+        vector<TreeNode *> ans;
         for (int i = start; i <= end; i++) {
             auto lefts = generateTrees(start, i - 1);
             auto rights = generateTrees(i + 1, end);
             for (auto left : lefts) {
                 for (auto right : rights) {
-                    auto iNode = new TreeNode(i);
-                    iNode->left = left;
-                    iNode->right = right;
-                    result.push_back(iNode);
+                    auto node = new TreeNode(i);
+                    node->left = left;
+                    node->right = right;
+                    ans.push_back(node);
                 }
             }
         }
-        return result;
+        return ans;
     }
 };
 
@@ -53,8 +54,8 @@ void print(TreeNode *root) {
 
 int main(int argc, const char * argv[]) {
     Solution solution;
-    auto result = solution.generateTrees(3);
-    for (auto root : result) {
+    auto ans = solution.generateTrees(3);
+    for (auto root : ans) {
         print(root);
         cout << endl;
     }
