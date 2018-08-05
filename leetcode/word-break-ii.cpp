@@ -18,7 +18,7 @@ public:
     vector<string> wordBreak(string s, vector<string>& wordDict) {
         unordered_set<string> dict;
         dict.insert(wordDict.begin(), wordDict.end());
-        unordered_map<int, vector<string>> memo; 
+        unordered_map<int, vector<string>> memo; // idx => sentences
         return search(s, 0, dict, memo);
     }
     
@@ -29,14 +29,15 @@ public:
         
         vector<string> ans;
         for (int i = idx; i < s.size(); i++) {
+            // 分成单词s[idx..i]、子问题s[i..]
             auto word = s.substr(idx, i - idx + 1);
             if (!dict.count(word)) continue;
             if (i == s.size() - 1) {
-                ans.push_back(word);
+                ans.push_back(word); // 句子只有一个词
             } else {
                 auto suffixes = search(s, i + 1, dict, memo);
                 for (auto &suffix : suffixes) {
-                    ans.push_back(word + " " + suffix);
+                    ans.push_back(word + " " + suffix); 
                 }                
             }
         }
