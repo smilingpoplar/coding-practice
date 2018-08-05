@@ -21,12 +21,12 @@ public:
         // ...
         // dp[k]  dp[k-1]+9*9*8*7*6*5*4*3*2*1*0，k为11
         if (n == 0) return 1;
-        int prev = 1, prod = 9; // 对应dp[1]行
+        int prod = 9, ans = 10; // 对应dp[1]行
         for (int i = 2; i <= min(n, 10); i++) {
-            prev += prod;
             prod *= 11 - i;
+            ans += prod;
         }
-        return prev + prod;
+        return ans;
     }
 };
 
