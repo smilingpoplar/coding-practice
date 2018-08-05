@@ -13,13 +13,12 @@ using namespace std;
 class Solution {
 public:
     int getMoneyAmount(int n) {
-        // 设dp[i][j]表示[i..j]子问题保证赢需要多少钱，1<=i<=j<=n
-        // dp[i][j]=min{ k+max(dp[i][k-1],dp[k+1][j]) }，i<=k<=j
-        // k+max(dp[i][k-1],dp[k+1][j])表示猜k保证赢需要多少钱，
-        // dp[i][j]=min{...}表示所有保证赢的情况里最少需要多少钱。
+        // 设dp[i][j]表示猜[i..j]数字的子问题保证赢需要多少钱，1<=i<=j<=n
+        // dp[i][j]=min{ k + max(dp[i][k-1],dp[k+1][j]) }，i<=k<=j
+        // k + max(dp[i][k-1],dp[k+1][j])表示猜k保证赢需要多少钱，
+        // dp[i][j] = min{...}表示所有保证赢的情况里最少需要多少钱。
         // 初始dp[i][i]=0
         vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0)); // dp[0]、dp[n+1]前后哨兵
-        for (int i = 1; i <= n; i++) dp[i][i] = 0;
         
         for (int len = 2; len <= n; len++) {
             for (int i = 1, j = i + len - 1; j <= n; i++, j++) {
