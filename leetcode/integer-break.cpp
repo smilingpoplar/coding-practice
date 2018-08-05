@@ -13,15 +13,13 @@ using namespace std;
 class Solution {
 public:
     int integerBreak(int n) {
-        // 从v[1..n-1]这n-1个数中取数字，完全背包问题
-        // 设dp[i][j]表示v[1..i]中取数字、剩余和为j时的最大积
-        // dp[i][j] = max( dp[i-1][j], i * dp[i][j-i] )
-        // 完全背包的一维数组写法
+        // 从[1..n-1]中取数，完全背包问题
+        // n是背包容量，取的数i是物品体积，数i也是物品价值
         vector<int> dp(n + 1);
         dp[0] = 1;
         for (int i = 1; i < n; i++) {
-            for (int j = i; j <= n; j++) { // 正序遍历
-                dp[j] = max(dp[j], i * dp[j - i]);
+            for (int v = i; v <= n; v++) { // 正序遍历各个容量
+                dp[v] = max(dp[v], i * dp[v - i]);
             }
         }
         return dp[n];
