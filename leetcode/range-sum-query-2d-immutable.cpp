@@ -16,8 +16,7 @@ class NumMatrix {
 public:
     NumMatrix(vector<vector<int>> matrix) {
         if (matrix.empty()) return;
-        R = matrix.size();
-        C = matrix[0].size();
+        R = matrix.size(), C = matrix[0].size();
         sum = vector<vector<int>>(R, vector<int>(C, 0));
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {

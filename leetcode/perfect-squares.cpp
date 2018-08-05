@@ -13,8 +13,8 @@ using namespace std;
 class Solution {
 public:
     int numSquares(int n) {
-        // 设dp[i]表示值i的最小完全平方数个数
-        // dp[i] = min(dp[i-j*j]+1)，0<j*j<=i
+        // 设dp[i]表示和值i的最少完全平方数个数
+        // dp[i] = min( dp[i-j*j]+1 /*分离出数j*/)，1<=j*j<=i
         // 初始dp[0]=0
         vector<int> dp(n + 1, INT_MAX);
         dp[0] = 0;
