@@ -14,10 +14,10 @@ using namespace std;
 class Solution {
 public:
     int calculateMinimumHP(vector<vector<int>> &dungeon) {
-        // 动态规划，从右下角的P处往上往左倒推
-        // 某处需要的最小血量hp：hp(i,j) = max(1, min(hp(i+1,j), hp(i,j+1)) - dungeon[i,j])
-        const int M = dungeon.size();
-        const int N = dungeon[0].size();
+        // 假设从[i,j]往右往下走到底，初始所需的最小血量为hp[i,j]：
+        // 由hp[i,j] + dungeon[i,j] == min(hp[i+1,j], hp[i,j+1]) /*下一步选所需血量最少的那条路径*/
+        // hp[i,j] = max(1 /*血量不能为0*/, min(hp[i+1,j], hp[i,j+1]) - dungeon[i,j])
+        const int M = dungeon.size(), N = dungeon[0].size();
         vector<vector<int>> hp(M, vector<int>(N, 0));
         hp[M-1][N-1] = max(1, 1 - dungeon[M-1][N-1]);
         for (int i = M - 2; i >= 0; i--) { // right
