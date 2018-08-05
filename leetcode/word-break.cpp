@@ -15,25 +15,22 @@ using namespace std;
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        // 设dp[i]表示s[0..i-1]可分成一个或多个单词，
-        // dp[i] = dp[j] && isWord(s[j..i-1])，0<=j<i
-        // 初始设 dp[0]=true
+        // 设dp[i]表示s[i..]可分割成一个或多个单词，
+        // dp[i] = any{ dp[j] && isWord(s[i..j-1]) }，0<=i<j<=N
+        // 初始dp[N]=true
         unordered_set<string> dict;
         for (auto &s : wordDict)
             dict.insert(s);
 
         const int N = s.size();
         vector<bool> dp(N + 1, false);
-        dp[0] = true;
-        for (int i = 1; i <= N; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && dict.count(s.substr(j, i - j))) {
-                    dp[i] = true;
-                    break;
-                }
+        dp[N] = true;
+        for (int i = N - 1; i >= 0; i--) {
+            for (int j = i + 1; j <= N && !dp[i]; j++) {
+                dp[i] = dp[j] && dict.count(s.substr(i, j - i));
             }
         }
-        return dp[N];
+        return dp[0];
     }
 };
 
