@@ -17,7 +17,7 @@ public:
         // dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i] /*卖股票*/)
         // dp[i][1] = max(dp[i-1][1], dp[i-2][0]-prices[i] /*买股票, cooldown=1天*/)
         // 初始dp[-1][0]=0，dp[-1][1]=INT_MIN；dp[-2][0]=0，dp[-2][1]=INT_MIN
-        // dp[i][]只依赖dp[i-1][]、dp[i-2][]
+        // 递推式在i这维上只依赖i-1项、i-2项
         vector<int> prev2 = { 0, INT_MIN };
         vector<int> prev1 = { 0, INT_MIN };
         for (int price : prices) {

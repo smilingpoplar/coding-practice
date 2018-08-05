@@ -18,7 +18,7 @@ public:
         vector<int> a(N);
         a[0] = a[N-1] = 1;
         for (int i = 1; i < N - 1; i++) {
-            a[i] = nums[i - 1];
+            a[i] = nums[i-1];
         }
 
         // 设dp[i][j]表示a[i..j]戳气球的最大得分，原问题dp[1][N-2]
