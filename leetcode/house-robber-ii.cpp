@@ -17,15 +17,16 @@ public:
         if (nums.empty()) return 0;
         const int N = nums.size();
         if (N == 1) return nums[0];
-        // 循环数组首尾不能同时选择，根据不能选尾元素还是不能选首元素，
-        // 分成无循环的子问题rob(nums,0,n-2)和rob(nums,1,n-1)
-        return max(robSub(nums, 0, N - 2), robSub(nums, 1, N - 1));
+        // 若不抢房子i，就能从i处将循环数组切断，变成无循环数组的子问题。
+        // 相邻两个房子不能同时抢，从相邻两个房子分别切开，就能得到两个无循环子问题。
+        // 不妨不能同时抢首尾两个房子，得到无循环的子问题 rob(nums,1,n-1)和rob(nums,0,n-2)
+        return max(robSub(nums, 1, N - 1), robSub(nums, 0, N - 2));
     }
     // rob nums[from,to]
     int robSub(const vector<int> &nums, int from, int to) {
-        // 设dp[i]表示抢了nums[from..i]后的最大值，from<=i<=to
-        // dp[i] = max( nums[i]+dp[i-2], dp[i-1] )，初始dp[from-2]=dp[from-1]=0
-        // 看递推式当前项只依赖于前两项，前两项分别用prev2和prev1表示
+        // 设dp[i]表示抢了nums[0..i]后的最大值，0<=i<N
+        // dp[i] = max( dp[i-1], nums[i]+dp[i-2] )，初始dp[-2]=dp[-1]=0
+        // 看递推式只依赖于前两项，前两项分别用prev2和prev1表示
         int prev2 = 0, prev1 = 0;
         for (int i = from; i <= to; i++) {
             int curr = max(nums[i] + prev2, prev1);

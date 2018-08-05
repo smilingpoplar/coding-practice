@@ -14,9 +14,9 @@ using namespace std;
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        // 设dp[i]表示抢了nums[0..i]后的最大值，0<=i<=N-1
+        // 设dp[i]表示抢了nums[0..i]后的最大值，0<=i<N
         // dp[i] = max( dp[i-1], nums[i]+dp[i-2] )，初始dp[-2]=dp[-1]=0
-        // 看递推式当前项只依赖于前两项，前两项分别用prev2和prev1表示
+        // 看递推式只依赖于前两项，前两项分别用prev2和prev1表示
         int prev2 = 0, prev1 = 0;
         for (int num : nums) {
             int curr = max(prev1, num + prev2);
