@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int numberOfPatterns(int m, int n) {
-        // 判断有效move的关键：3x3棋盘很小，跳过未选择数字的非法情况可以都记在表中
+        // 判断有效move的关键：3x3棋盘很小，去下一个数字需要跳过某数字的情况可以都记在表中
         vector<vector<int>> jump(10, vector<int>(10, -1));
         jump[1][3] = jump[3][1] = 2;
         jump[1][7] = jump[7][1] = 4;
@@ -24,8 +24,8 @@ public:
             = jump[3][7] = jump[7][3] = jump[4][6] = jump[6][4] = 5;
         
         // 回溯法
-        vector<bool> visited(10, false);
         int ans = 0;
+        vector<bool> visited(10, false);
         ans += countPatterns(1, 1, m, n, jump, visited) * 4; // 1、3、7、9位置对称
         ans += countPatterns(2, 1, m, n, jump, visited) * 4; // 2、4、6、8位置对称
         ans += countPatterns(5, 1, m, n, jump, visited);
@@ -49,7 +49,8 @@ public:
         for (int next = 1; next <= 9; next++) {
             if (visited[next]) continue;
             int jumpNum = jump[num][next];
-            if (jumpNum == -1 || visited[jumpNum]) { // 有效move：不需要跳过某数字，或被跳过的数字已访问
+            // 有效move：不需要跳过某数字，或被跳过的数字已访问
+            if (jumpNum == -1 || visited[jumpNum]) {
                 dfs(next, pattLen + 1, m, n, jump, visited, pattCnt);
             }
         }
