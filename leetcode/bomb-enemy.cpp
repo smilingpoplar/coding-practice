@@ -15,8 +15,8 @@ class Solution {
 public:
     int maxKilledEnemies(vector<vector<char>>& grid) {
         if (grid.empty()) return 0;
-        const int R = grid.size();
-        const int C = grid[0].size();
+        const int R = grid.size(), C = grid[0].size();
+        // 记录各空格若放炸弹，可以杀几个敌人
         vector<vector<int>> cnt(R, vector<int>(C, 0));
         int ans = 0;
         
