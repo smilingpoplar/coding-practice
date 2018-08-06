@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int kSum(vector<int> &A, int K, int target) {
-        // 设dp[i][k][t]表示A[0..i)中选k个数，它们的和为t的方式数
+        // 设dp[i][k][t]表示A[0..i-1]中选k个数，它们的和为t的方式数
         // dp[i][k][t] = dp[i-1][k][t] /*不选A[i-1]*/ + dp[i-1][k-1][t - A[i-1]] /*选A[i-1]*/
         // 0<=i<=N，1<=k<=K，0<=t<=target
         // 初始dp[i][0][0] = 1
