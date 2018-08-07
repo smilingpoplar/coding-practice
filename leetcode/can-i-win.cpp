@@ -17,17 +17,18 @@ public:
         if (maxChoosableInteger >= desiredTotal) return true;
         if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 < desiredTotal) return false;
         unordered_map<unsigned, bool> memo;
-        return canIWin(maxChoosableInteger, desiredTotal, 0, memo);
+        return dfs(maxChoosableInteger, desiredTotal, 0, memo);
     }
     
-    bool canIWin(int maxChoosableInteger, int desiredTotal,
-                 int used, unordered_map<unsigned, bool> &memo) {
+    // 把哪些数用过的当前状态编码used 作为memo的键
+    bool dfs(int maxChoosableInteger, int desiredTotal,
+            int used, unordered_map<unsigned, bool> &memo) {
         if (desiredTotal <= 0) return false; // 对方已赢
         if (memo.count(used)) return memo[used];
         for (int i = 1; i <= maxChoosableInteger; i++) {
             unsigned mask = 1 << i;
-            if ((used & mask) == 0) { // 可选择i
-                if (!canIWin(maxChoosableInteger, desiredTotal - i, used | mask, memo)) {
+            if ((used & mask) == 0) { // i还未用过
+                if (!dfs(maxChoosableInteger, desiredTotal - i, used | mask, memo)) { // 对方输
                     memo[used] = true;
                     return true;
                 }

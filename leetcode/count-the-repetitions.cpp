@@ -13,38 +13,43 @@ using namespace std;
 
 class Solution {
 public:
-    // https://leetcode.com/problems/count-the-repetitions/discuss/95398/C++-solution-inspired-by-@70664914-with-organized-explanation
+    // https://leetcode.com/problems/count-the-repetitions/solution/
     int getMaxRepetitions(string s1, int n1, string s2, int n2) {
-        // repeatCount[k]记录：s1的第k次出现匹配完后，s2匹配过几次。
-        // 若匹配次数为s2.size()，由起始匹配位置的鸽笼原理，肯定开始重复。
-        vector<int> s2Count(s2.size() + 1);
-        // nextIdx[k]记录：s1的第k次出现匹配完后，下一个要匹配s2中的哪个元素。
-        vector<int> nextIdx(s2.size() + 1);
-        int j = 0, count = 0;
-        for (int k = 1; k <= n1; k++) {
-            for (int i = 0; i < s1.size(); i++) {
-                if (s1[i] == s2[j]) j++;
-                if (j == s2.size()) {
-                    j = 0;
-                    count++;
+        // 在S1=[s1,n1]中连续找s2。
+        // 每个s1扫描之前记录：s2指针i2指到哪儿了、s2完整出现了几次
+        // i2起先指向0，由鸽笼原理，i2在扫描完s2.size()个s1后肯定出现重复，故只需记录s2.size()+1个变量
+        vector<int> idx(s2.size() + 1);
+        vector<int> cnt(s2.size() + 1);
+        int i2 = 0, s2cnt = 0;
+        idx[0] = i2, cnt[0] = s2cnt; // 第0个s1扫描之前
+
+        for (int i = 1; i <= n1; i++) {
+            // 扫描s1
+            for (int i1 = 0; i1 < s1.size(); i1++) {
+                if (s1[i1] == s2[i2]) i2++;
+                if (i2 == s2.size()) {
+                    i2 = 0;
+                    s2cnt++;
                 }
             }
-            s2Count[k] = count;
-            nextIdx[k] = j;
+            idx[i] = i2;
+            cnt[i] = s2cnt;
             
-            // 看下一个要匹配的s2中元素是否已出现过
-            for (int start = 0; start < k; start++) {
-                if (nextIdx[start] == nextIdx[k]) { // 若出现过，统计pattern开始前、pattern中、pattern结束后三段
-                    int s2CountForPrefix = s2Count[start];
-                    int s2CountForOnePattern = s2Count[k] - s2Count[start], patternCount = (n1 - start) / (k - start);
-                    int s2CountForPatterns = s2CountForOnePattern * patternCount;
-                    int end = start + (n1 - start) % (k - start);
-                    int s2CountForSuffix = s2Count[end] - s2Count[start];
-                    return (s2CountForPrefix + s2CountForPatterns + s2CountForSuffix) / n2;
+            // 看i2是否曾经出现过
+            for (int k = 0; k < i; k++) {
+                if (idx[k] == i2) {
+                    // 以前第k个、现在第i个s1扫描之前都出现i2，[k,i)的s1构成重复模式；
+                    // 看模式前、模式中、模式后三段分别消耗几个s2
+                    int prefixCnt = cnt[k] - cnt[0];
+                    int onePatternCnt = cnt[i] - cnt[k], totalPattern = (n1 - k) / (i - k);
+                    int patternsCnt = onePatternCnt * totalPattern;
+                    int remain = (n1 - k) % (i - k), end = k + remain;
+                    int suffixCnt = cnt[end] - cnt[k];
+                    return (prefixCnt + patternsCnt + suffixCnt) / n2;
                 }
             }
         }
-        return s2Count[n1] / n2;
+        return (cnt[n1] - cnt[0]) / n2;
     }
 };
 
