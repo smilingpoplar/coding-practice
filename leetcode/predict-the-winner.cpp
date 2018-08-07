@@ -19,7 +19,7 @@ public:
         const int N = nums.size();
         vector<vector<int>> dp(N, vector<int>(N, 0));
         for (int i = 0; i < N; i++) dp[i][i] = nums[i];
-        // 递推式是向上向右推导
+        // 递推式在i维上从右往左遍历、在j维上从左往右遍历
         for (int i = N - 1; i >= 0; i--) {
             for (int j = i + 1; j < N; j++) {
                 dp[i][j] = max(nums[i] - dp[i+1][j], nums[j] - dp[i][j-1]);
