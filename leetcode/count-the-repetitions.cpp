@@ -17,7 +17,7 @@ public:
     int getMaxRepetitions(string s1, int n1, string s2, int n2) {
         // 在S1=[s1,n1]中连续找s2。
         // 每个s1扫描之前记录：s2指针i2指到哪儿了、s2完整出现了几次
-        // i2起先指向0，由鸽笼原理，i2在扫描完s2.size()个s1后肯定出现重复，故只需记录s2.size()+1个变量
+        // 初始i2=0, 由鸽笼原理，i2在扫描完s2.size()个s1后肯定会重复，故只需记录s2.size()+1个变量
         vector<int> idx(s2.size() + 1);
         vector<int> cnt(s2.size() + 1);
         int i2 = 0, s2cnt = 0;
