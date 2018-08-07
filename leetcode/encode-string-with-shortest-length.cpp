@@ -14,11 +14,11 @@ using namespace std;
 class Solution {
 public:
     string encode(string s) {
-        // 用dp[i][L]记录从i开始长为L的子串的最短编码
+        // 用dp[i][L]记录s[i,i+L)的最短编码串
         const int N = s.size();
         vector<vector<string>> dp(N, vector<string>(N + 1));
         for (int L = 1; L <= N; L++) {
-            for (int i = 0; i + L - 1 < N; i++) {
+            for (int i = 0; i + L <= N; i++) {
                 dp[i][L] = collapse(s.substr(i, L), dp[i]);
                 for (int k = 1; k < L; k++) { // L长分两段，第一段长k
                     if (dp[i][k].size() + dp[i+k][L-k].size() < dp[i][L].size()) {

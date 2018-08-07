@@ -19,11 +19,11 @@ public:
             s += word + " "; // 句末要有空格才能接下一句
         int len = s.size();
         
-        int start = 0; // 行首的单词在sss...中的索引
+        int start = 0; // 行首在sss...中的位置
         for (int i = 0; i < rows; i++) {
             start += cols; // 尝试键入一满行
-            // 如果上行末的单词被截断（即start位置非空格），start回退到被截断单词开头
-            //              没被截断                   略过行首的空格
+            // 如果行末的单词被截断（即start位置非空格），start回退到空格处，然后跳过空格（换行了）
+            //            没被截断                                       跳过空格
             while (start > 0 && s[start % len] != ' ')
                 start--;
             start++;
