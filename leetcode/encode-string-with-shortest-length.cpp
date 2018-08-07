@@ -19,8 +19,8 @@ public:
         vector<vector<string>> dp(N, vector<string>(N + 1));
         for (int L = 1; L <= N; L++) {
             for (int i = 0; i + L <= N; i++) {
-                dp[i][L] = collapse(s.substr(i, L), dp[i]);
-                for (int k = 1; k < L; k++) { // 长L分两段，第一段长k
+                dp[i][L] = collapse(s.substr(i, L), dp[i]); // 尝试pattern*k模式
+                for (int k = 1; k < L; k++) { // 尝试分两段，第一段长k
                     if (dp[i][k].size() + dp[i+k][L-k].size() < dp[i][L].size()) {
                         dp[i][L] = dp[i][k] + dp[i+k][L-k];
                     }
