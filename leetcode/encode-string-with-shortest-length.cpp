@@ -20,7 +20,7 @@ public:
         for (int L = 1; L <= N; L++) {
             for (int i = 0; i + L <= N; i++) {
                 dp[i][L] = collapse(s.substr(i, L), dp[i]);
-                for (int k = 1; k < L; k++) { // L长分两段，第一段长k
+                for (int k = 1; k < L; k++) { // 长L分两段，第一段长k
                     if (dp[i][k].size() + dp[i+k][L-k].size() < dp[i][L].size()) {
                         dp[i][L] = dp[i][k] + dp[i+k][L-k];
                     }
@@ -30,13 +30,14 @@ public:
         return dp[0][N];
     }
     
-    string collapse(const string &s, vector<string> &dpi) {
-        int found = (s + s).find(s, 1), L = s.size();
-        if (found < L) { // s=k*pattern
-            auto encoded = to_string(L / found) + "[" + dpi[found] + "]"; // dp[i][found]是子问题最优解
+    // si是s[i,i+L)子串，要看si有没有更短编码串，dpi是dp[i][<L]
+    string collapse(const string &si, vector<string> &dpi) {
+        int d = (si + si).find(si, 1), L = si.size();
+        if (d < L) { // si=pattern*k
+            auto encoded = to_string(L / d) + "[" + dpi[d] + "]"; // dp[i][d]是子问题最优解
             if (encoded.size() < L) return encoded;
         }
-        return s;
+        return si;
     }
 };
 
