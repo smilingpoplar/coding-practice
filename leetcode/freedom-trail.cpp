@@ -18,12 +18,12 @@ public:
         // 需要旋转 diff = abs(i-r), step = min(diff, R-diff) 次
         // dp[r][k] = min{ step + dp[i][k+1] | for all ring[i]==key[k] }
         // 初始dp[][K]=0，表示key输入完成的情况
-        const int R = ring.size();
-        const int K = key.size();
+        const int R = ring.size(), K = key.size();
         vector<vector<int>> dp(R, vector<int>(K + 1, INT_MAX));
-        for (int i = 0; i < R; i++) dp[i][K] = 0;
+        for (int r = 0; r < R; r++) dp[r][K] = 0;
         
-        // dp[][k]在k维上依赖于dp[][k+1]，要先算k这维，且逆序遍历k
+        // 递推式在k这维只依赖于k+1项，要从右往左遍历k
+        // 由已知dp[][K]递推，要先算k这维
         for (int k = K - 1; k >= 0; k--) {
             for (int r = 0; r < R; r++) {
                 for (int i = 0; i < R; i++) {
