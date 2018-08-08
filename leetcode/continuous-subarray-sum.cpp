@@ -13,12 +13,12 @@ using namespace std;
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> mp; // sum =>pos
+        unordered_map<int, int> mp; // sum => idx
         int runningSum = 0;
         mp[runningSum] = -1; // 初始空集
-        // 在旧runningSum的集合mp中找runningSum-n*k，要找好多个数。
-        // 这里的关键在于将全部runningSum%k，状态压缩。
-        // 这样就变成在runningSum%k的集合mp中找(runningSum-n*k)%k=runningSum%k
+        // 在旧runningSum的集合中找runningSum-n*k，要找好多个数。
+        // 这里的关键在于将全部runningSum%k，状态压缩，
+        // 变成在runningSum%k的集合中找(runningSum-n*k)%k=runningSum%k
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i];
             if (k) runningSum %= k;

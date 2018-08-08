@@ -18,7 +18,6 @@ public:
         // 每个串由二叉树分叉成两部分，遍历1<=k<n<=N种划分可能，
         // dp[n,i,j] = ( dp[k,i,j] && dp[n-k,i+k,j+k] ) || ( dp[k,i,j+n-k] && dp[n-k,i+k,j] )
         // 初始n==1时，dp[1,i,j] = s1[i]==s2[j]
-
         const int N = s1.size();
         if (N != s2.size()) return false;
         vector<vector<vector<bool>>> dp(N + 1, vector<vector<bool>>(N, vector<bool>(N, false)));
