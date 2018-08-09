@@ -13,24 +13,36 @@ using namespace std;
 class Solution {
 public:
     int findIntegers(int num) {
-        // 设f[i]表示i位二进制中无连续1s的数的有多少个，根据最高位是0还是1
-        // f[i] = f[i-1]/*最高位0*/ + f[i-2]/*最高位1*/，初始f[1]=2、f[2]=3，推得f[0]=1
-        const int bitLen = sizeof(num) * 8;
-        vector<int> f(bitLen);
+        // 设f[n]表示n位二进制中无连续1s的有多少个
+        // 根据最高位是0还是1，f[n] = f[n-1]/*最高位0*/ + f[n-2]/*最高位1*/
+        // 初始f[1]=2、f[2]=3，推得f[0]=1
+        const int N = sizeof(num) * 8;
+        vector<int> f(N);
         f[0] = 1, f[1] = 2;
-        for (int i = 2; i < bitLen; i++) {
-            f[i] = f[i-1] + f[i-2];
+        for (int n = 2; n < N; n++) { // 不含符号位
+            f[n] = f[n-1] + f[n-2];
         }
         
+        // 求[0,num)间无连续1s的数有多少个，从num的最高位i=N-2看起（不含符号位），
+        // 一位位地拼入prefix，prefix = bit[N-2...i]位来自num、后面位全0的数。
+        // 累加[lastPrefix, prefix)间无连续1s的个数，就是在分区间统计[0,num)。
+        // 比如num=23，(10111)。就分区统计了二进制区间[0,10000), [10000,10100), [10100,10110)。
+        // 怎么统计分区间[lastPrefix, prefix)？
+        // 若prefix的第i位为0，lastPrefix==prefix，区间为空，可以略过；
+        // 若prefix的第i位为1，考虑第i位为0、bit[i-1..0]位任意的取值区间，贡献f[i]个的无连续1s的数。
         int count = 0;
-        // 该循环统计<n的所求数有多少个
-        for (int i = bitLen - 1; i >= 0; i--) {
+        int prebit = 0; // 初始时是符号位
+        for (int i = N - 2; i >= 0; i--) {
             if (num & (1 << i)) { // 第i位为1
-                count += f[i]; // 把第i位固定为0，后面[0..i-1]的i位数贡献f[i]
-                if (num & (1 << (i+1))) return count; // 若遇到连续1s提前结束统计
+                count += f[i];
+                if (prebit) return count; // 遇到连续的1s
+                prebit = 1;
+            } else {
+                prebit = 0;
             }
         }
-        return count + 1; // 1是算上n本身        
+        // 已求[0,num)间的个数，再加上num自身
+        return count + 1;
     }
 };
 
