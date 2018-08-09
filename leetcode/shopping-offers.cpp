@@ -17,36 +17,30 @@ public:
     }
     // special[idx..]子问题
     int shopping(vector<int>& price, vector<vector<int>>& special, vector<int>& needs, int idx) {
-        int ans = buy(price, needs); // 不用offers
+        int money = directBuy(price, needs); // 不用offers
         for (int i = idx; i < special.size(); i++) {
-            if (!canBuyOffer(special[i], needs)) continue;
-            auto newNeeds = buyOffer(special[i], needs);
-            ans = min(ans, special[i].back() + shopping(price, special, newNeeds, i)); 
+            auto result = buyOffer(special[i], needs);
+            if (!result.first) continue;
+            money = min(money, special[i].back() + shopping(price, special, result.second, i)); 
         }
-        return ans;
+        return money;
     }
     
-    int buy(const vector<int> &price, const vector<int> &needs) {
-        int sum = 0;
+    int directBuy(const vector<int> &price, const vector<int> &needs) {
+        int money = 0;
         for (int i = 0; i < needs.size(); i++) {
-            sum += needs[i] * price[i];
+            money += needs[i] * price[i];
         }        
-        return sum;
+        return money;
     }
     
-    bool canBuyOffer(const vector<int> &offer, const vector<int> &needs) {
+    pair<bool, vector<int>> buyOffer(const vector<int> &offer, const vector<int> &needs) {
+        vector<int> newNeeds(needs);
         for (int i = 0; i < needs.size(); i++) {
-            if (offer[i] > needs[i]) return false;
+            if (offer[i] > needs[i]) return { false, {}};
+            newNeeds[i] -= offer[i];
         }
-        return true;
-    }
-    
-    vector<int> buyOffer(const vector<int> &offer, const vector<int> &needs) {
-        vector<int> res(needs);
-        for (int i = 0; i < needs.size(); i++) {
-            res[i] -= offer[i];
-        }
-        return res;
+        return { true, newNeeds };
     }
 };
 
