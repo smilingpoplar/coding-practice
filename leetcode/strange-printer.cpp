@@ -14,16 +14,27 @@ class Solution {
 public:
     int strangePrinter(string s) {
         if (s.empty()) return 0;
+        // 设dp[i][j]表示s[i..j]的最少打印数。看i<=k<=j的k处，
+        // 当k==i，dp[i][j]=1+dp[i+1][j]
+        // 当i<k<=j，dp[i][j]=dp[i][k]+dp[k+1][j]；
+        //  若s[i]==s[k]，k可以和i一起打印，dp[i][k]=dp[i][k-1]
+        // 初始i==j时，dp[i][i]=1
+        // i从右往左遍历，j从左往右遍历
         const int N = s.size();
         vector<vector<int>> dp(N, vector<int>(N, INT_MAX));
-        for (int i = 0; i < N; i++) dp[i][i] = 1;
+        for (int i = 0; i < N; i++) {
+            dp[i][i] = 1;
+        }
         
-        for (int len = 2; len <= N; len++) {
-            for (int i = 0; i <= N - len; i++) {
-                int j = i + len - 1;
-                for (int k = i; k < j; k++) { // 分成两段s[i..k]、s[k+1..j]
-                    int count = dp[i][k] + dp[k+1][j];
-                    if (s[k] == s[j]) count--; // 两段尾字母可先同时打印，少打印一次
+        for (int i = N - 2; i >= 0; i--) {
+            for (int j = i + 1; j < N; j++) {
+                for (int k = i; k <= j; k++) {
+                    int count = (k+1 <= j) ? dp[k+1][j] : 0;
+                    if (k == i) count += 1;
+                    else {
+                        if (s[i] == s[k]) count += (i <= k-1) ? dp[i][k-1] : 0;
+                        else count += dp[i][k];
+                    }
                     dp[i][j] = min(dp[i][j], count);
                 }
             }
