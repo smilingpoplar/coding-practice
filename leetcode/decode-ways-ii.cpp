@@ -13,50 +13,50 @@ using namespace std;
 class Solution {
 public:
     int numDecodings(string s) {
-        // 设dp[i]表示s[0..i]的编码数。
-        // 若s[i]单独编码：
-        // s[i]    *       0    [1-9]
-        //     9*dp[i-1]  xxx  dp[i-1]
-        // 若s[i]和s[i-1]一起编码：
-        //     s[i]    *          [0-6]     [7-9]
-        // s[i-1]
-        //    *    15*dp[i-2]   2*dp[i-2]  dp[i-2]
-        //    1     9*dp[i-2]    dp[i-2]   dp[i-2]
-        //    2     6*dp[i-2]    dp[i-2]     xxx
+        // 设dp[i]表示s[i..]的解码数
+        // 若isValid(s[i..i]), dp[i] += ??dp[i+1]；若isValid(s[i,i+1])，dp[i] += ??dp[i+2]
+        // 若s[i]单独解码：
+        // s[i]
+        //   *     9*dp[i+1]
+        //   0      xxx
+        // [1-9]    dp[i+1]
+        // 若s[i]和s[i+1]一起解码：
+        //     s[i+1]    *          [0-6]     [7-9]
+        // s[i]
+        //   *      15*dp[i+2]   2*dp[i+2]  dp[i+2]
+        //   1       9*dp[i+2]    dp[i+2]   dp[i+2]
+        //   2       6*dp[i+2]    dp[i+2]     xxx
         //  0, 3-9     xxxxxxxxxxxxxxxxxx
-        const int M = 1000000007;
-        // 用long防止计算过程中溢出！仅仅赋值前每次都%M，中间变量也可能溢出导致计算错误。
-        long prev2 = 1, prev1 = 1;
-        for (int i = 0; i < s.size(); i++) {
+        const int Mod = 1e9 + 7;
+        // 用long防止计算过程中溢出！
+        // 若用int且右端%M，中间变量也可能溢出导致错误。
+        const int N = s.size();
+        long next1 = 1, next2 = 1;
+        for (int i = N; i >= 0; i--) {
             long curr = 0;
             if (s[i] == '*') {
-                curr += 9 * prev1;
-                if (i > 0) {
-                    if (s[i-1] == '*') {
-                        curr += 15 * prev2;
-                    } else if (s[i-1] == '1') {
-                        curr += 9 * prev2;
-                    } else if (s[i-1] == '2') {
-                        curr += 6 * prev2;
-                    }
+                curr += 9 * next1;
+                if (i + 1 < N) {
+                    if (s[i+1] == '*') curr += 15 * next2;
+                    else if (s[i+1] <= '6') curr += 2 * next2;
+                    else curr += next2;
                 }
             } else {
-                if (s[i] != '0') curr += prev1;
-                if (i > 0) {
-                    if (s[i-1] == '*') {
-                        if (s[i] <= '6') curr += 2 * prev2;
-                        else curr += prev2;
-                    } else if (s[i-1] == '1') {
-                        curr += prev2;
-                    } else if (s[i-1] == '2') {
-                        if (s[i] <= '6') curr += prev2;
+                if (s[i] != '0') curr += next1;
+                if (i + 1 < N) {
+                    if (s[i] == '1') {
+                        if (s[i+1] == '*') curr += 9 * next2;
+                        else curr += next2;
+                    } else if (s[i] == '2') {
+                        if (s[i+1] == '*') curr += 6 * next2;
+                        else if (s[i+1] <= '6') curr += next2;
                     }
                 }
             }
-            prev2 = prev1;
-            prev1 = curr % M;
+            next2 = next1;
+            next1 = curr % Mod;
         }
-        return (int)prev1;
+        return (int)next1;
     }
 };
 
