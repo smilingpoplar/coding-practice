@@ -20,17 +20,17 @@ public:
         const int MOD = 1e9 + 7;
         vector<vector<int>> dp(m, vector<int>(n, 0));
         for (int k = 1; k <= N; k++) {
-            vector<vector<int>> newdp(m, vector<int>(n, 0));
+            vector<vector<int>> ndp(m, vector<int>(n, 0));
             for (int r = 0; r < m; r++) {
                 for (int c = 0; c < n; c++) {
                     int paths = r == 0 ? 1 : dp[r-1][c];
                     paths = (paths + (r == m - 1 ? 1 : dp[r+1][c])) % MOD;
                     paths = (paths + (c == 0 ? 1 : dp[r][c-1])) % MOD;
                     paths = (paths + (c == n - 1 ? 1 : dp[r][c+1])) % MOD;
-                    newdp[r][c] = paths;                    
+                    ndp[r][c] = paths;                    
                 }
             }
-            swap(dp, newdp);            
+            swap(dp, ndp);            
         }
         return dp[i][j];        
     }

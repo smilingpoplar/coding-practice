@@ -24,15 +24,15 @@ public:
         const int K = days[0].size();
         vector<int> dp(N, 0);
         for (int k = K - 1; k >= 0; k--) {
-            vector<int> newdp(N, 0);
+            vector<int> ndp(N, 0);
             for (int i = 0; i < N; i++) {
-                newdp[i] = days[i][k] + dp[i]; // 呆城市i
+                ndp[i] = days[i][k] + dp[i]; // 呆城市i
                 for (int j = 0; j < N; j++) { // 飞城市j
                     if (flights[i][j] == 0) continue;
-                    newdp[i] = max(newdp[i], days[j][k] + dp[j]);
+                    ndp[i] = max(ndp[i], days[j][k] + dp[j]);
                 }
             }
-            swap(newdp, dp);
+            swap(dp, ndp);
         }
         return dp[0];
     }

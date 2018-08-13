@@ -15,17 +15,17 @@ class Solution {
 public:
     int minCost(vector<vector<int>>& costs) {
         // 设dp[i][c]表示前[0..i]房子、第i房颜色为c时的最小代价，有dp[i][c]=min(dp[i-1][not_c])+cost[i][c]
-        // 递推式i这维只依赖于i-1项，去掉i这维，i仍从左往右遍历。c这维的依赖方向不确定，要使用临时变量newdp[]。
+        // 递推式i这维只依赖于i-1项，去掉i这维，i仍从左往右遍历。c这维的依赖方向不确定，要使用临时变量ndp[]。
         // dp[c]=min(dp[not_c])+cost[i][c]。初始dp[c]=cost[0][c]。
         if (costs.empty()) return 0;
         const int N = costs.size(), C = costs[0].size();
         vector<int> dp = costs[0];
         for (int i = 1; i < N; i++) {
-            vector<int> newdp(C);
+            vector<int> ndp(C);
             for (int c = 0; c < C; c++) {
-                newdp[c] = min(dp[(c+1) % C], dp[(c+2) % C]) + costs[i][c];
+                ndp[c] = min(dp[(c+1) % C], dp[(c+2) % C]) + costs[i][c];
             }
-            swap(newdp, dp);
+            dp.swap(ndp);
         }
         return *min_element(dp.begin(), dp.end());
     }
