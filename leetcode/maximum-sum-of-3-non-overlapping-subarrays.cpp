@@ -3,7 +3,7 @@
 //  https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/
 //
 //  Created by smilingpoplar on 18/01/19.
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  CopyrightIdx (c) 2015年 YangLe. All rightIdxs reserved.
 //
 
 #include <iostream>
@@ -14,46 +14,45 @@ class Solution {
 public:
     vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
         if (k * 3 > nums.size()) return { -1, -1, -1 };
-        // 所有长k子数组和构成数组W
+        // 先算出所有k长的子段和，构成数组W
         vector<int> W(nums.size() - k + 1);
         int sum = 0;
-        for (int i = 0; i < k; i++) {
-            sum += nums[i];
-        }
-        int w = 0;
-        W[w++] = sum;
+        for (int i = 0; i < k; i++) sum += nums[i];
+        int iw = 0;
+        W[iw++] = sum;
+
         for (int i = k; i < nums.size(); i++) {
             sum += nums[i] - nums[i-k];
-            W[w++] = sum;
+            W[iw++] = sum;
         }
         
-        // 左边最大和的第一次出现
-        vector<int> left(W.size());
+        // 问题变成从W中取3个数ia、ib、ic，使W[ia]+W[ib]+W[ic]最大，不重叠要求ia+k<=ib、ib+k<=ic。
+        // 三个数一般想法是固定住中间的数，故假设中间的数ib已选定！
+        // 那么ia只要在[0..ib-k]中找最大值的最左出现，ic只要在[ib+k, len(W)-1]中找最大值的最左出现。
+        const int N = W.size();
+        vector<int> leftIdx(N);
         int maxIdx = 0;
-        for (int i = 0; i < W.size(); i++) {
-            if (W[i] > W[maxIdx]) {
-                maxIdx = i;
-            }
-            left[i] = maxIdx;
+        for (int i = 0; i < N; i++) {
+            if (W[i] > W[maxIdx]) maxIdx = i; // 最大值的最左出现
+            leftIdx[i] = maxIdx;
         }
-        // 右边最大和的第一次出现
-        vector<int> right(W.size());
-        maxIdx = W.size() - 1;
-        for (int j = W.size() - 1; j >= 0; j--) {
-            if (W[j] >= W[maxIdx]) {
-                maxIdx = j;
-            }
-            right[j] = maxIdx;
+
+        vector<int> rightIdx(N);
+        maxIdx = N - 1;
+        for (int j = N - 1; j >= 0; j--) {
+            if (W[j] >= W[maxIdx]) maxIdx = j; // 最大值的最左出现，注意这里>=的等号
+            rightIdx[j] = maxIdx;
         }
         
-        // 选三个数(ia,ib,ic), ia+k<=ib, ib+k<=ic
+        // 选三个数{ia,ib,ic}, ia+k<=ib, ib+k<=ic
         int maxSum = INT_MIN;
         vector<int> ans = { -1, -1, -1 };
-        for (int ib = k; ib < W.size() - k; ib++) {
-            int sum = W[left[ib-k]] + W[ib] + W[right[ib+k]];
+        for (int ib = k; ib < N - k; ib++) { // 先选中间的数ib
+            int ia = leftIdx[ib-k], ic = rightIdx[ib+k];
+            int sum = W[ia] + W[ib] + W[ic];
             if (sum > maxSum) {
                 maxSum = sum;
-                ans = { left[ib-k], ib, right[ib+k] };
+                ans = { ia, ib, ic };
             }
         }
         return ans;
