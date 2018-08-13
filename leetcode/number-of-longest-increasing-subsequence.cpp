@@ -16,7 +16,7 @@ public:
         if (nums.empty()) return 0;
         const int N = nums.size();
         vector<int> len(N, 1); // 以nums[i]结尾的递增子序列长度
-        vector<int> cnt(N, 1); // ----------------------个数
+        vector<int> cnt(N, 1); //      ...              个数
         
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
