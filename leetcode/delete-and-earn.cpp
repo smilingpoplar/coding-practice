@@ -13,12 +13,14 @@ using namespace std;
 class Solution {
 public:
     int deleteAndEarn(vector<int>& nums) {
-        map<int, int> count;
-        for (int num : nums) count[num]++;
-        const int N = 10000;
+        unordered_map<int, int> count;
+        for (int num : nums) 
+            count[num]++;
+
+        const int N = 10000; // nums[i]在范围[1..10000]
         // 设dp[i]表示值范围[1..i]的最大得分，1<=i<=N
         // dp[i] = max(dp[i-2] + i*count[i] /*取i*/, dp[i-1] /*不取i*/)
-        // dp[i]只依赖前两项，记为prev2、prev1
+        // dp[i]只依赖前两项，前两项记为prev2、prev1
         int prev2 = 0, prev1 = 0;
         for (int i = 1; i <= N; i++) {
             int curr = max(prev2 + i * count[i], prev1) ;
