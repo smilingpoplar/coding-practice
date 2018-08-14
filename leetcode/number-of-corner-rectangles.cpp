@@ -15,13 +15,12 @@ class Solution {
 public:
     int countCornerRectangles(vector<vector<int>>& grid) {
         if (grid.empty()) return 0;
-        const int R = grid.size();
-        const int C = grid[0].size();
+        const int R = grid.size(), C = grid[0].size();
         int ans = 0;
         // 遍历两个行
         for (int r1 = 0; r1 < R; r1++) {
             for (int r2 = r1 + 1; r2 < R; r2++) {
-                int cnt = 0; // "某列同为1"的个数
+                int cnt = 0; // “某列两端同为1”的个数
                 for (int c = 0; c < C; c++) {
                     if (grid[r1][c] && grid[r2][c]) cnt++;
                 }

@@ -12,20 +12,20 @@
 using namespace std;
 
 class Solution {
-    const int charCnt = 4;
+    const int charCnt = 4; // 只有abcd四种字母
     const int MOD = 1e9 + 7;
 public:
     int countPalindromicSubsequences(string S) {
-        // 比如"bccb"，先考虑所有相同字母x的最外层：比如对于x=b，考虑S[firstIdx(b)..lastIdx(b)]，
-        // 这最外层可贡献回文b、bb（firstIdx(b)!=lastIdx(b)时）；然后对于bb，剥去最外层可得到子问题：
-        // S[firstIdx(b)+1..lastIdx(b)-1]]。不同字母x的子问题不重叠，count可相加。
+        // 先考虑某字母的最外层区间。比如"bccb"，先考虑b，最外层区间S[firstIdx(b)..lastIdx(b)]。
+        // 这最外层可贡献回文b、bb（firstIdx(b)!=lastIdx(b)时）；然后对于bb，可剥去最外层得到子问题：
+        // S[firstIdx(b)+1..lastIdx(b)-1]]。不同字母的子问题不重叠，count可相加。
         const int N = S.size();
-        vector<set<int>> idx(charCnt);
+        vector<set<int>> idx(charCnt); // char => index_set
         for (int i = 0; i < N; i++) {
             idx[S[i] - 'a'].insert(i);
         }
 
-        vector<vector<int>> memo(N, vector<int>(N, -1));
+        vector<vector<int>> memo(N, vector<int>(N, -1)); // (start,end) => count
         return rCount(0, N - 1, idx, memo);
     }
     
@@ -34,12 +34,13 @@ public:
         if (memo[start][end] != -1) return memo[start][end];
         
         long ans = 0;
-        for (int x = 0; x < charCnt; x++) {
-            auto itStart = idx[x].lower_bound(start);
-            if (itStart == idx[x].end() || *itStart > end) continue;
-            auto itEnd = idx[x].upper_bound(end); itEnd--; // idx[x]非空，可itEnd--
+        for (int i = 0; i < charCnt; i++) {
+            auto itStart = idx[i].lower_bound(start);
+            if (itStart == idx[i].end() || *itStart > end) continue;
+            auto itEnd = idx[i].upper_bound(end); 
+            itEnd--; // *itStart<=end，<=end非空，可itEnd--
             ans += (*itStart == *itEnd) ? 1 : 2; // 最外层贡献c、cc
-            ans += rCount(*itStart + 1, *itEnd - 1, idx, memo) % MOD; // 最外层cc、拼接上内层：c..c
+            ans += rCount(*itStart + 1, *itEnd - 1, idx, memo); // 最外层cc、拼接上内层：c..c
         }
         memo[start][end] = ans % MOD;
         return memo[start][end];
