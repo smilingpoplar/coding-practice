@@ -13,50 +13,53 @@ using namespace std;
 class Solution {
 public:
     int minStickers(vector<string>& stickers, string target) {
-        // 设dp[str]表示已排序串str需要的最少贴纸数，已知dp[""]=0
-        unordered_map<string, int> dp;
-        dp[""] = 0;
-        sort(target.begin(), target.end());
-        vector<vector<int>> stickerCharsArray;
+        // 设memo[str]表示已排序串str需要的最少贴纸数，已知memo[""]=0
+        unordered_map<string, int> memo;
+        memo[""] = 0;
+
+        vector<vector<int>> stickerCharCnts;
         for (auto &sticker : stickers) {
-            stickerCharsArray.push_back(countChars(sticker));
+            stickerCharCnts.push_back(countChar(sticker));
         }
-        return minStickers(target, dp, stickerCharsArray);
+        sort(target.begin(), target.end());
+        return dfs(stickerCharCnts, target, memo);
     }
     
-    int minStickers(string target, unordered_map<string, int> &dp, 
-                    const vector<vector<int>> &stickerCharsArray) {
-        if (dp.count(target)) return dp[target];
+    // sticker,target变成charCnt[]参与运算
+    int dfs(const vector<vector<int>> &stickers, const string &targetStr,
+            unordered_map<string, int> &memo) {
+        if (memo.count(targetStr)) return memo[targetStr];
+
+        auto target = countChar(targetStr);
         int ans = INT_MAX;
-        auto targetChars = countChars(target);
-        for (auto &stickerChars : stickerCharsArray) {
-            if (stickerChars[target[0] - 'a'] <= 0) continue;
-            string reduced = reduceTarget(targetChars, stickerChars);
-            int subAns = minStickers(reduced, dp, stickerCharsArray);
+        for (auto &sticker : stickers) {
+            if (sticker[targetStr[0] - 'a'] == 0) continue; // 优化，至少要消掉首字母
+            auto reduced = reduceTarget(target, sticker);
+            int subAns = dfs(stickers, reduced, memo);
             if (subAns != -1) ans = min(ans, 1 + subAns);
         }
-        if (ans == INT_MAX) ans = -1;
-        dp[target] = ans;    
+        memo[targetStr] = ans != INT_MAX ? ans : -1;
+        return memo[targetStr];
+    }
+    
+    vector<int> countChar(const string &s) {
+        vector<int> ans(26, 0);
+        for (char c : s) {
+            ans[c - 'a']++;
+        }
         return ans;
     }
     
-    vector<int> countChars(const string &s) {
-        vector<int> count(26, 0);
-        for (char c : s) {
-            ++count[c - 'a'];
-        }
-        return count;
-    }
-    
-    string reduceTarget(vector<int> target, const vector<int> &v) {
+    // a - b
+    string reduceTarget(const vector<int> &a, const vector<int> &b) {
         ostringstream oss;
-        for (int i = 0; i < target.size(); i++) {
-            target[i] = max(0, target[i] - v[i]);
-            for (int k = 0; k < target[i]; k++) {
+        for (int i = 0; i < a.size(); i++) {
+            int cnt = max(0, a[i] - b[i]);
+            for (int k = 0; k < cnt; k++) {
                 oss << char(i + 'a');
             }
         }
-        return oss.str();        
+        return oss.str();
     }
 };
 
