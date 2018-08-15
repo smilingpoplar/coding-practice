@@ -35,7 +35,7 @@ public:
         return { num / cols, num % cols };
     }
     
-    int getValue(int idx, int defaultValue) {
+    int getValue(int idx) {
         return nums.count(idx) ? nums[idx] : idx;
     }
     
