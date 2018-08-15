@@ -16,11 +16,10 @@ class Solution {
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
         // K个中间站，即可往外走K+1步
-        // 不是dijkstra算法，dijkstra找的代价最小路径可能因为超过K+1步不能被选，而且没考虑K+1步内代价更大的路径
+        // 不是dijkstra算法，dijkstra的最小代价路径可能超过K+1步不能被选、而且K+1步内代价更大的路径没被考虑
         // 修改dijkstra，这里要考虑K+1步内的所有路径
         if (flights.empty()) return -1;
-        const int M = flights.size();
-        const int N = flights[0].size();
+        const int M = flights.size(), N = flights[0].size();
         unordered_map<int, unordered_map<int, int>> adj;
         for (auto &e : flights) {
             adj[e[0]][e[1]] = e[2];
@@ -47,13 +46,14 @@ public:
     }
 };
 */
+
 class Solution {
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
-        // K个中间站，最多是直线上V=K+2个节点
+        // 从src到dst最多K个中间站，共V=K+2个节点
         // bellman ford算法，对所有边做V-1=K+1次松弛
         const int INF = 1e9;
-        vector<int> dist(n, INF);
+        vector<int> dist(n, INF); // src到各节点的距离
         dist[src] = 0;
         for (int i = 0; i <= K; i++) {
             auto prev = dist;

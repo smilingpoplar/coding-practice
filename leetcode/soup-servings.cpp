@@ -14,12 +14,13 @@ using namespace std;
 class Solution {
 public:
     double soupServings(int N) {
-        if (N >= 5000) return 1; // trick：单调递增，N太大时直接返回1
-        map<pair<int, int>, double> memo;
+        if (N >= 5000) return 1; // tricky：单调递增，N太大时直接返回1
+        map<pair<int, int>, double> memo; // A,B剩余 => 概率
         return prob(N, N, memo);
     }
     
     double prob(int a, int b, map<pair<int, int>, double> &memo) {
+        // 基本的终止情况
         if (a <= 0 && b <= 0) return 0.5;
         if (a <= 0) return 1;
         if (b <= 0) return 0;

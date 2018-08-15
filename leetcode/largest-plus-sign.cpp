@@ -14,38 +14,38 @@ class Solution {
 public:
     int orderOfLargestPlusSign(int N, vector<vector<int>>& mines) {
         vector<vector<int>> grid(N, vector<int>(N, 1));
-        for (auto &v : mines) {
-            grid[v[0]][v[1]] = 0;
+        for (auto &m : mines) {
+            grid[m[0]][m[1]] = 0;
         }
 
         vector<vector<int>> order(N, vector<int>(N, INT_MAX));
         // 看各点往左能延伸多长、往右能延伸多长
-        for (int i = 0; i < N; i++) {
+        for (int r = 0; r < N; r++) {
             int count = 0;
-            for (int j = 0; j < N; j++) {
-                count = (grid[i][j] == 0) ? 0 : ++count;
-                if (count < order[i][j]) order[i][j] = count;
+            for (int c = 0; c < N; c++) {
+                count = (grid[r][c] == 0) ? 0 : ++count;
+                if (count < order[r][c]) order[r][c] = count;
             }
             count = 0;
-            for (int j = N - 1; j >= 0; j--) {
-                count = (grid[i][j] == 0) ? 0 : ++count;
-                if (count < order[i][j]) order[i][j] = count;
+            for (int c = N - 1; c >= 0; c--) {
+                count = (grid[r][c] == 0) ? 0 : ++count;
+                if (count < order[r][c]) order[r][c] = count;
             }
 
         }        
         // 看各点往上能延伸多长、往下能延伸多长
         int ans = 0;
-        for (int j = 0; j < N; j++) {
+        for (int c = 0; c < N; c++) {
             int count = 0;
-            for (int i = 0; i < N; i++) {
-                count = (grid[i][j] == 0) ? 0 : ++count;
-                if (count < order[i][j]) order[i][j] = count;
+            for (int r = 0; r < N; r++) {
+                count = (grid[r][c] == 0) ? 0 : ++count;
+                if (count < order[r][c]) order[r][c] = count;
             }
             count = 0;
-            for (int i = N - 1; i >= 0; i--) {
-                count = (grid[i][j] == 0) ? 0 : ++count;
-                if (count < order[i][j]) order[i][j] = count;
-                ans = max(ans, order[i][j]);
+            for (int r = N - 1; r >= 0; r--) {
+                count = (grid[r][c] == 0) ? 0 : ++count;
+                if (count < order[r][c]) order[r][c] = count;
+                ans = max(ans, order[r][c]);
             }
         }
         return ans;

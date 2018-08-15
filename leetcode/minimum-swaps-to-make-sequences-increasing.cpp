@@ -14,29 +14,30 @@ using namespace std;
 class Solution {
 public:
     int minSwap(vector<int>& A, vector<int>& B) {
-        // 设dp[i][0]表示A[0..i]、B[0..i]的A[i]、B[i]没交换时的最小交换数，
-        //   dp[i][1]                              交换
-        // 如果A[i-1]<A[i]&&B[i-1]<B[i]，如果第i-1项交换、第i项也要交换：dp[i][1] = dp[i-1][1]+1
-        //                              第i-1项没交换、第i项也不用交换：dp[i][0] = dp[i-1][0]
-        // 如果A[i-1]<B[i]&&B[i-1]<A[i]，如果第i-i项交换、第i项就不用交换：dp[i][0] = dp[i-1][1]
-        //                              第i-1项没交换、第i项就要交换：dp[i][1] = dp[i-1][0]+1
-        // 上述两种情况可同时存在。初始dp[0][0]=0, dp[0][1]=1
-        // dp[i][]只依赖于dp[i-1][]，降维，初始dp[0]=0,dp[1]=1
+        // 设dp[i][0]表示A[0..i]、B[0..i]不交换A[i]、B[i]时的最小交换数，
+        //   dp[i][1]                   交换
+        // 若A[i-1]<A[i]&&B[i-1]<B[i]，如果交换第i-1项、就要交换第i项：dp[i][1] = dp[i-1][1]+1
+        //                            不交换第i-1项、就不用交换第i项：dp[i][0] = dp[i-1][0]
+        // 若A[i-1]<B[i]&&B[i-1]<A[i]，如果交换第i-i项、就不用交换第i项：dp[i][0] = dp[i-1][1]
+        //                            不交换第i-1项、就要交换第i项：dp[i][1] = dp[i-1][0]+1
+        // 上述两种情况可同时存在。
+        // 初始dp[0][0]=0, dp[0][1]=1
+        // 递推式i这维只依赖i-1项，省掉i这维，i仍从左往右遍历
         const int N = A.size();
-        vector<int> prev = {0, 1};
+        vector<int> dp = {0, 1};
         for (int i = 1; i < N; i++) {
-            vector<int> curr = {INT_MAX, INT_MAX};
+            vector<int> ndp = {INT_MAX, INT_MAX};
             if (A[i-1] < A[i] && B[i-1] < B[i]) {
-                curr[1] = min(curr[1], prev[1] + 1);
-                curr[0] = min(curr[0], prev[0]);
+                ndp[1] = min(ndp[1], dp[1] + 1);
+                ndp[0] = min(ndp[0], dp[0]);
             }
             if (A[i-1] < B[i] && B[i-1] < A[i]) {
-                curr[0] = min(curr[0], prev[1]);
-                curr[1] = min(curr[1], prev[0] + 1);
+                ndp[0] = min(ndp[0], dp[1]);
+                ndp[1] = min(ndp[1], dp[0] + 1);
             }
-            swap(curr, prev);
+            swap(ndp, dp);
         }
-        return min(prev[0], prev[1]);
+        return min(dp[0], dp[1]);
     }
 };
 
