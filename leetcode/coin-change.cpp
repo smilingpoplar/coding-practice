@@ -13,7 +13,8 @@ using namespace std;
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        // 完全背包问题。背包容量是amount，物品体积是硬币面值，物品价值是硬币数1，这里要使总价值最小。
+        // 完全背包问题
+        // 背包容量是amount，物品体积是硬币面值，物品价值是硬币数1，要使总价值最小
         const int theMax = amount + 1;
         vector<int> dp(amount + 1, theMax);
         dp[0] = 0;

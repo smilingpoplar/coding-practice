@@ -14,10 +14,12 @@ using namespace std;
 class Solution {
 public:
     double largestSumOfAverages(vector<int>& A, int K) {
-        // 设dp[i][k]表示对A[0..i]最多分k段时的最大得分
-        // dp[i][k] = max{avg(0..i)/*不分段*/, dp[j][k-1] + avg(j+1..i) }，0<=j<i
-        // avg(j+1..i)用前缀和数组计算：(sum[i]-sum[j])/(i-j)，sum[i]表示A[0..i]的和
-        // dp[][k]只依赖于dp[][k-1]，省掉k这一维；dp[i]由dp[j]们计算，0<=j<i，i要逆序遍历
+        // 设dp[i][k]表示对A[0..i]最多分k段时的最大得分，k>=1
+        // dp[i][k] = max{ avg(0..i)/*不分段*/, dp[j][k-1] + avg(j+1..i) }，0<=j<i
+        // avg(j+1..i)用累加数组计算：(sum[i]-sum[j])/(i-j)，sum[i]表示A[0..i]的和
+        // 初始dp[i][1]=avg(0..i)
+        // 递推式k这维只依赖k-1项，省掉k这维，k仍从左往右遍历；
+        // dp[i]由dp[j]等旧状态计算，i要从右往左遍历
         const int N = A.size();
         vector<double> sum(N, 0);
         int runningSum = 0;
