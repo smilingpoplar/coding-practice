@@ -13,24 +13,21 @@ using namespace std;
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        // 想象数字构成的高低折线，每次都削掉第一个"波峰"，就能使数字最小
-        // 用栈找"波峰"，即找下一个更小的数
+        const int N = num.size();
+        int cnt = N - k; // 删掉k个数字就是留下N-k个数字
+        // 栈中留下递增序列、对应于波峰的左侧、找下一个更小的数
+        // 当栈内数字个数+剩余可压栈个数>cnt时才可pop()，栈内数字个数<cnt时才可push()
         string s;
-        for (char c : num) {
-            while (!s.empty() && c < s.back() && k > 0) {
-                s.pop_back(); // 弹出数是波峰，削掉第一个波峰
-                k--;
+        for (int i = 0; i < N; i++) {
+            while (!s.empty() && num[i] < s.back() 
+                   && s.size() + (N - i) > cnt) { // [i,N)是剩余可压栈的数字
+                s.pop_back();
             }
-            s.push_back(c);
-        }
-        // 满足特定条件才削峰，上面削掉的可能不够k个。栈中是递增序列，继续削
-        while (!s.empty() && k > 0) {
-            s.pop_back();
-            k--;
+            if (s.size() < cnt) s.push_back(num[i]);
         }
         // 删除开头的0
         int pos = 0;
-        while (pos < s.size() && s[pos] == '0') pos++;
+        while (pos < s.size() && s[pos] == '0') pos++;        
         return pos < s.size() ? s.substr(pos) : "0";
     }
 };

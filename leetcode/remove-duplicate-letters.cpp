@@ -24,8 +24,7 @@ public:
             if (visited[c]) continue;
             // 字母有富余count[stk.top()]>0时才弹出，保证每个字母最少选一次
             while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) {
-                int top = stk.back();
-                stk.pop_back();
+                int top = stk.back(); stk.pop_back();
                 visited[top] = false;
             }
             stk.push_back(c);

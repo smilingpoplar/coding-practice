@@ -22,6 +22,7 @@ using namespace std;
 class Solution {
 public:
     vector<Interval> employeeFreeTime(vector<vector<Interval>>& schedule) {
+        // 边界计数法
         map<int, int> timeline;
         for (auto &employee : schedule) {
             for (auto &interval : employee) {
@@ -31,11 +32,11 @@ public:
         }
 
         vector<Interval> ans;
-        int start = -1;
         int event = 0;
+        int start = -1;
         for (auto &e : timeline) {
             event += e.second;
-            if (event <= 0) {
+            if (event <= 0) { // 空闲时间
                 if (start == -1) {
                     start = e.first;
                 }
