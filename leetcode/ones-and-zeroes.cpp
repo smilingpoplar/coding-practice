@@ -26,7 +26,7 @@ public:
                 if (c == '0') zeros++;
                 else ones++;
             }
-            // 01背包，从右往左遍历容量
+            // 01背包，逆序遍历容量
             for (int i = m; i >= zeros; i--) {
                 for (int j = n; j >= ones; j--) {
                     dp[i][j] = max( dp[i][j], 1 + dp[i - zeros][j - ones] );

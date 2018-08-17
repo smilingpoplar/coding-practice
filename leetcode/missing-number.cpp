@@ -14,14 +14,10 @@ using namespace std;
 class Solution {
 public:
     int missingNumber(vector<int> &nums) {
-        const int N = (int)nums.size();
+        const int N = nums.size();
         int x = 0;
-        for (int i = 0; i <= N; i++) {
-            x ^= i;
-        }
-        for (auto num : nums) {
-            x ^= num;
-        }
+        for (int i = 0; i <= N; i++) x ^= i;
+        for (auto num : nums) x ^= num;
         return x;
     }
 };

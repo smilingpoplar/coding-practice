@@ -13,19 +13,20 @@ using namespace std;
 class Solution {
 public:
     int minPatches(vector<int>& nums, int n) {
-        // 设missing表示当前缺失的最小数，[1,missing)的数已都能相加得到
+        // 设[1..missing)已能由数组数相加获得，即missing是*可能缺失*的最小数
         long missing = 1;
-        int i = 0;
-        int count = 0;
+        int i = 0, added = 0;
         while (missing <= n) {
+            // nums[i]已能由相加获得（<missing）或在数组中（==missing）
             if (i < nums.size() && nums[i] <= missing) {
-                missing += nums[i++];
+                missing += nums[i];
+                i++;
             } else {
-                missing += missing;
-                count++;
+                missing += missing; // 补上数missing
+                added++;
             }
         }
-        return count;
+        return added;
     }
 };
 

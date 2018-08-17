@@ -19,11 +19,11 @@ public:
         priority_queue<int> taken; // 已选的课程，这里只记录duration
         
         int end = 0;
-        for (const auto &c : courses) {
+        for (auto &c : courses) {
             if (end + c[0] <= c[1]) { // 选课程c
                 taken.push(c[0]);
                 end += c[0];
-            } else if (!taken.empty()) { // 替换掉一个持续时间更大的已选课程，选其中最大的
+            } else if (!taken.empty()) { // 替换掉一个duration更大的已选课程，选其中最大的
                 int t = taken.top();
                 if (t > c[0]) {
                     taken.pop();

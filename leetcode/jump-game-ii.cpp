@@ -14,24 +14,20 @@ using namespace std;
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        // 每次jump都更新最远可达区间[start,end]，end>=1时到达终点
-        const int N = (int)nums.size();
+        // 按bfs分层遍历思路，记录可达的最远索引maxIdx
+        const int N = nums.size();
         if (N <= 1) return 0;
-        int step = 0;
-        int start = 0, end = 0;
-        while (true) {
-            ++step;
-            int oldEnd = end;
-            for (int i = start; i <= oldEnd; i++) {
-                end = max(end, i + nums[i]);
-                if (end >= N - 1) return step;
+        int maxIdx = 0, i = 0;
+        int level = 0;
+        while (i <= maxIdx) {
+            level++;
+            int levelMaxIdx = maxIdx;
+            for (; i <= levelMaxIdx; i++) {
+                maxIdx = max(maxIdx, i + nums[i]);
+                if (maxIdx >= N - 1) return level;
             }
-            if (end == oldEnd) return -1; // 不向前jump
-
-            start = oldEnd + 1;
         }
-        
-        return 0;
+        return -1;
     }
 };
 

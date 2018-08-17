@@ -20,12 +20,13 @@ public:
         string stk; // 让栈中保留递增序列，对应"波峰"左侧，对应找下一个更小的数
         for (char c : s) {
             count[c]--;
-            if (visited[c]) continue; // 保证每个字母最多选一次
+            // 保证每个字母最多选一次，判断放在前面保证相同字母选最早出现的
+            if (visited[c]) continue;
             // 字母有富余count[stk.top()]>0时才弹出，保证每个字母最少选一次
             while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) {
-                int pop = stk.back();
+                int top = stk.back();
                 stk.pop_back();
-                visited[pop] = false;
+                visited[top] = false;
             }
             stk.push_back(c);
             visited[c] = true;

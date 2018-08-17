@@ -13,12 +13,13 @@ using namespace std;
 class Solution {
 public:
     int minSwapsCouples(vector<int>& row) {
+        const int N = row.size();
         int ans = 0;
-        for (int i = 0; i < row.size(); i += 2) {
+        for (int i = 0; i < N; i += 2) {
             int couple = row[i] ^ 1;
-            if (row[i+1] ==  couple) continue;
+            if (row[i+1] == couple) continue;
             int j = i + 2;
-            while (j < row.size() && row[j] != couple) ++j;
+            while (j < N && row[j] != couple) j++;
             row[j] = row[i+1];
             row[i+1] = couple;
             ans++;
