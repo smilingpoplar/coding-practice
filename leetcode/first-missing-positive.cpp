@@ -14,18 +14,21 @@ using namespace std;
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        // 桶排序，准备N个桶来放数字[1,n]，第i个桶放数字i+1（索引从0开始）(0<=i<=N-1)，即把数字j放到第j-1个桶中(1<=j<=N)
-        const int N = (int)nums.size();
+        // 旋转置换
+        // 把位置i的[1..n]内的数和位置j=nums[i]-1的数交换，
+        // nums[i]-1是因为正数是1-based
+        const int N = nums.size();
         for (int i = 0; i < N; i++) {
-            while (nums[i] != i + 1 && 1 <= nums[i] && nums[i] <= N && nums[i] != nums[nums[i] - 1]) {
-                swap(nums[i], nums[nums[i] - 1]); // 把数字j放到第j-1个桶中
+            for (int j = nums[i] - 1; 
+                 1 <= nums[i] && nums[i] <= N && nums[i] != nums[j];
+                 j = nums[i] - 1) {
+                swap(nums[i], nums[j]);
             }
         }
         // first missing
         for (int i = 0; i < N; i++) {
-            if (nums[i] != i + 1) return i + 1;
+            if (i != nums[i] - 1) return i + 1;
         }
-        
         return N + 1;
     }
 };
