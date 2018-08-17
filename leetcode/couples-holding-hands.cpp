@@ -14,17 +14,24 @@ class Solution {
 public:
     int minSwapsCouples(vector<int>& row) {
         const int N = row.size();
+        vector<int> pos(N);
+        for (int i = 0; i < N; i++) {
+            pos[row[i]] = i;
+        }
+
         int ans = 0;
         for (int i = 0; i < N; i += 2) {
             int couple = row[i] ^ 1;
             if (row[i+1] == couple) continue;
-            int j = i + 2;
-            while (j < N && row[j] != couple) j++;
-            row[j] = row[i+1];
-            row[i+1] = couple;
+            doSwap(i + 1, pos[couple], row, pos);
             ans++;
         }
         return ans;
+    }
+
+    void doSwap(int idx1, int idx2, vector<int> &row, vector<int> &pos) {
+        swap(pos[row[idx1]], pos[row[idx2]]);
+        swap(row[idx1], row[idx2]);
     }
 };
 
