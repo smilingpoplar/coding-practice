@@ -31,7 +31,7 @@ public:
         
         int minAbbrStrLen = N + 1; // 无效值
         int ansAbbr = -1;
-        dfs(0, N, 0, 0, diffs, minAbbrStrLen, ansAbbr);
+        search(0, N, 0, 0, diffs, minAbbrStrLen, ansAbbr);
         if (minAbbrStrLen > N) return "";
         return getAbbrStr(ansAbbr, target);
     }
@@ -46,7 +46,7 @@ public:
         return diff;
     }
     
-    void dfs(int idx, const int N, int abbr, int abbrStrLen, // abbrStrLen指abbr对应的字符串长
+    void search(int idx, const int N, int abbr, int abbrStrLen, // abbrStrLen指abbr对应的字符串长
              const set<int> &diffs, int &minAbbrStrLen, int &ansAbbr) {
         if (abbrStrLen >= minAbbrStrLen) return; // 剪枝
         
@@ -65,11 +65,11 @@ public:
         // 刚开头或上次保留了字母，这次忽略[idx..i]间的字母
         if (idx == 0 || (abbr & 1)) {
             for (int i = N - 1; i >= idx; i--) {
-                dfs(i + 1, N, abbr << (i - idx + 1), abbrStrLen + 1, diffs, minAbbrStrLen, ansAbbr);
+                search(i + 1, N, abbr << (i - idx + 1), abbrStrLen + 1, diffs, minAbbrStrLen, ansAbbr);
             }
         }
         // 或者，这次再保留字母
-        dfs(idx + 1, N, (abbr << 1) | 1, abbrStrLen + 1, diffs, minAbbrStrLen, ansAbbr);
+        search(idx + 1, N, (abbr << 1) | 1, abbrStrLen + 1, diffs, minAbbrStrLen, ansAbbr);
     }
     
     string getAbbrStr(int abbr, const string &target) {

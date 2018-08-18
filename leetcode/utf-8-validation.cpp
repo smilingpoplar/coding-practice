@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     bool validUtf8(vector<int>& data) {
-        int count = 0;
+        int count = 0; // 需要一起验证的还有几字节
         for (auto c : data) {
             if (count == 0) {
                 if ((c >> 3) == 0b11110) count = 3;

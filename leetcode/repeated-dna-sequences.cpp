@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
-        // 因为只有ACGT四种字符，给字符编码只要2位，给10字符长的字符串编码只要20位（掩码：0xfffff）
+        // 因为只有ACGT四种字符，字符编码只要2位，10字符长的串编码只要20位（掩码：0xfffff）
         // 用个count记录编码出现的次数就能判重
         unordered_map<char, int> coding = {
             {'A', 0b00},
@@ -23,8 +23,8 @@ public:
             {'G', 0b10},
             {'T', 0b11},
         };
-        
         const int LENGTH = 10;
+
         vector<string> ans;
         unordered_map<int, int> count;
         int code = 0;
