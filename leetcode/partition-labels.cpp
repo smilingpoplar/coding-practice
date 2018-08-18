@@ -19,13 +19,13 @@ public:
         }
         
         vector<int> ans;
-        // 从左往右扫，遇到字母就将当前区间的右端点扩展到该字母的最右位置
+        // 每个字母都向右扩展当前区间右端点
         int left = 0, right = -1;
         for (int i = 0; i < S.size(); i++) {
             right = max(right, last[S[i]]);
-            if (i == right) { // 到达区间尾
+            if (i == right) { // 右端点不再扩展时子段结束
                 ans.push_back(i - left + 1);
-                left = i + 1;
+                left = right + 1;
             }
         }
         return ans;        

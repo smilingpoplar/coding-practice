@@ -19,7 +19,7 @@ public:
         for (int i = 0; i <= N; i++)
             ans.push_back(i + 1);
         
-        // 将连续D对应的子段翻转
+        // 连续D对应的子段需要翻转
         for (int i = 0; i < N; i++) {
             if (s[i] == 'D') {
                 int start = i;
