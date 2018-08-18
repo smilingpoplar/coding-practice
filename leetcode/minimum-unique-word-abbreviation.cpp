@@ -15,11 +15,11 @@ class Solution {
 public:
     string minAbbreviation(string target, vector<string>& dictionary) {
         // 1. 某单词要与target等长，它们的缩略词才可能冲突，所以只考虑dictionary中与target等长的子集。
-        // 2. 将某单词word与target"异或"：相同字符处取0、不同字符处取1，这样得到一个二进制数diff，
-        //    只要这个二进制数中存在一位1，那么该比特1处取字母、其他位省略成数字，就能得到不冲突的缩写。
-        // 3. 另一方面，如果将缩写的字母处取1、x数字处取x个0，这样得到一个二进制数abbr，
-        //    当abbr&diff!=0时，diff中至少一位1在abbr中以字母存在，abbr是不冲突的缩写。
-        // 4. 用回溯法尝试abbr的取值：从当前pos开始，或者省略连续几个字母（abbr对应位取0），或者保留字母（abbr对应位取1）
+        // 2. 将某单词word与target"异或"：相同字母处取0、不同字母处取1，这样得到一个二进制数diff，
+        //    只要这个diff中存在一位1，说明在该位1处存在不同字母，缩写时只要该1位处取字母、其他位省略成数就不冲突。
+        // 3. 将缩写的字母处取1、数字x处取x个0，得到二进制数abbr。当abbr&diff!=0时，abbr中存在diff中的某位1，
+        //    在该位1处缩写与target存在不同字母，缩写不冲突。当abbr&diff==0时，不存在与target不同的字母，缩写冲突。
+        // 4. 用回溯法尝试abbr的取值：从当前idx开始，或者省略连续几个字母（abbr对应位取0），或者保留字母（abbr对应位取1）
         const int N = target.size();
         set<int> diffs;
         for (auto &word : dictionary) {
