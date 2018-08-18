@@ -14,7 +14,7 @@ class Solution {
 public:
     int monotoneIncreasingDigits(int N) {
         // 形如d99999，0<=d<=9
-        // 从后往前，不断将波峰值减1，将最左波峰后的所有数都变为9
+        // 从右往左不断将波峰值减1，然后将最左波峰后面的所有数字都变为9
         string s = to_string(N);
         int pos = s.size();
         for (int i = s.size() - 2; i >= 0; i--) {

@@ -21,8 +21,8 @@ public:
         long end = LONG_MIN;
         for (auto &p : points) {
             if (p.first > end) {
-                ans++;
                 end = p.second;
+                ans++;
             }
         }
         return ans;
