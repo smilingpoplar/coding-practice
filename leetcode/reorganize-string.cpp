@@ -13,31 +13,29 @@ using namespace std;
 class Solution {
 public:
     string reorganizeString(string S) {
-        // 要可行，需要 最多的字符数-1<=其他所有字符数和
-        // 即maxcount-1<=n-c，maxcount<=(n+1)/2
-        unordered_map<int, int> count;
-        for (char c : S) {
-            count[c]++;
-        }
-        // 每次输出计数最多的两个字符即可
-        auto cmp = [&count](char a, char b) { 
-            return count[a] < count[b];
-        };
+        // 是 https://leetcode.com/problems/rearrange-string-k-distance-apart/ 的特例
+        // 可行只需 最多的字符个数 <= 其他所有字符隔开的空槽 = 其他所有字符个数和+1
+        // 即 maxCnt <= N-maxCnt+1，maxCnt <= (N+1)/2
+        unordered_map<int, int> cnt;
+        for (char c : S) cnt[c]++;
+        auto cmp = [&cnt](char a, char b) { return cnt[a] < cnt[b]; };
         priority_queue<char, vector<char>, decltype(cmp)> pq(cmp);
 
-        int maxcount = INT_MIN;
-        for (auto &e : count) {
-            maxcount = max(maxcount, e.second);
-            if (maxcount > (S.size() + 1) / 2) return "";
+        int maxCnt = INT_MIN;
+        for (auto &e : cnt) {
+            maxCnt = max(maxCnt, e.second);
+            if (maxCnt > (S.size() + 1) / 2) return "";
             pq.push(e.first);
         }
+
+        // 每次输出剩余最多的两个字符就行
         ostringstream oss;
         while (pq.size() >= 2) {
             char a = pq.top(); pq.pop();
             char b = pq.top(); pq.pop();
             oss << a << b;
-            if (--count[a] > 0) pq.push(a);
-            if (--count[b] > 0) pq.push(b);
+            if (--cnt[a] > 0) pq.push(a);
+            if (--cnt[b] > 0) pq.push(b);
         }
         if (!pq.empty()) {
             oss << pq.top();

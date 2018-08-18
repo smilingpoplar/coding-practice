@@ -29,7 +29,7 @@ public:
             mp[interval.start]++;
             mp[interval.end]--;
         }
-        // 想像有根时间线扫过各个时间，累加进行中的事件数
+        // 想像垂直时间线扫过各个时间，累加进行中的事件数
         int rooms = 0, ans = 0;
         for (auto &e : mp) {
             rooms += e.second;

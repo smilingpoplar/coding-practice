@@ -32,6 +32,34 @@ public:
     }
 };
 
+/*
+class Solution {
+public:
+     string removeKdigits(string num, int k) {
+         // 想象数字构成的高低折线，削掉第一个波峰就能使数字尽量地变小，
+         // 因此从左往右削掉k个波峰
+         // 用栈找"波峰"、找下一个更小的数
+         string s;
+         for (char c : num) {
+             while (!s.empty() && c < s.back() && k > 0) {
+                 s.pop_back();
+                 k--;
+             }
+             s.push_back(c);
+         }
+         // 上面削掉的若不够k个，再去掉末尾最大的几个
+         while (!s.empty() && k > 0) {
+             s.pop_back();
+             k--;
+         }
+         // 删除开头的0
+         int pos = 0;
+         while (pos < s.size() && s[pos] == '0') pos++;
+         return pos < s.size() ? s.substr(pos) : "0";
+     }
+};
+*/
+
 int main(int argc, const char * argv[]) {    
     return 0;
 }

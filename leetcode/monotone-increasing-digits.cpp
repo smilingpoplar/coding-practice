@@ -13,8 +13,8 @@ using namespace std;
 class Solution {
 public:
     int monotoneIncreasingDigits(int N) {
-        // 从后往前，找下降的相邻数对，将其中前一个减1
-        // 记住最终减1的位置，把它后面所有的数都变成'9'
+        // 形如d99999，0<=d<=9
+        // 从后往前，不断将波峰值减1，将最左波峰后的所有数都变为9
         string s = to_string(N);
         int pos = s.size();
         for (int i = s.size() - 2; i >= 0; i--) {

@@ -13,21 +13,19 @@ using namespace std;
 class Solution {
 public:
     int wiggleMaxLength(vector<int>& nums) {
-        // 设up[i]表示nums[0..i]中最后上升的最长摆动子序列长，
-        // down[i]         ---      下降      ---
-        // nums[i]>nums[i-1]时，up[i]=down[i-1]+1，down[i]=down[i-1]
-        // nums[i]<nums[i-1]时，down[i]=up[i-1]+1，up[i]=up[i-1]
-        // nums[i]==nums[i-1]时，down[i]=down[i-1]，up[i]=up[i-1]
+        // 贪婪法，发生摇摆时增长序列
         if (nums.empty()) return 0;
-        int up = 1, down = 1;
+        
+        int ans = 1;
+        int prevDiff = 0;
         for (int i = 1; i < nums.size(); i++) {
-            if (nums[i] > nums[i-1]) {
-                up = down + 1;
-            } else if (nums[i] < nums[i-1]) {
-                down = up + 1;
+            int diff = nums[i] - nums[i-1];
+            if ((diff > 0 && prevDiff <= 0) || (diff < 0 && prevDiff >= 0)) {
+                ans++;
+                prevDiff = diff; // 只在摇摆时更新方向，diff==0无摇摆时prevDiff不变
             }
         }
-        return max(up, down);
+        return ans;
     }
 };
 

@@ -21,18 +21,18 @@ using namespace std;
  */
 class Solution {
 public:
-    // 等同求最多不重叠区间的方法
+    // 等价问题：求最多不重叠区间数
     int eraseOverlapIntervals(vector<Interval>& intervals) {
         sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) { 
             return a.end < b.end;
         });
         int count = 0;
         int end = INT_MIN;
-        for (const auto &interval : intervals) {
+        for (auto &interval : intervals) {
             if (interval.start >= end) { // 不重叠，取当前区间
                 end = interval.end;
             } else {
-                ++count;
+                count++;
             }
         }
         return count;

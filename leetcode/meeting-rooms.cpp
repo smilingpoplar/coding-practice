@@ -23,14 +23,14 @@ using namespace std;
 class Solution {
 public:
     bool canAttendMeetings(vector<Interval>& intervals) {
-        // 即要求区间不可重叠
+        // 是否所有区间都不重叠？
         sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) {
-            return a.start < b.start;
+            return a.end < b.end;
         });
         int end = INT_MIN;
-        for (auto &i : intervals) {
-            if (i.start < end) return false;
-            end = i.end;
+        for (auto &interval : intervals) {
+            if (interval.start < end) return false;
+            else end = interval.end;
         }
         return true;
     }
