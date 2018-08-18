@@ -62,33 +62,33 @@ public:
             return;
         }
         
-        // 上次保留了字母，这次忽略[idx..i]间的字母
+        // 刚开头或上次保留了字母，这次忽略[idx..i]间的字母
         if (idx == 0 || (abbr & 1)) {
             for (int i = N - 1; i >= idx; i--) {
                 dfs(i + 1, N, abbr << (i - idx + 1), abbrStrLen + 1, diffs, minAbbrStrLen, ansAbbr);
             }
         }
-        // 或者，这次保留字母
+        // 或者，这次再保留字母
         dfs(idx + 1, N, (abbr << 1) | 1, abbrStrLen + 1, diffs, minAbbrStrLen, ansAbbr);
     }
     
     string getAbbrStr(int abbr, const string &target) {
         const int N = target.size();
         string ans;
-        int count0s = 0;
+        int cnt0s = 0;
         // abbr[i]位对应target[N-1-i]
         for (int i = N - 1; i >= 0; i--) {
             if (abbr & (1 << i)) {
-                if (count0s > 0) {
-                    ans += to_string(count0s);
-                    count0s = 0;
+                if (cnt0s > 0) {
+                    ans += to_string(cnt0s);
+                    cnt0s = 0;
                 }
                 ans += target[N-1-i];
             } else {
-                count0s++;
+                cnt0s++;
             }
         }
-        if (count0s > 0) ans += to_string(count0s);
+        if (cnt0s > 0) ans += to_string(cnt0s);
         return ans;
     }
 };
