@@ -16,9 +16,10 @@ public:
     string minAbbreviation(string target, vector<string>& dictionary) {
         // 1. 某单词要与target等长，它们的缩略词才可能冲突，所以只考虑dictionary中与target等长的子集。
         // 2. 将某单词word与target"异或"：相同字母处取0、不同字母处取1，这样得到一个二进制数diff，
-        //    只要这个diff中存在一位1，说明在该位1处存在不同字母，缩写时只要该1位处取字母、其他位省略成数就不冲突。
-        // 3. 将缩写的字母处取1、数字x处取x个0，得到二进制数abbr。当abbr&diff!=0时，abbr中存在diff中的某位1，
-        //    在该位1处缩写与target存在不同字母，缩写不冲突。当abbr&diff==0时，不存在与target不同的字母，缩写冲突。
+        //    只要这个diff中存在一位1（相异点），将该位取字母、其他位取数字，得到的缩写就不会冲突。
+        // 3. 将缩写的字母处取1、数字x处取x个0，得到缩写的二进制表示abbr。
+        //    当abbr&diff!=0时，abbr中存在相异点，缩写不冲突；
+        //    当abbr&diff==0时，abbr中不存在相异点，缩写冲突。
         // 4. 用回溯法尝试abbr的取值：从当前idx开始，或者省略连续几个字母（abbr对应位取0），或者保留字母（abbr对应位取1）
         const int N = target.size();
         set<int> diffs;
