@@ -13,9 +13,8 @@ using namespace std;
 class Solution {
 public:
     bool isPowerOfFour(int num) {
-        return (num >= 1)
-            && ((num & (num - 1)) == 0)   // 二进制只有1个1s
-            && ((num & 0x55555555) != 0); // 且这个1s只能出现在...01010101这些位
+        // 二进制只能有一个1，且这个1只能出现在...010101这些位
+        return num >= 1 && (num & (num - 1)) == 0 && (num & 0x55555555) != 0;
     }
 };
 

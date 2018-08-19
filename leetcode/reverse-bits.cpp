@@ -14,12 +14,12 @@ using namespace std;
 class Solution {
 public:
     uint32_t reverseBits(uint32_t n) {
-        uint32_t result = 0;
+        uint32_t ans = 0;
         for (int i = 0; i < 32; i++) {
-            result |= (n & 1) << (31 - i);
+            ans = (ans << 1) | (n & 1);
             n >>= 1;
         }
-        return result;
+        return ans;
     }
 };
 */
@@ -38,13 +38,12 @@ public:
     }
 
     uint32_t reverseBits(uint32_t n) {
-        uint32_t result = 0;
-        uint8_t *p = (uint8_t *)&n, *q = (uint8_t *)&result;
-        const int byteCount = 4;
-        for (int i = 0; i < byteCount; i++) {
-            q[byteCount - 1 - i] = cache[p[i]];
+        uint32_t ans = 0;
+        uint8_t *p = (uint8_t *)&n, *q = (uint8_t *)&ans;
+        for (int i = 0; i < 4; i++) {
+            q[3 - i] = cache[p[i]];
         }
-        return result;
+        return ans;
     }
 private:
     uint8_t cache[256];
