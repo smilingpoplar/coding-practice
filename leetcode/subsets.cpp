@@ -19,7 +19,7 @@ public:
         search(nums, 0, subset, ans);
         return ans;
     }
-private:
+
     void search(const vector<int> &nums, int idx, 
                 vector<int> &subset, vector<vector<int>> &ans) {
         ans.push_back(subset);

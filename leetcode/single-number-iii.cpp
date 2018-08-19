@@ -14,12 +14,12 @@ using namespace std;
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        // 设x和y是数组中只出现一次的两个数
+        // 设x和y是数组中只出现1次的两个数
         int xXorY = 0;
         for (auto num : nums) {
             xXorY ^= num;
         }
-        // xXorY中任意一位1表示该处x和y的比特值不同，不妨取最后一位来区分x和y
+        // xXorY中任意一位1表示x和y该处不同，不妨取最后一位1来区分x和y
         int lastOne = xXorY & -xXorY;
         int x = 0;
         for (auto num : nums) {
