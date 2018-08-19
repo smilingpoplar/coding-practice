@@ -15,7 +15,7 @@ class Solution {
 public:
     vector<string> ipToCIDR(string ip, int n) {
         // ip二进制最后一位1表示的数，就是一次可输出的最大范围，block=2^k
-        // 若block>n，不断block/=2直到block<=n，然后输出block个地址
+        // 若block>n，不断block/=2直到block<=n，然后先输出block个地址
         vector<string> ans;
         auto ipNum = ipToUint(ip);
         while (n) {
