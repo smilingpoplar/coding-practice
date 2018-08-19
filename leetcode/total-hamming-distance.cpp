@@ -14,8 +14,7 @@ class Solution {
 public:
     int totalHammingDistance(vector<int>& nums) {
         int ans = 0;
-        const int numBits = sizeof(int) * 8;
-        for (int i = 0; i < numBits; i++) {
+        for (int i = 0; i < 32; i++) {
             // 考查整组数的第i位
             int ones = 0;
             for (int num : nums) {
