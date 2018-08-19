@@ -12,19 +12,16 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
-        const int N = temperatures.size();
-        vector<int> ans(N, 0);
-        stack<int> S;
-        for (int i = 0; i < N; i++) {
-            while (!S.empty() && temperatures[i] > temperatures[S.top()]) {
-                int top = S.top();
-                S.pop();
-                ans[top] = i - top;                
-            }
-            S.push(i);
+    string reverseVowels(string s) {
+        set<char> vowels = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+        int i = 0, j = (int)s.size() - 1;
+        while (i < j) {
+            while (i < j && !vowels.count(s[i])) i++;
+            while (i < j && !vowels.count(s[j])) j--;
+            if (i < j) swap(s[i], s[j]);
+            i++, j--;
         }
-        return ans;
+        return s;
     }
 };
 

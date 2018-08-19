@@ -12,15 +12,15 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& numbers, int target) {
-        int i = 0, j = numbers.size() - 1;
-        while (i < j) {
-            if (numbers[i] + numbers[j] == target) {
-                return { i + 1, j + 1 };
-            } else if (numbers[i] + numbers[j] < target) {
-                i++;
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int l = 0, r = nums.size() - 1;
+        while (l < r) {
+            if (nums[l] + nums[r] == target) {
+                return { l + 1, r + 1 };
+            } else if (nums[l] + nums[r] < target) {
+                l++;
             } else {
-                j--;
+                r--;
             }
         }
         return { -1, -1 };

@@ -16,13 +16,13 @@ public:
     int removeDuplicates(vector<int>& nums) {
         const int N = nums.size();
         if (N <= 1) return N;
-        int write = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums[i] != nums[write - 1]) {
-                nums[write++] = nums[i];
+        int out = 1;
+        for (int in = 1; in < N; in++) {
+            if (nums[in] != nums[out - 1]) {
+                nums[out++] = nums[in];
             }
         }
-        return write;
+        return out;
     }
 };
 
