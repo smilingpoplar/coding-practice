@@ -15,8 +15,8 @@ class Solution {
 public:
     string toHex(int num) {
         if (num == 0) return "0";
+        const string HEX = "0123456789abcdef";
         string ans;
-        string HEX = "0123456789abcdef";
         unsigned x = num;
         while (x) {
             ans.push_back(HEX[x & 0x0f]);

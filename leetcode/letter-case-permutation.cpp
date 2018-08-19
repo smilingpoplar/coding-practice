@@ -19,17 +19,19 @@ public:
         return ans;
     }
     
-    void search(string &s, int pos, vector<string> &ans) {
-        if (pos == s.size()) {
+    void search(string &s, int idx, vector<string> &ans) {
+        if (idx == s.size()) {
             ans.push_back(s);
             return;
         }
         
-        search(s, pos + 1, ans);
-        if (isalpha(s[pos])) {
-            s[pos] ^= (1 << 5); // toggle case
-            search(s, pos + 1, ans);
-            s[pos] ^= (1 << 5); // toggle case
+        search(s, idx + 1, ans);
+        if (isalpha(s[idx])) {
+            // 根据ascii表，letter^=32就变换大小写
+            // 32 == 刚好>字母数26的 2的幂
+            s[idx] ^= 32;
+            search(s, idx + 1, ans);
+            s[idx] ^= 32;
         }
     }
 };
