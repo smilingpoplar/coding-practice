@@ -26,27 +26,24 @@ public:
 
 class Solution {
 public:
-    Solution() {
-        // 多次查询优化，缓存reverseBits(uint8_t n)的结果
-        for (int i = 0; i < 256; i++) {
-            uint8_t n = (uint8_t)i;
-            n = (n & 0b11110000) >> 4 | (n & 0b00001111) << 4;
-            n = (n & 0b11001100) >> 2 | (n & 0b00110011) << 2;
-            n = (n & 0b10101010) >> 1 | (n & 0b01010101) << 1;
-            cache[i] = n;
-        }
-    }
-
     uint32_t reverseBits(uint32_t n) {
-        uint32_t ans = 0;
-        uint8_t *p = (uint8_t *)&n, *q = (uint8_t *)&ans;
-        for (int i = 0; i < 4; i++) {
-            q[3 - i] = cache[p[i]];
+        // 分治，所有小组内交换前半段和后半段
+        // 比如n是uint8_t，初始len=8，mask=11111111
+        // 不断所有组内对半分并交换：
+        // 1. 算出对应所有组内后半段的mask：len >>= 1; mask ^= mask << len;
+        // 2. 交换所有组内前半段和后半段，用mask取出新的后半段、~mask取出新的前半段
+        //  第1轮：mask=00001111，~mask=11110000
+        //  第2轮：mask=00110011，~mask=11001100
+        //  第3轮：mask=01010101，~mask=10101010
+        int len = sizeof(n) * 8;
+        uint32_t mask = ~0;
+        while (len > 1) {
+            len >>= 1;
+            mask ^= mask << len; // 算mask是关键
+            n = ((n >> len) & mask) | ((n << len) & ~mask);
         }
-        return ans;
+        return n;
     }
-private:
-    uint8_t cache[256];
 };
 
 int main(int argc, const char * argv[]) {
