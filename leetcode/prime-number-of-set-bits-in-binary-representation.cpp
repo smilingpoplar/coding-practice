@@ -26,7 +26,7 @@ public:
         int count = 0;
         while (n) {
             n &= n-1;
-            ++count;
+            count++;
         }
         return count;
     }

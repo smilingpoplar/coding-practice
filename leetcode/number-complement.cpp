@@ -13,9 +13,10 @@ using namespace std;
 class Solution {
 public:
     int findComplement(int num) {
+        // 先找哪些是有效位
         int mask = ~0;
         while (mask & num) mask <<= 1;
-        return ~mask & ~num;
+        return ~mask ^ num;
     }
 };
 
