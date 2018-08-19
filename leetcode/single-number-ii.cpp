@@ -14,16 +14,27 @@ using namespace std;
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        int one = 0; // 用one记录到当前处理的元素为止，二进制1出现1次（mod 3）的那些位
-        int two = 0; // 用two记录到当前处理的元素为止，二进制1出现2次（mod 3）的那些位
-        for (auto num : nums) {
-            two |= one & num; // 对于two：原0遇1 ->1；不可能原1遇1（即二进制1出现了4次，因为后面出现3次时就做了清零）
-            one ^= num; // 对于one：原0遇1 ->1, 原1遇1（即二进制1出现了2次，前面已统计到two中，所以清零）->0
-            int clearThree = ~(one & two); // 出现3次的二进制1要进行清零
-            one &= clearThree;
-            two &= clearThree;
+        // 泛化成：其他数出现k次，某个数出现p次（p不能被k整除），找这单个数
+        // bit运算各个位相互独立，下面用int同时统计相互独立的各个位，逻辑上可把整个int当作一个bit
+        // 要统计某位上出现1的次数，需要个mod k计数器（该计数器共m>=lgk位），设xm,..,x2,x1表示该计数器的位，
+        // 1. 进位规则：..., x4^=x3&x2&x1&nums[i], x3^=x2&x1&nums[i], x2^=x1&nums[i], x1^=nums[i]
+        //    即 后面位和新数nums[i] 都为1时才进位到当前位
+        // 2. 计数为k时直接清零：当xm,..,x1的各个位分别等于k的各个位km,..,k1时，计数为k；判断计数为k的表达式为
+        //    (xm==km)&..&(x1==k1)，分量yj:(xj==kj)等价于kj==1时取xj、kj==0时取xj'(xj'表示xj取非)，
+        //    因此，判断计数为k的表达式为y1&..&ym；
+        //    计数为k时直接清零的 mask = ~(y1&..&ym)
+        //    有了mask后：..., x4&=mask, x3&=mask, x2&=mask, x1&=mask
+        // 3. 最终该位只要计数>0，该位为1，返回：x1|x2|x3|x4|...
+        int x1 = 0, x2 = 0;
+        int mask = 0;
+        for (int num : nums) {
+            x2 ^= x1 & num;
+            x1 ^= num;
+            mask = ~(x1 & x2); // k=3=(11)_2
+            x2 &= mask;
+            x1 &= mask;
         }
-        return one;
+        return x1 | x2;
     }
 };
 
