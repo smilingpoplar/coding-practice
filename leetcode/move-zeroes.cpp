@@ -13,14 +13,15 @@ using namespace std;
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        int write = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] != 0) {
-                nums[write++] = nums[i];
+        const int N = nums.size();
+        int out = 0;
+        for (int in = 0; in < N; in++) {
+            if (nums[in] != 0) {
+                nums[out++] = nums[in];
             }
         }
-        while (write < nums.size()) {
-            nums[write++] = 0;
+        while (out < N) {
+            nums[out++] = 0;
         }
     }
 };
