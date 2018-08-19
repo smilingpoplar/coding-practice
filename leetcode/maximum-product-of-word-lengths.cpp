@@ -14,14 +14,14 @@ using namespace std;
 class Solution {
 public:
     int maxProduct(vector<string>& words) {
-        vector<int> masks(words.size(), 0); // 单词中的字母出现用1位表示
+        vector<int> masks(words.size(), 0); // word中的字母 用mask中的1位表示
         int ans = 0;
         for (int i = 0; i < words.size(); i++) {
             for (char c : words[i]) {
                 masks[i] |= 1 << (c - 'a');
             }
             for (int j = 0; j < i; j++) {
-                if (!(masks[i] & masks[j])) {
+                if ((masks[i] & masks[j]) == 0) {
                     int len = words[i].size() * words[j].size();
                     ans = max(ans, len);
                 }
