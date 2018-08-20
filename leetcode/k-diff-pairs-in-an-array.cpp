@@ -14,14 +14,14 @@ class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
         if (k < 0) return 0;
-        map<int, int> count;
+        unordered_map<int, int> cnt;
         for (int num : nums)
-            count[num]++;
+            cnt[num]++;
         
         int ans = 0;
-        for (auto &e : count) {
-            if (k == 0) ans += (e.second > 1);
-            else ans += (count.count(e.first + k));
+        for (auto &e : cnt) {
+            if (k == 0) ans += e.second >= 2;
+            else ans += cnt.count(e.first + k);
         }
         return ans;
     }
