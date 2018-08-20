@@ -19,32 +19,33 @@ struct ListNode {
 class Solution {
 public:
     bool isPalindrome(ListNode *head) {
-        if (!head) return true;
-        // 快慢指针找中间节点（偶数时偏左奇数时中间）
-        auto fast = head;
-        auto slow = head;
-        while (fast->next && fast->next->next) {
+        // 快慢指针找中间节点（奇数长）或后半段头节点（偶数长）
+        auto fast = head, slow = head;
+        while (fast && fast->next) {
             fast = fast->next->next;
             slow = slow->next;
         }
-        // 后半段稍短，将后半段反转
-        auto head2 = slow->next;
-        slow->next = NULL;
-        ListNode dummy(-1);
-        while (head2) {
-            auto next = head2->next;
-            head2->next = dummy.next;
-            dummy.next = head2;
-            head2 = next;
-        }
-        head2 = dummy.next;
-        // 比较
-        while (head && head2) {
-            if (head->val != head2->val) return false;
-            head = head->next;
-            head2 = head2->next;
+
+        slow = reverse(slow);
+        fast = head;
+
+        while (fast && slow) {
+            if (fast->val != slow->val) return false;
+            fast = fast->next;
+            slow = slow->next;
         }
         return true;
+    }
+
+    ListNode* reverse(ListNode *head) {
+        ListNode *prev = NULL;
+        while (head) {
+            auto next = head->next;
+            head->next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
     }
 };
 

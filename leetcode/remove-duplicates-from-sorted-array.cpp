@@ -15,7 +15,7 @@ class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
         if (nums.empty()) return 0;
-        int out = 1;
+        int out = 1; // 第一个数肯定不删除
         for (int in = 1; in < nums.size(); in++) {
             if (nums[in] != nums[out-1]) {
                 nums[out++] = nums[in];
