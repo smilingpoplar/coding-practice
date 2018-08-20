@@ -16,8 +16,8 @@ public:
         const int N = haystack.size(), M = needle.size();
         for (int i = 0; i + M <= N; i++) {
             int j = 0;
-            while (j < N && haystack[i+j] == needle[j]) j++;
-            if (j == N) return i;
+            while (j < M && haystack[i+j] == needle[j]) j++;
+            if (j == M) return i;
         }
         return -1;
     }
