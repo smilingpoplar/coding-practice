@@ -13,11 +13,10 @@ using namespace std;
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        const int M = (int)haystack.size();
-        const int N = (int)needle.size();
-        for (int i = 0; i + N <= M; i++) {
+        const int N = haystack.size(), M = needle.size();
+        for (int i = 0; i + M <= N; i++) {
             int j = 0;
-            while (j < N && haystack[i + j] == needle[j]) ++j;
+            while (j < N && haystack[i+j] == needle[j]) j++;
             if (j == N) return i;
         }
         return -1;
