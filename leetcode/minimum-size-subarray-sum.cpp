@@ -14,17 +14,16 @@ using namespace std;
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
-        // 滑动窗口法。保持不变式：nums[left,i]是sum>=s的最小子数组
-        const int N = (int)nums.size();
+        // 滑动窗口nums[lo,hi]是sum>=s的子段
+        const int N = nums.size();
         int ans = INT_MAX;
         int sum = 0;
-        int left = 0;
-        for (int i = 0; i < N; i++) {
-            sum += nums[i];
+        for (int lo = 0, hi = 0; hi < N; hi++) {
+            sum += nums[hi];
             while (sum >= s) { 
-                ans = min(ans, i - left + 1);
-                sum -= nums[left];
-                left++;
+                ans = min(ans, hi - lo + 1);
+                sum -= nums[lo];
+                lo++;
             }
         }
         return ans != INT_MAX ? ans : 0;
