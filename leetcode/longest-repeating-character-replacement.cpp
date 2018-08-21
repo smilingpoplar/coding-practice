@@ -15,16 +15,16 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         unordered_map<char, int> count;
-        int maxSameTillNow = 0; // 至今为止的有效窗口中最大字符数，最长有效窗口是 maxSameTillNow + k
-        int start = 0, end = 0, ans = 0;
-        while (end < s.size()) {
-            maxSameTillNow = max(maxSameTillNow, ++count[s[end]]);
-            end++;
-            if (end - start > maxSameTillNow + k) { // 若是无效窗口、再移动start使窗口有效
-                count[s[start]]--;
-                start++;
+        int maxCntTillNow = 0; // 迄今为止窗口中的最大字符数
+        int ans = 0;
+        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+            maxCntTillNow = max(maxCntTillNow, ++count[s[hi]]);
+            // 替换发生后，有效窗口最长 <= maxCntTillNow + k
+            if (hi - lo + 1 > maxCntTillNow + k) { // 若是无效窗口、再移动lo使窗口有效
+                count[s[lo]]--;
+                lo++;
             }
-            ans = max(ans, end - start);
+            ans = max(ans, hi - lo + 1);
         }
         return ans;
     }
