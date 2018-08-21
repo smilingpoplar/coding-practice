@@ -16,15 +16,14 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         unordered_map<char, int> count;
-        int start = 0, end = 0, repeat = 0, ans = 0;
-        while (end < s.size()) {
-            if (++count[s[end]] >= 2) repeat++;
-            end++;
+        int repeat = 0, ans = 0;
+        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+            if (++count[s[hi]] >= 2) repeat++;
             while (repeat > 0) {
-                if (count[s[start]]-- >= 2) repeat--;
-                start++;
+                if (count[s[lo]]-- >= 2) repeat--;
+                lo++;
             }
-            ans = max(ans, end - start);
+            ans = max(ans, hi - lo + 1);
         }
         return ans;
     }
@@ -36,13 +35,12 @@ public:
     int lengthOfLongestSubstring(string s) {
         unordered_map<char, int> mp; // 用map记录滑动窗口内的char=>lastIdx
         int ans = 0;
-        int start = 0;
-        for (int end = 0; end < s.size(); end++) {
-            if (mp.count(s[end]) && mp[s[end]] >= start) { // s[end]重复出现且有效
-                start = mp[s[end]] + 1;
+        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+            if (mp.count(s[hi]) && mp[s[hi]] >= lo) { // s[hi]重复出现且有效
+                lo = mp[s[hi]] + 1;
             }
-            ans = max(ans, end - start + 1);
-            mp[s[end]] = end;
+            ans = max(ans, hi - lo + 1);
+            mp[s[hi]] = hi;
         }
         return ans;
     }

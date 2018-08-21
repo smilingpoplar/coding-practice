@@ -16,14 +16,14 @@ public:
     int lengthOfLongestSubstringTwoDistinct(string s) {
         // 滑动窗口法
         vector<int> cnt(128, 0);
-        int distinct = 0, start = 0, ans = 0;
-        for (int end = 0; end < s.size(); end++) {
-            if (cnt[s[end]]++ == 0) distinct++;
-            while (distinct > 2) { // 若是无效窗口、再移动start缩小窗口
-                if (--cnt[s[start]] == 0) distinct--;
-                start++;
+        int distinct = 0, ans = 0;
+        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+            if (cnt[s[hi]]++ == 0) distinct++;
+            while (distinct > 2) { // 若是无效窗口、再移动lo缩小窗口
+                if (--cnt[s[lo]] == 0) distinct--;
+                lo++;
             }
-            ans = max(ans, end - start + 1);
+            ans = max(ans, hi - lo + 1);
         }
         return ans;
     }
