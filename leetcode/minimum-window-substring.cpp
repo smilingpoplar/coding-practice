@@ -20,17 +20,15 @@ public:
         int distinct = count.size();
         
         int minWidth = INT_MAX, ansStart;
-        int start = 0, end = 0;
-        while (end < s.size()) {
-            if (--count[s[end]] == 0) distinct--;
-            end++;
+        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+            if (--count[s[hi]] == 0) distinct--;
             while (distinct == 0) {
-                if (end - start < minWidth) {
-                    minWidth = end - start;
-                    ansStart = start;
+                if (hi - lo + 1 < minWidth) {
+                    minWidth = hi - lo + 1;
+                    ansStart = lo;
                 }
-                if (count[s[start]]++ == 0) distinct++;
-                start++;
+                if (count[s[lo]]++ == 0) distinct++;
+                lo++;
             }
         }
         return minWidth != INT_MAX ? s.substr(ansStart, minWidth) : "";

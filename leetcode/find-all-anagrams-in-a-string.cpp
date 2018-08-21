@@ -19,7 +19,7 @@ public:
         int distinct = count.size(); // 要找多少个不同的字符
         
         vector<int> ans;
-        // 每次移动一步end：若是有效窗口、再移动start缩小至无效窗口
+        // 每次end移动一步：若是有效窗口、start再移动至无效窗口
         int start = 0, end = 0;
         while (end < s.size()) {
             if (--count[s[end]] == 0) distinct--;

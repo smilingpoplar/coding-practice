@@ -22,23 +22,21 @@ public:
         int distinct = count.size();
         
         vector<int> ans;
-        // s有M个起分点，构成M个序列，看每个序列有哪些子段满足条件
+        // s有M个起分点，构成M个序列，看各个序列有哪些子段满足条件
         for (int m = 0; m < M; m++) {
-            // 滑动窗口，每次移动一步end：若找到有效窗口、再移动start使窗口无效
+            // 滑动窗口，每次hi移动一步：若是有效窗口、lo再移动至无效窗口
             auto theCount = count;
-            auto theDistinct = distinct;
-            int start = m, end = m;
-            while (end + M <= s.size()) {
-                auto endWord = s.substr(end, M);
-                if (--theCount[endWord] == 0) theDistinct--;
-                end += M;
+            int theDistinct = distinct;
+            for (int lo = m, hi = m; hi + M <= s.size(); hi += M) {
+                auto hiWord = s.substr(hi, M);
+                if (--theCount[hiWord] == 0) theDistinct--;
                 while (theDistinct == 0) { // 有效窗口
-                    if (end - start == K * M) {
-                        ans.push_back(start);
+                    if (hi + M - lo == K * M) {
+                        ans.push_back(lo);
                     }
-                    auto startWord = s.substr(start, M);
-                    if (theCount[startWord]++ == 0) theDistinct++;
-                    start += M;
+                    auto loWord = s.substr(lo, M);
+                    if (theCount[loWord]++ == 0) theDistinct++;
+                    lo += M;
                 }
             }
         }
