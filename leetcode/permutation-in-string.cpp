@@ -13,30 +13,22 @@ using namespace std;
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        const int s1len = s1.size();
-        const int s2len = s2.size();
-        if (s1len > s2len) return false;
+        const int len1 = s1.size(), len2 = s2.size();
+        if (len1 > len2) return false;
         
-        vector<int> count(26, 0);
-        for (int i = 0; i < s1len; i++) {
-            count[s1[i] - 'a']++;
-            count[s2[i] - 'a']--;
-        }
-        if (allZeros(count)) return true;
+        unordered_map<char, int> cnt;
+        for (char c : s1) cnt[c]++;
+        int distinct = cnt.size();
         
-        for (int i = s1len; i < s2len; i++) {
-            count[s2[i] - 'a']--;
-            count[s2[i - s1len] - 'a']++;
-            if (allZeros(count)) return true;
+        for (int lo = 0, hi = 0; hi < len2; hi++) {
+            if (--cnt[s2[hi]] == 0) distinct--;
+            while (distinct == 0) {
+                if (hi - lo + 1 == len1) return true;
+                if (cnt[s2[lo]]++ == 0) distinct++;
+                lo++;
+            }
         }
         return false;
-    }
-    
-    bool allZeros(const vector<int> &count) {
-        for (int c : count) {
-            if (c != 0) return false;
-        }
-        return true;
     }
 };
 
