@@ -15,7 +15,7 @@ public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
         const int N = nums.size();
         vector<int> idx(N, 0); // idx[]存各数组的当前下标，数组i的当前元素是nums[i][idx[i]]
-        auto cmp = [&](int i, int j) { // 最小堆保存数组编号
+        auto cmp = [&](int i, int j) { // 最小堆
             return nums[i][idx[i]] > nums[j][idx[j]];
         };
         priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
@@ -41,6 +41,7 @@ public:
             idx[minQ]++;
             if (idx[minQ] == nums[minQ].size()) break;
             pq.push(minQ);
+            // 各数组是递增的，堆先弹出一个数、再压入一个更大的数，rangeEnd只能不变或变大
             rangeEnd = max(rangeEnd, nums[minQ][idx[minQ]]);
         }
         return ans;

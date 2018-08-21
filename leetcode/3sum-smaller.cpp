@@ -14,16 +14,14 @@ using namespace std;
 class Solution {
 public:
     int threeSumSmaller(vector<int>& nums, int target) {
-        // 只问有多少个满足条件的三元组，没问这些三元组的下标，数组可以排序
+        // 两指针法
         sort(nums.begin(), nums.end());
-        
         const int N = nums.size();
         int ans = 0;
         for (int i = 0; i < N - 2; i++) {
-            // 两指针法
             int j = i + 1, k = N - 1;
             while (j < k) {
-                if (nums[j] + nums[k] < target - nums[i]) {
+                if (nums[i] + nums[j] + nums[k] < target) {
                     // j&k, j&(k-1), j&(k-2) ... j&(j+1) 的数对都满足
                     ans += k - j;
                     j++;

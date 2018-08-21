@@ -14,11 +14,11 @@ using namespace std;
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        // 一遍扫描，把0都堆到[0,i0)，把2都堆到(i2,N-1]
+        // 三路划分，把0都堆到[0,i0)，把2都堆到(i2,N-1]
         // 不变式：
         // | = 0 | = 1 |  ?  | = 2 |
-        // [0    [i0   [i  i2]  N-1]
-        const int N = (int)nums.size();
+        //  0     i0    i  i2   N-1
+        const int N = nums.size();
         int i0 = 0, i = 0, i2 = N - 1;
         while (i <= i2) {
             if (nums[i] < 1) {
