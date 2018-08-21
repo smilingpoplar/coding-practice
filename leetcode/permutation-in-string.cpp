@@ -16,9 +16,10 @@ public:
         const int len1 = s1.size(), len2 = s2.size();
         if (len1 > len2) return false;
         
-        unordered_map<char, int> cnt;
+        vector<int> cnt(128);
         for (char c : s1) cnt[c]++;
-        int distinct = cnt.size();
+        int distinct = 0;
+        for (int num : cnt) distinct += num > 0;
         
         for (int lo = 0, hi = 0; hi < len2; hi++) {
             if (--cnt[s2[hi]] == 0) distinct--;
