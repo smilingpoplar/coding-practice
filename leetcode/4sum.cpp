@@ -20,24 +20,24 @@ public:
         sort(nums.begin(), nums.end());
         
         for (int ia = 0; ia < N - 3; ia++) {
-            while (0 < ia && ia < N - 3 && nums[ia] == nums[ia - 1]) ia++;
+            while (0 < ia && ia < N - 3 && nums[ia] == nums[ia-1]) ia++;
             for (int ib = ia + 1; ib < N - 2; ib++) {
-                while (ia + 1 < ib && ib < N - 2 && nums[ib] == nums[ib - 1]) ib++;
+                while (ia + 1 < ib && ib < N - 2 && nums[ib] == nums[ib-1]) ib++;
                 int ic = ib + 1, id = N - 1;
                 while (ic < id) {
                     int sum = nums[ia] + nums[ib] + nums[ic] + nums[id];
                     if (sum == target) {
                         ans.push_back({nums[ia], nums[ib], nums[ic], nums[id]});
                         ic++;
-                        while (ic < id && nums[ic] == nums[ic - 1]) ic++;
+                        while (ic < id && nums[ic] == nums[ic-1]) ic++;
                         id--;
-                        while (ic < id && nums[id] == nums[id + 1]) id--;
+                        while (ic < id && nums[id] == nums[id+1]) id--;
                     } else if (sum < target) {
                         ic++;
-                        while (ic < id && nums[ic] == nums[ic - 1]) ic++;
+                        while (ic < id && nums[ic] == nums[ic-1]) ic++;
                     } else {
                         id--;
-                        while (ic < id && nums[id] == nums[id + 1]) id--;
+                        while (ic < id && nums[id] == nums[id+1]) id--;
                     }
                 }
             }
