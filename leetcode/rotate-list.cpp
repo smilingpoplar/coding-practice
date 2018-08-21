@@ -27,7 +27,7 @@ public:
             p2 = p2->next;
             len++;
         }
-        if (!p2) { // k >= len
+        if (!p2) { // k>=len
             k %= len;
             if (k == 0) return head;
             // k根据len调整了，p2重跑

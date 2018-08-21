@@ -16,27 +16,26 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         const int N = nums.size();
         if (N < 3) return {};
-        sort(nums.begin(), nums.end()); // 先排序再两端夹逼
+        sort(nums.begin(), nums.end()); // 先排序再两指针
 
         vector<vector<int>> ans;        
-        for (int a = 0; a < N - 2; a++) {
-            while (0 < a && a < N - 2 && nums[a] == nums[a-1]) a++;
-            int b = a + 1, c = N - 1;
-            int target = 0;
-            while (b < c) {
-                int sum  = nums[a] + nums[b] + nums[c];
+        for (int ia = 0; ia < N - 2; ia++) {
+            while (0 < ia && ia < N - 2 && nums[ia] == nums[ia-1]) ia++;
+            int ib = ia + 1, ic = N - 1, target = 0;
+            while (ib < ic) {
+                int sum  = nums[ia] + nums[ib] + nums[ic];
                 if (sum == target) {
-                    ans.push_back({nums[a], nums[b], nums[c]});
-                    b++;
-                    while (b < c && nums[b] == nums[b-1]) b++;
-                    c--;
-                    while (b < c && nums[c] == nums[c+1]) c--;
+                    ans.push_back({nums[ia], nums[ib], nums[ic]});
+                    ib++;
+                    while (ib < ic && nums[ib] == nums[ib-1]) ib++;
+                    ic--;
+                    while (ib < ic && nums[ic] == nums[ic+1]) ic--;
                 } else if (sum < target) {
-                    b++;
-                    while (b < c && nums[b] == nums[b-1]) b++;
+                    ib++;
+                    while (ib < ic && nums[ib] == nums[ib-1]) ib++;
                 } else {
-                    c--;
-                    while (b < c && nums[c] == nums[c+1]) c--;
+                    ic--;
+                    while (ib < ic && nums[ic] == nums[ic+1]) ic--;
                 }
             }
         }
