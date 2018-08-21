@@ -20,33 +20,32 @@ class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if (!head) return NULL;
-        // 快慢指针，先让快指针跑k步
-        auto fast = head;
-        int length = 0;
-        for (int i = 0; i < k && fast; i++) {
-            fast = fast->next;
-            ++length;
+        // 让p2指向后半段，p2先跑k步
+        auto p2 = head;
+        int len = 0;
+        for (int i = 0; i < k && p2; i++) {
+            p2 = p2->next;
+            len++;
         }
-        if (!fast) { // k >= length
-            k %= length;
+        if (!p2) { // k >= len
+            k %= len;
             if (k == 0) return head;
-            // fast重跑
-            fast = head;
+            // k根据len调整了，p2重跑
+            p2 = head;
             for (int i = 0; i < k; i++) {
-                fast = fast->next;
+                p2 = p2->next;
             }
         }
-        // 快慢指针同时跑，slow要取断开处之前的节点
-        auto slow = head;
-        while (fast->next) {
-            fast = fast->next;
-            slow = slow->next;
+        // 同时跑，直到p1指向前半段末尾
+        auto p1 = head;
+        while (p2->next) {
+            p2 = p2->next;
+            p1 = p1->next;
         }
-        // 先把链表首尾相接
-        fast->next = head;
-        // 再在slow后断开
-        auto newHead = slow->next;
-        slow->next = NULL;
+
+        p2->next = head;
+        auto newHead = p1->next;
+        p1->next = NULL;
         
         return newHead;
     }
