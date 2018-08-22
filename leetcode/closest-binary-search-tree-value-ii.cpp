@@ -23,6 +23,57 @@ using namespace std;
 class Solution {
 public:
     vector<int> closestKValues(TreeNode* root, double target, int k) {
+        // 前驱栈pre和后继栈succ
+        stack<TreeNode *> pre, succ;
+        auto p = root;
+        while (p) {
+            if (target < p->val) {
+                succ.push(p);
+                p = p->left;
+            } else {
+                pre.push(p);
+                p = p->right;
+            }
+        }
+        
+        vector<int> ans;
+        while (k--) {
+            if (succ.empty() || (!pre.empty() && target - pre.top()->val < succ.top()->val - target)) { // 选前驱
+                ans.push_back(pre.top()->val);
+                getPredecessor(pre);
+            } else {
+                ans.push_back(succ.top()->val);
+                getSuccessor(succ);
+            }
+        }
+        return ans;
+    }
+    
+    // 类似i--
+    void getPredecessor(stack<TreeNode *> &pre) {
+        auto top = pre.top(); pre.pop();
+        auto p = top->left;
+        while (p) {
+            pre.push(p);
+            p = p->right;
+        }
+    }
+    
+    // 类似j++
+    void getSuccessor(stack<TreeNode *> &succ) {
+        auto top = succ.top(); succ.pop();
+        auto p = top->right;
+        while (p) {
+            succ.push(p);
+            p = p->left;
+        }
+    }
+};
+
+/*
+class Solution {
+public:
+    vector<int> closestKValues(TreeNode* root, double target, int k) {
         queue<int> q;
         inorder(root, target, k, q);
         
@@ -48,6 +99,7 @@ public:
         inorder(root->right, target, k, q);
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     return 0;
