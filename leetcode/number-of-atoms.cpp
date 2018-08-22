@@ -15,8 +15,8 @@ using namespace std;
 class Solution {
 public:
     string countOfAtoms(string formula) {
-        int pos = 0;
-        auto count = parse(formula, pos);
+        int idx = 0;
+        auto count = parse(formula, idx);
         ostringstream oss;
         for (auto &e : count) {
             oss << e.first;
@@ -26,39 +26,39 @@ public:
     }
     
     // 解析一层括号
-    map<string, int> parse(const string &formula, int &pos) {
+    map<string, int> parse(const string &formula, int &idx) {
         const int N = formula.size();
         map<string, int> count;
-        while (pos < N && formula[pos] != ')') {
-            if (formula[pos] == '(') {
-                pos++; // (
-                auto paren = parse(formula, pos);
-                int num = parseNum(formula, pos);
+        while (idx < N && formula[idx] != ')') {
+            if (formula[idx] == '(') {
+                idx++; // (
+                auto paren = parse(formula, idx);
+                int num = parseNum(formula, idx);
                 for (auto &e : paren) { 
                     count[e.first] += e.second * num;                    
                 }
             } else {
-                auto name = parseName(formula, pos);
-                int num = parseNum(formula, pos);
+                auto name = parseName(formula, idx);
+                int num = parseNum(formula, idx);
                 count[name] += num;
             }
         }    
-        if (pos < N) pos++; // )
+        if (idx < N) idx++; // )
         return count;
     }
     
-    int parseNum(const string &formula, int &pos) {
-        int start = pos;
-        while (pos < formula.size() && isdigit(formula[pos])) pos++;
-        if (pos == start) return 1;
-        return stoi(formula.substr(start, pos - start));
+    int parseNum(const string &formula, int &idx) {
+        int start = idx;
+        while (idx < formula.size() && isdigit(formula[idx])) idx++;
+        if (idx == start) return 1;
+        return stoi(formula.substr(start, idx - start));
     }
     
-    string parseName(const string &formula, int &pos) {
-        int start = pos;
-        pos++; // upper case
-        while (pos < formula.size() && islower(formula[pos])) pos++;
-        return formula.substr(start, pos - start);
+    string parseName(const string &formula, int &idx) {
+        int start = idx;
+        idx++; // upper case
+        while (idx < formula.size() && islower(formula[idx])) idx++;
+        return formula.substr(start, idx - start);
     }
 };
 */
@@ -70,24 +70,24 @@ public:
         stk.push({});
         
         const int N = formula.size();
-        int pos = 0;
-        while (pos < N) {
-            if (formula[pos] == '(') {
-                pos++; // (
+        int idx = 0;
+        while (idx < N) {
+            if (formula[idx] == '(') {
+                idx++; // (
                 stk.push({});
-            } else if (formula[pos] == ')') {
-                pos++; // )
+            } else if (formula[idx] == ')') {
+                idx++; // )
                 auto top = stk.top(); stk.pop();
-                int num = parseNum(formula, pos);
+                int num = parseNum(formula, idx);
                 for (auto &e : top) {
                     stk.top()[e.first] += e.second * num;
                 }
             } else {
-                int start = pos;
-                pos++; // upper case
-                while (pos < N && islower(formula[pos])) pos++;
-                auto name = formula.substr(start, pos - start);
-                int num = parseNum(formula, pos);
+                int start = idx;
+                idx++; // upper case
+                while (idx < N && islower(formula[idx])) idx++;
+                auto name = formula.substr(start, idx - start);
+                int num = parseNum(formula, idx);
                 stk.top()[name] += num;
             }
         }
@@ -100,11 +100,11 @@ public:
         return oss.str();
     }
     
-    int parseNum(const string &formula, int &pos) {
-        int start = pos;
-        while (pos < formula.size() && isdigit(formula[pos])) pos++;
-        if (pos == start) return 1;
-        return stoi(formula.substr(start, pos - start));
+    int parseNum(const string &formula, int &idx) {
+        int start = idx;
+        while (idx < formula.size() && isdigit(formula[idx])) idx++;
+        if (idx == start) return 1;
+        return stoi(formula.substr(start, idx - start));
     }
 };
 

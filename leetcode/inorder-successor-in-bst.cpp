@@ -24,7 +24,7 @@ class Solution {
 public:
     TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
         if (!root || !p) return NULL;
-        // bst的先序遍历是个有序数组，这题相当于要找第一个>p.val的节点
+        // bst的中序遍历是个有序数组，这题相当于要找第一个>p.val的节点
         // 类似二分搜索，root相当于二分搜索中的mid
         TreeNode *succ = NULL;
         while (root) {
