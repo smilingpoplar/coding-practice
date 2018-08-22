@@ -62,7 +62,7 @@ public:
     }
 };
 */
-
+/*
 class Solution {
 public:
     string countOfAtoms(string formula) {
@@ -83,10 +83,7 @@ public:
                     stk.top()[e.first] += e.second * num;
                 }
             } else {
-                int start = idx;
-                idx++; // upper case
-                while (idx < N && islower(formula[idx])) idx++;
-                auto name = formula.substr(start, idx - start);
+                auto name = parseName(formula, idx);
                 int num = parseNum(formula, idx);
                 stk.top()[name] += num;
             }
@@ -106,7 +103,15 @@ public:
         if (idx == start) return 1;
         return stoi(formula.substr(start, idx - start));
     }
+
+    string parseName(const string &formula, int &idx) {
+        int start = idx;
+        idx++; // upper case
+        while (idx < formula.size() && islower(formula[idx])) idx++;
+        return formula.substr(start, idx - start);
+    }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     return 0;
