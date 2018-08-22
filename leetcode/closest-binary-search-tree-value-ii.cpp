@@ -23,7 +23,6 @@ using namespace std;
 class Solution {
 public:
     vector<int> closestKValues(TreeNode* root, double target, int k) {
-        // 先序遍历，并维持一个k长的窗口
         queue<int> q;
         inorder(root, target, k, q);
         
@@ -37,15 +36,15 @@ public:
     
     void inorder(TreeNode *root, double target, int k, queue<int> &q) {
         if (!root) return;
+        // 中序遍历，相当于有序数组，找最接近target的k个数，维持一个k长的窗口。
+        // 窗口右端指向大的数、左端指向小的数，每次从两端选一个更接近target的。
         inorder(root->left, target, k, q);
         if (q.size() < k) {
             q.push(root->val);
-        } else {
-            if (abs(root->val - target) < abs(q.front() - target)) {
+        } else if (abs(root->val - target) < abs(q.front() - target)) {
                 q.pop();
                 q.push(root->val);
-            }
-        }
+        } else return;
         inorder(root->right, target, k, q);
     }
 };
