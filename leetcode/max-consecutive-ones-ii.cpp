@@ -14,18 +14,18 @@ using namespace std;
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
-        // 扩展：滑动窗口中至多k个0。无限流的情况，用个队列保存各0的下标。
+        // 扩展：滑动窗口中至多k个0，用队列保存各0的下标。
         const int k = 1;
         int ans = 0;
         queue<int> zeroIdx;
-        for (int winStart = 0, i = 0; i < nums.size(); i++) {
-            if (nums[i] == 0) zeroIdx.push(i);
+        for (int lo = 0, hi = 0; hi < nums.size(); hi++) {
+            if (nums[hi] == 0) zeroIdx.push(hi);
             
             while (zeroIdx.size() > k) {
-                winStart = zeroIdx.front() + 1;
+                lo = zeroIdx.front() + 1;
                 zeroIdx.pop();
             }
-            ans = max(ans, i - winStart + 1);
+            ans = max(ans, hi - lo + 1);
         }
         return ans;
     }

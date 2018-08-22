@@ -20,20 +20,21 @@ class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
         ListNode dummy1(-1); // list1 < x
-        ListNode *curr1 = &dummy1;
+        auto p1 = &dummy1;
         ListNode dummy2(-1); // list2 >= x
-        ListNode *curr2 = &dummy2;
-        for (auto p = head; p; p = p->next) {
-            if (p->val < x) {
-                curr1->next = p;
-                curr1 = p;
+        auto p2 = &dummy2;
+        while (head) {
+            if (head->val < x) {
+                p1->next = head;
+                p1 = head;
             } else {
-                curr2->next = p;
-                curr2 = p;
+                p2->next = head;
+                p2 = head;
             }
+            head = head->next;
         }
-        curr1->next = dummy2.next;
-        curr2->next = NULL;
+        p1->next = dummy2.next;
+        p2->next = NULL;
         return dummy1.next;
     }
 };

@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        // 由鸽笼原理，一定有环
+        // 由鸽笼原理，一定有重复
         // 把nums[i]看做下标i的next下标，相当于链表的next指针，
         // 找重复的数变成链表中找环的入口点，快慢指针法
         int fast = 0, slow = 0;
