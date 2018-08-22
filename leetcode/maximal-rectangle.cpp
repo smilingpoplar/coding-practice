@@ -32,7 +32,7 @@ public:
     int largestRectangleArea(vector<int>& heights) {
         // 同https://leetcode.com/problems/largest-rectangle-in-histogram/
         // 用栈找“波峰”。当前数小于栈顶时栈顶弹出。
-        // 对弹出数来说，弹出数是"波峰"，当前数是右边小于它的位置，新栈顶是左边小于它的位置
+        // 对弹出数来说，弹出数是"波峰"，当前数是右边小于它的数，新栈顶是左边小于它的数。
         // 为方便起见，假设heights[]首尾有高度为0的块，变成h[]。
         const int N = heights.size();
         vector<int> h(N + 2); 

@@ -23,14 +23,14 @@ using namespace std;
 class Solution {
 public:
     int closestValue(TreeNode* root, double target) {
-        int closest = root->val; // 已知root非空
+        int ans = root->val; // 已知root非空
         while (root) {
-            if (abs(root->val - target) < abs(closest - target)) {
-                closest = root->val;
+            if (abs(root->val - target) < abs(ans - target)) {
+                ans = root->val;
             }
             root = (target < root->val) ? root->left : root->right;
         }
-        return closest;
+        return ans;
     }
 };
 

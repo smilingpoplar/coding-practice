@@ -23,7 +23,7 @@ public:
     int parseExpr(const string &s, int &i) {
         const int N = s.size();
         char op = '+'; // 上一个未处理操作
-        int sum = 0;
+        int ans = 0;
         for (; i < N && op != ')'; i++) {
             if (s[i] == ' ') continue;
             int num = 0;
@@ -34,11 +34,11 @@ public:
                 num = parseExpr(s, ++i);
             } 
             // 遇到新操作+-*/或结束，处理上一个操作op
-            if (op == '+') sum += num;
-            else if (op == '-') sum -= num;
+            if (op == '+') ans += num;
+            else if (op == '-') ans -= num;
             op = s[i];
         }
-        return sum;
+        return ans;
     }
 };
 
