@@ -15,20 +15,21 @@ using namespace std;
 class Solution {
 public:
     string simplifyPath(string path) {
-        vector<string> stack; // 用栈存储解析出的部分
+        vector<string> stk; // 用栈存储解析出的部分
         istringstream iss(path);
         string part;
         while (getline(iss, part, '/')) {
             if (part.empty() || part == ".") continue;
             if (part == "..") {
-                if (!stack.empty()) stack.pop_back();
-                continue;
+                if (!stk.empty()) stk.pop_back();
+            } else {
+                stk.push_back(part);
             }
-            stack.push_back(part);
         }
-        if (stack.empty()) return "/";
+
+        if (stk.empty()) return "/";        
         ostringstream oss;
-        for (const auto &part : stack) {
+        for (auto &part : stk) {
             oss << "/" << part;
         }
         return oss.str();
