@@ -27,14 +27,14 @@ public:
         return l;
     }
     
-    // 找第k小的数，当猜的数不断变大时、二分搜索要输出[0,0,...,0,1,1,...]，因此要猜数是否>=第k小的数。
-    // 条件式enough(x)中要看x是第几小的数，即统计出<=x的个数count，判断是否count>=k。
+    // 找第k小的数，当猜的数不断变大时、二分搜索要输出[0,0,...,0,1,1,...]，要判断猜的数>=第k小的数。
+    // 条件式enough(x)中要看x是第几小的数，即统计出<=x的个数count，判断count>=k。
     bool enough(int x, vector<int> &nums, int k) {
         int count = 0;
         for (int j = 1; j < nums.size(); j++) {
-            // 找 nums[j] - nums[i] <= x，nums[i] >= nums[j] - x
-            int i  = lower_bound(nums.begin(), nums.end(), nums[j] - x) - nums.begin();
-            count += j - i;
+            // 找 nums[j]-nums[i] <= x，nums[i] >= nums[j]-x
+            int i = lower_bound(nums.begin(), nums.end(), nums[j] - x) - nums.begin();
+            count += j - i; // (i,j),(i+1,j),...,(j-1,j)满足
         }
         return count >= k;
     }

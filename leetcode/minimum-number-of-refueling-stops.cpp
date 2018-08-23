@@ -15,7 +15,7 @@ class Solution {
 public:
     int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
         // 贪婪法
-        // 只要油量够就不加油，只把油量记入堆中；油量不够，就从堆中取最大值加油
+        // 油量够时不加油，只把油量记入堆中；油量不够时，从堆中取最大值加油
         const int N = stations.size();
         int dist = startFuel; // 能行驶的最大距离
         priority_queue<int> pq;
