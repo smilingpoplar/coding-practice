@@ -22,26 +22,25 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>> result;
-        queue<TreeNode *> queue;
-        if (root) queue.push(root);
-        bool rightToLeft = false;
-        while (!queue.empty()) {
-            vector<int> level;
-            const int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; i++) {
-                auto node = queue.front();
-                queue.pop();
-                level.push_back(node->val);
+        vector<vector<int>> ans;
+        queue<TreeNode *> Q;
+        if (root) Q.push(root);
+        bool toRight = true;
+        while (!Q.empty()) {
+            const int sz = Q.size();
+            vector<int> row;
+            for (int i = 0; i < sz; i++) {
+                auto node = Q.front(); Q.pop();
+                row.push_back(node->val);
                 
-                if (node->left) queue.push(node->left);
-                if (node->right) queue.push(node->right);
+                if (node->left) Q.push(node->left);
+                if (node->right) Q.push(node->right);
             }
-            if (rightToLeft) reverse(level.begin(), level.end());
-            result.push_back(level);
-            rightToLeft = !rightToLeft;
+            if (!toRight) reverse(row.begin(), row.end());
+            ans.push_back(row);
+            toRight = !toRight;
         }
-        return result;
+        return ans;
     }
 };
 
@@ -57,8 +56,8 @@ int main(int argc, const char * argv[]) {
     t1r.right = &t2r;
     
     Solution solution;
-    auto result = solution.zigzagLevelOrder(&t0);
-    for (const auto &level : result) {
+    auto ans = solution.zigzagLevelOrder(&t0);
+    for (const auto &level : ans) {
         for (int num : level) {
             cout << num << " ";
         }
