@@ -32,12 +32,12 @@ public:
                 }
                 idx++; // [
                 string sub = decodeString(s, idx);
+                idx++; // ]
                 while (num--) ans += sub;
             }
         }
-        if (idx < s.size()) idx++; // ]
         return ans;
-    }   
+    }    
 };
 
 int main(int argc, const char * argv[]) {    

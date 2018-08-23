@@ -11,7 +11,6 @@
 
 using namespace std;
 
-/*
 class Solution {
 public:
     string countOfAtoms(string formula) {
@@ -33,6 +32,7 @@ public:
             if (formula[idx] == '(') {
                 idx++; // (
                 auto paren = parse(formula, idx);
+                idx++; // )
                 int num = parseNum(formula, idx);
                 for (auto &e : paren) { 
                     count[e.first] += e.second * num;                    
@@ -43,7 +43,6 @@ public:
                 count[name] += num;
             }
         }    
-        if (idx < N) idx++; // )
         return count;
     }
     
@@ -61,7 +60,7 @@ public:
         return formula.substr(start, idx - start);
     }
 };
-*/
+
 /*
 class Solution {
 public:
