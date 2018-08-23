@@ -16,12 +16,10 @@ public:
         // 可视化解释：https://www.youtube.com/watch?v=cJayBq38VYw
         // 用优先队列的遍历算法
         if (heightMap.empty()) return 0;
-        const int R = heightMap.size();
-        const int C = heightMap[0].size();
+        const int R = heightMap.size(), C = heightMap[0].size();
         // 队列元素int[3]: { row, col, heightWithWater }
-        // 高度最小的先出队处理
         auto cmp = [&](vector<int> &a, vector<int> &b) {
-            return a[2] > b[2];
+            return a[2] > b[2]; // 高度最小的先出队处理
         };
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
         vector<vector<bool>> visited(R, vector<bool>(C, false));

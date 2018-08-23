@@ -15,11 +15,11 @@ class Solution {
 public:
     vector<int> kthSmallestPrimeFraction(vector<int>& A, int K) {
         // 就是在行列有序的矩阵中找第K小的数
-        // 1/5  2/5  3/5
-        // 1/3  2/3
-        // 1/2
+        // 1/2  1/3  1/5
+        //      2/3  2/5
+        //           3/5
         
-        // 最小堆里存行列坐标，第一列先进队列
+        // 最小堆里存行列坐标，第一行先进队列
         const int N = A.size();
         auto cmp = [&A](vector<int> &a, vector<int> &b) {
             return A[a[0]] * A[b[1]] > A[b[0]] * A[a[1]];
