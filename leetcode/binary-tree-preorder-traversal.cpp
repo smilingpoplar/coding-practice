@@ -37,7 +37,6 @@ public:
 };
 */
 
-/*
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -50,14 +49,14 @@ public:
                 stk.push(curr);
                 curr = curr->left;
             }
-            auto node = stk.top();  stk.pop();
+            auto node = stk.top(); stk.pop();
             curr = node->right;
         }
         return ans;
     }
 };
-*/
 
+/*
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -91,6 +90,7 @@ public:
         return ans;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     TreeNode t0(3);

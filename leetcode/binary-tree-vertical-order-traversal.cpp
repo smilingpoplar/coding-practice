@@ -23,8 +23,8 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> verticalOrder(TreeNode* root) {
-        // 在同一列的按层排，所以bfs按层遍历
-        map<int, vector<int>> cols; // 用个哈希表按列分桶
+        // 在同一列的按层排，用bfs按层遍历
+        map<int, vector<int>> cols; // 按列分桶
         queue<pair<int, TreeNode *>> q; // pair: <col,node>
         if (root) q.push({0, root});
 

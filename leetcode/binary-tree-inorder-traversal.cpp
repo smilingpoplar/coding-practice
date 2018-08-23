@@ -18,7 +18,6 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-/*
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
@@ -30,15 +29,15 @@ public:
                 stk.push(curr);
                 curr = curr->left;
             } 
-            curr = stk.top();  stk.pop();
-            ans.push_back(curr->val);  // 出栈时访问
-            curr = curr->right;
+            auto node = stk.top();  stk.pop();
+            ans.push_back(node->val);  // 出栈时访问
+            curr = node->right;
         }
         return ans;
     }
 };
-*/
 
+/*
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
@@ -71,6 +70,7 @@ public:
         return ans;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     TreeNode t0(3);

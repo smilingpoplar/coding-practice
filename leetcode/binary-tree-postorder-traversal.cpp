@@ -18,7 +18,6 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-/*
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
@@ -37,14 +36,14 @@ public:
             } else { // 从右子树返回，则出栈时访问
                 stk.pop();
                 ans.push_back(node->val);
-                prev = node;                
+                prev = node;
             }
         }
         return ans;
     }
 };
-*/
 
+/*
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
@@ -87,6 +86,7 @@ private:
         result.push_back(from->val);
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     TreeNode t0(3);

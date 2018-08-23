@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -20,35 +20,33 @@ struct TreeNode {
 
 class BSTIterator {
 public:
-    // 中序遍历迭代版，用current表示调用栈[current,stack]的栈顶
+    // 中序遍历迭代版，用curr表示调用栈[curr,stk]的栈顶
     BSTIterator(TreeNode *root) {
-        current = root;
+        curr = root;
     }
     
     /** @return whether we have a next smallest number */
     bool hasNext() {
-        return current || !stack.empty();
+        return curr || !stk.empty();
     }
     
     /** @return the next smallest number */
     int next() {
-        while (current || !stack.empty()) {
-            if (current) {
-                stack.push_back(current);
-                current = current->left;
-            } else {
-                current = stack.back();
-                stack.pop_back();
-                int result = current->val;
-                current = current->right;
-                return result;
+        while (curr || !stk.empty()) {
+            while (curr) {
+                stk.push(curr);
+                curr = curr->left;
             }
+            curr = stk.top(); stk.pop();
+            int ans = curr->val;
+            curr = curr->right;
+            return ans;
         }
         return INT_MAX;
     }
 private:
-    TreeNode *current;
-    vector<TreeNode *> stack;
+    TreeNode *curr;
+    stack<TreeNode *> stk;
 };
 
 int main(int argc, const char * argv[]) {
