@@ -15,14 +15,14 @@ public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         const int N = nums.size();
         vector<int> ans(N, -1);
-        stack<int> stk; // 找下一个更大元素，用栈，保存下标
-        // 循环数组，重复处理两次nums
+        stack<int> stk; // 找下一个更大元素，保存下标
+        // 循环数组，查找两遍nums[]
         for (int i = 0; i < 2 * N; i++) {
             while (!stk.empty() && nums[i % N] > nums[stk.top()]) {
                 ans[stk.top()] = nums[i % N];
                 stk.pop();
             }
-            if (i < N) stk.push(i); // 栈中的数都会在弹出时找下一个更大元素，前N个数才找
+            if (i < N) stk.push(i); // 前N个数才找
         }
         return ans;
     }
