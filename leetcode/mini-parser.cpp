@@ -56,8 +56,7 @@ public:
                 if (s[i] == '[') {
                     stk.push({});
                 } else if (s[i] == ']') {
-                    auto top = stk.top();
-                    stk.pop();
+                    auto top = stk.top(); stk.pop();
                     stk.top().add(top);
                 }
                 i++;
@@ -66,7 +65,6 @@ public:
         return stk.top().getList()[0];
     }
 };
-
 int main(int argc, const char * argv[]) {
     return 0;
 }

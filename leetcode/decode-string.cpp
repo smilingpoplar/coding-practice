@@ -17,29 +17,27 @@ public:
         return decodeString(s, idx);
     }
     
-    // 假设这个函数能decode掉最上一层[xxx]
+    // 能decode掉最外一层[xxx]
     string decodeString(string &s, int &idx) {
-        string res;
+        string ans;
         while (idx < s.size() && s[idx] != ']') {
             if (isalpha(s[idx])) {
-                res += s[idx];
+                ans += s[idx];
                 idx++;
             } else { // 数字开头
-                int n = 0;
+                int num = 0;
                 while (idx < s.size() && isdigit(s[idx])) {
-                    n = n * 10 + s[idx] - '0';
+                    num = num * 10 + s[idx] - '0';
                     idx++;
                 }
                 idx++; // [
                 string sub = decodeString(s, idx);
-                idx++; // ]
-                while (n--) {
-                    res += sub;
-                }
+                while (num--) ans += sub;
             }
         }
-        return res;
-    }    
+        if (idx < s.size()) idx++; // ]
+        return ans;
+    }   
 };
 
 int main(int argc, const char * argv[]) {    
