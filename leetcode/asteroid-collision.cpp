@@ -17,13 +17,9 @@ public:
         for (int i = 0; i < asteroids.size(); i++) {
             if (stk.empty() || stk.back() < 0 || asteroids[i] > 0) {
                 stk.push_back(asteroids[i]);
-            } else {
-                if (stk.back() == -asteroids[i]) {
-                    stk.pop_back();
-                } else if (stk.back() < -asteroids[i]) {
-                    stk.pop_back();
-                    i--; // 继续看i
-                }
+            } else if (stk.back() <= -asteroids[i]) {
+                if (stk.back() < -asteroids[i]) i--; // 继续看i
+                stk.pop_back();
             }
         }
         return stk;
