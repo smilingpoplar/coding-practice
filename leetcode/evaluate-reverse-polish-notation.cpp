@@ -8,29 +8,28 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
-        vector<int> stack;
-        for (const auto &token : tokens) {
+        stack<int> stk;
+        for (auto &token : tokens) {
             if (token == "+" || token == "-" || token == "*" || token == "/") {
-                if (stack.size() < 2) return 0;
-                int value2 = stack.back();
-                stack.pop_back();
-                int value1 = stack.back();
-                stack.pop_back();
-                if (token == "+") stack.push_back(value1 + value2);
-                else if (token == "-") stack.push_back(value1 - value2);
-                else if (token == "*") stack.push_back(value1 * value2);
-                else if (token == "/") stack.push_back(value1 / value2);
+                if (stk.size() < 2) return 0;
+                int val2 = stk.top(); stk.pop();
+                int val1 = stk.top(); stk.pop();
+                if (token == "+") stk.push(val1 + val2);
+                else if (token == "-") stk.push(val1 - val2);
+                else if (token == "*") stk.push(val1 * val2);
+                else if (token == "/") stk.push(val1 / val2);
             } else {
-                stack.push_back(stoi(token));
+                stk.push(stoi(token));
             }
         }
-        return stack.back();
+        return stk.top();
     }
 };
 
