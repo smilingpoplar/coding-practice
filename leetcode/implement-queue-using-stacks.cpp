@@ -12,8 +12,7 @@
 using namespace std;
 
 class MyQueue {
-    stack<int> in;
-    stack<int> out;
+    stack<int> in, out;
 
     void moveIfOutStackEmpty() {
         if (out.empty()) {

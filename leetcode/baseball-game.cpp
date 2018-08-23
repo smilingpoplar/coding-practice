@@ -13,28 +13,26 @@ using namespace std;
 class Solution {
 public:
     int calPoints(vector<string>& ops) {
-        stack<int> stack;
+        stack<int> stk;
         for (string &op : ops) {
             if (op == "+") {
-                int a = stack.top(); 
-                stack.pop();
-                int b = stack.top(); 
-                stack.push(a);
-                stack.push(a + b);
+                int a = stk.top(); stk.pop();
+                int b = stk.top(); stk.push(a);
+                stk.push(a + b);
             } else if (op == "D") {
-                int a = stack.top();
-                stack.push(a * 2);
+                int a = stk.top();
+                stk.push(a * 2);
             } else if (op == "C") {
-                stack.pop();
+                stk.pop();
             } else { // integer
-                stack.push(stoi(op));
+                stk.push(stoi(op));
             }
         }
         
         int sum = 0;
-        while (!stack.empty()) {
-            sum += stack.top();
-            stack.pop();
+        while (!stk.empty()) {
+            sum += stk.top();
+            stk.pop();
         }
         return sum;
     }
