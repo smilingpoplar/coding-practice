@@ -21,9 +21,9 @@ public:
     // 解析一层括号
     int parseExpr(const string &s, int &i) {
         const int N = s.size();
-        char op = '+'; // 上一个未处理操作
+        char op = '+'; // 上一个未处理op
         vector<int> nums;
-        for (; i < N && op != ')'; i++) {
+        for (; i < N && op != ')'; i++) { // 尚有未处理op
             if (s[i] == ' ') continue;
             int num = 0;
             if (isdigit(s[i])) {
@@ -32,7 +32,7 @@ public:
             } else if (s[i] == '(') {
                 num = parseExpr(s, ++i);
             } 
-            // 遇到新操作+-*/或结束，处理上一个操作op
+            // 遇到新操作+-*/或结束，处理上一个op
             if (op == '+') nums.push_back(num);
             else if (op == '-') nums.push_back(-num);
             else if (op == '*') nums.back() *= num;

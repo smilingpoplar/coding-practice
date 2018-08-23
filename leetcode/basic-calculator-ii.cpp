@@ -15,7 +15,7 @@ class Solution {
 public:
     int calculate(string s) {
         const int N = s.size();
-        char op = '+'; // 上一个未处理操作
+        char op = '+'; // 上一个未处理op
         vector<int> nums;
         for (int i = 0; i < N; i++) {
             if (s[i] == ' ') continue;
@@ -24,7 +24,7 @@ public:
                 while (i < N && isdigit(s[i]))
                     num = num * 10 + s[i++] - '0';
             }
-            // 遇到新操作+-*/或结束，处理上一个操作op
+            // 遇到新操作+-*/或结束，处理上一个op
             if (op == '+') nums.push_back(num);
             else if (op == '-') nums.push_back(-num);
             else if (op == '*') nums.back() *= num;
