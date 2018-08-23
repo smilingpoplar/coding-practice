@@ -19,21 +19,21 @@ public:
         if (N < 3) return false;
         // 当前数左边找最小数
         vector<int> leftMin(N);
-        leftMin[0] = INT_MAX;
+        leftMin[0] = nums[0];
         for (int i = 1; i < N; i++) {
-            leftMin[i] = min(nums[i-1], leftMin[i-1]);
+            leftMin[i] = min(nums[i], leftMin[i-1]);
         }
-        // 当前数右边找小于它的最大数，相当于：从右往左找下一个更大的数时，记录最后弹出的数
+        // 当前数右边找小于它的最大数，相当于：从右往左找下一个更大的数
         stack<int> stk;
-        for (int j = N - 1; j >= 0; j--) {
+        for (int j = N - 1; j >= 1; j--) {
             int rMax = INT_MIN;
             while (!stk.empty() && nums[j] > stk.top()) {
                 rMax = stk.top();
                 stk.pop();
             }
-            stk.push(nums[j]);
+            stk.push(nums[j]); // nums[j]是rMax左边的下一个更大的数、rMax是nums[j]右边小于它的最大数
             
-            if (leftMin[j] < rMax) return true;
+            if (leftMin[j-1] < rMax) return true;
         }
         return false;
     }
