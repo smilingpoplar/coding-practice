@@ -16,7 +16,7 @@ public:
     int findKthLargest(vector<int>& nums, int k) {
         int l = 0, u = (int)nums.size() - 1;
         while (l <= u) {
-            int p = partition(nums, l, u); // p跟下标k-1比较，因为第k大数的下标应该是k-1
+            int p = partition(nums, l, u); // 用下标k-1跟p比较，因为第k大的数下标是k-1
             if (k - 1 == p) return nums[p];
             if (k - 1 < p) u = p - 1;
             else l = p + 1;
@@ -28,9 +28,7 @@ public:
         // 单向划分，将数组分为>t、<=t、?三段
         int m = l; // m指向第一段末尾、i指向第三段开头
         for (int i = l + 1; i <= u; i++) {
-            if (nums[i] > nums[l]) {
-                swap(nums[i], nums[++m]);
-            }
+            if (nums[i] > nums[l]) swap(nums[i], nums[++m]);
         }
         swap(nums[m], nums[l]);
         return m;
