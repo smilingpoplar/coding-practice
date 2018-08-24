@@ -19,15 +19,17 @@ public:
         unordered_set<string> dict;
         for (auto &word : wordList) dict.insert(word);
         
-        // 分层bfs
+        // 分层bfs找最短路径
         unordered_set<string> currLevel;
         currLevel.insert(beginWord);
         unordered_set<string> visited;
         unordered_map<string, unordered_set<string>> prevs; // 记录词变换
         bool found = false;
         while (!currLevel.empty() && !found) {
-            // 将同层词的visited[]全部设置，避免向同层词扩展
+            // 出队时设置visited[]，而不是入队时，这样允许多条变换路径；
+            // 将同层词的visited[]全部设置，避免向同层词变换。
             for (auto &word : currLevel) visited.insert(word);
+            
             unordered_set<string> nextLevel;
             for (auto &word : currLevel) {
                 auto nextWords = getNextWords(word, endWord, dict);
