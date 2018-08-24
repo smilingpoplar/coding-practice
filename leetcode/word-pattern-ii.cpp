@@ -14,41 +14,43 @@ using namespace std;
 class Solution {
 public:
     bool wordPatternMatch(string pattern, string str) {
-        // 回溯法
-        unordered_map<char, string> mp; // letter => mappingStr
+        unordered_map<char, string> mp; // c => mappingStr
         unordered_set<string> st; // 防止mappingStr多次匹配
         return match(pattern, 0, str, 0, mp, st);
     }
     
-    bool match(const string &pattern, int i, const string &str, int j,
+    bool match(const string &pattern, int pi, const string &str, int si,
               unordered_map<char, string> &mp, unordered_set<string> &st) {
-        if (i == pattern.size() && j == str.size()) return true; // 两个都匹配完
-        if (i == pattern.size() || j == str.size()) return false; // 只一个匹配完
+        const int M = pattern.size(), N = str.size();
+        if (pi == M && si == N) return true;  // 两个都匹配完
+        if (pi == M || si == N) return false; // 只一个匹配完
         
-        char patternChar = pattern[i];
-        if (mp.count(patternChar)) {
-            auto mappingStr = mp[patternChar];
-            if (!startsWith(mappingStr, str, j)) return false;
-            return match(pattern, i + 1, str, j + mappingStr.size(), mp, st);
+        char c = pattern[pi];
+        if (mp.count(c)) {
+            auto mappingStr = mp[c];
+            if (!startsWith(mappingStr, str, si)) return false;
+            return match(pattern, pi + 1, str, si + mappingStr.size(), mp, st);
         }
         
-        // 回溯，尝试匹配str[j..k]
-        for (int k = j; k < str.size(); k++) {
-            auto mappingStr = str.substr(j, k - j + 1);
+        // 回溯法，尝试给c匹配str[si..i]
+        for (int i = si; i < str.size(); i++) {
+            auto mappingStr = str.substr(si, i - si + 1);
             if (st.count(mappingStr)) continue;
-            mp[patternChar] = mappingStr;
+            
+            mp[c] = mappingStr;
             st.insert(mappingStr);
-            if (match(pattern, i + 1, str, k + 1, mp, st)) return true;
-            mp.erase(patternChar);
+            if (match(pattern, pi + 1, str, i + 1, mp, st)) return true;
+            mp.erase(c);
             st.erase(mappingStr);
         }
         return false;
     }
     
-    bool startsWith(const string &prefix, const string &str, int pos) {
-        if (prefix.size() + pos > str.size()) return false;
+    // prefix和str[idx..]是否相等
+    bool startsWith(const string &prefix, const string &str, int idx) {
+        if (idx + prefix.size() > str.size()) return false;
         for (int i = 0; i < prefix.size(); i++) {
-            if (prefix[i] != str[i + pos]) return false;
+            if (prefix[i] != str[idx + i]) return false;
         }
         return true;
     }
