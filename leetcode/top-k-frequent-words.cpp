@@ -13,31 +13,16 @@ using namespace std;
 class Solution {
 public:
     vector<string> topKFrequent(vector<string>& words, int k) {
-        unordered_map<string, int> count;
-        for (auto &w : words) {
-            ++count[w];
-        }
-        
-        /*
-        // 排序，取前k项
-        vector<string> keys;
-        for (auto &e : count) {
-            keys.push_back(e.first);
-        }
-        sort(keys.begin(), keys.end(), [&count](const string &a, const string &b){
-            if (count[a] == count[b]) return a.compare(b) < 0; // a<b时返回true
-            return count[a] > count[b];
-        });
-        return vector<string>(keys.begin(), keys.begin() + k);
-        */
+        unordered_map<string, int> cnt;
+        for (auto &w : words) cnt[w]++;
        
-        // c++中优先队列，堆顶跟比较函数排序出的正相反
-        auto cmp = [&count](const string &a, const string &b) {
-            if (count[a] == count[b]) return (a.compare(b) < 0);
-            return (count[a] > count[b]);
+        // 留下cnt大、字母序小的
+        auto cmp = [&cnt](const string &a, const string &b) {
+            if (cnt[a] == cnt[b]) return a < b;
+            return cnt[a] > cnt[b];
         };
         priority_queue<string, vector<string>, decltype(cmp)> pq(cmp);
-        for (auto &e : count) {
+        for (auto &e : cnt) {
             pq.push(e.first);
             if (pq.size() > k) pq.pop();
         }
