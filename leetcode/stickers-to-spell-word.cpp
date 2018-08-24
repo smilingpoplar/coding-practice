@@ -17,29 +17,28 @@ public:
         unordered_map<string, int> memo;
         memo[""] = 0;
 
-        vector<vector<int>> stickerCharCnts;
+        vector<vector<int>> stickersCC; // CC指CharCount
         for (auto &sticker : stickers) {
-            stickerCharCnts.push_back(countChar(sticker));
+            stickersCC.push_back(countChar(sticker));
         }
         sort(target.begin(), target.end());
-        return dfs(stickerCharCnts, target, memo);
+        return dfs(stickersCC, target, memo);
     }
     
-    // sticker,target变成charCnt[]参与运算
-    int dfs(const vector<vector<int>> &stickers, const string &targetStr,
+    int dfs(const vector<vector<int>> &stickersCC, const string &target,
             unordered_map<string, int> &memo) {
-        if (memo.count(targetStr)) return memo[targetStr];
+        if (memo.count(target)) return memo[target];
 
-        auto target = countChar(targetStr);
+        auto targetCC = countChar(target);
         int ans = INT_MAX;
-        for (auto &sticker : stickers) {
-            if (sticker[targetStr[0] - 'a'] == 0) continue; // 优化，至少要消掉首字母
-            auto reduced = reduceTarget(target, sticker);
-            int subAns = dfs(stickers, reduced, memo);
+        for (auto &stickerCC : stickersCC) {
+            if (stickerCC[target[0] - 'a'] == 0) continue; // 优化，至少要消掉首字母
+            auto reduced = reduceTarget(targetCC, stickerCC);
+            int subAns = dfs(stickersCC, reduced, memo);
             if (subAns != -1) ans = min(ans, 1 + subAns);
         }
-        memo[targetStr] = ans != INT_MAX ? ans : -1;
-        return memo[targetStr];
+        memo[target] = ans != INT_MAX ? ans : -1;
+        return memo[target];
     }
     
     vector<int> countChar(const string &s) {
@@ -55,9 +54,7 @@ public:
         ostringstream oss;
         for (int i = 0; i < a.size(); i++) {
             int cnt = max(0, a[i] - b[i]);
-            for (int k = 0; k < cnt; k++) {
-                oss << char(i + 'a');
-            }
+            oss << string(cnt, i + 'a');
         }
         return oss.str();
     }
