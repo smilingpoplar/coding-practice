@@ -22,11 +22,10 @@ class Solution {
 public:
     vector<string> findWords(vector<vector<char>> &board, vector<string> &words) {
         if (board.empty()) return {};
-        const int R = board.size();
-        const int C = board[0].size();
+        const int R = board.size(), C = board[0].size();
         vector<vector<bool>> visited(R, vector<bool>(C, false));
         for (auto &word : words) {
-            insert(word);
+            insert(word); // 插入trie中
         }
 
         vector<string> ans;
@@ -50,15 +49,14 @@ public:
 
     void dfs(int r, int c, const vector<vector<char>> &board, 
              vector<vector<bool>> &visited, TrieNode *node, vector<string> &ans) {
-        if (r < 0 || r >= board.size() || c < 0 || c >= board[0].size()) return;
-        if (visited[r][c]) return;
+        if (r < 0 || r >= board.size() || c < 0 || c >= board[0].size() || visited[r][c]) return;
         // 回溯法，在trie中搜索board[r][c]
         auto p = node->child[board[r][c] - 'a'];
         visited[r][c] = true;
         if (p) {
-            if (!p->word.empty()) {
+            if (!p->word.empty()) { // 找到一个词
                 ans.push_back(p->word);
-                p->word.clear(); // 不再搜索这个词
+                p->word.clear(); // 不用再找这个词
             }
             dfs(r - 1, c, board, visited, p, ans);
             dfs(r + 1, c, board, visited, p, ans);

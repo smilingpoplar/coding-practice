@@ -41,9 +41,9 @@ public:
         //     dp[i][j] ||= matchOne && dp[i+1][j] // 递归匹配多次
         // 当p[j+1]!='*'
         //     dp[i][j] = matchOne && dp[i+1][j+1]
+        // 初始dp[M][N]=true, dp[<M][N]=false
         
-        const int M = s.size();
-        const int N = p.size();
+        const int M = s.size(), N = p.size();
         vector<vector<bool>> dp(M + 1, vector<bool>(N + 1, false));
         dp[M][N] = true; // dp[][N]的其他情况为false
         

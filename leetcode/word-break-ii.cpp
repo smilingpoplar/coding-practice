@@ -29,7 +29,7 @@ public:
         
         vector<string> ans;
         for (int i = idx; i < s.size(); i++) {
-            // 分成单词s[idx..i]、子问题s[i..]
+            // 分成单词s[idx..i]、子问题s[i+1..]
             auto word = s.substr(idx, i - idx + 1);
             if (!dict.count(word)) continue;
             if (i == s.size() - 1) {

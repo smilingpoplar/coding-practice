@@ -14,24 +14,22 @@ using namespace std;
 class Solution {
 public:
     void solveSudoku(vector<vector<char>>& board) {
-        if (board.empty()) return;
-        solve(board);
+        dfs(board);
     }
-private:
-    bool solve(vector<vector<char>> &board) {
+
+    bool dfs(vector<vector<char>> &board) {
+        if (board.empty()) return false;
+        const int R = board.size(), C = board[0].size();
         // 尝试填空格，然后测试是否合法
-        const int R = board.size();
-        const int C = board[0].size();
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
-                if (board[r][c] == '.') {
-                    for (char ch = '1'; ch <= '9'; ch++) {
-                        board[r][c] = ch;
-                        if (isValid(r, c, board) && solve(board)) return true;
-                    }
-                    board[r][c] = '.';
-                    return false;
+                if (board[r][c] != '.') continue;
+                for (char ch = '1'; ch <= '9'; ch++) {
+                    board[r][c] = ch;
+                    if (isValid(r, c, board) && dfs(board)) return true;
                 }
+                board[r][c] = '.';
+                return false;
             }
         }
         return true;
@@ -39,8 +37,7 @@ private:
     
     bool isValid(int row, int col, const vector<vector<char>> &board) {
         if (board.empty()) return false;
-        const int R = board.size();
-        const int C = board[0].size();
+        const int R = board.size(), C = board[0].size();
         // 检查行
         for (int c = 0; c < C; c++) {
             if (c != col && board[row][c] == board[row][col]) return false;
