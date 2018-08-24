@@ -22,7 +22,7 @@ public:
         dist[K] = 0;
         
         auto cmp = [](vector<int> &a, vector<int> &b) { // {node, dist}
-            return a[1] > b[1];
+            return a[1] > b[1]; // 最小堆
         };
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
         pq.push({K, dist[K]});

@@ -42,10 +42,10 @@ public:
             return;
         }
         
-        unordered_set<char> selected;
+        unordered_set<char> seen;
         for (int i = idx; i < half.size(); i++) {
-            if (selected.count(half[i])) continue;
-            selected.insert(half[i]);
+            if (seen.count(half[i])) continue;
+            seen.insert(half[i]);
             
             swap(half[i], half[idx]);
             permute(idx + 1, half, mid, ans);
