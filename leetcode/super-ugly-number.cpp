@@ -15,7 +15,7 @@ public:
     int nthSuperUglyNumber(int n, vector<int>& primes) {
         vector<int> seq;
         seq.push_back(1);
-        // 每个因子对应一个要相乘的丑数，用以生成下个丑数
+        // 每个因子对应有一个要相乘的丑数，以生成下个丑数
         // 第j个因子primes[j]对应的丑数是seq[idx[j]]
         const int M = primes.size();
         vector<int> idx(M, 0); 
@@ -29,7 +29,7 @@ public:
                 if (next == seq[idx[j]] * primes[j]) idx[j]++;
             }
         }
-        return seq[n-1];
+        return seq.back();
     }
 };
 
