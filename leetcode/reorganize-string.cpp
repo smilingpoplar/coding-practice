@@ -20,15 +20,14 @@ public:
         for (char c : S) cnt[c]++;
         auto cmp = [&cnt](char a, char b) { return cnt[a] < cnt[b]; };
         priority_queue<char, vector<char>, decltype(cmp)> pq(cmp);
-
-        int maxCnt = INT_MIN;
+        int maxCnt = INT_MIN, maxCntLimit = (S.size() + 1) / 2;
         for (auto &e : cnt) {
             maxCnt = max(maxCnt, e.second);
-            if (maxCnt > (S.size() + 1) / 2) return "";
+            if (maxCnt > maxCntLimit) return "";
             pq.push(e.first);
         }
 
-        // 每次输出剩余最多的两个字符就行
+        // 每次输出剩余最多的两个字符
         ostringstream oss;
         while (pq.size() >= 2) {
             char a = pq.top(); pq.pop();
