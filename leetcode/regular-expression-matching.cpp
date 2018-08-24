@@ -15,17 +15,17 @@ using namespace std;
 class Solution {
 public:
     bool isMatch(string s, string p) {
-        return isMatch(s, 0, p, 0);
+        return match(s, 0, p, 0);
     }
     
-    bool isMatch(const string &s, int si, string &p, int pi) {
+    bool match(const string &s, int si, string &p, int pi) {
         const int M = s.size(), N = p.size();
         if (pi == N) return si == M;
         bool matchOne = si < M && (s[si] == p[pi] || p[pi] == '.');
         if (pi + 1 < N && p[pi+1] == '*') {
-            return isMatch(s, si, p, pi + 2) || (matchOne && isMatch(s, si + 1, p, pi));
+            return match(s, si, p, pi + 2) || (matchOne && match(s, si + 1, p, pi));
         } else {
-            return matchOne && isMatch(s, si + 1, p, pi + 1);
+            return matchOne && match(s, si + 1, p, pi + 1);
         }
     }
 };
