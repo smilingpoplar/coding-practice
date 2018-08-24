@@ -14,35 +14,31 @@ using namespace std;
 class Solution {
 public:
     int totalNQueens(int n) {
-        vector<int> placement(n, -1); // 按行放置，placement[i]=j 表示在i行的第j列放置皇后
-        // 放置皇后的判断条件
-        vector<bool> occupiedColumn(n, false);     // 某列是否被已放置的皇后占据
-        vector<bool> occupiedMainDiagonal(2 * n - 1, false);
-        vector<bool> occupiedAntiDiagonal(2 * n - 1, false);
-        
-        int total = 0;
-        dfs(0, placement, occupiedColumn, occupiedMainDiagonal, occupiedAntiDiagonal, total);
-        
-        return total;
+        // 按行放置，place[i]=j 表示在第i行的第j列放置皇后
+        vector<int> place(n, -1);
+        // 放置皇后时的判断条件
+        vector<bool> cols(n, false), diag(2 * n - 1, false), antidiag(2 * n - 1, false);
+
+        int ans = 0;
+        search(0, place, cols, diag, antidiag, ans);
+        return ans;
     }
-private:
-    void dfs(int row, vector<int> &placement, vector<bool> &occupiedColumn, vector<bool> &occupiedMainDiagonal, vector<bool> &occupiedAntiDiagonal, int &total) {
-        const size_t N = placement.size();
-        if (row == N) { // 终止条件
-            ++total;
+
+    void search(int r, vector<int> &place, vector<bool> &cols, 
+                vector<bool> &diag, vector<bool> &antidiag, int &ans) {
+        const int N = place.size();
+        if (r == N) {
+            ans++;
             return;
         }
         
-        for (int column = 0; column < N; column++) {
-            if (occupiedColumn[column] || occupiedMainDiagonal[row + column] || occupiedAntiDiagonal[row - column + N - 1]) continue;
-            // 执行动作
-            placement[row] = column;
-            occupiedColumn[column] = occupiedMainDiagonal[row + column] = occupiedAntiDiagonal[row - column + N - 1] = true;
-            // 递归
-            dfs(row + 1, placement, occupiedColumn, occupiedMainDiagonal, occupiedAntiDiagonal, total);
-            // 撤销动作
-            placement[row] = -1;
-            occupiedColumn[column] = occupiedMainDiagonal[row + column] = occupiedAntiDiagonal[row - column + N - 1] = false;
+        for (int c = 0; c < N; c++) {
+            if (cols[c] || diag[r + c] || antidiag[r - c + N - 1]) continue;
+            place[r] = c;
+            cols[c] = diag[r + c] = antidiag[r - c + N - 1] = true;
+            search(r + 1, place, cols, diag, antidiag, ans);
+            place[r] = -1;
+            cols[c] = diag[r + c] = antidiag[r - c + N - 1] = false;
         }
     }
 };
@@ -50,8 +46,8 @@ private:
 int main(int argc, const char * argv[]) {
     int n = 4;
     Solution solution;
-    int total = solution.totalNQueens(n);
-    cout << total;
+    int ans = solution.totalNQueens(n);
+    cout << ans;
     
     return 0;
 }

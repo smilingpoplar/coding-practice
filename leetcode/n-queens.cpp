@@ -14,44 +14,41 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> solveNQueens(int n) {
-        vector<int> placement(n, -1); // 按行放置，placement[i]=j 表示在i行的第j列放置皇后
-        // 放置皇后的判断条件
-        vector<bool> cols(n, false);     // 某列是否被已放置的皇后占据
-        vector<bool> diag(2 * n - 1, false);
-        vector<bool> antiDiag(2 * n - 1, false);
-        
+        // 按行放置，place[i]=j 表示在第i行的第j列放置皇后
+        vector<int> place(n, -1);
+        // 放置皇后时的判断条件
+        vector<bool> cols(n, false), diag(2 * n - 1, false), antidiag(2 * n - 1, false);
+
         vector<vector<string>> ans;
-        dfs(0, placement, cols, diag, antiDiag, ans);
+        search(0, place, cols, diag, antidiag, ans);
         return ans;
     }
-private:
-    void dfs(int row, vector<int> &placement, vector<bool> &cols, vector<bool> &diag, vector<bool> &antiDiag, vector<vector<string>> &ans) {
-        const int N = placement.size();
-        if (row == N) { // 终止条件
-            auto solution = genSolution(placement);
+
+    void search(int r, vector<int> &place, vector<bool> &cols,
+                vector<bool> &diag, vector<bool> &antidiag, vector<vector<string>> &ans) {
+        const int N = place.size();
+        if (r == N) {
+            auto solution = getSolution(place);
             ans.push_back(solution);
             return;
         }
         
-        for (int col = 0; col < N; col++) {
-            if (cols[col] || diag[row + col] || antiDiag[row - col + N - 1]) continue;
-            // 执行动作
-            placement[row] = col;
-            cols[col] = diag[row + col] = antiDiag[row - col + N - 1] = true;
-            // 递归
-            dfs(row + 1, placement, cols, diag, antiDiag, ans);
-            // 撤销动作
-            placement[row] = -1;
-            cols[col] = diag[row + col] = antiDiag[row - col + N - 1] = false;
+        for (int c = 0; c < N; c++) {
+            if (cols[c] || diag[r + c] || antidiag[r - c + N - 1]) continue;
+            place[r] = c;
+            cols[c] = diag[r + c] = antidiag[r - c + N - 1] = true;
+            search(r + 1, place, cols, diag, antidiag, ans);
+            place[r] = -1;
+            cols[c] = diag[r + c] = antidiag[r - c + N - 1] = false;
         }
     }
     
-    vector<string> genSolution(const vector<int> &placement) {
-        const int N = placement.size();
+    vector<string> getSolution(const vector<int> &place) {
+        const int N = place.size();
         vector<string> solution;
         for (int i = 0; i < N; i++) {
             string s(N, '.');
-            s[placement[i]] = 'Q';
+            s[place[i]] = 'Q';
             solution.push_back(s);
         }
         return solution;
@@ -62,7 +59,7 @@ int main(int argc, const char * argv[]) {
     int n = 4;
     Solution solution;
     auto solutions = solution.solveNQueens(n);
-    for (const auto &solution : solutions) {
+    for (auto &solution : solutions) {
         for (int i = 0; i < n; i++) {
             cout << solution[i] << endl;
         }
