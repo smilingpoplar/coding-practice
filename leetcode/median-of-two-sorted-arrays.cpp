@@ -14,13 +14,12 @@ using namespace std;
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
-        // 数组a在任意位置i分成a1[0..i-1]、a2[i..M-1]两部分，数组b在任意位置j分成b1[0..j-1]、b2[j..N-1]两部分。
-        // 把a1和b1放一起构成整体的left部分，a2和b2放一起构成整体的right部分。设k=len(left)=i+j，
-        // 则要使max(left)第k大的数，只需max(left)<=min(right)，即a[i-1]<=b[j]且b[j-1]<=a[i] (1)。
-        // 现在要找中位数（或两中位数的第一个），k=(M+N+1)/2。综上，二分搜索0<=i<=M、j=k-i，验证(1)式。
-        // 不妨使M<=N，则M<=中位数k<=N。由0<=i<=min(k,M)=M，j=k-i，得0<=k-M<=j<=k<=N，对应j值都合法。
-        const int M = a.size();
-        const int N = b.size();
+        // 数组a分成a1[0..i-1]、a2[i..M-1]两部分，数组b分成b1[0..j-1]、b2[j..N-1]两部分。
+        // 把a1和b1放一起构成整体的left部分，设k=len(left)=i+j，要使max(left)是第k大的数，
+        // 只需max(left)<=min(right)，即a[i-1]<=b[j] && b[j-1]<=a[i] (1)。
+        // 现在要找中位数（或两中位数的第一个），令k=(M+N+1)/2，二分搜索0<=i<=M，验证(1)式。
+        // 由0<=i<=M，j=k-i，k-M<=j<=k；要使0<=j<=N，需要k-M>=0、k<=N，M<=k<=N，M<=N
+        const int M = a.size(), N = b.size();
         if (M > N) return findMedianSortedArrays(b, a);
         
         int k = (M + N + 1) / 2;
@@ -31,7 +30,7 @@ public:
             if (i > 0 && a[i-1] > b[j]) {
                 // 需要a[i-1]<=b[j]，现在i太大了，要在左半边找
                 u = i - 1; 
-            } else if (i < M && b[j-1] > a[i]) { // i<M时 j>0
+            } else if (i < M && b[j-1] > a[i]) {
                 // 需要b[j-1]<=a[i]，现在i太小了，要在右半边找
                 l = i + 1;
             } else { // 肯定能找到
@@ -46,9 +45,47 @@ public:
                 return (leftMax + rightMin) * 0.5;
             }
         }
-        return INT_MIN;
     }
 };
+
+/*
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+        const int M = a.size(), N = b.size();
+        int k = (M + N + 1) / 2;
+        double median = getKthSmallest(k, a, b);
+        if ((M + N) % 2 == 1) return median; 
+        double next = getKthSmallest(k + 1, a, b);
+        return (median + next) * 0.5;
+    }
+
+    // 在两有序数组中找第k小的数
+    double getKthSmallest(int k, vector<int>& a, vector<int>& b) {
+        if (a.empty()) return b[k-1];
+        if (b.empty()) return a[k-1];
+        // 二分搜索，在值[min(a[0],b[0])..max(a[M-1],b[N-1])]范围内猜
+        int l = min(a[0], b[0]), u = max(a.back(), b.back());
+        while (l <= u) {
+            int mid = l + (u - l) / 2;
+            if (enough(mid, a, b, k)) {
+                u = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+    
+    // a和b中<=value的数有count个，count>=k?
+    bool enough(int value, vector<int>& a, vector<int> &b, int k) {
+        int count = 0;
+        count += upper_bound(a.begin(), a.end(), value) - a.begin();
+        count += upper_bound(b.begin(), b.end(), value) - b.begin();
+        return count >= k;
+    }
+};
+*/
 
 int main(int argc, const char * argv[]) {
     vector<int> nums1 = {200};

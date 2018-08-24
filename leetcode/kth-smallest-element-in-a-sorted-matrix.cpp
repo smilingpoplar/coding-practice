@@ -15,8 +15,7 @@ class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
         if (matrix.empty()) return INT_MIN;
-        const int M = matrix.size();
-        const int N = matrix[0].size();
+        const int M = matrix.size(), N = matrix[0].size();
         // 在值[matrix[0][0]..matrix[M-1][N-1]]中二分搜索找第k小的
         int l = matrix[0][0], u = matrix[M-1][N-1];
         while (l <= u) {
@@ -45,29 +44,27 @@ public:
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        // 每行是个有序数组，相当于在N个有序数组中找第k小的数
-        // 用N元最小堆保存行索引，用N元数组保存各行的列索引
+        // 在N行的有序数组中找第k小的数
+        // 用最小堆保存行索引，用colIdx[]保存各行的列索引
+        // 第r行当前元素是matrix[r][colIdx[r]]
         const int N = matrix.size();
         vector<int> colIdx(N, 0);
-        auto cmp = [&](int r1, int r2) { // 哪一行的当前元素较小
+        auto cmp = [&](int r1, int r2) {
             if (colIdx[r1] == N) return true; // 相当于r1行元素无穷大
             if (colIdx[r2] == N) return false;
-            return matrix[r1][colIdx[r1]] > matrix[r2][colIdx[r2]];
+            return matrix[r1][colIdx[r1]] > matrix[r2][colIdx[r2]]; // 最小堆
         };
         priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
-        for (int i = 0; i < N; i++) {
-            pq.push(i);
-        }
+        for (int i = 0; i < N; i++) pq.push(i);
         
-        while (true) {
+        while (--k) { // 弹出k-1个数
             int minR = pq.top();
             pq.pop();
-            k--;
-            if (k == 0) return matrix[minR][colIdx[minR]];
-
             colIdx[minR]++;
             pq.push(minR);
         }
+        int minR = pq.top();
+        return matrix[minR][colIdx[minR]];
     }
 };
 
