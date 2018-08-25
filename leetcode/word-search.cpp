@@ -14,36 +14,32 @@ using namespace std;
 class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word) {
-        const int R = board.size();
-        const int C = board[0].size();
+        const int R = board.size(), C = board[0].size();
         vector<vector<bool>> visited(R, vector<bool>(C, false));
         
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
-                if (dfs(board, r, c, word, 0, visited)) {
-                    return true;
-                }
+                if (dfs(board, r, c, word, 0, visited)) return true;
             }
         }
         return false;
     }
-private:
-    bool dfs(const vector<vector<char>>& board, int row, int col, const string &word, int idx, vector<vector<bool>> &visited) {
+
+    bool dfs(const vector<vector<char>>& board, int r, int c, 
+            const string &word, int idx, vector<vector<bool>> &visited) {
         if (board.empty()) return false;
-        const int R = board.size();
-        const int C = board[0].size();
+        const int R = board.size(), C = board[0].size();
         if (idx >= word.size()) return true;
 
-        if (row < 0 || row >= R || col < 0 || col >= C || 
-            visited[row][col] || board[row][col] != word[idx]) return false;
+        if (r < 0 || r >= R || c < 0 || c >= C
+            || visited[r][c] || board[r][c] != word[idx]) return false;
 
-        visited[row][col] = true;
-        bool ans = dfs(board, row - 1, col, word, idx + 1, visited)
-                || dfs(board, row + 1, col, word, idx + 1, visited)
-                || dfs(board, row, col - 1, word, idx + 1, visited)
-                || dfs(board, row, col + 1, word, idx + 1, visited);
-        visited[row][col] = false;
-        
+        visited[r][c] = true;
+        bool ans = dfs(board, r - 1, c, word, idx + 1, visited)
+                || dfs(board, r + 1, c, word, idx + 1, visited)
+                || dfs(board, r, c - 1, word, idx + 1, visited)
+                || dfs(board, r, c + 1, word, idx + 1, visited);
+        visited[r][c] = false;
         return ans;
     }
 };

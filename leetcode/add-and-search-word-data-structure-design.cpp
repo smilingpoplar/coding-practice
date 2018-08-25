@@ -14,8 +14,8 @@ using namespace std;
 class WordDictionary {
     struct TrieNode {
         vector<TrieNode *> child;
-        bool isWord;
-        TrieNode() : child(26, NULL), isWord(false) { }
+        bool isWord = false;
+        TrieNode() : child(26, NULL) { }
     };
     TrieNode root;
 public:
@@ -36,18 +36,17 @@ public:
     
     /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
     bool search(string word) {
-        return rSearch(&root, word);
+        return rSearch(&root, word, 0);
     }
     
-    bool rSearch(TrieNode *node, string word) {
+    bool rSearch(TrieNode *node, const string &word, int idx) {
         if (!node) return false;
         auto p = node;
-        for (int i = 0; i < word.size(); i++) {
+        for (int i = idx; i < word.size(); i++) {
             char c = word[i];
             if (c == '.') {
-                string substr = word.substr(i + 1);
                 for (auto child : p->child) {
-                    if (rSearch(child, substr)) return true;
+                    if (rSearch(child, word, i + 1)) return true;
                 }
                 return false;
             }
