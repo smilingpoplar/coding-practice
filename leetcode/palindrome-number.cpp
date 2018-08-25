@@ -1,4 +1,4 @@
-//
+    //
 //  palindrome-number
 //  https://leetcode.com/problems/palindrome-number/
 //
@@ -13,6 +13,22 @@ using namespace std;
 class Solution {
 public:
     bool isPalindrome(int x) {
+        // 以0结尾的正数没有回文数
+        if (x < 0 || (x > 0 && x % 10 == 0)) return false;
+
+        int rev = 0;
+        while (x > rev) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
+        }
+        return rev == x || rev / 10 == x;
+    }
+};
+
+/*
+class Solution {
+public:
+    bool isPalindrome(int x) {
         if (x < 0) return false;
         int reverse = 0;
         int tmpX = x;
@@ -24,6 +40,7 @@ public:
         return x == reverse;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     Solution solution;
