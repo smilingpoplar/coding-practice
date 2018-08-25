@@ -16,19 +16,19 @@ public:
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>> ans;
         vector<int> comb;
-        search(n, k, 1, comb, ans);
+        search(1, n, k, comb, ans);
         return ans;
     }
-private:
-    void search(int n, int k, int start,
+
+    void search(int startNum, const int n, const int k,
              vector<int> &comb, vector<vector<int>> &ans) {
         if (comb.size() == k) {
             ans.push_back(comb);
             return;
         }
-        for (int i = start; i <= n; i++) {
+        for (int i = startNum; i <= n; i++) {
             comb.push_back(i);
-            search(n, k, i + 1, comb, ans);
+            search(i + 1, n, k, comb, ans);
             comb.pop_back();
         }
     }
