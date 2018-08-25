@@ -21,23 +21,22 @@ public:
             if (mp[c] % 2 == 1) oddCnt++;
             else oddCnt--;
         }
-        if (odd > 1) return {};
+        if (oddCnt > 1) return {};
 
-        char mid;
-        string half;
+        string odd, half;
         for (auto &e : mp) {
-            if (e.second % 2 == 1) mid = e.first;
-            else half += string(e.second / 2, e.first);
+            if (e.second % 2 == 1) odd = string(1, e.first);
+            half += string(e.second / 2, e.first);
         }
         
         vector<string> ans;
-        permute(half, 0, mid, ans);
+        permute(half, 0, odd, ans);
         return ans;
     }
     
-    void permute(string &half, int idx, const string &mid, vector<string> &ans) {
+    void permute(string &half, int idx, const string &odd, vector<string> &ans) {
         if (idx == half.size()) {
-            ans.push_back(half + mid + string(half.rbegin(), half.rend()));
+            ans.push_back(half + odd + string(half.rbegin(), half.rend()));
             return;
         }
         
@@ -45,7 +44,7 @@ public:
             if (i > idx && half[i] == half[i-1]) continue; // 确保相同元素只选第一个
 
             swap(half[i], half[idx]);
-            permute(idx + 1, half, mid, ans);
+            permute(half, idx + 1, odd, ans);
             swap(half[i], half[idx]);
         }
     }
