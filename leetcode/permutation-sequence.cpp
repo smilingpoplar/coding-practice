@@ -15,36 +15,22 @@ using namespace std;
 class Solution {
 public:
     string getPermutation(int n, int k) {
-        // 假设由[0,n-1]这n个元素构成排列，首元素固定后剩余的元素有(n-1)!种排列，
-        // 所以每种首元素有(n-1)!种排列，第k个（从0开始的第k个）排列的首元素是 k/(n-1)!
-        if (n <= 0) return "";
-        int count = factorial(n);
-        if (k < 1 || k > count) return "";
-
-        vector<char> letters;
-        for (int i = 0; i < n; i++) {
-            letters.push_back(i + '1');
-        }
+        // 首元素固定后剩余元素有(n-1)!种排列，
+        // 第k（0-based）个排列的首元素是 k/(n-1)!
+        vector<int> f(n, 1); // f[i]=i!
+        for (int i = 1; i < n; i++) f[i] = i * f[i-1];
+        string s;
+        for (int i = 0; i < n; i++) s += '1' + i;
         
-        --k; // k从0开始计数
-        ostringstream result;
-        while (n > 0) {
-            count /= n; // (n-1)!
-            int index = k / count;
-            result << letters[index]; // 排列的首元素
-            letters.erase(letters.begin() + index);
-            k %= count;
-            --n;
+        k--; // k变成0-based
+        string ans;
+        while (n) {
+            int idx = k / f[n-1];
+            ans += s[idx];
+            k %= f[n-1], n--;
+            s.erase(s.begin() + idx); // 剩余元素要保持有序
         }
-        return result.str();
-    }
-private:
-    int factorial(int n) {
-        int product = 1;
-        for (int i = 1; i <= n; i++) {
-            product *= i;
-        }
-        return product;
+        return ans;
     }
 };
 
