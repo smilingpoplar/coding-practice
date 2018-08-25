@@ -41,8 +41,8 @@ public:
         }
         
         for (int i = idx; i < half.size(); i++) {
-            if (i > idx && half[i] == half[i-1]) continue; // 确保相同元素只选第一个
-
+            // 元素有重复（排列要去重）时，相同元素只选第一个
+            if (i > idx && half[i] == half[i-1]) continue;
             swap(half[i], half[idx]);
             permute(half, idx + 1, odd, ans);
             swap(half[i], half[idx]);
