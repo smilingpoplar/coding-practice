@@ -20,17 +20,21 @@ public:
         return ans;
     }
     
-    void search(int n, int start, vector<int> &comb, vector<vector<int>> &ans) {
+    void search(int n, int startNum, vector<int> &comb, vector<vector<int>> &ans) {
         if (n == 1) {
-            if (comb.size() > 1) ans.push_back(comb);
+            ans.push_back(comb);
             return;
         }
         
-        for (int i = start; i <= n; i++) {
-            if (i > sqrt(n)) i = n; // (sqrt(n)..n)的值不可能是因子    
+        const int maxI = sqrt(n);
+        for (int i = startNum; i <= maxI; i++) {
             if (n % i == 0) {
                 comb.push_back(i);
                 search(n / i, i, comb, ans);
+                // 一步得到两个因子
+                comb.push_back(n / i);
+                ans.push_back(comb);
+                comb.pop_back();
                 comb.pop_back();
             }
         }

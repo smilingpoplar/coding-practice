@@ -13,18 +13,20 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> palindromePairs(vector<string>& words) {
+        const int N = words.size();
         unordered_map<string, int> mp; // reverse=>pos
-        for (int i = 0; i < words.size(); i++) {
+        for (int i = 0; i < N; i++) {
             string reverse = string(words[i].rbegin(), words[i].rend());
             mp[reverse] = i;
         }
         
         vector<vector<int>> ans;
-        for (int i = 0; i < words.size(); i++) {
+        for (int i = 0; i < N; i++) {
             const string &word = words[i];
-            for (int j = 0; j <= word.size(); j++) {
+            const int len = word.size();
+            for (int j = 0; j <= len; j++) {
                 // left|right + reverse_left
-                if (isPalindrome(word, j, word.size() - 1)) {
+                if (isPalindrome(word, j, len - 1)) {
                     string left = word.substr(0, j);
                     if (mp.count(left) && mp[left] != i) {
                         ans.push_back({i, mp[left]});                    
