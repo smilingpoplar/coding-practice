@@ -40,9 +40,11 @@ public:
             return;
         }
         
+        unordered_set<char> seen;
         for (int i = idx; i < half.size(); i++) {
-            // 元素有重复（排列要去重）时，相同元素只选第一个
-            if (i > idx && half[i] == half[i-1]) continue;
+            if (seen.count(half[i])) continue;
+            seen.insert(half[i]);
+            
             swap(half[i], half[idx]);
             permute(half, idx + 1, odd, ans);
             swap(half[i], half[idx]);

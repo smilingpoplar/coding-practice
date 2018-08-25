@@ -20,14 +20,16 @@ public:
         return ans;
     }
 
-    void search(const string &s, int start, vector<string> &parts, vector<vector<string>> &ans) {
-        if (start == s.size()) {
+    void search(const string &s, int idx, vector<string> &parts, vector<vector<string>> &ans) {
+        const int N = s.size();
+        if (idx == N) {
             ans.push_back(parts);
             return;
         }
-        for (int i = start; i < s.size(); i++) {
-            if (!isPalindrome(s, start, i)) continue;
-            parts.push_back(s.substr(start, i - start + 1));
+        // 尝试分割s[idx..i]
+        for (int i = idx; i < N; i++) {
+            if (!isPalindrome(s, idx, i)) continue;
+            parts.push_back(s.substr(idx, i - idx + 1));
             search(s, i + 1, parts, ans);
             parts.pop_back();
         }
@@ -35,9 +37,7 @@ public:
     
     bool isPalindrome(const string &s, int left, int right) {
         while (left < right) {
-            if (s[left] != s[right]) return false;
-            left++;
-            right--;
+            if (s[left++] != s[right--]) return false;
         }
         return true;
     }

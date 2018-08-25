@@ -21,14 +21,15 @@ public:
     }
 
     void search(vector<int> &nums, int idx, vector<vector<int>> &ans) {
-        if (idx == nums.size()) {
+        const int N = nums.size();
+        if (idx == N) {
             ans.push_back(nums);
             return;
         }
-
-        // 有重复元素，相同元素只选第一个；不能排序数组
+        
+        // 有swap()扰乱排序，排序并判断相邻元素不能去重
         unordered_set<int> seen;
-        for (int i = idx; i < nums.size(); i++) {
+        for (int i = idx; i < N; i++) {
             if (seen.count(nums[i])) continue;
             seen.insert(nums[i]);
 
