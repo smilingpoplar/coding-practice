@@ -24,14 +24,13 @@ public:
         for (int i = 0; i + 1 < s.size(); i++) {
             if (s[i] == '+' && s[i+1] == '+') {
                 s[i] = s[i+1] = '-';
-                bool winning = canWin(s, memo);
+                bool player2 = canWin(s, memo);
                 s[i] = s[i+1] = '+';
-                if (!winning) return true;
+                if (!player2) return true;
             }
         }
         memo[s] = false;
-        return false;
-
+        return memo[s];
     }
 };
 
