@@ -21,32 +21,29 @@ public:
             if (mp[c] % 2 == 1) oddCnt++;
             else oddCnt--;
         }
-        if (oddCnt > 1) return {};
-        
-        // 最多1个奇数，奇数个那个字符放mid
-        string half, mid;
+        if (odd > 1) return {};
+
+        char mid;
+        string half;
         for (auto &e : mp) {
-            if (e.second % 2 == 1) {
-                mid = string(1, e.first);
-            }
-            half += string(e.second / 2, e.first);
+            if (e.second % 2 == 1) mid = e.first;
+            else half += string(e.second / 2, e.first);
         }
+        
         vector<string> ans;
-        permute(0, half, mid, ans);
+        permute(half, 0, mid, ans);
         return ans;
     }
     
-    void permute(int idx, string &half, const string &mid, vector<string> &ans) {
+    void permute(string &half, int idx, const string &mid, vector<string> &ans) {
         if (idx == half.size()) {
             ans.push_back(half + mid + string(half.rbegin(), half.rend()));
             return;
         }
         
-        unordered_set<char> seen;
         for (int i = idx; i < half.size(); i++) {
-            if (seen.count(half[i])) continue;
-            seen.insert(half[i]);
-            
+            if (i > idx && half[i] == half[i-1]) continue; // 确保相同元素只选第一个
+
             swap(half[i], half[idx]);
             permute(idx + 1, half, mid, ans);
             swap(half[i], half[idx]);
