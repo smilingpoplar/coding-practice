@@ -20,17 +20,17 @@ public:
         return ans;
     }
 private:
-    void search(int k, int n, int start, 
+    void search(int k, int sum, int startNum, 
              vector<int> &comb, vector<vector<int>> &ans) {
-        if (k == 0 && n == 0) {
+        if (k == 0 && sum == 0) {
             ans.push_back(comb);
             return;
         }
-        if (k <= 0 || n <= 0) return;
+        if (k <= 0 || sum <= 0) return;
         
-        for (int i = start; i <= 9; i++) {
+        for (int i = startNum; i <= 9; i++) {
             comb.push_back(i);
-            search(k - 1, n - i, i + 1, comb, ans);
+            search(k - 1, sum - i, i + 1, comb, ans); // 每个数只能选1次
             comb.pop_back();
         }
     }
