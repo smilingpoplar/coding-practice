@@ -21,23 +21,28 @@ struct Interval {
 class Solution {
 public:
     vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
-        vector<Interval> result;
-        bool inserted = false;
-        for (int i = 0; i < intervals.size(); i++) {
-            if (inserted || intervals[i].end < newInterval.start) {
-                result.push_back(intervals[i]);
-            } else if (newInterval.end < intervals[i].start) {
-                result.push_back(newInterval);
-                inserted = true;
-                result.push_back(intervals[i]);
-            } else { // merge
-                newInterval.start = min(newInterval.start, intervals[i].start);
-                newInterval.end = max(newInterval.end, intervals[i].end);
-            }
+        // 区间互不重叠、已按起点排序 <=等价于=> 已按终点排序
+        const int N = intervals.size();
+        vector<Interval> ans;
+        int idx = 0;
+        while (idx < N && intervals[idx].end < newInterval.start) {
+            ans.push_back(intervals[idx]);
+            idx++;
         }
-        if (!inserted) result.push_back(newInterval);
-        
-        return result;
+        // 至此 newInterval.start <= intervals[idx].end
+        while (idx < N && intervals[idx].start <= newInterval.end) {
+             // 重叠，合并到newInterval
+            newInterval.start = min(newInterval.start, intervals[idx].start);
+            newInterval.end = max(newInterval.end, intervals[idx].end);
+            idx++;
+        }
+        ans.push_back(newInterval);
+        // 至此 newInterval.end < intervals[idx].start
+        while (idx < N) {
+            ans.push_back(intervals[idx]);
+            idx++;
+        }
+        return ans;
     }
 };
 
@@ -45,8 +50,8 @@ int main(int argc, const char * argv[]) {
     vector<Interval> intervals = {{1,2},{3,5},{6,7},{8,10},{12,16}};
     Interval newInterval = {4,9};
     Solution solution;
-    auto result = solution.insert(intervals, newInterval);
-    for (const auto &interval : result) {
+    auto ans = solution.insert(intervals, newInterval);
+    for (const auto &interval : ans) {
         cout << interval.start << "," << interval.end << " ";
     }
     
