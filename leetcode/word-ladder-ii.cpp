@@ -23,10 +23,10 @@ public:
         unordered_set<string> currLevel;
         currLevel.insert(beginWord);
         unordered_set<string> visited;
-        unordered_map<string, unordered_set<string>> prevs; // 记录词变换
+        unordered_map<string, unordered_set<string>> prevs; // 词变换路径
         bool found = false;
         while (!currLevel.empty() && !found) {
-            // 出队时设置visited[]，而不是入队时，这样允许多条变换路径；
+            // 出队时设置visited[]、而不是入队时，这样允许多条路径；
             // 将同层词的visited[]全部设置，避免向同层词变换。
             for (auto &word : currLevel) visited.insert(word);
             

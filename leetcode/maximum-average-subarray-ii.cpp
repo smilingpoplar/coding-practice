@@ -14,40 +14,41 @@ using namespace std;
 class Solution {
 public:
     double findMaxAverage(vector<int>& nums, int k) {
-        // 假设x是最大均值，“所有”长>=k的子数组(a[i]+a[i+1]+...+a[j])/(j−i+1) <= x，
-        // a[i]+a[i+1]+...+a[j] <= x∗(j−i+1)，(a[i]−x)+(a[i+1]−x)+...+(a[j]−x)<=0
-        // 转化成"存在"条件：如果x不是最大均值，"存在"长>=k的子数组，使(a[i]−x)+(a[i+1]−x)+...+(a[j]−x)>0
-        // 用二分搜索来猜最大均值。如果mid满足上述"存在"条件，则mid不是最大均值，mid可猜大点；否则，mid可猜小点。
-        // 当abs(u-l)<=10^-5时收敛停止。
-        // 这个"存在"条件可用累加数组sum[]判断，只要判断sum[i] - min{sum[j]} > 0, j=[0..i-k]。
+        // 最大均值一定在数组最大值和最小值之间。假设m是最大均值，
+        // “所有”长>=k子段均值 (a[i]+a[i+1]+...+a[j])/(j−i+1) <= m，a[i]+a[i+1]+...+a[j] <= m*(j−i+1)，
+        // 即 所有长>=k子段 (a[i]−m)+(a[i+1]−m)+...+(a[j]−m)<=0 (1)
+        // 猜m的值，若m猜得太小，(1)式不成立；若m猜得太大，(1)式肯定成立
+        // 将(1)式作为二分搜索条件enough(m)，符合二分搜索返回[0 0 ... 0 1 1 ...]的要求
+        // (1)式可用累加数组sum[]判断，只要sum[i]-min{sum[j]}<=0，i-j>=k
+        // 其中sum[i]=(a[0]-m)+(a[1]-m)...+(a[i]-m)，j<=i-k
         double l = INT_MAX, u = INT_MIN;
         for (double num : nums) {
             l = min(l, num);
             u = max(u, num);
         }
-        while (u - l > 0.00001) {
+        while (u - l > 1e-5) {
             double mid = (l + u) / 2;
-            if (guess(mid, nums, k)) l = mid;
-            else u = mid;
+            if (enough(mid, nums, k)) u = mid;
+            else l = mid;
         }
         return u;
     }
     
-    bool guess(double x, vector<int> &nums, int k) {
+    bool enough(double m, vector<int> &nums, const int k) {
         double sum = 0;
         for (int i = 0; i < k; i++) {
-            sum += nums[i] - x;
+            sum += nums[i] - m;
         }
-        if (sum > 0) return true;
+        if (sum > 0) return false;
 
         double prevSum = 0, minPrevSum = 0;
         for (int i = k; i < nums.size(); i++) {
-            sum += nums[i] - x;
-            prevSum += nums[i-k] - x;
+            sum += nums[i] - m;
+            prevSum += nums[i-k] - m;
             minPrevSum = min(minPrevSum, prevSum);
-            if (sum - minPrevSum > 0) return true;
+            if (sum - minPrevSum > 0) return false;
         }
-        return false;
+        return true;
     }
 };
 
