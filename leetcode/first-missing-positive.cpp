@@ -14,9 +14,8 @@ using namespace std;
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        // 旋转置换
-        // 把位置i的[1..n]内的数和位置j=nums[i]-1的数交换，
-        // nums[i]-1是因为正数是1-based
+        // 期望变成数组[1..n]，位置i应放数i+1，数nums[i]应放到位置j=nums[i]-1
+        // 旋转置换：位置i的合法数和位置j=nums[i]-1的数，若不相等就不断交换
         const int N = nums.size();
         for (int i = 0; i < N; i++) {
             for (int j = nums[i] - 1; 

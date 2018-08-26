@@ -13,7 +13,10 @@ using namespace std;
 class Solution {
 public:
     int smallestDistancePair(vector<int>& nums, int k) {
-        // 距离x的取值范围[0, max(nums)-min(nums)]
+        // 距离m在值范围[0, max(nums)-min(nums)]
+        // m越小、<=m的距离个数越小；m越大、<=m的距离个数越大
+        // 二分搜索要返回[0 0 ... 0 1 1 ...]，
+        // 设二分搜索条件enough(m)表示"<=m的距离个数"count>=k
         sort(nums.begin(), nums.end());
         int l = 0, u = nums[nums.size() - 1] - nums[0];
         while (l <= u) {
@@ -27,14 +30,12 @@ public:
         return l;
     }
     
-    // 找第k小的数，当猜的数不断变大时、二分搜索要输出[0,0,...,0,1,1,...]，要判断猜的数>=第k小的数。
-    // 条件式enough(x)中要看x是第几小的数，即统计出<=x的个数count，判断count>=k。
-    bool enough(int x, vector<int> &nums, int k) {
+    bool enough(int m, vector<int> &nums, int k) {
         int count = 0;
         for (int j = 1; j < nums.size(); j++) {
-            // 找 nums[j]-nums[i] <= x，nums[i] >= nums[j]-x
-            int i = lower_bound(nums.begin(), nums.end(), nums[j] - x) - nums.begin();
-            count += j - i; // (i,j),(i+1,j),...,(j-1,j)满足
+            // 找 nums[j]-nums[i] <= m，nums[i] >= nums[j]-m
+            int i = lower_bound(nums.begin(), nums.end(), nums[j] - m) - nums.begin();
+            count += j - i; // 距离对：(i,j),(i+1,j),...,(j-1,j)
         }
         return count >= k;
     }

@@ -15,7 +15,7 @@ public:
     int splitArray(vector<int>& nums, int m) {
         // 各子段和的最大值x在值范围[max(nums), sum(nums)]
         // 考虑x和子段数m的关系：x越小、子段越短、子段数越多；x越大、子段越长、子段数越少
-        // 二分搜索条件valid(x)表示子段数<=m，满足二分搜索要返回[0 0 ... 0 1 1 ...]的要求
+        // 二分搜索要返回[0 0 ... 0 1 1 ...]，设二分搜索条件valid(x)表示子段数<=m
         // 因此，valid(x)中要统计子段和<=x的个数count，判断是否count<=m
         int mx = INT_MIN, sum = 0;
         for (int num : nums) {

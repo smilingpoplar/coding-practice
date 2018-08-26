@@ -13,7 +13,7 @@ using namespace std;
 
 class RandomizedSet {
     vector<int> nums;
-    unordered_map<int, int> mp; // num => pos
+    unordered_map<int, int> mp; // num => idx
 public:
     /** Initialize your data structure here. */
     RandomizedSet() {
@@ -31,16 +31,17 @@ public:
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     bool remove(int val) {
         if (!mp.count(val)) return false;
-        // 找到val的位置pos，若pos是nums的最后元素就直接删除，否则用nums的最后元素替换它
-        int pos = mp[val];
+        // 找到val的位置idx，
+        // 若idx是nums的最后元素就直接删除，否则用nums的最后元素替换它
+        int idx = mp[val];
         mp.erase(val);
 
         int lastIdx = nums.size() - 1;
-        if (pos != lastIdx) {
+        if (idx != lastIdx) {
             int lastVal = nums.back();
             mp.erase(lastVal);
-            nums[pos] = lastVal;
-            mp[lastVal] = pos;
+            mp[lastVal] = idx;
+            nums[idx] = lastVal;
         }
         nums.pop_back();
         return true;
