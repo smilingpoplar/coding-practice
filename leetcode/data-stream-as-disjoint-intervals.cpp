@@ -18,15 +18,15 @@ public:
     }
     
     void addNum(int val) {
-        // 合并所有与待插入区间curr重叠的区间
-        Interval curr = { val, val };
-        auto it = st.lower_bound({INT_MIN, val - 1}); // 最左的重叠区间右端是val-1
-        while (it != st.end() && isOverlap(*it, curr)) {
-            curr.start = min(curr.start, it->start);
-            curr.end = max(curr.end, it->end);
+        // 首个与{val,val}重叠区间toFind.end>=val-1
+        auto it = st.lower_bound({INT_MIN, val - 1}); 
+        Interval toInsert = { val, val };
+        while (it != st.end() && isOverlap(*it, toInsert)) {
+            toInsert.start = min(toInsert.start, it->start);
+            toInsert.end = max(toInsert.end, it->end);
             it = st.erase(it);
         }
-        st.insert(curr);
+        st.insert(toInsert);
     }
     
     vector<Interval> getIntervals() {

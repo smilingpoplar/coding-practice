@@ -31,15 +31,15 @@ public:
     }
     
     void addRange(int left, int right) {
-        // 合并所有与待插入区间curr重叠的区间
-        Interval curr = {left, right};
-        auto it = st.lower_bound({INT_MIN, left}); // 最左的重叠区间的右端是left
-        while (it != st.end() && isOverlap(*it, curr)) {
-            curr.left = min(curr.left, it->left);
-            curr.right = max(curr.right, it->right);
+        // 首个与{left, right}重叠的区间满足：toFind.right>=left
+        auto it = st.lower_bound({INT_MIN, left});
+        Interval toInsert = {left, right};
+        while (it != st.end() && isOverlap(*it, toInsert)) {
+            toInsert.left = min(toInsert.left, it->left);
+            toInsert.right = max(toInsert.right, it->right);
             it = st.erase(it);
         }
-        st.insert(curr);
+        st.insert(toInsert);
     }
     
     bool queryRange(int left, int right) {
@@ -48,15 +48,15 @@ public:
     }
     
     void removeRange(int left, int right) {
-        Interval toRemove = {left, right};
         auto it = st.lower_bound({INT_MIN, left});
-        vector<Interval> toInsert;
+        Interval toRemove = {left, right};
+        vector<Interval> afterRemove;
         while (it != st.end() && isOverlap(*it, toRemove)) {
-            if (it->left < toRemove.left) toInsert.push_back({it->left, toRemove.left});
-            if (toRemove.right < it->right) toInsert.push_back({toRemove.right, it->right});
+            if (it->left < toRemove.left) afterRemove.push_back({it->left, toRemove.left});
+            if (toRemove.right < it->right) afterRemove.push_back({toRemove.right, it->right});
             it = st.erase(it);
         }
-        st.insert(toInsert.begin(), toInsert.end());
+        st.insert(afterRemove.begin(), afterRemove.end());
     }
 };
 
