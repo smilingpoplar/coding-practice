@@ -20,7 +20,6 @@ public:
         for (int i = 0; i < k; i++) sum += nums[i];
         int iw = 0;
         W[iw++] = sum;
-
         for (int i = k; i < nums.size(); i++) {
             sum += nums[i] - nums[i-k];
             W[iw++] = sum;

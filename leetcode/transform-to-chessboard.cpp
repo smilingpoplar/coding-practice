@@ -14,8 +14,8 @@ using namespace std;
 class Solution {
 public:
     int movesToChessboard(vector<vector<int>>& board) {
-        // 1. 合法棋盘只有两种行、且01相反，只能有两种列、且01相反
-        // 2. 每行或每列01的个数相等或差1
+        // 1.合法棋盘只有两种行、且01相反，只有两种列、且01相反；
+        // 2.每行或每列01的个数相等或差1
         const int N = board.size();
         vector<int> rows(N, 0), cols(N, 0);
         for (int r = 0; r < N; r++) {
@@ -36,22 +36,20 @@ public:
     
     int swapLines(vector<int> &lines) {
         const int N = lines.size();
-        const int mask = (1 << N) - 1;
-        // 检查条件1 
+        const int mask = (1 << N) - 1; // 后N位全是1
+        // 条件1 
         set<int> st(lines.begin(), lines.end());
         if (st.size() != 2) return -1;
         vector<int> l(st.begin(), st.end());
         if ((l[0] ^ l[1]) != mask) return -1;
-        // 检查条件2
+        // 条件2
         int ones = countOnes(l[0]), zeros = N - ones;
-        if (ones != zeros && abs(ones - zeros) != 1) return -1;
-        // 计算需要的swap数
+        if (abs(ones - zeros) > 1) return -1;
+        // 需要的swap数
         const int mask1 = 0x55555555 & mask, mask2 = 0xaaaaaaaa & mask;
         int ans = INT_MAX;
-        if (ones == zeros || ones > zeros)
-            ans = min(ans, countOnes(l[0] ^ mask1) / 2);
-        if (ones == zeros || ones < zeros)
-            ans = min(ans, countOnes(l[0] ^ mask2) / 2);
+        if (ones >= zeros) ans = min(ans, countOnes(l[0] ^ mask1) / 2); // 往mask1靠
+        if (ones <= zeros) ans = min(ans, countOnes(l[0] ^ mask2) / 2); // 往mask2靠
         return ans;
     }
     
