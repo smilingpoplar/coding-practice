@@ -17,8 +17,7 @@ public:
         // 相当于在有序数组A[0,M*N)中搜索
         // 不变式：A[l,u)是数组中可能包含target的部分
         if (matrix.empty()) return false;
-        const int M = matrix.size();
-        const int N = matrix[0].size();
+        const int M = matrix.size(), N = matrix[0].size();
         int l = -1, u = M * N;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;

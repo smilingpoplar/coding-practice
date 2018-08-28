@@ -14,7 +14,8 @@ using namespace std;
 class Solution {
 public:
     bool isIdealPermutation(vector<int>& A) {
-        // 全局逆序数==局部逆序数，即对所有j、0<=i<=j-2，应有A[i]<=A[j]，max(A[0..j-2])<=A[j]
+        // 全局逆序数==相邻逆序数，除了相邻、没有逆序，
+        // 即对所有j、0<=i<=j-2，应有A[i]<=A[j]，max(A[0..j-2])<=A[j]
         int theMax = -1;
         for (int j = 2; j < A.size(); j++) {
             theMax = max(theMax, A[j-2]);
