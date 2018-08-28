@@ -16,16 +16,17 @@ public:
         unordered_map<int, int> cnt; // sum=>count
         int runningSum = 0;
         cnt[runningSum] = 1; // 初始空集
-        int total = 0;
+
+        int ans = 0;
         for (int num : nums) {
             runningSum += num;
             int toFind = runningSum - k;
             if (cnt.count(toFind)) {
-                total += cnt[toFind];
+                ans += cnt[toFind];
             }
             cnt[runningSum]++;
         }
-        return total;
+        return ans;
     }
 };
 
