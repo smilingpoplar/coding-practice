@@ -15,8 +15,7 @@ class Solution {
 public:
     int search(vector<int>& nums, int target) {
         // 旋转数组对半分后，一半是有序数组、一半是旋转数组
-        int l = 0;
-        int r = (int)nums.size() - 1;
+        int l = 0, r = (int)nums.size() - 1;
         while (l <= r) {
             int mid = l + (r - l) / 2;
             if (nums[mid] == target) return mid;
