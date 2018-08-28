@@ -25,23 +25,25 @@ public:
     TreeNode* str2tree(string s) {
         if (s.empty()) return NULL;
         // 分三部分：‘(’前的数字、第一对"()"、第二对"()"
-        auto pos = s.find('(');
-        if (pos == string::npos) return new TreeNode(stoi(s));
-        int val = stoi(s.substr(0, pos));
+        auto idx = s.find('(');
+        if (idx == string::npos) return new TreeNode(stoi(s));
+        int val = stoi(s.substr(0, idx));
         auto root = new TreeNode(val);
         
         // 用左括号计数找括号对
-        int start = pos;
-        int leftCount = 0;
-        for (int i = pos; i < s.size(); i++) {
-            if (s[i] == '(') leftCount++;
-            else if (s[i] == ')') leftCount--;
+        int start = idx;
+        int leftCnt = 0;
+        for (int i = idx; i < s.size(); i++) {
+            if (s[i] == '(') leftCnt++;
+            else if (s[i] == ')') leftCnt--;
             
-            if (leftCount == 0 && start == pos) { // 第一对括号[start..i]
-                root->left = str2tree(s.substr(start + 1, i - start - 1));
-                start = i + 1;
-            } else if (leftCount == 0) { // 第二对括号
-                root->right = str2tree(s.substr(start + 1, i - start - 1));
+            if (leftCnt == 0) { // 找到括号对
+                if (start == idx) { // 第一对
+                    root->left = str2tree(s.substr(start + 1, i - start - 1));
+                    start = i + 1;
+                } else {  // 第二对
+                    root->right = str2tree(s.substr(start + 1, i - start - 1));
+                }
             }
         }
         return root;
