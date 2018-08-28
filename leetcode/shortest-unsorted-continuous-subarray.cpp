@@ -10,49 +10,24 @@
 
 using namespace std;
 
-/*
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
+        // 若nums[i]在排序后该在的位置，有maxLeft[i]==nums[i]==minRight[i]。
+        // 从左到右找nums[r]!=maxLeft[r]的最大r、得无序的最右边界；
+        // 从右到左找nums[l]!=minRight[l]的最小l、得无序的最左边界。
         const int N = nums.size();
-        int maxL = INT_MIN, minR = INT_MAX;
-        int l = 0, r = -1;
-        for (int i = 0, j = N - 1; i < N; i++, j--) {
-            maxL = max(maxL, nums[i]);
-            if (nums[i] != maxL) r = i;
+        int maxLeft = INT_MIN, minRight = INT_MAX;
+        int l = 0, r = -1; // 如果nums[]有序
+        for (int i = 0; i < N; i++) {
+            maxLeft = max(maxLeft, nums[i]);
+            if (nums[i] != maxLeft) r = i;
             
-            minR = min(minR, nums[j]);
-            if (nums[j] != minR) l = j;
+            int j = N - 1 - i;
+            minRight = min(minRight, nums[j]);
+            if (nums[j] != minRight) l = j;
         }
         return r - l + 1;
-    }
-};
- */
-
-class Solution {
-public:
-    int findUnsortedSubarray(vector<int>& nums) {
-        const int N = nums.size();
-        // 先从两端向内找到第一个无序的位置（靠内）
-        int i = 0, j = N - 1;
-        while (i < N - 1 && nums[i] <= nums[i+1])
-            i++;
-        while (j > 0 && nums[j-1] <= nums[j])
-            j--;
-        if (i >= j) return 0;
-        // 在nums[i..j]中找到minNum和maxNum
-        int minNum = INT_MAX, maxNum = INT_MIN;
-        for (int k = i; k <= j; k++) {
-            minNum = min(minNum, nums[k]);
-            maxNum = max(maxNum, nums[k]);
-        }
-        // 根据nums[i-1]<=minNum、nums[j+1]>=maxNum向外扩展
-        while (i >= 1 && nums[i-1] > minNum)
-            i--;
-        while (j < N - 1 && nums[j+1] < maxNum)
-            j++;
-        
-        return j - i + 1;
     }
 };
 

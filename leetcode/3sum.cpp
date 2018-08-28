@@ -20,7 +20,7 @@ public:
 
         vector<vector<int>> ans;        
         for (int ia = 0; ia < N - 2; ia++) {
-            while (0 < ia && ia < N - 2 && nums[ia] == nums[ia-1]) ia++;
+            while (0 < ia && ia < N - 2 && nums[ia] == nums[ia-1]) ia++; // 去重，相同数字只取第一个
             int ib = ia + 1, ic = N - 1, target = 0;
             while (ib < ic) {
                 int sum  = nums[ia] + nums[ib] + nums[ic];

@@ -15,7 +15,7 @@ class Solution {
 public:
     vector<string> findMissingRanges(vector<int>& nums, int lower, int upper) {
         vector<string> ans;
-        long from = lower;
+        long from = lower; // 缺失区间的起点
         for (long num : nums) {
             if (num < lower || num > upper) continue;
             if (num > from) ans.push_back(rangeStr(from, num - 1));
