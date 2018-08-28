@@ -17,11 +17,9 @@ public:
         // 从外层往内层、一层层打印
         vector<int> ans;
         if (matrix.empty()) return ans;
-        const int R = matrix.size();
-        const int C = matrix[0].size();
+        const int R = matrix.size(), C = matrix[0].size();
         // 各层左上角、右下角
-        int r1 = 0, r2 = R - 1;
-        int c1 = 0, c2 = C - 1;
+        int r1 = 0, r2 = R - 1, c1 = 0, c2 = C - 1;
         while (true) {
             // r1行
             if (c1 > c2) break;
