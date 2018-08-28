@@ -16,8 +16,7 @@ public:
     void setZeroes(vector<vector<int>>& matrix) {
         // 用第0行记录某一列是否有0，用第0列记录某一行是否有0
         if (matrix.empty()) return;
-        const int R = matrix.size();
-        const int C = matrix[0].size();
+        const int R = matrix.size(), C = matrix[0].size();
 
         bool zeroInRow0 = false;
         for (int c = 0; c < C; c++) {

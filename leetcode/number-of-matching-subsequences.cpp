@@ -15,8 +15,8 @@ class Solution {
 public:
     int numMatchingSubseq(string S, vector<string>& words) {
         // S很长，为效率只遍历一遍
-        // 将words[]中单词按照待匹配字母分桶
-        vector<pair<int, int>> buckets[128]; // matching char => list of (word idx, matching char idx)
+        // 将words[]中单词按待匹配的首字母分桶
+        vector<pair<int, int>> buckets[128]; // 待匹配字母 => vector[(单词idx, 待匹配字母idx)]
         for (int i = 0; i < words.size(); i++) {
             buckets[words[i][0]].push_back({i, 0});
         }
@@ -24,7 +24,7 @@ public:
         for (char c : S) {
             auto list = buckets[c];
             buckets[c].clear();
-            for (auto &p : list) {
+            for (auto &p : list) { // list中单词都匹配一个字母
                 buckets[words[p.first][++p.second]].push_back(p);
             }
         }
