@@ -17,16 +17,16 @@ public:
         // 模拟倒水，先尽量往左边低地流、再尽量往右边低地流
         const int N = heights.size();
         while (V--) {
-            int lowest = K; // 尝试往左流
-            for (int i = K; i > 0 && heights[i-1] <= heights[i]; i--) {
-                if (heights[i-1] < heights[i]) lowest = i-1;
+            int low = K;
+            for (int i = K; i > 0 && heights[i-1] <= heights[i]; i--) { // <=都可流
+                if (heights[i-1] < heights[i]) low = i-1;
             }
-            if (lowest == K) { // 再尝试往右流
+            if (low == K) { // 再尝试往右流
                 for (int i = K; i < N - 1 && heights[i+1] <= heights[i]; i++) {
-                    if (heights[i+1] < heights[i]) lowest = i+1;
+                    if (heights[i+1] < heights[i]) low = i+1;
                 }
             }
-            heights[lowest]++;
+            heights[low]++;
         }
         return heights;
     }

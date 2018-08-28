@@ -20,7 +20,7 @@ public:
         // 名人：其他人知道他、他不知道其他人
         int cand = 0;
         for (int i = 1; i < n; i++) {
-            if (knows(cand, i)) { // cand知道i，cand不可能是名人
+            if (knows(cand, i)) { // cand知道i，cand不是名人
                 cand = i;
             }
         }
