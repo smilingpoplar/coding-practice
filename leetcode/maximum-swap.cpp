@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int maximumSwap(int num) {
-        // 从左往右看各位置，看有没有尽量大的比当前数字大的数字在后面，交换
+        // 从左往右看各位置，看有没有尽量比当前数字大的数字在后面，交换
         string s = to_string(num);
         vector<int> pos(10, -1);
         for (int i = 0; i < s.size(); i++) {
@@ -23,9 +23,7 @@ public:
         for (int i = 0; i < s.size(); i++) {
             for (int x = 9; x > s[i] - '0'; x--) {
                 if (pos[x] > i) {
-                    char c = s[pos[x]];
-                    s[pos[x]] = s[i];
-                    s[i] = c;
+                    swap(s[pos[x]], s[i]);
                     return stoi(s);
                 }
             }
