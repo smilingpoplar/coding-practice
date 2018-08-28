@@ -17,22 +17,22 @@ bool knows(int a, int b);
 class Solution {
 public:
     int findCelebrity(int n) {
-        // 名人：他不知道其他人、其他人知道他
-        int candidate = 0;
+        // 名人：其他人知道他、他不知道其他人
+        int cand = 0;
         for (int i = 1; i < n; i++) {
-            if (knows(candidate, i)) { // candidate知道i，candidate不可能是名人
-                candidate = i;
+            if (knows(cand, i)) { // cand知道i，cand不可能是名人
+                cand = i;
             }
         }
-        // 至此，candidate=k：[0..k-1]知道其他人，不是名人；k不知道[k+1,n-1]，[k+1,n-1]不是名人；k是唯一候选
-        // 下面验证k是不是真名人，已知"k不知道[k+1,n-1]"（不用再验证）
-        for (int i = 0; i < candidate; i++) {
-            if (!knows(i, candidate) || knows(candidate, i)) return -1;
+        // 至此，[0..cand)知道其他人，不是名人；cand不知道[cand+1..n)，[cand+1..n)不是名人；
+        // cand是唯一候选。下面验证cand是不是真名人，已知"cand不知道[cand+1..n)"（不用再验证）
+        for (int i = 0; i < cand; i++) {
+            if (!knows(i, cand) || knows(cand, i)) return -1;
         }
-        for (int i = candidate + 1; i < n; i++) {
-            if (!knows(i, candidate)) return -1;
+        for (int i = cand + 1; i < n; i++) {
+            if (!knows(i, cand)) return -1;
         }
-        return candidate;
+        return cand;
     }
 };
 
