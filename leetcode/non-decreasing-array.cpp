@@ -15,13 +15,13 @@ public:
     bool checkPossibility(vector<int>& nums) {
         int modified = 0;
         for (int i = 0; i + 1 < nums.size(); i++) {
-            if (nums[i] > nums[i+1]) {
-                if (modified++) return false;
-                if (i-1 < 0 || nums[i-1] <= nums[i+1]) {
-                    nums[i] = nums[i+1];
-                } else {
-                    nums[i+1] = nums[i];
-                }
+            if (nums[i] <= nums[i+1]) continue;
+            if (modified++) return false;
+            // 出现违背时，是修改nums[i]还是nums[i+1]？
+            if (i-1 < 0 || nums[i-1] <= nums[i+1]) {
+                nums[i] = nums[i+1];
+            } else {
+                nums[i+1] = nums[i];
             }
         }
         return true;
