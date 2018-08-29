@@ -25,7 +25,7 @@ public:
                 long d = (long)A[i] - A[j];
                 if (d < INT_MIN || d > INT_MAX) continue; // pass OL
                 int dp_jd = dp[j].count(d) ? dp[j][d] : 0; // 优化，防止d值不存在时往map里添0
-                dp[i][d] += dp_jd + 1; // dp[j][d]来自扩展的旧序列，现在长度>=3
+                dp[i][d] += dp_jd + 1; // dp[j][d]是扩展的旧序列，现在长度>=3
                 ans += dp_jd; // 把长度>=3的累加
             }
         }

@@ -23,11 +23,11 @@ public:
         // nth_element(nums.begin(), midptr, nums.end());
         // int median = *midptr;
         
-        // 把[mid,..]放到偶位、[0,mid)放到奇位的下标映射：i => (2*i+1) % (N|1)
+        // 把后一半坐标[N/2..]放到偶位、前一半坐标[0..N/2)放到奇位的下标映射：i => (2*i+1) % (N|1)
         // 见 https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)+O(1)-after-median-Virtual-Indexing
         auto idx = [&](int i) { return (2*i+1) % (N|1); };
-        // 三路划分：>median、==median、 ?  、<median
-        //                 i         j   k
+        // 三路划分：| >median | =median |  ?  | <median |
+        //          0         i         j    k        N-1
         // i指向>median待写入位置，j指向待处理位置，k指向<median待写入位置
         int i = 0, j = 0, k = nums.size() - 1;
         while (j <= k) {
@@ -56,8 +56,9 @@ public:
 
     int partition(vector<int> &nums, int l, int u) {
         if (l >= u) return l;
-        // 单向划分，将数组分为>t、<=t、?三段
-        int m = l; // m指向第一段末尾、i指向第三段开头
+        // 单向划分：| >t | <=t |  ?  |
+        //         l    m      i    u
+        int m = l;
         for (int i = l + 1; i <= u; i++) {
             if (nums[i] > nums[l]) {
                 swap(nums[i], nums[++m]);

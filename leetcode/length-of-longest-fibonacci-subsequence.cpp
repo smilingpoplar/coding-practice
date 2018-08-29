@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int lenLongestFibSubseq(vector<int>& A) {
-        // 设dp[i][j]表示以A[i]、A[j]结尾的长>=2的最长子序列长
+        // 设dp[i][j]表示以A[i]、A[j]结尾的长>=2的最长Fib子序列长
         // 映射A中value=>index，i,j的前一个索引是idx = mp[A[j]-A[i]]，
         // dp[i][j] = dp[idx][i] + 1
         const int N = A.size();

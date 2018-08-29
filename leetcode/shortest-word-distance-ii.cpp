@@ -12,7 +12,7 @@
 using namespace std;
 
 class WordDistance {
-    unordered_map<string, vector<int>> mp; // word=>posList
+    unordered_map<string, vector<int>> mp; // word => idxList
 public:
     WordDistance(vector<string> words) {
         for (int i = 0; i < words.size(); i++) {
