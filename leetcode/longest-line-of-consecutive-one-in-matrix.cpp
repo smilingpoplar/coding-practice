@@ -19,18 +19,17 @@ public:
         // dp[i][j][2]               对角线
         // dp[i][j][3]               反对角线
         if (M.empty()) return 0;
-        const int R = M.size();
-        const int C = M[0].size();
+        const int R = M.size(), C = M[0].size();
         vector<vector<vector<int>>> dp(R, vector<vector<int>>(C, vector<int>(4, 0)));
         
         int ans = 0;
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
                 if (M[r][c] == 1) {
-                    dp[r][c][0] = (c > 0) ? (dp[r][c-1][0] + 1) : 1;
-                    dp[r][c][1] = (r > 0) ? (dp[r-1][c][1] + 1) : 1;
-                    dp[r][c][2] = (r > 0 && c > 0) ? (dp[r-1][c-1][2] + 1) : 1;
-                    dp[r][c][3] = (r > 0 && c + 1 < C) ? (dp[r-1][c+1][3] + 1) : 1;
+                    dp[r][c][0] = (c > 0 ? dp[r][c-1][0] : 0) + 1;
+                    dp[r][c][1] = (r > 0 ? dp[r-1][c][1] : 0) + 1;
+                    dp[r][c][2] = (r > 0 && c > 0 ? dp[r-1][c-1][2] : 0) + 1;
+                    dp[r][c][3] = (r > 0 && c + 1 < C ? dp[r-1][c+1][3] : 0) + 1;
                     ans = max({ans, dp[r][c][0], dp[r][c][1], dp[r][c][2], dp[r][c][3]});
                 }
             }
