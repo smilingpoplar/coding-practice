@@ -14,15 +14,14 @@ using namespace std;
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
+        const int N = digits.size();
         int carry = 1;
-        for (auto it = digits.rbegin(); it != digits.rend() && carry > 0; it++) {
-            *it += carry;
-            carry = *it / 10;
-            *it %= 10;
+        for (int i = N - 1; i >= 0 && carry > 0; i--) {
+            digits[i] += carry;
+            carry = digits[i] / 10;
+            digits[i] %= 10;
         }
-        if (carry > 0) {
-            digits.insert(digits.begin(), carry);
-        }
+        if (carry > 0) digits.insert(digits.begin(), carry);
         return digits;
     }
 };
