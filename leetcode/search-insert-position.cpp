@@ -15,13 +15,12 @@ class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
         // 找>=target的第一个位置
-        int l = 0;
-        int u = (int)nums.size() - 1;
+        int l = 0, u = (int)nums.size() - 1;
         while (l <= u) {
             int mid = l + (u - l) / 2;
-            if (nums[mid] == target) {
+            if (target == nums[mid]) {
                 return mid;
-            } else if (nums[mid] < target) {
+            } else if (target > nums[mid]) {
                 l = mid + 1;
             } else {
                 u = mid - 1;
