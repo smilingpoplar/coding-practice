@@ -14,17 +14,21 @@ class Solution {
 public:
     int triangleNumber(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        const int N = (int)nums.size();
-        int count = 0;
-        for (int i = 0; i < N - 2; i++) {
-            if (nums[i] == 0) continue;
-            for (int j = i + 1; j < N - 1; j++) {
-                for (int k = j + 1; k < N && nums[i] + nums[j] > nums[k]; k++) {
-                    count++;
+        const int N = nums.size();
+        int ans = 0;
+        for (int k = 2; k < N; k++) {
+            int i = 0, j = k - 1;
+            while (i < j) {
+                if (nums[i] + nums[j] > nums[k]) {
+                    // (i,j) & (i+1,j) & ... & (j-1,j) 都符合
+                    ans += j - i;
+                    j--;
+                } else {
+                    i++;
                 }
             }
         }
-        return count;
+        return ans;
     }
 };
 

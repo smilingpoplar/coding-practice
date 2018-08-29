@@ -14,23 +14,40 @@ using namespace std;
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // 矩阵旋转90度的问题先转置再观察，观察知应转置后再把行反转，(r,c)=>(c,C-1-r)
-        // 置换组：(r,c) => (c,C-1-r) => (C-1-r,C-1-c) => (C-1-c,r) => (r,c)
-        // 取倒三角形的1/4矩阵进行置换
+        // 顺时针旋转90度<=等价于=>先转置、再把行反转
+        const int N = matrix.size();
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < i; j++) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        for (auto &row : matrix) {
+            reverse(row.begin(), row.end());
+        }
+    }
+};
+
+/*
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        // 顺时针旋转90度<=等价于=>先转置、再把行反转，(r,c)=>(c,N-1-r)
+        // 置换组：(r,c) => (c,N-1-r) => (N-1-r,N-1-c) => (N-1-c,r) => (r,c)
+        // 取上一半的倒三角形的1/4矩阵进行置换
         if (matrix.empty()) return;
-        const int R = matrix.size();
-        const int C = matrix[0].size();
-        for (int r = 0; r < R / 2; r++) {
-            for (int c = r; c < C - 1 - r; c++) {
+        const int N = matrix.size();
+        for (int r = 0; r < N / 2; r++) {
+            for (int c = r; c < N - 1 - r; c++) {
                 int tmp = matrix[r][c];
-                matrix[r][c] = matrix[C - 1 - c][r];
-                matrix[C - 1 - c][r] = matrix[C - 1 - r][C - 1 - c];
-                matrix[C - 1 - r][C - 1 - c] = matrix[c][C - 1 - r];
-                matrix[c][C - 1 - r] = tmp;
+                matrix[r][c] = matrix[N-1-c][r];
+                matrix[N-1-c][r] = matrix[N-1-r][N-1-c];
+                matrix[N-1-r][N-1-c] = matrix[c][N-1-r];
+                matrix[c][N-1-r] = tmp;
             }
         }
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     vector<vector<int>> matrix = {
