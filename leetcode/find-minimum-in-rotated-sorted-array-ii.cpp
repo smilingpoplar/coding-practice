@@ -16,8 +16,7 @@ public:
     int findMin(vector<int>& nums) {
         if (nums.empty()) return INT_MIN;
 
-        int l = 0;
-        int r = (int)nums.size() - 1;
+        int l = 0, r = (int)nums.size() - 1;
         while (l + 1 < r) { // 至少3个元素，mid和l、r不同
             if (nums[l] < nums[r]) return nums[l];
             
