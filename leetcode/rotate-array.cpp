@@ -18,15 +18,14 @@ public:
         const int N = nums.size();
         k %= N;
         if (k == 0) return;
-        reverse(nums, 0, N - k - 1);
+        reverse(nums, 0, N - 1 - k);
         reverse(nums, N - k, N - 1);
         reverse(nums, 0, N - 1);
     }
 
-    // 反转nums[start,end]
-    void reverse(vector<int> &nums, int start, int end) {
-        for (int i = start, j = end; i < j; i++, j--) {
-            swap(nums[i], nums[j]);
+    void reverse(vector<int> &nums, int left, int right) {
+        while (left < right) {
+            swap(nums[left++], nums[right--]);
         }
     }
 };
