@@ -14,20 +14,18 @@ using namespace std;
 class Solution {
 public:
     int findBlackPixel(vector<vector<char>>& picture, int N) {
-        // 题目说，要找符合条件的黑点位置
-        // rule1：该行要有N个黑点、该列要有N个黑点
-        // rule2：该黑点所在行的相同行要有N个
+        // 要找符合条件的黑点位置：
+        // 1. 该行有N个黑点
+        // 2. 该列有N个黑点
+        // 3. 该黑点所在行刚好有N个相同行
         if (picture.empty()) return 0;
-        const int R = picture.size();
-        const int C = picture[0].size();
+        const int R = picture.size(), C = picture[0].size();
 
-        // 先从rule2入手，统计相同行
-        unordered_map<string, int> mp; // row=>count
-        // 顺带为统计各列有几个黑点
-        vector<int> rowCnt(R, 0), colCnt(C, 0);
+        unordered_map<string, int> mp; // row=>count，统计相同行
+        vector<int> colCnt(C, 0); // 各列有几个黑点
         for (int r = 0; r < R; r++) {
             string row;
-            int blackCnt = 0; // 顺带统计各行有几个黑点
+            int blackCnt = 0; // 该行有几个黑点
             for (int c = 0; c < C; c++) {
                 row += picture[r][c];
                 if (picture[r][c] == 'B') {
@@ -35,16 +33,16 @@ public:
                     colCnt[c]++;
                 }
             }
-            if (blackCnt != N) continue;
+            if (blackCnt != N) continue; // 规则1
             mp[row]++;
         }
-        // 检查符合rule2的行里各黑点
+
         int ans = 0;
         for (auto &e : mp) {
-            if (e.second != N) continue;
+            if (e.second != N) continue; // 规则3
             auto &row = e.first;
-            for (int c = 0; c < row.size(); c++) {
-                if (row[c] == 'B' && colCnt[c] == N) // N行同一列的黑点都满足
+            for (int c = 0; c < C; c++) {
+                if (row[c] == 'B' && colCnt[c] == N) // 规则2
                     ans += N;
             }
         }
