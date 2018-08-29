@@ -17,9 +17,11 @@ public:
         const int N = flowerbed.size();
         int count = 0;
         for (int i = 0; i < N; i++) {
-            if (!flowerbed[i] && (i == 0 || !flowerbed[i-1]) && (i == N-1 || !flowerbed[i+1])) {
+            if (!flowerbed[i] 
+                && (i - 1 < 0 || !flowerbed[i-1]) 
+                && (i + 1 >= N || !flowerbed[i+1])) {
                 flowerbed[i] = 1;
-                ++count;
+                count++;
             }
             if (count >= n) return true;
         }
