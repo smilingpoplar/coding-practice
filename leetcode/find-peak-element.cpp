@@ -15,27 +15,30 @@ using namespace std;
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        // 顺序找到比下一元素大的nums[i]
-        for (int i = 0; i < nums.size() - 1; i++) {
-            if (nums[i] > nums[i+1]) return 2;
+        // 找波峰用栈，只找第一个波峰甚至没用到栈
+        // 对应找下个更小的数
+        const int N = nums.size();
+        for (int i = 0; i < N - 1; i++) {
+            if (nums[i] > nums[i+1]) return i;
         }
-        return nums.size() - 1;
+        return N - 1;
     }
 };
- */
+*/
 
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        // 该题中peak元素肯定存在，用二分搜索排除范围
-        // nums[mid]要跟nums[mid+1]比较，要保证[l,u]最少两个元素，条件式l<=u要改为l<u
-        int l = 0, u = (int)nums.size() - 1;
-        while (l < u) {
+        // 找波峰，对应下一个更小的数
+        // 变成找nums[i]>nums[i+1]的位置i
+        const int N = nums.size();
+        int l = 0, u = N - 1;
+        while (l < u) { // 至少两个元素
             int mid = l + (u - l) / 2;
-            if (nums[mid] < nums[mid+1]) {
-                l = mid + 1;
-            } else {
+            if (nums[mid] > nums[mid+1]) {
                 u = mid;
+            } else {
+                l = mid + 1;
             }
         }
         return u;
