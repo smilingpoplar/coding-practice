@@ -14,17 +14,16 @@ using namespace std;
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
-        // pascal三角的通项：p(i,j) = p(i-1,j-1) + p(i-1,j)，1<=j<i<=rowIndex
-        // 在i的递增循环j的递减循环中降维：p(j) = p(j-1) + p(j)，1<=j<i<=rowIndex
-        if (rowIndex < 0) return {};
-        vector<int> p;
-        for (int i = 0; i <= rowIndex; i++) {
-            for (int j = i - 1; j >= 1; j--) { // i>=2进循环
-                p[j] += p[j - 1];
+        // pascal每行除首尾外：row[i][j] = row[i-1][j-1] + row[i-1][j]，0<j<i
+        // 省掉i这维，i仍从左往右遍历；row[j-1]要表示旧值row[i-1][j-1]，j从右往左遍历
+        vector<int> row;
+        for (int i = 0; i < numRows; i++) {
+            for (int j = i - 1; j > 0; j--) {
+                row[j] += row[j-1];
             }
-            p.push_back(1); // 行末的1
+            row.push_back(1); // 行末的1
         }
-        return p;
+        return row;
     }
 };
 
