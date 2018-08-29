@@ -19,7 +19,7 @@ public:
         }
         int maxSum = sum;
         for (int i = k; i < nums.size(); i++) {
-            sum += nums[i] - nums[i - k];
+            sum += nums[i] - nums[i-k];
             maxSum = max(maxSum, sum);
         }
         return (double)maxSum / k;
