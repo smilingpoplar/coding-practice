@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> constructArray(int n, int k) {
-        // 从[1..k+1]中头尾交错选择数（有k个差值），剩下[k+2..n]按序输出
+        // 从[1..k+1]中头尾交错选择（有k个差值），剩下[k+2..n]按序输出
         vector<int> ans;
         for (int i = 1, j = k + 1, c = 0; i <= j; c++) {
             if (c % 2 == 0) ans.push_back(i++);
