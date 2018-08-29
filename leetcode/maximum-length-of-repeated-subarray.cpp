@@ -13,16 +13,16 @@ using namespace std;
 class Solution {
 public:
     int findLength(vector<int>& A, vector<int>& B) {
-        // 设dp[i][j]表示以A[i-1]结尾的A[0..i-1]、以B[j-1]结尾的B[0..j-1]的最长公共子段长
-        // 若A[i-1]==B[j-1]，dp[i][j]=1+dp[i-1][j-1]；否则dp[i][j]=0
-        // 初始dp[0][j]=0，dp[i][0]=0
+        // 设dp[i][j]表示以A[i]开头的A[i..]、以B[j]开头的B[j..]的最长公共子段长
+        // 若A[i]==B[j]，dp[i][j]=1+dp[i+1][j+1]；否则，dp[i][j]=0
+        // 初始dp[M][j]=0，dp[i][N]=0
         const int M = A.size(), N = B.size();
         vector<vector<int>> dp(M + 1, vector<int>(N + 1, 0));
         int ans = 0;
-        for (int i = 1; i <= M; i++) {
-            for (int j = 1; j <= N; j++) {
-                if (A[i-1] == B[j-1]) {
-                    dp[i][j] = 1 + dp[i-1][j-1];
+        for (int i = M - 1; i >= 0; i--) {
+            for (int j = N - 1; j >= 0; j--) {
+                if (A[i] == B[j]) {
+                    dp[i][j] = 1 + dp[i+1][j+1];
                     ans = max(ans, dp[i][j]);
                 }
             }
