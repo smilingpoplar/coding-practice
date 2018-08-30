@@ -33,8 +33,7 @@ public:
                 l2 = l2->next;
             }
         }
-        if (l1) p->next = l1;
-        if (l2) p->next = l2;
+        p->next = l1 ? l1 : l2;
         return dummy.next;
     }
 };
