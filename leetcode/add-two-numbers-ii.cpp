@@ -32,9 +32,9 @@ public:
             l2 = l2->next;
         }
         
-        ListNode dummy(-1);
+        ListNode *list = NULL;
         int carry = 0;
-        while (!s1.empty() || !s2.empty() || carry > 0) {
+        while (!s1.empty() || !s2.empty() || carry) {
             if (!s1.empty()) {
                 carry += s1.top();
                 s1.pop();
@@ -45,11 +45,11 @@ public:
             }
             
             auto node = new ListNode(carry % 10);
-            node->next = dummy.next;
-            dummy.next = node;
+            node->next = list;
+            list = node;
             carry /= 10;
         }
-        return dummy.next;
+        return list;
     }
 };
 

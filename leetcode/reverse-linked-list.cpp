@@ -19,14 +19,14 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode dummy(-1);
+        ListNode *list = NULL;
         while (head) {
             auto next = head->next;
-            head->next = dummy.next;
-            dummy.next = head;
+            head->next = list;
+            list = head;
             head = next;
         }
-        return dummy.next;
+        return list;
     }
 };
 

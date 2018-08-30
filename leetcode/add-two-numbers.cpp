@@ -23,10 +23,11 @@ public:
         ListNode *p = &dummy;
         int carry = 0;
         while (l1 || l2 || carry) {
-            int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + carry;
-            p->next = new ListNode(sum % 10);
+            if (l1) carry += l1->val;
+            if (l2) carry += l2->val;
+            p->next = new ListNode(carry % 10);
             p = p->next;
-            carry = sum / 10;
+            carry = carry / 10;
             if (l1) l1 = l1->next;
             if (l2) l2 = l2->next;
         }
