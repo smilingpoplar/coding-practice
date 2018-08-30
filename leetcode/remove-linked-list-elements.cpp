@@ -22,14 +22,14 @@ public:
         ListNode dummy(-1);
         dummy.next = head;
         
-        auto prev = &dummy;
-        while (prev->next) {
-            if (prev->next->val == val) {
-                auto toDelete = prev->next;
-                prev->next = toDelete->next;
+        auto p = &dummy;
+        while (p->next) {
+            if (p->next->val == val) {
+                auto toDelete = p->next;
+                p->next = toDelete->next;
                 delete toDelete;
             } else {
-                prev = prev->next;
+                p = p->next;
             }
         }
         return dummy.next;
