@@ -15,10 +15,10 @@ class Solution {
 public:
     vector<vector<int>> transpose(vector<vector<int>>& A) {
         if (A.empty()) return {};
-        const int M = A.size(), N = A[0].size();
-        vector<vector<int>> B(N, vector<int>(M));
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
+        const int R = A.size(), C = A[0].size();
+        vector<vector<int>> B(C, vector<int>(R));
+        for (int r = 0; r < R; r++) {
+            for (int c = 0; c < C; c++) {
                 B[c][r] = A[r][c];
             }
         }

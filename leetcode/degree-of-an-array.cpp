@@ -14,24 +14,24 @@ class Solution {
 public:
     int findShortestSubArray(vector<int>& nums) {
         // 每个数都记录出现次数、最左出现位置、最右出现位置
-        unordered_map<int, int> count;
+        unordered_map<int, int> cnt;
         unordered_map<int, int> left;
         unordered_map<int, int> right;
         
         for (int i = 0; i < nums.size(); i++) {
             int x = nums[i];
-            ++count[x];
+            cnt[x]++;
             if (!left.count(x)) left[x] = i;
             right[x] = i;
         }
         
         int degree = INT_MIN;
-        for (const auto &e : count) {
+        for (auto &e : cnt) {
             degree = max(degree, e.second);
         }
         
         int ans = INT_MAX;
-        for (const auto &e : count) {
+        for (auto &e : cnt) {
             if (e.second == degree) {
                 int x = e.first;
                 ans = min(ans, right[x] - left[x] + 1);

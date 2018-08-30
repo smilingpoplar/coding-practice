@@ -13,16 +13,15 @@ using namespace std;
 class Solution {
 public:
     bool isOneBitCharacter(vector<int>& bits) {
-        // 扫描前进，看能否通过前n-1位，停在最后1位上
-        int i = 0;
-        while (i < bits.size() - 1) {
-            if (bits[i] == 0) {
-                i += 1;
-            } else {
-                i += 2;
-            }
+        // 0开头的只能解析1位、1开头的只能解析2位
+        // 从头解析，看能否解析到达N-1位
+        const int N = bits.size();
+        int idx = 0;
+        while (idx < N - 1) {
+            if (bits[idx] == 0) idx += 1;
+            else idx += 2;
         }
-        return i == bits.size() - 1;
+        return idx == N - 1;
     }
 };
 
