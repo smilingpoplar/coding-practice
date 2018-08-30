@@ -19,8 +19,7 @@ struct ListNode {
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        // 快慢指针：
-        // 快指针跑两步慢指针跑一步，若快指针赶上慢指针则有环
+        // 快慢指针
         auto fast = head, slow = head;
         while (fast && fast->next) {
             fast = fast->next->next;
