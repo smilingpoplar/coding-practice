@@ -13,8 +13,7 @@ using namespace std;
 class Solution {
 public:
     int maxAreaOfIsland(vector<vector<int>>& grid) {
-        const int R = grid.size();
-        const int C = grid[0].size();
+        const int R = grid.size(), C = grid[0].size();
         vector<vector<bool>> visited(R, vector<bool>(C, false));
 
         int ans = 0;
@@ -27,8 +26,8 @@ public:
     }
     
     int area(int r, int c, vector<vector<int>>& grid, vector<vector<bool>>& visited) {
-        if (r < 0 || r >= grid.size() || c < 0 || c >= grid[0].size()) return 0;
-        if (visited[r][c] || grid[r][c] == 0) return 0;
+        if (r < 0 || r >= grid.size() || c < 0 || c >= grid[0].size() 
+            || visited[r][c] || grid[r][c] == 0) return 0;
 
         visited[r][c] = true;
         return 1 + area(r - 1, c, grid, visited) + area(r + 1, c, grid, visited) 

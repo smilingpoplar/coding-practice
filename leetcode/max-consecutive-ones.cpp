@@ -13,8 +13,7 @@ using namespace std;
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
-        int ans = 0;
-        int ones = 0;
+        int ones = 0, ans = 0;
         for (int num : nums) {
             if (num == 1) {
                 ones++;

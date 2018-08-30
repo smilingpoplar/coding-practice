@@ -14,8 +14,7 @@ class Solution {
 public:
     vector<vector<int>> matrixReshape(vector<vector<int>>& nums, int r, int c) {
         if (nums.empty()) return nums;
-        const int M = nums.size();
-        const int N = nums[0].size();
+        const int M = nums.size(), N = nums[0].size();
         if (M * N != r * c) return nums;
         
         vector<vector<int>> matrix(r, vector<int>(c));
