@@ -19,15 +19,14 @@ struct ListNode {
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        // head1跑完链表A跑链表B，head2跑完链表B跑链表A
-        // 有相交节点则同时跑到相交节点，无相交节点则同时跑到NULL
-        auto head1 = headA;
-        auto head2 = headB;
-        while (head1 != head2) {
-            head1 = head1 ? head1->next : headB;
-            head2 = head2 ? head2->next : headA;
+        // pa跑完链表A跑链表B，pb跑完链表B跑链表A
+        // 有交点则同时跑到交点，无交点则同时跑到NULL
+        auto pa = headA, pb = headB;
+        while (pa != pb) {
+            pa = pa ? pa->next : headB;
+            pb = pb ? pb->next : headA;
         }
-        return head1;
+        return pa;
     }
 };
 

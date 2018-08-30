@@ -20,33 +20,20 @@ class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if (!head) return NULL;
-        // 让p2指向后半段，p2先跑k步
-        auto p2 = head;
-        int len = 0;
-        for (int i = 0; i < k && p2; i++) {
-            p2 = p2->next;
+        // 先变循环链表
+        auto tail = head;
+        int len = 1;
+        while (tail->next) {
+            tail = tail->next;
             len++;
         }
-        if (!p2) { // k>=len
-            k %= len;
-            if (k == 0) return head;
-            // k根据len调整了，p2重跑
-            p2 = head;
-            for (int i = 0; i < k; i++) {
-                p2 = p2->next;
-            }
-        }
-        // 同时跑，直到p1指向前半段末尾
-        auto p1 = head;
-        while (p2->next) {
-            p2 = p2->next;
-            p1 = p1->next;
-        }
-
-        p2->next = head;
-        auto newHead = p1->next;
-        p1->next = NULL;
-        
+        tail->next = head;
+        // 再断开
+        k %= len;
+        for (int i = 0; i < len - k; i++)
+            tail = tail->next;
+        auto newHead = tail->next;
+        tail->next = NULL;
         return newHead;
     }
 };
