@@ -16,50 +16,54 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     void reorderList(ListNode* head) {
         if (!head) return;
-        // 快慢指针找中间节点（偶数时偏左奇数时中间）
-        auto fast = head;
-        auto slow = head;
-        while (fast->next && fast->next->next) { // 用fast&&fast->next找的中间节点是偶数时偏右奇数时中间
+        // 快慢指针，slow将指向较长前半段的尾节点
+        auto fast = head->next, slow = head;
+        while (fast && fast->next) {
             fast = fast->next->next;
             slow = slow->next;
         }
-        // slow指向中间节点
-        auto list2 = slow->next;
+        auto l2 = reverse(slow->next);
         slow->next = NULL;
-        // 将list2反转
-        {
-            ListNode dummy(-1);
-            auto current = list2;
-            while (current) {
-                auto next = current->next;
-                current->next = dummy.next;
-                dummy.next = current;
-                current = next;
-            }
-            list2 = dummy.next;
+        merge(head, l2);
+    }
+    
+    ListNode* reverse(ListNode *head) {
+        ListNode* list = NULL;
+        while (head) {
+            auto next = head->next;
+            head->next = list;
+            list = head;
+            head = next;
         }
-        // 将两个list交错合并
-        {
-            auto list1 = head;
-            ListNode dummy(-1);
-            ListNode *current = &dummy;
-            while (list1 && list2) {
-                current->next = list1;
-                current = list1;
-                list1 = list1->next;
-                
-                current->next = list2;
-                current = list2;
-                list2 = list2->next;
-            }
-            current->next = list1 ? list1 : list2;
+        return list;
+    }
+    
+    ListNode* merge(ListNode *l1, ListNode *l2) {
+        ListNode dummy(-1);
+        ListNode *p = &dummy;
+        while (l1 && l2) {
+            p->next = l1;
+            p = l1;
+            l1 = l1->next;
             
-            head = dummy.next;
+            p->next = l2;
+            p = l2;
+            l2 = l2->next;
         }
+        p->next = l1 ? l1 : l2;
+        return dummy.next;
     }
 };
 

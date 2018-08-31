@@ -19,20 +19,19 @@ struct ListNode {
 class Solution {
 public:
     bool isPalindrome(ListNode *head) {
-        // 快慢指针找中间节点
-        auto fast = head, slow = head;
+        if (!head) return true;
+        // 快慢指针，slow将指向较长前半段的尾节点
+        auto fast = head->next, slow = head;
         while (fast && fast->next) {
             fast = fast->next->next;
             slow = slow->next;
         }
 
-        slow = reverse(slow);
-        fast = head;
-
-        while (fast && slow) {
-            if (fast->val != slow->val) return false;
-            fast = fast->next;
-            slow = slow->next;
+        auto l1 = head, l2 = reverse(slow->next);
+        while (l2) {
+            if (l1->val != l2->val) return false;
+            l1 = l1->next;
+            l2 = l2->next;
         }
         return true;
     }
