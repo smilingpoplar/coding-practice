@@ -22,21 +22,21 @@ struct RandomListNode {
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
-        // 使用map
+        // 使用map记录
         unordered_map<RandomListNode *, RandomListNode *> copied;
-        auto current = head;
-        while (current) {
-            if (!copied[current]) copied[current] = new RandomListNode(current->label);
+        auto curr = head;
+        while (curr) {
+            if (!copied[curr]) copied[curr] = new RandomListNode(curr->label);
 
-            auto next = current->next;
+            auto next = curr->next;
             if (next && !copied[next]) copied[next] = new RandomListNode(next->label);
-            copied[current]->next = copied[next];
+            copied[curr]->next = copied[next];
 
-            auto random = current->random;
+            auto random = curr->random;
             if (random && !copied[random]) copied[random] =  new RandomListNode(random->label);
-            copied[current]->random = copied[random];
+            copied[curr]->random = copied[random];
 
-            current = current->next;
+            curr = curr->next;
         }
         return copied[head];
     }
@@ -47,32 +47,32 @@ class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
         // 在每个结点后放copy结点
-        auto current = head;
-        while (current) {
-            auto next = current->next;
-            auto copy = new RandomListNode(current->label);
+        auto curr = head;
+        while (curr) {
+            auto next = curr->next;
+            auto copy = new RandomListNode(curr->label);
             copy->next = next;
-            current->next = copy;
-            current = next;
+            curr->next = copy;
+            curr = next;
         }
         // 设置copy结点的random指针
-        current = head;
-        while (current) {
-            auto copy = current->next;
-            if (current->random) copy->random = current->random->next;
-            current = copy->next;
+        curr = head;
+        while (curr) {
+            auto copy = curr->next;
+            if (curr->random) copy->random = curr->random->next;
+            curr = copy->next;
         }
         // 拆分两个链表
         RandomListNode dummy(-1);
-        RandomListNode *currentDummy = &dummy;
-        current = head;
-        while (current) {
-            auto copy = current->next;
+        auto p = &dummy;
+        curr = head;
+        while (curr) {
+            auto copy = curr->next;
             auto next = copy->next;
-            currentDummy->next = copy;
-            currentDummy = copy;
-            current->next = next;
-            current = next;
+            p->next = copy;
+            p = copy;
+            curr->next = next;
+            curr = curr->next;
         }
         return dummy.next;
     }
