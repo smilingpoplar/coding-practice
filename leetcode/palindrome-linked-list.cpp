@@ -26,7 +26,7 @@ public:
             slow = slow->next;
         }
 
-        slow = reverseList(slow);
+        slow = reverse(slow);
         fast = head;
 
         while (fast && slow) {
@@ -37,7 +37,7 @@ public:
         return true;
     }
 
-    ListNode* reverseList(ListNode* head) {
+    ListNode* reverse(ListNode* head) {
         ListNode *list = NULL;
         while (head) {
             auto next = head->next;
