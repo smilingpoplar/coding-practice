@@ -16,35 +16,56 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+/*
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        if (!head || !head->next || k < 2) return head;
+        int len = 0;
+        for (auto node = head; node && len < k; node = node->next) len++;
+        if (len < k) return head;
+        // 反转前k个
+        ListNode *list = NULL;
+        auto node = head;
+        for (int i = 0; i < k; i++) {
+            auto next = node->next;
+            node->next = list;
+            list = node;
+            node = next;
+        }
+        // 至此head是组内尾元素，node是下一组头元素
+        head->next = reverseKGroup(node, k);
+        return list;
+    }
+};
+*/
+
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int len = 0;
+        for (auto p = head; p; p = p->next) len++;
+
         ListNode dummy(-1);
         dummy.next = head;
-        
-        auto prev = &dummy;
-        auto kNode = &dummy;
-        while (true) {
-            for (int i = 0; i < k && kNode; i++) {
-                kNode = kNode->next;
-            }
-            if (!kNode) break; // 不足k个
+        auto prevGroupTail = &dummy;
 
-            // 反转kGroup
-            auto p = prev->next;
-            kNode = p;
+        for (; len >= k; len -= k) {
+            auto groupTail = prevGroupTail->next; // 反转后将成尾元素
+            // 将当前组反转
+            ListNode *group = NULL;
+            auto p = prevGroupTail->next;
             for (int i = 0; i < k; i++) {
                 auto next = p->next;
-                p->next = prev->next;
-                prev->next = p;
+                p->next = group;
+                group = p;
                 p = next;
             }
-            kNode->next = p;
+            // 至此groupTail是组内尾元素，p是下组头元素
+            prevGroupTail->next = group;
+            groupTail->next = p;
             
-            prev = kNode;
+            prevGroupTail = groupTail;
         }
-        
         return dummy.next;
     }
 };

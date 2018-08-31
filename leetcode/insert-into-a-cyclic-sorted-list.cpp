@@ -32,13 +32,14 @@ public:
             nn->next = nn;
             return nn;
         }
+
         auto p = node;
         while (p->next != node) {
+            // 可以在p后插入时跳出循环
             if (p->val <= x && x <= p->next->val) break;
             if (p->val > p->next->val && (x >= p->val || x <= p->next->val)) break; // p指向最大值
             p = p->next;    
         }
-        // 接在p后
         auto nn = new ListNode(x);
         nn->next = p->next;
         p->next = nn;
