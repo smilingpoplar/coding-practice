@@ -19,14 +19,13 @@ struct ListNode {
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        // 可能删除头节点，所以加个dummy
-        ListNode dummy(-1);
+        ListNode dummy(-1); // 可能删除头节点
         dummy.next = head;
         
         auto fast = &dummy;
-        // 找倒数第n节点前一节点
-        // 这里走n步、后面while(fast->next)是唯一正确写法，可以配合!fast检测不合法n值
-        // <del>这里走n+1步、后面while(fast)的写法，当配合!fast检测不合法n值时出错</del>
+        // 找倒数第n节点前一节点：后面while(fast->next)对应最后节点，这里走n步对应往前n节点
+        // 这里走n步、后面while(fast->next)是唯一正确写法，可以配合!fast检测太大n值
+        // <del>这里走n+1步、后面while(fast)的写法，当配合!fast检测太大n值时出错</del>
         for (int i = 0; i < n && fast; i++) fast = fast->next;
         if (!fast) return head;
         
@@ -36,9 +35,9 @@ public:
             slow = slow->next;
         }
         // slow是待删除节点前一节点
-        auto toDelete = slow->next;
-        slow->next = toDelete->next;
-        delete toDelete;
+        auto next = slow->next->next;
+        delete slow->next;
+        slow->next = next;
         
         return dummy.next;
     }

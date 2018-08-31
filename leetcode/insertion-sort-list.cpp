@@ -24,9 +24,10 @@ public:
             auto next = head->next;
             
             auto prev = &dummy;
-            while (prev->next && prev->next->val <= head->val) {
+            while (prev->next && head->val >= prev->next->val) {
                 prev = prev->next;
             }
+            // 循环结束时找到插入位置
             head->next = prev->next;
             prev->next = head;
             
