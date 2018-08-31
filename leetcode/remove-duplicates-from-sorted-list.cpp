@@ -20,14 +20,14 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         if (!head) return head;
-        auto p = head;
-        while (p->next) {
-            if (p->next->val == p->val) {
-                auto next = p->next->next;
-                delete p->next;
-                p->next = next;
+        auto node = head;
+        while (node->next) {
+            if (node->next->val == node->val) {
+                auto next = node->next->next;
+                delete node->next;
+                node->next = next;
             } else {
-                p = p->next;
+                node = node->next;
             }
         }
         return head;

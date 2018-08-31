@@ -20,19 +20,19 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         ListNode dummy(-1);
-        dummy.next = head; // 在head前添加dummy节点
-        auto prev = &dummy;
+        dummy.next = head;
+        auto node = &dummy;
         
-        while (prev->next) { // 当前节点非空
-            if (prev->next->next && prev->next->val == prev->next->next->val) {
-                int val = prev->next->val;
-                while (prev->next && prev->next->val == val) { // 删除这些有相等值的节点
-                    auto toDelete = prev->next;
-                    prev->next = prev->next->next;
-                    delete toDelete;
+        while (node->next) {
+            if (node->next->next && node->next->val == node->next->next->val) {
+                int val = node->next->val; // 删除有这个值的节点
+                while (node->next && node->next->val == val) {
+                    auto next = node->next->next;
+                    delete node->next;
+                    node->next = next;
                 }
             } else {
-                prev = prev->next;
+                node = node->next;
             }
         }
         return dummy.next;
