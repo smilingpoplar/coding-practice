@@ -46,7 +46,7 @@ public:
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
-        // 在每个结点后放copy结点
+        // 在每个节点后放copy节点
         auto curr = head;
         while (curr) {
             auto next = curr->next;
@@ -55,7 +55,7 @@ public:
             curr->next = copy;
             curr = next;
         }
-        // 设置copy结点的random指针
+        // 设置copy节点的random指针
         curr = head;
         while (curr) {
             auto copy = curr->next;
