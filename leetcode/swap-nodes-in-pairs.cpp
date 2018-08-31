@@ -19,18 +19,18 @@ struct ListNode {
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        if (!head || !head->next) return head;
         ListNode dummy(-1);
+        dummy.next = head;
         auto prev = &dummy;
-        while (head && head->next) {
-            // head -> next -> next2
-            auto next = head->next;
-            auto next2 = next->next;
 
-            prev->next = next;
-            next->next = head;
+        // prev => head => next1 => next2
+        while (head && head->next) {
+            auto next1 = head->next;
+            auto next2 = next1->next;
+            prev->next = next1;
+            next1->next = head;
             head->next = next2;
-            
+
             prev = head;
             head = next2;
         }

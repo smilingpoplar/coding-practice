@@ -27,22 +27,18 @@ class Solution {
 public:
     TreeNode* sortedListToBST(ListNode *head) {
         if (!head) return NULL;
-        // 快慢指针找中间节点（偶数时偏右奇数时中间）
-        auto fast = head;
-        auto slow = head;
+        // 快慢指针，slow指向较短后半段的头节点
+        auto fast = head, slow = head;
         ListNode *prev = NULL;
         while (fast && fast->next) {
             fast = fast->next->next;
             prev = slow;
             slow = slow->next;
         }
-        // slow指向中间节点，prev是它的前一节点
         auto root = new TreeNode(slow->val);
         if (prev) {
             prev->next = NULL;
             root->left = sortedListToBST(head);
-        } else {
-            root->left = NULL;
         }
         root->right = sortedListToBST(slow->next);
         
