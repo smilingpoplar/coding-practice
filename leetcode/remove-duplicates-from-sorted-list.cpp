@@ -20,17 +20,15 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         if (!head) return head;
-        auto prev = head;
-        auto current = head->next;
-        while (current) {
-            auto next = current->next;
-            if (current->val == prev->val) {
-                prev->next = next;
-                delete current;
+        auto p = head;
+        while (p->next) {
+            if (p->next->val == p->val) {
+                auto next = p->next->next;
+                delete p->next;
+                p->next = next;
             } else {
-                prev = current;
+                p = p->next;
             }
-            current = next;
         }
         return head;
     }
