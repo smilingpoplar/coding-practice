@@ -47,24 +47,18 @@ public:
 
         ListNode dummy(-1);
         dummy.next = head;
-        auto prevGroupTail = &dummy;
+        auto prev = &dummy; // 组前的指针
 
         for (; len >= k; len -= k) {
-            auto groupTail = prevGroupTail->next; // 反转后将成尾元素
-            // 将当前组反转
-            ListNode *group = NULL;
-            auto p = prevGroupTail->next;
-            for (int i = 0; i < k; i++) {
-                auto next = p->next;
-                p->next = group;
-                group = p;
-                p = next;
+            // 将组内第[2..k]元素插入到prev之后
+            auto start = prev->next, curr = start->next;
+            for (int i = 2; i <= k; i++) {
+                start->next = curr->next;
+                curr->next = prev->next;
+                prev->next = curr;
+                curr = start->next;
             }
-            // 至此groupTail是组内尾元素，p是下组头元素
-            prevGroupTail->next = group;
-            groupTail->next = p;
-            
-            prevGroupTail = groupTail;
+            prev = start;
         }
         return dummy.next;
     }

@@ -31,7 +31,7 @@ public:
                 curr = curr->left;
             }
             auto node = stk.top();
-            if (node->right && node->right != prev) { // 不是从右子树返回，则先访问右子树
+            if (node->right && prev != node->right) { // 不是从右子树返回，则先访问右子树
                 curr = node->right;
             } else { // 从右子树返回，则出栈时访问
                 stk.pop();

@@ -19,26 +19,21 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        if (!(head && 1 <= m && m <= n)) return NULL;
+        if (!head) return NULL;
+        
         ListNode dummy(-1);
         dummy.next = head;
-        
         auto prev = &dummy;
-        for (int i = 1; i < m; i++) {
-            prev = prev->next;
-            if (!prev) return NULL;
+        for (int i = 1; i < m; i++) prev = prev->next;
+
+        // 将m+1到n的节点插入prev之后
+        auto start = prev->next, curr = start->next;
+        for (int i = m + 1; i <= n; i++) {
+            start->next = curr->next;
+            curr->next = prev->next;
+            prev->next = curr;
+            curr = start->next;
         }
-        auto p = prev->next;
-        auto nNode = p;
-        for (int i = m; i <= n; i++) {
-            if (!p) return NULL;
-            auto next = p->next;
-            p->next = prev->next;
-            prev->next = p;
-            p = next;
-        }
-        nNode->next = p;
-        
         return dummy.next;
     }
 };
