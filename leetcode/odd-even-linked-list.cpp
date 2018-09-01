@@ -23,18 +23,17 @@ class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
         if (!head) return NULL;
-        ListNode *even = head;
-        ListNode *odd = head->next;
-        // 把odd节点单独拎出来
-        ListNode *oddHead = odd;
-        while (odd && odd->next) {
-            even->next = odd->next;
-            even = even->next;
-            odd->next = even->next;
+        ListNode dummyOdd(-1), dummyEven(-1);
+        auto odd = &dummyOdd, even = &dummyEven;
+        while (head) {
+            odd->next = head;
             odd = odd->next;
+            even->next = head->next;
+            even = even->next;
+            head = even ? even->next : NULL;
         }
-        even->next = oddHead;
-        return head;
+        odd->next = dummyEven.next;
+        return dummyOdd.next;
     }
 };
 
