@@ -22,23 +22,20 @@ class Solution {
 public:
     vector<ListNode*> splitListToParts(ListNode* root, int k) {
         int n = 0;
-        for (auto p = root; p; p = p->next) {
-            ++n;
-        }
+        for (auto p = root; p; p = p->next) n++;
         
         vector<ListNode *> ans;
-        int base = n / k;
-        int remain = n % k;
+        int base = n / k, remain = n % k;
         for (int i = 0; i < k; i++) {
-            int length = base + (i < remain ? 1 : 0);
-            // 从链表中取length长的子链表放入ans中
+            int len = base + (i < remain);
+            // 取len长的子链表，算出的len总有效
             ans.push_back(root);
-            for (int j = 0; root && j < length - 1; j++) {
+            for (int j = 0; j < len - 1; j++) {
                 root = root->next;
             }
             if (root) {
                 auto next = root->next;
-                root->next = nullptr;
+                root->next = NULL;
                 root = next;
             }
         }
