@@ -26,16 +26,19 @@ public:
         dummy->next = head;
         // 找最后一个!=9（不进位）的位置
         ListNode *found;
-        for (auto p = dummy; p != NULL; p = p->next) {
+        for (auto p = dummy; p; p = p->next) {
             if (p->val != 9) found = p;
         }
-        // found位置值加1，后面位置值全变0
+        // found位置加1，后面位置全变0
         found->val += 1;
-        for (auto p = found->next; p != NULL; p = p->next) {
+        for (auto p = found->next; p; p = p->next) {
             p->val = 0;
         }
-        if (dummy->val == 0) return dummy->next; // 没进位到dummy节点
-        return dummy;
+        // 如果dummy后全是9，found=dummy，dummy->val==1
+        if (dummy->val != 0) return dummy;
+        auto ans = dummy->next;
+        delete dummy;
+        return ans;
     }
 };
 
