@@ -22,18 +22,17 @@ using namespace std;
 class Solution {
 public:
     int getMinimumDifference(TreeNode* root) {
-        int minDiff = INT_MAX;
-        int prev = -1;
-        inorder(root, prev, minDiff);
-        return minDiff;
+        int prev = INT_MIN, ans = INT_MAX;
+        inorder(root, prev, ans);
+        return ans;
     }
     
-    void inorder(TreeNode *root, int &prev, int &minDiff) {
+    void inorder(TreeNode *root, int &prev, int &ans) {
         if (!root) return;
-        inorder(root->left, prev, minDiff);
-        if (prev != -1) minDiff = min(minDiff, root->val - prev);
+        inorder(root->left, prev, ans);
+        if (prev != INT_MIN) ans = min(ans, root->val - prev);
         prev = root->val;
-        inorder(root->right, prev, minDiff);
+        inorder(root->right, prev, ans);
     }
 };
 
