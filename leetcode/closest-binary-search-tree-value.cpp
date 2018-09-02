@@ -24,7 +24,7 @@ class Solution {
 public:
     int closestValue(TreeNode* root, double target) {
         int ans = root->val; // 已知root非空
-        while (root) {
+        while (root) { // 去往更接近target的路上
             if (abs(root->val - target) < abs(ans - target)) {
                 ans = root->val;
             }

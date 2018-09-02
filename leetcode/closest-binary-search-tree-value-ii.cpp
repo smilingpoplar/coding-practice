@@ -38,6 +38,7 @@ public:
         
         vector<int> ans;
         while (k--) {
+            // 往两端的两指针
             if (succ.empty() || (!pre.empty() && target - pre.top()->val < succ.top()->val - target)) { // 选前驱
                 ans.push_back(pre.top()->val);
                 getPredecessor(pre);
@@ -49,7 +50,7 @@ public:
         return ans;
     }
     
-    // 类似i--
+    // 类似i--，一路进栈到左子树的最右值
     void getPredecessor(stack<TreeNode *> &pre) {
         auto top = pre.top(); pre.pop();
         auto p = top->left;
@@ -59,7 +60,7 @@ public:
         }
     }
     
-    // 类似j++
+    // 类似j++，一路进栈到右子树最左值
     void getSuccessor(stack<TreeNode *> &succ) {
         auto top = succ.top(); succ.pop();
         auto p = top->right;
@@ -74,27 +75,20 @@ public:
 class Solution {
 public:
     vector<int> closestKValues(TreeNode* root, double target, int k) {
-        queue<int> q;
+        deque<int> q;
         inorder(root, target, k, q);
-        
-        vector<int> ans;
-        while (!q.empty()) {
-            ans.push_back(q.front());
-            q.pop();
-        }
-        return ans;
+        return vector<int>(q.begin(), q.end());
     }
     
-    void inorder(TreeNode *root, double target, int k, queue<int> &q) {
+    void inorder(TreeNode *root, double target, int k, deque<int> &q) {
         if (!root) return;
-        // 中序遍历，相当于有序数组，找最接近target的k个数，维持一个k长的窗口。
-        // 窗口右端指向大的数、左端指向小的数，每次从两端选一个更接近target的。
+        // 用中序遍历和k长队列
         inorder(root->left, target, k, q);
         if (q.size() < k) {
-            q.push(root->val);
+            q.push_back(root->val);
         } else if (abs(root->val - target) < abs(q.front() - target)) {
-                q.pop();
-                q.push(root->val);
+                q.pop_front();
+                q.push_back(root->val);
         } else return;
         inorder(root->right, target, k, q);
     }
