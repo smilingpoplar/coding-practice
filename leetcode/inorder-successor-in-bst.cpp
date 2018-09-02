@@ -28,11 +28,11 @@ public:
         // 类似二分搜索，root相当于二分搜索中的mid
         TreeNode *succ = NULL;
         while (root) {
-            if (root->val <= p->val) { // root值太小，排除root和左子树
-                root = root->right;
-            } else { // root可以候选，排除右子树
+            if (root->val > p->val) { // root可作候选，排除右子树
                 succ = root;
                 root = root->left;
+            } else { // root值太小，排除root和左子树
+                root = root->right;
             }
         }
         return succ;

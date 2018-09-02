@@ -16,15 +16,15 @@ class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int> &nums, int k, int t) {
         if (k < 1 || t < 0) return false;
-        set<long> win; // 元素要跟它前面k个元素比较判重，保持win长度<=k
+        set<long> st; // 把前k个数放入set中
         for (int i = 0; i < nums.size(); i++) {
-            // win中是否存在x，使nums[i]-x<=t且x-nums[i]<=t，nums[i]-t<=x<=nums[i]+t
-            // 只要找>=nums[i]-t的数，看它是否满足<=nums[i]+t
-            auto it = win.lower_bound((long)nums[i] - t);
-            if (it != win.end() && *it <= (long)nums[i] + t) return true;
+            // 在st中找x，abs(nums[i]-x)<=t，nums[i]-t<=x<=nums[i]+t
+            // 只要找>=nums[i]-t的最小数，看它是否<=nums[i]+t
+            auto it = st.lower_bound((long)nums[i] - t);
+            if (it != st.end() && *it <= (long)nums[i] + t) return true;
             
-            win.insert(nums[i]);
-            if (win.size() > k) win.erase(nums[i - k]);
+            st.insert(nums[i]);
+            if (st.size() > k) st.erase(nums[i-k]);
 
         }
         return false;
@@ -40,9 +40,9 @@ public:
         // buckets保存前k个数的桶，保持size(buckets)<=k
         for (int i = 0; i < nums.size(); i++) {            
             auto idx = bucketIdx(nums[i], t);
-            // 重复发生在自己桶中
+            // 又落在自己桶
             if (buckets.count(idx)) return true;
-            // 重复发生在相邻两桶
+            // 检查相邻两桶
             if (buckets.count(idx-1) && nums[i] - buckets[idx-1] <= t) return true;
             if (buckets.count(idx+1) && buckets[idx+1] - nums[i] <= t) return true;
 
