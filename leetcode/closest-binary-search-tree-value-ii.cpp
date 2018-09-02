@@ -50,7 +50,7 @@ public:
         return ans;
     }
     
-    // 类似i--，一路进栈到左子树的最右值
+    // 类似i--，到左子树最右儿子的路径
     void getPredecessor(stack<TreeNode *> &pre) {
         auto top = pre.top(); pre.pop();
         auto p = top->left;
@@ -60,7 +60,7 @@ public:
         }
     }
     
-    // 类似j++，一路进栈到右子树最左值
+    // 类似j++，到右子树最左儿子的路径
     void getSuccessor(stack<TreeNode *> &succ) {
         auto top = succ.top(); succ.pop();
         auto p = top->right;
