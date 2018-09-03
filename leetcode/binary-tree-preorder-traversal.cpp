@@ -62,8 +62,8 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
         // morris前序遍历，只是把morris中序遍历里访问当前节点的语句换个位置
         // 用中序遍历前驱节点的右指针pred->righ表示左子树是否已访问
-        // pred->right为空 => 左子树未访问，访问当前节点，记住要返回到当前节点，进入左子树
-        // pred->right非空 => 左子树已访问，清空pred->right，进入右子树
+        // pred->right==NULL => 左子树未访问，访问当前节点，记住要返回到当前节点，进入左子树
+        // pred->right!=NULL => 左子树已访问，清空pred->right，进入右子树
         vector<int> ans;
         auto curr = root;
         TreeNode *pred = NULL;
@@ -72,16 +72,16 @@ public:
                 ans.push_back(curr->val);
                 curr = curr->right;
             } else {
-                // 找到中序遍历前驱结点（左子树的最右节点）
+                // 中序遍历前驱节点（左子树的最右节点）
                 pred = curr->left;
                 while (pred->right && pred->right != curr) {
                     pred = pred->right;
                 }
-                if (!pred->right) { // 左子树未访问过
+                if (!pred->right) { // 左子树未访问
                     ans.push_back(curr->val); // 把这句话放到这里
                     pred->right = curr;
                     curr = curr->left;
-                } else { // 左子树已访问过
+                } else { // 左子树已访问
                     pred->right = NULL;
                     curr = curr->right;
                 }

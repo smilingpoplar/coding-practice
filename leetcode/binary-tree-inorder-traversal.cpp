@@ -52,7 +52,7 @@ public:
                 ans.push_back(curr->val); // 访问当前节点
                 curr = curr->right;
             } else {
-                // 中序遍历前驱节点（左子树的最右节点）
+                // 中序遍历的前驱节点（左子树的最右节点）
                 pred = curr->left;
                 while (pred->right && pred->right != curr) {
                     pred = pred->right;
