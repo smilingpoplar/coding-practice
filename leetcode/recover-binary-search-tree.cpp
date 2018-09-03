@@ -22,7 +22,7 @@ struct TreeNode {
 class Solution {
 public:
     void recoverTree(TreeNode* root) {
-        // 中序遍历
+        // 中序遍历，O(N)
         auto curr = root;
         stack<TreeNode *> stk;
         TreeNode *prev = NULL, *m1 = NULL, *m2 = NULL;
@@ -40,7 +40,7 @@ public:
             prev = node;
             curr = node->right;
         }
-        
+
         if (m1 && m2) swap(m1->val, m2->val);
     }
 };
@@ -49,49 +49,46 @@ public:
 class Solution {
 public:
     void recoverTree(TreeNode* root) {
+        // 在遍历过程中，找出违反递增关系的首尾节点
+        TreeNode *prev = NULL, *m1 = NULL, *m2 = NULL;
         // morris中序遍历，O(1)空间
-        // 用当前节点的中序遍历前驱节点的右指针prev->right表示左子树是否访问过
-        // prev->right为空 => 左子树未访问过，记住要返回到当前节点，进入左子树
-        // prev->right非空 => 左子树已访问过，清空prev->right，访问当前节点，进入右子树
-        // 在遍历过程中，找出违反递增趋势的第一个和最后一个节点
-        TreeNode *firstSwapped = NULL;
-        TreeNode *lastSwapped = NULL;
-        TreeNode *lastVisited = NULL;
-        
-        auto current = root;
-        TreeNode *prev = NULL;
-        while (current) {
-            if (!current->left) {
+        // 用中序遍历前驱节点的右指针pred->right表示左子树是否访问过
+        // pred->right==NULL => 左子树未访问，记住要返回到当前节点，进入左子树
+        // pred->right!=NULL => 左子树已访问，清空pred->right，访问当前节点，进入右子树        
+        auto curr = root;
+        TreeNode *pred = NULL; // 中序遍历前驱节点
+        while (curr) {
+            if (!curr->left) {
                 // 访问当前节点
-                if (lastVisited && current->val < lastVisited->val) {
-                    if (!firstSwapped) firstSwapped = lastVisited;
-                    lastSwapped = current;
+                if (prev && curr->val < prev->val) {
+                    if (!m1) m1 = prev;
+                    m2 = curr;
                 }
-                lastVisited = current;
-                current = current->right;
+                prev = curr;
+                curr = curr->right;
             } else {
-                // 找出中序遍历的前驱节点（左子树的最右节点）
-                prev = current->left;
-                while (prev->right && prev->right != current) {
-                    prev = prev->right;
+                // 中序遍历的前驱节点（左子树的最右节点）
+                pred = curr->left;
+                while (pred->right && pred->right != curr) {
+                    pred = pred->right;
                 }
-                if (!prev->right) { // 左子树未访问过
-                    prev->right = current;
-                    current = current->left;
-                } else { // 左子树已访问过
-                    prev->right = NULL;
+                if (!pred->right) { // 左子树未访问
+                    pred->right = curr;
+                    curr = curr->left;
+                } else { // 左子树已访问
+                    pred->right = NULL;
                     // 访问当前节点
-                    if (lastVisited && current->val < lastVisited->val) {
-                        if (!firstSwapped) firstSwapped = lastVisited;
-                        lastSwapped = current;
+                    if (prev && curr->val < prev->val) {
+                        if (!m1) m1 = prev;
+                        m2 = curr;
                     }
-                    lastVisited = current;
-                    current = current->right;
+                    prev = curr;
+                    curr = curr->right;
                 }
             }
         }
-        if (!firstSwapped || !lastSwapped) return;
-        swap(firstSwapped->val, lastSwapped->val);
+
+        if (m1 && m2) swap(m1->val, m2->val);
     }
 };
 
