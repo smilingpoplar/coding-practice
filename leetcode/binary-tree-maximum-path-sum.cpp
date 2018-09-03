@@ -20,26 +20,23 @@ struct TreeNode {
 class Solution {
 public:
     int maxPathSum(TreeNode* root) {
-        // 通过某节点的maxPathSum有三种：1.往左子树延伸 2.往右子树延伸 3.跨左右子树
-        // 都需要求子树中的子问题：从root开始的路径的maxSubPathSum
-        int maxPathSum = INT_MIN;
-        maxSubPathSum(root, maxPathSum);
-        return maxPathSum;
+        int ans = INT_MIN;
+        arrowSum(root, ans);
+        return ans;
     }
-private:
-    int maxSubPathSum(TreeNode *root, int &maxPathSum) {
+
+    int arrowSum(TreeNode *root, int &ans) {
+        // 从root往左向下或往右向下的路径和
         if (!root) return 0;
-        int left = maxSubPathSum(root->left, maxPathSum);
-        int right = maxSubPathSum(root->right, maxPathSum);
-        int maxSubPathSum = root->val + max(0, max(left, right));
+        int leftSub = arrowSum(root->left, ans);
+        int rightSub = arrowSum(root->right, ans);
+        int arrow = root->val + max({0, leftSub, rightSub});
         
-        // 正好在递归过程中求maxPathSum
-        int pathSum = root->val;
-        if (left > 0) pathSum += left;
-        if (right > 0) pathSum += right;
-        maxPathSum = max(maxPathSum, pathSum);
+        // 后序遍历，更新ans
+        int pathSum = root->val + max(0, leftSub) + max(0, rightSub);
+        ans = max(ans, pathSum);
         
-        return maxSubPathSum;
+        return arrow;
     }
 };
 
