@@ -41,27 +41,27 @@ public:
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        // morris中序遍历，用中序遍历前驱节点的右指针prev->right表示左子树是否已访问
-        // prev->right为空 => 左子树未访问，记住要返回到当前节点，进入左子树
-        // prev->right非空 => 左子树已访问，清空prev->right，访问当前节点，进入右子树
+        // morris中序遍历，用中序遍历前驱节点的右指针pred->right表示左子树是否已访问
+        // pred->right==NULL => 左子树未访问，记住要返回到当前节点，进入左子树
+        // pred->right!=NULL => 左子树已访问，清空pred->right，访问当前节点，进入右子树
         vector<int> ans;
         auto curr = root;
-        TreeNode *prev = NULL;
+        TreeNode *pred = NULL;
         while (curr) {
             if (!curr->left) {
                 ans.push_back(curr->val); // 访问当前节点
                 curr = curr->right;
             } else {
-                // 找到中序遍历前驱节点（左子树的最右节点）
-                prev = curr->left;
-                while (prev->right && prev->right != curr) {
-                    prev = prev->right;
+                // 中序遍历前驱节点（左子树的最右节点）
+                pred = curr->left;
+                while (pred->right && pred->right != curr) {
+                    pred = pred->right;
                 }
-                if (!prev->right) { // 左子树未访问
-                    prev->right = curr;
+                if (!pred->right) { // 左子树未访问
+                    pred->right = curr;
                     curr = curr->left;
-                } else { // 左子树已访问过
-                    prev->right = NULL;
+                } else { // 左子树已访问
+                    pred->right = NULL;
                     ans.push_back(curr->val);
                     curr = curr->right;
                 }
