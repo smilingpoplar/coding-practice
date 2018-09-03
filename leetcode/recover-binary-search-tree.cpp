@@ -22,30 +22,26 @@ struct TreeNode {
 class Solution {
 public:
     void recoverTree(TreeNode* root) {
-        // 中序遍历，O(n)空间
-        // 用栈模拟，用current表示调用栈[current,stack]的栈顶
-        vector<TreeNode *> inorder;
-        auto current = root;
-        vector<TreeNode *> stack;
-        while (current || !stack.empty()) {
-            if (current) {
-                stack.push_back(current);
-                current = current->left;
-            } else {
-                current = stack.back();
-                stack.pop_back();
-                inorder.push_back(current);
-                current = current->right;
+        // 中序遍历
+        auto curr = root;
+        stack<TreeNode *> stk;
+        TreeNode *prev = NULL, *m1 = NULL, *m2 = NULL;
+        while (curr || !stk.empty()) {
+            while (curr) {
+                stk.push(curr);
+                curr = curr->left;
             }
+            // 找出违反递增关系的首尾节点
+            auto node = stk.top(); stk.pop();
+            if (prev && prev->val >= node->val) {
+                if (!m1) m1 = prev;
+                m2 = node;
+            }
+            prev = node;
+            curr = node->right;
         }
-        const int N = (int)inorder.size();
-        // 找出违反递增趋势的第一个和最后一个节点
-        int i = 0;
-        while (i < N - 1 && inorder[i]->val <= inorder[i + 1]->val) ++i;
-        int j = N - 1;
-        while (j > 0 && inorder[j]->val >= inorder[j - 1]->val) --j;
-        if (i >= N - 1 || j <= 0) return;
-        swap(inorder[i]->val, inorder[j]->val);
+        
+        if (m1 && m2) swap(m1->val, m2->val);
     }
 };
 */
