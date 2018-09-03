@@ -28,12 +28,12 @@ public:
     int arrowSum(TreeNode *root, int &ans) {
         // 从root往左向下或往右向下的路径和
         if (!root) return 0;
-        int leftSub = arrowSum(root->left, ans);
-        int rightSub = arrowSum(root->right, ans);
-        int arrow = root->val + max({0, leftSub, rightSub});
+        int left = arrowSum(root->left, ans);
+        int right = arrowSum(root->right, ans);
+        int arrow = root->val + max({0, left, right});
         
         // 后序遍历，更新ans
-        int pathSum = root->val + max(0, leftSub) + max(0, rightSub);
+        int pathSum = root->val + max(0, left) + max(0, right);
         ans = max(ans, pathSum);
         
         return arrow;
