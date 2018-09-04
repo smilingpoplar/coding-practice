@@ -22,9 +22,8 @@ class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
         if (!root) return NULL;
-        swap(root->left, root->right);
-        root->left = invertTree(root->left);
-        root->right = invertTree(root->right);
+        auto left = invertTree(root->left), right = invertTree(root->right);
+        root->left = right, root->right = left;
         return root;
     }
 };
@@ -34,20 +33,19 @@ public:
 
 class Solution {
 public:
-    TreeNode* invertTree(TreeNode* root) {
-        // 使用栈的通用图遍历算法就是dfs中的先序遍历
-        stack<TreeNode *> stk;
-        if (root) stk.push(root);
-        while (!stk.empty()) {
-            auto node = stk.top();
-            stk.pop();
-            swap(node->left, node->right);
-            
-            if (node->left) stk.push(node->left);
-            if (node->right) stk.push(node->right);
+        TreeNode* invertTree(TreeNode* root) {
+            // 用栈的图遍历
+            stack<TreeNode *> stk;
+            if (root) stk.push(root);
+            while (!stk.empty()) {
+                auto node = stk.top(); stk.pop();
+                swap(node->left, node->right);
+                
+                if (node->left) stk.push(node->left);
+                if (node->right) stk.push(node->right);
+            }
+            return root;
         }
-        return root;
-    }
 };
 
 void print(TreeNode *root) {
