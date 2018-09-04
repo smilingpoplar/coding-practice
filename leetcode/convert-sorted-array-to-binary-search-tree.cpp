@@ -21,17 +21,16 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        return sortedArrayToBST(nums, 0, (int)nums.size());
+        return convert(nums, 0, (int)nums.size() - 1);
     }
-private:
-    // 将nums[start,end)变为bst
-    TreeNode* sortedArrayToBST(const vector<int>& nums, int start, int end) {
-        if (start >= end) return NULL;
-        int mid = start + (end - start) / 2;
-        auto node = new TreeNode(nums[mid]);
-        node->left = sortedArrayToBST(nums, start, mid);
-        node->right = sortedArrayToBST(nums, mid + 1, end);
-        return node;
+    
+    TreeNode* convert(const vector<int>& nums, int low, int high) {
+        if (low > high) return NULL;
+        int mid = low + (high - low) / 2;
+        auto root = new TreeNode(nums[mid]);
+        root->left = convert(nums, low, mid - 1);
+        root->right = convert(nums, mid + 1, high);
+        return root;
     }
 };
 

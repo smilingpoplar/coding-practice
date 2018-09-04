@@ -21,27 +21,28 @@ struct TreeNode {
 class Solution {
 public:
     vector<string> binaryTreePaths(TreeNode *root) {
-        vector<string> result;
-        vector<string> values;
-        dfs(root, values, result);
-        return result;
+        vector<string> ans;
+        vector<int> path;
+        dfs(root, path, ans);
+        return ans;
     }
-private:
-    void dfs(TreeNode *root, vector<string> &values, vector<string> &result) {
+
+    void dfs(TreeNode *root, vector<int> &path, vector<string> &ans) {
         if (!root) return;
-        values.push_back(to_string(root->val));
+
+        path.push_back(root->val);
         if (!root->left && !root->right) {
-            string path;
-            for (int i = 0; i < values.size(); i++) {
-                if (i > 0) path += "->";
-                path += values[i];
+            string s;
+            for (int i = 0; i < path.size(); i++) {
+                if (i > 0) s += "->";
+                s += to_string(path[i]);
             }
-            result.push_back(path);
+            ans.push_back(s);
         } else {
-            dfs(root->left, values, result);
-            dfs(root->right, values, result);
+            dfs(root->left, path, ans);
+            dfs(root->right, path, ans);
         }
-        values.pop_back();
+        path.pop_back();
     }
 };
 
@@ -55,8 +56,8 @@ int main(int argc, const char * argv[]) {
     t0.left = &t01;
     
     Solution solution;
-    auto result = solution.binaryTreePaths(&t);
-    for (auto path : result) {
+    auto ans = solution.binaryTreePaths(&t);
+    for (auto path : ans) {
         cout << path << " ";
     }
     
