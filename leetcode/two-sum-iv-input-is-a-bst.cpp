@@ -22,15 +22,15 @@ using namespace std;
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        unordered_set<int> st;
-        return dfs(root, k, st);
+        unordered_set<int> seen;
+        return dfs(root, k, seen);
     }
     
-    bool dfs(TreeNode* root, int k, unordered_set<int> &st) {
+    bool dfs(TreeNode* root, int k, unordered_set<int> &seen) {
         if (!root) return false;
-        if (st.count(k - root->val)) return true;
-        st.insert(root->val);
-        return dfs(root->left, k, st) || dfs(root->right, k, st);
+        if (seen.count(k - root->val)) return true;
+        seen.insert(root->val);
+        return dfs(root->left, k, seen) || dfs(root->right, k, seen);
     }
 };
 

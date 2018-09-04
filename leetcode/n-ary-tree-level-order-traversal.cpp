@@ -39,7 +39,7 @@ public:
                 auto top = Q.front(); Q.pop();
                 row.push_back(top->val);
                 for (auto child : top->children)
-                    Q.push(child);                
+                    if (child) Q.push(child);                
             }
             ans.push_back(row);
         }
