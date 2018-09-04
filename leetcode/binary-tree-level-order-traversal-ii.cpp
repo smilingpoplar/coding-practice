@@ -22,24 +22,23 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
-        vector<vector<int>> result;
-        queue<TreeNode *> queue;
-        if (root) queue.push(root);
-        while (!queue.empty()) {
-            vector<int> level;
-            const int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; i++) {
-                auto node = queue.front();
-                queue.pop();
-                level.push_back(node->val);
+        vector<vector<int>> ans;
+        queue<TreeNode *> q;
+        if (root) q.push(root);
+        while (!q.empty()) {
+            const int sz = q.size();
+            vector<int> row;
+            for (int i = 0; i < sz; i++) {
+                auto node = q.front(); q.pop();
+                row.push_back(node->val);
                 
-                if (node->left) queue.push(node->left);
-                if (node->right) queue.push(node->right);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
-            result.push_back(level);
+            ans.push_back(row);
         }
-        reverse(result.begin(), result.end()); // 比binary-tree-level-order-traversal多一行
-        return result;
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
 
@@ -55,8 +54,8 @@ int main(int argc, const char * argv[]) {
     t1r.right = &t2r;
     
     Solution solution;
-    auto result = solution.levelOrderBottom(&t0);
-    for (const auto &level : result) {
+    auto ans = solution.levelOrderBottom(&t0);
+    for (const auto &level : ans) {
         for (int num : level) {
             cout << num << " ";
         }
