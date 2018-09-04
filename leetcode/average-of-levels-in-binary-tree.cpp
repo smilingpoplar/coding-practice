@@ -24,17 +24,16 @@ public:
     vector<double> averageOfLevels(TreeNode* root) {
         vector<double> ans;
         if (!root) return ans;
-        queue<TreeNode *> Q;
-        Q.push(root);
-        while (!Q.empty()) {
-            int n = Q.size();
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty()) {
+            int n = q.size();
             double sum = 0;
             for (int i = 0; i < n; i++) {
-                auto node = Q.front();
-                Q.pop();
+                auto node = q.front(); q.pop();
                 sum += node->val;
-                if (node->left) Q.push(node->left);
-                if (node->right) Q.push(node->right);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
             ans.push_back(sum / n);
         }
