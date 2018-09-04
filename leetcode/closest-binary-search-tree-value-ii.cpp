@@ -23,15 +23,15 @@ using namespace std;
 class Solution {
 public:
     vector<int> closestKValues(TreeNode* root, double target, int k) {
-        // 前驱栈pre和后继栈succ
-        stack<TreeNode *> pre, succ;
+        // 前驱栈pred和后继栈succ
+        stack<TreeNode *> pred, succ;
         auto p = root;
         while (p) {
             if (target < p->val) {
                 succ.push(p);
                 p = p->left;
             } else {
-                pre.push(p);
+                pred.push(p);
                 p = p->right;
             }
         }
@@ -39,9 +39,9 @@ public:
         vector<int> ans;
         while (k--) {
             // 往两端的两指针
-            if (succ.empty() || (!pre.empty() && target - pre.top()->val < succ.top()->val - target)) { // 选前驱
-                ans.push_back(pre.top()->val);
-                getPredecessor(pre);
+            if (succ.empty() || (!pred.empty() && target - pred.top()->val < succ.top()->val - target)) { // 选前驱
+                ans.push_back(pred.top()->val);
+                getPredecessor(pred);
             } else {
                 ans.push_back(succ.top()->val);
                 getSuccessor(succ);
@@ -51,11 +51,11 @@ public:
     }
     
     // 类似i--，到左子树最右儿子的路径
-    void getPredecessor(stack<TreeNode *> &pre) {
-        auto top = pre.top(); pre.pop();
+    void getPredecessor(stack<TreeNode *> &pred) {
+        auto top = pred.top(); pred.pop();
         auto p = top->left;
         while (p) {
-            pre.push(p);
+            pred.push(p);
             p = p->right;
         }
     }

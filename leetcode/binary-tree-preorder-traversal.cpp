@@ -22,7 +22,7 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        // 使用栈的图遍历算法就是先序遍历
+        // 使用栈的图遍历
         vector<int> ans;
         stack<TreeNode *> stk;
         if (root) stk.push(root);
