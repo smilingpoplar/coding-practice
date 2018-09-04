@@ -21,20 +21,22 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        unordered_map<int, int> mp; // val => idx
-        for (int i = 0; i < inorder.size(); i++) 
-            mp[inorder[i]] = i;
-        return buildTree(preorder, inorder, 0, 0, preorder.size(), mp);
+        unordered_map<int, int> inMp; // val => idx
+        const int N = inorder.size();
+        for (int i = 0; i < N; i++) inMp[inorder[i]] = i;
+        
+        return buildTree(N, preorder, 0, inorder, 0, inMp);
     }
     
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder, int pi, int ii,
-                        int len, unordered_map<int, int> &mp) {
-        if (len <= 0) return NULL;
+    // preorder[pi, pi+N)、inorder[ii, ii+N) 
+    TreeNode* buildTree(int N, vector<int>& preorder, int pi, 
+                vector<int>& inorder, int ii, unordered_map<int, int> &inMp) {
+        if (N <= 0) return NULL;
         int val = preorder[pi];
         auto root = new TreeNode(val);
-        int leftLen = mp[val] - ii, rightLen = len - 1 - leftLen;
-        root->left = buildTree(preorder, inorder, pi + 1, ii, leftLen, mp);
-        root->right = buildTree(preorder, inorder, pi + 1 + leftLen, ii + leftLen + 1, rightLen, mp);
+        int leftN = inMp[val] - ii, rightN = N - 1 - leftN;
+        root->left = buildTree(leftN, preorder, pi + 1, inorder, ii, inMp);
+        root->right = buildTree(rightN, preorder, pi + 1 + leftN, inorder, ii + leftN + 1, inMp);
         return root;
     }
 };
