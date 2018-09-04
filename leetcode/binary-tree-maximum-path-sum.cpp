@@ -25,14 +25,14 @@ public:
         return ans;
     }
 
+    // 返回从root向下的最大路径和
     int arrowSum(TreeNode *root, int &ans) {
-        // 从root往左向下或往右向下的路径和
         if (!root) return 0;
         int left = arrowSum(root->left, ans);
         int right = arrowSum(root->right, ans);
         int arrow = root->val + max({0, left, right});
         
-        // 后序遍历，更新ans
+        // 经过root的最大路径和
         int pathSum = root->val + max(0, left) + max(0, right);
         ans = max(ans, pathSum);
         
