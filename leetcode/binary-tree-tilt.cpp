@@ -22,19 +22,18 @@ using namespace std;
 class Solution {
 public:
     int findTilt(TreeNode* root) {
-        int tilt = 0;
-        sum(root, tilt);
-        return tilt;
+        int ans = 0;
+        getSum(root, ans);
+        return ans;
     }
     
-    int sum(TreeNode* root, int &tilt) {
+    int getSum(TreeNode* root, int &ans) {
         if (!root) return 0;
-        int leftSum = sum(root->left, tilt);
-        int rightSum = sum(root->right, tilt);
-        tilt += abs(leftSum - rightSum);
-        return root->val + leftSum + rightSum;
+        int left = getSum(root->left, ans);
+        int right = getSum(root->right, ans);
+        ans += abs(left - right);
+        return root->val + left + right;
     }
-    
 };
 
 int main(int argc, const char * argv[]) {    
