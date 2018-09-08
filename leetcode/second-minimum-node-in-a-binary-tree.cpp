@@ -23,20 +23,20 @@ class Solution {
 public:
     int findSecondMinimumValue(TreeNode* root) {
         if (!root) return -1;
-        // 父节点是子节点中较小的，该题只要找比根节点大的数
-        return largerThan(root, root->val);
+        int min1 = root->val, min2 = INT_MAX;
+        dfs(root, min1, min2);
+        return min2 != INT_MAX ? min2 : -1;
     }
     
-    // 找比target大的最小数
-    int largerThan(TreeNode *root, int target) {
-        if (!root) return -1;
-        if (root->val > target) return root->val;
-        
-        int left = largerThan(root->left, target);
-        int right = largerThan(root->right, target);
-        if (left != -1 && right != -1) return min(left, right);
-        if (left != -1) return left;
-        return right;
+    // 已知该树中，root->val >= min1
+    void dfs(TreeNode* root, int min1, int &min2) {
+        if (!root) return;
+        if (root->val == min1) {
+            dfs(root->left, min1, min2);
+            dfs(root->right, min1, min2);
+        } else if (root->val < min2) {
+            min2 = root->val;
+        }
     }
 };
 

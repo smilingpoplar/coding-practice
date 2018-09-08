@@ -20,13 +20,12 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
-        // p和q都在树中则返回lca，只一个在树中则返回p或q，都不在树中则返回null
-        if (!root) return NULL;
-        if (root == p || root == q) return root; // 当前节点就是lca
+        // p和q都在树中则返回lca，只一个在树中则返回p或q，都不在树中则返回NULL
+        if (!root || root == p || root == q) return root;
         
         auto left = lowestCommonAncestor(root->left, p, q);
         auto right = lowestCommonAncestor(root->right, p, q);
-        if (left && right) return root; // p和q分别在左右子树中，当前节点就是lca
+        if (left && right) return root; // p和q分别在左右子树，root就是lca
         return left ? left : right; // lca来自某个子树
     }
 };
