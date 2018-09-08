@@ -49,7 +49,6 @@ public:
     TreeNode* decode(istringstream &iss) {
         string s;
         iss >> s;
-        if (!iss) return NULL;
         if (s == "x") return NULL;
 
         auto root = new TreeNode(stoi(s));
