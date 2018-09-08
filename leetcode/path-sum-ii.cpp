@@ -33,8 +33,8 @@ public:
         if (!root->left && !root->right && root->val == sum) {
             ans.push_back(path);
         }
-        searchFrom(root->left, sum - root->val, path, ans);
-        searchFrom(root->right, sum - root->val, path, ans);
+        if (root->left) searchFrom(root->left, sum - root->val, path, ans);
+        if (root->right) searchFrom(root->right, sum - root->val, path, ans);
         path.pop_back();
     }
 };
