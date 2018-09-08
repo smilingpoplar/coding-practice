@@ -1,6 +1,6 @@
 //
-  //  the-maze-iii
-  //  https://leetcode.com/problems/the-maze-iii/
+//  the-maze-iii
+//  https://leetcode.com/problems/the-maze-iii/
 //
 //  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -28,8 +28,7 @@ public:
     string findShortestWay(vector<vector<int>>& maze, vector<int>& ball, vector<int>& hole) {
         // dijkstra算法，用优先队列，下一位置是向四个方向前进到碰墙处
         if (maze.empty()) return "";
-        const int M = maze.size();
-        const int N = maze[0].size();
+        const int M = maze.size(), N = maze[0].size();
         priority_queue<Info> pq;
         pq.push({ball[0], ball[1], 0, ""});
         vector<vector<bool>> visited(M, vector<bool>(N, false));

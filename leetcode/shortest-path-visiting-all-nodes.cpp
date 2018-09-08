@@ -17,35 +17,28 @@ public:
         // 要判断是否已访问所有节点，故将所有节点的访问状态编码成二进制mask。
         // 设当前节点为curr，state=(mask,curr)是bfs的"状态节点"。
         const int N = graph.size();
-        const int MASK_ALL_NODES = (1 << N) - 1;
-        using State = vector<int>;
+        const int MASK_TARGET = (1 << N) - 1;
         
-        queue<State> q;
-        set<State> visited;
+        vector<vector<bool>> visited(1 << N, vector<bool>(N, false));
+        queue<pair<int, int>> q;
         for (int i = 0; i < N; i++) {
-            State state({1 << i, i});
-            q.push(state);
-            visited.insert(state);
+            q.push({1 << i, i});
         }
         
-        int dist = 0;
-        while (!q.empty()) {
-            int sz = q.size();
-            for (int i = 0; i < sz; i++) {
-                auto state = q.front(); q.pop();
-                int mask = state[0], curr = state[1];
-                if (mask == MASK_ALL_NODES) return dist;
-
+        for (int dist = 0; !q.empty(); dist++) {
+            for (int sz = q.size(); sz > 0; sz--) {
+                auto state = q.front(); q.pop();                
+                int mask = state.first, curr = state.second;
+                if (visited[mask][curr]) continue;
+                visited[mask][curr] = true;
+                
+                if (mask == MASK_TARGET) return dist;
                 for (auto next : graph[curr]) {
-                    State nextState({mask | (1 << next), next});
-                    if (visited.count(nextState)) continue;
-                    q.push(nextState);
-                    visited.insert(nextState);
+                    q.push({mask | (1 << next), next});
                 }
             }
-            dist++;
         }
-        return dist;
+        return -1;
     }
 };
 
