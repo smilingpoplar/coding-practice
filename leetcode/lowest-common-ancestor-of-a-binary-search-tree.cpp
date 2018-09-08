@@ -20,21 +20,19 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
-        // bst左子树节点的值 <= 根节点的值，右子树节点的值 > 根节点的值
+        // 找值在p、q间的节点
         if (!root || !p || !q) return NULL;
-        if (p->val > q->val) swap(p, q); // p.val <= q.val
-        while (true) {
+        if (p->val > q->val) swap(p, q); // p.val < q.val
+        while (root) {
             if (root->val < p->val) {
                 root = root->right;
             } else if (root->val > q->val) {
                 root = root->left;
-            } else if (p->val == q->val && root != p && root != q) { // p.val==q.val时，p和q应在同一条左链上
-                root = root->left;
             } else {
-                return root;
+                break;
             }
         }
-        return NULL;
+        return root;
     }
 };
 
