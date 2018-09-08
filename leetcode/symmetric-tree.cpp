@@ -25,13 +25,13 @@ public:
         if (!root) return true;
         return isSymmetric(root->left, root->right);
     }
-private:
+
     bool isSymmetric(TreeNode *left, TreeNode *right) {
         if (!left && !right) return true;
         if (!left || !right) return false;
         return left->val == right->val
-        && isSymmetric(left->left, right->right)
-        && isSymmetric(left->right, right->left);
+            && isSymmetric(left->left, right->right)
+            && isSymmetric(left->right, right->left);
     }
 };
 */
@@ -41,23 +41,21 @@ class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
         if (!root) return true;
-        queue<TreeNode *> queue;
-        queue.push(root->left);
-        queue.push(root->right);
-        while (!queue.empty()) {
-            auto left = queue.front();
-            queue.pop();
-            auto right = queue.front();
-            queue.pop();
+        queue<TreeNode *> q;
+        q.push(root->left);
+        q.push(root->right);
+        while (!q.empty()) {
+            auto left = q.front(); q.pop();
+            auto right = q.front(); q.pop();
             if (!left && !right) continue;
             if (!left || !right) return false;
             if (left->val != right->val) return false;
             
-            queue.push(left->left);
-            queue.push(right->right);
+            q.push(left->left);
+            q.push(right->right);
             
-            queue.push(left->right);
-            queue.push(right->left);
+            q.push(left->right);
+            q.push(right->left);
         }
         return true;
     }

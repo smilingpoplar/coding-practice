@@ -17,27 +17,18 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 class Solution {
 public:
     /*
     // 递归
     int countNodes(TreeNode* root) {
         if (!root) return 0;
-        int leftHeight = getHeight(root->left);
-        int rightHeight = getHeight(root->right);
-        if (leftHeight == rightHeight) { // 左子树是满二叉树
-            return (1 << leftHeight) + countNodes(root->right);
+        int leftH = getHeight(root->left);
+        int rightH = getHeight(root->right);
+        if (leftH == rightH) { // 左子树是满二叉树，左子树和根节点共(2^leftH-1)+1
+            return (1 << leftH) + countNodes(root->right);
         } else { // 右子树是满二叉树
-            return (1 << rightHeight) + countNodes(root->left);
+            return (1 << rightH) + countNodes(root->left);
         }
     }
     */
@@ -45,24 +36,24 @@ public:
     int countNodes(TreeNode* root) {
         int count = 0;
         while (root) {
-            int leftHeight = getHeight(root->left);
-            int rightHeight = getHeight(root->right);
-            if (leftHeight == rightHeight) { // 左子树是满二叉树
-                count += (1 << leftHeight); // 左子树和根节点，(2^h-1)+1
+            int leftH = getHeight(root->left);
+            int rightH = getHeight(root->right);
+            if (leftH == rightH) { // 左子树是满二叉树
+                count += (1 << leftH); // 左子树和根节点共(2^leftH-1)+1
                 root = root->right;
             } else { // 右子树是满二叉树
-                count += (1 << rightHeight);
+                count += (1 << rightH);
                 root = root->left;
             }
         }
         return count;
     }
-private:
+
     int getHeight(TreeNode *root) {
         int height = 0;
         while (root) {
             root = root->left;
-            ++height;
+            height++;
         }
         return height;
     }

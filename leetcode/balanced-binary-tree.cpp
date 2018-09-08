@@ -20,14 +20,14 @@ struct TreeNode {
 class Solution {
 public:
     bool isBalanced(TreeNode *root) {
-        return balancedHeight(root) >= 0;
+        return getHeight(root) >= 0;
     }
-private:
-    int balancedHeight(TreeNode *root) {
-        // 返回树的高度（balanced）或返回-1（non-balanced）
+
+    // 返回树的高度（balanced）或返回-1（non-balanced）
+    int getHeight(TreeNode *root) {
         if (!root) return 0;
-        int left = balancedHeight(root->left);
-        int right = balancedHeight(root->right);
+        int left = getHeight(root->left);
+        int right = getHeight(root->right);
         if (left < 0 || right < 0 || abs(left - right) > 1) return -1;
         return 1 + max(left, right);
     }

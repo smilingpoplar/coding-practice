@@ -23,7 +23,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> findMode(TreeNode* root) {
-        // 先序遍历，是有序数组，找连续最多的元素
+        // bst中找众数，先序遍历找连续出现最多的数
         vector<int> ans;
         int prev = INT_MIN;
         int count = 0, maxCount = INT_MIN;
@@ -35,11 +35,11 @@ public:
         if (!root) return;
         inorder(root->left, prev, count, maxCount, ans);
 
-        if (root->val == prev) count++;
-        else count = 1;
+        if (root->val != prev) count = 1;
+        else count++;
         if (count > maxCount) {
-            ans = { root->val };
             maxCount = count;
+            ans = { root->val };
         } else if (count == maxCount) {
             ans.push_back(root->val);
         }

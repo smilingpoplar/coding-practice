@@ -25,7 +25,7 @@ public:
         return ans;
     }
 
-    // 返回从root向下的最大路径和
+    // 返回从root往下的最大路径和
     int arrowSum(TreeNode *root, int &ans) {
         if (!root) return 0;
         int left = arrowSum(root->left, ans);
