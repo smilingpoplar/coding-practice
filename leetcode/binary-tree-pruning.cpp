@@ -23,16 +23,11 @@ using namespace std;
 class Solution {
 public:
     TreeNode* pruneTree(TreeNode* root) {
-        return containsOne(root) ? root : NULL;
-    }
-    
-    bool containsOne(TreeNode *root) {
-        if (!root) return false;
-        auto left = containsOne(root->left);
-        auto right = containsOne(root->right);
-        if (!left) root->left = NULL;
-        if (!right) root->right = NULL;
-        return (root->val == 1) || left || right;
+        if (!root) return NULL;
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
+        if (!root->left && !root->right && root->val == 0) return NULL;
+        return root;
     }
 };
 

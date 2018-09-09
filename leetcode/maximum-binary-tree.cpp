@@ -22,19 +22,19 @@ using namespace std;
 class Solution {
 public:
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        return construct(nums, 0, nums.size() - 1);
+        return construct(nums, 0, (int)nums.size() - 1);
     }
     
     TreeNode* construct(vector<int>& nums, int left, int right) {
         if (left > right) return nullptr;
-        int maximum = INT_MIN, idx;
+        int maxNum = INT_MIN, idx;
         for (int i = left; i <= right; i++) {
-            if (nums[i] > maximum) {
-                maximum = nums[i];
+            if (nums[i] > maxNum) {
+                maxNum = nums[i];
                 idx = i;
             }
         }
-        auto root = new TreeNode(maximum);
+        auto root = new TreeNode(maxNum);
         root->left = construct(nums, left, idx - 1);
         root->right = construct(nums, idx + 1, right);
         return root;

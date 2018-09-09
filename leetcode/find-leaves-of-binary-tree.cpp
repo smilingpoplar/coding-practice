@@ -28,7 +28,7 @@ public:
         return ans;
     }
     
-    // 叶节点高度0，越往上越高。第h高节点输出到ans[h]中。
+    // 叶节点高为0，越往上越高，高h节点放到ans[h]中
     int getHeight(TreeNode *root, vector<vector<int>> &ans) {
         if (!root) return -1;
         auto left = getHeight(root->left, ans);
