@@ -23,8 +23,7 @@ struct TreeNode {
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        // 中序遍历，O(n)时间
-        // 用栈模拟，用curr表示当前待入栈的元素
+        // 中序遍历，复杂度O(k)
         if (k <= 0) return INT_MIN;
         auto curr = root;
         stack<TreeNode *> stk;
@@ -34,7 +33,7 @@ public:
                 stk.push(curr);
                 curr = curr->left;
             }
-            curr = stk.top();  stk.pop();
+            curr = stk.top(); stk.pop();
             count++;
             if (count == k) return curr->val;
             curr = curr->right;
@@ -47,7 +46,7 @@ public:
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        // 找第k小，用二分搜索
+        // 二分搜索，复杂度O(n)
         if (!root || k <= 0) return INT_MIN;
         int leftCount = countNodes(root->left);
         if (k <= leftCount) {
