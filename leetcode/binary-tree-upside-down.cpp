@@ -23,12 +23,15 @@ using namespace std;
 class Solution {
 public:
     TreeNode* upsideDownBinaryTree(TreeNode* root) {
-        // 这个变换相当于把头左转90度看这棵树，左下角节点变成新的根
-        // 递归，假设本函数能处理好左子树，只需关注当前节点和左右节点的关系变换
+        // 已知右节点为叶节点、此时左节点非空，或右节点为空。
+        // 此题要将二叉树右转90度：左节点变根节点、右节点变左节点、根节点变右节点。
+        // 递归，假设本函数能处理好左子树，只需考虑当前节点、左节点、右节点这三者的关系。
         if (!root || !root->left) return root;
         auto newRoot = upsideDownBinaryTree(root->left);
-        root->left->left = root->right; // left child of node2
-        root->left->right = root; // right child of node2
+        // root->left变成root->right、root的父节点
+        root->left->left = root->right;
+        root->left->right = root;
+        // 切断root的左右节点链接
         root->left = root->right = NULL;
         return newRoot;
     }

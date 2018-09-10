@@ -23,24 +23,25 @@ using namespace std;
 class Solution {
 public:
     vector<int> findFrequentTreeSum(TreeNode* root) {
-        unordered_map<int, int> sumToCount;
-        postOrder(root, sumToCount);
+        unordered_map<int, int> sumCnt; // sum => cnt
+        getSum(root, sumCnt);
+
         vector<int> ans;
-        int maxCount = 0;
-        for (auto &e : sumToCount) {
-            if (e.second > maxCount) {
+        int maxCnt = 0;
+        for (auto &e : sumCnt) {
+            if (e.second > maxCnt) {
                 ans = { e.first };
-                maxCount = e.second;
-            } else if (e.second == maxCount) {
+                maxCnt = e.second;
+            } else if (e.second == maxCnt) {
                 ans.push_back(e.first);
             }
         }
         return ans;
     }
     
-    int postOrder(TreeNode *root, unordered_map<int, int> &mp) {
+    int getSum(TreeNode *root, unordered_map<int, int> &mp) {
         if (!root) return 0;
-        int val = root->val + postOrder(root->left, mp) + postOrder(root->right, mp);
+        int val = root->val + getSum(root->left, mp) + getSum(root->right, mp);
         mp[val]++;
         return val;
     }
