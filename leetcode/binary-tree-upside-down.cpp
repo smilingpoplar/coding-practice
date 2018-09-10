@@ -25,7 +25,7 @@ public:
     TreeNode* upsideDownBinaryTree(TreeNode* root) {
         // 已知右节点为叶节点、左节点非空，或右节点为空。
         // 此题要将二叉树右转90度：左节点变根节点、右节点变左节点、根节点变右节点。
-        // 递归，假设本函数能处理好左子树，只需考虑根节点、左节点、右节点这三者的关系变换。
+        // 假设本函数能处理好左子树，只需考虑根节点、左节点、右节点这三者的关系。
         if (!root || !root->left) return root;
         auto newRoot = upsideDownBinaryTree(root->left);
         // root->left变成root->right、root的父节点
