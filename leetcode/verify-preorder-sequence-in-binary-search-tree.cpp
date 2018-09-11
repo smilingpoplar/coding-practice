@@ -17,15 +17,15 @@ public:
         return verify(preorder, 0, preorder.size(), INT_MIN, INT_MAX);
     }
     
-    // 用(lower, upper)值边界判断A[sIdx..eIdx)
-    bool verify(vector<int> &A, int sIdx, int eIdx, int lower, int upper) {
-        if (sIdx >= eIdx) return true;
-        int rootVal = A[sIdx];
-        if (rootVal <= lower || rootVal >= upper) return false;
-        int i = sIdx + 1;
-        while (i < eIdx && A[i] < rootVal) i++;
-        if (!verify(A, sIdx + 1, i, lower, rootVal)) return false;
-        if (!verify(A, i, eIdx, rootVal, upper)) return false;
+    // 用(lower, upper)边界法判断A[start..end)
+    bool verify(vector<int> &A, int start, int end, int lower, int upper) {
+        if (start >= end) return true;
+        int val = A[start];
+        if (val <= lower || val >= upper) return false;
+        int i = start + 1;
+        while (i < end && A[i] < val) i++;
+        if (!verify(A, start + 1, i, lower, val)) return false;
+        if (!verify(A, i, end, val, upper)) return false;
         return true;
     }
 };
