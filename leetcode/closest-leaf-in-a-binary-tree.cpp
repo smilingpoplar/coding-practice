@@ -23,18 +23,17 @@ using namespace std;
 class Solution {
 public:
     int findClosestLeaf(TreeNode* root, int k) {
-        // 题目的意思是：树中肯定有一个节点值为k，找出离这个节点最近的叶节点值
-        // 路径可沿边上下前进，其实就是把这树当作无向图，用bfs找最短路径
-        // 当作无向图的话，节点最多三个邻接点：lchild, rchild, parent
+        // 题目：树中有一个节点值为k，找出离这个节点最近的叶节点值
+        // 可沿边上下运动，其实就是把这树当作无向图，用bfs找最短路径
 
         // 先dfs创建无向图，同时找出k节点（用后序遍历）
         unordered_map<TreeNode *, vector<TreeNode *>> adj;
-        auto kNode = dfs(root, k, adj);
+        auto theKNode = dfs(root, k, adj);
         
         queue<TreeNode *> q;
-        q.push(kNode);
+        q.push(theKNode);
         unordered_set<TreeNode *> visited;
-        visited.insert(kNode);
+        visited.insert(theKNode);
         
         while (!q.empty()) {
             auto u = q.front(); q.pop();
@@ -49,10 +48,8 @@ public:
         return INT_MIN;
     }
     
-    TreeNode *dfs(TreeNode *root, int k, unordered_map<TreeNode *, vector<TreeNode *>> &adj) {
+    TreeNode* dfs(TreeNode *root, int k, unordered_map<TreeNode *, vector<TreeNode *>> &adj) {
         if (!root) return NULL;
-        auto left = dfs(root->left, k, adj);
-        auto right = dfs(root->right, k, adj);
         if (root->left) {
             adj[root].push_back(root->left);
             adj[root->left].push_back(root);
@@ -61,7 +58,9 @@ public:
             adj[root].push_back(root->right);
             adj[root->right].push_back(root);
         }
-        if (left) return left;
+        auto left = dfs(root->left, k, adj);
+        auto right = dfs(root->right, k, adj);
+        if (left) return left; // 在左子树中找到k节点
         if (right) return right;
         if (root->val == k) return root;
         return NULL;
