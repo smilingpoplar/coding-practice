@@ -21,7 +21,7 @@ using namespace std;
  * };
  */
 class Solution {
-    struct BstInfo {
+    struct Info {
         int size;
         int lower;
         int upper;
@@ -33,9 +33,9 @@ public:
         return ans;
     }
     
-    BstInfo checkBst(TreeNode *root, int &ans) {
-        // 空节点算bst，值范围为空 [INT_MAX,INT_MIN]
-        // 因为值范围要使它作为左儿子时，父节点的 root->val > upper 总成立，因此upper=INT_MIN；同理，lower=INT_MAX
+    Info checkBst(TreeNode *root, int &ans) {
+        // 空节点算bst，值区间为[INT_MAX,INT_MIN]
+        // 因为空节点作为左儿子时，父节点的root->val > upper总成立，所以upper=INT_MIN；同理，lower=INT_MAX。
         if (!root) return { 0, INT_MAX, INT_MIN };
         auto left = checkBst(root->left, ans);
         auto right = checkBst(root->right, ans);
@@ -44,8 +44,8 @@ public:
         }
         int size = left.size + 1 + right.size;
         ans = max(ans, size);
-        int lower = min(left.lower, root->val); // 正常是left.lower < root->val的，但空节点的left.lower=INT_MAX，所以用min()处理
-        int upper = max(right.upper, root->val); // 同理，用max()处理空节点的情况
+        int lower = min(left.lower, root->val); // 正常是left.lower < root->val，但空节点例外
+        int upper = max(right.upper, root->val);
         return { size, lower, upper };
     }
 };

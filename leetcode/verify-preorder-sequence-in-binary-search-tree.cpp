@@ -17,7 +17,7 @@ public:
         return verify(preorder, 0, preorder.size(), INT_MIN, INT_MAX);
     }
     
-    // 用值边界(lower,upper)判断A[start..end)
+    // 用值区间(lower,upper)判断A[start..end)
     bool verify(vector<int> &A, int start, int end, int lower, int upper) {
         if (start >= end) return true;
         int val = A[start];
