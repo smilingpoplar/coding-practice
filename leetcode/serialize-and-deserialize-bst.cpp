@@ -20,7 +20,6 @@ using namespace std;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-
 class Codec {
 public:
     // Encodes a tree to a single string.
@@ -41,25 +40,22 @@ public:
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
         istringstream iss(data);
-        return decode(iss, INT_MIN, INT_MAX);
+        vector<int> vals;
+        int val;
+        while (iss >> val) {
+            vals.push_back(val);
+        }
+        return decode(vals, 0, vals.size());
     }
     
-    // 利用上下边界[lower, upper]反序列化
-    TreeNode* decode(istringstream &iss, int lower, int upper) {
-        auto pos = iss.tellg();
-        string s;
-        iss >> s;
-        if (!iss) return NULL;
-
-        int val = stoi(s);
-        if (val < lower || val > upper) {
-            iss.seekg(pos);
-            return NULL;
-        }
-        
+    TreeNode* decode(vector<int> &vals, int start, int end) {
+        if (start >= end) return NULL;
+        int val = vals[start];
         auto root = new TreeNode(val);
-        root->left = decode(iss, lower, val);
-        root->right = decode(iss, val, upper);
+        int i = start + 1;
+        while (i < end && vals[i] < val) i++;
+        root->left = decode(vals, start + 1, i);
+        root->right = decode(vals, i, end);
         return root;
     }
 };
