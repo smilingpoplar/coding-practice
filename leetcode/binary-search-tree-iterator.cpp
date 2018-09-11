@@ -37,9 +37,9 @@ public:
                 stk.push(curr);
                 curr = curr->left;
             }
-            curr = stk.top(); stk.pop();
-            int ans = curr->val;
-            curr = curr->right;
+            auto node = stk.top(); stk.pop();
+            int ans = node->val;
+            curr = node->right;
             return ans;
         }
         return INT_MAX;
