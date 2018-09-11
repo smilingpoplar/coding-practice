@@ -23,22 +23,40 @@ class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
         vector<int> ans;
-        queue<TreeNode *> Q;
-        if (root) Q.push(root);
-        while (!Q.empty()) {
-            const int levelSize = Q.size();
+        queue<TreeNode *> q;
+        if (root) q.push(root);
+        while (!q.empty()) {
+            const int levelSize = q.size();
             for (int i = 0; i < levelSize; i++) {
-                auto node = Q.front();
-                Q.pop();
+                auto node = q.front(); q.pop();
                 if (i == levelSize - 1) ans.push_back(node->val);
                 
-                if (node->left) Q.push(node->left);
-                if (node->right) Q.push(node->right);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
         }
         return ans;
     }
 };
+
+/*
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> ans;
+        dfs(root, 0, ans);
+        return ans;
+    }
+    
+    void dfs(TreeNode *root, int level, vector<int> &ans) {
+        if (!root) return;
+        if (level == ans.size()) ans.push_back(root->val);
+        
+        dfs(root->right, level + 1, ans);
+        dfs(root->left, level + 1, ans);
+    }
+};
+*/
 
 int main(int argc, const char * argv[]) {
     TreeNode t0(3);

@@ -22,25 +22,47 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> result;
-        queue<TreeNode *> queue;
-        if (root) queue.push(root);
-        while (!queue.empty()) {
-            vector<int> level;
-            const int levelSize = (int)queue.size();
-            for (int i = 0; i < levelSize; i++) {
-                auto node = queue.front();
-                queue.pop();
-                level.push_back(node->val);
+        vector<vector<int>> ans;
+        queue<TreeNode *> q;
+        if (root) q.push(root);
+        while (!q.empty()) {
+            vector<int> row;
+            for (int sz = q.size(); sz > 0; sz--) {
+                auto node = q.front(); q.pop();
+                row.push_back(node->val);
                 
-                if (node->left) queue.push(node->left);
-                if (node->right) queue.push(node->right);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
-            result.push_back(level);
+            ans.push_back(row);
         }
-        return result;
+        return ans;
     }
 };
+
+/*
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        vector<TreeNode *> curr;
+        if (root) curr.push_back(root);
+        while (!curr.empty()) {
+            vector<TreeNode *> next;
+            vector<int> row;
+            for (auto node : curr) {
+                row.push_back(node->val);
+                
+                if (node->left) next.push_back(node->left);
+                if (node->right) next.push_back(node->right);
+            }
+            ans.push_back(row);
+            swap(curr, next);
+        }
+        return ans;
+    }
+};
+*/
 
 int main(int argc, const char * argv[]) {
     TreeNode t0(3);
@@ -54,9 +76,9 @@ int main(int argc, const char * argv[]) {
     t1r.right = &t2r;
     
     Solution solution;
-    auto result = solution.levelOrder(&t0);
-    for (const auto &level : result) {
-        for (int num : level) {
+    auto ans = solution.levelOrder(&t0);
+    for (auto &row : ans) {
+        for (int num : row) {
             cout << num << " ";
         }
         cout << endl;
