@@ -30,10 +30,12 @@ public:
     
     bool isUnivalue(TreeNode *root, int &ans) {
         if (!root) return true;
-        auto uniLeft = isUnivalue(root->left, ans);
-        auto uniRight = isUnivalue(root->right, ans);
-        if (!uniLeft || (root->left && root->left->val != root->val)) return false;
-        if (!uniRight || (root->right && root->right->val != root->val)) return false;            
+
+        // 左右子树无论如何都要遍历
+        auto left = isUnivalue(root->left, ans);
+        auto right = isUnivalue(root->right, ans);
+        if (!left || (root->left && root->left->val != root->val)) return false;
+        if (!right || (root->right && root->right->val != root->val)) return false;
 
         ans++;
         return true;

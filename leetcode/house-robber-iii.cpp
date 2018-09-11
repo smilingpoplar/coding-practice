@@ -20,43 +20,15 @@ using namespace std;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-/*
 class Solution {
 public:
     int rob(TreeNode* root) {
-        unordered_map<TreeNode *, int> memo;
-        return robSub(root, memo);
-    }
-    
-    int robSub(TreeNode *root, unordered_map<TreeNode *, int> &memo) {
-        if (!root) return 0;
-        if (memo.count(root)) return memo[root];
-        
-        int robRoot = root->val;
-        if (root->left) {
-            robRoot += robSub(root->left->left, memo);
-            robRoot += robSub(root->left->right, memo);
-        }
-        if (root->right) {
-            robRoot += robSub(root->right->left, memo);
-            robRoot += robSub(root->right->right, memo);
-        }
-        memo[root] = max(robRoot, robSub(root->left, memo) + robSub(root->right, memo));
-        return memo[root];
-    }
-};
-*/
-
-class Solution {
-public:
-    // https://leetcode.com/problems/house-robber-iii/discuss/79330/Step-by-step-tackling-of-the-problem
-    int rob(TreeNode* root) {
-        // 问题只有两种状态：抢没抢root，子问题也需返回这两种状态
+        // 问题只有两种状态：抢没抢root
         auto ans = robSub(root);
         return max(ans[0], ans[1]);
     }
     
-    // 设子问题返回没抢ans[0]和抢ans[1]两种情况下各自的最大值
+    // 该函数返回没抢ans[0]和抢ans[1]两种情况下的最大值
     vector<int> robSub(TreeNode *root) {
         if (!root) return { 0, 0 };
         auto left = robSub(root->left);
