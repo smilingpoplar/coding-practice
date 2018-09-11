@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -22,14 +22,13 @@ class Solution {
 public:
     void flatten(TreeNode* root) {
         // 先序遍历
-        vector<TreeNode *> stack;
-        if (root) stack.push_back(root);
+        stack<TreeNode *> stk;
+        if (root) stk.push(root);
         TreeNode *prev = NULL;
-        while (!stack.empty()) {
-            auto node = stack.back();
-            stack.pop_back();
-            if (node->right) stack.push_back(node->right);
-            if (node->left) stack.push_back(node->left);
+        while (!stk.empty()) {
+            auto node = stk.top(); stk.pop();
+            if (node->right) stk.push(node->right);
+            if (node->left) stk.push(node->left);
             
             node->left = node->right = NULL;
             if (prev) prev->right = node;
