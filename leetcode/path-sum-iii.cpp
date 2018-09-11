@@ -31,9 +31,11 @@ public:
     
     int searchFrom(TreeNode *root, int sum) {
         if (!root) return 0;
-        return (root->val == sum ? 1 : 0 )
-            + searchFrom(root->left, sum - root->val) 
-            + searchFrom(root->right, sum - root->val);
+        int ans = 0;
+        if (root->val == sum) ans++;
+        ans += searchFrom(root->left, sum - root->val);
+        ans += searchFrom(root->right, sum - root->val);
+        return ans;
     }
 };
 
