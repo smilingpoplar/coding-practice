@@ -22,19 +22,19 @@ using namespace std;
 class Solution {
 public:
     TreeNode* addOneRow(TreeNode* root, int v, int d) {
-        if (d == 1) {
-            auto node = new TreeNode(v);
-            node->left= root;
-            return node;
-        }
-        insert(root, 1, v, d);
-        return root;
+        TreeNode dummy(0);
+        dummy.left = root;
+        insert(0, &dummy, v, d);
+        return dummy.left;
     }
     
-    // 当前节点root深度depth
-    void insert(TreeNode* root, int depth, int v, int d) {
+    void insert(int depth, TreeNode* root, int v, int d) {
+        // 找到d-1层，在其子节点插入
         if (!root) return;
-        if (depth == d - 1) { // 在当前节点的子节点插入
+        if (depth < d - 1) {
+            insert(depth + 1, root->left, v, d);
+            insert(depth + 1, root->right, v, d);
+        } else {
             auto ln = new TreeNode(v);
             ln->left = root->left;
             root->left = ln;
@@ -42,9 +42,6 @@ public:
             auto rn = new TreeNode(v);
             rn->right = root->right;
             root->right = rn;                
-        } else {
-            insert(root->left, depth + 1, v, d);
-            insert(root->right, depth + 1, v, d);
         }
     }
 };
