@@ -27,9 +27,8 @@ public:
         if (root) Q.push(root);
         bool toRight = true;
         while (!Q.empty()) {
-            const int sz = Q.size();
             vector<int> row;
-            for (int i = 0; i < sz; i++) {
+            for (int sz = Q.size(); sz > 0; sz--) {
                 auto node = Q.front(); Q.pop();
                 row.push_back(node->val);
                 

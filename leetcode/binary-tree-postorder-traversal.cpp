@@ -33,7 +33,7 @@ public:
             auto node = stk.top();
             if (node->right && prev != node->right) { // 不是从右子树返回，先访问右子树
                 curr = node->right;
-            } else { // 从右子树返回，出栈时访问；curr保持NULL，下一元素在下一循环继续出栈
+            } else { // 从右子树返回，出栈时访问；curr保持NULL，下一循环继续出栈
                 stk.pop();
                 ans.push_back(node->val);
                 prev = node;

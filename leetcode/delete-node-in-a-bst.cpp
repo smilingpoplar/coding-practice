@@ -37,8 +37,8 @@ public:
             // 把后继节点作为新根
             auto curr = root->right;
             while (curr->left) curr = curr->left;
-            swap(root->val, curr->val);
-            root->right = deleteNode(root->right, key);
+            root->val = curr->val;
+            root->right = deleteNode(root->right, curr->val);
         }
         return root;
     }

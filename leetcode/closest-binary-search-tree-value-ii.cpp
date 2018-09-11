@@ -87,8 +87,8 @@ public:
         if (q.size() < k) {
             q.push_back(root->val);
         } else if (abs(root->val - target) < abs(q.front() - target)) {
-                q.pop_front();
-                q.push_back(root->val);
+            q.pop_front();
+            q.push_back(root->val);
         } else return;
         inorder(root->right, target, k, q);
     }
