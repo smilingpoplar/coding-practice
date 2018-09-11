@@ -30,11 +30,12 @@ public:
     void searchFrom(TreeNode *root, int sum, vector<int> &path, vector<vector<int>> &ans) {
         if (!root) return;
         path.push_back(root->val);
-        if (!root->left && !root->right && root->val == sum) {
-            ans.push_back(path);
+        if (!root->left && !root->right) {
+            if (root->val == sum) ans.push_back(path);
+        } else {
+            if (root->left) searchFrom(root->left, sum - root->val, path, ans);
+            if (root->right) searchFrom(root->right, sum - root->val, path, ans);
         }
-        if (root->left) searchFrom(root->left, sum - root->val, path, ans);
-        if (root->right) searchFrom(root->right, sum - root->val, path, ans);
         path.pop_back();
     }
 };
