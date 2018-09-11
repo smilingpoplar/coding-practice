@@ -28,12 +28,12 @@ public:
         return ans;
     }
     
-    // 从root开始到向下路径长
+    // 从root开始向下的路径长
     int arrowLen(TreeNode *root, int &ans) {
         if (!root) return 0;
-        // 后序遍历
         auto left = arrowLen(root->left, ans);
         auto right = arrowLen(root->right, ans);
+
         int len = 1;
         if (root->left && root->left->val == root->val + 1)
             len = max(len, 1 + left);

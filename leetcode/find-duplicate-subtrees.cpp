@@ -22,21 +22,20 @@ using namespace std;
 class Solution {
 public:
     vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
-        unordered_map<string, int> count;
+        unordered_map<string, int> cnt;
         vector<TreeNode *> ans;        
-        dfs(root, count, ans);
+        dfs(root, cnt, ans);
         return ans;
     }
     
-    string dfs(TreeNode *root, unordered_map<string, int> &count, vector<TreeNode *> &ans) {
+    string dfs(TreeNode *root, unordered_map<string, int> &cnt, vector<TreeNode *> &ans) {
         if (!root) return "#";
-        auto left = dfs(root->left, count, ans);
-        auto right = dfs(root->right, count, ans);
+        auto left = dfs(root->left, cnt, ans);
+        auto right = dfs(root->right, cnt, ans);
+        // 将NULL节点输出为"#"，一棵树的遍历输出唯一
         auto s = to_string(root->val) + left + right;
-        count[s]++;
-        if (count[s] == 2) {
-            ans.push_back(root);
-        }
+        cnt[s]++;
+        if (cnt[s] == 2) ans.push_back(root);
         return s;
     }
 };

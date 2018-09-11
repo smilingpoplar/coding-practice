@@ -32,12 +32,12 @@ public:
         return ans;
     }
     
-    // 从root开始往下递增或递减的路径长
+    // 从root开始往下递增和递减的节点数
     Info arrowLen(TreeNode *root, int &ans) {
         if (!root) return {0, 0};
-        // 后序遍历
         auto left = arrowLen(root->left, ans);
         auto right = arrowLen(root->right, ans);
+
         int incLen = 1, decLen = 1;        
         if (root->left) {
             if (root->left->val == root->val + 1) {

@@ -21,14 +21,18 @@ struct TreeNode {
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        return sumNumber(root, 0);
+        int ans = 0;
+        dfs(root, 0, ans);
+        return ans;
     }
-private:
-    int sumNumber(TreeNode *root, int prefix) {
-        if (!root) return 0;
-        prefix = prefix * 10 + root->val;
-        if (!root->left && !root->right) return prefix;
-        return sumNumber(root->left, prefix) + sumNumber(root->right, prefix);
+
+    void dfs(TreeNode *root, int num, int &ans) {
+        if (!root) return;
+        
+        num = num * 10 + root->val;
+        if (!root->left && !root->right) ans += num;
+        dfs(root->left, num, ans);
+        dfs(root->right, num, ans);
     }
 };
 
