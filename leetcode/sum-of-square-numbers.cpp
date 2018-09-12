@@ -13,16 +13,15 @@ using namespace std;
 class Solution {
 public:
     bool judgeSquareSum(int c) {
-        int i = 0;
-        int j = sqrt(c);
+        int i = 0, j = sqrt(c);
         while (i <= j) {
             int sum = i * i + j * j;
             if (sum == c) {
                 return true;
             } else if (sum < c) {
-                ++i;
+                i++;
             } else {
-                --j;
+                j--;
             }
         }
         return false;
