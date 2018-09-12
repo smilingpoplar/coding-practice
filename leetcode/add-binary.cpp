@@ -13,19 +13,18 @@ using namespace std;
 class Solution {
 public:
     string addBinary(string a, string b) {
-        string result;
-        int i = (int)a.size() - 1;
-        int j = (int)b.size() - 1;
+        string ans;
+        int i = (int)a.size() - 1, j = (int)b.size() - 1;
         int carry = 0;
         while (i >= 0 || j >= 0 || carry > 0) {
-            int sum = (i >= 0 ? a[i] - '0' : 0) + (j >= 0 ? b[j] - '0' : 0) + carry;
-            result.push_back((sum & 1) + '0');
-            carry = (sum >> 1);
-            --i;
-            --j;
+            carry += (i >= 0 ? a[i] - '0' : 0);
+            carry += (j >= 0 ? b[j] - '0' : 0);
+            ans.push_back((carry & 1) + '0');
+            carry >>= 1;
+            i--, j--;
         }
-        reverse(result.begin(), result.end());
-        return result;
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
 
