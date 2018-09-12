@@ -12,54 +12,38 @@
 using namespace std;
 
 class Solution {
-    class UnionFind {
-        vector<int> parent;
-        int cnt = 0;
-    public:
-        UnionFind(int sz) : parent(sz, -1) {
-        }
-        
-        void add(int x) {
-            if (parent[x] != -1) return;
-            parent[x] = x;
-            cnt++;
-        }
-
-        int find(int x) {
-            if (parent[x] == -1) return -1;
-            if (parent[x] != x)
-                parent[x] = find(parent[x]);
-            return parent[x];
-        }
-        
-        void unite(int x, int y) {
-            int px = find(x), py = find(y);
-            if (px == py) return;
-            parent[py] = px;
-            cnt--;
-        }
-        
-        int count() {
-            return cnt;
-        }
-    };
 public:
     vector<int> numIslands2(int m, int n, vector<pair<int, int>>& positions) {
-        UnionFind uf(m * n);
         const vector<vector<int>> dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+        vector<int> parent(m * n, -1);
         vector<int> ans;
+        int count = 0;
         for (auto &pos : positions) {
             int r = pos.first, c = pos.second, curr = r * n + c;
-            uf.add(curr);
-            for (auto &dir : dirs) {
-                int nr = r + dir[0], nc = c + dir[1], next = nr * n + nc;
-                if (nr < 0 || nr >= m || nc < 0 || nc >= n || uf.find(next) == -1) continue;
-                uf.unite(curr, next);
+            if (parent[curr] == -1) {
+                parent[curr] = curr;
+                count++;
+                for (auto &dir : dirs) {
+                    int nr = r + dir[0], nc = c + dir[1], next = nr * n + nc;
+                    if (nr < 0 || nr >= m || nc < 0 || nc >= n || parent[next] == -1) continue;
+                    // unite curr & next
+                    int px = find(curr, parent), py = find(next, parent);
+                    if (px != py) {
+                        parent[px] = py;
+                        count--;
+                    }
+                }
             }
-            ans.push_back(uf.count());
+            ans.push_back(count);
         }
         return ans;
-    }  
+    }
+
+    int find(int x, vector<int> &parent) {
+        if (parent[x] != x)
+            parent[x] = find(parent[x], parent);
+        return parent[x];
+    } 
 };
 
 int main(int argc, const char * argv[]) {
