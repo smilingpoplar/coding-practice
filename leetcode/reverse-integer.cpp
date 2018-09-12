@@ -13,20 +13,14 @@ using namespace std;
 class Solution {
 public:
     int reverse(int x) {
-        if (x == INT_MIN) return 0; // -2147483648，反转将溢出
-        int sign = 1;
-        if (x < 0) {
-            sign = -1;
-            x = -x;
-        }
-        
-        int r = 0;
+        // 负数也可以处理
+        long rev = 0;
         while (x) {
-            if (r > (INT_MAX - x % 10) / 10) return 0; // > INT_MAX，溢出
-            r = r * 10 + x % 10;
+            rev = rev * 10 + x % 10;
+            if (rev < INT_MIN || rev > INT_MAX) return 0;
             x /= 10;
         }
-        return sign * r;
+        return rev;
     }
 };
 
