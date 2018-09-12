@@ -11,18 +11,43 @@
 
 using namespace std;
 
+/*
 class Solution {
 public:
     bool isHappy(int n) {
-        // 设n为m位数，每位数最大为9，因此每次计算的结果 <= 81m，而 81m < 10^(m-1) <= n (当m较大时，如m>=4)，
-        // 也就是说，每次计算的结果落在有限区间内，如果n不是happy数，不断计算下去计算结果将出现重复
-        unordered_set<int> results; // 记录每次计算的结果
-        int result = n;
+        // 快慢指针法
+        int fast = n, slow = n;
         while (true) {
-            result = calc(result);
-            if (result == 1) return true;
-            if (results.count(result)) return false;
-            results.insert(result);
+            fast = calc(calc(fast));
+            slow = calc(slow);
+            if (fast == 1) return true;
+            if (fast == slow) return false;
+        }
+    }
+
+    int calc(int n) {
+        int sum = 0;
+        while (n) {
+            int digit = n % 10;
+            sum += digit * digit;
+            n /= 10;
+        }
+        return sum;
+    }
+};
+*/
+
+class Solution {
+public:
+    bool isHappy(int n) {
+        // n为m位数，每位数最大为9，每次计算结果<=81m。而m=lgn+1和n比较，由函数曲线，当n较大时81m<n。
+        // 故每次计算结果<n，有限区间。如果n不是happy数，一直计算结果将重复。
+        unordered_set<int> st; // 记录每次计算的结果
+        while (true) {
+            n = calc(n);
+            if (n == 1) return true;
+            if (st.count(n)) return false;
+            st.insert(n);
         }
     }
 
