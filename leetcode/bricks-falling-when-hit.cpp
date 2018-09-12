@@ -42,22 +42,20 @@ class Solution {
     };
 public:
     vector<int> hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits) {
-        // 把时间反转：从砖块全消除的局面开始，一步步恢复被消除的砖块，看与"顶部"相连砖块数的变化
+        // 把时间反转：从全消除的局面开始，一步步恢复被消除的砖块，看与"顶部"相连砖块数的变化
         if (grid.empty()) return {};
-        const int R = grid.size();
-        const int C = grid[0].size();
-        vector<vector<int>> erased(grid);
+        const int R = grid.size(), C = grid[0].size();
+        vector<vector<int>> erased(grid); // 先是全消除的局面
         for (auto &hit : hits) {
             erased[hit[0]][hit[1]] = 0;
         }
-        
         UnionFind uf(R * C + 1); // idx=R*C是特殊的"顶部"节点
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
                 if (!erased[r][c]) continue;
                 int idx = r * C + c;
-                if (r == 0) uf.unite(idx, R * C);
-                // 与上下左右连接：从上往下、从左往右扫描，只要考查与上左的连接
+                // 与上下左右连接：从上往下、从左往右遍历，只要考虑与上左的连接
+                if (r == 0) uf.unite(idx, R * C); // 首行砖块与"顶部"连接
                 if (r > 0 && erased[r-1][c]) uf.unite(idx, (r-1) * C + c);
                 if (c > 0 && erased[r][c-1]) uf.unite(idx, r * C + c - 1);
             }
@@ -81,10 +79,8 @@ public:
                     uf.unite(idx, nr * C + nc);
                 }
             }
-            
-            // 消除的砖块与顶部不相连，掉落0块
-            //                相连，掉落curr-prev-1块
-            int curr = uf.topBricksCount();
+            int curr = uf.topBricksCount();            
+            // 消除的砖块若与顶部相连，掉落curr-prev-1块；若不相连，掉落0块
             ans[i] = max(0, curr - prev - 1);
             prev = curr;
         }
