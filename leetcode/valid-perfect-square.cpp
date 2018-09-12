@@ -20,7 +20,7 @@ public:
             if (mid >= num / mid) { // mid*mid >= num
                 u = mid - 1;
             } else {
-                l= mid + 1;
+                l = mid + 1;
             }
         }
         return l * l == num;
