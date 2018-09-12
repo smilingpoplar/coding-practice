@@ -15,8 +15,7 @@ class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
         if (grid.empty()) return 0;
-        const size_t R = grid.size();
-        const size_t C = grid[0].size();
+        const int R = grid.size(), C = grid[0].size();
         vector<vector<bool>> visited(R, vector<bool>(C, false));
         
         int count = 0;
