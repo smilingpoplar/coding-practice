@@ -14,8 +14,10 @@ class Solution {
 public:
     int addDigits(int num) {
         // 参考：https://en.wikipedia.org/wiki/Digital_root
-        // 除了 dr(0)=0, dr(n)=9 if n%9==0，dr(n)=n%9 otherwise；通式 dr(n) = 1+(n-1)%9
-        return 1 + (num - 1) % 9;
+        // 因为 10^i % 9 == 1，所以 num % 9 == sum(digit*10^i) % 9 == sum(digit) % 9
+        if (num == 0) return 0;
+        if (num % 9 == 0) return 9;
+        return num % 9;
     }
 };
 
