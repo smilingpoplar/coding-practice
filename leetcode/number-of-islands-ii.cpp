@@ -15,6 +15,7 @@ class Solution {
 public:
     vector<int> numIslands2(int m, int n, vector<pair<int, int>>& positions) {
         const vector<vector<int>> dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+        // 并查集
         vector<int> parent(m * n, -1);
         vector<int> ans;
         int count = 0;
