@@ -32,7 +32,7 @@ public:
         int left = getHeight(root->left, ans);
         int right = getHeight(root->right, ans);
         int arrow = 1 + max(left, right);
-        // left高度 <=> 节点数 <=> 从root往左向下的边数
+        // left高度 <=> left节点数 <=> 从root往左向下的边数
         ans = max(ans, left + right);
         return arrow;
     }
