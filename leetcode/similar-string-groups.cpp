@@ -14,9 +14,9 @@ using namespace std;
 class Solution {
     class UnionFind {
         vector<int> parent;
-        int size;
+        int cnt;
     public:
-        UnionFind(int sz) : parent(sz), size(sz) {
+        UnionFind(int sz) : parent(sz), cnt(sz) {
             for (int i = 0; i < sz; i++) {
                 parent[i] = i;
             }
@@ -33,11 +33,11 @@ class Solution {
             int px = find(x), py = find(y);
             if (px == py) return;
             parent[px] = py;
-            size--;
+            cnt--;
         }
         
-        int getSize() {
-            return size;
+        int count() {
+            return cnt;
         }
     };
 public:
@@ -51,7 +51,7 @@ public:
                 }
             }
         }
-        return uf.getSize();
+        return uf.count();
     }
     
     bool isSimilar(const string &a, const string &b) {
