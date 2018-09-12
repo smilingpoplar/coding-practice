@@ -14,11 +14,10 @@ using namespace std;
 class Solution {
     class UnionFind {
         vector<int> parent;
-        vector<int> rank;
         int cnt = 0;
-        
     public:
-        UnionFind(int sz) : parent(sz, -1), rank(sz, 0) { }
+        UnionFind(int sz) : parent(sz, -1) {
+        }
         
         void add(int x) {
             if (parent[x] != -1) return;
@@ -36,9 +35,6 @@ class Solution {
         void unite(int x, int y) {
             int px = find(x), py = find(y);
             if (px == py) return;
-            
-            if (rank[px] < rank[py]) swap(px, py);
-            if (rank[px] == rank[py]) rank[px]++;
             parent[py] = px;
             cnt--;
         }
@@ -63,7 +59,7 @@ public:
             ans.push_back(uf.count());
         }
         return ans;
-    }    
+    }  
 };
 
 int main(int argc, const char * argv[]) {
