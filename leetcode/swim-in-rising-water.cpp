@@ -14,6 +14,7 @@ using namespace std;
 class Solution {
 public:
     int swimInWater(vector<vector<int>>& grid) {
+        // 最少时间到达右下角，等价于到右下角时水面要最低，因此
         // 用优先队列的图遍历（dijkstra算法），海拔高度小的优先
         if (grid.empty()) return 0;
         const int R = grid.size(), C = grid[0].size();

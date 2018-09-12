@@ -23,7 +23,7 @@ public:
         for (int i = 0; i < N; i += 2) {
             int couple = row[i] ^ 1;
             if (row[i+1] == couple) continue;
-            doSwap(i + 1, pos[couple], row, pos);
+            doSwap(i+1, pos[couple], row, pos);
             ans++;
         }
         return ans;
