@@ -14,21 +14,20 @@ using namespace std;
 class Solution {
 public:
     int findNthDigit(int n) {
-        // [1..9]：1*9，[10..99]：2*90，[100..999]：3*900... k*9*base
-        int k = 1;
-        long base = 1;
-        while (k * 9 * base < n) {
-            n -= k * 9 * base;
-            k++;
-            base *= 10;
+        // [1..9]：1*9，[10..99]：2*90，[100..999]：3*900，...
+        // 每部分的个数：len*count
+        int len = 1, count = 9, start = 1;
+        while (count < n / len) { // len * count < n
+            n -= len * count;
+            len++;
+            count *= 10;
+            start *= 10;
         }
+        
         n--; // n变成0-based索引
-        long num = base + n / k; // k个数字的数中第n/k个数
-        int idx = k - 1 - n % k; // num中自右向左第idx位数字
-        for (int i = 0; i < idx; i++) 
-            num /= 10;
-        num %= 10;
-        return num;
+        start += n / len;
+        string s = to_string(start);
+        return s[n % len] - '0';
     }
 };
 
