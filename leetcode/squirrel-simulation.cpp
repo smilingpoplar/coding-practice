@@ -15,9 +15,8 @@ class Solution {
 public:
     int minDistance(int height, int width, vector<int>& tree, vector<int>& squirrel, vector<vector<int>>& nuts) {
         // 除了第一次松鼠=>坚果=>树，其他都是树=>坚果=>树
-        // 算树<=>所有坚果间往返的路程，以及松鼠先跑哪颗松果更省路程
-        int dist = 0;
-        int delta = INT_MAX;
+        // 算出树和所有坚果间往返的路程、松鼠第一次跑哪颗松果多花的路程最少
+        int dist = 0, delta = INT_MAX;
         for (auto &nut : nuts) {
             int treeDist = getDist(tree, nut);
             dist += 2 * treeDist;
