@@ -17,17 +17,17 @@ public:
     string intToRoman(int num) {
         const vector<int> radix = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         const vector<string> symbol = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-        
+        // 贪婪法
         ostringstream oss;
         int i = 0;
         while (num) {
-            int count = num / radix[i];
+            int cnt = num / radix[i];
             num %= radix[i];
-            while (count) {
+            while (cnt) {
                 oss << symbol[i];
-                --count;
+                cnt--;
             }
-            ++i;
+            i++;
         }
         return oss.str();
     }
