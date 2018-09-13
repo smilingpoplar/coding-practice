@@ -29,11 +29,10 @@ public:
         if (len > highLen) return; // 排除过长的
         if (len >= lowLen && !(len > 1 && num[0] == '0')) { // 长度合适，排除以‘0’开头的
             if (lowLen == highLen) {
-                if (low <= num && num <= high) 
-                    count++;
+                if (low <= num && num <= high) count++;
             } else {
-                if ((len == lowLen && num >= low) || (len == highLen && num <= high) || (lowLen < len && len < highLen)) 
-                    count++;
+                if ((len == lowLen && num >= low) || (len == highLen && num <= high) 
+                    || (lowLen < len && len < highLen)) count++;
             }
         }
 
