@@ -12,25 +12,29 @@
 using namespace std;
 
 class Solution {
+    unordered_map<string, string> mp = { {"0","0"}, {"1","1"}, {"6","9"}, {"8","8"}, {"9","6"} };
 public:
     vector<string> findStrobogrammatic(int n) {
         vector<string> ans;
-        expand("", n, ans); // len=0
-        for (string s : {"0", "1", "8"}) { // len=1
-            expand(s, n, ans);
+        if (n % 2 == 0) {
+            expand(n, "", ans);
+        } else {
+            for (string s : {"0", "1", "8"}) {
+                expand(n, s, ans);
+            }
         }
         return ans;
     }
     
     // 扩展num两端，添加数对
-    void expand(string num, int n, vector<string> &ans) {
-        int len = num.size();
-        if (len > n) return;
-        if (len == n && !(len > 1 && num[0] == '0')) ans.push_back(num);
+    void expand(int n, string num, vector<string> &ans) {
+        if (num.size() == n) {
+            if (n == 1 || num[0] != '0') ans.push_back(num);
+            return;
+        }
         
-        static unordered_map<string, string> mp = { {"0","0"}, {"1","1"}, {"6","9"}, {"8","8"}, {"9","6"} };
         for (auto &e : mp) {
-            expand(e.first + num + e.second, n, ans);
+            expand(n, e.first + num + e.second, ans);
         }
     }
 };
