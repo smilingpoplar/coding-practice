@@ -15,8 +15,8 @@ class Solution {
 public:
     vector<vector<int>> spiralMatrixIII(int R, int C, int r0, int c0) {
         // 往右下左上方向不断走1,1,2,2,3,3,4,4,5,5,...步
-        // 从索引n生成1,1,2,2,3,3,4,4,5,5,...的通式是 n/2+1
-        vector<vector<int>> dirs = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+        // 从索引n（0-based）生成1,1,2,2,3,3,4,4,5,5,...的通式是 n/2+1
+        const vector<vector<int>> dirs = {{0,1}, {1,0}, {0,-1}, {-1,0}};
         vector<vector<int>> ans;
         ans.push_back({r0, c0});
         
