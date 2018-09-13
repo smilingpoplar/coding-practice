@@ -16,8 +16,8 @@ class Solution {
 public:
     int strobogrammaticInRange(string low, string high) {
         int count = 0;
-        expand("", low, high, count); // n==0
-        for (string s : {"0", "1", "8"}) { // n==1
+        expand("", low, high, count); // n%2==0
+        for (string s : {"0", "1", "8"}) { // n%2==1
             expand(s, low, high, count);
         }
         return count;
