@@ -12,6 +12,7 @@
 using namespace std;
 
 class Solution {
+    unordered_map<string, string> mp = { {"0","0"}, {"1","1"}, {"6","9"}, {"8","8"}, {"9","6"} };
 public:
     int strobogrammaticInRange(string low, string high) {
         int count = 0;
@@ -36,7 +37,6 @@ public:
             }
         }
 
-        static unordered_map<string, string> mp = { {"0","0"}, {"1","1"}, {"6","9"}, {"8","8"}, {"9","6"} };
         for (auto &e : mp) {
             expand(e.first + num + e.second, low, high, count);
         }
