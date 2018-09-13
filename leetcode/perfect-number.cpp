@@ -18,8 +18,7 @@ public:
         for (int i = 2; i * i <= num; i++) {
             if (num % i == 0) {
                 sum += i; 
-                int another = num / i;
-                if (another != i) sum += another;
+                if (i * i != num) sum += num / i;
             }
         }
         return num == sum;

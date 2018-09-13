@@ -14,11 +14,11 @@ class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
         vector<int> ans;
-        // 把出现过的数当索引（1-based），把索引位置的数变为负数
+        // 把数x当作下标（1-based），将nums[x-1]标记为负数
         for (int num : nums) {
-            int idx = abs(num);
-            if (nums[idx-1] < 0) ans.push_back(idx);
-            nums[idx-1] = -nums[idx-1];
+            int x = abs(num);
+            if (nums[x-1] < 0) ans.push_back(x);
+            nums[x-1] = -nums[x-1];
         }
         return ans;
     }

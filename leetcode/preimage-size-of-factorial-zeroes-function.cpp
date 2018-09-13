@@ -14,9 +14,9 @@ using namespace std;
 class Solution {
 public:
     int preimageSizeFZF(int K) {
-        // f(x)是x!末尾0的个数，取决于1..x中因子5的个数。
-        // 因子5的个数每连续5个数相等，之后的5个数至少加1。所以只要f(x)=K的x存在，一定是有5个。
-        // 二分搜索使f(x)=K的x，x的上限取5*K。因为x至少贡献x/5个因子5，5*K就可贡献K个因子5。
+        // f(x)是x!末尾0的个数，取决于1..x中因子5的个数。因子5的个数每连续5个数相等（之后的5个数至少增加1）。
+        // 只要f(x)==K的x存在，一定是5个；x不存在就是0个。这题变成判断f(x)==K的x是否存在。
+        // 用二分搜索，x的上限取5*K。因为x至少贡献x/5个因子5，5*K就可贡献K个因子5。
         long l = 0, u = 5l * K;
         while (l <= u) {
             long mid = l + (u - l) / 2;
@@ -31,8 +31,7 @@ public:
     
     int countZeros(long n) {
         int ans = 0;
-        while (n) {
-            n /= 5;
+        while (n /= 5) {
             ans += n;
         }
         return ans;

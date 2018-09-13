@@ -13,14 +13,14 @@ using namespace std;
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums){
-        // 把出现过的数当索引（1-based），把索引位置的数变为负数
+        // 把数x当作下标（1-based），将nums[x-1]标记为负数
         for (int num : nums) {
-            int idx = abs(num);
-            nums[idx-1] = -abs(nums[idx-1]);
+            int x = abs(num);
+            if (nums[x-1] > 0) nums[x-1] = -nums[x-1];
         }
         vector<int> ans;
-        for (int i = 1; i <= nums.size(); i++) {
-            if (nums[i-1] > 0) ans.push_back(i);
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] > 0) ans.push_back(i + 1);
         }
         return ans;
     }
