@@ -17,24 +17,24 @@ public:
     vector<string> findStrobogrammatic(int n) {
         vector<string> ans;
         if (n % 2 == 0) {
-            expand(n, "", ans);
+            expand("", n, ans);
         } else {
             for (string s : {"0", "1", "8"}) {
-                expand(n, s, ans);
+                expand(s, n, ans);
             }
         }
         return ans;
     }
     
     // 扩展num两端，添加数对
-    void expand(int n, string num, vector<string> &ans) {
+    void expand(string num, const int n, vector<string> &ans) {
         if (num.size() == n) {
-            if (n == 1 || num[0] != '0') ans.push_back(num);
+            if (!(n > 1 && num[0] == '0')) ans.push_back(num);
             return;
         }
         
         for (auto &e : mp) {
-            expand(n, e.first + num + e.second, ans);
+            expand(e.first + num + e.second, n, ans);
         }
     }
 };
