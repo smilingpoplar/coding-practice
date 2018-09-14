@@ -13,30 +13,27 @@ using namespace std;
 class Solution {
 public:
     string multiply(string num1, string num2) {
-        const int M = (int)num1.size();
-        const int N = (int)num2.size();
-        string result(M + N, 0); // 乘积最多M+N位
+        const int M = num1.size(), N = (int)num2.size();
+        string ans(M + N, 0); // 乘积最多M+N位
         
         for (auto &c : num1) c -= '0';
         for (auto &c : num2) c -= '0';
-        // 将num1和num2从低位算起的第i位和第j位相乘，结果加到result从低位算起的第i+j位
-        // 这里将num1和num2从高位算起的第i位和第j位相乘，相当于从低位算起的第(M-1-i)位和第(N-1-j)位相乘，
-        // 结果加到result从低位算起的第(M-1-i)+(N-1-j)位，从高位算起的第(M+N-1)-(M-1-i)-(N-1-j)=i+j+1位
+        // 将num1和num2从低位算起的第i1位和第i2位相乘，结果加到ans从低位算起的第i1+i2位
+        // 换成从高位算起的视角，num1[M-1-i1] * num2[N-1-i2] +=> ans[M+N-1-(i1+i2)]
+        // 设i=M-1-i1，j=N-1-i2，num1[i] * num2[j] +=> ans[i+j+1]
         for (int i = M - 1; i >= 0; i--) {
-            int carry = 0;
             for (int j = N - 1; j >= 0; j--) {
-                // 第i位和第j位相乘，结果加到第i+j+1位
-                int temp = result[i + j + 1] + num1[i] * num2[j] + carry;
-                result[i + j + 1] = temp % 10;
-                carry = temp / 10;
+                int tmp = num1[i] * num2[j] + ans[i+j+1];
+                ans[i+j+1] = tmp % 10;
+                ans[i+j] += tmp / 10;
             }
-            result[i] += carry;
         }
-        
-        for (auto &c : result) c += '0';
-        auto pos = result.find_first_not_of('0');
-        if (pos == string::npos) return "0";
-        return result.substr(pos);
+        for (auto &c : ans) c += '0';
+
+        int i = 0;
+        while (ans[i] == '0') i++;
+        if (i == ans.size()) return "0";
+        return ans.substr(i);
     }
 };
 
