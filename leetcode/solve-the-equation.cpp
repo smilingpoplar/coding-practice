@@ -16,32 +16,28 @@ public:
     string solveEquation(string equation) {
         const int N = equation.size();
         int coef = 0, vari = 0;
-        int sign = 1;
         int flag = 1; // '='左边系数为正、'='右边系数为负
-        for (int i = 0; i < N; ) {
+        int sign = 1;
+        for (int i = 0; i < N; i++) {
             char c = equation[i];
             if (c == '+') {
                 sign = 1;
-                i++;
             } else if (c == '-') {
                 sign = -1;
-                i++;
             } else if (c == '=') {
                 flag = -1;
                 sign = 1;
-                i++;
             } else if (c == 'x') { // 无系数的x
                 coef += flag * sign;
-                i++;
             } else { // digit
                 int start = i;
                 while (i < N && isdigit(equation[i])) i++;
                 int num = flag * sign * stoi(equation.substr(start, i - start));
                 if (i < N && equation[i] == 'x') {
                     coef += num;
-                    i++;
                 } else {
-                    vari += num;                    
+                    vari += num;
+                    i--; // 回退一步
                 }
             }
         }
