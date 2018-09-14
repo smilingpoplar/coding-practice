@@ -14,21 +14,21 @@ using namespace std;
 class Solution {
 public:
     bool validTicTacToe(vector<string>& board) {
-        int xCount = 0, oCount = 0;
+        int xCnt = 0, oCnt = 0;
         for (auto &row : board) {
             for (char c : row) {
-                if (c == 'X') xCount++;
-                else if (c == 'O') oCount++;
+                if (c == 'X') xCnt++;
+                else if (c == 'O') oCnt++;
             }
         }
         
-        if (xCount != oCount + 1 && xCount != oCount) return false;
-        if (hasRowOf('X', board) && xCount != oCount + 1) return false;
-        if (hasRowOf('O', board) && xCount != oCount) return false;
+        if (xCnt != oCnt + 1 && xCnt != oCnt) return false;
+        if (hasRowOf('X', board) && xCnt != oCnt + 1) return false;
+        if (hasRowOf('O', board) && xCnt != oCnt) return false;
         return true;
     }
     
-    // 检查行、列、对角线是否全是c
+    // 检查行、列、对角线是否有一个全是c
     bool hasRowOf(char c, vector<string>& board) {
         for (int i = 0; i < 3; i++) {
             if (c == board[i][0] && c == board[i][1] && c == board[i][2]) return true;
@@ -38,7 +38,6 @@ public:
         if (c == board[0][2] && c == board[1][1] && c == board[2][0]) return true;            
         return false;
     }
-
 };
 
 int main(int argc, const char * argv[]) {
