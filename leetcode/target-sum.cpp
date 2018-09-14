@@ -17,17 +17,17 @@ public:
         for (int num : nums)
             sum += num;
         if (sum < S || (sum - S) % 2 != 0) return 0;
-        sum = (sum - S) / 2;
+        int target = (sum - S) / 2;
 
         // 01背包问题
-        vector<int> dp(sum + 1, 0);
+        vector<int> dp(target + 1, 0);
         dp[0] = 1;
         for (int num : nums) {
-            for (int j = sum; j >= num; j--) { // 逆序循环
+            for (int j = target; j >= num; j--) { // 逆序循环
                 dp[j] += dp[j-num];
             }
         }
-        return dp[sum];
+        return dp[target];
     }
 };
 

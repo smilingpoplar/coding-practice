@@ -13,13 +13,13 @@ using namespace std;
 class Solution {
 public:
     double myPow(double x, int n) {
-        long nl = n; // 防止INT_MIN取负溢出
+        long nl = n; // 防止INT_MIN取负时溢出
         if (nl < 0) {
             x = 1 / x;
             nl = -nl;
         }
         
-        // 取幂的二进制的最后一位，累乘
+        // 取幂的二进制最后一位，累乘
         double ans = 1;
         while (nl) {
             if (nl & 1) ans *= x;

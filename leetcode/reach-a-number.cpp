@@ -13,17 +13,17 @@ using namespace std;
 class Solution {
 public:
     int reachNumber(int target) {
-        // 给1,2,...,k中一些数加上负号，要加正号的数和为A，要加负号的数和为B
-        // A+B=S=1+2+...+k，A-B=target，B=(S-target)/2，S-target为偶数时B存在
-        // 先让S>=target
+        // target<0往数轴左侧和target>0往数轴右侧情况对称
         target = abs(target);
-        int sum = 0;
-        int k = 0;
+        // 给1,2,...,k中一些数加上负号，设要加正号的和为A，要加负号的和为B
+        // A+B=1+2+...+k=sum，A-B=target，B=(sum-target)/2
+        // 要满足sum>=target且sum-target为偶数
+        int sum = 0, k = 0;
         while (sum < target) 
             sum += ++k;
         int delta = sum - target;
         if (delta % 2 == 0) return k;
-        // 否则最多再加两次k
+        // 最多再走两步，sum-target总能变成偶数
         delta += ++k;
         if (delta % 2 == 0) return k;
         return k + 1 ;
