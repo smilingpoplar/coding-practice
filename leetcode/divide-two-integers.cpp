@@ -17,21 +17,19 @@ public:
         if (dividend == INT_MIN && divisor == -1) return INT_MAX;
         
         int sign = (dividend ^ divisor) >= 0 ? 1 : -1;
-        // abs(INT_MIN)溢出成INT_MIN，用"unsigned"避免int溢出
-        unsigned uDividend = abs(dividend);
-        unsigned uDivisor = abs(divisor);
+        // abs(INT_MIN)溢出成INT_MIN，用labs()避免溢出
+        long dvd = labs(dividend), dvs = labs(divisor);
         
         int ans = 0;
-        while (uDivisor <= uDividend) {
-            // 看uDivisor能翻几倍，累加 
-            unsigned d = uDivisor;
-            int multiple = 1;
-            while (d <= (uDividend >> 1)) { // (d<<1)<=uDividend可能溢出
-                d <<= 1;
-                multiple <<= 1;
+        while (dvs <= dvd) {
+            long tmp = dvs, mult = 1;
+            // 看dvs能翻几倍
+            while ((tmp << 1) <= dvd) {
+                tmp <<= 1;
+                mult <<= 1;
             }
-            uDividend -= d;
-            ans += multiple;
+            dvd -= tmp;
+            ans += mult;
         }
         return sign * ans;
     }
