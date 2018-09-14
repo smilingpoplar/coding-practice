@@ -15,11 +15,11 @@ class Solution {
 public:
     bool isIdealPermutation(vector<int>& A) {
         // 全局逆序数==相邻逆序数，除了相邻、没有逆序，
-        // 即对所有j、0<=i<=j-2，应有A[i]<=A[j]，max(A[0..j-2])<=A[j]
+        // 即max(A[0..i-2])<=A[i]
         int theMax = -1;
-        for (int j = 2; j < A.size(); j++) {
-            theMax = max(theMax, A[j-2]);
-            if (theMax > A[j]) return false;
+        for (int i = 2; i < A.size(); i++) {
+            theMax = max(theMax, A[i-2]);
+            if (theMax > A[i]) return false;
         }
         return true;
     }

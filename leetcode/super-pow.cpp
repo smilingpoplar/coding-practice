@@ -13,19 +13,20 @@ using namespace std;
 class Solution {
 public:
     int superPow(int a, vector<int>& b) {
-        // 37^213 mod k = 37^(21*10+3) mod k = ((37^21 mod k)^10 mod k) * (37^3 mod k)
+        // 幂太大，将幂分解，例如
+        // 37^213 mod K = 37^(210+3) mod K = ((37^21 mod K)^10 mod K) * (37^3 mod K)
         if (b.empty()) return 1;
-        const int k = 1337;
-        int lastDigit = b.back();
-        b.pop_back();        
-        return (pow(superPow(a, b), 10, k) * pow(a, lastDigit, k)) % k;
+        const int K = 1337;
+        int lastDigit = b.back(); b.pop_back();        
+        return (pow(superPow(a, b), 10, K) * pow(a, lastDigit, K)) % K;
     }
     
-    int pow(long a, int b, int k) {
+    // 幂较小使用该函数计算
+    int pow(long a, int b, int K) {
         int ans = 1;
         while (b) {
-            if (b & 1) ans = (ans * a) % k;
-            a = (a * a) % k;
+            if (b & 1) ans = (ans * a) % K;
+            a = (a * a) % K;
             b >>= 1;
         }
         return ans;

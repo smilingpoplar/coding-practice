@@ -23,9 +23,8 @@ public:
             st.insert(p);
         }
 
-        int sum = minX + maxX;
         for (auto &p : points) {
-            int reflX = sum - p.first;
+            int reflX = minX + maxX - p.first;
             if (!st.count({reflX, p.second})) return false;
         }
         return true;
