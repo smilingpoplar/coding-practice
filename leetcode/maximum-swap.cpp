@@ -13,17 +13,18 @@ using namespace std;
 class Solution {
 public:
     int maximumSwap(int num) {
-        // 从左往右看各位置，看有没有尽量比当前数字大的数字在后面，交换
+        // 从左往右看各位置，看尽量比当前数字大的数字有没有在后面，有就交换
         string s = to_string(num);
-        vector<int> pos(10, -1);
-        for (int i = 0; i < s.size(); i++) {
-            pos[s[i] - '0'] = i;
+        const int N = s.size();
+        vector<int> lastIdx(10, -1);
+        for (int i = 0; i < N; i++) {
+            lastIdx[s[i] - '0'] = i;
         }
         
-        for (int i = 0; i < s.size(); i++) {
+        for (int i = 0; i < N; i++) {
             for (int x = 9; x > s[i] - '0'; x--) {
-                if (pos[x] > i) {
-                    swap(s[pos[x]], s[i]);
+                if (lastIdx[x] > i) {
+                    swap(s[i], s[lastIdx[x]]);
                     return stoi(s);
                 }
             }
