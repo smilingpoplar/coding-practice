@@ -44,10 +44,9 @@ public:
         
         if (coef == 0) {
             if (vari == 0) return "Infinite solutions";
-            else return "No solution";
-        } else {
-            return "x=" + to_string(-vari / coef);
+            return "No solution";
         }
+        return "x=" + to_string(-vari / coef);
     }
 };
 
