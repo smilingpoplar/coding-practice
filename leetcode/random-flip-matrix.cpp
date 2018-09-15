@@ -12,7 +12,7 @@
 using namespace std;
 
 class Solution {
-    unordered_map<int, int> mp; // rnd=>idx
+    unordered_map<int, int> mp; // 下标重映射
     int rows, cols, total;
 public:
     Solution(int n_rows, int n_cols) {
@@ -23,19 +23,15 @@ public:
     }
     
     vector<int> flip() {
-        // 想象把矩阵二维索引转成一维索引放入数组mp[0..total)，初始mp[i]=i
-        // 每次生成[0,total)的随机数rnd，rnd处的索引被选中移到数组尾，total-1处的索引被移到rnd处
-        // 用unordered_map模拟数组
-        int rnd = rand() % total;
+        int idx = rand() % total;
+        int theIdx = remapping(idx);
         total--;
-        int idx = getIdx(rnd);
-        mp[rnd] = getIdx(total);
-        mp[total] = idx;
-        return { idx / cols, idx % cols };
+        mp[idx] = remapping(total);
+        return { theIdx / cols, theIdx % cols };
     }
     
-    int getIdx(int rnd) {
-        return mp.count(rnd) ? mp[rnd] : rnd;
+    int remapping(int idx) {
+        return mp.count(idx) ? mp[idx] : idx;
     }
     
     void reset() {
