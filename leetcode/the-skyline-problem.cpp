@@ -17,7 +17,7 @@ public:
     vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
         // 参考：http://www.cnblogs.com/grandyang/p/4534586.html
         
-        // 扫除线（sweep line）算法，把building离散化成(Li,-Hi)和(Ri,Hi)两个点，把所有点加入points[]并排序。
+        // 扫描线（sweep line）算法，把building离散化成(Li,-Hi)和(Ri,Hi)两个点，把所有点加入points[]并排序。
         // 假想有垂直扫除线从左到右扫描，遇到左端点（高度取负值）就把高度Hi加入集合，遇到右端点就把高度Hi从集合中删除，
         // 扫描*看集合中的最大高度*currHi是否发生变化，若发生变化（currHi!=prevHi）说明出现了所需的跃变点。
         
