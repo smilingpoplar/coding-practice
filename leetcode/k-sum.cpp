@@ -19,7 +19,7 @@ public:
         // 0<=i<=N，1<=k<=K，0<=t<=target
         // 初始dp[i][0][0] = 1
         // 递推式在i这维上只依赖于i-1项，可省掉i这维，i仍从左往右遍历
-        // k这维上dp[][k-1][]要表示旧状态，k从右往左遍历；同理，t从右往左遍历
+        // 这题不用临时变量ndp[][]恰好可以，相当于二维的01背包问题，逆序遍历k和t
         const int N = A.size();
         vector<vector<int>> dp(K + 1, vector<int>(target + 1, 0));
         dp[0][0] = 1;

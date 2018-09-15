@@ -18,32 +18,28 @@ public:
         if (numerator == 0) return "0";
 
         string ans;
-        bool negative = (numerator ^ denominator) < 0;
-        if (negative) ans += "-";
+        bool neg = (numerator ^ denominator) < 0;
+        if (neg) ans += "-";
 
-        auto n = abs((long long)numerator);
-        auto d = abs((long long)denominator);
-        auto integral = n / d;
-        ans += to_string(integral);
+        long n = labs(numerator), d = labs(denominator);
+        ans += to_string(n / d);
         
-        auto remainder = n % d;
-        if (remainder > 0) ans += ".";
+        long rmd = n % d;
+        if (rmd > 0) ans += ".";
         
-        unordered_map<long long, int> mp; // remainder=>pos
-        while (remainder > 0) {
-            if (mp.count(remainder)) {
-                ans.insert(mp[remainder], "(");
+        unordered_map<long, int> mp; // 余数 => 对应输出到ans的位置
+        while (rmd) {
+            if (mp.count(rmd)) {
+                ans.insert(mp[rmd], "(");
                 ans += ")";
-                break;
+                return ans;
             }
-            mp[remainder] = ans.size();
-            
-            remainder *= 10;
-            auto quotient = remainder / d;
-            ans += to_string(quotient);
-            remainder %= d;
+
+            mp[rmd] = ans.size();
+            rmd *= 10;
+            ans += to_string(rmd / d);
+            rmd %= d;
         }
-        
         return ans;
     }
 };

@@ -14,29 +14,27 @@ using namespace std;
 class Solution {
 public:
     int minTotalDistance(vector<vector<int>>& grid) {
-        // 分维度考虑，在一个维度上（x维或y维）各点相遇，可算出这个维度上所有点的距离
+        // 分维度考虑，在某个维度让各点相遇的路程
         if (grid.empty()) return 0;
-        const int R = grid.size();
-        const int C = grid[0].size();
-        vector<int> X;
-        vector<int> Y;
+        const int R = grid.size(), C = grid[0].size();
+        vector<int> rows, cols;
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
                 if (grid[r][c]) {
-                    X.push_back(c);
-                    Y.push_back(r);
+                    rows.push_back(r);
+                    cols.push_back(c);
                 }
             }
         }
-        return minDist(X) + minDist(Y);
+        return minDist(rows) + minDist(cols);
     }
     
-    int minDist(vector<int> &list) {
+    int minDist(vector<int> &v) {
         int ans = 0;
-        sort(list.begin(), list.end());
-        int i = 0, j = list.size() - 1;
+        sort(v.begin(), v.end());
+        int i = 0, j = (int)v.size() - 1;
         while (i < j) {
-            ans += list[j--] - list[i++];
+            ans += v[j--] - v[i++];
         }
         return ans;
     }
