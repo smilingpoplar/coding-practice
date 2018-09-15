@@ -11,6 +11,15 @@
 
 using namespace std;
 
+/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */
 class SummaryRanges {
 public:
     /** Initialize your data structure here. */
@@ -42,13 +51,6 @@ private:
         return (a.start <= b.end + 1) && (b.start <= a.end + 1);
     }
 };
-
-/**
- * Your SummaryRanges object will be instantiated and called as such:
- * SummaryRanges obj = new SummaryRanges();
- * obj.addNum(val);
- * vector<Interval> param_2 = obj.getIntervals();
- */
 
 int main(int argc, const char * argv[]) {
     return 0;
