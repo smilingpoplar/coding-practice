@@ -26,7 +26,10 @@ public:
                 s[i] = s[i+1] = '-';
                 bool player2 = canWin(s, memo);
                 s[i] = s[i+1] = '+';
-                if (!player2) return true;
+                if (!player2) {
+                    memo[s] = true;
+                    return memo[s];
+                }
             }
         }
         memo[s] = false;
