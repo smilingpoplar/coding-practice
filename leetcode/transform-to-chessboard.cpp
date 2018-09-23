@@ -21,7 +21,7 @@ public:
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
                 if (board[r][c] == 1) {
-                    rows[r] |= 1 << c;
+                    rows[r] |= 1 << c; // 将一行变成一个二进制数
                     cols[c] |= 1 << r;
                 }
             }
@@ -36,24 +36,24 @@ public:
     
     int swapLines(vector<int> &lines) {
         const int N = lines.size();
-        const int mask = (1 << N) - 1; // 后N位全是1
         // 条件1 
         set<int> st(lines.begin(), lines.end());
         if (st.size() != 2) return -1;
         vector<int> l(st.begin(), st.end());
-        if ((l[0] ^ l[1]) != mask) return -1;
+        if ((l[0] & l[1]) != 0) return -1;
         // 条件2
-        int ones = countOnes(l[0]), zeros = N - ones;
+        int ones = count1s(l[0]), zeros = N - ones;
         if (abs(ones - zeros) > 1) return -1;
         // 需要的swap数
+        const int mask = (1 << N) - 1; // 后N位全是1
         const int mask1 = 0x55555555 & mask, mask2 = 0xaaaaaaaa & mask;
         int ans = INT_MAX;
-        if (ones >= zeros) ans = min(ans, countOnes(l[0] ^ mask1) / 2); // 往mask1靠
-        if (ones <= zeros) ans = min(ans, countOnes(l[0] ^ mask2) / 2); // 往mask2靠
+        if (ones >= zeros) ans = min(ans, count1s(l[0] ^ mask1) / 2); // 往mask1靠
+        if (ones <= zeros) ans = min(ans, count1s(l[0] ^ mask2) / 2); // 往mask2靠
         return ans;
     }
     
-    int countOnes(int n) {
+    int count1s(int n) {
         int ans = 0;
         while (n) {
             n &= n - 1 ;
