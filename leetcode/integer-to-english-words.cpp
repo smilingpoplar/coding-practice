@@ -12,10 +12,11 @@
 using namespace std;
 
 class Solution {
-    vector<string> THOUSANDS = { "Billion", "Million", "Thousand", "" };
-    vector<string> TENS = { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
-    vector<string> LESS20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
     vector<int> RADIX = { 1000000000, 1000000, 1000, 1 };
+    vector<string> THOUSANDS = { "Billion", "Million", "Thousand", "" };
+    vector<string> LESS20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
+            "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+    vector<string> TENS = { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
 public:
     string numberToWords(int num) {
         if (num == 0) return "Zero";
