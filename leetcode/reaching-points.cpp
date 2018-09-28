@@ -14,22 +14,15 @@ using namespace std;
 class Solution {
 public:
     bool reachingPoints(int sx, int sy, int tx, int ty) {
-        // 正向考虑的话，(x,y)=>(x+y,y)或(x,x+y)，两条路径
-        // 反向考虑的话，大的那个一定是和，x>=y时 (x,y)=>(x-y, y)，x<y时 (x,y)=>(x,y-x)，一条路径
-        // 不断相减就是求gcd时的辗转相除
-        while (tx >= sx && ty >= sy) {
-            if (tx >= ty) {
-                if (ty > sy) { tx %= ty; }
-                else { // ty == sy，ty不能再减小，只能tx每次减小ty
-                    return (tx - sx) % ty == 0;
-                }
-            } else {
-                if (tx > sx) { ty %= tx; }
-                else { // tx == sx，tx不能再减小，只能ty每次减小tx
-                    return (ty - sy) % tx == 0;
-                }
-            }
+        // 反向考虑，tx,ty大的那个一定是和，辗转相减得小的那个
+        while (tx > sx && ty > sy) {
+            if (tx > ty) tx %= ty;
+            else ty %= tx;
         }
+        // tx==sx，ty只能每次再减小tx
+        if (tx == sx && (ty - sy) % tx == 0) return true;
+        // ty==sy，tx只能每次再减小ty
+        if (ty == sy && (tx - sx) % ty == 0) return true;
         return false;
     }
 };
