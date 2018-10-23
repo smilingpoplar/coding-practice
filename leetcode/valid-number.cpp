@@ -13,18 +13,16 @@ using namespace std;
 class Solution {
 public:
     bool isNumber(string s) {
-        const int N = (int)s.size();
+        const int N = s.size();
         int i = 0, j = N - 1;
         // 去掉首尾的空格
-        while (i <= j && s[i] == ' ') ++i;
-        while (i <= j && s[j] == ' ') --j;
+        while (i <= j && s[i] == ' ') i++;
+        while (i <= j && s[j] == ' ') j--;
         if (i > j) return false;
         // 去掉开头的+/-
-        if (s[i] == '+' || s[i] == '-') ++i;
+        if (s[i] == '+' || s[i] == '-') i++;
         
-        bool num = false;
-        bool exp = false;
-        bool dot = false;
+        bool num = false, exp = false, dot = false;
         while (i <= j) {
             char c = s[i];
             if (isdigit(c)) {
@@ -41,7 +39,7 @@ public:
             } else {
                 return false;
             }
-            ++i;
+            i++;
         }
         
         return num;
