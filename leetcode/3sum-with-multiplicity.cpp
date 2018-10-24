@@ -26,10 +26,10 @@ public:
                 if (i > j || !cnt.count(k) || j > k) continue;
                 // 至此 i <= j <= k
                 if (i == j) {
-                    if (j == k) ans += cnt[i] * (cnt[i] - 1) * (cnt[i] - 2) / 6;
-                    else ans += cnt[i] * (cnt[i] - 1) / 2 * cnt[k];
+                    if (j == k) ans += cnt[i] * (cnt[i] - 1) * (cnt[i] - 2) / 6; // cnt[i]个选3个
+                    else ans += cnt[i] * (cnt[i] - 1) / 2 * cnt[k]; // cnt[i]中选2个
                 } else {
-                    if (j == k) ans += cnt[i] * cnt[j] * (cnt[j] - 1) / 2;
+                    if (j == k) ans += cnt[i] * cnt[j] * (cnt[j] - 1) / 2; // cnt[j]中选2个
                     else ans += cnt[i] * cnt[j] * cnt[k];
                 }
             }
