@@ -14,17 +14,17 @@ using namespace std;
 class Solution {
 public:
     int superpalindromesInRange(string L, string R) {
-        // 若palin是回文，再看palin^2是否是回文
-        // palin^2 <= R < 10^18，palin < 10^9
-        // 生成palin只需k正反拼接（最后一位可重合），k < 10^5
+        // 对于回文palin，若palin^2也是回文则palin^2是superpalin。
+        // palin^2 <= R < 10^18，palin < 10^9（九位数）
+        // 可用数k正反拼接生成palin（最后一位可重合），k < 10^5
         const long l = stol(L), r = stol(R);
         int ans = 0;
-        countIfLengthOdd(true, l, r, ans);
-        countIfLengthOdd(false, l, r, ans);
+        countIfOddLen(true, l, r, ans);
+        countIfOddLen(false, l, r, ans);
         return ans;
     }
     
-    void countIfLengthOdd(bool odd, long l, long r, int &ans) {
+    void countIfOddLen(bool odd, long l, long r, int &ans) {
         for (int k = 1; k < 1e5; k++) {
             auto s = to_string(k);
             string rs(s.rbegin(), s.rend());
