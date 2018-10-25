@@ -24,28 +24,20 @@ public:
         // 递推式在i这维只依赖于i-1项，可省掉i这一维。
         // 01背包问题，逆序遍历k和v：dp[k][v] = dp[k][v] || dp[k-1][v-A[i-1]]
         // 
-        // 这里A[i-1]在范围[0,10000]，和值sum较大，用二维数组dp[k][v]浪费空间，
-        // 改用`vector<unordered_set<int>> dp;`，dp[k]表示从A[0..i-1]中取k个数、能达到的和值集
+        // 这里A[i-1]在范围[0,10000]，和值v较大，用二维数组dp[k][v]浪费空间。
+        // 改用`vector<unordered_set<int>> dp;`，dp[k]表示从A[0..i-1]中取k个数、能达到的和值集，
         // dp[k].insert(v)表示dp[k][v]==true
         
-        int sum = 0;
-        for (int num : A) {
-            sum += num;
-        }
-
-        // 提早判断返回
         const int N = A.size();
-        bool canSplit = false;
-        for (int k = 1; k <= N / 2 && !canSplit; k++) {
-            if (k * sum % N == 0) canSplit = true;
-        }
-        if (!canSplit) return false;
+        int sum = 0;
+        for (int num : A) sum += num;
+        
+        if (!canSplit(sum, N)) return false; // 提早判断返回
         
         vector<unordered_set<int>> dp(N / 2 + 1);
         dp[0].insert(0);
         for (int i = 1; i <= N; i++) {
-            // 01背包，逆序遍历k
-            for (int k = min(N / 2, i); k >= 1; k--) {
+            for (int k = min(N / 2, i); k >= 1; k--) { // 01背包，逆序遍历k
                 for (int s : dp[k-1]) {
                     dp[k].insert(s + A[i-1]);
                 }
@@ -54,6 +46,13 @@ public:
         
         for (int k = 1; k <= N / 2; k++) {
             if (k * sum % N == 0 && dp[k].count(k * sum / N)) return true;
+        }
+        return false;
+    }
+    
+    bool canSplit(int sum, int N) {
+        for (int k = 1; k <= N / 2; k++) {
+            if (k * sum % N == 0) return true;
         }
         return false;
     }
