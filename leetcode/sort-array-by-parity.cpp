@@ -14,14 +14,9 @@ using namespace std;
 class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& A) {
-        int i = 0, j = (int)A.size() - 1;
-        while (i < j) { // 把奇数往后抛
-            if (A[i] & 1) {
-                swap(A[i], A[j]);
-                j--;
-            } else {
-                i++;
-            }
+        // 把偶数往前抛
+        for (int r = 0, w = 0; r < A.size(); r++) {
+            if (A[r] % 2 == 0) swap(A[r], A[w++]);
         }
         return A;
     }
