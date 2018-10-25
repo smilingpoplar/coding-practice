@@ -14,13 +14,12 @@ using namespace std;
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        // O(n)，可来自dp的降维写法
-        int maxendinghere = 0, maxsofar = INT_MIN;
+        int currMax = 0, ans = INT_MIN;
         for (int num : nums) {
-            maxendinghere = max(maxendinghere + num, num);
-            maxsofar = max(maxsofar, maxendinghere);
+            currMax = num + max(currMax, 0);
+            ans = max(ans, currMax);
         }
-        return maxsofar;
+        return ans;
     }
 };
 

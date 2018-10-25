@@ -14,16 +14,15 @@ using namespace std;
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        // 最大乘积可能来自负负得正，因此要同时保留最大乘积imax和最小乘积imin。
-        // 以nums[i]结尾子问题nums[0..i]的imax、imin来自 { imax*nums[i], imin*nums[i], nums[i] }
+        // 最大乘积可能来自负负得正，因此要保留最大乘积currMax和最小乘积currMin，
+        // 以nums[i]结尾子问题nums[0..i]的最大最小乘积来自 { currMax*nums[i], currMin*nums[i], nums[i] }
         const int N = nums.size();
-        int ans = INT_MIN;
-        int imax = 1, imin = 1;
+        int currMax = 1, currMin = 1, ans = INT_MIN;
         for (int num : nums) {
-            int cand1 = imax * num, cand2 = imin * num;
-            imax = max({cand1, cand2, num});
-            imin = min({cand1, cand2, num});
-            if (imax > ans) ans = imax;
+            int cand1 = currMax * num, cand2 = currMin * num;
+            currMax = max({cand1, cand2, num});
+            currMin = min({cand1, cand2, num});
+            if (currMax > ans) ans = currMax;
         }
         return ans;
     }
