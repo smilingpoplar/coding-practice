@@ -14,23 +14,21 @@ using namespace std;
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
-        // 用栈找“波峰”，当前数小于栈顶时栈顶弹出。
-        // 对弹出数来说，弹出数是"波峰"，当前数是右边小于它的数，新栈顶是左边小于它的数。
-        // 为方便起见，假设heights[]首尾有高度为0的块，变成h[]。
+        // 用栈找“波峰” <=> 找下一个更小的数
+        // 弹出数是"波峰"，当前数是右边小于它的数，新栈顶是左边小于它的数。
+
+        // 为方便起见，heights[]首尾加上高度为0的哨兵块
+        heights.insert(heights.begin(), 0);
+        heights.push_back(0);
         const int N = heights.size();
-        vector<int> h(N + 2); 
-        h[0] = h[N+1] = 0;
-        for (int i = 0; i < N; i++) {
-            h[i+1] = heights[i];
-        }
         
         int ans = 0;
         stack<int> stk; // 栈中保存坐标
-        for (int i = 0; i < N + 2; i++) {
-            while (!stk.empty() && h[i] < h[stk.top()]) {
+        for (int i = 0; i < N; i++) {
+            while (!stk.empty() && heights[i] < heights[stk.top()]) {
                 int peak = stk.top(); stk.pop();
-                int top = stk.top();
-                ans = max(ans, h[peak] * (i - top - 1));
+                int left = stk.top();
+                ans = max(ans, heights[peak] * (i - left - 1));
             }
             stk.push(i);
         }

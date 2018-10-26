@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     bool increasingTriplet(vector<int>& nums) {
-        // 从左到右扫描，只要min2被设置了，说明它前面有比它小的min1
+        // 从左到右扫描，若开始设置第三小，说明前面已有min1和min2
         int min1 = INT_MAX, min2 = INT_MAX;
         for (int num : nums) {
             if (num <= min1) {
