@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
-        // 把R行C列的矩阵看作R个以第r行为底的直方图，直方图从底往上计算高度
+        // 把R行C列的矩阵看作R个以第r行为底的直方图
         if (matrix.empty()) return 0;
         const int R = matrix.size(), C = matrix[0].size();
         int ans = 0;
@@ -31,23 +31,23 @@ public:
 
     int largestRectangleArea(vector<int>& heights) {
         // 同https://leetcode.com/problems/largest-rectangle-in-histogram/
-        // 用栈找“波峰”。当前数小于栈顶时栈顶弹出。
-        // 对弹出数来说，弹出数是"波峰"，当前数是右边小于它的数，新栈顶是左边小于它的数。
-        // 为方便起见，假设heights[]首尾有高度为0的块，变成h[]。
-        const int N = heights.size();
-        vector<int> h(N + 2); 
-        h[0] = h[N+1] = 0;
-        for (int i = 0; i < N; i++) {
-            h[i+1] = heights[i];
+        // 用栈找“波峰” <=> 找下一个更小的数
+        // 弹出数是"波峰"，当前数是右边小于它的数，新栈顶是左边小于它的数。
+
+        // 为方便起见，heights[]首尾加上高度为0的哨兵块，变为h[]
+        vector<int> h(heights.size() + 2, 0);
+        const int N = h.size();
+        for (int i = 1; i < N - 1; i++) {
+            h[i] = heights[i-1];
         }
-        
+
         int ans = 0;
         stack<int> stk; // 栈中保存坐标
-        for (int i = 0; i < N + 2; i++) {
+        for (int i = 0; i < N; i++) {
             while (!stk.empty() && h[i] < h[stk.top()]) {
                 int peak = stk.top(); stk.pop();
-                int top = stk.top();
-                ans = max(ans, h[peak] * (i - top - 1));
+                int left = stk.top();
+                ans = max(ans, h[peak] * (i - left - 1));
             }
             stk.push(i);
         }
