@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        // 使数字串最小，需要留下递增序列 <=> 找下一个更小的数；在此基础上，考虑限制条件：
+        // 使数字串最小，需要栈中留下递增序列 <=> 找下一个更小的数；在此基础上，考虑限制条件：
         // 当栈内数字个数+剩余可压栈个数>needed时才可pop()，栈内数字个数<needed时才可push()
         const int N = num.size(), needed = N - k;
         string s;
