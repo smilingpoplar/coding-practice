@@ -19,8 +19,6 @@ public:
         // 固定第二个数，在右边找小于它的最大数rMax，再看左边是否有数<rMax。
         // 某数右边小于它的最大数 <=等价于=> 从右往左找下一个更大的数
         const int N = nums.size();
-        if (N < 3) return false;
-        
         int rMax = INT_MIN;
         stack<int> stk;
         for (int i = N - 1; i >= 0; i--) {
