@@ -12,33 +12,30 @@
 using namespace std;
 
 class MaxStack {
-    stack<int> stk;
-    stack<int> maxStk;
+    stack<int> nums;
+    stack<int> maxs;
 public:
     /** initialize your data structure here. */
     MaxStack() {
     }
     
     void push(int x) {
-        int theMax = maxStk.empty() ? INT_MIN : peekMax();
-        if (x > theMax) theMax = x;
-        maxStk.push(theMax);
-        stk.push(x);
+        if (maxs.empty() || x >= maxs.top()) maxs.push(x);
+        nums.push(x);
     }
     
     int pop() {
-        int ans = top();
-        maxStk.pop();
-        stk.pop();
+        if (nums.top() == maxs.top()) maxs.pop();
+        int ans = top(); nums.pop();
         return ans;
     }
     
     int top() {
-        return stk.top();
+        return nums.top();
     }
     
     int peekMax() {
-        return maxStk.top();
+        return maxs.top();
     }
     
     int popMax() {
@@ -47,8 +44,8 @@ public:
         while (top() != ans) {
             buffer.push(pop());
         }
-        maxStk.pop();
-        stk.pop();
+        maxs.pop();
+        nums.pop();
         while (!buffer.empty()) {
             push(buffer.top());
             buffer.pop();

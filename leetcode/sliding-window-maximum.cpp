@@ -15,14 +15,15 @@ using namespace std;
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        // 用双端队列deque，队头保存当前窗口的最大值（的下标），队中保存递减序列（的下标）
-        // 递减序列对应波谷左侧、对应找下一个更大的数
+        // 用deque实现单调队列，队头保存当前窗口的最大值（的下标），
+        // 递减队列 <=> 找下一个更大的数
         vector<int> ans;
         deque<int> dq;
         for (int i = 0; i < nums.size(); i++) {
-            if (!dq.empty() && i - dq.front() + 1 > k) dq.pop_front();
-            while (!dq.empty() && nums[i] > nums[dq.back()]) 
+            if (!dq.empty() && i - dq.front() + 1 > k) dq.pop_front(); // 控制住窗口长
+            while (!dq.empty() && nums[i] > nums[dq.back()]) {
                 dq.pop_back();
+            }
             dq.push_back(i);
             if (i - k + 1 >= 0) ans.push_back(nums[dq.front()]);
         }

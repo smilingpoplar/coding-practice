@@ -15,14 +15,14 @@ class Solution {
 public:
     int shortestSubarray(vector<int>& A, int K) {
         const int N = A.size();
-        vector<int> sum(N + 1, 0); // sum[i]表示sumA[0..i)
+        vector<int> sum(N + 1, 0); // sum[i]表示sum( A[0..i) )
         for (int i = 1; i <= N; i++) 
             sum[i] = sum[i-1] + A[i-1];
         
         int ans = INT_MAX;
         deque<int> q;
         for (int i = 0; i <= N; i++) {
-            // sumA[q[0]..i)子段和
+            // sum( A[q[0]..i) )子段和
             while (!q.empty() && sum[i] - sum[q.front()] >= K) {
                 ans = min(ans, i - q.front());
                 q.pop_front();

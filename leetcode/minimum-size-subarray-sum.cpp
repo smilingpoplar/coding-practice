@@ -14,10 +14,8 @@ using namespace std;
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
-        // 滑动窗口nums[lo,hi]是sum>=s的子段
-        const int N = nums.size();
-        int ans = INT_MAX;
-        int sum = 0;
+        const int N = nums.size();        
+        int sum = 0, ans = INT_MAX;
         for (int lo = 0, hi = 0; hi < N; hi++) {
             sum += nums[hi];
             while (sum >= s) { 

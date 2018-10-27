@@ -12,7 +12,7 @@
 using namespace std;
 
 class FreqStack {
-    // 每个频率一个桶；"有多个最大频率时，离栈顶近的先弹出"，所以桶中是一个栈
+    // 每个频率一个桶；"有多个最大频率时，后进先出"，所以该桶是栈，栈中存放该频率的数
     unordered_map<int, stack<int>> buckets; // freq=>stack
     unordered_map<int, int> freq; // num=>freq
     int maxfreq = 0;

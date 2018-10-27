@@ -13,22 +13,23 @@ using namespace std;
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        vector<int> count(128);
-        for (char c : s) count[c]++;
-        
-        vector<bool> visited(128);
-        string stk; // 让栈中保留递增序列，对应"波峰"左侧，对应找下一个更小的数
+        // 要使剩余串的字典序最小，需要栈中留下递增序列 <=> 找下一个更小的数
+        // 限制条件：每个字母出现且仅出现一次
+        vector<int> leftCnt(128, 0); // 某字母还有多少富余
+        for (char c : s) leftCnt[c]++;
+        vector<bool> appeared(128, false); // 某字母是否已出现
+
+        string stk;
         for (char c : s) {
-            count[c]--;
-            // 保证每个字母最多选一次，判断放在前面保证相同字母选最早出现的
-            if (visited[c]) continue;
-            // 字母有富余count[stk.top()]>0时才弹出，保证每个字母最少选一次
-            while (!stk.empty() && c < stk.back() && count[stk.back()] > 0) {
+            leftCnt[c]--;
+            if (appeared[c]) continue; // 最多出现一次，在开始就判断保证重复字母选左边的
+            while (!stk.empty() && c < stk.back() 
+                    && leftCnt[stk.back()] > 0) { // 有富余才能弹出，保证最少出现一次
                 int top = stk.back(); stk.pop_back();
-                visited[top] = false;
+                appeared[top] = false;
             }
             stk.push_back(c);
-            visited[c] = true;
+            appeared[c] = true;
         }
         return stk;
     }

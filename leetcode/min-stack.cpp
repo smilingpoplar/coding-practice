@@ -12,29 +12,29 @@
 using namespace std;
 
 class MinStack {
-    stack<int> stk;    // 存储所有值
-    stack<int> minStk; // 存储当前最小值
+    stack<int> nums;
+    stack<int> mins;
 public:
     /** initialize your data structure here. */
     MinStack() {    
     }
 
     void push(int x) {
-        if (minStk.empty() || x <= minStk.top()) minStk.push(x);
-        stk.push(x);
+        if (mins.empty() || x <= mins.top()) mins.push(x);
+        nums.push(x);
     }
     
     void pop() {
-        if (stk.top() == minStk.top()) minStk.pop();
-        stk.pop();
+        if (nums.top() == mins.top()) mins.pop();
+        nums.pop();
     }
     
     int top() {
-        return stk.top();
+        return nums.top();
     }
     
     int getMin() {
-        return minStk.top();
+        return mins.top();
     }
 };
 
