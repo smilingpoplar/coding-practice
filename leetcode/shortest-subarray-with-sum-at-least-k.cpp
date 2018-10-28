@@ -15,22 +15,23 @@ class Solution {
 public:
     int shortestSubarray(vector<int>& A, int K) {
         const int N = A.size();
-        vector<int> sum(N + 1, 0); // sum[i]表示sum( A[0..i) )
+        vector<int> B(N + 1, 0);
         for (int i = 1; i <= N; i++) 
-            sum[i] = sum[i-1] + A[i-1];
+            B[i] = B[i-1] + A[i-1];
+        // B[i]表示sum{A[0..i)，B[i]-B[j]表示sum{A[j..i)}
         
         int ans = INT_MAX;
         deque<int> q;
         for (int i = 0; i <= N; i++) {
-            // sum( A[q[0]..i) )子段和
-            while (!q.empty() && sum[i] - sum[q.front()] >= K) {
-                ans = min(ans, i - q.front());
+            while (!q.empty() && B[i] - B[q[0]] >= K) {
+                ans = min(ans, i - q[0]);
                 q.pop_front();
             }
-            // 以i结尾的子段和，要给sum[i]在sum[..i)从后往前找满足"sum[i]-sum[j]>=K"的索引j。
-            // 假设已找到索引j，那么j前面>=sum[j]的数都可以抛弃，因为子段变长、子段和sum[i]-sum[j]变小。
-            // 所以要找下个更小的数，对应找波峰、栈中保留递增序列。
-            while (!q.empty() && sum[i] <= sum[q.back()]) q.pop_back();
+            // 当前数B[i]-队首B[q[0]]表示子段和，要这子段和尽量大（为了>=K），队首放最小值，是递增队列。
+            // 队中数最终都要作为队首参与子段和计算。若队中两个相等数B[x]==B[y]，x<y，
+            // 参与计算时y比起x值相等、子段更短，x可以丢弃，即相等数只保留右边那个，是严格递增序列。
+            while (!q.empty() && B[i] <= B[q.back()]) 
+                q.pop_back();
             q.push_back(i);
         }
         return ans != INT_MAX ? ans : -1;
