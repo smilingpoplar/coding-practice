@@ -13,11 +13,11 @@ using namespace std;
 class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
-        // 子集排列数问题，将背包问题的外层物品循环改内层
-        // 数可取多次，完全背包
+        // 和为i的子集排列数，递推式 dp[i]=sum(dp[i-num])
+        // 子集排列数的写法刚好 将背包问题的外层物品循环改内层
         vector<int> dp(target + 1, 0);
         dp[0] = 1;
-        for (int i = 0; i <= target; i++) { // 完全背包，顺序循环
+        for (int i = 0; i <= target; i++) {
             for (int num : nums) {
                 if (i - num >= 0) dp[i] += dp[i-num];
             }

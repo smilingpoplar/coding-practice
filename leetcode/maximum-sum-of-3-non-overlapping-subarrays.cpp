@@ -26,8 +26,8 @@ public:
         }
         
         // 问题变成从W中取3个数ia、ib、ic，使W[ia]+W[ib]+W[ic]最大，不重叠要求ia+k<=ib、ib+k<=ic。
-        // 三个数一般想法是固定住中间的数，故假设中间的数ib已选定！
-        // 那么ia只要在[0..ib-k]中找最大值的最左出现，ic只要在[ib+k, len(W)-1]中找最大值的最左出现。
+        // 三个数一般想法是固定住中间的数，故先选定中间数ib。那么ia只要在[0..ib-k]中找最大值的最左出现，
+        // ic只要在[ib+k, len(W)-1]中找最大值的最左出现。
         const int N = W.size();
         vector<int> leftIdx(N);
         int maxIdx = 0;
@@ -39,14 +39,14 @@ public:
         vector<int> rightIdx(N);
         maxIdx = N - 1;
         for (int j = N - 1; j >= 0; j--) {
-            if (W[j] >= W[maxIdx]) maxIdx = j; // 最大值的最左出现，注意这里>=的等号
+            if (W[j] >= W[maxIdx]) maxIdx = j; // 最大值的最左出现，注意这里>=号
             rightIdx[j] = maxIdx;
         }
         
         // 选三个数{ia,ib,ic}, ia+k<=ib, ib+k<=ic
         int maxSum = INT_MIN;
         vector<int> ans = { -1, -1, -1 };
-        for (int ib = k; ib < N - k; ib++) { // 先选中间的数ib
+        for (int ib = k; ib < N - k; ib++) {
             int ia = leftIdx[ib-k], ic = rightIdx[ib+k];
             int sum = W[ia] + W[ib] + W[ic];
             if (sum > maxSum) {

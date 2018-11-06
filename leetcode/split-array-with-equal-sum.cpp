@@ -22,22 +22,22 @@ public:
         for (int i = 1; i < N; i++)
             sum[i] = sum[i-1] + nums[i];
 
-        // 遍历j的各个取值[3..N-4]
+        // 遍历j的各个取值
         for (int j = 3; j <= N - 4; j++) {
-            // 记录相等的小段和。用set而不是int，因为不同分法i有不同的小段和
-            // 比如`3,2,1,-1,6`，分在1时两边小段和为5，分在-1时两边小段和为6
             unordered_set<int> subSums;
-            // j之前存在相等的两段
             for (int i = 1; i <= j - 2; i++) {
+                // j之前存在不同分法的相等小段，用个set记录，而不是单个int。
+                // 比如`3,2,1,-1,6`，i分在1时两边小段和为5，分在-1时两边小段和为6。
                 if (sum[i-1] == sum[j-1] - sum[i]) {
                     subSums.insert(sum[i-1]);
                 }
             }
             if (subSums.empty()) continue;
-            // j之后存在相等的两段
+            // j之后存在与前面相等的小段
             for (int k = j + 2; k <= N - 2; k++) {
                 int subSum = sum[k-1] - sum[j];
-                if (subSum == sum[N-1] - sum[k] && subSums.count(subSum)) return true;
+                if (subSum == sum[N-1] - sum[k] && subSums.count(subSum)) 
+                    return true;
             }
         }
         return false;
