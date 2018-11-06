@@ -25,7 +25,7 @@ public:
         // 01背包问题，逆序遍历k和v：dp[k][v] = dp[k][v] || dp[k-1][v-A[i-1]]
         // 
         // 这里A[i-1]在范围[0,10000]，和值v较大，用二维数组dp[k][v]浪费空间。
-        // 改用`vector<unordered_set<int>> dp;`，dp[k]表示从A[0..i-1]中取k个数、能达到的和值集，
+        // 改用vector<unordered_set<int>> dp;，dp[k]表示从A[0..i-1]中取k个数、能达到的和值集，
         // dp[k].insert(v)表示dp[k][v]==true
         
         const int N = A.size();
