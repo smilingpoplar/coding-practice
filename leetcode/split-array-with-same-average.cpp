@@ -23,7 +23,27 @@ public:
         // 考虑num，dp[i][k][v] = dp[i-1][k][v]/*不取num*/ || dp[i-1][k-1][v-num] /*取num*/
         // 递推式在i这维只依赖于i-1项，可省掉i这一维。
         // 01背包问题，逆序遍历k和v：dp[k][v] = dp[k][v] || dp[k-1][v-num]
-        // 
+        
+        /**
+        const int N = A.size();
+        int sum = 0;
+        for (int num : A) sum += num;
+        vector<vector<bool>> dp(N / 2 + 1, vector<bool>(sum + 1, false));
+        dp[0][0] = true;
+        for (int num : A) { 
+            for (int k = N/2; k >= 1; k--) { // 01背包，逆序遍历k和v
+                for (int v = sum; v >= num; v--) {
+                    dp[k][v] = dp[k][v] || dp[k-1][v-num];
+                }
+            }
+        }
+
+        for (int k = 1; k <= N / 2; k++) {
+            if (k * sum % N == 0 && dp[k][k * sum / N]) return true;
+        }
+        return false;
+        */
+        
         // 优化：
         // 这里num在范围[0,10000]，和值v较大，用二维数组dp[k][v]浪费空间。
         // 改用vector<unordered_set<int>> dp;，dp[k]表示从前i个数中取k个数、能达到的和值集，
