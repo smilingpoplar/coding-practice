@@ -14,7 +14,7 @@ class Solution {
 public:
     int numDecodings(string s) {
         // 设dp[i]表示s[i..]的解码数
-        // 若isValid(s[i..i]), dp[i] += ??dp[i+1]；若isValid(s[i,i+1])，dp[i] += ??dp[i+2]
+        // 若isValid(s[i]), dp[i] += ??dp[i+1]；若isValid(s[i..i+1])，dp[i] += ??dp[i+2]
         // 若s[i]单独解码：
         // s[i]
         //   *     9*dp[i+1]
@@ -27,10 +27,12 @@ public:
         //   1       9*dp[i+2]    dp[i+2]   dp[i+2]
         //   2       6*dp[i+2]    dp[i+2]     xxx
         //  0, 3-9     xxxxxxxxxxxxxxxxxx
+        //  因为dp[i]只依赖i+1, i+2项，可省掉i这维
+        //  用curr,next1,next2代表dp[i],dp[i+1],dp[i+2]
         const int Mod = 1e9 + 7;
+        const int N = s.size();
         // 用long防止计算过程中溢出！
         // 若用int且右端%M，中间变量也可能溢出导致错误。
-        const int N = s.size();
         long next1 = 1, next2 = 1;
         for (int i = N; i >= 0; i--) {
             long curr = 0;

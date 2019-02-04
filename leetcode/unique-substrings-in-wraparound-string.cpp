@@ -14,7 +14,7 @@ class Solution {
 public:
     int findSubstringInWraproundString(string p) {
         // 找以各个字母结尾的最长子串长，
-        // 比如以d结尾的最长子串长3，它就贡献了d、cd、bcd三个子串
+        // 比如以d结尾的最长子串bcd长3，它就贡献了d、cd、bcd三个子串
         vector<int> longest(26);
         int len;
         for (int i = 0; i < p.size(); i++) {

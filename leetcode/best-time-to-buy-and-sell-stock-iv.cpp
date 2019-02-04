@@ -24,7 +24,7 @@ public:
         // dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - prices[i] /*买股票，新交易*/)
         // 初始dp[-1][j][0]=0，dp[-1][j][1]=INT_MIN
         // dp在i这维上只依赖于i-1项，去掉i这维
-        // 降维后，要让dp[j-1][]表示旧状态dp[i-1][j-1][0]，j要从右往左遍历
+        // 降维后，要让dp[j-1][]表示旧状态d，j要从右往左遍历
         vector<vector<int>> dp(k + 1, vector<int>({ 0, INT_MIN }));
         for (int price : prices) {
             for (int j = k; j >= 1; j--) {

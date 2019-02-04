@@ -15,7 +15,7 @@ class Solution {
 public:
     int numDecodings(string s) {
         // 设dp[i]表示s[i..]的解码数，0<=i<=N
-        // 若isValid(s[i,i]), dp[i] += dp[i+1]；若isValid(s[i,i+1])，dp[i] += dp[i+2]
+        // 若isValid(s[i]), dp[i] += dp[i+1]；若isValid(s[i..i+1])，dp[i] += dp[i+2]
         // 初始dp[N] = 1
         const int N = s.size();
         vector<int> dp(N + 1, 0);
