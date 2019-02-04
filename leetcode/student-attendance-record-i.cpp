@@ -13,15 +13,14 @@ using namespace std;
 class Solution {
 public:
     bool checkRecord(string s) {
-        int a = 0;
-        int ll = 0;
+        int a = 0, ll = 0;
         for (char c : s) {
             if (c == 'L') {
-                ++ll;
+                ll++;
             } else {
                 ll = 0;
                 if (c == 'A') {
-                    ++a;
+                    a++;
                 }
             }
             if (a > 1 || ll > 2) return false;
