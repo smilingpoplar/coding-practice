@@ -18,7 +18,7 @@ public:
         // 若s[i]==t[j]，dp[i,j] = dp[i+1,j+1]/*使用s[i]*/ + dp[i+1,j]/*不用s[i]*/
         // 若s[i]!=t[j]，dp[i,j] = dp[i+1,j]
         // 初值：dp[i,N]=1，dp[M,j<N]=0
-        // 省略i这一维，i仍从右向左遍历，要让dp[j+1]表示两行合并前的原值dp[i+1,j+1]，j从左向右遍历
+        // 省略i这一维，i仍从右向左遍历，要让dp[j+1]是旧状态，j从左向右遍历
         const int M = s.size(), N = t.size();
         vector<int> dp(N + 1, 0); // 对应i==M
         dp[N] = 1;
