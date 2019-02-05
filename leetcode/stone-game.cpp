@@ -20,7 +20,6 @@ public:
         const int N = piles.size();
         vector<vector<int>> dp(N, vector<int>(N, 0));
         for (int i = 0; i < N; i++) dp[i][i] = piles[i];
-        // len(i..j) >= 2
         for (int i = N - 1; i >= 0; i--) {
             for (int j = i + 1; j < N; j++) {
                 dp[i][j] = max(piles[i] - dp[i+1][j], piles[j] - dp[i][j-1]);
