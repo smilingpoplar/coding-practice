@@ -19,13 +19,12 @@ public:
         // dp[i][j] = min{...}表示所有保证赢的情况里最少需要多少钱。
         // 初始dp[i][i]=0
         
-        vector<vector<int>> dp(n + 1, vector<int>(n + 1));
+        vector<vector<int>> dp(n + 1, vector<int>(n + 1, INT_MAX));
         for (int i = 1; i <= n; i++) {
             dp[i][i] = 0;
         }
         for (int i = n; i >= 1; i--) {
             for (int j = i + 1; j <= n; j++) {
-                dp[i][j] = INT_MAX;
                 for (int k = i; k <= j; k++) {
                     int money = k + max(i <= k - 1 ? dp[i][k-1] : 0, k + 1 <= j ? dp[k+1][j] : 0);
                     dp[i][j] = min(dp[i][j], money);

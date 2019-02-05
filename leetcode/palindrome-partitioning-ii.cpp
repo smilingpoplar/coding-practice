@@ -26,8 +26,8 @@ public:
         }
 
         // 设cut[i]表示子串s[0..i]的minCut，0<=i<N
-        // dp[0][i]==true时，cut[i]=0
-        // dp[0][i]==false时，对于满足dp[k+1][i]==true的k，cut[i]=min( cut[k]+1 )，0<=k<i
+        // dp[0][i]==true时，cut[i]=0；否则，
+        // 对于0<=k<i的k若满足dp[k+1][i]==true，cut[i]=min{ cut[k]+1 }
         vector<int> cut(N, INT_MAX);
         for (int i = 0; i < N; i++) {
             if (dp[0][i]) {

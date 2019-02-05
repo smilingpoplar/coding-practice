@@ -25,7 +25,7 @@ public:
         vector<vector<int>> dp(N, vector<int>(N, -1));
         dp[0][0] = grid[0][0]; // 已知grid[0][0]!=-1
         for (int k = 1; k <= 2*(N-1); k++) {
-            vector<vector<int>> ndp(N, vector<int>(N, -1));
+            vector<vector<int>> ndp(N, vector<int>(N, -1)); // 用-1表示路不通
             for (int r1 = 0; r1 < N; r1++) {
                 for (int r2 = 0; r2 < N; r2++) {
                     int c1 = k - r1, c2 = k - r2;
@@ -36,8 +36,8 @@ public:
                     if (r1 > 0) theMax = max(theMax, dp[r1-1][r2]);
                     if (r1 > 0 && r2 > 0) theMax = max(theMax, dp[r1-1][r2-1]);
                     if (theMax < 0) continue; // 路不通
-                    // 防止重复统计同一格
                     ndp[r1][r2] = grid[r1][c1] + theMax;
+                    // 防止重复统计同一格
                     if (r1 != r2) ndp[r1][r2] += grid[r2][c2];
                 }
             }
