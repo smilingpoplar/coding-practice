@@ -15,23 +15,27 @@ class Solution {
 public:
     int shortestSubarray(vector<int>& A, int K) {
         const int N = A.size();
+        // B[i]表示sum{A[0..i)}，B[i]-B[j]表示sum{A[j..i)}
         vector<int> B(N + 1, 0);
-        for (int i = 1; i <= N; i++) 
-            B[i] = B[i-1] + A[i-1];
-        // B[i]表示sum{A[0..i)，B[i]-B[j]表示sum{A[j..i)}
+        for (int i = 0; i < N; i++) {
+            B[i+1] = B[i] + A[i];
+        }
         
+        // 当前数B[i]-队首B[q[0]]表示子段和；要让子段和尽量大，队首尽量小，是递增队列。
+        // 因为q是递增序列，若B[i]-B[q[0]]>=K，i-q[0]就是以q[0]开头的子段中最短的，q[0]用完即弃。
+        // 若q中相邻两数x<y，B[x]==B[y]，作为队首参与计算时y对应子段更短，相等数只保留右边的，
+        // 所以是严格递增队列，出栈比较用<=。
         int ans = INT_MAX;
         deque<int> q;
         for (int i = 0; i <= N; i++) {
             while (!q.empty() && B[i] - B[q[0]] >= K) {
                 ans = min(ans, i - q[0]);
-                q.pop_front();
+                q.pop_front(); // q[0]用完即弃
             }
-            // 当前数B[i]-队首B[q[0]]表示子段和，要让子段和最大，队首放最小值，是递增队列。
-            // 队中数最终都要作为队首参与子段和计算。若队中两个相等数B[x]==B[y]，x<y，
-            // 参与计算时y比起x值相等、子段更短，x可以丢弃，相等数只保留右边的，是严格递增序列。
-            while (!q.empty() && B[i] <= B[q.back()]) 
+
+            while (!q.empty() && B[i] <= B[q.back()]) { // 出栈比较用<=
                 q.pop_back();
+            }     
             q.push_back(i);
         }
         return ans != INT_MAX ? ans : -1;
