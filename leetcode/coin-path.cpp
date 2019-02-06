@@ -15,8 +15,8 @@ class Solution {
 public:
     vector<int> cheapestJump(vector<int>& A, int B) {
         // "两条路径同样代价且同样长时，取词典序小的那个"
-        // 设dp[i]表示从A[i..N-1]的最小代价，在dp[i]按序尝试i+1,i+2,...,i+B，
-        // 先找到的最小代价就满足字典序小。dp[i] = min{ dp[i+x] + A[i] }，1<=x<=B
+        // 设dp[i]表示从A[i..]起跳的最小代价，在dp[i]按序尝试i+1,i+2,...,i+B，
+        // 先找到的最小代价就满足字典序小。dp[i] = min{ dp[i+b] + A[i] }，1<=b<=B
         // 初始dp[N-1] = 0
         const int N = A.size();
         vector<int> dp(N, INT_MAX);

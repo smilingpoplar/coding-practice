@@ -22,10 +22,11 @@ using namespace std;
 class Solution {
 public:
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        // 从左往右扫描，假设已构造好子问题nums[0..i-1]，现在处理nums[i]。
-        // 让nums[i]对应下一个更大的数，'nums[i] > stk.back()->val'时弹栈顶，
-        // 最后弹出的数是nums[i]左边小于<nums[i]的最大数，同时nums[i]是新栈顶右边<新栈顶的最大数。
-        // 找下一个更大的数 <=> 留下的是递减栈 => 最大值在stk.front()
+        // 以最大值为根构造二叉树，正好对应找下一个更大的数的单调栈问题。
+        // 从左往右扫描，当前数num>stk.top()时弹栈顶，
+        // 最后弹出的数是num左边小于<num的最大数，最后弹出数是num的左子节点；
+        // 新栈顶是num左边>num的最小数，num是新栈顶右边<新栈顶的最大数，num是新栈顶的右子节点。
+        // 最后，找下一个更大的数 <=> 留下的是递减栈 => 最大值在stk[0]
         vector<TreeNode *> stk;
         for (int num : nums) {
             auto curr = new TreeNode(num);

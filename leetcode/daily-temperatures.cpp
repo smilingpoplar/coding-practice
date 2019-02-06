@@ -16,7 +16,7 @@ public:
         const int N = temperatures.size();
         vector<int> ans(N, 0);
         stack<int> stk;
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < N; i++) {
             while (!stk.empty() && temperatures[i] > temperatures[stk.top()]) {
                 int top = stk.top(); stk.pop();
                 ans[top] = i - top;                
