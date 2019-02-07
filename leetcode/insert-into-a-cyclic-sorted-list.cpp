@@ -33,13 +33,16 @@ public:
             return nn;
         }
 
+        // 能否在某位置后插入：
+        // 以node为头的话，循环中只判断不含尾的之前位置；
+        // 这些位置都不行时，通过画图例可知，尾位置总是可行。
         auto p = node;
         while (p->next != node) {
-            // 循环结束时找到插入位置
             if (p->val <= x && x <= p->next->val) break;
-            if (p->val > p->next->val && (x >= p->val || x <= p->next->val)) break; // p指向最大值
+            if (p->val > p->next->val && (x >= p->val || x <= p->next->val)) break;
             p = p->next;    
         }
+        // 这时在p后插入
         auto nn = new ListNode(x);
         nn->next = p->next;
         p->next = nn;

@@ -15,9 +15,10 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) {
         int l = 0, r = nums.size() - 1;
         while (l < r) {
-            if (nums[l] + nums[r] == target) {
+            int sum = nums[l] + nums[r];
+            if (sum == target) {
                 return { l + 1, r + 1 };
-            } else if (nums[l] + nums[r] < target) {
+            } else if (sum < target) {
                 l++;
             } else {
                 r--;

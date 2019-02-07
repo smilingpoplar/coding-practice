@@ -19,8 +19,8 @@ struct ListNode {
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        // pa跑完链表A跑链表B，pb跑完链表B跑链表A
-        // 有交点则同时跑到交点，无交点则同时跑到NULL
+        // pa跑完链表A跑链表B，pb跑完链表B跑链表A，
+        // 最终跑到同一交点（有交点到交点，无交点到NULL节点）
         auto pa = headA, pb = headB;
         while (pa != pb) {
             pa = pa ? pa->next : headB;

@@ -46,7 +46,7 @@ public:
         if (capacity == 0) return;
         if (!infoOfKey.count(key)) {
             if (infoOfKey.size() == capacity) evict();
-            // 应插入频率为1的行。这里先设频率为0，然后和后面情况一起处理。
+            // 应插入频率为1的行。这里先设频率为0，待会儿和其他情况一起增1。
             auto bucket = buckets.insert(buckets.begin(), { 0, {{key, value}} });
             infoOfKey[key] = { bucket, bucket->kvs.begin() };
         } else {
