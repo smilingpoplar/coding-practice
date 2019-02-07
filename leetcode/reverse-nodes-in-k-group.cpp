@@ -50,15 +50,15 @@ public:
         auto prev = &dummy; // 组前的指针
 
         for (; len >= k; len -= k) {
-            // 将组内第[2..k]元素插入到prev之后
-            auto start = prev->next, curr = start->next;
+            // 组头是反转后的组尾，将组内第[2..k]元素插入到prev之后
+            auto tail = prev->next, curr = tail->next;
             for (int i = 2; i <= k; i++) {
-                start->next = curr->next;
+                tail->next = curr->next;
                 curr->next = prev->next;
                 prev->next = curr;
-                curr = start->next;
+                curr = tail->next;
             }
-            prev = start;
+            prev = tail;
         }
         return dummy.next;
     }

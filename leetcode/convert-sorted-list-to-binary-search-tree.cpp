@@ -27,7 +27,7 @@ class Solution {
 public:
     TreeNode* sortedListToBST(ListNode *head) {
         if (!head) return NULL;
-        // 快慢指针，slow指向较短后半段的头节点
+        // 快慢指针，让slow指向后半段头节点
         auto fast = head, slow = head;
         ListNode *prev = NULL;
         while (fast && fast->next) {

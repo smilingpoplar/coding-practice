@@ -23,18 +23,18 @@ public:
         dummy.next = head;
         
         auto fast = &dummy;
-        // 找倒数第n节点前一节点：后面while(fast->next)对应最后节点，这里走n步对应往前n节点
-        // 这里走n步、后面while(fast->next)是唯一正确写法，可以配合!fast检测太大n值
-        // <del>这里走n+1步、后面while(fast)的写法，当配合!fast检测太大n值时出错</del>
+        // 找倒数第n节点前一节点：
+        // fast先走n步、后面while(fast->next)是唯一正确写法，可以配合!fast检测n值合法
+        // <del>fast先走n+1步、后面while(fast)的写法，若配合!fast检测n值会出错</del>
         for (int i = 0; i < n && fast; i++) fast = fast->next;
         if (!fast) return head;
         
         auto slow = &dummy;
-        while (fast->next) { // 配合前面先走n步
+        while (fast->next) { // fast最后停在尾节点
             fast = fast->next;
             slow = slow->next;
         }
-        // slow是待删除节点前一节点
+        // slow是待删除节点的前一节点
         auto next = slow->next->next;
         delete slow->next;
         slow->next = next;

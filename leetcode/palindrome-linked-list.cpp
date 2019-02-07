@@ -20,7 +20,7 @@ class Solution {
 public:
     bool isPalindrome(ListNode *head) {
         if (!head) return true;
-        // 快慢指针，slow将指向较长前半段的尾节点
+        // 快慢指针，让slow指向前半段尾节点
         auto fast = head->next, slow = head;
         while (fast && fast->next) {
             fast = fast->next->next;
