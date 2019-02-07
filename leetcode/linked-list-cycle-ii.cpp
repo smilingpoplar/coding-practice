@@ -27,15 +27,15 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        // 快慢指针，fast跑两步slow跑一步，当slow进入环中没跑一圈肯定被fast追上
-        // 假设从链表头到环起点的距离为a，从环起点到环中相遇点的距离为b
+        // 快慢指针，fast跑两步slow跑一步，slow进入环后不到一圈肯定被fast追上，
+        // 假设从链表头到环起点的距离为a，从环起点到环中相遇点的距离为b，
         // 有 a+b+n*L = 2(a+b), a = n*L-b
-        // 即 若两指针同时从链表头和环中相遇点同速跑，它们将在环起点相遇
+        // 即 若两指针从链表头和环中相遇点同速跑，将在环入口相遇。
         auto fast = head, slow = head;
         while (fast && fast->next) {
             fast = fast->next->next;
             slow = slow->next;
-            if (fast == slow) { // 相遇，再让两指针从链表头和相遇点同速跑
+            if (fast == slow) { // 相遇，再同速跑
                 fast = head;
                 while (fast != slow) {
                     fast = fast->next;
