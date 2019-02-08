@@ -16,7 +16,7 @@ public:
     int threeSumClosest(vector<int>& nums, int target) {
         const int N = nums.size();
         if (N < 3) return INT_MAX;
-        sort(nums.begin(), nums.end()); // 先排序再两端夹逼
+        sort(nums.begin(), nums.end()); // 先排序再两指针
         
         int minDist = INT_MAX, ans;
         for (int a = 0; a < N - 2; a++) {
@@ -28,6 +28,7 @@ public:
                     minDist = dist;
                     ans = sum;
                 }
+                
                 if (sum == target) {
                     return sum;
                 } else if (sum < target) {
