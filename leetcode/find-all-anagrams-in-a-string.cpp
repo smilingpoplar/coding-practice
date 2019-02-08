@@ -16,7 +16,7 @@ public:
     vector<int> findAnagrams(string s, string p) {
         unordered_map<char, int> count;
         for (char c : p) count[c]++;
-        int distinct = count.size(); // 要找多少个不同的字符
+        int distinct = count.size();
         
         vector<int> ans;
         // 每次hi移动一步：若是有效窗口、lo再移动至无效窗口
