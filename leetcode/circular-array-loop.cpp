@@ -17,31 +17,30 @@ public:
         const int N = nums.size();
         // 快慢指针找循环
         for (int i = 0; i < N; i++) {
-            if (nums[i] == 0) continue; // 非循环路径上的数将标记为0
-            
+            if (nums[i] == 0) continue; // 无循环路径上的点已标为0
+
+            // 从i出发是否构成循环路径
             int fast = i, slow = i;
             while (true) {
-                // fast移动两步，slow移动一步
                 int next = getNext(fast, nums);
-                if (nums[i] * nums[next] < 0) break; // 循环方向不能变
+                if (nums[i] * nums[next] < 0) break; // 要求循环方向不变
                 fast = next, next = getNext(fast, nums);
-                if (nums[i] * nums[next] < 0) break; // 循环方向不能变
-                fast = next, next = getNext(fast, nums);
+                if (nums[i] * nums[next] < 0) break;
+                fast = next;
                 
                 slow = getNext(slow, nums);
                 if (fast == slow) { // 有环
-                    if (fast == next) break; // 但单个数不算循环
+                    if (fast == getNext(fast, nums)) break; // 排除单数成环
                     return true;
                 }
             }
             
-            // 从i出发的非循环路径上的数都标记为0
-            int val = nums[i];
-            slow = i;
-            while (val * nums[slow] > 0) {
-                int next = getNext(slow, nums);
-                nums[slow] = 0;
-                slow = next;
+            // 至此从i出发够不成循环，将路径上的点都标为0
+            int dir = nums[i], idx = i;
+            while (dir * nums[idx] > 0) {
+                int next = getNext(idx, nums);
+                nums[idx] = 0;
+                idx = next;
             }
         }
         return false;
