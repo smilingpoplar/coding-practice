@@ -27,7 +27,7 @@ public:
         
         // 问题变成从W中取3个数ia、ib、ic，使W[ia]+W[ib]+W[ic]最大，不重叠要求ia+k<=ib、ib+k<=ic。
         // 三个数一般想法是固定住中间的数，故先选定中间数ib。那么ia只要在[0..ib-k]中找最大值的最左出现，
-        // ic只要在[ib+k, len(W)-1]中找最大值的最左出现。
+        // ic只要在[ib+k..N-1]中找最大值的最左出现。
         const int N = W.size();
         vector<int> leftIdx(N);
         int maxIdx = 0;
