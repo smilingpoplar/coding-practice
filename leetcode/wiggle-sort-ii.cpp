@@ -16,11 +16,11 @@ public:
     void wiggleSort(vector<int>& nums) {
         const int N = nums.size();
         // 按逆序处理，所以下面找kthLargest、三路划分先找>median
-        // (N+1)/2是中位数，因为取下整，偶数个时指向偏前
+        // kthLargest的k是1-based，中位数k=(N+1)/2
         int median = findKthLargest(nums, (N + 1) / 2);
-        // 这里也可以调用nth_element()（第n个最小的数）找偏后的中位数
-        // auto midptr = nums.begin() + N / 2;
-        // nth_element(nums.begin(), midptr, nums.end());
+        // 这里也可以调用nth_element(..., greater<int>())，
+        // auto midptr = nums.begin() + (N - 1) / 2; // 中位数加上偏移(N+1)/2-1
+        // nth_element(nums.begin(), midptr, nums.end(), greater<int>());
         // int median = *midptr;
         
         // 把后一半坐标[N/2..]放到偶位、前一半坐标[0..N/2)放到奇位的下标映射：i => (2*i+1) % (N|1)
@@ -46,18 +46,20 @@ public:
 
     int findKthLargest(vector<int>& nums, int k) {
         int l = 0, u = (int)nums.size() - 1;
+        k--; // k是1-based，变为下标作比较
         while (l <= u) {
-            int p = partition(nums, l, u); // p跟下标k-1比较，因为第k大数的下标应该是k-1
-            if (k - 1 == p) return nums[p];
-            if (k - 1 < p) u = p - 1;
+            int p = partition(nums, l, u);
+            if (k == p) break;
+            if (k < p) u = p - 1;
             else l = p + 1;
         }
+        return nums[k];
     }
 
     int partition(vector<int> &nums, int l, int u) {
         if (l >= u) return l;
-        // 单向划分：| >t | <=t |  ?  |
-        //         l    m      i    u
+        // 单向划分：|t| >t | <=t |  ?  |
+        //          l     m      i    u
         int m = l;
         for (int i = l + 1; i <= u; i++) {
             if (nums[i] > nums[l]) {
