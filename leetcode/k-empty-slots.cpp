@@ -20,7 +20,7 @@ public:
             days[flowers[i] - 1] = i + 1;
         }
         // 要找相隔k的两个位置lo和hi（hi-lo==k+1），使所有位置i（lo<i<hi）都满足
-        // days[i]>days[lo]和days[i]>days[hi]
+        // days[i]>days[lo] && days[i]>days[hi]
         int ans = INT_MAX;
         for (int lo = 0, hi = lo + k + 1; hi < N; hi = lo + k + 1) {
             int i = lo + 1;

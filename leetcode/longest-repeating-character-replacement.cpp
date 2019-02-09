@@ -19,7 +19,7 @@ public:
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
             // 每一步都尝试将窗口长度推到极限 maxCnt+k
             maxCnt = max(maxCnt, ++count[s[hi]]);
-            if (hi - lo + 1 > maxCnt + k) {
+            while (hi - lo + 1 > maxCnt + k) {
                 count[s[lo]]--;
                 lo++;
             }

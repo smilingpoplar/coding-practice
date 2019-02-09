@@ -18,7 +18,8 @@ public:
         mp[runningSum] = -1; // 初始空集
         // 在旧runningSum的集合中找runningSum-n*k，要找好多个数。
         // 这里的关键在于将所有runningSum状态压缩成runningSum%k，
-        // 变成在runningSum%k的集合中找(runningSum-n*k)%k=runningSum%k
+        // 变成在runningSum%k的集合中找(runningSum-n*k)%k=runningSum%k。
+        // 为让子段尽量长，多个相同runningSum%k对应的下标只保留第一个。
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i];
             if (k) runningSum %= k;

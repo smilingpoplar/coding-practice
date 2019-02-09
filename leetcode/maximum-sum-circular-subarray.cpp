@@ -15,8 +15,8 @@ class Solution {
 public:
     int maxSubarraySumCircular(vector<int>& A) {
         // 1. 没跨越数组尾时是maxSubarraySum问题
-        // 2. 跨越数组尾时的最大子段和 = 全数组总和-数组中段的minSubarraySum，
-        //    minSubarray不能扩展为全数组，否则跨越数组尾的子段为空，这要求minSubarraySum!=totalSum
+        // 2. 跨越数组尾时的最大子段和 = 全数组总和 - 数组中段的minSubarraySum
+        // 特例是数组全为负数，这时ansMax<0，应返回ansMax
         int currMax = 0, ansMax = INT_MIN;
         int currMin = 0, ansMin = INT_MAX;
         int totalSum = 0;
@@ -27,7 +27,7 @@ public:
             ansMin = min(ansMin, currMin);
             totalSum += a;
         }
-        if (ansMin == totalSum) return ansMax;
+        if (ansMax < 0) return ansMax;
         return max(ansMax, totalSum - ansMin);
     }
 };

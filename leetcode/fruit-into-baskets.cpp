@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int totalFruit(vector<int>& tree) {
-        // 求最多包含两种元素的最长子数组，滑动窗口
+        // 求最多含两种元素的最长子数组，滑动窗口
         unordered_map<int, int> cnt; // num=>count
         int ans = 0;
         for (int lo = 0, hi = 0; hi < tree.size(); hi++) {
@@ -26,7 +26,8 @@ public:
             ans = max(ans, hi - lo + 1);
         }
         return ans;
-    }};
+    }
+};
 
 int main(int argc, const char * argv[]) {
     return 0;
