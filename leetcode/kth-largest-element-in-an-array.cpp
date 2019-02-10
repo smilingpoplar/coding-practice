@@ -15,18 +15,22 @@ class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
         int l = 0, u = (int)nums.size() - 1;
+        k--; // k是1-based，变成下标作比较
         while (l <= u) {
-            int p = partition(nums, l, u); // 用下标k-1跟p比较，因为第k大的数下标是k-1
-            if (k - 1 == p) return nums[p];
-            if (k - 1 < p) u = p - 1;
+            int p = partition(nums, l, u);
+            if (k == p) break;
+            if (k < p) u = p - 1;
             else l = p + 1;
         }
+        return nums[k];
     }
 
     int partition(vector<int> &nums, int l, int u) {
         if (l >= u) return l;
-        // 单向划分，将数组分为>t、<=t、?三段
-        int m = l; // m指向第一段末尾、i指向第三段开头
+        // 单向划分
+        // |t| >t | <=t |  ?  |
+        //  l    m       i   u
+        int m = l;
         for (int i = l + 1; i <= u; i++) {
             if (nums[i] > nums[l]) swap(nums[i], nums[++m]);
         }
