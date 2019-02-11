@@ -32,11 +32,11 @@ class Solution {
 public:
     int mySqrt(int x) {
         if (x <= 1) return x;
-        // 找满足t^2<=x的最大整数t，就是找满足t^2>x的最小整数t的前一个数
+        // 找满足r^2<=x的最大整数r，就是找满足r^2>x的最小整数r的前一个数
         int l = 1, u = x;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;
-            if (mid > x / mid) { // mid*mid > x可能溢出
+            if (mid > x / mid) { // mid*mid > x
                 u = mid;
             } else {
                 l = mid;

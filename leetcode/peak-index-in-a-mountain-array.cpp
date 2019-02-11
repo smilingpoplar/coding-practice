@@ -17,12 +17,12 @@ public:
         int l = 0, u = (int)A.size() - 1;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;
-            if (A[mid-1] < A[mid] && A[mid] > A[mid+1]) {
-                return mid;
-            } else if (A[mid-1] < A[mid]) {
-                l = mid;
-            } else {
+            if (A[mid-1] >= A[mid]) {
                 u = mid;
+            } else if (A[mid] <= A[mid+1]){
+                l = mid;
+            } else { // A[mid-1] < A[mid] && A[mid] > A[mid+1]
+                return mid;
             }
         }
         return -1;

@@ -14,14 +14,15 @@ using namespace std;
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        // 每两个数配对，找第一个不配对的数，即找第一个nums[m]!=nums[m^1]的数
-        int l = 0, u = nums.size() - 1;
-        while (l <= u) {
+        // 由题知N是奇数，对于[0..N-2]的一对对，找第一对nums[m]!=nums[m^1]
+        // 二分搜索条件nums[m]!=nums[m^1]满足[0 ... 0 1 1 ...]形式
+        int l = -1, u = (int)nums.size() - 1;
+        while (l + 1 < u) {
             int mid = l + (u - l) / 2;
-            if (nums[mid] != nums[mid ^ 1]) u = mid - 1;
-            else l = mid + 1;
+            if (nums[mid] != nums[mid ^ 1]) u = mid;
+            else l = mid;
         }
-        return nums[l];
+        return nums[u];
     }
 };
 
