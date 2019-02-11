@@ -15,7 +15,7 @@ class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
         // 由题知N是奇数，对于[0..N-2]的一对对，找第一对nums[m]!=nums[m^1]
-        // 二分搜索条件nums[m]!=nums[m^1]满足[0 ... 0 1 1 ...]形式
+        // nums[m]!=nums[m^1]作二分搜索条件满足[0 ... 0 1 1 ...]形式
         int l = -1, u = (int)nums.size() - 1;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;
