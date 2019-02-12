@@ -11,7 +11,8 @@
 using namespace std;
 
 class MedianQueue {
-    // 两个优先队列构成中位数队列，因为c++的priority_queue没法删除元素，只好用两个multiset
+    // 最大堆负责左半，最小堆负责右半
+    // 因为c++的priority_queue没法随意删除元素，用multiset替代
     multiset<int, greater<int>> lo;
     multiset<int> hi;
 
