@@ -45,6 +45,7 @@ public:
                 return (leftMax + rightMin) * 0.5;
             }
         }
+        return -1;
     }
 };
 
