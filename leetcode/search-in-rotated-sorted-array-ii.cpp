@@ -32,9 +32,9 @@ public:
                     r = mid - 1;
                 }
             } else { // nums[l] == nums[mid]，至少半边全是重复元素
-                if (nums[mid] != nums[r]) { // 左半全是重复元素，在右半找
+                if (nums[mid] != nums[r]) { // 左半重复，在右半找
                     l = mid + 1;
-                } else { // 不知哪边全是重复元素，两边都得找
+                } else { // 不知哪半全是重复元素，两边都得找
                     l++;
                     r--;
                 }

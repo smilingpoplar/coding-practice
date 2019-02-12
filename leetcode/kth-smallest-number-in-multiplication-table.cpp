@@ -14,8 +14,6 @@ class Solution {
 public:
     int findKthNumber(int m, int n, int k) {
         // 设第k个数为x，x在范围[1..m*n]
-        // x猜得小，<=x的数少；x猜得大，<=x的数多
-        // 二分搜索要返回[0 0 ... 0 1 1 ...]，
         // 设二分搜索条件enough(x)表示"<=x的个数"count>=k
         int l = 0, u = m * n + 1;
         while (l + 1 < u) {

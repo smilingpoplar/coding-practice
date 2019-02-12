@@ -19,8 +19,8 @@ public:
         // 即 所有长>=k子段 (a[i]−m)+(a[i+1]−m)+...+(a[j]−m)<=0 (1)
         // 猜m的值，若m猜得太小，(1)式不成立；若m猜得太大，(1)式肯定成立
         // 将(1)式作为二分搜索条件enough(m)，符合二分搜索返回[0 0 ... 0 1 1 ...]的要求
-        // (1)式可用累加数组sum[]判断，只要sum[i]-min{sum[j]}<=0，i-j>=k
-        // 其中sum[i]=(a[0]-m)+(a[1]-m)...+(a[i]-m)，j<=i-k
+        // (1)式可用累加数组sum[i]=(a[0]-m)+(a[1]-m)...+(a[i]-m)判断
+        // 对"所有"长>=k的子段，只要sum[i]-min{sum[j]}<=0，i-j>=k
         double l = INT_MAX, u = INT_MIN;
         for (double num : nums) {
             l = min(l, num);

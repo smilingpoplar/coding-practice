@@ -14,8 +14,6 @@ class Solution {
 public:
     int smallestDistancePair(vector<int>& nums, int k) {
         // 距离m在值范围[0, max(nums)-min(nums)]
-        // m越小、<=m的距离个数越小；m越大、<=m的距离个数越大
-        // 二分搜索要返回[0 0 ... 0 1 1 ...]，
         // 设二分搜索条件enough(m)表示"<=m的距离个数"count>=k
         sort(nums.begin(), nums.end());
         int l = 0, u = nums[nums.size() - 1] - nums[0];

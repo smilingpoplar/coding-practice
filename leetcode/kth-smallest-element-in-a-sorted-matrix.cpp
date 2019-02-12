@@ -15,12 +15,13 @@ class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
         if (matrix.empty()) return INT_MIN;
-        const int M = matrix.size(), N = matrix[0].size();
-        // 在值[matrix[0][0]..matrix[M-1][N-1]]中二分搜索找第k小的
-        int l = matrix[0][0], u = matrix[M-1][N-1];
+        const int R = matrix.size(), C = matrix[0].size();
+        // 设第k小的数为x，x在范围[matrix[0][0]..matrix[R-1][C-1]]
+        // 设二分搜索条件enough(x)表示"<=x的个数"count>=k
+        int l = matrix[0][0], u = matrix[R-1][C-1];
         while (l <= u) {
             int mid = l + (u - l) / 2;
-            if (enough(matrix, mid, k)) {
+            if (enough(mid, matrix, k)) {
                 u = mid - 1;
             } else {
                 l = mid + 1;
@@ -29,11 +30,10 @@ public:
         return l;
     }
     
-    // matrix中<=value的数有k个吗？随着value增大，输出[0 0 .. 0 1 1 1 ...]
-    bool enough(vector<vector<int>>& matrix, int value, int k) {
+    bool enough(int value, vector<vector<int>>& matrix, int k) {
         int count = 0;
         for (auto &row : matrix) {
-            // 看每行<=value的数有几个
+            // 看每行<=value的数有多少
             count += upper_bound(row.begin(), row.end(), value) - row.begin();
         }
         return count >= k;
