@@ -14,17 +14,18 @@ class Solution {
 public:
     int splitArray(vector<int>& nums, int m) {
         // 各子段和的最大值x在值范围[max(nums), sum(nums)]
-        // 考虑x和子段数m的关系：x越小、子段越短、子段数越多；x越大、子段越长、子段数越少
-        // 二分搜索要返回[0 0 ... 0 1 1 ...]，设二分搜索条件valid(x)表示子段数<=m
-        // 因此，valid(x)中要统计子段和<=x的个数count，判断是否count<=m
-        int mx = INT_MIN, sum = 0;
+        // x和子段数的关系：x越小、子段越短、子段数越多；x越大、子段越长、子段数越少
+        // 设二分搜索条件valid(x)表示“子段和<=x的子段数”count<=m，满足形式[0 0 ... 0 1 1 ...]
+        int mx = 0;
+        long sum = 0;
         for (int num : nums) {
             mx = max(mx, num);
             sum += num;
         }
-        int l = mx, u = sum;
+
+        long l = mx, u = sum;
         while (l <= u) {
-            int mid = l + (u - l) / 2;
+            long mid = l + (u - l) / 2;
             if (valid(mid, nums, m)) {
                 u = mid - 1;
             } else {
@@ -34,14 +35,14 @@ public:
         return l;        
     }
     
-    bool valid(int x, vector<int> &nums, int m) {
+    bool valid(long x, vector<int> &nums, int m) {
         int count = 1;
-        int total = 0;
+        long sum = 0;
         for (int num : nums) {
-            total += num;
-            if (total > x) {
+            sum += num;
+            if (sum > x) {
                 count++;
-                total = num;
+                sum = num;
                 if (count > m) return false;
             }
         }
