@@ -13,16 +13,18 @@ using namespace std;
 class Solution {
 public:
     vector<int> largestDivisibleSubset(vector<int>& nums) {
+        // 先排序数组。子集扩展到nums[i]的条件是 nums[i]能整除子集的所有值。
+        // 因为子集末尾的最大值nums[j]能整除子集所有其他值，
+        // 所以nums[i]只需整除nums[j]就能扩展该子集。
         sort(nums.begin(), nums.end());
         const int N = nums.size();
-        // 类似最长递增子序列的动态规划解法
-        // 设dp[i]表示以nums[i]结尾的nums[0..i]的最大可整除子序列长
+        // 设dp[i]表示以nums[i]结尾的nums[0..i]的最大可整除子集长
         vector<int> dp(N, 1);
-        vector<int> prev(N, -1); // 重建序列用
+        vector<int> prev(N, -1); // 记录序列
         int maxlen = 0, maxidx = -1;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
-                if (nums[i] % nums[j] == 0) { // nums[i]可扩展以nums[j]结尾的子序列
+                if (nums[i] % nums[j] == 0) { // nums[i]能扩展以nums[j]结尾的子集
                     if (dp[j] + 1 > dp[i]) {
                         dp[i] = dp[j] + 1;
                         prev[i] = j;
