@@ -20,7 +20,7 @@ public:
             if (k > count) { // 走右兄弟节点
                 curr++;
                 k -= count;
-            } else { // 走最左子节点
+            } else { // 不是当前节点，走最左子节点
                 curr *= 10;
                 k--;
             }
@@ -28,18 +28,16 @@ public:
         return curr;
     }
     
-    // 计算前缀为prefix的数有多少个
-    // 累加[prefix, prefix+1)、[prefix*10, (prefix+1)*10)、[prefix*100, (prefix+1)*100)、...
-    // 其中每个区间都限制在[1,n]
-    int countNums(int prefix, int n) {
-        int cnt = 0;
-        long start = prefix, end = prefix + 1;
+    // 以数p为根的子树含多少[1,n]间的数？
+    // 可累加[p,p+1)、[p *10,(p+1) *10)、[p *100,(p+1) *100)、... 与[1,n]重合的部分
+    int countNums(int p, long n) {
+        int count = 0;
+        long start = p, end = p + 1;
         while (start <= n) {
-            cnt += min(end, n + 1L) - start; // [start, min(end,n+1))
-            start *= 10;
-            end *= 10;
+            count += min(end, n + 1) - start;
+            start *= 10, end *= 10;
         }
-        return cnt;
+        return count;
     }
 };
 
