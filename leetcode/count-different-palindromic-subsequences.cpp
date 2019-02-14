@@ -12,38 +12,39 @@
 using namespace std;
 
 class Solution {
-    const int charCnt = 4; // 只有abcd四种字母
+    const int CHAR_CN = 4; // 只有abcd四种字母
     const int MOD = 1e9 + 7;
 public:
     int countPalindromicSubsequences(string S) {
-        // 先考虑某字母的最外层区间。比如"bccb"，先考虑b，最外层区间S[firstIdx(b)..lastIdx(b)]。
-        // 这最外层可贡献回文b、bb（firstIdx(b)!=lastIdx(b)时）；然后对于bb，可剥去最外层得到子问题：
-        // S[firstIdx(b)+1..lastIdx(b)-1]]。不同字母的子问题不重叠，count可相加。
+        // 先考虑某字母的最外层区间，比如"bccb"，先考虑b的最外层区间S[firstIdx(b)..lastIdx(b)]。
+        // 这最外层可贡献回文b（不再考虑内层）、bb（firstIdx(b)!=lastIdx(b)，可继续考虑内层）。
+        // 对于bb，可剥去最外层得到子问题：S[firstIdx(b)+1..lastIdx(b)-1]]。
+        // 不同字母的子问题不重叠，count可相加。
         const int N = S.size();
-        vector<set<int>> idx(charCnt); // char => index_set
+        vector<set<int>> idxSet(CHAR_CN); // char => index_set
         for (int i = 0; i < N; i++) {
-            idx[S[i] - 'a'].insert(i);
+            idxSet[S[i] - 'a'].insert(i);
         }
 
-        vector<vector<int>> memo(N, vector<int>(N, -1)); // (start,end) => count
-        return rCount(0, N - 1, idx, memo);
+        vector<vector<int>> memo(N, vector<int>(N, -1)); // S[lo..hi] => count
+        return rCount(0, N - 1, idxSet, memo);
     }
     
-    int rCount(int start, int end, vector<set<int>> &idx, vector<vector<int>> &memo) {
-        if (start > end) return 0;
-        if (memo[start][end] != -1) return memo[start][end];
+    int rCount(int lo, int hi, vector<set<int>> &idxSet, vector<vector<int>> &memo) {
+        if (lo > hi) return 0;
+        if (memo[lo][hi] != -1) return memo[lo][hi];
         
         long ans = 0;
-        for (int i = 0; i < charCnt; i++) {
-            auto itStart = idx[i].lower_bound(start);
-            if (itStart == idx[i].end() || *itStart > end) continue;
-            auto itEnd = idx[i].upper_bound(end); 
-            itEnd--; // *itStart<=end，<=end非空，可itEnd--
-            ans += (*itStart == *itEnd) ? 1 : 2; // 最外层贡献c、cc
-            ans += rCount(*itStart + 1, *itEnd - 1, idx, memo); // 最外层cc、拼接上内层：c..c
+        for (int i = 0; i < CHAR_CN; i++) {
+            auto itLo = idxSet[i].lower_bound(lo);
+            if (itLo == idxSet[i].end() || *itLo > hi) continue;
+            auto itHi = idxSet[i].upper_bound(hi); 
+            itHi--; // *itLo<=hi，<=hi非空，可itHi--
+            ans += (*itLo == *itHi) ? 1 : 2; // 最外层贡献c、cc
+            ans += rCount(*itLo + 1, *itHi - 1, idxSet, memo); // 最外层cc、拼接上内层：c..c
         }
-        memo[start][end] = ans % MOD;
-        return memo[start][end];
+        memo[lo][hi] = ans % MOD;
+        return memo[lo][hi];
     }
 };
 

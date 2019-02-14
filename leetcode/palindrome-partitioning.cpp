@@ -26,7 +26,7 @@ public:
             ans.push_back(parts);
             return;
         }
-        // 尝试分割s[idx..i]
+        // 尝试割下s[idx..i]
         for (int i = idx; i < N; i++) {
             if (!isPalindrome(s, idx, i)) continue;
             parts.push_back(s.substr(idx, i - idx + 1));
@@ -35,9 +35,9 @@ public:
         }
     }
     
-    bool isPalindrome(const string &s, int left, int right) {
-        while (left < right) {
-            if (s[left++] != s[right--]) return false;
+    bool isPalindrome(const string &s, int l, int r) {
+        while (l < r) {
+            if (s[l++] != s[r--]) return false;
         }
         return true;
     }
