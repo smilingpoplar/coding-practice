@@ -46,7 +46,7 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         // 从可能的中心往外扩展找回文
-        int start = 0, longest = 0;
+        int longest = 0, start = 0;
         for (int i = 0; i < s.size(); i++) {
             int len1 = expand(s, i, i);
             int len2 = expand(s, i, i + 1);
