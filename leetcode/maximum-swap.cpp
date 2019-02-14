@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int maximumSwap(int num) {
-        // 从左往右看各位置，看尽量比当前数字大的数字有没有在后面，有就交换
+        // 从左往右看各位置，看有没有比当前数字尽量大的数字在最后面，有就交换
         string s = to_string(num);
         const int N = s.size();
         vector<int> lastIdx(10, -1);

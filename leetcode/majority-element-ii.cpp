@@ -16,7 +16,8 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
         // 一般化，找出现次数>n/k的元素
-        // 算法是：每次删掉k个不同的元素，最后剩下的为候选
+        // 用个map统计各候选的出现次数，当map.size()==k时删掉k个不同元素，
+        // 最后剩下的为候选
         unordered_map<int, int> cnt;
         for (auto num : nums) {
             cnt[num]++;
@@ -32,9 +33,9 @@ public:
                 }
             }
         }
-        // 验证候选的出现次数
+        // 需要验证候选的出现次数
         for (auto &e : cnt) {
-            e.second = 0; // 准备给候选重新计数
+            e.second = 0; // 给候选重新计数
         }
         for (auto num : nums) {
             if (cnt.count(num)) cnt[num]++;
@@ -60,7 +61,7 @@ public:
                 cnt1++;
             } else if (cand2 == num) {
                 cnt2++;
-            } else if (cnt1 == 0) { // cnt==0要放在后面判断，尽量不新选cand
+            } else if (cnt1 == 0) { // cnt==0要放在后面判断，尽量不选新cand
                 cand1 = num;
                 cnt1++;
             } else if (cnt2 == 0) {

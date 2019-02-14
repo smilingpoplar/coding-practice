@@ -23,14 +23,14 @@ public:
         //    (xm==km)&..&(x1==k1)，分量yj:(xj==kj)等价于kj==1时取xj、kj==0时取xj'(xj'表示xj取非)，
         //    因此，判断计数为k的表达式为y1&..&ym；
         //    计数为k时直接清零的 mask = ~(y1&..&ym)
-        //    有了mask后：..., x4&=mask, x3&=mask, x2&=mask, x1&=mask
-        // 3. 最终该位只要计数>0，该位为1，返回：x1|x2|x3|x4|...
+        //    有了mask后清零：..., x4&=mask, x3&=mask, x2&=mask, x1&=mask
+        // 3. 最终只要计数器的计数>0，即x1|x2|x3|x4|...，该统计位为1
         int x1 = 0, x2 = 0;
         int mask = 0;
         for (int num : nums) {
             x2 ^= x1 & num;
             x1 ^= num;
-            mask = ~(x1 & x2); // k=3=(11)_2
+            mask = ~(x1 & x2); // k =3 =(11)_2
             x2 &= mask;
             x1 &= mask;
         }

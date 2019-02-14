@@ -13,19 +13,12 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> palindromePairs(vector<string>& words) {
-        // 将w1分成s1=w1[0..cut)、s2=w1[cut..)两段，几种情况：
+        // 将w1分成w1[0..cut)、w1[cut..)两段，两种情况：
         // 1. w1[0..cut)是回文，w2是w1[cut..)反转，w2+w1是回文
-        //    cut=0时，w2是w1反转，w2+w1是回文
-        //    cut=len时，w1是回文，w2是空串，w2+w1是回文
         // 2. w1[cut..)是回文，w2是w1[0..cut)反转，w1+w2是回文
-        //    cut=0时，w1是回文，w2是空串，w1+w2是回文
-        //    cut=len时，w2是w1反转，w1+w2是回文
-        //    
-        // 若w1、w2一个回文一个空串，遍历到w1时贡献w1+w2和w2+w1，遍历到w2时没贡献；
-        // 若w1、w2互为反转，遍历到w1时贡献w1+w2和w2+w1，遍历到w2时又贡献w2+w1和w1+w2，这就重复了。
-        // 
+
         const int N = words.size();
-        unordered_map<string, int> mp; // reverse=>pos
+        unordered_map<string, int> mp; // reverse=>idx
         for (int i = 0; i < N; i++) {
             string reverse = string(words[i].rbegin(), words[i].rend());
             mp[reverse] = i;
@@ -36,18 +29,22 @@ public:
             const string &word = words[i];
             const int len = word.size();
             for (int cut = 0; cut <= len; cut++) {
-                // 情况1
+                // 若w1、w2互为反转，比如abc、cba，
+                // abc|null + cba，处理单词abc、cut=len，返回{0,1}
+                // abc + null|cba，处理单词cba、cut=0，  返回{0,1}
+                // 这就重复了。
+                // 所以当w1、w2互为反转时，用cut>0或cut<len去掉一种重复。
+                // case 1
                 if (isPalindrome(word, 0, cut - 1)) {
                     string s2 = word.substr(cut);
                     if (mp.count(s2) && mp[s2] != i) {
                         ans.push_back({mp[s2], i});                     
                     }
                 }
-                if (cut == len) continue;
-                // 情况2
+                // case 2
                 if (isPalindrome(word, cut, len - 1)) {
                     string s1 = word.substr(0, cut);
-                    if (mp.count(s1) && mp[s1] != i) {
+                    if (mp.count(s1) && mp[s1] != i && cut < len) { // 用cut<len去重
                         ans.push_back({i, mp[s1]});                    
                     }
                 }
@@ -56,9 +53,9 @@ public:
         return ans;
     }
 
-    bool isPalindrome(const string &s, int left, int right) {
-        while (left < right) {
-            if (s[left++] != s[right--]) return false;
+    bool isPalindrome(const string &s, int lo, int hi) {
+        while (lo < hi) {
+            if (s[lo++] != s[hi--]) return false;
         }
         return true;
     }

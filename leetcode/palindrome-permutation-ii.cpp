@@ -40,7 +40,7 @@ public:
             return;
         }
         
-        unordered_set<char> seen;
+        unordered_set<char> seen; // 防止相同元素再次交换
         for (int i = idx; i < half.size(); i++) {
             if (seen.count(half[i])) continue;
             seen.insert(half[i]);

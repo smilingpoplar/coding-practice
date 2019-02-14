@@ -30,7 +30,7 @@ public:
         return ans;
     }
     
-    // 归并已排序的 nums[l, mid] 和 nums[mid + 1, h]
+    // 归并已排序的 nums[l,mid] 和 nums[mid+1,h]
     void merge(vector<int>& nums, int l, int mid, int h) {
         vector<int> merged(h - l + 1);
         int i = l, j = mid + 1, k = 0;

@@ -14,6 +14,8 @@ using namespace std;
 class Solution {
 public:
     int nthUglyNumber(int n) {
+        // 每个因子x对应一个要相乘的已知丑数seq[ix]，以生成下个丑数 min{ seq[ix]*x }
+        // 当生成了下个丑数后，所有参与生成的因子的索引ix++
         vector<int> seq;
         seq.push_back(1);
         int i2 = 0, i3 = 0, i5 = 0;
