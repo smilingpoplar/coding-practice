@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int> &nums, int k, int t) {
-        if (k < 1 || t < 0) return false;
+        if (t < 0) return false;
         set<long> st; // 把前k个数放入set中
         for (int i = 0; i < nums.size(); i++) {
             // 在st中找x，abs(nums[i]-x)<=t，nums[i]-t<=x<=nums[i]+t
@@ -35,9 +35,9 @@ public:
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int> &nums, int k, int t) {
-        if (k < 1 || t < 0) return false;
-        unordered_map<long, long> buckets; // idx=>num
-        // buckets保存前k个数的桶，保持size(buckets)<=k
+        if (t < 0) return false;
+        unordered_map<long, long> buckets; // bucketIdxOfNum=>num
+        // buckets保存前k个数的桶，buckets.size()<=k
         for (int i = 0; i < nums.size(); i++) {            
             auto idx = bucketIdx(nums[i], t);
             // 又落在自己桶
