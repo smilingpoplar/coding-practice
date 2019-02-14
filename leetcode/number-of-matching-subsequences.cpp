@@ -14,8 +14,8 @@ using namespace std;
 class Solution {
 public:
     int numMatchingSubseq(string S, vector<string>& words) {
-        // 将word按待匹配字母分桶
-        vector<pair<int, int>> buckets[128]; // 待匹配字母 => vector[(单词idx, 待匹配字母idx)]
+        // 将word按待匹配字母分桶，待匹配字母 => vector[(单词idx, 单词中字母idx)]
+        vector<pair<int, int>> buckets[128];
         for (int i = 0; i < words.size(); i++) {
             buckets[words[i][0]].push_back({i, 0});
         }
