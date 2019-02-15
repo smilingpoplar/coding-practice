@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int maxChunksToSorted(vector<int>& arr) {
-        // 若leftMax[i]<=rightMin[i+1]，则在i后可断开左右分别排序
+        // 若leftMax[i]<=rightMin[i+1]，则在i后可断开左右
         const int N = arr.size();
         vector<int> rightMin(N);
         rightMin[N-1] = arr[N-1];

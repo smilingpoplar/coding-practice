@@ -13,19 +13,18 @@ using namespace std;
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
-        // 若nums[i]在排序后该在的位置，有maxLeft[i]==nums[i]==minRight[i]。
-        // 从左到右找nums[r]!=maxLeft[r]的最大r、得无序的最右边界；
-        // 从右到左找nums[l]!=minRight[l]的最小l、得无序的最左边界。
+        // 若数组有序，任意nums[i]有：leftMax[i]==nums[i]==rightMin[i]
+        // 从左往右检查，最右的违反leftMax[i]==nums[i]的i，是无序子段的右边界
+        // 从右往左检查，最左的违反num[i]==rightMin[i]的i，是无序子段的左边界
         const int N = nums.size();
-        int maxLeft = INT_MIN, minRight = INT_MAX;
-        int l = 0, r = -1; // 如果nums[]有序
-        for (int i = 0; i < N; i++) {
-            maxLeft = max(maxLeft, nums[i]);
-            if (nums[i] != maxLeft) r = i;
+        int leftMax = INT_MIN, rightMin = INT_MAX;
+        int l = 0, r = -1; // 无序子段的左右边界
+        for (int i = 0, j = N - 1; i < N; i++, j--) {
+            leftMax = max(leftMax, nums[i]);
+            if (nums[i] != leftMax) r = i;
             
-            int j = N - 1 - i;
-            minRight = min(minRight, nums[j]);
-            if (nums[j] != minRight) l = j;
+            rightMin = min(rightMin, nums[j]);
+            if (nums[j] != rightMin) l = j;
         }
         return r - l + 1;
     }

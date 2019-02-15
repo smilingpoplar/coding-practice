@@ -14,19 +14,21 @@ using namespace std;
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        // 期望变成数组[1..n]，位置i应放数i+1，数nums[i]应放到位置j=nums[i]-1
-        // 旋转置换：位置i的合法数和位置j=nums[i]-1的数，若不相等就不断交换
+        // 期望变成数组[1..n]。位置i应放数i+1，即nums[i]==i+1；
+        // 数x应在位置x-1，即nums[i]应在位置nums[i]-1，nums[nums[i]-1]==nums[i]。
+        // 旋转置换：
+        // 若位置nums[i]-1处不是nums[i]，即若nums[nums[i]-1]!=nums[i]，
+        // 把位置nums[i]-1和位置i处的值交换，然后继续处理位置i。
         const int N = nums.size();
         for (int i = 0; i < N; i++) {
-            for (int j = nums[i] - 1; 
-                 1 <= nums[i] && nums[i] <= N && nums[i] != nums[j];
-                 j = nums[i] - 1) {
-                swap(nums[i], nums[j]);
+            while (1 <= nums[i] && nums[i] <= N 
+                    && nums[nums[i]-1] != nums[i]) {
+                swap(nums[nums[i]-1], nums[i]);
             }
         }
         // first missing
         for (int i = 0; i < N; i++) {
-            if (i != nums[i] - 1) return i + 1;
+            if (nums[i] != i + 1) return i + 1;
         }
         return N + 1;
     }

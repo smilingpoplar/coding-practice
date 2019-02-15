@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int minMoves(vector<int>& nums) {
-        // 走一步相当于把最大数减1，都减成最小数都行了
+        // 走一步相当于把最大数减1，都减成最小数就都相等了
         int sum = 0, minNum = INT_MAX;
         for (int num : nums) {
             sum += num;

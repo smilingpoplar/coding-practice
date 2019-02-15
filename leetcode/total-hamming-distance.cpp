@@ -13,6 +13,9 @@ using namespace std;
 class Solution {
 public:
     int totalHammingDistance(vector<int>& nums) {
+        // 两数的hamming距离指两数二进制的不同比特数。
+        // 可以总体考虑一组数的某一位，该位有ones个1、(N-ones)个零，
+        // 那么这组数在该位上的hamming距离是ones*(N-ones)。累加所有位。
         int ans = 0;
         for (int i = 0; i < 32; i++) {
             // 考查整组数的第i位
