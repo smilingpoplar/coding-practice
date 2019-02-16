@@ -14,37 +14,35 @@ using namespace std;
 class Solution {
 public:
     int movesToChessboard(vector<vector<int>>& board) {
-        // 1.合法棋盘只有两种行、且01相反，只有两种列、且01相反；
-        // 2.每行或每列01的个数相等或差1
+        // 合法棋盘只有两种行，且01相反、01个数相等或差1；
+        //              列，...
         const int N = board.size();
         vector<int> rows(N, 0), cols(N, 0);
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
                 if (board[r][c] == 1) {
-                    rows[r] |= 1 << c; // 将一行变成一个二进制数
+                    rows[r] |= 1 << c; // 行r变成二进制数
                     cols[c] |= 1 << r;
                 }
             }
         }
         
-        int swap1 = swapLines(rows);
+        int swap1 = minSwaps(rows);
         if (swap1 == -1) return -1;
-        int swap2 = swapLines(cols);
+        int swap2 = minSwaps(cols);
         if (swap2 == -1) return -1;
         return swap1 + swap2;
     }
     
-    int swapLines(vector<int> &lines) {
+    int minSwaps(vector<int> &lines) {
         const int N = lines.size();
-        // 条件1 
         set<int> st(lines.begin(), lines.end());
-        if (st.size() != 2) return -1;
+        if (st.size() != 2) return -1; // 只有两种行
         vector<int> l(st.begin(), st.end());
-        if ((l[0] & l[1]) != 0) return -1;
-        // 条件2
+        if ((l[0] & l[1]) != 0) return -1; // 且01相反
         int ones = count1s(l[0]), zeros = N - ones;
-        if (abs(ones - zeros) > 1) return -1;
-        // 需要的swap数
+        if (abs(ones - zeros) > 1) return -1; // 01个数相等或差1
+        // 往mask1或mask2靠，最少需要多少swap
         const int mask = (1 << N) - 1; // 后N位全是1
         const int mask1 = 0x55555555 & mask, mask2 = 0xaaaaaaaa & mask;
         int ans = INT_MAX;
