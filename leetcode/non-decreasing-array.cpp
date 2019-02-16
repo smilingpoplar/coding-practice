@@ -13,11 +13,14 @@ using namespace std;
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
-        int modified = 0;
+        // 贪婪法。找到违反<=关系的x[i]>x[i+1]，优先改小x[i]，x[i]=x[i+1]。
+        // （改小保证后面满足<=，前面满足还需x[i-1]<=x[i+1]）
+        // 无法改小时改大x[i+1]，x[i+1]=x[i]。
+        int cnt = 0;
         for (int i = 0; i + 1 < nums.size(); i++) {
             if (nums[i] <= nums[i+1]) continue;
-            if (modified++) return false;
-            // 出现违背时，是修改nums[i]还是nums[i+1]？
+            if (cnt++ > 0) return false;
+            // 优先改小x[i]
             if (i-1 < 0 || nums[i-1] <= nums[i+1]) {
                 nums[i] = nums[i+1];
             } else {

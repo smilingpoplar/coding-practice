@@ -13,8 +13,8 @@ using namespace std;
 class Solution {
 public:
     int rangeBitwiseAnd(int m, int n) {
-        // "范围与"的结果是：首尾两数的二进制相同前缀
-        // 因为非相同前缀部分肯定是0xxx和1xxx的形式，存在中间数1000使这部分"范围与"变为0000
+        // "范围与"的结果是：首尾两数二进制的公共前缀
+        // 因为非公共前缀一定是0xxx和1xxx的形式，存在中间数1000将这部分"范围与"清零
         int shift = 0;
         while (m != n) {
             m >>= 1;

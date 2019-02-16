@@ -15,24 +15,23 @@ using namespace std;
 class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
-        // 因为只有ACGT四种字符，字符编码只要2位，10字符长的串编码只要20位（掩码：0xfffff）
-        // 用个count记录编码出现的次数就能判重
+        // 只有ACGT四种字符，字符编码只要2位，长10的串编码只要20位（掩码：0xfffff）
+        const int LENGTH = 10;
         unordered_map<char, int> coding = {
             {'A', 0b00},
             {'C', 0b01},
             {'G', 0b10},
             {'T', 0b11},
         };
-        const int LENGTH = 10;
 
         vector<string> ans;
-        unordered_map<int, int> count;
+        unordered_map<int, int> cnt; // code=>count
         int code = 0;
         for (int i = 0; i < s.size(); i++) {
             code = ((code << 2) + coding[s[i]]) & 0xfffff;
-            if (i < LENGTH - 1) continue;
-            count[code]++;
-            if (count[code] == 2) {
+            if (i < LENGTH - 1) continue; // <LENGTH的串编码不要
+            cnt[code]++;
+            if (cnt[code] == 2) {
                 ans.push_back(s.substr(i - LENGTH + 1, LENGTH));
             }
         }        

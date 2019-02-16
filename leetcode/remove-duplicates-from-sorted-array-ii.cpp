@@ -19,8 +19,7 @@ public:
         int out = 2;
         for (int in = 2; in < N; in++) {
             if (nums[in] != nums[out-2]) {
-                nums[out] = nums[in];
-                out++;
+                nums[out++] = nums[in];
             }
         }
         return out;
