@@ -14,28 +14,31 @@ using namespace std;
 class Solution {
 public:
     int rectangleArea(vector<vector<int>>& rectangles) {
-        // 水平扫描线向上扫，遇到下边界把区间[x1,x2]加入集合，遇到上边界把区间[x1,x2]移出集合。
-        // 每次遇到边界要先计算，面积 += 集合中所有区间贡献的重叠长 * (边界-前一边界)贡献的高。
         const int OPEN = 0, CLOSE = 1;
         vector<vector<int>> events;
+        // 遍历events时要相当于水平线向上扫，所以先按y坐标排序
         for (auto &rect : rectangles) {
             events.push_back({rect[1], OPEN, rect[0], rect[2]});
             events.push_back({rect[3], CLOSE, rect[0], rect[2]});
         }
         sort(events.begin(), events.end());
 
+        // 扫描线算法：
+        // 水平扫描线向上扫，每遇到y边界都累加一横块面积。
+        // 面积高为 (y边界-前一y边界)，面积长为 旧区间集合的重叠长。
+
+        // 记得更新区间集合： 
+        // 下边界把横坐标区间[x1,x2]加入集合，上边界把[x1,x2]移出集合。
         const int MOD = 1e9 + 7;
-        // {x1,x2}的集合，按照左端点排序
-        multiset<vector<int>> st;
+        multiset<vector<int>> st; // st{ [x1,x2] }
         int preY = INT_MIN;
         int ans = 0;
         for (auto &e : events) {
             int y = e[0], type = e[1], x1 = e[2], x2 = e[3];
-            // 计算面积
             if (preY != INT_MIN) {
+                int height = y - preY;
                 int width = intervalsLen(st);
-                long height = y - preY;
-                ans = (ans + width * height) % MOD;
+                ans = (ans + (long)width * height) % MOD;
             }
             
             if (type == OPEN) st.insert({x1, x2});
@@ -45,7 +48,7 @@ public:
         return ans;
     }
     
-    // 集合中所有区间贡献的重叠长
+    // 区间集合的重叠长
     int intervalsLen(multiset<vector<int>> &st) {
         int ans = 0;
         int curr = INT_MIN;
