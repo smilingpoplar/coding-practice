@@ -13,9 +13,10 @@ using namespace std;
 class Solution {
 public:
     int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
-        int area = (C - A) * (D - B) + (G - E) * (H - F);
-        if (E >= C || A >= G || B >= H || F >= D) return area;
-        return area - (min(C, G) - max(A, E)) * (min(D, H) - max(B, F)); // 相交矩形的右左上下
+        int area1 = (C - A) * (D - B), area2 = (G - E) * (H - F);
+        if (E >= C || A >= G || B >= H || F >= D) return area1 + area2;
+        int overlap = (min(C, G) - max(A, E)) * (min(D, H) - max(B, F)); // 相交部分的右左上下
+        return area1 - overlap + area2;
     }
 };
 

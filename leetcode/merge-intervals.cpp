@@ -22,14 +22,14 @@ class Solution {
 public:
     vector<Interval> merge(vector<Interval>& intervals) {
         if (intervals.empty()) return {};
-        // 若按终点排，当后面的大区间要合并前面多个小区间时，合并较麻烦、要修改已输出区间。
-        // 按起点排、先考虑大区间，就不存在上述问题。
+        // 区间合并问题要按起点排，先考虑大区间
+        // 若按终点排，当后面大区间要合并前面多个小区间时，要修改已输出区间，很麻烦
         sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) {
             return a.start < b.start || (a.start == b.start && a.end > b.end);
         });
         
         vector<Interval> ans;
-        auto last = intervals[0];
+        auto last = intervals[0]; // 维护着上个待合并区间
         for (int i = 1; i < intervals.size(); i++) {
             if (intervals[i].start > last.end) {
                 ans.push_back(last);

@@ -32,8 +32,7 @@ public:
         }
 
         vector<Interval> ans;
-        int event = 0;
-        int start = -1;
+        int event = 0, start = -1;
         for (auto &e : timeline) {
             event += e.second;
             if (event <= 0) { // 空闲时间

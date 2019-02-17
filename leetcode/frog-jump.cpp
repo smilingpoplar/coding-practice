@@ -13,14 +13,14 @@ using namespace std;
 class Solution {
 public:
     bool canCross(vector<int>& stones) {
-        set<int> st; // 记录哪些位置有石头
-        for (int pos : stones)
+        unordered_map<int, set<int>> jump; // 某石头=>set{可以跳几步}
+        jump[0].insert(1);
+
+        set<int> st; // 快速判断某位置是否有石头
+        for (int pos : stones) 
             st.insert(pos);
         
-        unordered_map<int, set<int>> jump; // 记录从某位置可以跳几步
-        jump[0].insert(1);
-        
-        for (int pos : stones) {
+        for (int pos : stones) { // 遍历各石头
             for (int k : jump[pos]) {
                 int next = pos + k;
                 if (!st.count(next)) continue;

@@ -21,8 +21,8 @@ using namespace std;
  */
 class Solution {
 public:
-    // 等价问题：求最多不重叠区间数
     int eraseOverlapIntervals(vector<Interval>& intervals) {
+        // 等价问题：求最多不重叠区间数
         sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) { 
             return a.end < b.end;
         });

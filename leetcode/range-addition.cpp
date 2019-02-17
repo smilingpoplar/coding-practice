@@ -14,15 +14,15 @@ using namespace std;
 class Solution {
 public:
     vector<int> getModifiedArray(int length, vector<vector<int>>& updates) {
-        // 只在区间边界记录变化量：
-        // 对于[startIdx, endIdx, inc]，在startIdx记录+inc，在endIdx+1记录-inc
+        // 将区间[l,r]的值增加inc，只在区间边界记录变化量：arr[l]+=inc; arr[r+1]-=inc;
+        // 然后idx处的值就是前缀和sum[0..idx]
         vector<int> ans(length, 0);
         for (auto &update : updates) {
-            int start = update[0], end = update[1], inc = update[2];
-            ans[start] += inc;
-            if (end + 1 < length) ans[end+1] -= inc;
+            int l = update[0], r = update[1], inc = update[2];
+            ans[l] += inc;
+            if (r + 1 < length) ans[r+1] -= inc;
         }
-        // 最后将变化量累加
+        // 将ans数组从增量变成前缀和
         for (int i = 1; i < length; i++) {
             ans[i] += ans[i-1];
         }

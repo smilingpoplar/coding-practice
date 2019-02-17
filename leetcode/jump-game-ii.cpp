@@ -14,17 +14,17 @@ using namespace std;
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        // 按bfs分层遍历思路，记录可达的最远索引maxIdx
+        // bfs分层遍历，记录最远可达theMax
         const int N = nums.size();
         if (N <= 1) return 0;
-        int maxIdx = 0, i = 0;
+
+        int i = 0, theMax = 0;
         int level = 0;
-        while (i <= maxIdx) {
-            level++;
-            int levelMaxIdx = maxIdx;
-            for (; i <= levelMaxIdx; i++) {
-                maxIdx = max(maxIdx, i + nums[i]);
-                if (maxIdx >= N - 1) return level;
+        while (i <= theMax) { // 相当于!q.empty()
+            level++;            
+            for (int levelMax = theMax; i <= levelMax; i++) {
+                theMax = max(theMax, i + nums[i]);
+                if (theMax >= N - 1) return level;
             }
         }
         return -1;

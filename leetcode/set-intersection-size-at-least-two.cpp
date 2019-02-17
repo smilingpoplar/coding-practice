@@ -13,23 +13,23 @@ using namespace std;
 class Solution {
 public:
     int intersectionSizeTwo(vector<vector<int>>& intervals) {
-        // 区间按end排序，end相同的优先考虑范围小的
+        // 区间按right排序，right相同时优先考虑范围小的
         sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b) {
             if (a[1] == b[1]) return a[0] > b[0];
             return a[1] < b[1];
         });
         
         int ans = 0;
-        // 要创建的集合S的最后两个数。区间按end排序，可保证这两数递增，按start排序就不行。
-        int last2 = INT_MIN, last1 = INT_MIN;
+        // last1,last2是集合S的最后两个数
+        int last1 = INT_MIN, last2 = INT_MIN;
         for (auto &interval : intervals) {
             if (last1 < interval[0]) {
-                // 与S不相交，往S中加入当前区间的最后两个数
+                // 当前区间与S不相交，要往S中加入当前区间的最后两个数
                 ans += 2;
                 last1 = interval[1];
                 last2 = last1 - 1;
             } else if (last2 < interval[0] && interval[0] <= last1) {
-                // 有一个数与S相交，往S中加入当前区间的最后一个数
+                // 当前区间与S有一个数相交，要往S中加入当前区间的最后一个数
                 ans += 1;
                 last2 = last1;
                 last1 = interval[1];

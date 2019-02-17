@@ -14,11 +14,13 @@ using namespace std;
 class Solution {
 public:
     vector<int> grayCode(int n) {
-        // 观察几个格雷码的例子，n位的格雷码可以分作上下两部分：
-        // 上半部是n-1位格雷码（前面加个0），下半部是n-1位格雷码的倒序前面拼上1
+        // n位格雷码的序列可分作上下两半：
+        //  上半是n-1位格雷码序列、前面拼上0；下半是n-1位格雷码的逆序列、前面拼上1
+        // 反过来，已知n位格雷码序列，把它当作n+1位格雷码序列的上半部，
+        //  逆序遍历并在前面拼上1，就得n+1位格雷码序列的下半部
         vector<int> ans;
         ans.push_back(0); // n==0
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // 拼n次
             for (int j = (int)ans.size() - 1; j >= 0; j--) {
                 ans.push_back(ans[j] | (1 << i));
             }

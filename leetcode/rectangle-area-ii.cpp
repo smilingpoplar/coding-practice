@@ -57,10 +57,10 @@ public:
         return ans;
     }
 
-        // 集合中所有区间贡献的重叠长
+    /*
     int intervalsLen(multiset<vector<int>> &st) {
         int ans = 0;
-        int start = 0, end = 0;
+        int start = 0, end = 0; // [start,end)是上个待合并区间
         for (auto &x : st) {
             if (x[0] >= end) { // 新区间
                 ans += end - start;
@@ -69,9 +69,9 @@ public:
             end = x[1];
         }
         ans += end - start;
-        cout << ans << endl;
         return ans;
     }
+    */
 };
 
 int main(int argc, const char * argv[]) {

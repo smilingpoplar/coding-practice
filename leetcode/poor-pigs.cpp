@@ -14,8 +14,8 @@ using namespace std;
 class Solution {
 public:
     int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
-        // 一只猪可不吃食或者m次试毒，有(m+1)种选择，作为(m+1)进制的一位。
-        // n只猪就是n位。总共可试毒(m+1)^n桶。
+        // 一只猪可不吃食或者a次试毒，有(a+1)种选择，作(a+1)进制的一位。
+        // b只猪就是共b位。总共可试毒(a+1)^b桶。
         int base = minutesToTest / minutesToDie + 1;
         int power = 0;
         while (pow(base, power) < buckets)
