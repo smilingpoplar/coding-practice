@@ -30,9 +30,10 @@ public:
             auto top = pq.top(); pq.pop();
             ans += top.first;
             top.second--;
-            // 每个字母输出后都进入freezed队列（包括{c,0}）
+            // 每个字母输出后都进freezed队列（包括{c,0}），
+            // freezed.size()>=k时队头解冻回堆。
             freezed.push(top);
-            if (freezed.size() >= k) { // 冻住>=k个字母时队头解冻
+            if (freezed.size() >= k) {
                 auto released = freezed.front(); freezed.pop();
                 if (released.second > 0) pq.push(released);
             }

@@ -13,9 +13,9 @@ using namespace std;
 class Solution {
 public:
     string reorganizeString(string S) {
-        // 是 https://leetcode.com/problems/rearrange-string-k-distance-apart/ 的特例
-        // 可行只需 最多的字符个数 <= 其他所有字符隔开的空槽 = 其他所有字符个数和+1
-        // 即 maxCnt <= N-maxCnt+1，maxCnt <= (N+1)/2
+        // https://leetcode.com/problems/rearrange-string-k-distance-apart/ k=2特例
+        // 可行只需 最多的字符个数 <= 其他所有字符隔开的空槽数 = 其他所有字符数+1
+        // 即 maxCnt <= (N-maxCnt)+1，maxCnt <= (N+1)/2
         unordered_map<int, int> cnt;
         for (char c : S) cnt[c]++;
         auto cmp = [&cnt](char a, char b) { return cnt[a] < cnt[b]; };
@@ -27,7 +27,7 @@ public:
             pq.push(e.first);
         }
 
-        // 每次输出剩余最多的两个字符
+        // 可行后只需 每次输出剩余最多的两个字符
         ostringstream oss;
         while (pq.size() >= 2) {
             char a = pq.top(); pq.pop();
