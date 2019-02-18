@@ -18,9 +18,11 @@ public:
         // F(k-1) = [k-1   k ... n-2 n-1 0 ... k-2] * A
         // F(k) - F(k-1) = [1 1 ... 1 1-n 1 .. 1] * A = sum(A) - n*A[n-k]
         // F(k) = F(k-1) + sum(A) - n*A[n-k]
+        // 
+        // F(k)只依赖于k-1项，降维，F += sum(A) - n*A[n-k]
+        // 初始F(0)=sum(i*A[i])
         const int n = A.size();
-        int sum = 0;
-        int F = 0; // F(k)只依赖于k-1项，降维，初始F(0)=sum(i*A[i])
+        int sum = 0, F = 0;
         for (int i = 0; i < n; i++) {
             sum += A[i];
             F += i * A[i];

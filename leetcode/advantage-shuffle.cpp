@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> advantageCount(vector<int>& A, vector<int>& B) {
-        // 选A中比b稍大的，没有则选A中最小的
+        // 选A中比b稍大的，若没有则选A中最小的
         multiset<int> ms(A.begin(), A.end());
         vector<int> ans;
         for (int b : B) {

@@ -14,12 +14,12 @@ using namespace std;
 class Solution {
 public:
     vector<int> findPermutation(string s) {
+        // 将连续D对应的子段翻转
         const int N = s.size();
         vector<int> ans;
         for (int i = 0; i <= N; i++)
             ans.push_back(i + 1);
         
-        // 连续D对应的子段需要翻转
         for (int i = 0; i < N; i++) {
             if (s[i] == 'D') {
                 int start = i;

@@ -14,19 +14,15 @@ using namespace std;
 class Solution {
 public:
     int numRabbits(vector<int>& answers) {
+        // 相同数才能分在一组，数x每组有x+1个
+        // 数x共有 ceil(count[x]/(x+1)) = (count[x]+x)/(x+1)组
         unordered_map<int, int> count;
-        for (int num : answers) 
-            count[num]++;
-        // 1 => 2          2 => 3
-        // 1 1 => 2        2 2 => 3
-        // 1 1 1 => 4      2 2 2 => 3
-        // 1 1 1 1 => 4    2 2 2 2 => 6
-        // x值每x+1个分一组，共分 ceil(count[x]/(x+1)) = (count[x]+x)/(x+1)组
-        // x值共有 (count[x]+x)/(x+1)*(x+1)个
+        for (int num : answers) count[num]++;
+
         int ans = 0;
         for (auto &e : count) {
             int x = e.first;
-            ans += (count[x] + x) / (x+1) * (x+1);
+            ans += (count[x] + x) / (x + 1) * (x + 1);
         }
         return ans;
     }

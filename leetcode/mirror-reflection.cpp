@@ -15,7 +15,7 @@ class Solution {
 public:
     int mirrorReflection(int p, int q) {
         // 反射相当于方形折叠展开、光线穿透直射
-        // 当 k*q%p == 0 时到达接收器，k最小时 k*q == lcm(p,q) == p*q/gcd(p,q)
+        // 当 (k*q)%p == 0 时到达接收器，k最小时 k*q == lcm(p,q) == p*q/gcd(p,q)
         // 所以，横向方形数k = p/gcd(p,q)，纵向方形数k*q/p = q/gcd(p,q)
         // 只需考查横向、纵向方形数的奇偶性
         int g = gcd(p, q);
