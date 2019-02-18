@@ -13,19 +13,19 @@ using namespace std;
 class Solution {
 public:
     bool isPossible(vector<int>& nums) {
-        unordered_map<int, int> count; // x有多少个
+        unordered_map<int, int> count; // 数x有count[x]个
         for (int x : nums) count[x]++;
 
-        // 字母x优先扩展旧序列，因为太长的旧序列总可以再拆成多个新序列
-        unordered_map<int, int> need;  // x作为旧序列尾的需求
+        // 数x优先扩展旧序列，即使旧序列太长也可拆分成多个新序列
+        unordered_map<int, int> need;  // 扩展旧序列需要need[x]个x
         for (int x : nums) {
             if (count[x] == 0) continue;
             
-            if (need[x] > 0) { // x优先扩展旧序列
+            if (need[x] > 0) { // 数x优先扩展旧序列
                 count[x]--;
                 need[x]--;
                 need[x+1]++;
-            } else if (count[x+1] > 0 && count[x+2] > 0) { // x可作为新序列头
+            } else if (count[x+1] > 0 && count[x+2] > 0) { // x可作新序列头
                 count[x]--;
                 count[x+1]--;
                 count[x+2]--;
@@ -34,7 +34,6 @@ public:
                 return false;
             }
         }
-        
         return true;        
     }
 };
