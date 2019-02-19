@@ -29,7 +29,7 @@ public:
         
         unordered_map<long, int> mp; // 余数 => 对应输出到ans的位置
         while (rmd) {
-            if (mp.count(rmd)) {
+            if (mp.count(rmd)) { // 找到循环节
                 ans.insert(mp[rmd], "(");
                 ans += ")";
                 return ans;

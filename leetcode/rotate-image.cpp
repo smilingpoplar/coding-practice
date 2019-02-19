@@ -14,7 +14,11 @@ using namespace std;
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // 顺时针旋转90度<=等价于=>先转置、再把行反转
+        // 旋转90度跟"转置"有关
+        // 顺时针旋转90度 <=等价=> 先转置、再把行反转
+        // 1 2 3      1 4 7      7 4 1 
+        // 4 5 6  =>  2 5 8  =>  8 5 2
+        // 7 8 9      3 6 9      9 6 3
         const int N = matrix.size();
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
@@ -31,7 +35,7 @@ public:
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // 顺时针旋转90度<=等价于=>先转置、再把行反转，(r,c)=>(c,N-1-r)
+        // 顺时针旋转90度<=等价=>先转置、再把行反转，(r,c)=>(c,N-1-r)
         // 置换组：(r,c) => (c,N-1-r) => (N-1-r,N-1-c) => (N-1-c,r) => (r,c)
         // 取上一半的倒三角形的1/4矩阵进行置换
         if (matrix.empty()) return;

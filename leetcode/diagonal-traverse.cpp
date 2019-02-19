@@ -21,7 +21,7 @@ public:
         for (int i = 0; i < R * C; i++) {
             ans.push_back(matrix[r][c]);
             if ((r + c) % 2 == 0) { // 向右上运动
-                if (c == C - 1) { // 先考虑弯折路径的前端
+                if (c == C - 1) { // 考虑右上角，要先r++
                     r++;
                 } else if (r == 0) {
                     c++;
@@ -30,7 +30,7 @@ public:
                     c++;
                 }
             } else { // 向左下运动
-                if (r == R - 1) { // 先考虑弯折路径的前端
+                if (r == R - 1) { // 考虑左下角，要先c++
                     c++;
                 } else if (c == 0) {
                     r++;
