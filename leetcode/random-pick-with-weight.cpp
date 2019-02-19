@@ -17,14 +17,14 @@ public:
     Solution(vector<int> w) : wsum(w.size(), 0) {
         wsum[0] = w[0];
         for (int i = 1; i < w.size(); i++) {
-            wsum[i] += wsum[i-1] + w[i];
+            wsum[i] = wsum[i-1] + w[i];
         }
         srand(time(NULL));
     }
     
     int pickIndex() {
         int rnd = rand() % wsum.back();
-        // 因为rnd<wsum[N-1]，<号没带=，所以在wsum中找>rnd的第一个
+        // 因为要rnd<wsum[i]，<号没带=，所以在wsum中找>rnd的第一个
         return upper_bound(wsum.begin(), wsum.end(), rnd) - wsum.begin();
     }
 };

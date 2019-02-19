@@ -19,7 +19,7 @@ class Solution {
 public:
     int rand10() {
         // rejection sampling
-        // 2个rand7()调用生成[0-48]的数，使用其中的[0-39]，
+        // 用两个rand7()调用生成[0-48]的平均分布，使用其中的[0-39]，
         // 利用率40/49，平均每个随机数调用rand7()：2/(40/49)=2.45次
         while (true) {
             int num = (rand7() - 1) * 7 + (rand7() - 1);

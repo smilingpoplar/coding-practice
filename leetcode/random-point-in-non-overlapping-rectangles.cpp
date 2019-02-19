@@ -16,7 +16,7 @@ class Solution {
     vector<int> wsum;
 public:
     Solution(vector<vector<int>> rects) : rects(rects) {
-        // 以面积为权重选个rect，然后再rect中选个点
+        // 以面积为权重选个rect，然后在rect中选个点
         int sum = 0;
         for (auto &rect : rects) {
             sum += (rect[2] - rect[0] + 1) * (rect[3] - rect[1] + 1);
