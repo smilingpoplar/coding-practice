@@ -16,19 +16,17 @@ public:
     int wordsTyping(vector<string>& sentence, int rows, int cols) {
         string s;
         for (auto &word : sentence)
-            s += word + " "; // 句末要有空格才能接下一句
+            s += word + " "; // 句末有换行符
         int len = s.size();
         
-        int start = 0; // 行首在sss...中的位置
+        int left = 0; // 屏幕左侧正对着哪个字符
         for (int i = 0; i < rows; i++) {
-            start += cols; // 尝试键入一满行
-            // 如果行末的单词被截断（即start位置非空格），start回退到空格处，然后跳过空格（换行了）
-            //            没被截断                                       跳过空格
-            while (start > 0 && s[start % len] != ' ')
-                start--;
-            start++;
+            left += cols; // 尝试键入一满行
+            while (left > 0 && s[left % len] != ' ') // 若对着单词中间则回退
+                left--;
+            left++;   // 跳过空格或换行符
         }
-        return start / len;
+        return left / len;
     }
 };
 
