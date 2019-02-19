@@ -13,15 +13,16 @@ using namespace std;
 class Solution {
 public:
     int superPow(int a, vector<int>& b) {
-        // 幂太大，将幂分解，例如
-        // 37^213 mod K = 37^(210+3) mod K = ((37^21 mod K)^10 mod K) * (37^3 mod K)
+        // 幂太大，将幂分解。
+        // 例如，37^213 mod K = 37^(210+3) mod K 
+        //   = ((37^21 mod K)^10 mod K) * (37^3 mod K)
         if (b.empty()) return 1;
         const int K = 1337;
         int lastDigit = b.back(); b.pop_back();        
         return (pow(superPow(a, b), 10, K) * pow(a, lastDigit, K)) % K;
     }
     
-    // 幂较小使用该函数计算
+    // 幂较小用该函数计算，a^k mod K
     int pow(long a, int b, int K) {
         int ans = 1;
         while (b) {

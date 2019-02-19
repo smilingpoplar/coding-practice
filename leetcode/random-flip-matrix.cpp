@@ -12,25 +12,25 @@
 using namespace std;
 
 class Solution {
-    unordered_map<int, int> mp; // 下标重映射
+    // 把2d矩阵当作1d数组处理
+    unordered_map<int, int> mp; // 已用过下标=>未用过下标
     int rows, cols, total;
 public:
     Solution(int n_rows, int n_cols) {
         rows = n_rows;
         cols = n_cols;
-        total = n_rows * n_cols;
+        total = rows * cols;
         srand(time(NULL));
     }
     
     vector<int> flip() {
-        int idx = rand() % total;
-        int theIdx = remapping(idx);
-        total--;
-        mp[idx] = remapping(total);
-        return { theIdx / cols, theIdx % cols };
+        int r = rand() % total--;
+        int rr = mapping(r);    // r对应到未用过下标rr
+        mp[r] = mapping(total); // rr要被使用，让r重映射到未用过的下标
+        return { rr / cols, rr % cols };
     }
     
-    int remapping(int idx) {
+    int mapping(int idx) {
         return mp.count(idx) ? mp[idx] : idx;
     }
     
