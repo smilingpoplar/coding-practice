@@ -22,8 +22,8 @@ using namespace std;
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        vector<int> leftMost; // 各层最左节点的id
         int ans = INT_MIN;
+        vector<int> leftMost; // 各层最左节点的id 
         dfs(root, 0, 1, leftMost, ans);
         return ans;
     }
