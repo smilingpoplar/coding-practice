@@ -34,7 +34,7 @@ public:
         }
         
         int ans = 0;
-        vector<vector<int>> dirs = { {-1, 0}, {0,1}, {1,0}, {0,-1} };
+        vector<vector<int>> dirs = { {-1,0}, {0,1}, {1,0}, {0,-1} };
         while (!pq.empty()) {
             auto elem = pq.top();  pq.pop();
             int r = elem[0], c = elem[1], heightWithWater = elem[2];
@@ -42,7 +42,7 @@ public:
             for (auto &dir : dirs) {
                 int nr = r + dir[0], nc = c + dir[1];
                 if (nr < 0 || nr >= R || nc < 0 || nc >= C || visited[nr][nc]) continue;
-                // 邻居的高度更小，说明该邻居柱上可储水，储水量为高度差
+                // 若邻居的高度更小，该邻居柱上可储水，储水量为高度差
                 int diff = heightWithWater - heightMap[nr][nc];
                 if (diff > 0) ans += diff;
                 pq.push({nr, nc, max(heightWithWater, heightMap[nr][nc])});
