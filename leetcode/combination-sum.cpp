@@ -16,11 +16,11 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;
         vector<int> comb;
-        search(candidates, target, 0, comb, ans);
+        search(candidates, 0, target, comb, ans);
         return ans;
     }
-private:
-    void search(const vector<int> candiatates, int target, int idx,
+
+    void search(const vector<int> candiatates, int idx, int target,
                 vector<int> &comb, vector<vector<int>> &ans) {
         if (target < 0) return;
         if (target == 0) {
@@ -30,7 +30,7 @@ private:
         
         for (int i = idx; i < candiatates.size(); i++) {
             comb.push_back(candiatates[i]);
-            search(candiatates, target - candiatates[i], i, comb, ans);
+            search(candiatates, i, target - candiatates[i], comb, ans);
             comb.pop_back();
         }
     }

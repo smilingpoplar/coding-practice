@@ -21,11 +21,12 @@ public:
     }
 
     void search(int startNum, const int n, const int k,
-             vector<int> &comb, vector<vector<int>> &ans) {
+                vector<int> &comb, vector<vector<int>> &ans) {
         if (comb.size() == k) {
             ans.push_back(comb);
             return;
         }
+
         for (int i = startNum; i <= n; i++) {
             comb.push_back(i);
             search(i + 1, n, k, comb, ans);
