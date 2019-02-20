@@ -23,12 +23,12 @@ using namespace std;
 class Solution {
 public:
     int rob(TreeNode* root) {
-        // 问题只有两种状态：抢没抢root
+        // 只有两种状态：抢没抢root
         auto ans = robSub(root);
         return max(ans[0], ans[1]);
     }
     
-    // 该函数返回没抢ans[0]和抢ans[1]两种情况下的最大值
+    // 返回没抢ans[0]和抢ans[1]两种情况下的最大值
     vector<int> robSub(TreeNode *root) {
         if (!root) return { 0, 0 };
         auto left = robSub(root->left);

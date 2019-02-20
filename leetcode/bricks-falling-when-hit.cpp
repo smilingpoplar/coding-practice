@@ -42,11 +42,12 @@ class Solution {
     };
 public:
     vector<int> hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits) {
-        // 把时间反转：从全消除的局面开始，一步步恢复被消除的砖块，看与"顶部"相连砖块数的变化
+        // 把时间反转，从hits[]全应用的局面开始，一步步恢复被消除的砖块，
+        // 看与"顶部"相连的砖块数的变化
         if (grid.empty()) return {};
         const int R = grid.size(), C = grid[0].size();
-        vector<vector<int>> erased(grid); // 先是全消除的局面
-        for (auto &hit : hits) {
+        vector<vector<int>> erased(grid);
+        for (auto &hit : hits) { // 先是hits[]全应用的局面
             erased[hit[0]][hit[1]] = 0;
         }
         UnionFind uf(R * C + 1); // idx=R*C是特殊的"顶部"节点
@@ -54,10 +55,11 @@ public:
             for (int c = 0; c < C; c++) {
                 if (!erased[r][c]) continue;
                 int idx = r * C + c;
-                // 与上下左右连接：从上往下、从左往右遍历，只要考虑与上左的连接
+                // idx与上下左右连接（连接就是并查集unite）
+                // 从上往下、从左往右遍历，只要考虑与上左的连接
                 if (r == 0) uf.unite(idx, R * C); // 首行砖块与"顶部"连接
-                if (r > 0 && erased[r-1][c]) uf.unite(idx, (r-1) * C + c);
-                if (c > 0 && erased[r][c-1]) uf.unite(idx, r * C + c - 1);
+                if (r > 0 && erased[r-1][c]) uf.unite(idx, (r - 1) * C + c);
+                if (c > 0 && erased[r][c-1]) uf.unite(idx, r * C + (c - 1));
             }
         }
         int prev = uf.topBricksCount();
@@ -65,13 +67,13 @@ public:
         const int N = hits.size();
         vector<int> ans(N, 0);
         vector<vector<int>> dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
-        // 恢复被消除的砖块
+        // 一步步恢复被消除的砖块
         for (int i = N - 1; i >= 0; i--) {
             int r = hits[i][0], c = hits[i][1];
             if (!grid[r][c]) continue;
             erased[r][c] = 1;
-            // 与上下左右连接
             int idx = r * C + c;
+            // 让idx与上下左右连接
             if (r == 0) uf.unite(idx, R * C);
             for (auto &dir : dirs) {
                 int nr = r + dir[0], nc = c + dir[1];
@@ -79,9 +81,9 @@ public:
                     uf.unite(idx, nr * C + nc);
                 }
             }
-            int curr = uf.topBricksCount();            
-            // 消除的砖块若与顶部相连，掉落curr-prev-1块；若不相连，掉落0块
-            ans[i] = max(0, curr - prev - 1);
+            int curr = uf.topBricksCount();
+            // 若curr>prev，掉落curr-prev-1块；若curr==prev，掉落0块          
+            ans[i] = max(curr - prev - 1, 0);
             prev = curr;
         }
         return ans;

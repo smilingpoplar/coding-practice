@@ -22,20 +22,20 @@ using namespace std;
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        vector<int> leftmost;
+        vector<int> leftMost; // 各层最左节点的id
         int ans = INT_MIN;
-        dfs(root, 0, 0, leftmost, ans);
+        dfs(root, 0, 1, leftMost, ans);
         return ans;
     }
     
-    void dfs(TreeNode *root, int depth, int order, vector<int> &leftmost, int &ans) {
+    void dfs(TreeNode *root, int depth, int id, vector<int> &leftMost, int &ans) {
         if (!root) return;
-        if (depth == leftmost.size()) leftmost.push_back(order);
+        if (depth == leftMost.size()) leftMost.push_back(id);
         
-        int width = order - leftmost[depth] + 1;
+        int width = id - leftMost[depth] + 1;
         ans = max(ans, width);
-        dfs(root->left, depth + 1, order * 2, leftmost, ans);
-        dfs(root->right, depth + 1, order * 2 + 1, leftmost, ans);
+        dfs(root->left, depth + 1, id * 2, leftMost, ans);
+        dfs(root->right, depth + 1, id * 2 + 1, leftMost, ans);
     }
 };
 

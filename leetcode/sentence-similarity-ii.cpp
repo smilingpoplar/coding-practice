@@ -15,7 +15,7 @@ class Solution {
 public:
     bool areSentencesSimilarTwo(vector<string>& words1, vector<string>& words2, vector<pair<string, string>> pairs) {
         if (words1.size() != words2.size()) return false;
-        // 并查集，直接用word作key
+        // 直接用word作并查集的键
         unordered_map<string, string> parent;
         for (auto &p : pairs) {
             auto pw1 = find(p.first, parent), pw2 = find(p.second, parent);
@@ -30,8 +30,7 @@ public:
     }
     
     string find(const string &s, unordered_map<string, string> &parent) {
-        if (!parent.count(s)) 
-            parent[s] = s;
+        if (!parent.count(s)) parent[s] = s;
         
         if (parent[s] != s) 
             parent[s] = find(parent[s], parent);

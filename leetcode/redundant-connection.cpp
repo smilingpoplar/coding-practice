@@ -28,7 +28,7 @@ public:
     }
     
     int find(int x, vector<int> &parent) {
-        if (x != parent[x]) {
+        if (parent[x] != x) {
             parent[x] = find(parent[x], parent);
         }
         return parent[x];

@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
-        // 并查集，直接用mail作key
+        // 直接用mail作并查集的键，同用户的mail在同一集合
         unordered_map<string, string> parent;
         unordered_map<string, string> owner;
         for (auto &account : accounts) {
@@ -32,7 +32,7 @@ public:
             }
         }
         
-        // 同用户的mail合并
+        // 同一集合的mail放入数组
         unordered_map<string, vector<string>> mp;
         for (auto &e : parent) {
             auto &x = e.first;
