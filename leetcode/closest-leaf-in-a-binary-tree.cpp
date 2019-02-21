@@ -24,16 +24,16 @@ class Solution {
 public:
     int findClosestLeaf(TreeNode* root, int k) {
         // 题目：树中有一个节点值为k，找出离这个节点最近的叶节点值
-        // 可沿边上下运动，其实就是把这树当作无向图，用bfs找最短路径
+        // 可沿边上下运动，其实就是把这树当作无向图，用bfs找从k节点到叶节点的最短路径
 
         // 先dfs创建无向图，同时找出k节点（用后序遍历）
         unordered_map<TreeNode *, vector<TreeNode *>> adj;
-        auto theKNode = dfs(root, k, adj);
+        auto kNode = dfs(root, k, adj);
         
         queue<TreeNode *> q;
-        q.push(theKNode);
+        q.push(kNode);
         unordered_set<TreeNode *> visited;
-        visited.insert(theKNode);
+        visited.insert(kNode);
         
         while (!q.empty()) {
             auto u = q.front(); q.pop();
@@ -58,6 +58,7 @@ public:
             adj[root].push_back(root->right);
             adj[root->right].push_back(root);
         }
+
         auto left = dfs(root->left, k, adj);
         auto right = dfs(root->right, k, adj);
         if (left) return left; // 在左子树中找到k节点

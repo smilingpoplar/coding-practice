@@ -24,16 +24,16 @@ public:
     TreeNode* addOneRow(TreeNode* root, int v, int d) {
         TreeNode dummy(0);
         dummy.left = root;
-        insert(0, &dummy, v, d);
+        insert(&dummy, 0, v, d);
         return dummy.left;
     }
     
-    void insert(int depth, TreeNode* root, int v, int d) {
-        // 找到d-1层，在其子节点插入
+    void insert(TreeNode* root, int depth, int v, int d) {
         if (!root) return;
+        // 找到d-1层，在其子节点插入
         if (depth < d - 1) {
-            insert(depth + 1, root->left, v, d);
-            insert(depth + 1, root->right, v, d);
+            insert(root->left, depth + 1, v, d);
+            insert(root->right, depth + 1, v, d);
         } else {
             auto ln = new TreeNode(v);
             ln->left = root->left;
