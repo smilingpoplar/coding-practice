@@ -14,19 +14,21 @@ using namespace std;
 class Solution {
 public:
     bool isValidSerialization(string preorder) {
-        // 设diff=叶节点数-内节点数。扫描串的过程中确保diff<1，
-        // 一旦diff==1则树已构建好不能再扩展，此时确保扫完整串。
+        // 想象扫描串并构建树，在扫描串的过程中要确保"叶节点数<内节点数+1"，
+        // 一旦"叶节点数=内节点数+1"则树已建好不能再扩展，此时要确保扫完串。
+        // 设diff=叶节点数-内节点数，扫描过程中确保diff<1，一旦diff==1确保扫完串。
         const int N = preorder.size();
-        int i = 0, diff = 0;
+        int diff = 0, i = 0;
         while (i < N) {
             if (preorder[i++] == '#') diff++;
             else diff--;
             if (diff == 1) break;
 
+            // 向前越过','
             while (i < N && preorder[i] != ',') i++;
             if (i < N) i++;
         }
-        return diff == 1 && i == N;
+        return i == N && diff == 1;
     }
 };
 

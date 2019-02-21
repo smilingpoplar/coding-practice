@@ -22,20 +22,22 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        // 正常的分层遍历，输出时将元素放到该层从左往右或从右往左的对应位置
         vector<vector<int>> ans;
-        queue<TreeNode *> Q;
-        if (root) Q.push(root);
+        queue<TreeNode *> q;
+        if (root) q.push(root);
         bool toRight = true;
-        while (!Q.empty()) {
-            vector<int> row;
-            for (int sz = Q.size(); sz > 0; sz--) {
-                auto node = Q.front(); Q.pop();
-                row.push_back(node->val);
+        while (!q.empty()) {
+            int sz = q.size();
+            vector<int> row(sz);
+            for (int i = 0; i < sz; i++) {
+                auto node = q.front(); q.pop();
+                int idx = toRight ? i : sz - 1 - i;
+                row[idx] = node->val;
                 
-                if (node->left) Q.push(node->left);
-                if (node->right) Q.push(node->right);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
-            if (!toRight) reverse(row.begin(), row.end());
             ans.push_back(row);
             toRight = !toRight;
         }

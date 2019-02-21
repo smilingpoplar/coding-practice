@@ -42,7 +42,7 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> ans;
         stack<TreeNode *> stk;
-        auto curr = root; // curr表示当前待入栈的元素
+        auto curr = root; // curr是待入栈的节点
         while (curr || !stk.empty()) {
             while (curr) {
                 ans.push_back(curr->val); // 进栈前访问

@@ -32,8 +32,7 @@ public:
         if (!root) return;
         if (depth == leftMost.size()) leftMost.push_back(id);
         
-        int width = id - leftMost[depth] + 1;
-        ans = max(ans, width);
+        ans = max(ans, id - leftMost[depth] + 1);
         dfs(root->left, depth + 1, id * 2, leftMost, ans);
         dfs(root->right, depth + 1, id * 2 + 1, leftMost, ans);
     }

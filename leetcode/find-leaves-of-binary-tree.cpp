@@ -28,8 +28,8 @@ public:
         return ans;
     }
     
-    // 叶节点高为0，越往上越高，高h节点放到ans[h]中
     int getHeight(TreeNode *root, vector<vector<int>> &ans) {
+        // 高h节点放到ans[h]中，让叶节点高为0，故定义空节点高为-1
         if (!root) return -1;
         auto left = getHeight(root->left, ans);
         auto right = getHeight(root->right, ans);

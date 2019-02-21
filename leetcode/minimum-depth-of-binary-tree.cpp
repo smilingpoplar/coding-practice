@@ -21,6 +21,7 @@ class Solution {
 public:
     int minDepth(TreeNode *root) {
         if (!root) return 0;
+        // 一边子树为空时要特别判断，不是取1+min(0,minDepth(非空子树))
         if (!root->left) return 1 + minDepth(root->right);
         if (!root->right) return 1 + minDepth(root->left);
         return 1 + min(minDepth(root->left), minDepth(root->right));

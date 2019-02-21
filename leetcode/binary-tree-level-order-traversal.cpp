@@ -48,8 +48,8 @@ public:
         vector<TreeNode *> curr;
         if (root) curr.push_back(root);
         while (!curr.empty()) {
-            vector<TreeNode *> next;
             vector<int> row;
+            vector<TreeNode *> next;
             for (auto node : curr) {
                 row.push_back(node->val);
                 

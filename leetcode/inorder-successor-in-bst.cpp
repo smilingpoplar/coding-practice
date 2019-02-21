@@ -25,10 +25,10 @@ public:
     TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
         if (!root || !p) return NULL;
         // bst的中序遍历是个有序数组，这题相当于要找第一个>p.val的节点
-        // 类似二分搜索，root相当于二分搜索中的mid
+        // 类似二分搜索，root就是二分搜索中的mid
         TreeNode *succ = NULL;
         while (root) {
-            if (root->val > p->val) { // root可作候选，排除右子树
+            if (root->val > p->val) { // root作候选，看左边有没更小的
                 succ = root;
                 root = root->left;
             } else { // root值太小，排除root和左子树

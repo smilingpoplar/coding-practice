@@ -20,7 +20,7 @@ struct TreeNode {
 
 class BSTIterator {
 public:
-    // 中序遍历迭代版，用curr表示调用栈[curr,stk]的栈顶
+    // 中序遍历迭代版，curr表示当前待入栈的元素
     BSTIterator(TreeNode *root) {
         curr = root;
     }
