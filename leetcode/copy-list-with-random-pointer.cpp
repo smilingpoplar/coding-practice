@@ -47,32 +47,32 @@ class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
         // 在每个节点后放copy节点
-        auto curr = head;
-        while (curr) {
-            auto next = curr->next;
-            auto copy = new RandomListNode(curr->label);
-            copy->next = next;
-            curr->next = copy;
-            curr = next;
+        auto l1 = head;
+        while (l1) {
+            auto next = l1->next;
+            auto l2 = new RandomListNode(l1->label);
+            l2->next = next;
+            l1->next = l2;
+            l1 = next;
         }
-        // 设置copy节点的random指针
-        curr = head;
-        while (curr) {
-            auto copy = curr->next;
-            if (curr->random) copy->random = curr->random->next;
-            curr = copy->next;
+        // 设置l2节点的random指针
+        l1 = head;
+        while (l1) {
+            auto l2 = l1->next;
+            if (l1->random) l2->random = l1->random->next;
+            l1 = l2->next;
         }
         // 拆分两个链表
         RandomListNode dummy(-1);
         auto p = &dummy;
-        curr = head;
-        while (curr) {
-            auto copy = curr->next;
-            auto next = copy->next;
-            p->next = copy;
-            p = copy;
-            curr->next = next;
-            curr = curr->next;
+        l1 = head;
+        while (l1) {
+            auto l2 = l1->next;
+            auto next = l2->next;
+            p->next = l2;
+            p = l2;
+            l1->next = next;
+            l1 = l1->next;
         }
         return dummy.next;
     }
