@@ -17,8 +17,7 @@ public:
         // 期望变成数组[1..n]。位置i应放数i+1，即nums[i]==i+1；
         // 数x应在位置x-1，即nums[i]应在位置nums[i]-1，nums[nums[i]-1]==nums[i]。
         // 旋转置换：
-        // 若位置nums[i]-1处不是nums[i]，即若nums[nums[i]-1]!=nums[i]，
-        // 把位置nums[i]-1和位置i处的值交换，然后继续处理位置i。
+        // 若nums[nums[i]-1]!=nums[i]，交换位置nums[i]-1和位置i处的值，然后继续处理位置i。
         const int N = nums.size();
         for (int i = 0; i < N; i++) {
             while (1 <= nums[i] && nums[i] <= N 
