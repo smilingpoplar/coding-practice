@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int minPatches(vector<int>& nums, int n) {
-        // 设[1..missing)已能由数组数相加获得
+        // 设[1..missing)已能由数组数相加获得，尝试扩展上边界msssing
         long missing = 1;
         int i = 0, ans = 0;
         while (missing <= n) {

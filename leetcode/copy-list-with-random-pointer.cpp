@@ -46,7 +46,7 @@ public:
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
-        // 在每个节点后放copy节点
+        // 在每个l1节点后放l2节点
         auto l1 = head;
         while (l1) {
             auto next = l1->next;
