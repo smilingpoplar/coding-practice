@@ -52,17 +52,16 @@ public:
         if (r < 0 || r >= board.size() || c < 0 || c >= board[0].size() || visited[r][c]) return;
         // 回溯法，在trie中搜索board[r][c]
         auto p = node->child[board[r][c] - 'a'];
-        visited[r][c] = true;
-        if (p) {
-            if (!p->word.empty()) { // 找到一个词
-                ans.push_back(p->word);
-                p->word.clear(); // 不用再找这个词
-            }
-            dfs(r - 1, c, board, visited, p, ans);
-            dfs(r + 1, c, board, visited, p, ans);
-            dfs(r, c - 1, board, visited, p, ans);
-            dfs(r, c + 1, board, visited, p, ans);
+        if (!p) return;
+        if (!p->word.empty()) { // 找到一个词
+            ans.push_back(p->word);
+            p->word.clear(); // 不用再找这个词
         }
+        visited[r][c] = true;
+        dfs(r - 1, c, board, visited, p, ans);
+        dfs(r + 1, c, board, visited, p, ans);
+        dfs(r, c - 1, board, visited, p, ans);
+        dfs(r, c + 1, board, visited, p, ans);
         visited[r][c] = false;
     }
 };
