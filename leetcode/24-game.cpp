@@ -20,33 +20,32 @@ public:
     bool solve(vector<double>& nums) {
         const vector<char> ops = {'+', '-', '*', '/'};
         const int N = nums.size();
-        if (N == 0) return false;
-        if (N == 1) return abs(nums[0] - 24) < 1e-6;
+        const double EPSILON = 1e-6;
+        if (N == 1) return abs(nums[0] - 24) < EPSILON;
         
-        // 任取两位置i和j的数，准备做计算
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (i == j) continue;        
                 // 先把剩下的数放入新数组
-                vector<double> res;
+                vector<double> arr;
                 for (int k = 0; k < N; k++) {
                     if (k != i && k != j) {
-                        res.push_back(nums[k]);
+                        arr.push_back(nums[k]);
                     }
                 }
                 
                 for (char op : ops) {
                     if ((op == '+' || op == '*') && i > j) continue; // +*满足交换律，减少重复计算
-                    if (op == '/' && nums[j] == 0) continue;
+                    if (op == '/' && abs(nums[j]) < EPSILON) continue;
                     
                     double ans;
                     if (op == '+') ans = nums[i] + nums[j];
                     else if (op == '-') ans = nums[i] - nums[j];
                     else if (op == '*') ans = nums[i] * nums[j];
                     else if (op == '/') ans = nums[i] / nums[j];
-                    res.push_back(ans);    
-                    if (solve(res)) return true;
-                    res.pop_back();
+                    arr.push_back(ans);    
+                    if (solve(arr)) return true;
+                    arr.pop_back();
                 }
             }
         }
