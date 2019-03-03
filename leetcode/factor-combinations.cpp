@@ -30,7 +30,7 @@ public:
             if (n % i == 0) {
                 comb.push_back(i);
                 search(n / i, i, comb, ans);
-                // 一步得到两个因子
+                // 本次得到两个因子
                 comb.push_back(n / i);
                 ans.push_back(comb);
                 comb.pop_back();
