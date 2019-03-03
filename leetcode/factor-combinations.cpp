@@ -26,8 +26,7 @@ public:
             return;
         }
         
-        const int maxI = sqrt(n);
-        for (int i = startNum; i <= maxI; i++) {
+        for (int i = startNum; i * i <= n; i++) {
             if (n % i == 0) {
                 comb.push_back(i);
                 search(n / i, i, comb, ans);
