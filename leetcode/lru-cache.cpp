@@ -13,12 +13,11 @@
 using namespace std;
 
 class LRUCache{
-    // 1. 按key分桶，每桶只要存key和value
-    // 2. 映射：key=>列表中的key桶
-    // 3. 每次访问把桶移到列表头，删除lru时只要删除表尾
-    struct Bucket { int key; int value; };
-    list<Bucket> buckets;
-    unordered_map<int, list<Bucket>::iterator> bucketOfKey;
+    // 1. table只有单列，按key分行 => entry{key,value}
+    // 2. 每次访问把entry移到列头，删除lru时只要删除列尾
+    struct Entry { int key; int value; };
+    list<Entry> table;
+    unordered_map<int, list<Entry>::iterator> entryPtr;
     int capacity;
 public:
     LRUCache(int capacity) {
@@ -26,29 +25,28 @@ public:
     }
     
     int get(int key) {
-        if (!bucketOfKey.count(key)) return -1;
+        if (!entryPtr.count(key)) return -1;
         touch(key);
-        return bucketOfKey[key]->value;
+        return entryPtr[key]->value;
     }
     
-    // 把桶移到列表头，更新哈希表中的映射
     void touch(int key) {
         // toList.splice(toListIterator, fromList, fromListSingleIterator)
-        buckets.splice(buckets.begin(), buckets, bucketOfKey[key]);
-        bucketOfKey[key] = buckets.begin();
+        table.splice(table.begin(), table, entryPtr[key]);
+        entryPtr[key] = table.begin();
     }
     
     void put(int key, int value) {
         if (capacity == 0) return;
-        if (!bucketOfKey.count(key)) {
-            if (buckets.size() == capacity) { // 删除链表尾
-                bucketOfKey.erase(buckets.back().key);
-                buckets.pop_back();
+        if (!entryPtr.count(key)) {
+            if (table.size() == capacity) { // 删除列尾
+                entryPtr.erase(table.back().key);
+                table.pop_back();
             }
-            buckets.push_front({key, value});
-            bucketOfKey[key] = buckets.begin();
+            table.push_front({key, value});
+            entryPtr[key] = table.begin();
         } else {
-            bucketOfKey[key]->value = value;
+            entryPtr[key]->value = value;
             touch(key);
         }
     }
