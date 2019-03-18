@@ -1,4 +1,4 @@
-//
+    //
 //  lru-cache
 //  https://leetcode.com/problems/lru-cache/
 //
@@ -13,7 +13,7 @@
 using namespace std;
 
 class LRUCache{
-    // 1. table只有单列，按key分行 => entry{key,value}
+    // 1. 映射表table只有单列，按key分行 => entry{key,value}
     // 2. 每次访问把entry移到列头，删除lru时只要删除列尾
     struct Entry { int key; int value; };
     list<Entry> table;

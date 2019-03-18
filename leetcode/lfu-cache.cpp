@@ -12,11 +12,12 @@
 using namespace std;
 
 class LFUCache {
-    struct KV { int key; int value; };
-    struct Bucket { int freq; list<KV> kvs; };
-    list<Bucket> buckets; // 按频率分桶
-    struct Info { list<Bucket>::iterator bp; list<KV>::iterator kvp; };
-    unordered_map<int, Info> infoOfKey;
+    // 映射表table按频率分行，每行行首放最近使用项
+    struct Entry { int key; int value; };
+    struct FreqRow { int freq; list<Entry> entries; };
+    list<FreqRow> table; 
+    struct EntryPtr { list<FreqRow>::iterator row; list<Entry>::iterator entry; };
+    unordered_map<int, EntryPtr> entryPtr;
     int capacity;
 public:
     LFUCache(int capacity) {
@@ -24,44 +25,44 @@ public:
     }
     
     int get(int key) {
-        if (!infoOfKey.count(key)) return -1;
+        if (!entryPtr.count(key)) return -1;
         increaseFreq(key);
-        return infoOfKey[key].kvp->value;
+        return entryPtr[key].entry->value;
     }
     
-    // 将kv从原行删除、插入"频率+1"行
+    // 将entry从原行删除、插入"freq+1"行
     void increaseFreq(int key) {
-        auto info = infoOfKey[key];
-        auto bucket = info.bp, nextBucket = next(bucket);
-        int nextFreqNeeded = bucket->freq + 1;
-        if (nextBucket == buckets.end() || nextBucket->freq != nextFreqNeeded) { // 插入新行
-            nextBucket = buckets.insert(nextBucket, { nextFreqNeeded, { }});
+        auto ptr = entryPtr[key];
+        auto currRow = ptr.row, nextRow = next(currRow);
+        int nextFreq = currRow->freq + 1;
+        if (nextRow == table.end() || nextRow->freq != nextFreq) { // 插入新行
+            nextRow = table.insert(nextRow, { nextFreq, { }});
         }
-        nextBucket->kvs.splice(nextBucket->kvs.begin(), bucket->kvs, info.kvp);
-        if (bucket->kvs.empty()) buckets.erase(bucket);
-        infoOfKey[key] = { nextBucket, nextBucket->kvs.begin() };
+        nextRow->entries.splice(nextRow->entries.begin(), currRow->entries, ptr.entry);
+        if (currRow->entries.empty()) table.erase(currRow);
+        entryPtr[key] = { nextRow, nextRow->entries.begin() };
     }
     
     void put(int key, int value) {
         if (capacity == 0) return;
-        if (!infoOfKey.count(key)) {
-            if (infoOfKey.size() == capacity) evict();
-            // 应插入频率为1的行。这里先设频率为0，待会儿和其他情况一起增1。
-            auto bucket = buckets.insert(buckets.begin(), { 0, {{key, value}} });
-            infoOfKey[key] = { bucket, bucket->kvs.begin() };
+        if (!entryPtr.count(key)) {
+            if (entryPtr.size() == capacity) evict();
+            // 应插入freq=1的行。这里先设freq=0，待会儿和其他情况一起增1。
+            auto row = table.insert(table.begin(), { 0, {{key, value}} });
+            entryPtr[key] = { row, row->entries.begin() };
         } else {
-            infoOfKey[key].kvp->value = value;
+            entryPtr[key].entry->value = value;
         }
         increaseFreq(key);
     }
     
-    // 删除最小频率lfu的桶中最少最近使用lru项
+    // 删除最小频率lfu的行中最少最近使用lru项
     void evict() {
-        if (buckets.empty()) return;
-        auto lfu = buckets.begin();
-        infoOfKey.erase(lfu->kvs.back().key);
-        lfu->kvs.pop_back();
-        if (lfu->kvs.empty()) buckets.erase(lfu);
+        if (table.empty()) return;
+        auto lfu = table.begin();
+        entryPtr.erase(lfu->entries.back().key);
+        lfu->entries.pop_back();
+        if (lfu->entries.empty()) table.erase(lfu);
     }
 };
 
