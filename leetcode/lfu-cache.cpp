@@ -32,13 +32,12 @@ public:
     
     // 将entry从原行删除、插入"freq+1"行
     void increaseFreq(int key) {
-        auto ptr = entryPtr[key];
-        auto currRow = ptr.row, nextRow = next(currRow);
+        auto currRow = entryPtr[key].row, nextRow = next(currRow);
         int nextFreq = currRow->freq + 1;
         if (nextRow == table.end() || nextRow->freq != nextFreq) { // 插入新行
             nextRow = table.insert(nextRow, { nextFreq, { }});
         }
-        nextRow->entries.splice(nextRow->entries.begin(), currRow->entries, ptr.entry);
+        nextRow->entries.splice(nextRow->entries.begin(), currRow->entries, entryPtr[key].entry);
         if (currRow->entries.empty()) table.erase(currRow);
         entryPtr[key] = { nextRow, nextRow->entries.begin() };
     }
