@@ -1,4 +1,4 @@
-    //
+//
 //  lru-cache
 //  https://leetcode.com/problems/lru-cache/
 //
@@ -19,6 +19,12 @@ class LRUCache{
     list<Entry> table;
     unordered_map<int, list<Entry>::iterator> entryPtr;
     int capacity;
+private:
+    void touch(int key) {
+        // toList.splice(toListIterator, fromList, fromListSingleIterator)
+        table.splice(table.begin(), table, entryPtr[key]);
+        entryPtr[key] = table.begin();
+    }
 public:
     LRUCache(int capacity) {
         this->capacity = capacity;
@@ -28,12 +34,6 @@ public:
         if (!entryPtr.count(key)) return -1;
         touch(key);
         return entryPtr[key]->value;
-    }
-    
-    void touch(int key) {
-        // toList.splice(toListIterator, fromList, fromListSingleIterator)
-        table.splice(table.begin(), table, entryPtr[key]);
-        entryPtr[key] = table.begin();
     }
     
     void put(int key, int value) {

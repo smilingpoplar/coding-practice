@@ -11,15 +11,27 @@
 
 using namespace std;
 
-// https://leetcode.com/problems/all-oone-data-structure/discuss/91398/C++-solution-with-comments
-
 class AllOne {
-    struct Bucket { 
-        const int value; 
-        unordered_set<string> keys;
-    };
-    list<Bucket> buckets; // 按值分桶
-    unordered_map<string, list<Bucket>::iterator> bucketOfKey;
+    // 映射表table按值分行
+    struct ValueRow { int value; unordered_set<string> keys; };
+    list<ValueRow> table;
+    unordered_map<string, list<ValueRow>::iterator> rowPtr;
+private:
+    void deleteKey(const string &key, list<ValueRow>::iterator &row) {
+        row->keys.erase(key);
+        if (row->keys.empty()) table.erase(row);
+        rowPtr.erase(key);
+    }
+
+    void insertKey(const string &key, list<ValueRow>::iterator &row) {
+        row->keys.insert(key);
+        rowPtr[key] = row;
+    }
+
+    void moveKey(const string &key, list<ValueRow>::iterator &from, list<ValueRow>::iterator &to) {
+        deleteKey(key, from);
+        insertKey(key, to);
+    }
 public:
     /** Initialize your data structure here. */
     AllOne() {
@@ -27,51 +39,41 @@ public:
     
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
     void inc(string key) {
-        if (!bucketOfKey.count(key)) {
-            // 先插入0，待会儿和其他情况一起增1
-            bucketOfKey[key] = buckets.insert(buckets.begin(), {0, { key }}); 
+        if (!rowPtr.count(key)) { // 先插入0，待会儿和其他情况一起增1
+            rowPtr[key] = table.insert(table.begin(), {0, { key }}); 
         }
-        // 增1即将key移入下一桶
-        auto bucket = bucketOfKey[key], nextBucket = next(bucket); 
-        int nextValueNeeded = bucket->value + 1;
-        if (nextBucket == buckets.end() || nextBucket->value != nextValueNeeded) {
-            nextBucket = buckets.insert(nextBucket, {nextValueNeeded, { }});
+        auto currRow = rowPtr[key], nextRow = next(currRow); 
+        int nextValueNeeded = currRow->value + 1;
+        if (nextRow == table.end() || nextRow->value != nextValueNeeded) { // 插入新行
+            nextRow = table.insert(nextRow, {nextValueNeeded, { }});
         }
-        nextBucket->keys.insert(key);
-        bucketOfKey[key] = nextBucket;
-        // 从桶中删除key
-        bucket->keys.erase(key);
-        if (bucket->keys.empty()) buckets.erase(bucket);
+        moveKey(key, currRow, nextRow);
     }
     
     /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
     void dec(string key) {
-        if (!bucketOfKey.count(key)) return;
-        // 减1即将key移入上一桶
-        auto bucket = bucketOfKey[key], prevBucket = prev(bucket);
-        if (bucket->value > 1) {
-            int prevValueNeeded = bucket->value - 1;
-            if (bucket == buckets.begin() || prevBucket->value != prevValueNeeded) {
-                prevBucket = buckets.insert(bucket, {prevValueNeeded, { }});
-            } 
-            prevBucket->keys.insert(key);
-            bucketOfKey[key] = prevBucket;
-        } else {
-            bucketOfKey.erase(key);
+        if (!rowPtr.count(key)) return;
+        auto currRow = rowPtr[key];
+        if (currRow->value == 1) {
+            deleteKey(key, currRow);
+            return;
         }
-        // 从旧桶删除key
-        bucket->keys.erase(key);
-        if (bucket->keys.empty()) buckets.erase(bucket);
+        auto prevRow = prev(currRow);
+        int prevValueNeeded = currRow->value - 1;
+        if (currRow == table.begin() || prevRow->value != prevValueNeeded) {
+            prevRow = table.insert(currRow, {prevValueNeeded, { }});
+        }
+        moveKey(key, currRow, prevRow);
     }
     
     /** Returns one of the keys with maximal value. */
     string getMaxKey() {
-        return buckets.empty() ? "" : *buckets.rbegin()->keys.begin();
+        return table.empty() ? "" : *table.rbegin()->keys.begin();
     }
     
     /** Returns one of the keys with Minimal value. */
     string getMinKey() {
-        return buckets.empty() ? "" : *buckets.begin()->keys.begin();        
+        return table.empty() ? "" : *table.begin()->keys.begin();        
     }
 };
 
