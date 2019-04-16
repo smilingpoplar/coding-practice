@@ -1,6 +1,6 @@
 //
-//  bulb-switcher
-//  https://leetcode.com/problems/bulb-switcher/
+//  longest-absolute-file-path
+//  https://leetcode.com/problems/longest-absolute-file-path/
 //
 //  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -18,10 +18,10 @@ public:
         string line;
         stack<int> stk;
         int ans = 0;
-        while (getline(iss, line)) {
+        while (getline(iss, line)) { // 遍历\n每行路径，并将路径长压栈
             int indent = 0;
             while (line[indent] == '\t') indent++;
-            while (stk.size() > indent) stk.pop(); // 确保压栈时紧接着父目录位置
+            while (stk.size() > indent) stk.pop(); // 确保压栈时紧接着父目录位置，即栈元素个数等于缩进数
             int filelen = line.size() - indent;
             int pathlen = (stk.empty() ? 0 : stk.top() + 1) + filelen; // 1是分隔符长
             stk.push(pathlen);
