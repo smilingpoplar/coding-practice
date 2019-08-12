@@ -14,10 +14,11 @@ using namespace std;
 class Solution {
 public:
     string smallestFromLeaf(TreeNode* root) {
-        if (!root) return string(1, 'a' + 26); // 要让空子树返回很大值
+        // 后面的min(subtree,NULL)比较不能选空子树，所以要让空子树返回很大值
+        if (!root) return string(1, 'a' + 26);
+        
         string s(1, 'a' + root->val);
         if (!root->left && !root->right) return s;
-        // 若一个子树为空，min(a,空)比较不能选空子树，要让空子树返回很大值
         return min(smallestFromLeaf(root->left) + s, smallestFromLeaf(root->right) + s);
     }
 };
