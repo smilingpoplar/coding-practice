@@ -20,7 +20,8 @@ class LFUCache {
     unordered_map<int, EntryPtr> entryPtr;
     int capacity;
 private:
-    void moveKey(int key, list<FreqRow>::iterator &from, list<FreqRow>::iterator &to) {
+    void moveKey(int key, list<FreqRow>::iterator &to) {
+        auto from = entryPtr[key].row;
         to->entries.splice(to->entries.begin(), from->entries, entryPtr[key].entry);
         if (from->entries.empty()) table.erase(from);
         entryPtr[key] = { to, to->entries.begin() };
@@ -33,7 +34,7 @@ private:
         if (nextRow == table.end() || nextRow->freq != nextFreq) { // 插入新行
             nextRow = table.insert(nextRow, { nextFreq, { }});
         }
-        moveKey(key, currRow, nextRow);
+        moveKey(key, nextRow);
     }
     
     // 删除最小频率lfu的行中最少最近使用lru项
