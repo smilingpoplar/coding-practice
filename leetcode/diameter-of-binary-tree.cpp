@@ -23,18 +23,17 @@ class Solution {
 public:
     int diameterOfBinaryTree(TreeNode* root) {
         int ans = 0;
-        getHeight(root, ans);
+        arrowLen(root, ans);
         return ans;
     }
     
-    int getHeight(TreeNode *root, int &ans) {
+    int arrowLen(TreeNode *root, int &ans) {
         if (!root) return 0;
-        int left = getHeight(root->left, ans);
-        int right = getHeight(root->right, ans);
-        int arrow = 1 + max(left, right);
         // left高度 <=> left节点数 <=> 从root往左向下的边数
+        int left = arrowLen(root->left, ans);
+        int right = arrowLen(root->right, ans);
         ans = max(ans, left + right);
-        return arrow;
+        return 1 + max(left, right);
     }
 };
 
