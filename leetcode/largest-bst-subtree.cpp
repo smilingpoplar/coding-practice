@@ -35,7 +35,7 @@ public:
     
     Info checkBst(TreeNode *root, int &ans) {
         // 空节点算bst，值区间为[INT_MAX,INT_MIN]
-        // 当空节点作左儿子时，父节点的root->val > upper总成立，故upper=INT_MIN；同理，lower=INT_MAX。
+        // 当空节点作左儿子时，父节点的root->val > 左子树upper总成立，故左子树upper=INT_MIN
         if (!root) return { 0, INT_MAX, INT_MIN };
         auto left = checkBst(root->left, ans);
         auto right = checkBst(root->right, ans);
