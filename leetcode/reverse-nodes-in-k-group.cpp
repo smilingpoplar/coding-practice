@@ -50,7 +50,7 @@ public:
         auto prev = &dummy; // 组前的指针
 
         for (; len >= k; len -= k) {
-            // 组头是反转后的组尾，将组内第[2..k]元素插入到prev之后
+            // 组尾是反转前的组头，将组内第[2..k]元素插入到prev之后
             auto tail = prev->next, curr = tail->next;
             for (int i = 2; i <= k; i++) {
                 tail->next = curr->next;
