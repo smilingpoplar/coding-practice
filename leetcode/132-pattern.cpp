@@ -22,7 +22,10 @@ public:
         int rMax = INT_MIN;
         stack<int> stk;
         for (int i = N - 1; i >= 0; i--) {
-            if (nums[i] < rMax) return true; // 跟上一循环nums[i+1]对应的rMax比较
+            // 因为rMax将递增，判断条件将变宽，
+            // 即使nums[i]左边有数<rMax，这次没返回以后也会返回
+            if (nums[i] < rMax) return true;
+            
             while (!stk.empty() && nums[i] > stk.top()) {
                 rMax = stk.top();
                 stk.pop();
