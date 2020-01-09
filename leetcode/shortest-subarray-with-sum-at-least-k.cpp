@@ -20,19 +20,19 @@ public:
         for (int i = 0; i < N; i++) {
             B[i+1] = B[i] + A[i];
         }
-        
-        // 当前数B[i]-队首B[q[0]]表示子段和，要让子段和尽量大，队首要尽量小，q是递增序列。
-        // 队中数最终都要作为队首参与子段和计算，最短子段要求相同数只保留右边的，q是严格递增序列。
-        // 因为q递增，若B[i]-B[q[0]]>=K，i-q[0]就是以q[0]开头的子段中最短的，q[0]用完弃。
+
+        // 当前数B[i]-队首B[q[0]]表示子段和，要让子段和尽量大，队首要尽量小，B[q[x..]]是递增序列。
+        // 队中数最终都要作为队首参与子段和计算，最短子段要求相同数只保留右边的，B[q[x..]]是严格递增序列
+
         int ans = INT_MAX;
         deque<int> q;
         for (int i = 0; i <= N; i++) {
-            while (!q.empty() && B[i] - B[q[0]] >= K) {
+            while (!q.empty() && B[i] - B[q[0]] >= K) { 
                 ans = min(ans, i - q[0]);
-                q.pop_front(); // q[0]用完弃
+                q.pop_front();
             }
 
-            while (!q.empty() && B[i] <= B[q.back()]) { // 严格递增，出栈比较用<=
+            while (!q.empty() && B[i] <= B[q.back()]) { // 严格递增，出栈用<=比较
                 q.pop_back();
             }     
             q.push_back(i);
