@@ -13,17 +13,17 @@
 using namespace std;
 
 class LRUCache{
-    // 1. 映射表table只有单列，按key分行 => entry{key,value}
-    // 2. 每次访问把entry移到列头，删除lru时只要删除列尾
+    // 把entry{key,value}用链表串起来，
+    // 每次访问把entry移到表头，删除lru时删除表尾
     struct Entry { int key; int value; };
-    list<Entry> table;
-    unordered_map<int, list<Entry>::iterator> entryPtr;
+    list<Entry> l;
+    unordered_map<int, list<Entry>::iterator> entryPtr; // key=>entry
     int capacity;
 private:
     void touch(int key) {
         // toList.splice(toListIterator, fromList, fromListSingleIterator)
-        table.splice(table.begin(), table, entryPtr[key]);
-        entryPtr[key] = table.begin();
+        l.splice(l.begin(), l, entryPtr[key]);
+        entryPtr[key] = l.begin();
     }
 public:
     LRUCache(int capacity) {
@@ -39,12 +39,12 @@ public:
     void put(int key, int value) {
         if (capacity == 0) return;
         if (!entryPtr.count(key)) {
-            if (table.size() == capacity) { // 删除列尾
-                entryPtr.erase(table.back().key);
-                table.pop_back();
+            if (l.size() == capacity) { // 删除表尾
+                entryPtr.erase(l.back().key);
+                l.pop_back();
             }
-            table.push_front({key, value});
-            entryPtr[key] = table.begin();
+            l.push_front({key, value});
+            entryPtr[key] = l.begin();
         } else {
             entryPtr[key]->value = value;
             touch(key);
