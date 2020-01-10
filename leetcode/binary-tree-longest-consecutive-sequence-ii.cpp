@@ -22,39 +22,39 @@ using namespace std;
  */
 class Solution {
     struct Info {
-        int incLen;
-        int decLen;
+        int incCnt;
+        int decCnt;
     };
 public:
     int longestConsecutive(TreeNode* root) {
         int ans = 0;
-        arrowLen(root, ans);
+        arrowNodesCount(root, ans);
         return ans;
     }
     
     // 从root开始往下递增和递减的节点数
-    Info arrowLen(TreeNode *root, int &ans) {
+    Info arrowNodesCount(TreeNode *root, int &ans) {
         if (!root) return {0, 0};
-        auto left = arrowLen(root->left, ans);
-        auto right = arrowLen(root->right, ans);
+        auto left = arrowNodesCount(root->left, ans);
+        auto right = arrowNodesCount(root->right, ans);
 
-        int incLen = 1, decLen = 1;        
+        int incCnt = 1, decCnt = 1;        
         if (root->left) {
             if (root->left->val == root->val + 1) {
-                incLen = max(incLen, left.incLen + 1);
+                incCnt = max(incCnt, left.incCnt + 1);
             } else if (root->left->val == root->val - 1) {
-                decLen = max(decLen, left.decLen + 1);
+                decCnt = max(decCnt, left.decCnt + 1);
             }
         }
         if (root->right) {
             if (root->right->val == root->val + 1) {
-                incLen = max(incLen, right.incLen + 1);
+                incCnt = max(incCnt, right.incCnt + 1);
             } else if (root->right->val == root->val - 1) {
-                decLen = max(decLen, right.decLen + 1);
+                decCnt = max(decCnt, right.decCnt + 1);
             }
         }
-        ans = max(ans, incLen + decLen - 1);
-        return {incLen, decLen};
+        ans = max(ans, incCnt + decCnt - 1);
+        return {incCnt, decCnt};
     }
 };
 

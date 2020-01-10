@@ -24,15 +24,14 @@ class Solution {
 public:
     int longestConsecutive(TreeNode* root) {
         int ans = 0;
-        arrowLen(root, ans);
+        arrowNodesCount(root, ans);
         return ans;
     }
     
-    // 从root开始向下的路径长
-    int arrowLen(TreeNode *root, int &ans) {
+    int arrowNodesCount(TreeNode *root, int &ans) {
         if (!root) return 0;
-        auto left = arrowLen(root->left, ans);
-        auto right = arrowLen(root->right, ans);
+        auto left = arrowNodesCount(root->left, ans);
+        auto right = arrowNodesCount(root->right, ans);
 
         int len = 1;
         if (root->left && root->left->val == root->val + 1)

@@ -23,15 +23,15 @@ class Solution {
 public:
     int diameterOfBinaryTree(TreeNode* root) {
         int ans = 0;
-        getHeight(root, ans);
+        arrowNodesCount(root, ans);
         return ans;
     }
     
-    int getHeight(TreeNode *root, int &ans) {
+    int arrowNodesCount(TreeNode *root, int &ans) {
         if (!root) return 0;
 
-        int left = getHeight(root->left, ans);
-        int right = getHeight(root->right, ans);
+        int left = arrowNodesCount(root->left, ans);
+        int right = arrowNodesCount(root->right, ans);
         ans = max(ans, left + right); // 经过root的直径长
 
         return 1 + max(left, right);

@@ -14,15 +14,14 @@ class Solution {
 public:
     int longestUnivaluePath(TreeNode* root) {
         int ans = 0;
-        arrowLen(root, ans);
+        arrowEdgesCount(root, ans);
         return ans;
     }
 
-    // 返回从root往下的最大边数
-    int arrowLen(TreeNode *root, int &ans) {
+    int arrowEdgesCount(TreeNode *root, int &ans) {
         if (!root) return 0;
-        int left = arrowLen(root->left, ans);
-        int right = arrowLen(root->right, ans);
+        int left = arrowEdgesCount(root->left, ans);
+        int right = arrowEdgesCount(root->right, ans);
 
         int arrowLeft = 0, arrowRight = 0;
         if (root->left && root->left->val == root->val) arrowLeft = 1 + left;
