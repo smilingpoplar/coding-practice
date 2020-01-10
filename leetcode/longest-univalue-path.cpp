@@ -27,8 +27,7 @@ public:
         int arrowLeft = 0, arrowRight = 0;
         if (root->left && root->left->val == root->val) arrowLeft = 1 + left;
         if (root->right && root->right->val == root->val) arrowRight = 1 + right;
-        // 经过root的最大边数
-        ans = max(ans, arrowLeft + arrowRight);
+        ans = max(ans, arrowLeft + arrowRight); // 经过root的最大边数
 
         return max(arrowLeft, arrowRight);
     }
