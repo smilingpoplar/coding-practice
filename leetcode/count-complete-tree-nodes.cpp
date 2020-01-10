@@ -52,8 +52,8 @@ public:
     int getHeight(TreeNode *root) {
         int height = 0;
         while (root) {
-            root = root->left;
             height++;
+            root = root->left;
         }
         return height;
     }
