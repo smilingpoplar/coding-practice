@@ -14,12 +14,12 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstringKDistinct(string s, int k) {
-        // 滑动窗口法
         vector<int> cnt(128, 0);
         int distinct = 0, ans = 0;
+        // 窗口有效条件：distince <= k
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
             if (cnt[s[hi]]++ == 0) distinct++;
-            while (distinct > k) { // 若是无效窗口、再移动lo缩小窗口
+            while (distinct > k) {
                 if (--cnt[s[lo]] == 0) distinct--;
                 lo++;
             }

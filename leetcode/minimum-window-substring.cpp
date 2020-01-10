@@ -20,6 +20,7 @@ public:
         int distinct = count.size();
         
         int minWidth = INT_MAX, ansStart;
+        // 窗口有效条件：unique == 0
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
             if (--count[s[hi]] == 0) distinct--;
             while (distinct == 0) {

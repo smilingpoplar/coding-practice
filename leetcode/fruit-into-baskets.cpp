@@ -17,6 +17,7 @@ public:
         // 求最多含两种元素的最长子数组，滑动窗口
         unordered_map<int, int> cnt; // num=>count
         int ans = 0;
+        // 窗口有效条件：cnt.size() <= 2
         for (int lo = 0, hi = 0; hi < tree.size(); hi++) {
             cnt[tree[hi]]++;
             while (cnt.size() > 2) {

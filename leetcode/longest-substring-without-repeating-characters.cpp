@@ -17,6 +17,7 @@ public:
     int lengthOfLongestSubstring(string s) {
         unordered_map<char, int> count;
         int repeat = 0, ans = 0;
+        // 窗口有效条件：repeat == 0
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
             if (++count[s[hi]] >= 2) repeat++;
             while (repeat > 0) {
