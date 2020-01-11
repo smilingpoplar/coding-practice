@@ -15,11 +15,11 @@ class Solution {
 public:
     int kEmptySlots(vector<int>& flowers, int k) {
         const int N = flowers.size();
-        vector<int> days(N); // 各个位置的花哪天开
+        vector<int> days(N); // days[]是各个位置的花哪天开，flowers[]是各天开的花在哪个位置
         for (int i = 0; i < N; i++) {
             days[flowers[i] - 1] = i + 1;
         }
-        // 要找相隔k的两个位置lo和hi（hi-lo==k+1），使所有位置i（lo<i<hi）都满足
+        // 要找相隔k的两个位置lo和hi（hi-lo-1==k），使所有位置i（lo<i<hi）都满足
         // days[i]>days[lo] && days[i]>days[hi]
         int ans = INT_MAX;
         for (int lo = 0, hi = lo + k + 1; hi < N; hi = lo + k + 1) {
@@ -29,6 +29,7 @@ public:
                 int day = max(days[lo], days[hi]);
                 ans = min(ans, day);
             }
+            // 位置i不能再作中间的空slot
             lo = i;
         }
         return ans != INT_MAX ? ans : -1;
