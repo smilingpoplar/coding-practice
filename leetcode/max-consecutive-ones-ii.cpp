@@ -13,14 +13,15 @@ using namespace std;
 
 class Solution {
 public:
+    // 扩展：滑动窗口中至多k个0，用队列保存各0的下标
     int findMaxConsecutiveOnes(vector<int>& nums) {
-        // 扩展：滑动窗口中至多k个0，用队列保存各0的下标。
         const int k = 1;
         int ans = 0;
         queue<int> zeroIdx;
+        // 窗口有效条件：zeroIdx.size() <= k
         for (int lo = 0, hi = 0; hi < nums.size(); hi++) {
             if (nums[hi] == 0) zeroIdx.push(hi);
-            
+
             while (zeroIdx.size() > k) {
                 lo = zeroIdx.front() + 1;
                 zeroIdx.pop();
