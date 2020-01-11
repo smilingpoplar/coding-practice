@@ -24,7 +24,7 @@ public:
         // 2.        有        无             并查集中刚导致有环的边
         // 3.        无        有             去掉的侯选边
         const int N = edges.size();
-        vector<int> parent(N + 1, 0);
+        vector<int> parent(N + 1, 0); // 节点是1-based
         vector<int> candA, candB;
         for (auto &edge : edges) {
             if (parent[edge[1]] == 0) {
