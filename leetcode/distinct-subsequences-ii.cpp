@@ -19,7 +19,8 @@ public:
         vector<int> count(26, 0);
         long sum = 0; // sum为count[]的和
         for (char c : S) {
-            // 以字母c结尾的子序列有sum+1个，sum为原先子序列扩展个c，1是新的字母c序列
+            // 以字母c结尾的子序列有sum+1个
+            // sum为原先子序列扩展个c，1是新的字母c序列
             int idx = c - 'a';
             int diff = (sum + 1 - count[idx] + MOD) % MOD;
             count[idx] = (count[idx] + diff) % MOD;
