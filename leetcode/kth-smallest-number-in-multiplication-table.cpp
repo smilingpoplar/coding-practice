@@ -28,7 +28,7 @@ public:
     }
     
     bool enough(int x, int m, int n, int k) {
-        // 乘法表一行行看有多少数<=x
+        // 乘法表一行行看有多少数<=乘积x
         int count = 0;
         for (int r = 1; r <= m; r++) {
             count += min(x / r, n);
