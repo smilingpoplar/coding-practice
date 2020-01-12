@@ -15,14 +15,13 @@ public:
     int wiggleMaxLength(vector<int>& nums) {
         // 贪婪法，摇摆发生时增长子序列
         if (nums.empty()) return 0;
-        
         int ans = 1;
         int prevDiff = 0;
         for (int i = 1; i < nums.size(); i++) {
             int diff = nums[i] - nums[i-1];
             if ((diff > 0 && prevDiff <= 0) || (diff < 0 && prevDiff >= 0)) {
                 ans++;
-                prevDiff = diff; // 摇摆发生时更新方向，diff==0无摇摆时prevDiff不变
+                prevDiff = diff;
             }
         }
         return ans;
