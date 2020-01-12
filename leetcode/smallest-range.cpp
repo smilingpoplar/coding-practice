@@ -41,7 +41,6 @@ public:
             idx[minQ]++;
             if (idx[minQ] == nums[minQ].size()) break;
             pq.push(minQ);
-            // 各数组是递增的，堆先弹出一个数、再压入一个更大的数，rangeEnd只能不变或变大
             rangeEnd = max(rangeEnd, nums[minQ][idx[minQ]]);
         }
         return ans;
