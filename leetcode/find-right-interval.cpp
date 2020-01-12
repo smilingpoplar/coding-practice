@@ -28,7 +28,7 @@ public:
         }
 
         vector<int> ans;
-        // 每个区间使用startMap.lower_bound(end)找>=end的下一起点
+        // 每个区间找>=end的下一起点：mp.lower_bound(end)
         for (auto &interval : intervals) {
             auto it = mp.lower_bound(interval.end);
             ans.push_back(it != mp.end() ? it->second : -1);
