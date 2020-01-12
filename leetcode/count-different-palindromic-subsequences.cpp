@@ -12,16 +12,16 @@
 using namespace std;
 
 class Solution {
-    const int CHAR_CN = 4; // 只有abcd四种字母
+    const int CHAR_CNT = 4; // 只有abcd四种字母
     const int MOD = 1e9 + 7;
 public:
     int countPalindromicSubsequences(string S) {
-        // 先考虑某字母的最外层区间，比如"bccb"，先考虑b的最外层区间S[firstIdx(b)..lastIdx(b)]。
-        // 这最外层可贡献回文b（不再考虑内层）、bb（firstIdx(b)!=lastIdx(b)，可继续考虑内层）。
-        // 对于bb，可剥去最外层得到子问题：S[firstIdx(b)+1..lastIdx(b)-1]]。
+        // 先考虑某字母的最外层区间。比如"bccb"，先考虑b的最外层区间S[firstIdx(b)..lastIdx(b)]。
+        // 这最外层可贡献回文b（不再考虑内层）、bb（firstIdx(b)!=lastIdx(b)），剥去最外层的bb，
+        // 还可得内层子问题：S[firstIdx(b)+1..lastIdx(b)-1]]。
         // 不同字母的子问题不重叠，count可相加。
         const int N = S.size();
-        vector<set<int>> idxSet(CHAR_CN); // char => index_set
+        vector<set<int>> idxSet(CHAR_CNT); // char => index_set
         for (int i = 0; i < N; i++) {
             idxSet[S[i] - 'a'].insert(i);
         }
@@ -35,13 +35,13 @@ public:
         if (memo[lo][hi] != -1) return memo[lo][hi];
         
         long ans = 0;
-        for (int i = 0; i < CHAR_CN; i++) {
+        for (int i = 0; i < CHAR_CNT; i++) {
             auto itLo = idxSet[i].lower_bound(lo);
             if (itLo == idxSet[i].end() || *itLo > hi) continue;
             auto itHi = idxSet[i].upper_bound(hi); 
             itHi--; // *itLo<=hi，<=hi非空，可itHi--
             ans += (*itLo == *itHi) ? 1 : 2; // 最外层贡献c、cc
-            ans += rCount(*itLo + 1, *itHi - 1, idxSet, memo); // 最外层cc、拼接上内层：c..c
+            ans += rCount(*itLo + 1, *itHi - 1, idxSet, memo); // 剥掉最外层c..c、内层子问题
         }
         memo[lo][hi] = ans % MOD;
         return memo[lo][hi];
