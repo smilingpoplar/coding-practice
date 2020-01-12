@@ -15,25 +15,23 @@ class Solution {
 public:
     double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
         // 数组a分成a1[0..i-1]、a2[i..M-1]两部分，数组b分成b1[0..j-1]、b2[j..N-1]两部分。
-        // 把a1和b1放一起构成整体的left部分，设k=len(left)=i+j，为使max(left)是第k小的数，
-        // 只需max(left)<=min(right)，即a[i-1]<=b[j] && b[j-1]<=a[i] (1)。
-        // 现在要找中位数（或两中位数的第一个），令k=(M+N+1)/2，二分搜索0<=i<=M，找满足(1)式的i。
-        // 由0<=i<=M，j=k-i，k-M<=j<=k；要使0<=j<=N，需要k-M>=0、k<=N，M<=N，即在短数组中搜索i。
+        // 把a1和b1放一起构成整体的left部分，设left长度k=i+j=(M+N+1)/2，则中位数仅与{a[i-1], a[i], b[j-1], b[j]}四数有关。
+        // 由0<=i<=M，j=k-i => k-M<=j<=k；要使0<=j<=N，需要k-M>=0，k<=N => M<=N；要在较短数组中搜索i
+        // 若使划分i有效，需 max(left)<=min(right)，即 a[i-1]<=b[j] && b[j-1]<=a[i]
+        // 1) M+N为奇数时，max(left)为中位数
+        // 2) M+N为偶数时，[max(left)+min(right)]/2为中位数
         const int M = a.size(), N = b.size();
         if (M > N) return findMedianSortedArrays(b, a);
         
         int k = (M + N + 1) / 2;
         int l = 0, u = M;
         while (l <= u) {
-            int i = l + (u - l) / 2;
-            int j = k - i;
-            if (i > 0 && a[i-1] > b[j]) {
-                // 需要a[i-1]<=b[j]，现在i太大了，要在左半找
+            int i = l + (u - l) / 2, j = k - i;
+            if (i > 0 && a[i-1] > b[j]) { // 需要a[i-1]<=b[j]，现在i太大了，要在左半找
                 u = i - 1; 
-            } else if (i < M && b[j-1] > a[i]) {
-                // 需要b[j-1]<=a[i]，现在i太小了，要在右半找
+            } else if (j > 0 && b[j-1] > a[i]) { // 需要b[j-1]<=a[i]，现在i太小了，要在右半找
                 l = i + 1;
-            } else { // 找到满足(1)式的i
+            } else { // 有效的划分i
                 int leftMax = INT_MIN;
                 if (i > 0) leftMax = max(leftMax, a[i-1]);
                 if (j > 0) leftMax = max(leftMax, b[j-1]);
