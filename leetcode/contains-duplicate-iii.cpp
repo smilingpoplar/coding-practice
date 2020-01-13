@@ -25,7 +25,6 @@ public:
             
             st.insert(nums[i]);
             if (st.size() > k) st.erase(nums[i-k]);
-
         }
         return false;
     }
