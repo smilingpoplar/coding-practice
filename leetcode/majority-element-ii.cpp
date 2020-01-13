@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        // 一般化，找出现次数>n/k的元素
+        // 一般化，找出现次数>N/k的元素
         // 用个map统计各候选的出现次数，当map.size()==k时删掉k个不同元素，
         // 最后剩下的为候选
         unordered_map<int, int> cnt;
