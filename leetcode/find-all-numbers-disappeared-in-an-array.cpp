@@ -16,7 +16,7 @@ public:
         // 把数x当作下标（1-based），将nums[x-1]标记为负数
         for (int num : nums) {
             int x = abs(num);
-            if (nums[x-1] > 0) nums[x-1] = -nums[x-1];
+            if (nums[x-1] > 0) nums[x-1] *= -1;
         }
         vector<int> ans;
         for (int i = 0; i < nums.size(); i++) {

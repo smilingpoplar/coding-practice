@@ -22,14 +22,12 @@ public:
             if (nums[x-1] < 0) {
                 dup = x;
             } else {
-                nums[x-1] = -nums[x-1];
+                nums[x-1] *= -1;
             }
         }
         // 哪个下标位置仍是正数
         for (int i = 0; i < N; i++) {
-            if (nums[i] > 0) {
-                missing = i + 1;
-            }
+            if (nums[i] > 0) missing = i + 1;
         }
         return {dup, missing};
     }

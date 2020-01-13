@@ -13,12 +13,12 @@ using namespace std;
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
-        vector<int> ans;
         // 把数x当作下标（1-based），将nums[x-1]标记为负数
+        vector<int> ans;
         for (int num : nums) {
             int x = abs(num);
             if (nums[x-1] < 0) ans.push_back(x);
-            nums[x-1] = -nums[x-1];
+            else nums[x-1] *= -1;
         }
         return ans;
     }
