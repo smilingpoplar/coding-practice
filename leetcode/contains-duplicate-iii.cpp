@@ -36,7 +36,7 @@ public:
     bool containsNearbyAlmostDuplicate(vector<int> &nums, int k, int t) {
         if (t < 0) return false;
         unordered_map<long, long> buckets; // bucketIdxOfNum=>num
-        // buckets保存前k个数的桶，buckets.size()<=k
+        // buckets保存前k个数，buckets.size()<=k
         for (int i = 0; i < nums.size(); i++) {            
             auto idx = bucketIdx(nums[i], t);
             // 又落在自己桶
