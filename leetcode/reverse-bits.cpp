@@ -30,7 +30,7 @@ public:
         // 分治，所有小组内交换前半段和后半段
         // 比如n是uint8_t，初始len=8，mask=11111111
         // 所有组内对半分并交换：
-        // 1. 算出对应所有组内后半段的mask：len >>= 1; mask ^= mask << len;
+        // 1. 算出对应所有组内后半段的mask：len >>= 1; mask ^= (mask << len);
         // 2. 将所有组内前半段后移并用mask取出、后半段前移并用~mask取出
         //  第1轮：mask=00001111，~mask=11110000
         //  第2轮：mask=00110011，~mask=11001100
@@ -39,7 +39,7 @@ public:
         uint32_t mask = ~0;
         while (len > 1) {
             len >>= 1;
-            mask ^= mask << len; // 算mask是关键
+            mask ^= (mask << len); // 算mask是关键
             n = ((n >> len) & mask) | ((n << len) & ~mask);
         }
         return n;
