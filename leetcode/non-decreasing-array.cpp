@@ -13,9 +13,9 @@ using namespace std;
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
-        // 贪婪法。找到违反<=关系的x[i]>x[i+1]，优先改小x[i]，x[i]=x[i+1]。
-        // （改小保证后面满足<=，前面满足还需x[i-1]<=x[i+1]）
-        // 无法改小时改大x[i+1]，x[i+1]=x[i]。
+        // 贪婪法。找到违反<=关系的x[i]>x[i+1]，优先改小x[i]：x[i]=x[i+1]。
+        // （后面是否满足<=待后面循环去检查，前面满足要还需x[i-1]<=x[i+1]）
+        // 无法改小时改大x[i+1]：x[i+1]=x[i]。
         int cnt = 0;
         for (int i = 0; i + 1 < nums.size(); i++) {
             if (nums[i] <= nums[i+1]) continue;

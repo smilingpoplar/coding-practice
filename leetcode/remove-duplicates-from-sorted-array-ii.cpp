@@ -14,11 +14,12 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        const int N = nums.size();
-        if (N <= 2) return N;
-        int out = 2;
-        for (int in = 2; in < N; in++) {
-            if (nums[in] != nums[out-2]) {
+        const int N = nums.size(), k = 2;
+        if (N <= k) return N;
+        
+        int out = k;
+        for (int in = k; in < N; in++) {
+            if (nums[in] != nums[out-k]) {
                 nums[out++] = nums[in];
             }
         }

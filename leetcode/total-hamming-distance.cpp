@@ -21,7 +21,7 @@ public:
             // 考查整组数的第i位
             int ones = 0;
             for (int num : nums) {
-                if ((num >> i) & 1) ones++;
+                if (num & (1 << i)) ones++;
             }
             ans += ones * (nums.size() - ones);
         }
