@@ -15,9 +15,9 @@ class Solution {
 public:
     int findMaximumXOR(vector<int>& nums) {
         // 假设A^B=maxXor，只考虑i位前缀，有prefixA^prefixB=prefixMaxXor。
-        // 就像两数之和的问题，问是否存在两数a+b=sum，就是对每个a看对应的sum-a在数集中是否存在。
-        // 这里为使xor尽量大，问是否存在两个i位前缀a^b==guess（guess是第i位为1的maxXor）。
-        // 同理，对每个i位前缀a，看对应的guess^a在前缀集中是否存在。存在则maxXor的第i位为1。
+        // 就像两数之和的问题，问是否存在两数a+b=sum，解法是对每个a看对应的sum-a在数集中是否存在。
+        // 这里为使xor尽量大，特意设置guess=第i位为1的prefixMaxXor，再问是否存在两个i位前缀a^b==guess。
+        // 解法是对每个i位前缀a，看对应的guess^a在前缀集中是否存在。存在则maxXor的第i位为1。
         int mask = 0, maxXor = 0;
         for (int i = 31; i >= 0; i--) {
             unordered_set<int> st;
