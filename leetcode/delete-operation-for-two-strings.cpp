@@ -13,10 +13,10 @@ using namespace std;
 class Solution {
 public:
     int minDistance(string word1, string word2) {
-        // 设dp[i,j]表示word1[i..]和word2[j..]的最长公共子序列长
-        // word1[i]==word2[j] => dp[i,j] = 1 + dp[i+1,j+1], 
-        //         !=         =>         = max(dp[i,j+1], dp[i+1,j])
-        // 初始dp[n1,..]=dp[..,n2]=0，所求dp[0,0]
+        // 设dp[i][j]表示word1[i..]和word2[j..]的最长公共子序列长
+        // word1[i]==word2[j] => dp[i][j] = 1 + dp[i+1][j+1], 
+        //         !=         =>          = max(dp[i][j+1], dp[i+1][j])
+        // 初始dp[n1][..]=dp[..][n2]=0，所求dp[0][0]
         const int n1 = word1.size(), n2 = word2.size();
         vector<vector<int>> dp(n1 + 1, vector<int>(n2 + 1, 0));
         for (int i = n1 - 1; i >= 0; i--) {
