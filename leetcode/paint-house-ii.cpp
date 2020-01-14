@@ -25,18 +25,18 @@ public:
         const int N = costs.size(), K = costs[0].size();
         int min1 = 0, min1c = -1, min2 = 0; // 对应dp[i-1][]的一组值
         for (int i = 0; i < N; i++) {
-            int iMin1 = INT_MAX, iMin1c = -1, iMin2 = INT_MAX; // 对应dp[i][]的一组值
+            int min1_i = INT_MAX, min1c_i = -1, min2_i = INT_MAX; // 对应dp[i][]的一组值
             for (int c = 0; c < K; c++) {
                 int cost = (c != min1c ? min1 : min2) + costs[i][c];
-                if (cost < iMin1) {
-                    iMin2 = iMin1;
-                    iMin1 = cost;
-                    iMin1c = c;
-                } else if (cost < iMin2) {
-                    iMin2 = cost;
+                if (cost < min1_i) {
+                    min2_i = min1_i;
+                    min1_i = cost;
+                    min1c_i = c;
+                } else if (cost < min2_i) {
+                    min2_i = cost;
                 }
             }
-            min1 = iMin1, min1c = iMin1c, min2 = iMin2;
+            min1 = min1_i, min1c = min1c_i, min2 = min2_i;
         }
         return min1;
     }
