@@ -14,9 +14,9 @@ using namespace std;
 class Solution {
 public:
     int minCost(vector<vector<int>>& costs) {
-        // 设dp[i][c]表示前[0..i]房子、第i房颜色为c时的最小代价，有dp[i][c]=min(dp[i-1][not_c])+cost[i][c]
+        // 设dp[i][c]表示前[0..i]房子、第i房颜色为c时的最小代价，有dp[i][c]=min(dp[i-1][not_c])+costs[i][c]
         // 递推式在i维上只依赖i-1项，省掉i这维，i仍从左往右遍历。c这维的依赖方向不确定，要用临时变量ndp[]。
-        // ndp[c]=min(dp[not_c])+cost[i][c]。初始dp[c]=cost[0][c]。
+        // ndp[c]=min(dp[not_c])+costs[i][c]。初始dp[c]=costs[0][c]。
         if (costs.empty()) return 0;
         const int N = costs.size(), C = costs[0].size();
         vector<int> dp = costs[0];
