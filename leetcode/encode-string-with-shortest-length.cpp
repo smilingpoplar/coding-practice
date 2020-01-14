@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     string encode(string s) {
-        // 用dp[i][L]记录s[i..i+L)的最短编码串
+        // 用dp[i][L]记录s[i,i+L)的最短编码串
         const int N = s.size();
         vector<vector<string>> dp(N, vector<string>(N + 1)); // dp[i][0]=""
         for (int L = 1; L <= N; L++) {
@@ -30,7 +30,7 @@ public:
         return dp[0][N];
     }
     
-    // si是s[i..i+L)子串，要看si有没有更短编码串，dpi是dp[i][<L]
+    // si是s[i,i+L)子串，要看si有没有更短编码串，dpi是dp[i][<L]
     string collapse(const string &si, vector<string> &dpi) {
         int d = (si + si).find(si, 1), L = si.size();
         if (d < L) { // si=pattern*k
