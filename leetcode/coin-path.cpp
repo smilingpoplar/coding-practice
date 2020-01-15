@@ -14,10 +14,9 @@ using namespace std;
 class Solution {
 public:
     vector<int> cheapestJump(vector<int>& A, int B) {
-        // "两条路径同样代价且同样长时，取词典序小的那个"
-        // 设dp[i]表示从A[i..]起跳的最小代价，在dp[i]按序尝试i+1,i+2,...,i+B，
-        // 先找到的最小代价就满足字典序小。dp[i] = min{ dp[i+b] + A[i] }，1<=b<=B
-        // 初始dp[N-1] = 0
+        // "两条路径代价相同时，取词典序小的那个"
+        // 设dp[i]表示从A[i..]起跳的最小代价，在dp[i]按序尝试i+1,i+2,...,i+B，先找到的最小代价字典序就小。
+        // dp[i] = min{ A[i] + dp[i+b] }，1<=b<=B；初始dp[N-1] = 0
         const int N = A.size();
         vector<int> dp(N, INT_MAX);
         dp[N-1] = 0;
@@ -27,7 +26,7 @@ public:
             int maxJ = min(i + B, N - 1);
             for (int j = i + 1; j <= maxJ; j++) {
                 if (A[j] == -1) continue;
-                int cost = dp[j] + A[i];
+                int cost = A[i] + dp[j];
                 if (cost < dp[i]) {
                     dp[i] = cost;
                     next[i] = j;
@@ -36,6 +35,7 @@ public:
         }
         
         vector<int> ans;
+        // for (p = head; p != NULL; p = p->next)
         for (int i = 0; i != -1; i = next[i]) {
             ans.push_back(i + 1); // 1-indexed
             if (i == N - 1) return ans;
