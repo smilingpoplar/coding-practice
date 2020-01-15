@@ -27,6 +27,7 @@ public:
         return ans;
     }
     
+    // 单数字数组保持组内顺序取k个数字，拼成最大的数
     vector<int> maxNumber(vector<int>& nums, int k) {
         // 拼成最大的数：栈中留下的是递减序列 <=> 找下一个更大的数
         // 取k个数：当栈内数字个数+剩余可压栈个数>k时才可pop()，栈内数字个数<k时才可push()
