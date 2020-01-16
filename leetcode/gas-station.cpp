@@ -17,8 +17,6 @@ public:
         // 只要 sum(gas[i]-cost[i]) >=0 就能绕圈
         // 因为若无法绕圈，存在某站的消耗 cost[i]-gas[i] > 其他站的总积累 sum(gas[j]-cost[j])，
         // 所有站的总积累 sum(gas[i]-cost[i]) < 0 ==取逆否命题=> sum(gas[i]-cost[i]) >=0 就能绕圈
-        // 
-        // 若在某站gasFromStart<0，则该站及前面站不能作为起点，下一站作起点候选。
 
         const int N = gas.size();
         int start = 0;
@@ -26,8 +24,8 @@ public:
         for (int i = 0; i < N; i++) {
             int gasI = gas[i] - cost[i];
             gasSum += gasI, gasFromStart += gasI;
-            if (gasFromStart < 0) {
-                start = i + 1; // 下一站作起点候选
+            if (gasFromStart < 0) { // i站及前面站不能作为起点，下一站作起点候选
+                start = i + 1;
                 gasFromStart = 0;
             }
         }
