@@ -17,7 +17,7 @@ class Solution {
         int height;
     };
     struct Cmp {
-        bool operator()(const Interval &a, const Interval &b) {
+        bool operator()(const Interval &a, const Interval &b) const {
             return a.right < b.right;
         }
     };
@@ -32,21 +32,21 @@ public:
         int highest = 0;
         for (auto &p : pos) {
             int left = p.first, right = p.first + p.second, height = p.second;
-            // 删除[left..right)区间
-            // 首个与[left..right)重叠的区间toFind.right > left
+            // 删除[left,right)区间
+            // 首个与[left,right)重叠的区间toFind.right > left
             auto it = st.upper_bound({INT_MIN, left, 0});
-            Interval toRemove = {left, right};
-            vector<Interval> afterRemove;
+            Interval removing({left, right});
+            vector<Interval> remain;
             int base = 0; // 新块儿放置的高度是重叠区间的最大高度
-            while (it != st.end() && isOverlap(*it, toRemove)) {
-                if (it->left < toRemove.left) 
-                    afterRemove.push_back({ it->left, toRemove.left, it->height });
-                if (toRemove.right < it->right)
-                    afterRemove.push_back({ toRemove.right, it->right, it->height });
+            while (it != st.end() && isOverlap(*it, removing)) {
+                if (it->left < removing.left) 
+                    remain.push_back({ it->left, removing.left, it->height });
+                if (removing.right < it->right)
+                    remain.push_back({ removing.right, it->right, it->height });
                 base = max(base, it->height);
                 it = st.erase(it);
             }
-            st.insert(afterRemove.begin(), afterRemove.end());
+            st.insert(remain.begin(), remain.end());
             // 插入新块儿
             height += base;
             st.insert({left, right, height});
