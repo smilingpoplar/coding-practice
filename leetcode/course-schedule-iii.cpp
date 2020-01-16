@@ -16,14 +16,14 @@ public:
         sort(courses.begin(), courses.end(), [](const auto &a, const auto &b) {
             return a[1] < b[1];
         });
-        priority_queue<int> taken; // 已选课程的持续时间
-        
-        int end = 0; // 已选课程的最晚实际结束时间
+        priority_queue<int> taken; // 已选课程的持续时间t
+
+        int end = 0; // 已选课程的实际结束时间
         for (auto &c : courses) {
             if (end + c[0] <= c[1]) { // 选课程c
                 taken.push(c[0]);
                 end += c[0];
-            } else if (!taken.empty()) { // 替换掉持续时间最大且更大的已选课程
+            } else if (!taken.empty()) { // 替换掉持续时间t最大且更大的已选课程
                 int t = taken.top();
                 if (t > c[0]) {
                     taken.pop();
