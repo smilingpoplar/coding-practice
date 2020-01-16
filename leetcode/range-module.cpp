@@ -12,17 +12,18 @@
 using namespace std;
 
 class RangeModule {
-    struct Interval {
+    struct Interval { // [left,right)
         int left;
         int right;
     };
     struct Cmp {
-        bool operator()(const Interval &a, const Interval &b) {
+        bool operator()(const Interval &a, const Interval &b) const {
             return a.right < b.right;
         }
     };
     set<Interval, Cmp> st;
     
+    // 认为[x,y)和[y,z)重叠，以合并区间
     bool isOverlap(const Interval &a, const Interval &b) {
         return a.left <= b.right && b.left <= a.right;
     }
@@ -31,15 +32,15 @@ public:
     }
     
     void addRange(int left, int right) {
-        // 首个与{left, right}重叠的区间满足：toFind.right>=left
+        // 首个与[left,right)重叠的区间满足：toFind.right>=left
         auto it = st.lower_bound({INT_MIN, left});
-        Interval toInsert = {left, right};
-        while (it != st.end() && isOverlap(*it, toInsert)) {
-            toInsert.left = min(toInsert.left, it->left);
-            toInsert.right = max(toInsert.right, it->right);
+        Interval adding({left, right});
+        while (it != st.end() && isOverlap(*it, adding)) {
+            adding.left = min(adding.left, it->left);
+            adding.right = max(adding.right, it->right);
             it = st.erase(it);
         }
-        st.insert(toInsert);
+        st.insert(adding);
     }
     
     bool queryRange(int left, int right) {
@@ -49,14 +50,16 @@ public:
     
     void removeRange(int left, int right) {
         auto it = st.lower_bound({INT_MIN, left});
-        Interval toRemove = {left, right};
-        vector<Interval> afterRemove;
-        while (it != st.end() && isOverlap(*it, toRemove)) {
-            if (it->left < toRemove.left) afterRemove.push_back({it->left, toRemove.left});
-            if (toRemove.right < it->right) afterRemove.push_back({toRemove.right, it->right});
+        Interval removing({left, right});
+        vector<Interval> remain;
+        while (it != st.end() && isOverlap(*it, removing)) {
+            if (it->left < removing.left) 
+                remain.push_back({it->left, removing.left});
+            if (removing.right < it->right) 
+                remain.push_back({removing.right, it->right});
             it = st.erase(it);
         }
-        st.insert(afterRemove.begin(), afterRemove.end());
+        st.insert(remain.begin(), remain.end());
     }
 };
 
