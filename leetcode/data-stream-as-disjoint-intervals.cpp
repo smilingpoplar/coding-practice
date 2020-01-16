@@ -27,15 +27,15 @@ public:
     }
     
     void addNum(int val) {
-        // 首个与{val,val}重叠区间toFind.end>=val-1
+        // 首个与[val,val]重叠区间toFind.end>=val-1
         auto it = st.lower_bound({INT_MIN, val - 1}); 
-        Interval toInsert = { val, val };
-        while (it != st.end() && isOverlap(*it, toInsert)) {
-            toInsert.start = min(toInsert.start, it->start);
-            toInsert.end = max(toInsert.end, it->end);
+        Interval adding({ val, val });
+        while (it != st.end() && isOverlap(*it, adding)) {
+            adding.start = min(adding.start, it->start);
+            adding.end = max(adding.end, it->end);
             it = st.erase(it);
         }
-        st.insert(toInsert);
+        st.insert(adding);
     }
     
     vector<Interval> getIntervals() {
@@ -43,7 +43,7 @@ public:
     }
 private:
     struct Cmp {
-        bool operator()(const Interval &a, const Interval &b) { return a.end < b.end; }
+        bool operator()(const Interval &a, const Interval &b) const { return a.end < b.end; }
     };
     set<Interval, Cmp> st;
 
