@@ -18,18 +18,18 @@ public:
             if (a[1] == b[1]) return a[0] > b[0];
             return a[1] < b[1];
         });
-        
+
         int ans = 0;
-        // last1,last2是集合S的最后两个数
+        // last1,last2是集合S[..last2,last1]的最后两个数
         int last1 = INT_MIN, last2 = INT_MIN;
         for (auto &interval : intervals) {
             if (last1 < interval[0]) {
-                // 当前区间与S不相交，要往S中加入当前区间的最后两个数
+                // S与当前区间不相交，要在S中加入当前区间的最后两个数
                 ans += 2;
                 last1 = interval[1];
                 last2 = last1 - 1;
             } else if (last2 < interval[0] && interval[0] <= last1) {
-                // 当前区间与S有一个数相交，要往S中加入当前区间的最后一个数
+                // S与当前区间有一个数相交，要在S中加入当前区间的最后一个数
                 ans += 1;
                 last2 = last1;
                 last1 = interval[1];
