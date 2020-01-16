@@ -15,9 +15,14 @@ class Solution {
 public:
     int numSubarrayBoundedMax(vector<int>& A, int L, int R) {
         // 求满足 L<= 子段最大值 <=R 的子段数
-        // 维持不变式：L<= 子段A[lo..hi]中所有值 <=R
-        int lo = 0, hi = -1;
+        // 每次循环添加以A[i]结尾的有效子段个数
+        // 例如 A=[0,1,2,-1], L=2, R=3
+        //  i=0时，无；
+        //  i=1时，无；
+        //  i=2时，三个以2结尾的有效子段：[0,1,2], [1,2], [2]；
+        //  i=3时，和i=2的情况相同，三个以-1结尾的有效子段：[0,1,2,-1], [1,2,-1], [2,-1]
         int ans = 0;
+        int lo = 0, hi = -1;
         for (int i = 0; i < A.size(); i++) {
             if (L <= A[i] && A[i] <= R) {
                 hi = i;
