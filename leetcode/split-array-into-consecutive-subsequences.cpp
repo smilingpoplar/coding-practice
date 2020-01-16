@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     bool isPossible(vector<int>& nums) {
-        unordered_map<int, int> count; // 数x有count[x]个
+        unordered_map<int, int> count;
         for (int x : nums) count[x]++;
 
         // 数x优先扩展旧序列，即使旧序列太长也可拆分成多个新序列
@@ -21,11 +21,11 @@ public:
         for (int x : nums) {
             if (count[x] == 0) continue;
             
-            if (need[x] > 0) { // 数x优先扩展旧序列
+            if (need[x] > 0) { // 优先扩展旧序列
                 count[x]--;
                 need[x]--;
                 need[x+1]++;
-            } else if (count[x+1] > 0 && count[x+2] > 0) { // x可作新序列头
+            } else if (count[x+1] > 0 && count[x+2] > 0) { // x可作长>=3新序列的头
                 count[x]--;
                 count[x+1]--;
                 count[x+2]--;
