@@ -13,34 +13,36 @@ using namespace std;
 class Solution {
 public:
     string reorganizeString(string S) {
-        // https://leetcode.com/problems/rearrange-string-k-distance-apart/ k=2特例
-        // 可行只需 最多的字符个数 <= 其他所有字符隔开的空槽数 = 其他所有字符数+1
-        // 即 maxCnt <= (N-maxCnt)+1，maxCnt <= (N+1)/2
-        unordered_map<int, int> cnt;
-        for (char c : S) cnt[c]++;
+        // https://leetcode.com/problems/rearrange-string-k-distance-apart/ 的特例
+        // 可行需 最多的字符数 <= 其他所有字符隔开的空槽
+        // 即 maxCnt <= N-maxCnt+1，2*maxCnt <= N+1
+        const int N = S.size();
+        int maxCnt = INT_MIN;
+        unordered_map<char, int> cnt;
+        for (char c : S) {
+            cnt[c]++;
+            if (cnt[c] > maxCnt) maxCnt = cnt[c];
+        }
+        if (2 * maxCnt > N + 1) return ""; // 该判断之后一定可行
+
         auto cmp = [&cnt](char a, char b) { return cnt[a] < cnt[b]; };
         priority_queue<char, vector<char>, decltype(cmp)> pq(cmp);
-        int maxCnt = INT_MIN, maxCntLimit = (S.size() + 1) / 2;
-        for (auto &e : cnt) {
-            maxCnt = max(maxCnt, e.second);
-            if (maxCnt > maxCntLimit) return "";
-            pq.push(e.first);
-        }
+        for (auto &e : cnt) pq.push(e.first);
 
-        // 可行后只需 每次输出剩余最多的两个字符
-        ostringstream oss;
-        while (pq.size() >= 2) {
-            char a = pq.top(); pq.pop();
-            char b = pq.top(); pq.pop();
-            oss << a << b;
-            if (--cnt[a] > 0) pq.push(a);
-            if (--cnt[b] > 0) pq.push(b);
+        string ans;
+        queue<char> freezed;
+        while (!pq.empty()) {
+            char top = pq.top(); pq.pop();
+            ans += top;
+            cnt[top]--;
+            
+            freezed.push(top);
+            if (freezed.size() >= 2) { // 相同字母至少距离2
+                int released = freezed.front(); freezed.pop();
+                if (cnt[released] > 0) pq.push(released);
+            }
         }
-        if (!pq.empty()) {
-            oss << pq.top();
-            pq.pop();
-        }
-        return oss.str();
+        return ans;
     }
 };
 
