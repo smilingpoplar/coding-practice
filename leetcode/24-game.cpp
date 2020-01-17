@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     bool judgePoint24(vector<int>& nums) {
-        vector<double> v = vector<double>(nums.begin(), nums.end());
+        vector<double> v(nums.begin(), nums.end());
         return solve(v);
     }
     
@@ -23,6 +23,7 @@ public:
         const double EPSILON = 1e-6;
         if (N == 1) return abs(nums[0] - 24) < EPSILON;
         
+        // 任取两个数
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (i == j) continue;        
