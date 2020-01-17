@@ -29,8 +29,9 @@ public:
         for (int i = startNum; i * i <= n; i++) {
             if (n % i == 0) {
                 comb.push_back(i);
+                // n/i能拆分成更多小因子乘积
                 search(n / i, i, comb, ans);
-                // 本次得到两个因子
+                // 或n/i不再拆分了
                 comb.push_back(n / i);
                 ans.push_back(comb);
                 comb.pop_back();
