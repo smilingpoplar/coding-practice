@@ -14,18 +14,21 @@ using namespace std;
 class Solution {
 public:
     int minKBitFlips(vector<int>& A, int K) {
-        // 从左往右遇到A[i]==0时将[i..i+K-1]翻转
-        // 用flips记录[i..i+K-1]间累积的各次翻转，各次翻转用右端点表示
+        // 若翻转A[i..i+K-1]，将i入队，维持一个长K-1窗口的队列q，
+        // 有效窗口[i-K+1,i-1]内对A[i]有影响的翻转次数为q.size()，
+        // 若A[i]==0&&q.size()%2==0 或 A[i]==1&&q.size()%2==1，要翻转
         const int N = A.size();
-        deque<int> flips;
         int ans = 0;
+        deque<int> q;
         for (int i = 0; i < N; i++) {
-            if (A[i] == flips.size() % 2) { // 这俩同0或同1，要翻转
+            if (!q.empty() &&  q.front() < i - K + 1) {
+                q.pop_front();
+            }
+            if (A[i] == q.size() % 2) { // 要翻转
                 if (i + K - 1 >= N) return -1;
-                flips.push_back(i + K - 1);
+                q.push_back(i);
                 ans++;
             }
-            if (!flips.empty() && flips[0] == i) flips.pop_front();
         }
         return ans;
     }
@@ -35,22 +38,21 @@ public:
 class Solution {
 public:
     int minKBitFlips(vector<int>& A, int K) {
-        // 从左往右遇到A[i]==0时将[i..i+K-1]翻转
-        // A[i]设为负值表示在[i..i+K-1]累积一次翻转
+        // flipped[i]表示翻转A[i..i+K-1]，
+        // influ表示flipped[i-K+1..i-1]对A[i]的影响，
+        // 若A[i]==0&&influ==0 或 A[i]==1&&influ==1，要翻转
         const int N = A.size();
-        int flips = 0, ans = 0; // flips表示A[i]处有多少翻转
+        vector<int> flipped(N, 0);
+        int influ = 0, ans = 0;
         for (int i = 0; i < N; i++) {
-            if (A[i] == flips % 2) { // 这俩同0或同1，要翻转
+            if (A[i] == influ) {
                 if (i + K - 1 >= N) return -1;
-                A[i] -= 2; // A[i]设为负值
-                flips++, ans++;
+                flipped[i] = 1;
+                ans++;
             }
-            // 最左影响到A[i]的端点是i-K+1
-            int left = i - K + 1;
-            if (left >= 0 && A[left] < 0) { // 为i++更新变量
-                A[left] += 2;
-                flips--;
-            }
+            
+            influ ^= flipped[i];
+            if (i - K + 1 >= 0) influ ^= flipped[i - K + 1];
         }
         return ans;
     }
