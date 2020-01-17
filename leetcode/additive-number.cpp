@@ -30,7 +30,8 @@ public:
     bool isValid(const string &num, int idx, const string &n1, const string &n2) {
         const int N = num.size();
         if (idx == N) return true;
-        auto sum = add(n1, n2); int len = sum.size();
+        auto sum = add(n1, n2);
+        int len = sum.size();
         if (idx + len > N || num.substr(idx, len) != sum) return false;
         return isValid(num, idx + len, n2, sum);
     }
