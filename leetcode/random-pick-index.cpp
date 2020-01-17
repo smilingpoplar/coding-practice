@@ -24,7 +24,7 @@ public:
         for (int i = 0; i < nums.size(); i++) {
             if (nums[i] != target) continue;
             count++;
-            // 以1/count概率替换已选的
+            // 以1/count概率替换掉已选
             if (rand() % count == 0) ans = i;
         }
         return ans;
