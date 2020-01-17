@@ -26,7 +26,7 @@ public:
             return;
         }
 
-        // [0..idx)是lastExprStr, [idx..i]是currStr, [i+1..]进递归
+        // [idx..i]是currStr, [i+1..]进递归
         for (int i = idx; i < num.size(); i++) {
             if (i > idx && num[idx] == '0') continue; // 多位数不能以"0"开头
             auto currStr = num.substr(idx, i - idx + 1);
@@ -39,6 +39,7 @@ public:
                 search(num, target, i + 1, lastExprStr + "-" + currStr, 
                        lastExprVal - currNum, -currNum, ans);
                 // 比如 lastExprVal=1+2+3，现在遇到*4，要lastExprVal-3+3*4
+                // 若再遇到*5，要lastExprVal-(3*4)+(3*4)*5
                 search(num, target, i + 1, lastExprStr + "*" + currStr, 
                        lastExprVal - lastNum + lastNum * currNum, lastNum * currNum, ans);
             }

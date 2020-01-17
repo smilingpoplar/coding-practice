@@ -21,7 +21,7 @@ public:
         // 第0行选定后，第1行要以a开头（ball[1]）；
         // 第1行选定后，第2行要以le开头（ball[2]、area[2]）；
         // 第2行选定后，第3行要以lad开头（ball[3]、area[3]、lead[3]）；
-        // ...        第k行要以串row[0..k-1][k]开头
+        // ...        第k行要以串rows[0..k-1][k]开头
         // 需要根据前缀找单词的功能，可以用prefix=>wordIdx[]的哈希表，或者tire节点中存wordIdx[]
         if (words.empty()) return {};
         unordered_map<string, vector<int>> mp; // prefix=>wordIdx[]
