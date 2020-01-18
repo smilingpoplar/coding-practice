@@ -19,7 +19,7 @@ public:
         //   当s[i]==p[j] || p[j]=='?'时，dp[i][j] = dp[i+1][j+1]
         //   当p[j]=='*'时，dp[i][j] = dp[i][j+1] /*匹配0个*/ || dp[i+1][j] /*匹配1个或多个*/
         //   否则，dp[i][j]=false
-        // 初始化，p匹配完、s也匹配完，dp[M][N]=true；或者，s匹配完、p剩下的全是*，dp[M][,..]=true
+        // 初始化，s匹配完、p也匹配完，dp[M][N]=true；或者，s匹配完、p剩下的全是*，dp[M][,..]=true
         const int M = s.size(), N = p.size();
         vector<vector<bool>> dp(M + 1, vector<bool>(N + 1, false));
         dp[M][N] = true;
