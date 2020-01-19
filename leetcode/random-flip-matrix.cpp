@@ -13,21 +13,24 @@ using namespace std;
 
 class Solution {
     // 把2d矩阵当作1d数组处理
-    unordered_map<int, int> mp; // 已用过下标=>未用过下标
-    int rows, cols, total;
+    // Fisher-Yates洗牌：生成0~n-1随机数r，交换r和n-1，n--
+    unordered_map<int, int> mp; // 记录r和n-1的交换操作
+    int rows, cols, n;
 public:
     Solution(int n_rows, int n_cols) {
         rows = n_rows;
         cols = n_cols;
-        total = rows * cols;
+        n = rows * cols;
         srand(time(NULL));
     }
     
     vector<int> flip() {
-        int r = rand() % total--;
-        int rr = mapping(r);    // r对应到未用过下标rr
-        mp[r] = mapping(total); // rr要被使用，让r重映射到未用过的下标
-        return { rr / cols, rr % cols };
+        int r = rand() % n;
+        int tmp = mapping(r);
+        mp[r] = mapping(n-1);
+        mp[n-1] = tmp;
+        n--;
+        return { tmp / cols, tmp % cols };
     }
     
     int mapping(int idx) {
@@ -36,7 +39,7 @@ public:
     
     void reset() {
         mp.clear();
-        total = rows * cols;
+        n = rows * cols;
     }
 };
 
