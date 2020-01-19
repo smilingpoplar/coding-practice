@@ -24,7 +24,7 @@ public:
     
     int pickIndex() {
         int rnd = rand() % wsum.back();
-        // 要rnd<wsum[i]，<号没带=，所以在wsum中找>rnd的第一个
+        // 要rnd<wsum[i]，在wsum中找第一个>rnd的位置
         return upper_bound(wsum.begin(), wsum.end(), rnd) - wsum.begin();
     }
 };
