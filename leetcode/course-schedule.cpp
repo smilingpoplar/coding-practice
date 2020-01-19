@@ -28,7 +28,7 @@ public:
         }
         return true;
     }
-private:
+
     bool hasCycle(int u, const vector<unordered_set<int>> &graph, vector<int> &color) {
         if (color[u] != 0) return color[u] == 1;
         color[u] = 1;
