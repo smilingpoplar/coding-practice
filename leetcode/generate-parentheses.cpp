@@ -18,16 +18,16 @@ public:
         search(n, n, "", ans);
         return ans;
     }
-    
-    void search(int lefts, int rights, string paren, vector<string> &ans) {
-        // 0 <= 左括号剩余lefts <= 右括号剩余rights
-        if (lefts == 0 && rights == 0) {
+
+    void search(int leftRemain, int rightRemain, string paren, vector<string> &ans) {
+        // 确保 0 <= leftRemain <= rightRemain
+        if (leftRemain == 0 && rightRemain == 0) {
             ans.push_back(paren);
             return;
         }
         
-        if (lefts > 0) search(lefts - 1, rights, paren + '(', ans);
-        if (lefts < rights) search(lefts, rights - 1, paren + ")", ans);
+        if (leftRemain > 0) search(leftRemain - 1, rightRemain, paren + '(', ans);
+        if (leftRemain < rightRemain) search(leftRemain, rightRemain - 1, paren + ")", ans);
     }
 };
 
