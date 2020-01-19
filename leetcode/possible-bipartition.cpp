@@ -29,8 +29,8 @@ public:
     
     bool canColor(int idx, int color, vector<unordered_set<int>> &adj, vector<int> &colors) {
         if (colors[idx] != -1) return colors[idx] == color;
-        colors[idx] = color;
         
+        colors[idx] = color;
         for (auto &next : adj[idx]) {
             if (!canColor(next, 1 - color, adj, colors)) return false;
         }

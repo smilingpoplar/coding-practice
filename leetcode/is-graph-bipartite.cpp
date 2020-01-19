@@ -22,7 +22,7 @@ public:
         return true;
     }
     
-    bool canColor(int node, int c, vector<vector<int>>& graph, vector<int> &colors) {
+    bool canColor(int node, int c, vector<vector<int>> &graph, vector<int> &colors) {
         if (colors[node] != -1) return colors[node] == c;
         colors[node] = c;
         for (int neighbor : graph[node]) {
