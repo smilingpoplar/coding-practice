@@ -14,29 +14,31 @@ using namespace std;
 class Solution {
 public:
     int shortestPathLength(vector<vector<int>>& graph) {
-        // 要判断是否已访问所有节点，故将所有节点的访问状态编码成二进制mask。
-        // 设当前节点为curr，state=(mask,curr)是bfs的"状态节点"。
+        // 为判断是否已访问所有节点，将所有节点的访问状态编码成二进制mask
+        // 设当前节点编号curr，bfs的"状态节点"为 (mask,curr)
         const int N = graph.size();
         const int MASK_TARGET = (1 << N) - 1;
-        
+
         vector<vector<bool>> visited(1 << N, vector<bool>(N, false));
         queue<pair<int, int>> q;
         for (int i = 0; i < N; i++) {
             q.push({1 << i, i});
         }
-        
-        for (int dist = 0; !q.empty(); dist++) {
+
+        int dist = 0;
+        while (!q.empty()) {
             for (int sz = q.size(); sz > 0; sz--) {
                 auto state = q.front(); q.pop();                
                 int mask = state.first, curr = state.second;
                 if (visited[mask][curr]) continue;
                 visited[mask][curr] = true;
-                
+
                 if (mask == MASK_TARGET) return dist;
                 for (auto next : graph[curr]) {
                     q.push({mask | (1 << next), next});
                 }
             }
+            dist++;
         }
         return -1;
     }
