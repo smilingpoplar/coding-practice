@@ -13,12 +13,13 @@ using namespace std;
 
 class Solution {
 public:
-    vector<string> findItinerary(vector<pair<string, string>> tickets) {
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
         // 一张机票一条边，求遍历所有边的欧拉路径
-        // 已知欧拉路径存在且从JFK开始，只要用 边的后序遍历 求 逆欧拉路径
+        // 已知欧拉路径存在且从JFK开始，用Hierholzer算法：
+        // 从图中删除邻接边再dfs递归，无边可删时把当前点输出到栈中。 
         unordered_map<string, multiset<string>> adj;
         for (auto &ticket : tickets)
-            adj[ticket.first].insert(ticket.second);
+            adj[ticket[0]].insert(ticket[1]);
         
         vector<string> ans;
         dfs("JFK", adj, ans);
@@ -30,10 +31,10 @@ public:
         auto &tos = adj[from];
         while (!tos.empty()) {
             auto next = *tos.begin();
-            tos.erase(tos.begin()); // 相当于把边(from,to)放进visited[]数组
+            tos.erase(tos.begin());
             dfs(next, adj, ans);
         }
-        ans.push_back(from); // 后序遍历
+        ans.push_back(from); // ans当栈用
     }
 };
 
