@@ -17,12 +17,8 @@ public:
     vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
         // 扫描线算法，垂直线向右扫，遇到左端点把高度Hi加入集合，遇到右端点把Hi移出集合。
         // 若集合中最大高度变化（currHi!=prevHi），就得所需的跃变点。
-        // 
-        // >> 为了区分左右端点，可以用{Li,0,Hi}表示左端点、{Ri,1,Hi}表示右端点；
-        //    为避免当x相同时currHi变化输出多余跃变点，左端点要按y从大到小排。
-        //    
-        // 不妨将左端点的高度取负值，然后统一排序。
-        // 这样既区分了左右端点，左端点又按y从大到小排。
+        // 当x相同时，为避免currHi变化输出多余跃变点，左端点再按h从大到小排，右端点再按h从小到大排。
+        // 不妨将左端点的高度取负值，然后统一排序。这样既区分了左右端点，又满足排序要求。
         vector<pair<int, int>> points; // (x,h)
         for (auto &building : buildings) {
             points.push_back({building[0], -building[2]});
