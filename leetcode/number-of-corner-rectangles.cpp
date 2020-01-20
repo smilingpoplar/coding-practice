@@ -20,7 +20,7 @@ public:
         // 遍历两个行
         for (int r1 = 0; r1 < R; r1++) {
             for (int r2 = r1 + 1; r2 < R; r2++) {
-                int cnt = 0; // “某列两端同为1”的个数
+                int cnt = 0; // “某列两端同为1”的列数
                 for (int c = 0; c < C; c++) {
                     if (grid[r1][c] && grid[r2][c]) cnt++;
                 }
