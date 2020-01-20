@@ -42,14 +42,14 @@ public:
         if (N <= 20) return max(modifyOp, needLUD); // 只需修改操作
         // N > 20
         const int needDelete = N - 20; // 需要的删除操作数
-        // 如果用删除操作取代部分修改操作，可以省下多少修改操作？
+        // 用删除操作取代部分修改操作，可以省掉多少修改操作？
         int deleteOp = needDelete;
         if (deleteOp <= type[0]) {
             modifyOp -= deleteOp;
         } else {
             modifyOp -= type[0];
             deleteOp -= type[0];
-            // len%3==1这类子串要省下type[1]个修改，需要2*type[1]个删除
+            // len%3==1这类子串要省掉type[1]个修改，需要2*type[1]个删除
             if (deleteOp <= 2 * type[1]) {
                 modifyOp -= deleteOp / 2;
             } else {
