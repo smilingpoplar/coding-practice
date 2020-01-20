@@ -27,8 +27,8 @@ public:
         }
         sort(events.begin(), events.end());
 
-        // 遇到下边界把横坐标区间[x1..x2]加入集合，
-        // 遇到上边界把[x1..x2]移出集合。
+        // 遇到下边界把横坐标区间[x1,x2]加入集合，
+        // 遇到上边界把[x1,x2]移出集合。
         const int MOD = 1e9 + 7;
         multiset<vector<int>> st; // st{ [x1,x2] }
         int preY = INT_MIN;
