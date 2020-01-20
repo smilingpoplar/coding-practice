@@ -20,7 +20,7 @@ public:
         const int N = words.size();
         unordered_map<string, int> mp; // reverse=>idx
         for (int i = 0; i < N; i++) {
-            string reverse = string(words[i].rbegin(), words[i].rend());
+            string reverse(words[i].rbegin(), words[i].rend());
             mp[reverse] = i;
         }
         
