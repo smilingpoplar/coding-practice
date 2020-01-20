@@ -20,7 +20,7 @@ public:
         for (int pos : stones) 
             st.insert(pos);
         
-        for (int pos : stones) { // 遍历各石头
+        for (int pos : stones) { // 遍历有石头的位置
             for (int k : jump[pos]) {
                 int next = pos + k;
                 if (!st.count(next)) continue;
