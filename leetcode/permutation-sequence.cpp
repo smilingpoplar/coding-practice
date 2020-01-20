@@ -20,10 +20,10 @@ public:
         vector<int> f(n, 1); // f[i]=i!
         for (int i = 1; i < n; i++) 
             f[i] = i * f[i-1];
+
         string s;
-        for (int i = 0; i < n; i++) 
-            s += '1' + i;
-        
+        for (int i = 1; i <= n; i++) 
+            s += '0' + i;
         k--; // k变成0-based
         string ans;
         while (n) {
