@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int maximalSquare(vector<vector<char>>& matrix) {
-        // 设dp[i][j]表示从子矩阵右下角[i-1,j-1]能向上向左扩展的最大正方形边长。
+        // 设dp[i][j]表示右下角在[i-1,j-1]的最大正方形子矩阵边长。
         // 当matrix[i-1][j-1]=='1'时，
         // dp[i][j] = 1 /*右下角的'1'*/ + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) /*即左、上、左上矩阵*/
         // 初始dp[0][..]=dp[..][0]=0
