@@ -24,6 +24,7 @@ public:
         int delta = sum - target;
         if (delta % 2 == 0) return k;
         // 最多再走两步，sum-target总能变成偶数
+        // 走两步，是因为第一次加的k可能是偶数
         delta += ++k;
         if (delta % 2 == 0) return k;
         return k + 1 ;
