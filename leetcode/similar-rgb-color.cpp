@@ -23,8 +23,8 @@ public:
         const string mapping = "0123456789abcdef";
         // #ab要变成#xx，#xx=16*x+x=17x，所以要找最接近#ab的17的倍数
         int num = stoi(ab, NULL, 16);
-        int dec = (num + 8) / 17; // "四舍五入"
-        return string(2, mapping[dec]);
+        int x = (num + 8) / 17; // "四舍五入"
+        return string(2, mapping[x]);
     }
 };
 
