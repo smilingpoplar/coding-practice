@@ -13,21 +13,21 @@ using namespace std;
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        vector<int> cnt(26, 0);
-        for (char t : tasks) cnt[t - 'A']++;
+        vector<int> count(26, 0);
+        for (char t : tasks) count[t - 'A']++;
 
-        int maxC = INT_MIN;
-        int cntMaxC = 0;
-        for (int c : cnt) {
-            if (c > maxC) {
-                maxC = c;
-                cntMaxC = 1;
-            } else if (c == maxC) {
-                cntMaxC++;
+        int maxCnt = INT_MIN;
+        int tasksWithMaxCnt = 0;
+        for (int cnt : count) {
+            if (cnt > maxCnt) {
+                maxCnt = cnt;
+                tasksWithMaxCnt = 1;
+            } else if (cnt == maxCnt) {
+                tasksWithMaxCnt++;
             }
         }
 
-        return max((maxC - 1) * (1 + n) + cntMaxC, (int)tasks.size());
+        return max((maxCnt - 1) * (1 + n) + tasksWithMaxCnt, (int)tasks.size());
     }
 };
 
