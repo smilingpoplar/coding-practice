@@ -14,17 +14,18 @@ using namespace std;
 class Solution {
 public:
     int wordsTyping(vector<string>& sentence, int rows, int cols) {
+        // 把word+" "+word+" "+...无限扩展
         string s;
         for (auto &word : sentence)
-            s += word + " "; // 句末有换行符
+            s += word + " ";
         int len = s.size();
         
-        int left = 0; // 屏幕左侧正对着哪个字符
+        int cnt = 0; // 总共输入了多少字符
         for (int i = 0; i < rows; i++) {
-            left += cols; // 尝试键入一满行
-            while (left > 0 && s[left % len] != ' ') // 若对着单词中间则回退
-                left--;
-            left++;   // 跳过空格或换行符
+            cnt += cols; // 尝试键入一满行
+            while (cnt > 0 && s[cnt % len] != ' ') // 若对着单词中间则回退
+                cnt--;
+            cnt++;   // 跳过空格
         }
         return left / len;
     }
