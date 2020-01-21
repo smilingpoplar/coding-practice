@@ -14,22 +14,22 @@ class Solution {
 public:
     int findMinMoves(vector<int>& machines) {
         const int N = machines.size();
-        int sum = 0;
+        int total = 0;
         for (int machine : machines)
-            sum += machine;
-        if (sum % N != 0) return -1;
+            total += machine;
+        if (total % N != 0) return -1;
 
-        // 一次move相当于给机器添一单位流量的管道，各机器要能保证通过：
-        // 1. 自己能发出流量：out[i] = machines[i]-avg，
-        //    不用abs(out[i])？比如[-1 2 -1]要两次，[1 -2 1]只需一次，用abs(out[i])就错了。
-        // 2. 通过它流向另一侧的流量：abs(sum(out[0..i]))。sum为正向右流、为负向左流。
-        int avg = sum / N;
-        int toRight = 0;
+        // 每个洗衣机要发出衣服：out[i] = machines[i]-avg
+        // 1. 一次只能发一件，发out[i]件需要out[i]次
+        // 2. 通过本机发向另一侧的件数 x=abs(sum(out[0..i]))，
+        //    sum为正向右流、为负向左流，又需要x次
+        int avg = total / N;
+        int sum = 0;
         int ans = 0;
         for (int i = 0; i < N; i++) {
             int out = machines[i] - avg;
-            toRight += out; // sum(out[0..i])
-            ans = max({ans, out, abs(toRight)});
+            sum += out; // sum(out[0..i])
+            ans = max({ans, out, abs(sum)});
         }
         return ans;
     }
