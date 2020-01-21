@@ -21,7 +21,7 @@ public:
             for (int i = K; i > 0 && heights[i-1] <= heights[i]; i--) { // <=的地儿都要查
                 if (heights[i-1] < heights[i]) low = i-1;
             }
-            if (low == K) { // 再尝试往右流
+            if (low == K) { // 没往左边流，再尝试往右流
                 for (int i = K; i < N - 1 && heights[i+1] <= heights[i]; i++) {
                     if (heights[i+1] < heights[i]) low = i+1;
                 }
