@@ -13,9 +13,13 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> palindromePairs(vector<string>& words) {
-        // 将w1分成w1[0..cut)、w1[cut..)两段，两种情况：
-        // 1. w1[0..cut)是回文，w2是w1[cut..)反转，w2+w1是回文
-        // 2. w1[cut..)是回文，w2是w1[0..cut)反转，w1+w2是回文
+        // 将w1分成w1[0..cut)、w1[cut..)两段，0<=cut<=len，两种情况：
+        // 1. w1[0..cut)是回文，w1[cut..)是w2反转，w2+w1是回文
+        // 2. w1[cut..)是回文，w1[0..cut)是w2反转，w1+w2是回文
+        // 若w1、w2互为反转，比如abc、cba，
+        //  abc|null + cba，处理单词abc、cut=len，返回{0,1}
+        //  abc + null|cba，处理单词cba、cut=0，  返回{0,1}
+        // 这就重复了，这时用cut>0或cut<len去掉一种重复。
 
         const int N = words.size();
         unordered_map<string, int> mp; // reverse=>idx
@@ -29,11 +33,6 @@ public:
             const string &word = words[i];
             const int len = word.size();
             for (int cut = 0; cut <= len; cut++) {
-                // 若w1、w2互为反转，比如abc、cba，
-                // abc|null + cba，处理单词abc、cut=len，返回{0,1}
-                // abc + null|cba，处理单词cba、cut=0，  返回{0,1}
-                // 这就重复了。
-                // 所以当w1、w2互为反转时，用cut>0或cut<len去掉一种重复。
                 // case 1
                 if (isPalindrome(word, 0, cut - 1)) {
                     string s2 = word.substr(cut);
