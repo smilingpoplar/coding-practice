@@ -32,6 +32,33 @@ public:
     }
 };
 
+/*
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        // 奇数变成1，偶数变成0，题目变成：求子段和为k的子段数
+        const int N = nums.size();
+        for (auto &num : nums) {
+            num = num % 2 == 1 ? 1 : 0;
+        }
+        
+        unordered_map<int, int> presum; // sum=>count
+        int runningSum = 0;
+        presum[runningSum] = 1; // 初始空集
+
+        int ans = 0;
+        for (int num : nums) {
+            runningSum += num;
+            // 需k=runningSum-toFind
+            int toFind = runningSum - k;
+            if (presum.count(toFind)) ans += presum[toFind];
+            presum[runningSum]++;
+        }
+        return ans;        
+    }
+};
+*/
+
 int main(int argc, const char * argv[]) {    
     return 0;
 }
