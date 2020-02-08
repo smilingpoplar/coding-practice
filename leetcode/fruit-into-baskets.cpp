@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     int totalFruit(vector<int>& tree) {
-        // 求最多含两种元素的最长子数组，滑动窗口
+        // 求含<=2种元素的最长子段，滑动窗口法
         unordered_map<int, int> cnt; // num=>count
         int ans = 0;
         // 窗口有效条件：cnt.size() <= 2
