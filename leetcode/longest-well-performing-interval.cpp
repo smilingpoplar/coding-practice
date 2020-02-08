@@ -18,7 +18,7 @@ public:
         // 假设i<j，要满足presum[j]-presum[i]>=K，需要最大化j-i
         // 1. 固定j最小化i，假设i1<i2<j，presum[i1]<=presum[i2]（注意有＝）
         // i1比i2更好，因为如果(i2,j)满足条件，(i1,j)的和更大、子段更长
-        // 所以i2不用保留，presum[]只需保留更小值，用严格单调递减的栈
+        // 所以当presum[i2]>=presum[i1]时，i2不用进栈（仅保留更小值，严格单调递减栈）
         // 2. 固定i最大化j，假设i<j1<j2，presum[j2]-presum[i]>=K
         // j1比j2更差，因为(i,j1)子段更短、还可能不满足presum[j1]-presum[i]>=K
         // 所以从右往左找到一个满足条件的j2后，所有j1不用再考虑，i不用再保留，i出栈
