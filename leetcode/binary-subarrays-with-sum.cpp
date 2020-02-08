@@ -14,17 +14,17 @@ using namespace std;
 class Solution {
 public:
     int numSubarraysWithSum(vector<int>& A, int S) {
-        unordered_map<int, int> mp; // sum=>count
+        unordered_map<int, int> presum; // sum=>count
         int runningSum = 0;
-        mp[runningSum] = 1; // 初始空集
+        presum[runningSum] = 1; // 初始空集
         
         int ans = 0;
         for (int a : A) {
             runningSum += a;
-            // 要找S=runningSum-toFind
+            // 需S=runningSum-toFind
             int toFind = runningSum - S;
-            if (mp.count(toFind)) ans += mp[toFind];
-            mp[runningSum]++;
+            if (presum.count(toFind)) ans += presum[toFind];
+            presum[runningSum]++;
         }
         return ans;        
     }
