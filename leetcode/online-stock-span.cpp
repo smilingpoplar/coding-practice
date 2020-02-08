@@ -19,7 +19,7 @@ public:
     }
     
     int next(int price) {
-        // 找<=price的最近连续天数
+        // 找<=price的往前连续天数
         // 将左边<=price的数不断弹出，直到>price的位置prev，则span=idx-prev
         // 栈中保留递减序列，对应找波谷、下一个更大的数
         while (!stk.empty() && price >= stk.top().first) {

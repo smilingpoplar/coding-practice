@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        // 用deque实现单调队列，队头保存当前窗口的最大值（的下标），
+        // 用deque实现单调队列，队头保存当前窗口最大值的下标
         // 递减队列 <=> 找下一个更大的数
         vector<int> ans;
         deque<int> dq;
