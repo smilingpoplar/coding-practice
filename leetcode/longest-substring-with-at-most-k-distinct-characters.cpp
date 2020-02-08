@@ -16,7 +16,7 @@ public:
     int lengthOfLongestSubstringKDistinct(string s, int k) {
         vector<int> cnt(128, 0);
         int distinct = 0, ans = 0;
-        // 窗口有效条件：distinct <= k
+        // 有效窗口：distinct <= k
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
             if (cnt[s[hi]]++ == 0) distinct++;
             while (distinct > k) {

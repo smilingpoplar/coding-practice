@@ -17,7 +17,7 @@ public:
         // 求含<=2种元素的最长子段，滑动窗口法
         unordered_map<int, int> cnt; // num=>count
         int ans = 0;
-        // 窗口有效条件：cnt.size() <= 2
+        // 有效窗口：cnt.size() <= 2
         for (int lo = 0, hi = 0; hi < tree.size(); hi++) {
             cnt[tree[hi]]++;
             while (cnt.size() > 2) {

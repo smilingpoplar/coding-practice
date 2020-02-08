@@ -18,7 +18,7 @@ public:
         const int k = 1;
         int ans = 0;
         queue<int> zeroIdx;
-        // 窗口有效条件：zeroIdx.size() <= k
+        // 有效窗口：zeroIdx.size() <= k
         for (int lo = 0, hi = 0; hi < nums.size(); hi++) {
             if (nums[hi] == 0) zeroIdx.push(hi);
 
