@@ -23,7 +23,7 @@ public:
             cnt[c]++;
             if (cnt[c] > maxCnt) maxCnt = cnt[c];
         }
-        if (2 * maxCnt > N + 1) return ""; // 该判断之后一定可行
+        if (2 * maxCnt > N + 1) return ""; // 此判断之后一定可行
 
         auto cmp = [&cnt](char a, char b) { return cnt[a] < cnt[b]; };
         priority_queue<char, vector<char>, decltype(cmp)> pq(cmp);
@@ -32,11 +32,11 @@ public:
         string ans;
         queue<char> freezed;
         while (!pq.empty()) {
-            char top = pq.top(); pq.pop();
-            ans += top;
-            cnt[top]--;
+            char c = pq.top(); pq.pop();
+            ans += c;
+            cnt[c]--;
             
-            freezed.push(top);
+            freezed.push(c);
             if (freezed.size() >= 2) { // 相同字母至少距离2
                 int released = freezed.front(); freezed.pop();
                 if (cnt[released] > 0) pq.push(released);
