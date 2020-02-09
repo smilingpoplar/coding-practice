@@ -14,11 +14,11 @@ using namespace std;
 class Solution {
 public:
     int nthMagicalNumber(int N, int A, int B) {
-        // 猜第N小的A,B倍数为x，x的取值范围为[min(A,B), N*min(A,B)]
+        // 猜第N小的A,B倍数为x，x的取值范围为[min(A,B), n*min(A,B)]
         // 设二分搜索条件enough(x)表示"<=x的A,B倍数的个数"count>=N
         // 而 count = x/A + x/B - x/lcm(A,B)
         const int MOD = 1e9 + 7;
-        int lcm = A / gcd(A, B) * B;
+        int lcm = A / __gcd(A, B) * B;
         long l = min(A, B), u = (long)N * min(A, B);
         while (l <= u) {
             long mid = l + (u - l) / 2;
@@ -29,15 +29,6 @@ public:
             }
         }
         return l % MOD;
-    }
-
-    int gcd(int A, int B) {
-        while (B) {
-            int tmpA = A;
-            A = B;
-            B = tmpA % B;
-        }
-        return A;
     }
 
     bool enough(long x, int A, int B, int lcm, int N) {
