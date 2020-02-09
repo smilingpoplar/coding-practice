@@ -16,13 +16,13 @@ public:
         const int N = arr.size();
         sort(arr.begin(), arr.end());
         vector<int> presum(N + 1, 0);
-        int maxNum = INT_MIN;
+        int maxval = INT_MIN;
         for (int i = 0; i < N; i++) {
             presum[i+1] = presum[i] + arr[i];
-            maxNum = max(maxNum, arr[i]);
+            maxval = max(maxval, arr[i]);
         }
         
-        int l = 0, u = maxNum + 1;
+        int l = 0, u = maxval + 1;
         while (l + 1 < u) {
             int m = l + (u - l) / 2;
             if (getSum(arr, m, presum) >= target) {
