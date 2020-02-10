@@ -22,7 +22,7 @@ public:
         int rMax = INT_MIN;
         stack<int> stk;
         for (int i = N - 1; i >= 0; i--) {
-            // 因为rMax将递增，判断条件将变宽，
+            // 因为rMax将递增，<rMax判断条件将变宽，
             // 即使nums[i]左边有数<rMax，这次没返回以后也会返回
             if (nums[i] < rMax) return true;
             
