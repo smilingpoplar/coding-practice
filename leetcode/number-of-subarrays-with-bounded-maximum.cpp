@@ -20,19 +20,19 @@ public:
         //  i=0时，无；i=1时，无；i=2时，三个以2结尾的有效子段：[0,1,2], [1,2], [2]；
         //  i=3时，和i=2的情况相同，三个以-1结尾的有效子段：[0,1,2,-1], [1,2,-1], [2,-1]
         //
-        // 每次循环，i是有效子段的结尾，设[lo..hi]是有效子段起始的范围，ans += hi-lo+1
-        //  若L<=A[i]<=R，hi=i；
-        //  若A[i]>R，lo=i+1，hi=i；
-        //  若A[i]<L，lo和hi不变
+        // 每次循环，A[i]是有效子段的结尾，设[lo1..lo2]是有效子段起始的范围，ans += lo2-lo1+1
+        //  若L<=A[i]<=R，lo2=i；
+        //  若A[i]>R，lo1=i+1，lo2=i；
+        //  若A[i]<L，lo1和lo2不变
         int ans = 0;
-        int lo = 0, hi = -1;
+        int lo1 = 0, lo2 = -1;
         for (int i = 0; i < A.size(); i++) {
             if (L <= A[i] && A[i] <= R) {
-                hi = i;
+                lo2 = i;
             } else if (A[i] > R) {
-                lo = i + 1, hi = i;
+                lo1 = i + 1, lo2 = i;
             }
-            ans += hi - lo + 1; // A[lo..i], A[lo+1..i], ..., A[hi..i]
+            ans += lo2 - lo1 + 1; // A[lo1..i], A[lo1+1..i], ..., A[lo2..i]
         }
         return ans;
     }
