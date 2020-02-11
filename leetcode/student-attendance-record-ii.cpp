@@ -19,7 +19,7 @@ public:
         //               + dp[i-1][a][l-1] //..L
         //               + dp[i-1][a][2] //..P
         // 递推式在i维上只依赖于i-1项，省掉i这维，i仍从左往右遍历
-        // 三维降维要用临时变量：ndp[a][l] = dp[a-1][2] + dp[a][l-1] + dp[a][2]
+        // 降维使用临时变量：ndp[a][l] = dp[a-1][2] + dp[a][l-1] + dp[a][2]
         const int MOD = 1e9 + 7;
         vector<vector<int>> dp(2, vector<int>(3, 1)); // i==0
         for (int i = 1; i <= n; i++) {
