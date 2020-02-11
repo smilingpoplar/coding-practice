@@ -16,15 +16,14 @@ public:
         unordered_map<int, int> mp; // sum=>idx
         int runningSum = 0;
         mp[runningSum] = -1; // 初始空集
-        // 在旧runningSum的集合中找runningSum-n*k，要找好多个数。
-        // 这里的关键在于将所有runningSum状态压缩成runningSum%k，
-        // 变成在runningSum%k的集合中找(runningSum-n*k)%k=runningSum%k。
-        // 为让子段尽量长，多个相同runningSum%k对应的下标只保留第一个。
+        // 子段和是k的倍数，即子段和(runningSum-toFind)%k==0
+        // (toFind==runningSum)%K
+        // 为让子段尽量长，多个相同runningSum的只保留第一个
         for (int i = 0; i < nums.size(); i++) {
             runningSum += nums[i];
             if (k) runningSum %= k;
             if (!mp.count(runningSum)) {
-                mp[runningSum] = i; // 相同sum保留第一个
+                mp[runningSum] = i;
             } else if (i - mp[runningSum] >= 2) {
                 return true;
             }
