@@ -15,9 +15,10 @@ public:
     int numRollsToTarget(int d, int f, int target) {
         // 取d次数，每次在[1..f]，总和为target
         // 设dp[i][j]表示取i次数、总和为j的子问题解
-        // dp[i][j] += dp[i-1][j-k], k为[1..f]。初始dp[0][0]=1
+        // dp[i][j] += dp[i-1][j-k], k为[1..f]。
+        // 初始dp[0][0]=1
         // 第i项只依赖i-1项，省掉第i项，i仍从左往右遍历；
-        // 有设置初始值dp[0]=1，要使用临时变量ndp
+        // 初始值dp[0][0]=1与后续迭代dp[>0][0]=0冲突，要使用临时变量ndp
         // ndp[j] += ndp[j-k]，k为[1..f]，j遍历顺序任意
         // 01背包，分组
         const int MOD = 1e9 + 7;
