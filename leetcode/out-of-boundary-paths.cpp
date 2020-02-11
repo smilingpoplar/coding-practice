@@ -14,20 +14,21 @@ class Solution {
 public:
     int findPaths(int m, int n, int N, int i, int j) {
         // 设dp[k][r][c]表示从位置[r,c]至多k步能走出边界的方式数
-        // dp[k][r][c] = dp[k-1][r-1][c] + dp[k-1][r+1][c] + dp[k-1][r][c-1] + dp[k-1][r][c+1]
-        // 初始dp[0][][]=0；当k>0时，注意四个边界的dp=1
-        // 递推式k维只依赖k-1项，省掉k这维
+        // dp[k][r][c] = dp[k-1][r-1][c] + dp[k-1][r+1][c] 
+        //              + dp[k-1][r][c-1] + dp[k-1][r][c+1]
+        // 初始dp[0][][]=0；注意四个边界的dp值为1
+        // 递推式第k项只依赖第k-1项，省掉k这维，用临时变量ndp
         const int MOD = 1e9 + 7;
         vector<vector<int>> dp(m, vector<int>(n, 0));
         for (int k = 1; k <= N; k++) {
             vector<vector<int>> ndp(m, vector<int>(n, 0));
             for (int r = 0; r < m; r++) {
                 for (int c = 0; c < n; c++) {
-                    int paths = r == 0 ? 1 : dp[r-1][c];
-                    paths = (paths + (r == m - 1 ? 1 : dp[r+1][c])) % MOD;
-                    paths = (paths + (c == 0 ? 1 : dp[r][c-1])) % MOD;
-                    paths = (paths + (c == n - 1 ? 1 : dp[r][c+1])) % MOD;
-                    ndp[r][c] = paths;                    
+                    long paths = r == 0 ? 1 : dp[r-1][c];
+                    paths += r == m - 1 ? 1 : dp[r+1][c];
+                    paths += c == 0 ? 1 : dp[r][c-1];
+                    paths += c == n - 1 ? 1 : dp[r][c+1];
+                    ndp[r][c] = paths % MOD;                    
                 }
             }
             swap(dp, ndp);            
