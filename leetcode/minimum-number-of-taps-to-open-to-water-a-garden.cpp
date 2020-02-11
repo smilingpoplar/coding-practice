@@ -1,6 +1,6 @@
 //
-//  video-stitching
-//  https://leetcode.com/problems/video-stitching/
+//  minimum-number-of-taps-to-open-to-water-a-garden
+//  https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/
 //
 //  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
@@ -12,6 +12,14 @@ using namespace std;
 
 class Solution {
 public:
+    int minTaps(int n, vector<int>& ranges) {
+        vector<vector<int>> clips;
+        for (auto i = 0; i < ranges.size(); ++i) {
+            clips.push_back({i - ranges[i], i + ranges[i]});
+        }
+        return videoStitching(clips, n);
+    }
+    
     int videoStitching(vector<vector<int>>& clips, int T) {
         const int N = clips.size();
         sort(begin(clips), end(clips));
