@@ -28,8 +28,8 @@ public:
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        // 找波峰，对应找下一个更小的数，找nums[i]>nums[i+1]的位置i
-        // 因为nums[i]要跟nums[i+1]比较，i二分搜索的范围是[0..N-2]
+        // 找波峰，找第一个nums[i]>nums[i+1]的位置i
+        // i二分搜索的范围是[0..N-2]
         const int N = nums.size();
         int l = -1, u = N - 1;
         while (l + 1 < u) {
