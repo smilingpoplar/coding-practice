@@ -20,7 +20,7 @@ public:
             ans = to_string(rem) + ans;
             N = -(N >> 1);
         }
-        return ans;
+        return !ans.empty() ? ans : "0";
     }
 };
 
