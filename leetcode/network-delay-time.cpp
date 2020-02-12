@@ -53,7 +53,7 @@ public:
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
-        // bellman ford算法，对所有边做N-1次松弛
+        // Bellman-Ford算法，对所有边做N-1次松弛
         const int INF = 1e9;
         vector<int> dist(N + 1, INF);
         dist[K] = 0;
@@ -72,6 +72,41 @@ public:
     }
 };
  */
+
+/*
+class Solution {
+public:
+    int networkDelayTime(vector<vector<int>>& times, int N, int K) {
+        // Floyd算法，所有点对的最短路径
+        const int INF = 1e9;
+        vector<vector<int>> dist(N + 1, vector<int>(N + 1, INF));
+        for (int i = 1; i <= N; i++) {
+            dist[i][i] = 0;
+        }
+        for (auto &e : times) {
+            dist[e[0]][e[1]] = e[2];
+        }
+        
+        // 三重循环做松弛
+        for (int k = 1; k <= N; k++) {
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= N; j++) {
+                    int newdist = dist[i][k] + dist[k][j];
+                    if (newdist < dist[i][j]) {
+                        dist[i][j] = newdist;
+                    }
+                }
+            }
+        }
+
+        int ans = INT_MIN;
+        for (int i = 1; i <= N; i++) {
+            ans = max(ans, dist[K][i]);
+        }
+        return (ans != INF) ? ans : -1;
+    }
+};
+*/
 
 int main(int argc, const char * argv[]) {    
     return 0;
