@@ -38,21 +38,21 @@ public:
 class Solution {
 public:
     int minKBitFlips(vector<int>& A, int K) {
-        // flipped[i]表示翻转A[i..i+K-1]，
-        // influ表示flipped[i-K+1..i-1]对A[i]的影响，
+        // flipKFrom[i]表示翻转A[i..i+K-1]，
+        // influ表示flipKFrom[i-K+1..i-1]对A[i]的影响，
         // 若A[i]==0&&influ==0 或 A[i]==1&&influ==1，要翻转
         const int N = A.size();
-        vector<int> flipped(N, 0);
+        vector<int> flipKFrom(N, 0);
         int influ = 0, ans = 0;
         for (int i = 0; i < N; i++) {
             if (A[i] == influ) {
                 if (i + K - 1 >= N) return -1;
-                flipped[i] = 1;
+                flipKFrom[i] = 1;
                 ans++;
             }
             
-            influ ^= flipped[i];
-            if (i - K + 1 >= 0) influ ^= flipped[i - K + 1];
+            influ ^= flipKFrom[i];
+            if (i - K + 1 >= 0) influ ^= flipKFrom[i - K + 1];
         }
         return ans;
     }
