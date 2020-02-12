@@ -62,7 +62,7 @@ public:
     }
     
     void floyd(vector<vector<int>> &dist) {
-        // floyd算法，求所有点对最短距离
+        // floyd求所有点对最短距离
         const int N = dist.size();
         for (int k = 0; k < N; k++) {
             for (int i = 0; i < N; i++) {
