@@ -16,7 +16,7 @@ public:
     vector<string> findItinerary(vector<vector<string>>& tickets) {
         // 一张机票一条边，求遍历所有边的欧拉路径
         // 已知欧拉路径存在且从JFK开始，用Hierholzer算法：
-        // 从图中删除邻接边再dfs递归，无边可删时把当前点输出到栈中。 
+        // 从图中删除邻接边再dfs递归，后序遍历输出到栈中。 
         unordered_map<string, multiset<string>> adj;
         for (auto &ticket : tickets)
             adj[ticket[0]].insert(ticket[1]);
