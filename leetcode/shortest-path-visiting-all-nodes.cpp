@@ -56,7 +56,14 @@ public:
                 dist[i][j] = 1;
             }
         }
+        
+        floyd(dist);        
+        return shortestHamilton(dist);
+    }
+    
+    void floyd(vector<vector<int>> &dist) {
         // floyd算法，求所有点对最短距离
+        const int N = dist.size();
         for (int k = 0; k < N; k++) {
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
@@ -64,8 +71,6 @@ public:
                 }
             }
         }
-        
-        return shortestHamilton(dist);
     }
     
     int shortestHamilton(vector<vector<int>> &dist) {
