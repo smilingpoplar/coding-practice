@@ -127,7 +127,7 @@ public:
             dist[e[0]][e[1]] = e[2];
         }
         
-        // 三重循环做松弛
+        // 三重循环松弛
         for (int k = 1; k <= N; k++) {
             for (int i = 1; i <= N; i++) {
                 for (int j = 1; j <= N; j++) {
