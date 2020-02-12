@@ -83,15 +83,17 @@ public:
         for (int group = 1; group < (1<<N); group++) {
             // group中选一点u、group外选一点v
             for (int u = 0; u < N; u++) {
+                int umask = 1<<u;
+                if (!(group & umask)) continue;
                 for (int v = 0; v < N; v++) {
-                    int uMask = 1<<u, vMask = 1<<v;
-                    if ((group & uMask) && !(group & vMask)) {
-                        dp[group|vMask][v] = min(dp[group|vMask][v],
-                                                 dp[group][u] + dist[u][v]);
-                    }
+                    int vmask = 1<<v;
+                    if (group & vmask) continue;
+                    dp[group|vmask][v] = min(dp[group|vmask][v],
+                                             dp[group][u] + dist[u][v]);
                 }
             }
         }
+        
         // 从所有点出发的最小值
         int ans = INF;
         for (int i = 0; i < N; i++) {
