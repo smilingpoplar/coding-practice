@@ -52,6 +52,46 @@ public:
 /*
 class Solution {
 public:
+    // 若使用c++中比较函数的引用语法[&dist](){}，优先队列中可不用再存节点距离d。
+    int networkDelayTime(vector<vector<int>>& times, int N, int K) {
+        // dijkstra算法
+        unordered_map<int, unordered_map<int, int>> adj;
+        for (auto &e : times) {
+            adj[e[0]][e[1]] = e[2];
+        }
+        vector<int> dist(N + 1, INT_MAX); // 节点1..N
+        dist[K] = 0;
+
+        auto cmp = [&dist](int a, int b) {
+            return dist[a] > dist[a]; // 最小堆
+        };
+        priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
+        pq.push(K);
+
+        while (!pq.empty()) {
+            auto u = pq.top(); pq.pop();
+            for (auto &e : adj[u]) { // 遍历u的所有邻接点
+                int v = e.first, cost = e.second;
+                int newdist = dist[u] + cost;
+                if (newdist < dist[v]) {
+                    dist[v] = newdist;
+                    pq.push(v);
+                }
+            }
+        }
+
+        int ans = INT_MIN;
+        for (int i = 1; i <= N; i++) {
+            ans = max(ans, dist[i]);
+        }
+        return (ans != INT_MAX) ? ans : -1;
+    }
+};
+*/
+
+/*
+class Solution {
+public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
         // Bellman-Ford算法，对所有边做N-1次松弛
         const int INF = 1e9;
