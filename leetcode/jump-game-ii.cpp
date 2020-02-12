@@ -14,16 +14,16 @@ using namespace std;
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        // bfs分层遍历，记录最远可达maxIdx
+        // bfs分层遍历，记录最远可达farthest
         const int N = nums.size();
         if (N <= 1) return 0;
 
-        int maxIdx = 0, level = 0;
-        for (int i = 0; i <= maxIdx; ) {
-            level++;            
-            for (int levelIdx = maxIdx; i <= levelIdx; i++) {
-                maxIdx = max(maxIdx, i + nums[i]);
-                if (maxIdx >= N - 1) return level;
+        int farthest = 0, ans = 0;
+        for (int i = 0; i <= farthest; ) {
+            ans++;            
+            for (int sofar = farthest; i <= sofar; i++) {
+                farthest = max(farthest, i + nums[i]);
+                if (farthest >= N - 1) return ans;
             }
         }
         return -1;
