@@ -14,10 +14,10 @@ using namespace std;
 class Solution {
 public:
     int shortestPathLength(vector<vector<int>>& graph) {
-        // 为判断是否已访问所有节点，将所有节点的访问状态编码成二进制mask
-        // 设当前节点编号curr，bfs的"状态节点"为 (mask,curr)
+        // 编码所有节点的访问状态到二进制cover，当前节点为curr
+        // bfs的"状态"为 (cover,curr)
         const int N = graph.size();
-        const int MASK_TARGET = (1 << N) - 1;
+        const int VISIT_ALL = (1 << N) - 1;
 
         vector<vector<bool>> visited(1 << N, vector<bool>(N, false));
         queue<pair<int, int>> q;
@@ -29,13 +29,13 @@ public:
         while (!q.empty()) {
             for (int sz = q.size(); sz > 0; sz--) {
                 auto state = q.front(); q.pop();                
-                int mask = state.first, curr = state.second;
-                if (visited[mask][curr]) continue;
-                visited[mask][curr] = true;
+                int cover = state.first, curr = state.second;
+                if (visited[cover][curr]) continue;
+                visited[cover][curr] = true;
 
-                if (mask == MASK_TARGET) return dist;
+                if (cover == VISIT_ALL) return dist;
                 for (auto next : graph[curr]) {
-                    q.push({mask | (1 << next), next});
+                    q.push({cover | (1 << next), next});
                 }
             }
             dist++;
