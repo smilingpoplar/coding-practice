@@ -37,6 +37,42 @@ public:
     }
 };
 
+/*
+class MedianFinder {
+    map<int, int> counter;
+    int totalCnt = 0;
+public:
+    MedianFinder() {
+    }
+    
+    void addNum(int num) {
+        counter[num]++;
+        totalCnt++;
+    }
+    
+    double findMedian() {
+        // 如：5个的第3个，4个的第2个
+        int medianCnt = totalCnt / 2 + totalCnt % 2;
+        int searchCnt = 0, median = 0;
+        auto it = counter.begin();
+        while (searchCnt < medianCnt) {
+            median = it->first;
+            searchCnt += it->second;
+            it++;
+        }
+        if (totalCnt % 2 == 1) return median;
+        
+        int median1 = median;
+        while (searchCnt < medianCnt + 1) {
+            median = it->first;
+            searchCnt += it->second;
+            it++;
+        }
+        return (median1 + median) * 0.5;
+    }
+};
+*/
+
 int main(int argc, const char * argv[]) {
     MedianFinder obj = new MedianFinder();
     obj.addNum(num);
