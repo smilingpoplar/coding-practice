@@ -29,7 +29,7 @@ public:
             }
             stk.push(val);
         }
-        // 递减栈，最终要剩2个（左哨兵和根节点）
+        // 递减栈，最终要剩2个（左哨兵和最大叶节点）
         while (stk.size() > 2) {
             int localMin = stk.top(); stk.pop();
             ans += localMin * stk.top();
