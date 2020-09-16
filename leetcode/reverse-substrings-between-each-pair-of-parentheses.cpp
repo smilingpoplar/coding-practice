@@ -13,17 +13,16 @@ using namespace std;
 class Solution {
 public:
     string reverseParentheses(string s) {
-        const int N = s.size();
-        stack<int> opened;
         string ans;
-        for (int i = 0; i < N; i++) {
-            if (s[i] == '(') {
-                opened.push(ans.size());                
-            } else if (s[i] == ')') {
-                int j = opened.top();  opened.pop();
-                reverse(ans.begin() + j, ans.end());
+        stack<int> open;
+        for (char c : s) {
+            if (c == '(') {
+                open.push(ans.size());                
+            } else if (c == ')') {
+                int pos = open.top();  open.pop();
+                reverse(ans.begin() + pos, ans.end());
             } else {
-                ans += s[i];
+                ans += c;
             }
         }
         return ans;
