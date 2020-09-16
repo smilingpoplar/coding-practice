@@ -18,12 +18,11 @@ public:
         // 2. target与dict中某单词的相异点diff：相同字母处取0、不同字母处取1，这样得到二进制数diff，
         //    diff中的位1表示相异点。只要将任一位1处取字母、其他位取数字，得到的缩写就不会冲突。
         //    注意，target[i]^word[i]对应二进制diff[N-1-i]
-        // 3. target的缩写abbr是否与dict中某单词冲突：将缩写的字母处取1、数字x处取x个0，得到缩写的二进制表示abbr。
-        //    当abbr&diff!=0时，缩写中存在相异点，缩写不冲突；
-        //    当abbr&diff==0时，缩写中不存在相异点，缩写冲突。
-        // 4. 回溯法尝试abbr的取值：
-        //    从单词的当前idx开始，或者省略连续几个字母（abbr对应位取0），或者保留字母（abbr对应位取1）。
+        // 3. target的某缩写是否可行？将缩写的字母处取1、数字x处取x个0，得到缩写的二进制表示abbr。
+        //    当abbr&diff!=0时，缩写中存在相异点，缩写不冲突；当abbr&diff==0时，缩写中不存在相异点，缩写冲突。
         //    若abbr与所有diff都不冲突，这个abbr可行。
+        // 4. 回溯法尝试abbr的取值看是否可行：
+        //    从单词的当前idx开始，或者省略连续几个字母（abbr对应位取0），或者保留字母（abbr对应位取1）。
         const int N = target.size();
         set<int> diffs; // 将单词子集转为diffs集合
         for (auto &word : dictionary) {

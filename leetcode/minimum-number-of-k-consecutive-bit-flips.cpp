@@ -14,8 +14,8 @@ using namespace std;
 class Solution {
 public:
     int minKBitFlips(vector<int>& A, int K) {
-        // 若翻转A[i..i+K-1]，将i入队，维持一个长K-1窗口的队列q，
-        // 有效窗口[i-K+1,i-1]内对A[i]有影响的翻转次数为q.size()，
+        // 若翻转A[i..i+K-1]，将i放入双端队列q
+        // 对A[i]有影响的是有效窗口[i-K+1,i-1]内的翻转次数q.size()
         // 若A[i]==0&&q.size()%2==0 或 A[i]==1&&q.size()%2==1，要翻转
         const int N = A.size();
         int ans = 0;
