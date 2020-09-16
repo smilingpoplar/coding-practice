@@ -26,7 +26,7 @@ public:
         auto prev = &dummy;
         for (int i = 1; i < m; i++) prev = prev->next;
 
-        // 组头是反转后的组尾，将[m+1..n]的节点插入prev之后
+        // 组头是反转后的组尾tail，将[m+1..n]的节点插入prev之后
         auto tail = prev->next, curr = tail->next;
         for (int i = m + 1; i <= n; i++) {
             tail->next = curr->next;
