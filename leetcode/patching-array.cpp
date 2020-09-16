@@ -13,11 +13,11 @@ using namespace std;
 class Solution {
 public:
     int minPatches(vector<int>& nums, int n) {
-        // 设[1..missing)已能由数组数相加获得，尝试扩展上边界msssing
+        // 设[1..missing)已能由数组数相加获得，尝试扩展上边界missing
         long missing = 1;
         int i = 0, ans = 0;
         while (missing <= n) {
-            // nums[i]已能由相加获得（<missing）或在数组中（==missing）
+            // nums[i]已能由相加获得（<missing）或在数组中（=missing）
             if (i < nums.size() && nums[i] <= missing) {
                 missing += nums[i];
                 i++;
