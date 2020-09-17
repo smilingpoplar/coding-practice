@@ -27,7 +27,7 @@ public:
                 cnt--;
             cnt++;   // 跳过空格
         }
-        return left / len;
+        return cnt / len;
     }
 };
 
