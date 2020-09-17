@@ -52,7 +52,7 @@ public:
             ans = (ans + dp[j]) % MOD;
         }
         return ans;
-     }
+    }
 };
 
 int main(int argc, const char * argv[]) {
