@@ -18,7 +18,7 @@ public:
             maxW = max(maxW, w);
             sumW += w;
         }
-        
+
         int l = maxW, u = sumW;
         while (l <= u) {
             int m = l + (u - l) / 2;
@@ -30,17 +30,18 @@ public:
         }
         return l;
     }
-    
-    // 二分搜索条件enough(m)表示运载力m时能在days<=D天内运完
-    bool enough(int m, vector<int>& weights, int D) {
+
+    bool enough(int capacity, vector<int>& weights, int D) {
+        // 运载力capacity、天数days的关系
         int weight = 0, days = 1;
         for (int i = 0; i < weights.size(); i++) {
             weight += weights[i];
-            if (weight > m) {
+            if (weight > capacity) {
                 days++;
                 weight = weights[i];
             }
         }
+        // capacity越大、days越小、days<=D越返回1
         return days <= D;
     }
 };
