@@ -13,8 +13,8 @@ using namespace std;
 class Solution {
 public:
     int monotoneIncreasingDigits(int N) {
-        // 将N的串表示从右往左不断将波峰减1，
-        // 再将最左波峰后面的所有数字变为9。
+        // 将N的串表示从右往左不断将逆序波峰减1，
+        // 再将最左逆序波峰后面的所有数字变为9。
         string s = to_string(N);
         int idx = s.size();
         for (int i = s.size() - 2; i >= 0; i--) {
