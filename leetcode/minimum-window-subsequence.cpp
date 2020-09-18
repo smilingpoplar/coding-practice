@@ -15,7 +15,7 @@ class Solution {
 public:
     string minWindow(string S, string T) {
         // 设dp[i][j]=k表示在S[0..i)中找T[0..j)子序列、找到的最右起始索引（最右=>最小窗口），
-        // 找到时S[k..i)是包含T[0..j)的最小窗口，找不到k==-1。
+        // 找到时S[k..i)是包含T[0..j)的最小窗口，找不到时k==-1。
         // 若S[i-1]==T[j-1]，需在S[0..i-1)中找T[0..j-1)，dp[i][j]=dp[i-1][j-1]
         // 若S[i-1]!=T[j-1]，需在S[0..i-1)中找T[0..j)，dp[i][j]=dp[i-1][j]
         // 所以 dp[i][j] = (S[i-1]==T[j-1]) ? dp[i-1][j-1] : dp[i-1][j]
