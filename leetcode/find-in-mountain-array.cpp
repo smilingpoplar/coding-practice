@@ -44,13 +44,13 @@ public:
             }
         }
         // u是波峰
-        int ans = bsearch(target, mountainArr, 0, u, true);
+        int ans = binarySsearch(target, mountainArr, 0, u, true);
         if (ans != -1) return ans;
-        return bsearch(target, mountainArr, u, N - 1, false);
+        return binarySsearch(target, mountainArr, u, N - 1, false);
     }
-    
-    int bsearch(int target, MountainArray &mountainArr, 
-                int lower, int upper, bool asc) {
+
+    int binarySsearch(int target, MountainArray &mountainArr, 
+                    int lower, int upper, bool asc) {
         int l = lower, u = upper;
         while (l <= u) {
             int m = l + (u - l) / 2;
