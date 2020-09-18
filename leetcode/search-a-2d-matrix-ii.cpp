@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
-        // 线性搜索，O(m+n)，从右上角开始找（或从左下角开始找）
+        // 从行列有序的”中间“位置（右上角或左下角）开始线性查找，O(m+n)
         if (matrix.empty()) return false;
         const int R = matrix.size();
         const int C = matrix[0].size();
