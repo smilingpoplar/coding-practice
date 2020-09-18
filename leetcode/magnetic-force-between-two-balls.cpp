@@ -33,14 +33,15 @@ public:
     
     bool enough(int dist, vector<int>& position, int m) {
         // 两球间的最小距离dist一确定，position[]中能放的球数count也确定
-        // count(dist)是关于dist的递减函数，count(dist)<m符合二分搜索的条件形式[0..0 1 1..]
+        // count(dist)是关于dist的递减函数，
+        // count(dist)<m符合二分搜索的条件形式[0..0 1 1..]，
         // 用<m而不是<=m，因为要找满足条件的最后一个，条件式中去掉等号
         const int N = position.size();
-        int lastPos = INT_MIN, count = 0;
+        int nextPos = 0, count = 0;
         for (int i = 0; i < N; i++) {            
-            if (position[i] >= lastPos + dist) {
+            if (position[i] >= nextPos) {
                 count++;
-                lastPos = position[i];
+                nextPos = position[i] + dist;
             }
         }
         return count < m; // 修改1
