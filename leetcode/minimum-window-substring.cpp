@@ -19,20 +19,20 @@ public:
         for (char c : t) count[c]++;
         int distinct = count.size();
         
-        int minWidth = INT_MAX, ansStart;
         // 有效窗口：unique == 0
+        int minWidth = INT_MAX, ansLo;
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
             if (--count[s[hi]] == 0) distinct--;
             while (distinct == 0) {
                 if (hi - lo + 1 < minWidth) {
                     minWidth = hi - lo + 1;
-                    ansStart = lo;
+                    ansLo = lo;
                 }
                 if (count[s[lo]]++ == 0) distinct++;
                 lo++;
             }
         }
-        return minWidth != INT_MAX ? s.substr(ansStart, minWidth) : "";
+        return minWidth != INT_MAX ? s.substr(ansLo, minWidth) : "";
     }
 };
 
