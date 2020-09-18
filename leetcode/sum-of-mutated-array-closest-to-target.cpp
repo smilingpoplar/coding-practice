@@ -15,32 +15,35 @@ public:
     int findBestValue(vector<int>& arr, int target) {
         const int N = arr.size();
         sort(arr.begin(), arr.end());
-        vector<int> presum(N + 1, 0);
-        int maxval = INT_MIN;
+        vector<int> presum(N + 1, 0); // presum[i]表示sum(arr[0..i))
+        int mx = INT_MIN;
         for (int i = 0; i < N; i++) {
             presum[i+1] = presum[i] + arr[i];
-            maxval = max(maxval, arr[i]);
+            mx = max(mx, arr[i]);
         }
         
-        int l = 0, u = maxval + 1;
+        int l = 0, u = mx + 1;
         while (l + 1 < u) {
             int m = l + (u - l) / 2;
-            if (getSum(arr, m, presum) >= target) {
+            // 数组之和sum(value)是关于value的递增函数，
+            // sum(value)>=target满足二分搜索的条件形式[0..0 1..1]
+            if (getSum(m, arr, presum) >= target) {
                 u = m;
             } else {
                 l = m;
             }
         }
-        // u和u-1作为候选
-        int diff1 = abs(getSum(arr, u, presum) - target);
-        int diff2 = abs(getSum(arr, u-1, presum) - target);
-        return diff1 < diff2 ? u : u-1;
+        // 找最接近target的数，u和u-1作为候选
+        int diff1 = abs(getSum(u, arr, presum) - target);
+        int diff2 = abs(getSum(u-1, arr, presum) - target);
+        return diff2 <= diff1 ? u-1 : u;
     }
     
-    int getSum(vector<int>& arr, int num, const vector<int> &presum) {
-        int idx = lower_bound(arr.begin(), arr.end(), num) - arr.begin();
-        // [0..idx)为原数，[idx..N)变为num
-        int sum = presum[idx] + (arr.size() - idx) * num;
+    int getSum(int value, vector<int>& arr, const vector<int> &presum) {
+        // 将>=value的值全变成value
+        int idx = lower_bound(arr.begin(), arr.end(), value) - arr.begin();
+        // [0..idx)为原数，[idx..N)变为value
+        int sum = presum[idx] + (arr.size() - idx) * value;
         return sum;
     }
 };
