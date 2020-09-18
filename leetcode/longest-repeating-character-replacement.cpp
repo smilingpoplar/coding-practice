@@ -23,6 +23,8 @@ public:
                 count[s[lo]]--;
                 lo++;
             }
+            // 用maxCnt不能保证当前窗口都有效，但不影响结果，
+            // 可以保证最长有效窗口一定计算到
             ans = max(ans, hi - lo + 1);
         }
         return ans;
