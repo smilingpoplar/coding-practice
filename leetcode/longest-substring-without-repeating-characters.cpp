@@ -34,10 +34,10 @@ public:
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> mp; // 用map记录滑动窗口内的char=>lastIdx
+        unordered_map<char, int> mp; // char=>lastIdx
         int ans = 0;
         for (int lo = 0, hi = 0; hi < s.size(); hi++) {
-            if (mp.count(s[hi]) && mp[s[hi]] >= lo) { // s[hi]重复出现且有效
+            if (mp.count(s[hi]) && mp[s[hi]] >= lo) { // s[hi]重复出现且在窗口内
                 lo = mp[s[hi]] + 1;
             }
             ans = max(ans, hi - lo + 1);
