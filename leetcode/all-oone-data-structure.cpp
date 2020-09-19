@@ -15,17 +15,17 @@ class AllOne {
     // 映射表table按值分行
     struct ValueRow { int value; unordered_set<string> keys; };
     list<ValueRow> table;
-    unordered_map<string, list<ValueRow>::iterator> rowPtr;
+    unordered_map<string, list<ValueRow>::iterator> rowPtrs;
 private:
     void deleteKey(const string &key, list<ValueRow>::iterator &row) {
         row->keys.erase(key);
         if (row->keys.empty()) table.erase(row);
-        rowPtr.erase(key);
+        rowPtrs.erase(key);
     }
 
     void insertKey(const string &key, list<ValueRow>::iterator &row) {
         row->keys.insert(key);
-        rowPtr[key] = row;
+        rowPtrs[key] = row;
     }
 
     void moveKey(const string &key, list<ValueRow>::iterator &from, list<ValueRow>::iterator &to) {
@@ -39,10 +39,10 @@ public:
     
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
     void inc(string key) {
-        if (!rowPtr.count(key)) { // 先插入0，待会儿和其他情况一起增1
-            rowPtr[key] = table.insert(table.begin(), {0, { key }}); 
+        if (!rowPtrs.count(key)) { // 先插入0，待会儿和其他情况一起增1
+            rowPtrs[key] = table.insert(table.begin(), {0, { key }}); 
         }
-        auto currRow = rowPtr[key], nextRow = next(currRow); 
+        auto currRow = rowPtrs[key], nextRow = next(currRow); 
         int nextValueNeeded = currRow->value + 1;
         if (nextRow == table.end() || nextRow->value != nextValueNeeded) { // 插入新行
             nextRow = table.insert(nextRow, {nextValueNeeded, { }});
@@ -52,8 +52,8 @@ public:
     
     /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
     void dec(string key) {
-        if (!rowPtr.count(key)) return;
-        auto currRow = rowPtr[key];
+        if (!rowPtrs.count(key)) return;
+        auto currRow = rowPtrs[key];
         if (currRow->value == 1) {
             deleteKey(key, currRow);
             return;
