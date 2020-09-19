@@ -13,7 +13,6 @@ using namespace std;
 class Solution {
 public:
     int subarraysWithKDistinct(vector<int>& A, int K) {
-        // 伸缩滑动窗口
         const int N = A.size();
         unordered_map<int, int> cnt;
         int ans = 0;
@@ -21,7 +20,7 @@ public:
         // lo1<=lo2，这里有lo2-lo1+1个窗口
         for (int lo1 = 0, lo2 = 0, hi = 0; hi < N; hi++) {
             cnt[A[hi]]++;
-            if (cnt.size() == K + 1) { // 含K个不同元素的窗口已处理完
+            if (cnt.size() == K + 1) {
                 cnt.erase(A[lo2]);
                 lo2++;
                 lo1 = lo2;

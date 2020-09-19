@@ -13,7 +13,6 @@ using namespace std;
 class Solution {
 public:
     int numberOfSubarrays(vector<int>& nums, int k) {
-        const int N = nums.size();
         return atMost(nums, k) - atMost(nums, k-1);        
     }
     
@@ -26,7 +25,7 @@ public:
                 if (nums[lo] % 2 == 1) oddCnt--;
                 lo++;
             }
-            ans += hi - lo + 1;
+            ans += hi - lo + 1; // [lo,hi], [lo+1,hi], ..., [hi,hi]
         }
         return ans;
     }
