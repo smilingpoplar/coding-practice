@@ -16,14 +16,14 @@ class LRUCache{
     // 把entry{key,value}用链表串起来，
     // 每次访问把entry移到表头，删除lru时删除表尾
     struct Entry { int key; int value; };
-    list<Entry> l;
-    unordered_map<int, list<Entry>::iterator> entryPtr; // key=>entry
+    list<Entry> l; // 实际存储
+    unordered_map<int, list<Entry>::iterator> entryPtrs; // key=>entry
     int capacity;
 private:
     void touch(int key) {
         // toList.splice(toListIterator, fromList, fromListSingleIterator)
-        l.splice(l.begin(), l, entryPtr[key]);
-        entryPtr[key] = l.begin();
+        l.splice(l.begin(), l, entryPtrs[key]);
+        entryPtrs[key] = l.begin();
     }
 public:
     LRUCache(int capacity) {
@@ -31,22 +31,22 @@ public:
     }
     
     int get(int key) {
-        if (!entryPtr.count(key)) return -1;
+        if (!entryPtrs.count(key)) return -1;
         touch(key);
-        return entryPtr[key]->value;
+        return entryPtrs[key]->value;
     }
     
     void put(int key, int value) {
         if (capacity == 0) return;
-        if (!entryPtr.count(key)) {
+        if (!entryPtrs.count(key)) {
             if (l.size() == capacity) { // 删除表尾
-                entryPtr.erase(l.back().key);
+                entryPtrs.erase(l.back().key);
                 l.pop_back();
             }
             l.push_front({key, value});
-            entryPtr[key] = l.begin();
+            entryPtrs[key] = l.begin();
         } else {
-            entryPtr[key]->value = value;
+            entryPtrs[key]->value = value;
             touch(key);
         }
     }
