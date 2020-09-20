@@ -15,19 +15,18 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         unordered_map<char, int> count;
-        int maxCnt = 0, ans = 0;
-        for (int hi = 0, lo = 0; hi < s.size(); hi++) {
+        int maxCnt = 0;
+        int lo, hi;
+        for (lo = 0, hi = 0; hi < s.size(); hi++) {
             // 每一步都尝试将窗口长度推到极限 maxCnt+k
+            // 不收缩的滑动窗口，窗口不符合条件时整体右移一步
             maxCnt = max(maxCnt, ++count[s[hi]]);
-            while (hi - lo + 1 > maxCnt + k) {
+            if (hi - lo + 1 > maxCnt + k) {
                 count[s[lo]]--;
                 lo++;
             }
-            // 用maxCnt不能保证当前窗口都有效，但不影响结果，
-            // 可以保证最长有效窗口一定计算到
-            ans = max(ans, hi - lo + 1);
         }
-        return ans;
+        return hi - lo;
     }
 };
 
