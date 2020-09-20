@@ -18,7 +18,7 @@ public:
         int ans = 0;
         // 设以hi结尾的包含K个不同元素的窗口最长为[lo1..hi]、最短为[lo2..hi]，
         // lo1<=lo2，这里有lo2-lo1+1个窗口
-        for (int lo1 = 0, lo2 = 0, hi = 0; hi < N; hi++) {
+        for (int hi = 0, lo1 = 0, lo2 = 0; hi < N; hi++) {
             cnt[A[hi]]++;
             if (cnt.size() == K + 1) {
                 cnt.erase(A[lo2]);
