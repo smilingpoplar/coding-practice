@@ -15,6 +15,7 @@ public:
     int longestSubarray(vector<int>& nums, int limit) {
         // 子段max(A)-min(A)<=limit
         // 同时保留滑动窗口的最大最小值
+        // 用multiset
         const int N = nums.size();
         multiset<int> win;
         int ans = 0, lo = 0;
