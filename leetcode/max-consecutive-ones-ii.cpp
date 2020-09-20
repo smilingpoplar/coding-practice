@@ -16,7 +16,7 @@ public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
         const int N = nums.size();
         int zeroCnt = 0, ans = INT_MIN;
-        for (int lo = 0, hi = 0; hi < N; hi++) {
+        for (int hi = 0, lo = 0; hi < N; hi++) {
             if (nums[hi] == 0) zeroCnt++;
             while (zeroCnt > 1) {
                 if (nums[lo++] == 0) zeroCnt--;

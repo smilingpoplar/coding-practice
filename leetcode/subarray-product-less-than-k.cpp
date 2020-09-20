@@ -17,7 +17,7 @@ public:
         if (k <= 1) return 0;
         
         int prod = 1, ans = 0;
-        for (int lo = 0, hi = 0; hi < nums.size(); hi++) {
+        for (int hi = 0, lo = 0; hi < nums.size(); hi++) {
             prod *= nums[hi];
             while (prod >= k) {
                 prod /= nums[lo];

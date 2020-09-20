@@ -17,7 +17,7 @@ public:
         vector<int> cnt(128, 0);
         int distinct = 0, ans = 0;
         // 有效窗口：distinct <= k
-        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+        for (int hi = 0, lo = 0; hi < s.size(); hi++) {
             if (cnt[s[hi]]++ == 0) distinct++;
             while (distinct > k) {
                 if (--cnt[s[lo]] == 0) distinct--;

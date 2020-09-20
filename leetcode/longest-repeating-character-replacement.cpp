@@ -16,7 +16,7 @@ public:
     int characterReplacement(string s, int k) {
         unordered_map<char, int> count;
         int maxCnt = 0, ans = 0;
-        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+        for (int hi = 0, lo = 0; hi < s.size(); hi++) {
             // 每一步都尝试将窗口长度推到极限 maxCnt+k
             maxCnt = max(maxCnt, ++count[s[hi]]);
             while (hi - lo + 1 > maxCnt + k) {

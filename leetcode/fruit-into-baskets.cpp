@@ -18,7 +18,7 @@ public:
         unordered_map<int, int> cnt; // num=>count
         int ans = 0;
         // 有效窗口：cnt.size() <= 2
-        for (int lo = 0, hi = 0; hi < tree.size(); hi++) {
+        for (int hi = 0, lo = 0; hi < tree.size(); hi++) {
             cnt[tree[hi]]++;
             while (cnt.size() > 2) {
                 if (--cnt[tree[lo]] == 0) cnt.erase(tree[lo]);

@@ -22,7 +22,7 @@ public:
         }
         
         int ans = INT_MAX;
-        for (int lo = 0, hi = 0; hi < N; hi++) {
+        for (int hi = 0, lo = 0; hi < N; hi++) {
             count[s[hi]]--;
             while (lo < N 
                    && count['Q'] - K <= 0 && count['W'] - K <= 0 

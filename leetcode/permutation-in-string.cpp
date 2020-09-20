@@ -21,7 +21,7 @@ public:
         int distinct = 0;
         for (int num : cnt) distinct += num > 0;
         
-        for (int lo = 0, hi = 0; hi < len2; hi++) {
+        for (int hi = 0, lo = 0; hi < len2; hi++) {
             if (--cnt[s2[hi]] == 0) distinct--;
             while (distinct == 0) {
                 if (hi - lo + 1 == len1) return true;

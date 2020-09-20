@@ -19,7 +19,7 @@ public:
     int atMost(vector<int> &nums, int k) {
         const int N = nums.size();        
         int ans = 0, oddCnt = 0;
-        for (int lo = 0, hi = 0; hi < N; hi++) {
+        for (int hi = 0, lo = 0; hi < N; hi++) {
             if (nums[hi] % 2 == 1) oddCnt++;
             while (oddCnt > k) {
                 if (nums[lo] % 2 == 1) oddCnt--;

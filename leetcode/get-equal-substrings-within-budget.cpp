@@ -15,7 +15,7 @@ public:
     int equalSubstring(string s, string t, int maxCost) {
         const int N = s.size();
         int ans = 0;
-        for (int lo = 0, hi = 0, cost = 0; hi < N; hi++) {
+        for (int hi = 0, lo = 0, cost = 0; hi < N; hi++) {
             cost += abs(s[hi] - t[hi]);
             while (cost > maxCost) {
                 cost -= abs(s[lo] - t[lo]);

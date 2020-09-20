@@ -17,7 +17,7 @@ public:
         // 滑动窗口法
         vector<int> cnt(128, 0);
         int distinct = 0, ans = 0;
-        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+        for (int hi = 0, lo = 0; hi < s.size(); hi++) {
             if (cnt[s[hi]]++ == 0) distinct++;
             while (distinct > 2) { // 若是无效窗口、再移动lo缩小窗口
                 if (--cnt[s[lo]] == 0) distinct--;

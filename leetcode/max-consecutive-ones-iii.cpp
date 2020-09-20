@@ -15,7 +15,7 @@ public:
     int longestOnes(vector<int>& A, int K) {
         const int N = A.size();
         int zeroCnt = 0, ans = INT_MIN;
-        for (int lo = 0, hi = 0; hi < N; hi++) {
+        for (int hi = 0, lo = 0; hi < N; hi++) {
             if (A[hi] == 0) zeroCnt++;
             while (zeroCnt > K) {
                 if (A[lo++] == 0) zeroCnt--;

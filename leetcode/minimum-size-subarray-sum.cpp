@@ -16,7 +16,7 @@ public:
     int minSubArrayLen(int s, vector<int>& nums) {
         const int N = nums.size();        
         int sum = 0, ans = INT_MAX;
-        for (int lo = 0, hi = 0; hi < N; hi++) {
+        for (int hi = 0, lo = 0; hi < N; hi++) {
             sum += nums[hi];
             while (sum >= s) { 
                 ans = min(ans, hi - lo + 1);

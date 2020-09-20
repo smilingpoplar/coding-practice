@@ -21,7 +21,7 @@ public:
         
         // 有效窗口：unique == 0
         int minWidth = INT_MAX, ansLo;
-        for (int lo = 0, hi = 0; hi < s.size(); hi++) {
+        for (int hi = 0, lo = 0; hi < s.size(); hi++) {
             if (--count[s[hi]] == 0) distinct--;
             while (distinct == 0) {
                 if (hi - lo + 1 < minWidth) {
