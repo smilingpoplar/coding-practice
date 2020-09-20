@@ -13,20 +13,16 @@ using namespace std;
 class Solution {
 public:
     int longestOnes(vector<int>& A, int K) {
-        // 滑动窗口中至多k个0，用队列保存各0的下标
-        // 有效窗口：zeroIdx.size() <= k
-        int ans = 0;
-        queue<int> zeroIdx;
-        for (int lo = 0, hi = 0; hi < A.size(); hi++) {
-            if (A[hi] == 0) zeroIdx.push(hi);
-
-            while (zeroIdx.size() > K) {
-                lo = zeroIdx.front() + 1;
-                zeroIdx.pop();
+        const int N = A.size();
+        int zeroCnt = 0, ans = INT_MIN;
+        for (int lo = 0, hi = 0; hi < N; hi++) {
+            if (A[hi] == 0) zeroCnt++;
+            while (zeroCnt > K) {
+                if (A[lo++] == 0) zeroCnt--;
             }
             ans = max(ans, hi - lo + 1);
         }
-        return ans;        
+        return ans;
     }
 };
 
