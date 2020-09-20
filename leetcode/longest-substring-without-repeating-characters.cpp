@@ -15,13 +15,12 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> count;
-        int repeat = 0, ans = 0;
-        // 有效窗口：repeat == 0
+        unordered_map<char, int> cnt;
+        int ans = 0;
         for (int hi = 0, lo = 0; hi < s.size(); hi++) {
-            if (++count[s[hi]] >= 2) repeat++;
-            while (repeat > 0) {
-                if (count[s[lo]]-- >= 2) repeat--;
+            cnt[s[hi]]++;
+            while (cnt[s[hi]] > 1) {
+                cnt[s[lo]]--;
                 lo++;
             }
             ans = max(ans, hi - lo + 1);
