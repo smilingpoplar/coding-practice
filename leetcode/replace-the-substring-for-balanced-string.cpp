@@ -13,22 +13,24 @@ using namespace std;
 class Solution {
 public:
     int balancedString(string s) {
-        // balanced串中各字符要出现K次，此题变成：
-        // 找各字符出现cntInS-K次的最小窗口长
-        const int N = s.size(), K = N / 4;
-        unordered_map<char, int> count;
+        const int N = s.size();
+        unordered_map<char, int> cnt; // char=>count
         for (char c : s) {
-            count[c]++;
+            cnt[c]++;
         }
-        
-        int ans = INT_MAX;
+        unordered_map<char, int> excess;
+        for (auto &e : cnt) {
+            e.second -= N / 4;
+            if (e.second > 0) excess[e.first] = e.second;
+        }
+        if (excess.empty()) return 0;
+        // 找出包含所有富余字符的最小窗口
+        int k = excess.size(), ans = INT_MAX;
         for (int hi = 0, lo = 0; hi < N; hi++) {
-            count[s[hi]]--;
-            while (lo < N 
-                   && count['Q'] - K <= 0 && count['W'] - K <= 0 
-                   && count['E'] - K <= 0 && count['R'] - K <= 0) {
+            if (--cnt[s[hi]] == 0) k--;
+            while (k == 0) { // 包含所有
                 ans = min(ans, hi - lo + 1);
-                count[s[lo]]++;
+                if (cnt[s[lo]]++ == 0) k++;
                 lo++;
             }
         }

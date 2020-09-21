@@ -19,11 +19,10 @@ public:
         for (char c : t) count[c]++;
         int distinct = count.size();
         
-        // 有效窗口：unique == 0
         int minWidth = INT_MAX, ansLo;
         for (int hi = 0, lo = 0; hi < s.size(); hi++) {
             if (--count[s[hi]] == 0) distinct--;
-            while (distinct == 0) {
+            while (distinct == 0) { // 有效窗口
                 if (hi - lo + 1 < minWidth) {
                     minWidth = hi - lo + 1;
                     ansLo = lo;

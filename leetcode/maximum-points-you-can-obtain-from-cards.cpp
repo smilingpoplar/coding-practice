@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
-        // 变为：找长为N-k的最小子段和
+        // 变为：找长=N-k的最小子段和
         const int N = cardPoints.size();
         int totalSum = 0, subSum = 0, minSum = INT_MAX;
         for (int hi = 0, lo = 0; hi < N; hi++) {
