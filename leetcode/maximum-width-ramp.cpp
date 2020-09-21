@@ -34,26 +34,6 @@ public:
 };
 
 /*
-int maxWidthRamp(vector<int>& A) {
-    const int N = A.size();
-    map<int, int> mp; // num=>idx
-    int ans = 0;
-    for (int i = 0; i < N; i++) {
-        // 找<=mp[A[i]]的值中最大的
-        auto it = mp.upper_bound(A[i]); // 先找>mp[A[i]]的
-        bool notFound = (it == mp.begin());
-        if (notFound) { // 多个值只保留第一个
-            mp[A[i]] = i;
-        } else { 
-            it--;
-            ans = max(ans, i - it->second);
-        }
-    }
-    return ans;
-}
-*/
-
-/*
 class Solution {
 public:
     int maxWidthRamp(vector<int>& A) {

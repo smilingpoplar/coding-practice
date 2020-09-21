@@ -14,8 +14,8 @@ class Solution {
 public:
     int longestWPI(vector<int>& hours) {
         // >8变为1，否则变为-1，题目为：找子段和>0最长子段
+        // 配合presum数组，变成找相距最远的两个递增数
         // 同https://leetcode.com/problems/maximum-width-ramp/
-        // 找相距最远的两个递增数
         const int N = hours.size();
         vector<int> presum(N + 1, 0);
         for (int i = 0; i < N; i++) {
