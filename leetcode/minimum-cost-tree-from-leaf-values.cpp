@@ -17,19 +17,19 @@ public:
         //      总代价=内节点代价之和，求最小总代价。
         // 每次算完一个内节点，左右子树中较小的叶节点值a以后都不再使用，
         // 只有较大的叶节点值b参与后续的代价计算。要使总代价最小，就要使b最小。
-        // 所以对a找下一个更大的数b，对应找波谷（局部最小值），
-        // 波谷两侧紧邻是两个方向的下一个更大数，取小者的为b。值a贡献代价a*b。
+        // 所以对a找下一个更大的数b，对应找波谷（局部最小值）。
+        // 波谷a两侧紧邻是两个方向的下一个更大数，取小者的为b。值a贡献代价a*b。
         int ans = 0;
         stack<int> stk;
         stk.push(INT_MAX); // 左哨兵
         for (int val : arr) {
             while (!stk.empty() && val >= stk.top()) {
                 int localMin = stk.top(); stk.pop();
-                ans += localMin * min(stk.top(), val);
+                ans += localMin * min(stk.top(), val); //这里用到左哨兵
             }
             stk.push(val);
         }
-        // 递减栈，最终要剩2个（左哨兵和最大叶节点）
+        // 递减栈，最终要剩最大叶节点、左哨兵
         while (stk.size() > 2) {
             int localMin = stk.top(); stk.pop();
             ans += localMin * stk.top();
