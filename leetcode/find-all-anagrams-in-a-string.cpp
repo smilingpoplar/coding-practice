@@ -19,7 +19,6 @@ public:
         int distinct = count.size();
         
         vector<int> ans;
-        // 每次hi移动一步：若是有效窗口、lo再移动至无效窗口
         for (int hi = 0, lo = 0; hi < s.size(); hi++) {
             if (--count[s[hi]] == 0) distinct--;
             while (distinct == 0) { // 有效窗口
