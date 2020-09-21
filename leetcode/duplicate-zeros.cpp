@@ -20,16 +20,13 @@ public:
         
         // 虚拟扩展位置到j=N-1+zeroCnt
         const int N = arr.size();
-        int j = N - 1 + zeroCnt;
-        for (int i = N - 1; i >= 0; i--) {
+        for (int i = N - 1, j = N - 1 + zeroCnt; i >= 0; i--, j--) {
             if (arr[i]) {
                 if (j < N) arr[j] = arr[i];
-                j--;
             } else {
                 if (j < N) arr[j] = 0;
                 j--;
                 if (j < N) arr[j] = 0;
-                j--;
             }
         }
     }
