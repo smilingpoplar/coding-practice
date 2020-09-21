@@ -13,6 +13,29 @@ using namespace std;
 class Solution {
 public:
     int subarraysWithKDistinct(vector<int>& A, int K) {
+        return atMost(A, K) - atMost(A, K-1);
+    }
+    
+    int atMost(vector<int>& A, int K) {
+        const int N = A.size();
+        unordered_map<int, int> cnt; // num=>count
+        int ans = 0;
+        for (int hi = 0, lo = 0; hi < N; hi++) {
+            if (cnt[A[hi]]++ == 0) K--;
+            while (K < 0) {
+                if (--cnt[A[lo]] == 0) K++;
+                lo++;
+            }
+            ans += hi - lo + 1;
+        }
+        return ans;
+    }
+};
+
+/*
+class Solution {
+public:
+    int subarraysWithKDistinct(vector<int>& A, int K) {
         const int N = A.size();
         unordered_map<int, int> cnt;
         int ans = 0;
@@ -36,6 +59,7 @@ public:
         return ans;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {    
     return 0;
