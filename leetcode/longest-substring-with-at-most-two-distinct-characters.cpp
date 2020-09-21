@@ -14,13 +14,13 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstringTwoDistinct(string s) {
-        // 滑动窗口法
-        vector<int> cnt(128, 0);
-        int distinct = 0, ans = 0;
+        unordered_map<int, int> cnt; // char=>count
+        int k = 2;
+        int ans = 0;
         for (int hi = 0, lo = 0; hi < s.size(); hi++) {
-            if (cnt[s[hi]]++ == 0) distinct++;
-            while (distinct > 2) { // 若是无效窗口、再移动lo缩小窗口
-                if (--cnt[s[lo]] == 0) distinct--;
+            if (cnt[s[hi]]++ == 0) k--;
+            while (k < 0) {
+                if (--cnt[s[lo]] == 0) k++;
                 lo++;
             }
             ans = max(ans, hi - lo + 1);
