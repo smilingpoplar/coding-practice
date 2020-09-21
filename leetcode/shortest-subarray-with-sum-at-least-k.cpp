@@ -14,14 +14,13 @@ using namespace std;
 class Solution {
 public:
     int shortestSubarray(vector<int>& A, int K) {
-        // 前缀和+单调栈
-        // 假设i<j，要满足presum[j]-presum[i]>=K，需要最小化j-i
-        // 1. 固定j最大化i，假设i1<i2<j，presum[i1]>=presum[i2]（注意有＝）
-        // i2比i1更好，因为如果(i1,j)满足条件，(i2,j)的和更大、子段更短
-        // 所以i1不用保留，当presum[i2]<=presum[i1]时i1出栈（严格单调递增栈）
-        // 2. 固定i最小化j，假设i<j1<j2，presum[j1]-i>=K
-        // j2比j1更差，因为(i,j2)子段更长（即使满足presum[j2]-i>=K，更何况可能不满足）
-        // 所以从左往右找到一个满足条件的j1后，所有j2不用再考虑，i不用再保留，i出栈
+        // 前缀和+可取最小值的单调队列
+        // 假设i<j，要满足presum[j]-presum[i]>=K，且最小化j-i
+        // 1. 固定j最大化i，假设i1<i2<j，presum[i2]<=presum[i1]（注意有＝）
+        // i2比i1更好，因为如果(i1,j)满足大小条件，(i2,j)更满足、子段更短，所以i1不用保留
+        // 2. 固定i最小化j，假设i<j1<j2，presum[j1]-presum[i]>=K
+        // j2比j1更差，因为(i,j2)子段更长（即使满足presum[j2]-presum[i]>=K，更何况可能不满足）
+        // 所以从左往右找到一个满足条件的j1后，所有j2不用再考虑，i用完不再保留
         const int N = A.size();
         vector<int> presum(N + 1, 0);
         for (int i = 0; i < N; i++) {
@@ -29,18 +28,18 @@ public:
         }
         
         int ans = INT_MAX;
-        deque<int> q;
+        deque<int> dq;
         for (int i = 0; i <= N; i++) {
-            // 1 严格单调递增栈
-            while (!q.empty() && presum[i] <= presum[q.back()]) {
-                q.pop_back();
+            // 1 可取最小值->单调递增；最短->相同值只保留最后一个->弹出比较用<=
+            while (!dq.empty() && presum[i] <= presum[dq.back()]) {
+                dq.pop_back();
             }     
-            q.push_back(i);
+            dq.push_back(i);
             
-            // 2 从左往右，找满足presum[j]-stackTop>=K的索引j，找到后i出栈
-            while (!q.empty() && presum[i] - presum[q.front()] >= K) {
-                ans = min(ans, i - q.front());
-                q.pop_front();
+            // 2 从左往右，当前数跟队头比较
+            while (!dq.empty() && presum[i] - presum[dq[0]] >= K) {
+                ans = min(ans, i - dq[0]); // 前开后闭区间
+                dq.pop_front();
             }
         }
         return ans != INT_MAX ? ans : -1;
