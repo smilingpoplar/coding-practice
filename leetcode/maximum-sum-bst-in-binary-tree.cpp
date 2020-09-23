@@ -19,6 +19,8 @@ public:
     }
     
     // 返回{sum, min, max}
+    // 空节点作左儿子时，要让"父节点的val > 空节点的max"总成立，空节点的max=INT_MIN；
+    // 同理，空节点的min=INT_MAX；所以，空节点值区间[INT_MAX,INT_MIN]
     // {0,INT_MAX,INT_MIN}表示空节点，{0,INT_MIN,INT_MAX}表示无效节点
     array<int,3> dfs(TreeNode *root, int &ans) {
         if (!root) return { 0, INT_MAX, INT_MIN };
