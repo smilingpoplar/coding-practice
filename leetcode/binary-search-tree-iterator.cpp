@@ -19,34 +19,30 @@ struct TreeNode {
 };
 
 class BSTIterator {
-public:
-    // 中序遍历迭代版，curr表示当前待入栈的元素
-    BSTIterator(TreeNode *root) {
-        curr = root;
-    }
+    stack<TreeNode *> stk;
     
-    /** @return whether we have a next smallest number */
-    bool hasNext() {
-        return curr || !stk.empty();
+    void pushLeft(TreeNode *node) {
+        while (node) {
+            stk.push(node);
+            node = node->left;
+        }
+    }
+public:
+    BSTIterator(TreeNode* root) {
+        pushLeft(root);
     }
     
     /** @return the next smallest number */
     int next() {
-        while (curr || !stk.empty()) {
-            while (curr) {
-                stk.push(curr);
-                curr = curr->left;
-            }
-            auto node = stk.top(); stk.pop();
-            int ans = node->val;
-            curr = node->right;
-            return ans;
-        }
-        return INT_MAX;
+        auto node = stk.top(); stk.pop();
+        pushLeft(node->right);
+        return node->val;
     }
-private:
-    TreeNode *curr;
-    stack<TreeNode *> stk;
+    
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        return !stk.empty();
+    }
 };
 
 int main(int argc, const char * argv[]) {
