@@ -18,7 +18,6 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-/*
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
@@ -27,12 +26,13 @@ public:
 
     bool isValidBST(TreeNode *root, long lower, long upper) {
         if (!root) return true;
-        if (root->val <= lower || root->val >= upper) return false;
-        return isValidBST(root->left, lower, root->val) && isValidBST(root->right, root->val, upper);
+        return (lower < root->val && root->val < upper) 
+            && isValidBST(root->left, lower, root->val) 
+            && isValidBST(root->right, root->val, upper);
     }
 };
-*/
 
+/*
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
@@ -56,6 +56,7 @@ public:
         }
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     TreeNode t0(3);
