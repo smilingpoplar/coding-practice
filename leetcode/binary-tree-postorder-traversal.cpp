@@ -21,18 +21,14 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
-        vector<int> ans;
         stack<TreeNode *> stk;
-        auto curr = root; // curr是待入栈的节点
+        pushLeft(stk, root);
         TreeNode *prev = NULL;
-        while (curr || !stk.empty()) {
-            while (curr) {
-                stk.push(curr);
-                curr = curr->left;
-            }
+        vector<int> ans;
+        while (!stk.empty()) {
             auto node = stk.top();
             if (node->right && prev != node->right) { // 不是从右子树返回，访问右子树
-                curr = node->right;
+                pushLeft(stk, node->right);
             } else { // 从右子树返回，出栈并访问
                 stk.pop();
                 ans.push_back(node->val);
@@ -40,6 +36,13 @@ public:
             }
         }
         return ans;
+    }
+
+    void pushLeft(stack<TreeNode*> &stk, TreeNode *node) {
+       while (node) {
+            stk.push(node);
+            node = node->left;
+        }
     }
 };
 
