@@ -37,20 +37,23 @@ class Solution {
 public:
     bool isValidBST(TreeNode* root) {
         // 确保bst的中序遍历单调递增
-        auto curr = root;
         stack<TreeNode *> stk;
+        pushLeft(stk, root);
         TreeNode *prev = NULL;
-        while (curr || !stk.empty()) {
-            while (curr) {
-                stk.push(curr);
-                curr = curr->left;
-            } 
+        while (!stk.empty()) {
             auto node = stk.top(); stk.pop();                
             if (prev && prev->val >= node->val) return false;
             prev = node;
-            curr = node->right;
+            pushLeft(stk, node->right);
         }
         return true;
+    }
+
+    void pushLeft(stack<TreeNode*> &stk, TreeNode *node) {
+        while (node) {
+            stk.push(node);
+            node = node->left;
+        }
     }
 };
 
