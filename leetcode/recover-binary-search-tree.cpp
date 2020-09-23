@@ -23,25 +23,29 @@ class Solution {
 public:
     void recoverTree(TreeNode* root) {
         // 中序遍历，O(N)
-        auto curr = root;
         stack<TreeNode *> stk;
+        pushLeft(stk, root);
+        
         TreeNode *prev = NULL, *m1 = NULL, *m2 = NULL;
-        while (curr || !stk.empty()) {
-            while (curr) {
-                stk.push(curr);
-                curr = curr->left;
-            }
+        while (!stk.empty()) {
             // 找出违反递增关系的首尾节点
             auto node = stk.top(); stk.pop();
-            if (prev && prev->val >= node->val) {
+            if (prev && node->val <= prev->val) {
                 if (!m1) m1 = prev;
                 m2 = node;
             }
             prev = node;
-            curr = node->right;
+            pushLeft(stk, node->right);
         }
 
         if (m1 && m2) swap(m1->val, m2->val);
+    }
+    
+    void pushLeft(stack<TreeNode*> &stk, TreeNode *node) {
+        while (node) {
+            stk.push(node);
+            node = node->left;
+        }
     }
 };
 */
