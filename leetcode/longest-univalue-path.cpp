@@ -14,21 +14,21 @@ class Solution {
 public:
     int longestUnivaluePath(TreeNode* root) {
         int ans = 0;
-        arrowEdgesCount(root, ans);
+        dfs(root, ans);
         return ans;
     }
 
-    int arrowEdgesCount(TreeNode *root, int &ans) {
+    int dfs(TreeNode *root, int &ans) {
         if (!root) return 0;
-        int left = arrowEdgesCount(root->left, ans);
-        int right = arrowEdgesCount(root->right, ans);
+        int left = dfs(root->left, ans);
+        int right = dfs(root->right, ans);
 
-        int arrowLeft = 0, arrowRight = 0;
-        if (root->left && root->left->val == root->val) arrowLeft = 1 + left;
-        if (root->right && root->right->val == root->val) arrowRight = 1 + right;
-        ans = max(ans, arrowLeft + arrowRight); // 经过root的最大边数
+        int leftEdge = 0, rightEdge = 0;
+        if (root->left && root->left->val == root->val) leftEdge = 1 + left;
+        if (root->right && root->right->val == root->val) rightEdge = 1 + right;
+        ans = max(ans, leftEdge + rightEdge); // 经过当前节点的最大边数
 
-        return max(arrowLeft, arrowRight);
+        return max(leftEdge, rightEdge);
     }
 };
 
