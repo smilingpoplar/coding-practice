@@ -52,8 +52,8 @@ public:
     
     // 类似i--，到左子树最右儿子的路径
     void getPredecessor(stack<TreeNode *> &pred) {
-        auto top = pred.top(); pred.pop();
-        auto p = top->left;
+        auto node = pred.top(); pred.pop();
+        auto p = node->left;
         while (p) {
             pred.push(p);
             p = p->right;
@@ -62,8 +62,8 @@ public:
     
     // 类似j++，到右子树最左儿子的路径
     void getSuccessor(stack<TreeNode *> &succ) {
-        auto top = succ.top(); succ.pop();
-        auto p = top->right;
+        auto node = succ.top(); succ.pop();
+        auto p = node->right;
         while (p) {
             succ.push(p);
             p = p->left;
