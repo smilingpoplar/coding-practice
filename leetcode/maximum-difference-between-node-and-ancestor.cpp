@@ -27,13 +27,13 @@ public:
         return ans;
     }
     
-    void dfs(TreeNode *root, int pathMin, int pathMax, int &ans) {
+    void dfs(TreeNode *root, int mn, int mx, int &ans) {
         if (!root) return;
-        pathMin = min(pathMin, root->val);
-        pathMax = max(pathMax, root->val);
-        dfs(root->left, pathMin, pathMax, ans);
-        dfs(root->right, pathMin, pathMax, ans);
-        ans = max(ans, pathMax - pathMin);
+        mn = min(mn, root->val);
+        mx = max(mx, root->val);
+        dfs(root->left, mn, mx, ans);
+        dfs(root->right, mn, mx, ans);
+        ans = max(ans, mx - mn);
     }
 };
 

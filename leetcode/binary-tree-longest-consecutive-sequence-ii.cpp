@@ -28,15 +28,15 @@ class Solution {
 public:
     int longestConsecutive(TreeNode* root) {
         int ans = 0;
-        arrowNodesCount(root, ans);
+        dfs(root, ans);
         return ans;
     }
     
     // 从root开始往下递增和递减的节点数
-    Info arrowNodesCount(TreeNode *root, int &ans) {
+    Info dfs(TreeNode *root, int &ans) {
         if (!root) return {0, 0};
-        auto left = arrowNodesCount(root->left, ans);
-        auto right = arrowNodesCount(root->right, ans);
+        auto left = dfs(root->left, ans);
+        auto right = dfs(root->right, ans);
 
         int incCnt = 1, decCnt = 1;        
         if (root->left) {
