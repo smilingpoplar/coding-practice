@@ -34,7 +34,7 @@ public:
                 delete root;
                 return left;
             }
-            // 把后继节点作为新根
+            // 把后继节点的值赋给根，并删除该后继节点
             auto curr = root->right;
             while (curr->left) curr = curr->left;
             root->val = curr->val;
