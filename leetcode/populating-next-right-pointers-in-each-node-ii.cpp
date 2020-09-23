@@ -18,26 +18,28 @@ struct TreeLinkNode {
 
 class Solution {
 public:
-    void connect(TreeLinkNode *root) {
-        TreeLinkNode dummy(0); // 下层起点
-        auto prev = &dummy;
-        while (root) { // 遍历当前层，当前层已用next指针连接
-            if (root->left) {
-                prev->next = root->left;
-                prev = root->left;
+    Node* connect(Node *root) {
+        Node nextRow(0); // 下层起点
+        auto last = &nextRow;
+        auto curr = root;
+        while (curr) { // 遍历当前层，当前层已用next指针连接
+            if (curr->left) {
+                last->next = curr->left;
+                last = curr->left;
             }
-            if (root->right) {
-                prev->next = root->right;
-                prev = root->right;
+            if (curr->right) {
+                last->next = curr->right;
+                last = curr->right;
             }
-            root = root->next;
+            curr = curr->next;
 
-            if (!root) { 
-                root = dummy.next;
-                dummy.next = NULL;
-                prev = &dummy;
+            if (!curr) { 
+                curr = nextRow.next;
+                nextRow.next = NULL;
+                last = &nextRow;
             }
         }
+        return root;
     }
 };
 
