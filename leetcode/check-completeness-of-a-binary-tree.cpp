@@ -14,17 +14,17 @@ using namespace std;
 class Solution {
 public:
     bool isCompleteTree(TreeNode* root) {
-        // bfs，NULL也入队
-        bool completed = false;
         queue<TreeNode *> q;
         q.push(root);
-        
+
+        // BFS，在弹出NULL后不应再有实际节点
+        bool seenNull = false;
         while (!q.empty()) {
             auto node = q.front(); q.pop();
             if (!node) {
-                completed = true;
+                seenNull = true;
             } else {
-                if (completed) return false;
+                if (seenNull) return false;
                 q.push(node->left);
                 q.push(node->right);
             }
