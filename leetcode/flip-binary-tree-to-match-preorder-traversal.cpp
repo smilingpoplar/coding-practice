@@ -13,9 +13,8 @@ using namespace std;
 class Solution {
 public:
     vector<int> flipMatchVoyage(TreeNode* root, vector<int>& voyage) {
-        // 类似表达式解析问题，有个idx记录解析位置
-        int idx = 0;
         vector<int> ans;
+        int idx = 0; // 类似表达式解析问题，有个idx记录解析位置
         if (match(root, voyage, idx, ans)) return ans;
         return {-1};
     }

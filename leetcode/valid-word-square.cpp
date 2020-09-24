@@ -1,6 +1,6 @@
 //
-  //  valid-word-square
-  //  https://leetcode.com/problems/valid-word-square/
+//  valid-word-square
+//  https://leetcode.com/problems/valid-word-square/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
