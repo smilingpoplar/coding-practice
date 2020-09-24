@@ -15,8 +15,9 @@ public:
     int countComponents(int n, vector<pair<int, int>>& edges) {
         // 并查集
         vector<int> parent(n);
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             parent[i] = i;
+        }
         
         // unite
         for (auto &edge : edges) {

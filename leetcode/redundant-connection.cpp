@@ -13,9 +13,11 @@ class Solution {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         // 并查集
-        const int N = edges.size();
+        const int N = edges.size(); // 已知节点数N为输入数组长
         vector<int> parent(N + 1, 0);
-        for (int i = 1; i <= N; i++) parent[i] = i;
+        for (int i = 1; i <= N; i++) {
+            parent[i] = i;
+        }
         // unite
         for (auto &edge : edges) {
             int pu = find(edge[0], parent);
