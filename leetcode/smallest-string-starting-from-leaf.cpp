@@ -14,12 +14,24 @@ using namespace std;
 class Solution {
 public:
     string smallestFromLeaf(TreeNode* root) {
-        // 后面的min(subtree,NULL)比较不能选空子树，所以要让空子树返回很大值
-        if (!root) return string(1, 'a' + 26);
-        
-        string s(1, 'a' + root->val);
-        if (!root->left && !root->right) return s;
-        return min(smallestFromLeaf(root->left) + s, smallestFromLeaf(root->right) + s);
+        // 注意，如果两串不等长，s1<s2不能推得s1+s<s2+s
+        // 比如ab<abab，不能推得abz<ababz
+        // dfs全部遍历
+        string cur;
+        string smallest(1, 'a' + 26);
+        dfs(root, cur, smallest);
+        return smallest;
+    }
+    
+    void dfs(TreeNode *root, string cur, string &s) {
+        if (!root) return;
+        cur = char('a' + root->val) + cur;
+        if (!root->left && !root->right) {
+            s = min(s, cur);
+            return;
+        }
+        dfs(root->left, cur, s);
+        dfs(root->right, cur, s);        
     }
 };
 
