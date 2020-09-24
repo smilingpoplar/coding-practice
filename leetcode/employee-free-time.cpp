@@ -32,15 +32,15 @@ public:
 
         vector<Interval> ans;
         int event = 0, start = -1;
-        for (auto &e : timeline) {
-            event += e.second;
+        for (auto& [time, cnt] : timeline) {
+            event += cnt;
             if (event <= 0) { // 空闲时间
                 if (start == -1) {
-                    start = e.first;
+                    start = time;
                 }
             } else {
                 if (start != -1) {
-                    ans.push_back({ start, e.first });                    
+                    ans.push_back({ start, time });                    
                     start = -1;
                 }
             }
