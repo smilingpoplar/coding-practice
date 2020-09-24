@@ -12,12 +12,12 @@ using namespace std;
 class Solution {
 public:
     string frequencySort(string s) {
-        unordered_map<char, int> count;
-        for (char c : s) count[c]++;
+        unordered_map<char, int> cnt;
+        for (char c : s) cnt[c]++;
         // 按频率分桶
         vector<vector<char>> buckets(s.size() + 1);
-        for (auto &e : count) 
-            buckets[e.second].push_back(e.first);
+        for (auto& [key, val] : cnt) 
+            buckets[val].push_back(key);
         
         ostringstream oss;
         for (int i = buckets.size() - 1; i >= 0; i--) {
