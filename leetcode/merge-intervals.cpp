@@ -2,7 +2,7 @@
 //  merge-intervals
 //  https://leetcode.com/problems/merge-intervals/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

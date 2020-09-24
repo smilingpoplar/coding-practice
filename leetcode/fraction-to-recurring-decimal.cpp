@@ -2,7 +2,7 @@
 //  fraction-to-recurring-decimal
 //  https://leetcode.com/problems/fraction-to-recurring-decimal/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  split-array-into-consecutive-subsequences
 //  https://leetcode.com/problems/split-array-into-consecutive-subsequences/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

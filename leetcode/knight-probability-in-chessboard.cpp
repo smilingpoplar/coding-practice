@@ -2,7 +2,7 @@
 //  knight-probability-in-chessboard
 //  https://leetcode.com/problems/knight-probability-in-chessboard/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

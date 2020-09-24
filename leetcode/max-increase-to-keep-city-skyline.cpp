@@ -2,7 +2,7 @@
 //  max-increase-to-keep-city-skyline
 //  https://leetcode.com/problems/max-increase-to-keep-city-skyline/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

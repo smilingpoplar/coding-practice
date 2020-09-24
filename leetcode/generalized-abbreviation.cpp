@@ -2,7 +2,7 @@
 //  generalized-abbreviation
 //  https://leetcode.com/problems/generalized-abbreviation/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

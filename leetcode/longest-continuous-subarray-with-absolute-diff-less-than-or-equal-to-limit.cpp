@@ -2,7 +2,7 @@
 //  longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit
 //  https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

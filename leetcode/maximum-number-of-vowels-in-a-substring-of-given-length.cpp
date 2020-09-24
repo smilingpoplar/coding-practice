@@ -2,7 +2,7 @@
 //  maximum-number-of-vowels-in-a-substring-of-given-length
 //  https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

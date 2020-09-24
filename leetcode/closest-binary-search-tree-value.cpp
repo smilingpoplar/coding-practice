@@ -2,7 +2,7 @@
 //  closest-binary-search-tree-value
 //  https://leetcode.com/problems/closest-binary-search-tree-value/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  new-21-game
 //  https://leetcode.com/problems/new-21-game/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

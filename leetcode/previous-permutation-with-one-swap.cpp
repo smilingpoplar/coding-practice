@@ -2,7 +2,7 @@
 //  previous-permutation-with-one-swap
 //  https://leetcode.com/problems/previous-permutation-with-one-swap/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

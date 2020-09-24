@@ -2,7 +2,7 @@
 //  convert-binary-number-in-a-linked-list-to-integer
 //  https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

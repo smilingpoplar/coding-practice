@@ -2,7 +2,7 @@
 //  check-if-word-is-valid-after-substitutions
 //  https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

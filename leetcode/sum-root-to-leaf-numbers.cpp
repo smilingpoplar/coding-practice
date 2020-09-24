@@ -2,7 +2,7 @@
 //  sum-root-to-leaf-numbers
 //  https://leetcode.com/problems/sum-root-to-leaf-numbers/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

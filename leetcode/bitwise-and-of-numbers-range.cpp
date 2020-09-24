@@ -2,7 +2,7 @@
 //  bitwise-and-of-numbers-range
 //  https://leetcode.com/problems/bitwise-and-of-numbers-range/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

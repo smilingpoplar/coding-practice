@@ -2,7 +2,7 @@
 //  ip-to-cidr
 //  https://leetcode.com/problems/ip-to-cidr/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

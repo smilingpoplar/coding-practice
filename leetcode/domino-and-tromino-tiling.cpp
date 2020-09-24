@@ -2,7 +2,7 @@
 //  domino-and-tromino-tiling
 //  https://leetcode.com/problems/domino-and-tromino-tiling/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

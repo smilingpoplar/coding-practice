@@ -2,7 +2,7 @@
 //  running-sum-of-1d-array
 //  https://leetcode.com/problems/running-sum-of-1d-array/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

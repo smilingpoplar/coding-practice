@@ -2,7 +2,7 @@
 //  maximum-non-negative-product-in-a-matrix
 //  https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

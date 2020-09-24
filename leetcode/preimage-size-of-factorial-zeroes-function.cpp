@@ -2,7 +2,7 @@
 //  preimage-size-of-factorial-zeroes-function
 //  https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

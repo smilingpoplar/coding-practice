@@ -2,7 +2,7 @@
 //  smallest-integer-divisible-by-k
 //  https://leetcode.com/problems/smallest-integer-divisible-by-k/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

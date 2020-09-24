@@ -2,7 +2,7 @@
 //  minimum-score-triangulation-of-polygon
 //  https://leetcode.com/problems/minimum-score-triangulation-of-polygon/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

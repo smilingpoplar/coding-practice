@@ -2,7 +2,7 @@
 //  two-sum-ii-input-array-is-sorted
 //  https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

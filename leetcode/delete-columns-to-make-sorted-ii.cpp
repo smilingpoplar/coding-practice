@@ -2,7 +2,7 @@
 //  delete-columns-to-make-sorted-ii
 //  https://leetcode.com/problems/delete-columns-to-make-sorted-ii/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

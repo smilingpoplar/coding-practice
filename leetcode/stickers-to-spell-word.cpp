@@ -2,7 +2,7 @@
 //  stickers-to-spell-word
 //  https://leetcode.com/problems/stickers-to-spell-word/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

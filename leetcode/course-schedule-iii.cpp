@@ -2,7 +2,7 @@
 //  course-schedule-iii
 //  https://leetcode.com/problems/course-schedule-iii/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

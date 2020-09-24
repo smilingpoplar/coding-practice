@@ -2,7 +2,7 @@
 //  maximum-number-of-coins-you-can-get
 //  https://leetcode.com/problems/maximum-number-of-coins-you-can-get/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

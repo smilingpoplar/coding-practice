@@ -2,7 +2,7 @@
 //  intersection-of-two-arrays
 //  https://leetcode.com/problems/intersection-of-two-arrays/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  guess-number-higher-or-lower
 //  https://leetcode.com/problems/guess-number-higher-or-lower/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

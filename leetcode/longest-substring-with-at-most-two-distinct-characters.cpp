@@ -2,7 +2,7 @@
 //  longest-substring-with-at-most-two-distinct-characters
 //  https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

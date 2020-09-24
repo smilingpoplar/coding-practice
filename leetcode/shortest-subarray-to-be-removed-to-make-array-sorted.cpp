@@ -2,7 +2,7 @@
 //  shortest-subarray-to-be-removed-to-make-array-sorted
 //  https://leetcode.com/problems/shortest-subarray-to-be-removed-to-make-array-sorted/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

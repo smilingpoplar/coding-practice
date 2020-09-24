@@ -2,7 +2,7 @@
 //  maximum-subarray-sum-with-one-deletion
 //  https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

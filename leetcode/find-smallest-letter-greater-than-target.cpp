@@ -2,7 +2,7 @@
 //  find-smallest-letter-greater-than-target
 //  https://leetcode.com/problems/find-smallest-letter-greater-than-target/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  find-the-duplicate-number
 //  https://leetcode.com/problems/find-the-duplicate-number/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

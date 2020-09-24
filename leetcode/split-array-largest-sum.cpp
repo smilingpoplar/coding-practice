@@ -2,7 +2,7 @@
 //  split-array-largest-sum
 //  https://leetcode.com/problems/split-array-largest-sum/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

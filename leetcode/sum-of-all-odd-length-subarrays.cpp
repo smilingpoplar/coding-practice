@@ -2,7 +2,7 @@
 //  sum-of-all-odd-length-subarrays
 //  https://leetcode.com/problems/sum-of-all-odd-length-subarrays/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

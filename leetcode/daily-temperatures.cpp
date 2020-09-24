@@ -2,7 +2,7 @@
 //  daily-temperatures
 //  https://leetcode.com/problems/daily-temperatures/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  minimum-remove-to-make-valid-parentheses
 //  https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

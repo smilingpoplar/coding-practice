@@ -2,7 +2,7 @@
 //  all-possible-full-binary-trees
 //  https://leetcode.com/problems/all-possible-full-binary-trees/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

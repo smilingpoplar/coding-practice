@@ -2,7 +2,7 @@
 //  1-bit-and-2-bit-characters
 //  https://leetcode.com/problems/1-bit-and-2-bit-characters/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  fruit-into-baskets
 //  https://leetcode.com/problems/fruit-into-baskets/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

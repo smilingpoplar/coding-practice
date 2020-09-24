@@ -2,7 +2,7 @@
 //  di-string-match
 //  https://leetcode.com/problems/di-string-match/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

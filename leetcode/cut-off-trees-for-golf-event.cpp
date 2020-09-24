@@ -2,7 +2,7 @@
 //  cut-off-trees-for-golf-event
 //  https://leetcode.com/problems/cut-off-trees-for-golf-event/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

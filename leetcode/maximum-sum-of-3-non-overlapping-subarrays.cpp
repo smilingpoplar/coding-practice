@@ -2,7 +2,7 @@
 //  maximum-sum-of-3-non-overlapping-subarrays
 //  https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/
 //
-//  CopyrightIdx (c) 2015年 YangLe. All rightIdxs reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

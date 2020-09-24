@@ -2,7 +2,7 @@
 //  all-paths-from-source-to-target
 //  https://leetcode.com/problems/all-paths-from-source-to-target/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

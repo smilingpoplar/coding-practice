@@ -2,7 +2,7 @@
 //  surface-area-of-3d-shapes
 //  https://leetcode.com/problems/surface-area-of-3d-shapes/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

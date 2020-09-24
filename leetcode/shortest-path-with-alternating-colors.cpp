@@ -2,7 +2,7 @@
 //  shortest-path-with-alternating-colors
 //  https://leetcode.com/problems/shortest-path-with-alternating-colors/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

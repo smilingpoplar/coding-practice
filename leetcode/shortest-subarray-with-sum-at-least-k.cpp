@@ -2,7 +2,7 @@
 //  shortest-subarray-with-sum-at-least-k
 //  https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

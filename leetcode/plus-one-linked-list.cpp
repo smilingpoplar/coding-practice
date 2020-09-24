@@ -2,7 +2,7 @@
 //  plus-one-linked-list
 //  https://leetcode.com/problems/plus-one-linked-list/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

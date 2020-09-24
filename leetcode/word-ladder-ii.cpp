@@ -2,7 +2,7 @@
 //  word-ladder-ii
 //  https://leetcode.com/problems/word-ladder-ii/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

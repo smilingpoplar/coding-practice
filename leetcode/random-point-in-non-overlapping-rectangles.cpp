@@ -2,7 +2,7 @@
 //  random-point-in-non-overlapping-rectangles
 //  https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

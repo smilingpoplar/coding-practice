@@ -2,7 +2,7 @@
 //  range-sum-query-mutable
 //  https://leetcode.com/problems/range-sum-query-mutable/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

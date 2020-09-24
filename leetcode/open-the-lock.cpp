@@ -2,7 +2,7 @@
 //  open-the-lock
 //  https://leetcode.com/problems/open-the-lock/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

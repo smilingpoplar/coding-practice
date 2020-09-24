@@ -2,7 +2,7 @@
 //  max-points-on-a-line
 //  https://leetcode.com/problems/max-points-on-a-line/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

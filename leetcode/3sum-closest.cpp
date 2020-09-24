@@ -2,7 +2,7 @@
 //  3sum-closest
 //  https://leetcode.com/problems/3sum-closest/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

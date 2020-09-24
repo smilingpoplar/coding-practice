@@ -2,7 +2,7 @@
 //  add-one-row-to-tree
 //  https://leetcode.com/problems/add-one-row-to-tree/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

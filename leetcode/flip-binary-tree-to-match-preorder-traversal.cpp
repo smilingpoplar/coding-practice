@@ -2,7 +2,7 @@
 //  flip-binary-tree-to-match-preorder-traversal
 //  https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

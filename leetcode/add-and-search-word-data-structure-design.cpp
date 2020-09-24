@@ -2,7 +2,7 @@
 //  add-and-search-word-data-structure-design
 //  https://leetcode.com/problems/add-and-search-word-data-structure-design/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

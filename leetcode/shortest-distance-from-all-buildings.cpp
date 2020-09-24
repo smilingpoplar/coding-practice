@@ -2,7 +2,7 @@
 //  shortest-distance-from-all-buildings
 //  https://leetcode.com/problems/shortest-distance-from-all-buildings/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

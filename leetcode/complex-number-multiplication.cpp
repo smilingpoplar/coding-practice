@@ -2,7 +2,7 @@
 //  complex-number-multiplication
 //  https://leetcode.com/problems/complex-number-multiplication/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

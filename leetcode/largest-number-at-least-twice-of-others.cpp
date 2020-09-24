@@ -2,7 +2,7 @@
 //  largest-number-at-least-twice-of-others
 //  https://leetcode.com/problems/largest-number-at-least-twice-of-others/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

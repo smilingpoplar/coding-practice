@@ -2,7 +2,7 @@
 //  kth-smallest-number-in-multiplication-table
 //  https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

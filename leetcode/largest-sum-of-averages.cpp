@@ -2,7 +2,7 @@
 //  largest-sum-of-averages
 //  https://leetcode.com/problems/largest-sum-of-averages/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

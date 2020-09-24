@@ -2,7 +2,7 @@
 //  letter-combinations-of-a-phone-number
 //  https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

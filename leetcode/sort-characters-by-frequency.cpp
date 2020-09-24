@@ -2,7 +2,7 @@
 //  sort-characters-by-frequency
 //  https://leetcode.com/problems/sort-characters-by-frequency/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

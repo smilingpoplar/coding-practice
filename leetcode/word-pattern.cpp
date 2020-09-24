@@ -2,7 +2,7 @@
 //  word-pattern
 //  https://leetcode.com/problems/word-pattern/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

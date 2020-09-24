@@ -2,7 +2,7 @@
 //  h-index-ii
 //  https://leetcode.com/problems/h-index-ii/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

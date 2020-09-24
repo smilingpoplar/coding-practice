@@ -2,7 +2,7 @@
 //  quad-tree-intersection
 //  https://leetcode.com/problems/quad-tree-intersection/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

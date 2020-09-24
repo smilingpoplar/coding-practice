@@ -2,7 +2,7 @@
 //  k-sum
 //  https://www.lintcode.com/problem/k-sum/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

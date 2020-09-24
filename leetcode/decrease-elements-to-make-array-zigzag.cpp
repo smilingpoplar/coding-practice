@@ -2,7 +2,7 @@
 //  decrease-elements-to-make-array-zigzag
 //  https://leetcode.com/problems/decrease-elements-to-make-array-zigzag/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

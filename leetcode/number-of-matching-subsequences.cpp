@@ -2,7 +2,7 @@
 //  number-of-matching-subsequences
 //  https://leetcode.com/problems/number-of-matching-subsequences/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

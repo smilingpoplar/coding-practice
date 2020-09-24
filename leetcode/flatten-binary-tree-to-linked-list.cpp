@@ -2,7 +2,7 @@
 //  flatten-binary-tree-to-linked-list
 //  https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

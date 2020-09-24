@@ -2,7 +2,7 @@
 //  minimum-cost-for-tickets
 //  https://leetcode.com/problems/minimum-cost-for-tickets/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

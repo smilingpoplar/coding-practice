@@ -2,7 +2,7 @@
 //  rearrange-string-k-distance-apart
 //  https://leetcode.com/problems/rearrange-string-k-distance-apart/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

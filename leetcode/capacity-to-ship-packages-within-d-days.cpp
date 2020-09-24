@@ -2,7 +2,7 @@
 //  capacity-to-ship-packages-within-d-days
 //  https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

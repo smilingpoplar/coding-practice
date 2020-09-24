@@ -2,7 +2,7 @@
 //  number-of-good-pairs
 //  https://leetcode.com/problems/number-of-good-pairs/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

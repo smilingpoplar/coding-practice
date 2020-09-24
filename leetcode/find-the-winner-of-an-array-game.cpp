@@ -2,7 +2,7 @@
 //  find-the-winner-of-an-array-game
 //  https://leetcode.com/problems/find-the-winner-of-an-array-game/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

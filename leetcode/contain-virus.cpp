@@ -2,7 +2,7 @@
 //  contain-virus
 //  https://leetcode.com/problems/contain-virus/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

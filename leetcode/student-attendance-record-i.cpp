@@ -2,7 +2,7 @@
 //  student-attendance-record-i
 //  https://leetcode.com/problems/student-attendance-record-i/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

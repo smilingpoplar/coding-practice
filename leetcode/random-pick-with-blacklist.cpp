@@ -2,7 +2,7 @@
 //  random-pick-with-blacklist
 //  https://leetcode.com/problems/random-pick-with-blacklist/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

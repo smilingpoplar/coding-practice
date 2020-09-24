@@ -2,7 +2,7 @@
 //  k-th-smallest-in-lexicographical-order
 //  https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

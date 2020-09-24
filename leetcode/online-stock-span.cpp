@@ -2,7 +2,7 @@
 //  online-stock-span
 //  https://leetcode.com/problems/online-stock-span/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

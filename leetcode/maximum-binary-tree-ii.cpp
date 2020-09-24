@@ -2,7 +2,7 @@
 //  maximum-binary-tree-ii
 //  https://leetcode.com/problems/maximum-binary-tree-ii/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

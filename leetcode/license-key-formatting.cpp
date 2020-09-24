@@ -2,7 +2,7 @@
 //  license-key-formatting
 //  https://leetcode.com/problems/license-key-formatting/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

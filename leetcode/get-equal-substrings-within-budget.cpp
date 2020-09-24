@@ -2,7 +2,7 @@
 //  get-equal-substrings-within-budget
 //  https://leetcode.com/problems/get-equal-substrings-within-budget/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

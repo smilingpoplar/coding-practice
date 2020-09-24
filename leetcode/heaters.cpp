@@ -2,7 +2,7 @@
 //  heaters
 //  https://leetcode.com/problems/heaters/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

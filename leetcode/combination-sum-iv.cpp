@@ -2,7 +2,7 @@
 //  combination-sum-iv
 //  https://leetcode.com/problems/combination-sum-iv/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  bag-of-tokens
 //  https://leetcode.com/problems/bag-of-tokens/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

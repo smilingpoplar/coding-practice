@@ -2,7 +2,7 @@
 //  x-of-a-kind-in-a-deck-of-cards
 //  https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

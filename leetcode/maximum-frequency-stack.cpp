@@ -2,7 +2,7 @@
 //  maximum-frequency-stack
 //  https://leetcode.com/problems/maximum-frequency-stack/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

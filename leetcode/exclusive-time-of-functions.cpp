@@ -2,7 +2,7 @@
 //  exclusive-time-of-functions
 //  https://leetcode.com/problems/exclusive-time-of-functions/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

@@ -2,7 +2,7 @@
 //  delete-nodes-and-return-forest
 //  https://leetcode.com/problems/delete-nodes-and-return-forest/
 //
-//  Copyright (c) 2015年 YangLe. All rights reserved.
+//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>
