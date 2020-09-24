@@ -15,14 +15,14 @@ class FindElements {
 public:
     FindElements(TreeNode* root) {
         _root = root;
-        recover(root, 0);
+        dfs(root, 0);
     }
     
-    void recover(TreeNode *root, int val) {
+    void dfs(TreeNode *root, int val) {
         if (!root) return;
         root->val = val;
-        recover(root->left, val * 2 + 1);
-        recover(root->right, val * 2 + 2);
+        dfs(root->left, val * 2 + 1);
+        dfs(root->right, val * 2 + 2);
     }
     
     bool find(int target) {
