@@ -16,11 +16,11 @@ public:
         for (char c : s) cnt[c]++;
         // 按频率分桶
         vector<vector<char>> buckets(s.size() + 1);
-        for (auto& [key, val] : cnt) 
-            buckets[val].push_back(key);
+        for (auto& [key, freq] : cnt) 
+            buckets[freq].push_back(key);
         
         ostringstream oss;
-        for (int i = buckets.size() - 1; i >= 0; i--) {
+        for (int i = (int)buckets.size() - 1; i >= 0; i--) {
             if (buckets[i].empty()) continue;
             for (char c : buckets[i]) {
                 oss << string(i, c);

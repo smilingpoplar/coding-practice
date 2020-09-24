@@ -18,8 +18,8 @@ public:
         
         // 按绝对值从小到大处理
         vector<int> vals;
-        for (auto &e : count)
-            vals.push_back(e.first);
+        for (auto& [val, _] : count)
+            vals.push_back(val);
         sort(vals.begin(), vals.end(), [](int a, int b){
             return abs(a) < abs(b);
         });
