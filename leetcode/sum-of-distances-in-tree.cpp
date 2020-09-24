@@ -18,7 +18,7 @@ public:
         // 1. 已知subtreeDist(NULL)==0，后序遍历求subtreeDist(p)
         // subtreeDist(p) = sum( subtreeDist(c[i])+nodeCount(c[i]) )
         // 最终 subtreeDist(root) == dist(root)
-        // 2. 已知dist(p)，先序遍历求dist(c)。设树中除子树c外的含p的其他部分为o，
+        // 2. 已知dist(p)，前序遍历求dist(c)。设树中除子树c外的含p的其他部分为o，
         // 从dist(p)（所有其他节点到p）变为dist(c)（所有其他节点到c），o中的节点距离+1，c中的节点距离-1，
         // 所以 dist(c) = dist(p)+nodeCount(o)-nodeCount(c) = dist(p)+N-2*nodeCount(c)
         vector<unordered_set<int>> adj(N);

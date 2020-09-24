@@ -20,7 +20,7 @@ struct TreeNode {
 class Solution {
 public:
     void flatten(TreeNode* root) {
-        // 先序遍历
+        // 前序遍历
         stack<TreeNode *> stk;
         if (root) stk.push(root);
         TreeNode *prev = NULL;

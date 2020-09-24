@@ -77,7 +77,7 @@ public:
             return;
         }
 
-        if (leftbd) ans.push_back(root->val); // 先序
+        if (leftbd) ans.push_back(root->val); // 前序
         // 1. root是左边界、左子树存在   => root->left是左边界
         // 2.       左边界、左子树不存在 => root->right是左边界
         // 3.       右边界、右子树存在   => root->right是右边界

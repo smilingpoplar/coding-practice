@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> lexicalOrder(int n) {
-        // 十叉树的先序遍历
+        // 十叉树的前序遍历
         vector<int> ans;
         for (int i = 1; i <= 9; i++) {
             preorder(i, n, ans);
@@ -35,7 +35,7 @@ public:
 class Solution {
 public:
     vector<int> lexicalOrder(int n) {
-        // 十叉树的先序遍历
+        // 十叉树的前序遍历
         vector<int> ans;
         stack<int> stk;
         for (int i = 9; i >= 1; i--) {
