@@ -29,9 +29,7 @@ public:
         while (!pq.empty()) {
             auto info = pq.top(); pq.pop();
             int u = info[0], d = info[1];
-            for (auto &e : adj[u]) { // 遍历u的所有邻接点
-                int v = e.first, cost = e.second;
-
+            for (auto& [v, cost] : adj[u]) { // 遍历u的所有邻接点
                 int newdist = d + cost;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
@@ -69,8 +67,7 @@ public:
 
         while (!pq.empty()) {
             auto u = pq.top(); pq.pop();
-            for (auto &e : adj[u]) { // 遍历u的所有邻接点
-                int v = e.first, cost = e.second;
+            for (auto& [v, cost]: adj[u]) { // 遍历u的所有邻接点
                 int newdist = dist[u] + cost;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
