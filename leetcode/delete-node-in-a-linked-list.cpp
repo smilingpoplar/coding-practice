@@ -2,7 +2,6 @@
 //  delete-node-in-a-linked-list
 //  https://leetcode.com/problems/delete-node-in-a-linked-list/
 //
-//  Created by smilingpoplar on 15/8/1.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

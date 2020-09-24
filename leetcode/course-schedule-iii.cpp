@@ -2,7 +2,6 @@
 //  course-schedule-iii
 //  https://leetcode.com/problems/course-schedule-iii/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

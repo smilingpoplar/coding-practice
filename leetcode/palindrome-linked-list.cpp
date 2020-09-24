@@ -2,7 +2,6 @@
 //  palindrome-linked-list
 //  https://leetcode.com/problems/palindrome-linked-list/
 //
-//  Created by smilingpoplar on 15/7/10.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

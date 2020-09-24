@@ -2,7 +2,6 @@
 //  dota2-senate
 //  https://leetcode.com/problems/dota2-senate/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

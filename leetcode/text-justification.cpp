@@ -2,7 +2,6 @@
 //  text-justification
 //  https://leetcode.com/problems/text-justification/
 //
-//  Created by smilingpoplar on 15/5/9.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

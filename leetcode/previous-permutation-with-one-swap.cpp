@@ -2,7 +2,6 @@
 //  previous-permutation-with-one-swap
 //  https://leetcode.com/problems/previous-permutation-with-one-swap/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

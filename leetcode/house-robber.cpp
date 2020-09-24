@@ -2,7 +2,6 @@
 //  house-robber
 //  https://leetcode.com/problems/house-robber/
 //
-//  Created by smilingpoplar on 15/6/3.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  all-elements-in-two-binary-search-trees
 //  https://leetcode.com/problems/all-elements-in-two-binary-search-trees/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

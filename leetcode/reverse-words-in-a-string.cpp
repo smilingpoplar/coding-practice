@@ -2,7 +2,6 @@
 //  reverse-words-in-a-string
 //  https://leetcode.com/problems/reverse-words-in-a-string/
 //
-//  Created by smilingpoplar on 15/5/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

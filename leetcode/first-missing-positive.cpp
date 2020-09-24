@@ -2,7 +2,6 @@
 //  first-missing-positive
 //  https://leetcode.com/problems/first-missing-positive/
 //
-//  Created by smilingpoplar on 15/5/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  map-sum-pairs
 //  https://leetcode.com/problems/map-sum-pairs/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

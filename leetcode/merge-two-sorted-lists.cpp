@@ -2,7 +2,6 @@
 //  merge-two-sorted-lists
 //  https://leetcode.com/problems/merge-two-sorted-lists/
 //
-//  Created by smilingpoplar on 15/5/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

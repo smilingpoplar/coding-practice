@@ -2,7 +2,6 @@
 //  prime-number-of-set-bits-in-binary-representation
 //  https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

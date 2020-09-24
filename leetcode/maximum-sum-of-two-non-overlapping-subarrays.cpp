@@ -2,7 +2,6 @@
 //  maximum-sum-of-two-non-overlapping-subarrays
 //  https://leetcode.com/problems/maximum-sum-of-two-non-overlapping-subarrays/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

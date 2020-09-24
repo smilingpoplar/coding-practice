@@ -2,7 +2,6 @@
 //  deepest-leaves-sum
 //  https://leetcode.com/problems/deepest-leaves-sum/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

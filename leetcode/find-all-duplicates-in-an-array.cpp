@@ -2,7 +2,6 @@
 //  find-all-duplicates-in-an-array
 //  https://leetcode.com/problems/find-all-duplicates-in-an-array/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

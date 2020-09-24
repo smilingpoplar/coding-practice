@@ -2,7 +2,6 @@
 //  longest-common-prefix
 //  https://leetcode.com/problems/longest-common-prefix/
 //
-//  Created by smilingpoplar on 15/6/16.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

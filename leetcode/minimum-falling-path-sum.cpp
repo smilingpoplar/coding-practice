@@ -2,7 +2,6 @@
 //  minimum-falling-path-sum
 //  https://leetcode.com/problems/minimum-falling-path-sum/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

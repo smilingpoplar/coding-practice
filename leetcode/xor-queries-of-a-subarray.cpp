@@ -2,7 +2,6 @@
 //  xor-queries-of-a-subarray
 //  https://leetcode.com/problems/xor-queries-of-a-subarray/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

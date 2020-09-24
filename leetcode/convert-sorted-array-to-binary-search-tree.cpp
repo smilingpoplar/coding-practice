@@ -2,7 +2,6 @@
 //  convert-sorted-array-to-binary-search-tree
 //  https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 //
-//  Created by smilingpoplar on 15/5/22.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

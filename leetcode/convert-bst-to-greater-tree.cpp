@@ -2,7 +2,6 @@
 //  beautiful-arrangement
 //  https://leetcode.com/problems/beautiful-arrangement/
 //
-//  Created by smilingpoplar on 17/11/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

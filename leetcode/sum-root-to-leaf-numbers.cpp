@@ -2,7 +2,6 @@
 //  sum-root-to-leaf-numbers
 //  https://leetcode.com/problems/sum-root-to-leaf-numbers/
 //
-//  Created by smilingpoplar on 15/5/26.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

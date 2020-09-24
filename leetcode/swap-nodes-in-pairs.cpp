@@ -2,7 +2,6 @@
 //  swap-nodes-in-pairs
 //  https://leetcode.com/problems/swap-nodes-in-pairs/
 //
-//  Created by smilingpoplar on 15/5/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

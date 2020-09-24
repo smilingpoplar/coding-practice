@@ -2,7 +2,6 @@
 //  missing-number
 //  https://leetcode.com/problems/missing-number/
 //
-//  Created by smilingpoplar on 15/8/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

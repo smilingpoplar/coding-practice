@@ -2,7 +2,6 @@
 //  binary-tree-maximum-path-sum
 //  https://leetcode.com/problems/binary-tree-maximum-path-sum/
 //
-//  Created by smilingpoplar on 15/5/20.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

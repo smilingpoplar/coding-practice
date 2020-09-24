@@ -2,7 +2,6 @@
 //  number-of-matching-subsequences
 //  https://leetcode.com/problems/number-of-matching-subsequences/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

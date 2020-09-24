@@ -2,7 +2,6 @@
 //  split-array-largest-sum
 //  https://leetcode.com/problems/split-array-largest-sum/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  range-sum-query-2d-mutable
 //  https://leetcode.com/problems/range-sum-query-2d-mutable/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

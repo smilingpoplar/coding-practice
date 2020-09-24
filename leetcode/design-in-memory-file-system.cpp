@@ -2,7 +2,6 @@
 //  design-in-memory-file-system
 //  https://leetcode.com/problems/design-in-memory-file-system/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

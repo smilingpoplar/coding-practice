@@ -2,7 +2,6 @@
 //  friends-of-appropriate-ages
 //  https://leetcode.com/problems/friends-of-appropriate-ages/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

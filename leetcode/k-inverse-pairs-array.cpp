@@ -2,7 +2,6 @@
 //  k-inverse-pairs-array
 //  https://leetcode.com/problems/k-inverse-pairs-array/
 //
-//  Created by smilingpoplar on 17/12/07.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

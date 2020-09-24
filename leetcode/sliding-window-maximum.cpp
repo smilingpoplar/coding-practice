@@ -2,7 +2,6 @@
 //  sliding-window-maximum
 //  https://leetcode.com/problems/sliding-window-maximum/
 //
-//  Created by smilingpoplar on 15/8/2.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

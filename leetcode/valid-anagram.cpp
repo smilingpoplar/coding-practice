@@ -2,7 +2,6 @@
 //  valid-anagram
 //  https://leetcode.com/problems/valid-anagram/
 //
-//  Created by smilingpoplar on 15/8/1.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

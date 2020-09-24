@@ -2,7 +2,6 @@
 //  subsets
 //  https://leetcode.com/problems/subsets/
 //
-//  Created by smilingpoplar on 15/5/2.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

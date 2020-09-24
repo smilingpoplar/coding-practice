@@ -2,7 +2,6 @@
 //  unique-morse-code-words
 //  https://leetcode.com/problems/unique-morse-code-words/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

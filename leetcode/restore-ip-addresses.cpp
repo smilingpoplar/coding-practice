@@ -2,7 +2,6 @@
 //  restore-ip-addresses
 //  https://leetcode.com/problems/restore-ip-addresses/
 //
-//  Created by smilingpoplar on 15/6/6.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

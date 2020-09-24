@@ -2,7 +2,6 @@
 //  rearrange-string-k-distance-apart
 //  https://leetcode.com/problems/rearrange-string-k-distance-apart/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

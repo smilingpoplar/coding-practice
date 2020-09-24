@@ -2,7 +2,6 @@
 //  maximum-width-of-binary-tree
 //  https://leetcode.com/problems/maximum-width-of-binary-tree/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

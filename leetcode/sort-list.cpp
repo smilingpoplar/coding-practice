@@ -2,7 +2,6 @@
 //  sort-list
 //  https://leetcode.com/problems/sort-list/
 //
-//  Created by smilingpoplar on 15/6/5.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

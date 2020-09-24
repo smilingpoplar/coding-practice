@@ -2,7 +2,6 @@
 //  reverse-linked-list
 //  https://leetcode.com/problems/reverse-linked-list/
 //
-//  Created by smilingpoplar on 15/5/20.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

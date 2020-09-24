@@ -2,7 +2,6 @@
 //  binary-search-tree-iterator
 //  https://leetcode.com/problems/binary-search-tree-iterator/
 //
-//  Created by smilingpoplar on 15/5/20.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

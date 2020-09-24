@@ -2,7 +2,6 @@
 //  reverse-substrings-between-each-pair-of-parentheses
 //  https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

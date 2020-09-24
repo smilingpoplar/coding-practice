@@ -2,7 +2,6 @@
 //  generate-random-point-in-a-circle
 //  https://leetcode.com/problems/generate-random-point-in-a-circle/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

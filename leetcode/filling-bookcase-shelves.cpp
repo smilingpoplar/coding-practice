@@ -2,7 +2,6 @@
 //  filling-bookcase-shelves
 //  https://leetcode.com/problems/filling-bookcase-shelves/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

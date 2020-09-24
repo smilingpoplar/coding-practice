@@ -2,7 +2,6 @@
 //  range-addition-ii
 //  https://leetcode.com/problems/range-addition-ii/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

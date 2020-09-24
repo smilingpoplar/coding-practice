@@ -2,7 +2,6 @@
 //  bitwise-and-of-numbers-range
 //  https://leetcode.com/problems/bitwise-and-of-numbers-range/
 //
-//  Created by smilingpoplar on 15/5/8.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

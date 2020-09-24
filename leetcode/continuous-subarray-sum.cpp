@@ -2,7 +2,6 @@
 //  continuous-subarray-sum
 //  https://leetcode.com/problems/continuous-subarray-sum/
 //
-//  Created by smilingpoplar on 17/11/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

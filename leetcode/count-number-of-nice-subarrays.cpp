@@ -2,7 +2,6 @@
 //  count-number-of-nice-subarrays
 //  https://leetcode.com/problems/count-number-of-nice-subarrays/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

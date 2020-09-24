@@ -2,7 +2,6 @@
 //  01-matrix
 //  https://leetcode.com/problems/01-matrix/
 //
-//  Created by smilingpoplar on 17/11/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

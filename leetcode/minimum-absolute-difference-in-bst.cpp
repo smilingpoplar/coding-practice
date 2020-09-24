@@ -2,7 +2,6 @@
 //  minimum-absolute-difference-in-bst
 //  https://leetcode.com/problems/minimum-absolute-difference-in-bst/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

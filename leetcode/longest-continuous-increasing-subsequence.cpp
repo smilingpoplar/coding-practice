@@ -2,7 +2,6 @@
 //  longest-continuous-increasing-subsequence
 //  https://leetcode.com/problems/longest-continuous-increasing-subsequence/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

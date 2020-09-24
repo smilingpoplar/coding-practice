@@ -2,7 +2,6 @@
 //  pacific-atlantic-water-flow
 //  https://leetcode.com/problems/pacific-atlantic-water-flow/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

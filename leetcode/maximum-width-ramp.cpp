@@ -2,7 +2,6 @@
 //  maximum-width-ramp
 //  https://leetcode.com/problems/maximum-width-ramp/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

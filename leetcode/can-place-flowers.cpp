@@ -2,7 +2,6 @@
 //  can-place-flowers
 //  https://leetcode.com/problems/can-place-flowers/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

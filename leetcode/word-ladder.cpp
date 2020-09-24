@@ -2,7 +2,6 @@
 //  word-ladder
 //  https://leetcode.com/problems/word-ladder/
 //
-//  Created by smilingpoplar on 15/4/28.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

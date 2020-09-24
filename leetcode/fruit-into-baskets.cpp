@@ -2,7 +2,6 @@
 //  fruit-into-baskets
 //  https://leetcode.com/problems/fruit-into-baskets/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

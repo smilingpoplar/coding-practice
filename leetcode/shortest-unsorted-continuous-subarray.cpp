@@ -2,7 +2,6 @@
 //  shortest-unsorted-continuous-subarray
 //  https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

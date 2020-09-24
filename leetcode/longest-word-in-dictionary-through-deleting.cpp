@@ -2,7 +2,6 @@
 //  longest-word-in-dictionary-through-deleting
 //  https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/
 //
-//  Created by smilingpoplar on 17/11/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

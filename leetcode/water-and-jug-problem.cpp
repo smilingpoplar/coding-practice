@@ -2,7 +2,6 @@
 //  water-and-jug-problem
 //  https://leetcode.com/problems/water-and-jug-problem/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

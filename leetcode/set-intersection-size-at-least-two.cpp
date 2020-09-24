@@ -2,7 +2,6 @@
 //  set-intersection-size-at-least-two
 //  https://leetcode.com/problems/set-intersection-size-at-least-two/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  dungeon-game
 //  https://leetcode.com/problems/dungeon-game/
 //
-//  Created by smilingpoplar on 15/4/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

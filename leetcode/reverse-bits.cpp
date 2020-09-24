@@ -2,7 +2,6 @@
 //  reverse-bits
 //  https://leetcode.com/problems/reverse-bits/
 //
-//  Created by smilingpoplar on 15/6/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

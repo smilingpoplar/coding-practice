@@ -2,7 +2,6 @@
 //  add-bold-tag-in-string
 //  https://leetcode.com/problems/add-bold-tag-in-string/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

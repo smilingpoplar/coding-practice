@@ -2,7 +2,6 @@
 //  longest-repeating-character-replacement
 //  https://leetcode.com/problems/longest-repeating-character-replacement/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  predict-the-winner
 //  https://leetcode.com/problems/predict-the-winner/
 //
-//  Created by smilingpoplar on 17/11/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

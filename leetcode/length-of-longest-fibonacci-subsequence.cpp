@@ -2,7 +2,6 @@
 //  length-of-longest-fibonacci-subsequence
 //  https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

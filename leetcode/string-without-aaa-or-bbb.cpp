@@ -2,7 +2,6 @@
 //  string-without-aaa-or-bbb
 //  https://leetcode.com/problems/string-without-aaa-or-bbb/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

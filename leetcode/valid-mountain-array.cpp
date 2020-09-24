@@ -2,7 +2,6 @@
 //  valid-mountain-array
 //  https://leetcode.com/problems/valid-mountain-array/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

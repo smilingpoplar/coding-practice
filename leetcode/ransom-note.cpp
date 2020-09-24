@@ -2,7 +2,6 @@
 //  ransom-note
 //  https://leetcode.com/problems/ransom-note/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

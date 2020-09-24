@@ -2,7 +2,6 @@
 //  add-binary
 //  https://leetcode.com/problems/add-binary/
 //
-//  Created by smilingpoplar on 15/6/17.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

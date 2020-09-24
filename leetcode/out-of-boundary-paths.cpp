@@ -2,7 +2,6 @@
 //  out-of-boundary-paths
 //  https://leetcode.com/problems/out-of-boundary-paths/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

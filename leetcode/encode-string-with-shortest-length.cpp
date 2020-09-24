@@ -2,7 +2,6 @@
 //  encode-string-with-shortest-length
 //  https://leetcode.com/problems/encode-string-with-shortest-length/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  merge-sorted-array
 //  https://leetcode.com/problems/merge-sorted-array/
 //
-//  Created by smilingpoplar on 15/5/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

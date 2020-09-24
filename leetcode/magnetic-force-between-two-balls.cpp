@@ -2,7 +2,6 @@
 //  magnetic-force-between-two-balls
 //  https://leetcode.com/problems/magnetic-force-between-two-balls/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

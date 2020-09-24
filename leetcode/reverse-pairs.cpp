@@ -2,7 +2,6 @@
 //  reverse-pairs
 //  https://leetcode.com/problems/reverse-pairs/
 //
-//  Created by smilingpoplar on 17/11/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

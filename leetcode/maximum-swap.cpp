@@ -2,7 +2,6 @@
 //  maximum-swap
 //  https://leetcode.com/problems/maximum-swap/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

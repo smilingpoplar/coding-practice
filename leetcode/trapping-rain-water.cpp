@@ -2,7 +2,6 @@
 //  trapping-rain-water
 //  https://leetcode.com/problems/trapping-rain-water/
 //
-//  Created by smilingpoplar on 15/5/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

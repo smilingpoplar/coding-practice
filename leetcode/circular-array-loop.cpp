@@ -2,7 +2,6 @@
 //  circular-array-loop
 //  https://leetcode.com/problems/circular-array-loop/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

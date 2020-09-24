@@ -2,7 +2,6 @@
 //  two-sum-ii-input-array-is-sorted
 //  https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

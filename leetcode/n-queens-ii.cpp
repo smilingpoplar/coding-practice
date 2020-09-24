@@ -2,7 +2,6 @@
 //  n-queens-ii
 //  https://leetcode.com/problems/n-queens-ii/
 //
-//  Created by smilingpoplar on 15/4/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

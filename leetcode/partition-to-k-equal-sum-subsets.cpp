@@ -2,7 +2,6 @@
 //  partition-to-k-equal-sum-subsets
 //  https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

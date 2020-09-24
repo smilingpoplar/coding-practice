@@ -2,7 +2,6 @@
 //  distinct-subsequences
 //  https://leetcode.com/problems/distinct-subsequences/
 //
-//  Created by smilingpoplar on 15/5/9.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

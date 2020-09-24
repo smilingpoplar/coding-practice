@@ -2,7 +2,6 @@
 //  climbing-stairs
 //  https://leetcode.com/problems/climbing-stairs/
 //
-//  Created by smilingpoplar on 15/5/8.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

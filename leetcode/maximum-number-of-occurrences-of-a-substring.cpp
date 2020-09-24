@@ -2,7 +2,6 @@
 //  maximum-number-of-occurrences-of-a-substring
 //  https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

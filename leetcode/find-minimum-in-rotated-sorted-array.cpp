@@ -2,7 +2,6 @@
 //  find-minimum-in-rotated-sorted-array
 //  https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 //
-//  Created by smilingpoplar on 15/5/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

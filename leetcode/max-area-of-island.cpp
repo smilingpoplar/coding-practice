@@ -2,7 +2,6 @@
 //  max-area-of-island
 //  https://leetcode.com/problems/max-area-of-island/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

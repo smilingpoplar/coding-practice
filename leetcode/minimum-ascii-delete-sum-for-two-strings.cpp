@@ -2,7 +2,6 @@
 //  minimum-ascii-delete-sum-for-two-strings
 //  https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

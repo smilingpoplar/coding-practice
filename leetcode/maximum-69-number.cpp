@@ -2,7 +2,6 @@
 //  maximum-69-number
 //  https://leetcode.com/problems/maximum-69-number/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

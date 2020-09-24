@@ -2,7 +2,6 @@
 //  detect-capital
 //  https://leetcode.com/problems/detect-capital/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

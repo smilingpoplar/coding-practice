@@ -2,7 +2,6 @@
 //  1-bit-and-2-bit-characters
 //  https://leetcode.com/problems/1-bit-and-2-bit-characters/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

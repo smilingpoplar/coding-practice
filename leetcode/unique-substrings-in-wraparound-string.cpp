@@ -2,7 +2,6 @@
 //  unique-substrings-in-wraparound-string
 //  https://leetcode.com/problems/unique-substrings-in-wraparound-string/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

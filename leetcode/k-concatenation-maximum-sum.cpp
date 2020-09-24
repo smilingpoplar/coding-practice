@@ -2,7 +2,6 @@
 //  k-concatenation-maximum-sum
 //  https://leetcode.com/problems/k-concatenation-maximum-sum/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

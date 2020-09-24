@@ -2,7 +2,6 @@
 //  4sum
 //  https://leetcode.com/problems/4sum/
 //
-//  Created by smilingpoplar on 15/6/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

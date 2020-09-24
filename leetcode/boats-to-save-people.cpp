@@ -2,7 +2,6 @@
 //  boats-to-save-people
 //  https://leetcode.com/problems/boats-to-save-people/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

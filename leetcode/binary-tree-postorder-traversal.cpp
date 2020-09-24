@@ -2,7 +2,6 @@
 //  binary-tree-postorder-traversal
 //  https://leetcode.com/problems/binary-tree-postorder-traversal/
 //
-//  Created by smilingpoplar on 15/5/17.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

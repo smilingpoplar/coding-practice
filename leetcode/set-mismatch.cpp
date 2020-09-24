@@ -2,7 +2,6 @@
 //  set-mismatch
 //  https://leetcode.com/problems/set-mismatch/
 //
-//  Created by smilingpoplar on 17/12/11.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  swim-in-rising-water
 //  https://leetcode.com/problems/swim-in-rising-water/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

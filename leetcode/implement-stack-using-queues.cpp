@@ -2,7 +2,6 @@
 //  implement-stack-using-queues
 //  https://leetcode.com/problems/implement-stack-using-queues/
 //
-//  Created by smilingpoplar on 15/6/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

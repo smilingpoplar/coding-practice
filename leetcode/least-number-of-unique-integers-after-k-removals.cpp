@@ -2,7 +2,6 @@
 //  least-number-of-unique-integers-after-k-removals
 //  https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  valid-parentheses
 //  https://leetcode.com/problems/valid-parentheses/
 //
-//  Created by smilingpoplar on 15/5/4.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

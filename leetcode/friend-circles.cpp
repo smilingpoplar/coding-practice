@@ -2,7 +2,6 @@
 //  friend-circles
 //  https://leetcode.com/problems/friend-circles/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

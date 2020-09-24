@@ -2,7 +2,6 @@
 //  prefix-and-suffix-search
 //  https://leetcode.com/problems/prefix-and-suffix-search/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

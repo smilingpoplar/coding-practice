@@ -2,7 +2,6 @@
 //  number-of-dice-rolls-with-target-sum
 //  https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

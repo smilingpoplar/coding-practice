@@ -2,7 +2,6 @@
 //  minimum-number-of-arrows-to-burst-balloons
 //  https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

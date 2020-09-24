@@ -2,7 +2,6 @@
 //  swap-adjacent-in-lr-string
 //  https://leetcode.com/problems/swap-adjacent-in-lr-string/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

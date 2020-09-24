@@ -2,7 +2,6 @@
 //  delete-operation-for-two-strings
 //  https://leetcode.com/problems/delete-operation-for-two-strings/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

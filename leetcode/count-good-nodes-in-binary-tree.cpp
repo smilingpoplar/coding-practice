@@ -2,7 +2,6 @@
 //  count-good-nodes-in-binary-tree
 //  https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

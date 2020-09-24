@@ -2,7 +2,6 @@
 //  max-points-on-a-line
 //  https://leetcode.com/problems/max-points-on-a-line/
 //
-//  Created by smilingpoplar on 15/6/8.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

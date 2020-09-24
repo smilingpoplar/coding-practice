@@ -2,7 +2,6 @@
 //  smallest-range
 //  https://leetcode.com/problems/smallest-range/
 //
-//  Created by smilingpoplar on 17/12/07.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

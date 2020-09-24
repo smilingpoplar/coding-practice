@@ -2,7 +2,6 @@
 //  maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold
 //  https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

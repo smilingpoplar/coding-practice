@@ -2,7 +2,6 @@
 //  maximum-number-of-events-that-can-be-attended
 //  https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

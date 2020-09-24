@@ -2,7 +2,6 @@
 //  find-k-closest-elements
 //  https://leetcode.com/problems/find-k-closest-elements/
 //
-//  Created by smilingpoplar on 18/01/17.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

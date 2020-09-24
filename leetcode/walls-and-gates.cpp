@@ -2,7 +2,6 @@
 //  walls-and-gates
 //  https://leetcode.com/problems/walls-and-gates/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

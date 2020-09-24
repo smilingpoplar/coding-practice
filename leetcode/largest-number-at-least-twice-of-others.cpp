@@ -2,7 +2,6 @@
 //  largest-number-at-least-twice-of-others
 //  https://leetcode.com/problems/largest-number-at-least-twice-of-others/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

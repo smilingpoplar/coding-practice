@@ -2,7 +2,6 @@
 //  largest-number
 //  https://leetcode.com/problems/largest-number/
 //
-//  Created by smilingpoplar on 15/4/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

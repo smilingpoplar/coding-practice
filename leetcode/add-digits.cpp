@@ -2,7 +2,6 @@
 //  add-digits
 //  https://leetcode.com/problems/add-digits/
 //
-//  Created by smilingpoplar on 15/8/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

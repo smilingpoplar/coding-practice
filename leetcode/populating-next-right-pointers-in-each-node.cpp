@@ -2,7 +2,6 @@
 //  populating-next-right-pointers-in-each-node
 //  https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
 //
-//  Created by smilingpoplar on 15/6/6.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

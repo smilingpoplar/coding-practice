@@ -2,7 +2,6 @@
 //  first-unique-character-in-a-string
 //  https://leetcode.com/problems/first-unique-character-in-a-string/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

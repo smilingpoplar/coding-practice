@@ -2,7 +2,6 @@
 //  maximum-length-of-repeated-subarray
 //  https://leetcode.com/problems/maximum-length-of-repeated-subarray/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

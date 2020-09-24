@@ -2,7 +2,6 @@
 //  binary-search-tree-to-greater-sum-tree
 //  https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

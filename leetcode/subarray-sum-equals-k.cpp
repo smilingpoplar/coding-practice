@@ -2,7 +2,6 @@
 //  subarray-sum-equals-k
 //  https://leetcode.com/problems/subarray-sum-equals-k/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

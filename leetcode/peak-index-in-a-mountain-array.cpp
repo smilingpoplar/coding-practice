@@ -2,7 +2,6 @@
 //  peak-index-in-a-mountain-array
 //  https://leetcode.com/problems/peak-index-in-a-mountain-array/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

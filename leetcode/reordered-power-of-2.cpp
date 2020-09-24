@@ -2,7 +2,6 @@
 //  reordered-power-of-2
 //  https://leetcode.com/problems/reordered-power-of-2/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

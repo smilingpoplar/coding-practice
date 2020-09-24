@@ -2,7 +2,6 @@
 //  reachable-nodes-in-subdivided-graph
 //  https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

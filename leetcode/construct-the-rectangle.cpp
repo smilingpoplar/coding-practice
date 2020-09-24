@@ -2,7 +2,6 @@
 //  construct-the-rectangle
 //  https://leetcode.com/problems/construct-the-rectangle/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

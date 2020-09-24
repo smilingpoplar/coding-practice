@@ -2,7 +2,6 @@
 //  best-time-to-buy-and-sell-stock-with-transaction-fee
 //  https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

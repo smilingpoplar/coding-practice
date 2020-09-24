@@ -2,7 +2,6 @@
 //  lonely-pixel-i
 //  https://leetcode.com/problems/lonely-pixel-i/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

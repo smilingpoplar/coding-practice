@@ -2,7 +2,6 @@
 //  candy
 //  https://leetcode.com/problems/candy/
 //
-//  Created by smilingpoplar on 15/5/8.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

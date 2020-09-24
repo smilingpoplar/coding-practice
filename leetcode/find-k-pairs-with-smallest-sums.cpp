@@ -2,7 +2,6 @@
 //  find-k-pairs-with-smallest-sums
 //  https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  strange-printer
 //  https://leetcode.com/problems/strange-printer/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

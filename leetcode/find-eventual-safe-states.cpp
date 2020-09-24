@@ -2,7 +2,6 @@
 //  find-eventual-safe-states
 //  https://leetcode.com/problems/find-eventual-safe-states/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  word-search-ii
 //  https://leetcode.com/problems/word-search-ii/
 //
-//  Created by smilingpoplar on 15/5/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

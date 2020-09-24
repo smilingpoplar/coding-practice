@@ -2,7 +2,6 @@
 //  maximum-average-subarray-i
 //  https://leetcode.com/problems/maximum-average-subarray-i/
 //
-//  Created by smilingpoplar on 17/12/11.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k
 //  https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

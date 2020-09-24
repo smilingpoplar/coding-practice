@@ -2,7 +2,6 @@
 //  product-of-array-except-self
 //  https://leetcode.com/problems/product-of-array-except-self/
 //
-//  Created by smilingpoplar on 15/8/1.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

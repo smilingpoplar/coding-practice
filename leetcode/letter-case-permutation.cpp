@@ -2,7 +2,6 @@
 //  letter-case-permutation
 //  https://leetcode.com/problems/letter-case-permutation/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

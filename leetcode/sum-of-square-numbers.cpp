@@ -2,7 +2,6 @@
 //  sum-of-square-numbers
 //  https://leetcode.com/problems/sum-of-square-numbers/
 //
-//  Created by smilingpoplar on 17/12/07.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

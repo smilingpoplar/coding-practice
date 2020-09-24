@@ -2,7 +2,6 @@
 //  minimum-window-substring
 //  https://leetcode.com/problems/minimum-window-substring/
 //
-//  Created by smilingpoplar on 15/5/26.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

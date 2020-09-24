@@ -2,7 +2,6 @@
 //  balanced-binary-tree
 //  https://leetcode.com/problems/balanced-binary-tree/
 //
-//  Created by smilingpoplar on 15/8/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

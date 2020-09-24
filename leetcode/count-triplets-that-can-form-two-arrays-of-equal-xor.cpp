@@ -2,7 +2,6 @@
 //  count-triplets-that-can-form-two-arrays-of-equal-xor
 //  https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

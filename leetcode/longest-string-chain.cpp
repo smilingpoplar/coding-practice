@@ -2,7 +2,6 @@
 //  longest-string-chain
 //  https://leetcode.com/problems/longest-string-chain/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

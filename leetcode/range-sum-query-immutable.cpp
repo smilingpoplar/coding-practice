@@ -2,7 +2,6 @@
 //  range-sum-query-immutable
 //  https://leetcode.com/problems/range-sum-query-immutable/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

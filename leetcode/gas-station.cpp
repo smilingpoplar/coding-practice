@@ -2,7 +2,6 @@
 //  gas-station
 //  https://leetcode.com/problems/gas-station/
 //
-//  Created by smilingpoplar on 15/5/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

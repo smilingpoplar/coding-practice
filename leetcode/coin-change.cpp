@@ -2,7 +2,6 @@
 //  coin-change
 //  https://leetcode.com/problems/coin-change/
 //
-//  Created by smilingpoplar on 17/10/12.
 //  Copyright (c) 2017年 YangLe. All rights reserved.
 //
 

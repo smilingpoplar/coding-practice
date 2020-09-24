@@ -2,7 +2,6 @@
 //  intersection-of-two-linked-lists
 //  https://leetcode.com/problems/intersection-of-two-linked-lists/
 //
-//  Created by smilingpoplar on 15/5/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

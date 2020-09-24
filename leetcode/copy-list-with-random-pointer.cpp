@@ -2,7 +2,6 @@
 //  copy-list-with-random-pointer
 //  https://leetcode.com/problems/copy-list-with-random-pointer/
 //
-//  Created by smilingpoplar on 15/6/3.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

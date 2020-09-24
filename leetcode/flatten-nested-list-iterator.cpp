@@ -2,7 +2,6 @@
 //  flatten-nested-list-iterator
 //  https://leetcode.com/problems/flatten-nested-list-iterator/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

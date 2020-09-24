@@ -2,7 +2,6 @@
 //  redundant-connection
 //  https://leetcode.com/problems/redundant-connection/
 //
-//  Created by smilingpoplar on 18/01/17.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

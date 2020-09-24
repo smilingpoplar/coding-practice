@@ -2,7 +2,6 @@
 //  basic-calculator-ii
 //  https://leetcode.com/problems/basic-calculator-ii/
 //
-//  Created by smilingpoplar on 15/6/22.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

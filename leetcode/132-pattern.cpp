@@ -2,7 +2,6 @@
 //  132-pattern
 //  https://leetcode.com/problems/132-pattern/
 //
-//  Created by smilingpoplar on 17/11/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  remove-nth-node-from-end-of-list
 //  https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

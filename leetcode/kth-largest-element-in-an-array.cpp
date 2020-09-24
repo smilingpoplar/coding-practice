@@ -2,7 +2,6 @@
 //  kth-largest-element-in-an-array
 //  https://leetcode.com/problems/kth-largest-element-in-an-array/
 //
-//  Created by smilingpoplar on 15/6/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

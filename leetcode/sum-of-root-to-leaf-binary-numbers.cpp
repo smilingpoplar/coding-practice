@@ -2,7 +2,6 @@
 //  sum-of-root-to-leaf-binary-numbers
 //  https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

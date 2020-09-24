@@ -2,7 +2,6 @@
 //  second-minimum-node-in-a-binary-tree
 //  https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

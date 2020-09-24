@@ -2,7 +2,6 @@
 //  car-pooling
 //  https://leetcode.com/problems/car-pooling/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

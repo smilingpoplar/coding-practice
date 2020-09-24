@@ -2,7 +2,6 @@
 //  2-keys-keyboard
 //  https://leetcode.com/problems/2-keys-keyboard/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

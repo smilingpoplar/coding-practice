@@ -2,7 +2,6 @@
 //  subtree-of-another-tree
 //  https://leetcode.com/problems/subtree-of-another-tree/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

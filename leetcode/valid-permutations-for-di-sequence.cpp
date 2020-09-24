@@ -2,7 +2,6 @@
 //  valid-permutations-for-di-sequence
 //  https://leetcode.com/problems/valid-permutations-for-di-sequence/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

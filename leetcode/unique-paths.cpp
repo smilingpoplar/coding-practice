@@ -2,7 +2,6 @@
 //  unique-paths
 //  https://leetcode.com/problems/unique-paths/
 //
-//  Created by smilingpoplar on 15/5/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

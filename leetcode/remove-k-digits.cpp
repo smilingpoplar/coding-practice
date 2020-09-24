@@ -2,7 +2,6 @@
 //  remove-k-digits
 //  https://leetcode.com/problems/remove-k-digits/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

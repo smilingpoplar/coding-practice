@@ -2,7 +2,6 @@
 //  find-bottom-left-tree-value
 //  https://leetcode.com/problems/find-bottom-left-tree-value/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

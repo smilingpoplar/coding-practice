@@ -2,7 +2,6 @@
 //  detect-pattern-of-length-m-repeated-k-or-more-times
 //  https://leetcode.com/problems/detect-pattern-of-length-m-repeated-k-or-more-times/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

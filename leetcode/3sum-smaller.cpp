@@ -2,7 +2,6 @@
 //  3sum-smaller
 //  https://leetcode.com/problems/3sum-smaller/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

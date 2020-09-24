@@ -2,7 +2,6 @@
 //  maximum-points-you-can-obtain-from-cards
 //  https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

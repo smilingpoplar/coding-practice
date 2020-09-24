@@ -2,7 +2,6 @@
 //  minimum-size-subarray-sum
 //  https://leetcode.com/problems/minimum-size-subarray-sum/
 //
-//  Created by smilingpoplar on 15/5/25.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

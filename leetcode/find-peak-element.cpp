@@ -2,7 +2,6 @@
 //  find-peak-element
 //  https://leetcode.com/problems/find-peak-element/
 //
-//  Created by smilingpoplar on 15/5/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

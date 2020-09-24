@@ -2,7 +2,6 @@
 //  design-hit-counter
 //  https://leetcode.com/problems/design-hit-counter/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  find-largest-value-in-each-tree-row
 //  https://leetcode.com/problems/find-largest-value-in-each-tree-row/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

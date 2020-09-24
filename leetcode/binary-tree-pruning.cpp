@@ -2,7 +2,6 @@
 //  binary-tree-pruning
 //  https://leetcode.com/problems/binary-tree-pruning/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

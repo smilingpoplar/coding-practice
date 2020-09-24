@@ -2,7 +2,6 @@
 //  longest-arithmetic-sequence
 //  https://leetcode.com/problems/longest-arithmetic-sequence/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  implement-rand10-using-rand7
 //  https://leetcode.com/problems/implement-rand10-using-rand7/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

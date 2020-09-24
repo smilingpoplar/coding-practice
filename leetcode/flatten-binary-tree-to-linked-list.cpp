@@ -2,7 +2,6 @@
 //  flatten-binary-tree-to-linked-list
 //  https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 //
-//  Created by smilingpoplar on 15/5/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  sum-of-mutated-array-closest-to-target
 //  https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  spiral-matrix-ii
 //  https://leetcode.com/problems/spiral-matrix-ii/
 //
-//  Created by smilingpoplar on 15/5/12.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

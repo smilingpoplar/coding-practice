@@ -2,7 +2,6 @@
 //  insert-into-a-cyclic-sorted-list
 //  https://leetcode.com/problems/insert-into-a-cyclic-sorted-list/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

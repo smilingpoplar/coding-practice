@@ -2,7 +2,6 @@
 //  make-the-string-great
 //  https://leetcode.com/problems/make-the-string-great/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

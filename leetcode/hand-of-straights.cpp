@@ -2,7 +2,6 @@
 //  hand-of-straights
 //  https://leetcode.com/problems/hand-of-straights/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

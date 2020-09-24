@@ -2,7 +2,6 @@
 //  increasing-triplet-subsequence
 //  https://leetcode.com/problems/increasing-triplet-subsequence/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

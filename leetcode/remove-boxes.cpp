@@ -2,7 +2,6 @@
 //  remove-boxes
 //  https://leetcode.com/problems/remove-boxes/
 //
-//  Created by smilingpoplar on 17/11/30.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

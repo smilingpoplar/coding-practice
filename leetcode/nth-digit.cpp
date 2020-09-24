@@ -2,7 +2,6 @@
 //  nth-digit
 //  https://leetcode.com/problems/nth-digit/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

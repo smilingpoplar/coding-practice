@@ -2,7 +2,6 @@
 //  add-one-row-to-tree
 //  https://leetcode.com/problems/add-one-row-to-tree/
 //
-//  Created by smilingpoplar on 17/12/03.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

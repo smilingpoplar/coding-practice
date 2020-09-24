@@ -2,7 +2,6 @@
 //  k-th-symbol-in-grammar
 //  https://leetcode.com/problems/k-th-symbol-in-grammar/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

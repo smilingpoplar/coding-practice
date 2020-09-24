@@ -2,7 +2,6 @@
 //  minimum-index-sum-of-two-lists
 //  https://leetcode.com/problems/minimum-index-sum-of-two-lists/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

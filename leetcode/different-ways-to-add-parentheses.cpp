@@ -2,7 +2,6 @@
 //  different-ways-to-add-parentheses
 //  https://leetcode.com/problems/different-ways-to-add-parentheses/
 //
-//  Created by smilingpoplar on 15/8/2.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

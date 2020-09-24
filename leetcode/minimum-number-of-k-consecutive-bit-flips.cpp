@@ -2,7 +2,6 @@
 //  minimum-number-of-k-consecutive-bit-flips
 //  https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

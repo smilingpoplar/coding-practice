@@ -2,7 +2,6 @@
 //  clone-graph
 //  https://leetcode.com/problems/clone-graph/
 //
-//  Created by smilingpoplar on 15/5/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

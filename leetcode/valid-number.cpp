@@ -2,7 +2,6 @@
 //  valid-number
 //  https://leetcode.com/problems/valid-number/
 //
-//  Created by smilingpoplar on 15/6/15.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  largest-triangle-area
 //  https://leetcode.com/problems/largest-triangle-area/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

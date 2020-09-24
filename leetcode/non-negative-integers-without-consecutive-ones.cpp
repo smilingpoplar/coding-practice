@@ -2,7 +2,6 @@
 //  non-negative-integers-without-consecutive-ones
 //  https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

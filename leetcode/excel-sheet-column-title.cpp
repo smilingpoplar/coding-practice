@@ -2,7 +2,6 @@
 //  excel-sheet-column-title
 //  https://leetcode.com/problems/excel-sheet-column-title/
 //
-//  Created by smilingpoplar on 15/6/17.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

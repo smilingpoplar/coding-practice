@@ -2,7 +2,6 @@
 //  max-consecutive-ones-iii
 //  https://leetcode.com/problems/max-consecutive-ones-iii/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

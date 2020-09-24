@@ -2,7 +2,6 @@
 //  race-car
 //  https://leetcode.com/problems/race-car/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

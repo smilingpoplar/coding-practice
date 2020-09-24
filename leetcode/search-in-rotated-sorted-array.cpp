@@ -2,7 +2,6 @@
 //  search-in-rotated-sorted-array
 //  https://leetcode.com/problems/search-in-rotated-sorted-array/
 //
-//  Created by smilingpoplar on 15/5/22.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

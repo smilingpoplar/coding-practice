@@ -2,7 +2,6 @@
 //  same-tree
 //  https://leetcode.com/problems/same-tree/
 //
-//  Created by smilingpoplar on 15/5/22.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

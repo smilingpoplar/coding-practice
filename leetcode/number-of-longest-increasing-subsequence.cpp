@@ -2,7 +2,6 @@
 //  number-of-longest-increasing-subsequence
 //  https://leetcode.com/problems/number-of-longest-increasing-subsequence/
 //
-//  Created by smilingpoplar on 18/01/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

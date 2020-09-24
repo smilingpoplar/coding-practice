@@ -2,7 +2,6 @@
 //  valid-triangle-number
 //  https://leetcode.com/problems/valid-triangle-number/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  rank-teams-by-votes
 //  https://leetcode.com/problems/rank-teams-by-votes/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

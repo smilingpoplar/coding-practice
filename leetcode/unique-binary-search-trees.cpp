@@ -2,7 +2,6 @@
 //  unique-binary-search-trees
 //  https://leetcode.com/problems/unique-binary-search-trees/
 //
-//  Created by smilingpoplar on 15/5/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

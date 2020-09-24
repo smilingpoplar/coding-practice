@@ -2,7 +2,6 @@
 //  summary-ranges
 //  https://leetcode.com/problems/summary-ranges/
 //
-//  Created by smilingpoplar on 15/6/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

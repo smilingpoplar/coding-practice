@@ -2,7 +2,6 @@
 //  longest-substring-with-at-most-k-distinct-characters
 //  https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

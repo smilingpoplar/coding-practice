@@ -2,7 +2,6 @@
 //  binary-tree-preorder-traversal
 //  https://leetcode.com/problems/binary-tree-preorder-traversal/
 //
-//  Created by smilingpoplar on 15/5/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  find-right-interval
 //  https://leetcode.com/problems/find-right-interval/
 //
-//  Created by smilingpoplar on 17/11/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

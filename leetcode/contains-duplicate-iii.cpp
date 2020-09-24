@@ -2,7 +2,6 @@
 //  contains-duplicate-iii
 //  https://leetcode.com/problems/contains-duplicate-iii/
 //
-//  Created by smilingpoplar on 15/6/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

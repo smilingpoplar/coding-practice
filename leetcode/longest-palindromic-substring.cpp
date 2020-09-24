@@ -2,7 +2,6 @@
 //  longest-palindromic-substring
 //  https://leetcode.com/problems/longest-palindromic-substring/
 //
-//  Created by smilingpoplar on 15/6/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

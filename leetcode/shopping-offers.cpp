@@ -2,7 +2,6 @@
 //  shopping-offers
 //  https://leetcode.com/problems/shopping-offers/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

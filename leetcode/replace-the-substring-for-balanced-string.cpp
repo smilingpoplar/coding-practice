@@ -2,7 +2,6 @@
 //  replace-the-substring-for-balanced-string
 //  https://leetcode.com/problems/replace-the-substring-for-balanced-string/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

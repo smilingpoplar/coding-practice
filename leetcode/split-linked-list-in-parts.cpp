@@ -2,7 +2,6 @@
 //  split-linked-list-in-parts
 //  https://leetcode.com/problems/split-linked-list-in-parts/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

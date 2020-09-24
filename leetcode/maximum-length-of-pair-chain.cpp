@@ -2,7 +2,6 @@
 //  maximum-length-of-pair-chain
 //  https://leetcode.com/problems/maximum-length-of-pair-chain/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

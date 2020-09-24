@@ -2,7 +2,6 @@
 //  multiply-strings
 //  https://leetcode.com/problems/multiply-strings/
 //
-//  Created by smilingpoplar on 15/6/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

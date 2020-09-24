@@ -2,7 +2,6 @@
 //  longest-substring-without-repeating-characters
 //  https://leetcode.com/problems/longest-substring-without-repeating-characters/
 //
-//  Created by smilingpoplar on 15/5/4.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  min-cost-climbing-stairs
 //  https://leetcode.com/problems/min-cost-climbing-stairs/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

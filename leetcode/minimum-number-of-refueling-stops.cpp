@@ -2,7 +2,6 @@
 //  minimum-number-of-refueling-stops
 //  https://leetcode.com/problems/minimum-number-of-refueling-stops/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

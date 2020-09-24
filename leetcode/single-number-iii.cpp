@@ -2,7 +2,6 @@
 //  single-number-iii
 //  https://leetcode.com/problems/single-number-iii/
 //
-//  Created by smilingpoplar on 15/5/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

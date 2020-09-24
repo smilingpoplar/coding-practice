@@ -2,7 +2,6 @@
 //  degree-of-an-array
 //  https://leetcode.com/problems/degree-of-an-array/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

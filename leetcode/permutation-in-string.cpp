@@ -2,7 +2,6 @@
 //  permutation-in-string
 //  https://leetcode.com/problems/permutation-in-string/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

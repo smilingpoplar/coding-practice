@@ -2,7 +2,6 @@
 //  task-scheduler
 //  https://leetcode.com/problems/task-scheduler/
 //
-//  Created by smilingpoplar on 17/12/03.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

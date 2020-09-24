@@ -2,7 +2,6 @@
 //  number-of-islands
 //  https://leetcode.com/problems/number-of-islands/
 //
-//  Created by smilingpoplar on 15/5/2.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

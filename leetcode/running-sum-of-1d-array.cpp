@@ -2,7 +2,6 @@
 //  running-sum-of-1d-array
 //  https://leetcode.com/problems/running-sum-of-1d-array/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

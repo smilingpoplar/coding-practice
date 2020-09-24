@@ -2,7 +2,6 @@
 //  maximum-difference-between-node-and-ancestor
 //  https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

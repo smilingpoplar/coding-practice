@@ -2,7 +2,6 @@
 //  longest-harmonious-subsequence
 //  https://leetcode.com/problems/longest-harmonious-subsequence/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

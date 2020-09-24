@@ -2,7 +2,6 @@
 //  combination-sum
 //  https://leetcode.com/problems/combination-sum/
 //
-//  Created by smilingpoplar on 15/5/26.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

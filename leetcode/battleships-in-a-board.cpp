@@ -2,7 +2,6 @@
 //  battleships-in-a-board
 //  https://leetcode.com/problems/battleships-in-a-board/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

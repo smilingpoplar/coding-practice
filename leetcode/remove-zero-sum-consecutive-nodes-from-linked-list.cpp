@@ -2,7 +2,6 @@
 //  remove-zero-sum-consecutive-nodes-from-linked-list
 //  https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

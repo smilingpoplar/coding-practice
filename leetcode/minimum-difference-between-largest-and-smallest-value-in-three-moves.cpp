@@ -2,7 +2,6 @@
 //  minimum-difference-between-largest-and-smallest-value-in-three-moves
 //  https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

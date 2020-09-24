@@ -2,7 +2,6 @@
 //  maximize-distance-to-closest-person
 //  https://leetcode.com/problems/maximize-distance-to-closest-person/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  3sum
 //  https://leetcode.com/problems/3sum/
 //
-//  Created by smilingpoplar on 15/5/10.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

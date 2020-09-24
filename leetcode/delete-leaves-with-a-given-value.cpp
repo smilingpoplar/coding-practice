@@ -2,7 +2,6 @@
 //  delete-leaves-with-a-given-value
 //  https://leetcode.com/problems/delete-leaves-with-a-given-value/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

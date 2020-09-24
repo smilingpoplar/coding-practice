@@ -2,7 +2,6 @@
 //  lowest-common-ancestor-of-a-binary-tree
 //  https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 //
-//  Created by smilingpoplar on 15/8/1.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

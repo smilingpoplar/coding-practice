@@ -2,7 +2,6 @@
 //  maximum-length-of-a-concatenated-string-with-unique-characters
 //  https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

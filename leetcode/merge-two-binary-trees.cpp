@@ -2,7 +2,6 @@
 //  merge-two-binary-trees
 //  https://leetcode.com/problems/merge-two-binary-trees/
 //
-//  Created by smilingpoplar on 17/12/02.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

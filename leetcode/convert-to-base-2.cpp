@@ -2,7 +2,6 @@
 //  convert-to-base-2
 //  https://leetcode.com/problems/convert-to-base-2/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

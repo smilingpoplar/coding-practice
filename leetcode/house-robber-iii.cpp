@@ -2,7 +2,6 @@
 //  house-robber-iii
 //  https://leetcode.com/problems/house-robber-iii/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

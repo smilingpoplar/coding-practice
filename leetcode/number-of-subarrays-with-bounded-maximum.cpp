@@ -2,7 +2,6 @@
 //  number-of-subarrays-with-bounded-maximum
 //  https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

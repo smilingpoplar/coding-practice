@@ -2,7 +2,6 @@
 //  sum-of-subarray-minimums
 //  https://leetcode.com/problems/sum-of-subarray-minimums/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

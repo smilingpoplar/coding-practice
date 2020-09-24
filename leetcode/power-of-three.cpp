@@ -2,7 +2,6 @@
 //  power-of-three
 //  https://leetcode.com/problems/power-of-three/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

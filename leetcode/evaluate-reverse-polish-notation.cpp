@@ -2,7 +2,6 @@
 //  evaluate-reverse-polish-notation
 //  https://leetcode.com/problems/evaluate-reverse-polish-notation/
 //
-//  Created by smilingpoplar on 15/6/17.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

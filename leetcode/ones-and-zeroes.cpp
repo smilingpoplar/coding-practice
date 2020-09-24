@@ -2,7 +2,6 @@
 //  ones-and-zeroes
 //  https://leetcode.com/problems/ones-and-zeroes/
 //
-//  Created by smilingpoplar on 17/11/26.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

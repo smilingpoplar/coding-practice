@@ -2,7 +2,6 @@
 //  minimum-flips-to-make-a-or-b-equal-to-c
 //  https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

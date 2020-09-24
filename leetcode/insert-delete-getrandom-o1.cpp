@@ -2,7 +2,6 @@
 //  insert-delete-getrandom-o1
 //  https://leetcode.com/problems/insert-delete-getrandom-o1/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

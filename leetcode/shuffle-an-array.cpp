@@ -2,7 +2,6 @@
 //  shuffle-an-array
 //  https://leetcode.com/problems/shuffle-an-array/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

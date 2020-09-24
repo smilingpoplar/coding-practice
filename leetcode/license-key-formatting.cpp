@@ -2,7 +2,6 @@
 //  license-key-formatting
 //  https://leetcode.com/problems/license-key-formatting/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

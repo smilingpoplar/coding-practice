@@ -2,7 +2,6 @@
 //  search-a-2d-matrix-ii
 //  https://leetcode.com/problems/search-a-2d-matrix-ii/
 //
-//  Created by smilingpoplar on 15/8/2.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

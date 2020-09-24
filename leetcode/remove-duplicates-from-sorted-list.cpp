@@ -2,7 +2,6 @@
 //  remove-duplicates-from-sorted-list
 //  https://leetcode.com/problems/remove-duplicates-from-sorted-list/
 //
-//  Created by smilingpoplar on 15/6/6.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

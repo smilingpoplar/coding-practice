@@ -2,7 +2,6 @@
 //  random-flip-matrix
 //  https://leetcode.com/problems/random-flip-matrix/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  longest-subarray-of-1s-after-deleting-one-element
 //  https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

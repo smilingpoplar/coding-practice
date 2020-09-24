@@ -2,7 +2,6 @@
 //  matchsticks-to-square
 //  https://leetcode.com/problems/matchsticks-to-square/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  partition-labels
 //  https://leetcode.com/problems/partition-labels/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

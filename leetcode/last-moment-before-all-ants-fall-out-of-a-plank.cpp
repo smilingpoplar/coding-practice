@@ -2,7 +2,6 @@
 //  last-moment-before-all-ants-fall-out-of-a-plank
 //  https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

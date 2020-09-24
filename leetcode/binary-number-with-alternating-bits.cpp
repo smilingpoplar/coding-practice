@@ -2,7 +2,6 @@
 //  binary-number-with-alternating-bits
 //  https://leetcode.com/problems/binary-number-with-alternating-bits/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

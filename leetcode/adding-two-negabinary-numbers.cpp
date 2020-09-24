@@ -2,7 +2,6 @@
 //  adding-two-negabinary-numbers
 //  https://leetcode.com/problems/adding-two-negabinary-numbers/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

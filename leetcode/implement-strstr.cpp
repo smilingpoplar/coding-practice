@@ -2,7 +2,6 @@
 //  implement-strstr
 //  https://leetcode.com/problems/implement-strstr/
 //
-//  Created by smilingpoplar on 15/6/3.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

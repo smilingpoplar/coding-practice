@@ -2,7 +2,6 @@
 //  sparse-matrix-multiplication
 //  https://leetcode.com/problems/sparse-matrix-multiplication/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

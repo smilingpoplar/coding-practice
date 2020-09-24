@@ -2,7 +2,6 @@
 //  count-primes
 //  https://leetcode.com/problems/count-primes/
 //
-//  Created by smilingpoplar on 15/6/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

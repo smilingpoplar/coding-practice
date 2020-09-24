@@ -2,7 +2,6 @@
 //  search-for-a-range
 //  https://leetcode.com/problems/search-for-a-range/
 //
-//  Created by smilingpoplar on 15/5/12.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

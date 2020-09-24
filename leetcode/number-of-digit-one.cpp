@@ -2,7 +2,6 @@
 //  number-of-digit-one
 //  https://leetcode.com/problems/number-of-digit-one/
 //
-//  Created by smilingpoplar on 15/7/9.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

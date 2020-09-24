@@ -2,7 +2,6 @@
 //  find-median-from-data-stream
 //  https://leetcode.com/problems/find-median-from-data-stream/
 //
-//  Created by smilingpoplar on 17/10/12.
 //  Copyright (c) 2017年 YangLe. All rights reserved.
 //
 

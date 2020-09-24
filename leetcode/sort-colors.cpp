@@ -2,7 +2,6 @@
 //  sort-colors
 //  https://leetcode.com/problems/sort-colors/
 //
-//  Created by smilingpoplar on 15/5/11.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

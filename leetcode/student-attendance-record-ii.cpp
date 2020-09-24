@@ -2,7 +2,6 @@
 //  student-attendance-record-ii
 //  https://leetcode.com/problems/student-attendance-record-ii/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

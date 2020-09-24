@@ -2,7 +2,6 @@
 //  maximum-product-of-word-lengths
 //  https://leetcode.com/problems/maximum-product-of-word-lengths/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

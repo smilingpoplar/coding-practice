@@ -2,7 +2,6 @@
 //  minimum-cost-to-hire-k-workers
 //  https://leetcode.com/problems/minimum-cost-to-hire-k-workers/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

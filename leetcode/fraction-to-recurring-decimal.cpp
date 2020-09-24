@@ -2,7 +2,6 @@
 //  fraction-to-recurring-decimal
 //  https://leetcode.com/problems/fraction-to-recurring-decimal/
 //
-//  Created by smilingpoplar on 15/8/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

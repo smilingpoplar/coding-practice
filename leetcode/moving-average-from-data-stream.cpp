@@ -2,7 +2,6 @@
 //  moving-average-from-data-stream
 //  https://leetcode.com/problems/moving-average-from-data-stream/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  convert-sorted-list-to-binary-search-tree
 //  https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
 //
-//  Created by smilingpoplar on 15/6/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

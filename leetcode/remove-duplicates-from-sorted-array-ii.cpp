@@ -2,7 +2,6 @@
 //  remove-duplicates-from-sorted-array-ii
 //  https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
 //
-//  Created by smilingpoplar on 15/6/4.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  count-complete-tree-nodes
 //  https://leetcode.com/problems/count-complete-tree-nodes/
 //
-//  Created by smilingpoplar on 15/6/20.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

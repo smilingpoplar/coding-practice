@@ -2,7 +2,6 @@
 //  count-of-smaller-numbers-after-self
 //  https://leetcode.com/problems/count-of-smaller-numbers-after-self/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

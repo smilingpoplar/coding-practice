@@ -2,7 +2,6 @@
 //  minimum-increment-to-make-array-unique
 //  https://leetcode.com/problems/minimum-increment-to-make-array-unique/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

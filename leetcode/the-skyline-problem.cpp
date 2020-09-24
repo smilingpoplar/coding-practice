@@ -2,7 +2,6 @@
 //  the-skyline-problem
 //  https://leetcode.com/problems/the-skyline-problem/
 //
-//  Created by smilingpoplar on 15/6/16.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  time-based-key-value-store
 //  https://leetcode.com/problems/time-based-key-value-store/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

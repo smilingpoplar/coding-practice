@@ -2,7 +2,6 @@
 //  substring-with-concatenation-of-all-words
 //  https://leetcode.com/problems/substring-with-concatenation-of-all-words/
 //
-//  Created by smilingpoplar on 15/5/8.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

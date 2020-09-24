@@ -2,7 +2,6 @@
 //  maximum-subarray-sum-with-one-deletion
 //  https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

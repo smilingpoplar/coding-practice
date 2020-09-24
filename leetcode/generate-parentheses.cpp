@@ -2,7 +2,6 @@
 //  generate-parentheses
 //  https://leetcode.com/problems/generate-parentheses/
 //
-//  Created by smilingpoplar on 15/6/9.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

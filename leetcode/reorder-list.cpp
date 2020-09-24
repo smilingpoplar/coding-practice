@@ -2,7 +2,6 @@
 //  reorder-list
 //  https://leetcode.com/problems/reorder-list/
 //
-//  Created by smilingpoplar on 15/5/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

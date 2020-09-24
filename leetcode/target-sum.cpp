@@ -2,7 +2,6 @@
 //  target-sum
 //  https://leetcode.com/problems/target-sum/
 //
-//  Created by smilingpoplar on 17/10/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

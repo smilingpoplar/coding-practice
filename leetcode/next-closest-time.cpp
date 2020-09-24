@@ -2,7 +2,6 @@
 //  next-closest-time
 //  https://leetcode.com/problems/next-closest-time/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

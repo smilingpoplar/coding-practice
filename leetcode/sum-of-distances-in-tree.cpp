@@ -2,7 +2,6 @@
 //  sum-of-distances-in-tree
 //  https://leetcode.com/problems/sum-of-distances-in-tree/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

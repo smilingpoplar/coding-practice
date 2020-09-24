@@ -2,7 +2,6 @@
 //  intersection-of-two-arrays
 //  https://leetcode.com/problems/intersection-of-two-arrays/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  number-of-segments-in-a-string
 //  https://leetcode.com/problems/number-of-segments-in-a-string/
 //
-//  Created by smilingpoplar on 17/11/24.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

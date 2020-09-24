@@ -2,7 +2,6 @@
 //  longest-line-of-consecutive-one-in-matrix
 //  https://leetcode.com/problems/longest-line-of-consecutive-one-in-matrix/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

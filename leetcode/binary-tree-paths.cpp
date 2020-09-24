@@ -2,7 +2,6 @@
 //  binary-tree-paths
 //  https://leetcode.com/problems/binary-tree-paths/
 //
-//  Created by smilingpoplar on 15/8/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  binary-tree-right-side-view
 //  https://leetcode.com/problems/binary-tree-right-side-view/
 //
-//  Created by smilingpoplar on 15/5/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

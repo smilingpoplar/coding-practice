@@ -2,7 +2,6 @@
 //  total-hamming-distance
 //  https://leetcode.com/problems/total-hamming-distance/
 //
-//  Created by smilingpoplar on 17/11/26.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  longest-arithmetic-subsequence-of-given-difference
 //  https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

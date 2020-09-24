@@ -2,7 +2,6 @@
 //  best-time-to-buy-and-sell-stock-iii
 //  https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
 //
-//  Created by smilingpoplar on 15/5/9.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

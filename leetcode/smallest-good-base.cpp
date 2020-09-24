@@ -2,7 +2,6 @@
 //  smallest-good-base
 //  https://leetcode.com/problems/smallest-good-base/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

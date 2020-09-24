@@ -2,7 +2,6 @@
 //  queue-reconstruction-by-height
 //  https://leetcode.com/problems/queue-reconstruction-by-height/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

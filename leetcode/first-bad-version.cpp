@@ -2,7 +2,6 @@
 //  first-bad-version
 //  https://leetcode.com/problems/first-bad-version/
 //
-//  Created by smilingpoplar on 17/10/12.
 //  Copyright (c) 2017年 YangLe. All rights reserved.
 //
 

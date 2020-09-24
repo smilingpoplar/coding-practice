@@ -2,7 +2,6 @@
 //  shortest-path-with-alternating-colors
 //  https://leetcode.com/problems/shortest-path-with-alternating-colors/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

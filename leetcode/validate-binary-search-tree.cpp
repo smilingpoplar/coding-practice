@@ -2,7 +2,6 @@
 //  validate-binary-search-tree
 //  https://leetcode.com/problems/validate-binary-search-tree/
 //
-//  Created by smilingpoplar on 15/5/23.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

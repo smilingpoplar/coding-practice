@@ -2,7 +2,6 @@
 //  find-duplicate-subtrees
 //  https://leetcode.com/problems/find-duplicate-subtrees/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  rotate-array
 //  https://leetcode.com/problems/rotate-array/
 //
-//  Created by smilingpoplar on 15/5/21.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

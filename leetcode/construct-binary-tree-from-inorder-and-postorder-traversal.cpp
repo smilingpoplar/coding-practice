@@ -2,7 +2,6 @@
 //  construct-binary-tree-from-inorder-and-postorder-traversal
 //  https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
 //
-//  Created by smilingpoplar on 15/6/16.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

@@ -2,7 +2,6 @@
 //  next-greater-element-i
 //  https://leetcode.com/problems/next-greater-element-i/
 //
-//  Created by smilingpoplar on 17/11/27.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

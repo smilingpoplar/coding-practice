@@ -2,7 +2,6 @@
 //  permutations-ii
 //  https://leetcode.com/problems/permutations-ii/
 //
-//  Created by smilingpoplar on 15/5/28.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

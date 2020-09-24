@@ -2,7 +2,6 @@
 //  two-sum-iii-data-structure-design
 //  https://leetcode.com/problems/two-sum-iii-data-structure-design/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

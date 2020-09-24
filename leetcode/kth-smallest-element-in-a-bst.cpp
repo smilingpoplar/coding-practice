@@ -2,7 +2,6 @@
 //  kth-smallest-element-in-a-bst
 //  https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 //
-//  Created by smilingpoplar on 15/7/5.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

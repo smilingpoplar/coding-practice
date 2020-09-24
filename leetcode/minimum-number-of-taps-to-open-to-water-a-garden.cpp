@@ -2,7 +2,6 @@
 //  minimum-number-of-taps-to-open-to-water-a-garden
 //  https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

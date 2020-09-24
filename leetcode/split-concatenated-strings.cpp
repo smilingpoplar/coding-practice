@@ -2,7 +2,6 @@
 //  split-concatenated-strings
 //  https://leetcode.com/problems/split-concatenated-strings/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

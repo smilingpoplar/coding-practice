@@ -2,7 +2,6 @@
 //  reshape-the-matrix
 //  https://leetcode.com/problems/reshape-the-matrix/
 //
-//  Created by smilingpoplar on 17/12/01.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

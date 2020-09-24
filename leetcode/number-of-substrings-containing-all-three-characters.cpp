@@ -2,7 +2,6 @@
 //  number-of-substrings-containing-all-three-characters
 //  https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

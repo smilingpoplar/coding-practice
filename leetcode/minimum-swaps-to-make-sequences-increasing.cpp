@@ -2,7 +2,6 @@
 //  minimum-swaps-to-make-sequences-increasing
 //  https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

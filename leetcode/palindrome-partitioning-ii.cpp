@@ -2,7 +2,6 @@
 //  palindrome-partitioning-ii
 //  https://leetcode.com/problems/palindrome-partitioning-ii/
 //
-//  Created by smilingpoplar on 15/6/3.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

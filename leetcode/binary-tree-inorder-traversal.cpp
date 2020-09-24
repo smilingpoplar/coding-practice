@@ -2,7 +2,6 @@
 //  binary-tree-inorder-traversal
 //  https://leetcode.com/problems/binary-tree-inorder-traversal/
 //
-//  Created by smilingpoplar on 15/5/18.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

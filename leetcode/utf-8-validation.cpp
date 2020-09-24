@@ -2,7 +2,6 @@
 //  utf-8-validation
 //  https://leetcode.com/problems/utf-8-validation/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

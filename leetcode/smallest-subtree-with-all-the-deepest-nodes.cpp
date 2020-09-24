@@ -2,7 +2,6 @@
 //  smallest-subtree-with-all-the-deepest-nodes
 //  https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
 //
-//  Created by smilingpoplar on 15/6/7.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

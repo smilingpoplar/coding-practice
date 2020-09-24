@@ -2,7 +2,6 @@
 //  next-greater-element-iii
 //  https://leetcode.com/problems/next-greater-element-iii/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

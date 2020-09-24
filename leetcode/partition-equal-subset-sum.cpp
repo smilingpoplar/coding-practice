@@ -2,7 +2,6 @@
 //  partition-equal-subset-sum
 //  https://leetcode.com/problems/partition-equal-subset-sum/
 //
-//  Created by smilingpoplar on 17/10/13.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

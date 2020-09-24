@@ -2,7 +2,6 @@
 //  move-zeroes
 //  https://leetcode.com/problems/move-zeroes/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 

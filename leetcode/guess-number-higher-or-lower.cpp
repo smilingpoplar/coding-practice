@@ -2,7 +2,6 @@
 //  guess-number-higher-or-lower
 //  https://leetcode.com/problems/guess-number-higher-or-lower/
 //
-//  Created by smilingpoplar on 18/01/19.
 //  Copyright (c) 2015年 YangLe. All rights reserved.
 //
 
