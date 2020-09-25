@@ -67,7 +67,7 @@ public:
 
         while (!pq.empty()) {
             auto u = pq.top(); pq.pop();
-            for (auto& [v, cost]: adj[u]) { // 遍历u的所有邻接点
+            for (auto& [v, cost] : adj[u]) { // 遍历u的所有邻接点
                 int newdist = dist[u] + cost;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
@@ -93,13 +93,14 @@ public:
         const int INF = 1e9;
         vector<int> dist(N + 1, INF);
         dist[K] = 0;
-        for (int i = 0; i < N; i++) {
+        for (int i = 1; i < N; i++) {
             auto prev = dist;
             for (auto &e : times) {
                 int u = e[0], v = e[1], cost = e[2];
                 dist[v] = min(dist[v], prev[u] + cost);
             }
         }
+    
         int ans = INT_MIN;
         for (int i = 1; i <= N; i++) {
             ans = max(ans, dist[i]);
