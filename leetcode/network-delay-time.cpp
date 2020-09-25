@@ -19,25 +19,25 @@ public:
         }
         vector<int> dist(N + 1, INT_MAX); // 节点1..N
         dist[K] = 0;
-        
-        auto cmp = [](vector<int> &a, vector<int> &b) { // {node, dist}
-            return a[1] > b[1]; // 最小堆
+
+        using arr2 = array<int, 2>; // [dist, node]
+        auto cmp = [](arr2 &a, arr2 &b) { 
+            return a[0] > b[0]; // 最小堆
         };
-        priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
-        pq.push({K, dist[K]});
-        
+        priority_queue<arr2, vector<arr2>, decltype(cmp)> pq(cmp);
+        pq.push({dist[K], K});
+
         while (!pq.empty()) {
-            auto info = pq.top(); pq.pop();
-            int u = info[0], d = info[1];
+            auto [d, u] = pq.top(); pq.pop();
             for (auto& [v, cost] : adj[u]) { // 遍历u的所有邻接点
                 int newdist = d + cost;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
-                    pq.push({v, newdist}); // pq中将可能有多个v值，但后续v值对结果没影响
+                    pq.push({newdist, v}); // pq中将可能有多个v值，但后续v值对结果没影响
                 }
             }
         }
-        
+
         int ans = INT_MIN;
         for (int i = 1; i <= N; i++) {
             ans = max(ans, dist[i]);

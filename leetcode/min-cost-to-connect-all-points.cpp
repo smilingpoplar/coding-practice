@@ -72,7 +72,7 @@ public:
             return a[0] > b[0]; // 最小堆
         };
         priority_queue<arr2, vector<arr2>, decltype(cmp)> pq(cmp);
-        pq.push({0, 0});
+        pq.push({dist[0], 0});
 
         int ans = 0;
         vector<int> visited(N, false);
