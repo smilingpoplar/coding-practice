@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  find-two-non-overlapping-sub-arrays-each-with-target-sum
+//  https://leetcode.com/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
