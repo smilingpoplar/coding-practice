@@ -18,8 +18,7 @@ public:
         // 若不满足等差，dp[i]=0。
         // 初始dp[0]=dp[1]=0，因为长度要>=3。
         // i这维只依赖前一项，省掉i这维，满足等差时dp+=1，不满足时dp=0。
-        int ans = 0;
-        int dp = 0;
+        int dp = 0, ans = 0;
         for (int i = 2; i < A.size(); i++) {
             if (A[i] - A[i-1] == A[i-1] - A[i-2]) {
                 dp += 1;
