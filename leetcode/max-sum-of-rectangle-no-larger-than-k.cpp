@@ -17,20 +17,22 @@ public:
         
         int ans = INT_MIN;
         for (int r1 = 0; r1 < R; r1++) {
-            vector<int> sum(C, 0); // [r1,r2]行累加到sum中
+            vector<int> rowSum(C, 0); // [r1..r2]行累加到rowSum中
             for (int r2 = r1; r2 < R; r2++) {
                 for (int c = 0; c < C; c++) {
-                    sum[c] += matrix[r2][c];
+                    rowSum[c] += matrix[r2][c];
                 }
                 
-                // 在sum[]中找<=k的子段和，滑动窗口解atMost问题
-                int wsum = 0;
-                for (int hi = 0, lo = 0; hi < C; hi++) {
-                    wsum += sum[hi];
-                    while (s > k) {
-                        s -= wsum[lo++];
-                    }
-                    ans = max(ans, wsum);
+                // 在rowSum[]中找<=k的子段和
+                set<int> st = {0};
+                int runningSum = 0;
+                for (int num : rowSum) {
+                    runningSum += num;
+                    // runningSum-toFind<=k，toFind>=runningSum-k
+                    auto it = st.lower_bound(runningSum - k);
+                    if (it != st.end()) ans = max(ans, runningSum - *it);
+                    if (ans == k) return k;//
+                    st.insert(runningSum);
                 }
             }           
         }
