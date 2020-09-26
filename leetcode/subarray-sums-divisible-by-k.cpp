@@ -12,9 +12,8 @@ using namespace std;
 class Solution {
 public:
     int subarraysDivByK(vector<int>& A, int K) {
-        unordered_map<int, int> cnt; // sum=>count
+        unordered_map<int, int> cnt = {{0, 1}}; // sum=>count
         int runningSum = 0;
-        cnt[runningSum] = 1;
         
         int ans = 0;
         for (int a : A) {

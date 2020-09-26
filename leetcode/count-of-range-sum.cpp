@@ -13,9 +13,8 @@ using namespace std;
 class Solution {
 public:
     int countRangeSum(vector<int>& nums, int lower, int upper) {
-        map<long, int> cnt; // sum=>count
+        map<long, int> cnt = {{0, 1}}; // sum=>count
         long runningSum = 0;
-        cnt[runningSum] = 1;
         
         int ans = 0;
         for (int num : nums) {
