@@ -29,7 +29,7 @@ public:
         int ans = INT_MAX;
         deque<int> dq;
         for (int i = 0; i <= N; i++) {
-            // 1 可取最小值->单调递增；最短->相同值只保留最后一个->弹出比较用<=
+            // 1 可取最小值->单调递增；最短 -> 相同值只保留最后一个 -> 弹出比较用<=
             while (!dq.empty() && presum[i] <= presum[dq.back()]) {
                 dq.pop_back();
             }     
