@@ -16,6 +16,7 @@ public:
         // 设dp[i][j]表示以A[i]、A[j]结尾的长>=2的最长Fib子序列长
         // 将A中值作val=>idx的映射，i,j的前一个索引idx=mp[A[j]-A[i]]，
         // dp[i][j] = dp[idx][i] + 1
+        // i从左往右遍历，j从左往右遍历
         const int N = A.size();
         unordered_map<int, int> mp; // val=>idx
         vector<vector<int>> dp(N, vector<int>(N, 0));
