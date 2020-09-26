@@ -12,9 +12,8 @@ using namespace std;
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> mp; // sum=>idx
+        unordered_map<int, int> mp = {{0, 1}}; // sum=>idx
         int runningSum = 0;
-        mp[runningSum] = -1; // 初始空集
         // 子段和是k的倍数，即子段和(runningSum-toFind)%k==0
         // (toFind==runningSum)%K
         // 为让子段尽量长，多个相同runningSum的只保留第一个
