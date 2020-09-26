@@ -14,19 +14,19 @@ public:
     int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
         if (matrix.empty()) return 0;
         const int R = matrix.size(), C = matrix[0].size();
-        
+        // 题目中说行数可能远大于列数，所以要按列求和
         int ans = INT_MIN;
-        for (int r1 = 0; r1 < R; r1++) {
-            vector<int> rowSum(C, 0); // [r1..r2]行累加到rowSum中
-            for (int r2 = r1; r2 < R; r2++) {
-                for (int c = 0; c < C; c++) {
-                    rowSum[c] += matrix[r2][c];
+        for (int c1 = 0; c1 < C; c1++) {
+            vector<int> colSum(R, 0); // [c1..c2]列累加到colSum中
+            for (int c2 = c1; c2 < C; c2++) {
+                for (int r = 0; r < R; r++) {
+                    colSum[r] += matrix[r][c2];
                 }
                 
-                // 在rowSum[]中找<=k的子段和
+                // 在colSum[]中找<=k的子段和
                 set<int> st = {0};
                 int runningSum = 0;
-                for (int num : rowSum) {
+                for (int num : colSum) {
                     runningSum += num;
                     // runningSum-toFind<=k，toFind>=runningSum-k
                     auto it = st.lower_bound(runningSum - k);
