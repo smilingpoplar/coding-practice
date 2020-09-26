@@ -17,6 +17,7 @@ public:
         vector<int> len(N, 1); // 以nums[i]结尾的递增子序列长度
         vector<int> cnt(N, 1); //      ...              个数
         
+        int longest = INT_MIN, ans = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
@@ -28,15 +29,10 @@ public:
                     }
                 }
             }
-        }
-        
-        int longest = INT_MIN;
-        for (int l : len) {
-            longest = max(longest, l);
-        }
-        int ans = 0;
-        for (int i = 0; i < N; i++) {
-            if (len[i] == longest) {
+            if (len[i] > longest) {
+                longest = len[i];
+                ans = cnt[i];
+            } else if (len[i] == longest) {
                 ans += cnt[i];
             }
         }
