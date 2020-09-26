@@ -12,31 +12,32 @@ using namespace std;
 
 class Solution {
     struct TrieNode {
-        vector<TrieNode *> child;
         string word;
-        TrieNode() : child(26, NULL) {}
+        vector<TrieNode *> child;
+        TrieNode() : child(26, nullptr) {}
     };
 
     TrieNode root;
 public:
     vector<string> findWords(vector<vector<char>> &board, vector<string> &words) {
+        // 将单词表存成trie结构以同时搜索整个单词表，在矩阵中回溯搜索
         if (board.empty()) return {};
         const int R = board.size(), C = board[0].size();
         vector<vector<bool>> visited(R, vector<bool>(C, false));
         for (auto &word : words) {
-            insert(word); // 插入trie中
+            insertToTrie(word);
         }
 
         vector<string> ans;
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
-                dfs(r, c, board, visited, &root, ans);
+                search(r, c, board, visited, &root, ans);
             }
         }
         return ans;
     }
 
-    void insert(const string &word) {
+    void insertToTrie(const string &word) {
         auto p = &root;
         for (char c : word) {
             int idx = c - 'a';
@@ -46,21 +47,24 @@ public:
         p->word = word;
     }
 
-    void dfs(int r, int c, const vector<vector<char>> &board, 
+    void search(int r, int c, const vector<vector<char>> &board, 
              vector<vector<bool>> &visited, TrieNode *node, vector<string> &ans) {
-        if (r < 0 || r >= board.size() || c < 0 || c >= board[0].size() || visited[r][c]) return;
+        const int R = board.size(), C = board[0].size();
+        if (r < 0 || r >= R || c < 0 || c >= C || visited[r][c]) return;
         // 回溯法，在trie中搜索board[r][c]
-        auto p = node->child[board[r][c] - 'a'];
+        int idx = board[r][c] - 'a';
+        auto p = node->child[idx];
         if (!p) return;
         if (!p->word.empty()) { // 找到一个词
             ans.push_back(p->word);
             p->word.clear(); // 不用再找这个词
         }
+        
         visited[r][c] = true;
-        dfs(r - 1, c, board, visited, p, ans);
-        dfs(r + 1, c, board, visited, p, ans);
-        dfs(r, c - 1, board, visited, p, ans);
-        dfs(r, c + 1, board, visited, p, ans);
+        search(r - 1, c, board, visited, p, ans);
+        search(r + 1, c, board, visited, p, ans);
+        search(r, c - 1, board, visited, p, ans);
+        search(r, c + 1, board, visited, p, ans);
         visited[r][c] = false;
     }
 };

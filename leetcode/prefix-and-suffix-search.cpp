@@ -14,7 +14,7 @@ class WordFilter {
     struct TrieNode {
         vector<int> wordIdx;
         vector<TrieNode *> child;
-        TrieNode() : child(26, NULL) { }
+        TrieNode() : child(26, nullptr) { }
     };
 
     class Trie {
