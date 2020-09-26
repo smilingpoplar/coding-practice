@@ -62,7 +62,7 @@ public:
         int i = wordIdx1.size() - 1, j = wordIdx2.size() - 1;
         while (i >= 0 && j >= 0) {
             if (wordIdx1[i] == wordIdx2[j]) return wordIdx1[i];
-            else if (wordIdx1[i] > wordIdx2[j]) i--;
+            if (wordIdx1[i] > wordIdx2[j]) i--;
             else j--;
         }
         return -1;
