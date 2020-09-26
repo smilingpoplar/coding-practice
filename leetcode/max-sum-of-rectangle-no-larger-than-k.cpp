@@ -23,17 +23,14 @@ public:
                     sum[c] += matrix[r2][c];
                 }
                 
-                // 在sum[]中找<=k的子段和
-                int runningSum = 0;
-                set<int> st;
-                st.insert(runningSum); // 初始空集
-                for (int num : sum) {
-                    runningSum += num;
-                    // 在set中找x使runningSum-x<=k，x>=runningSum-k
-                    // 要使runningSum-x尽量大，x要尽量小
-                    auto it = st.lower_bound(runningSum - k);
-                    if (it != st.end()) ans = max(ans, runningSum - *it);
-                    st.insert(runningSum);
+                // 在sum[]中找<=k的子段和，滑动窗口解atMost问题
+                int wsum = 0;
+                for (int hi = 0, lo = 0; hi < C; hi++) {
+                    wsum += sum[hi];
+                    while (s > k) {
+                        s -= wsum[lo++];
+                    }
+                    ans = max(ans, wsum);
                 }
             }           
         }
