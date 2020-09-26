@@ -31,7 +31,6 @@ public:
                     // runningSum-toFind<=k，toFind>=runningSum-k
                     auto it = st.lower_bound(runningSum - k);
                     if (it != st.end()) ans = max(ans, runningSum - *it);
-                    if (ans == k) return k;//
                     st.insert(runningSum);
                 }
             }           
