@@ -28,7 +28,7 @@ public:
             if (sum == target) {
                 int len = hi - lo + 1;
                 dp[hi] = len;
-                // 能求到两最小长度的和
+                // 不重叠子段，能求到两个长度最小的
                 if (lo > 0) ans = min(ans, len + dp[lo-1]);
             }
             if (hi > 0) dp[hi] = min(dp[hi], dp[hi-1]);
