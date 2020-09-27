@@ -18,8 +18,7 @@ public:
         unordered_map<int, int> dp; // 子序列结尾值v=>子序列长
         int ans = 0;
         for (int v : arr) {
-            int nv = dp.count(v - difference) ? dp[v - difference] + 1 : 1;
-            dp[v] = max(dp[v], nv);
+            dp[v] = dp.count(v - difference) ? dp[v - difference] + 1 : 1;
             ans = max(ans, dp[v]);
         }
         return ans;

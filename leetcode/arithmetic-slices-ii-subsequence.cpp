@@ -13,7 +13,7 @@ class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& A) {
         // 设dp[i][d]表示以A[i]结尾、等差为d、长度>=2的等差子序列数。
-        // 对所有j<i，d=A[i]-A[j]，dp[i][d] += dp[j][d]+1
+        // 对所有j<i，d=A[i]-A[j]，dp[i][d]=sum(dp[j][d]+1)
         // 其中dp[j][d]来自扩展的旧序列，1来自新出现的长度==2序列
         // 优化：由于d是两数之差，范围无限，dp[i][d]的d这一维要用unordered_map
         // 要用dp[j].count(d)测试，防止d值不存在时往map里添0，导致内存溢出
