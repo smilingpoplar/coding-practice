@@ -14,6 +14,29 @@ public:
     bool PredictTheWinner(vector<int>& nums) {
         // 设dp[i][j]表示当前玩家从nums[i..j]局面能得的最高分，0<=i<=j<N
         // dp[i][j] = max(nums[i]-dp[i+1][j], nums[j]-dp[i][j-1])
+        // 初始dp[i][i]=nums[i]
+        // 省掉i这维，用临时变量ndp，i从右往左遍历，j从左往右遍历
+        // ndp[j] = max(nums[i]-dp[j], nums[j]-ndp[j-1])
+        const int N = nums.size();
+        vector<int> dp(N);
+        for (int i = N - 1; i >= 0; i--) {
+            vector<int> ndp(N);
+            ndp[i] = nums[i];
+            for (int j = i + 1; j < N; j++) {
+                ndp[j] = max(nums[i] - dp[j], nums[j] - ndp[j-1]);
+            }
+            swap(dp, ndp);
+        }
+        return dp[N-1] >= 0;
+    }
+};
+
+/*
+class Solution {
+public:
+    bool PredictTheWinner(vector<int>& nums) {
+        // 设dp[i][j]表示当前玩家从nums[i..j]局面能得的最高分，0<=i<=j<N
+        // dp[i][j] = max(nums[i]-dp[i+1][j], nums[j]-dp[i][j-1])
         // 初始dp[i][i]=nums[i]，dp[N][N]=0
         // i从右往左遍历，j从左往右遍历
         const int N = nums.size();
@@ -29,6 +52,7 @@ public:
         return dp[0][N-1] >= 0;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {    
     return 0;
