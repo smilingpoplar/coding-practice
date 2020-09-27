@@ -17,35 +17,28 @@ public:
         if (matrix.empty()) return 0;
         const int R = matrix.size(), C = matrix[0].size();
         int ans = 0;
-        vector<int> heights(C, 0);
+        vector<int> h(C, 0);
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < C; c++) {
-                if (matrix[r][c] == '0') heights[c] = 0;
-                else heights[c]++;
+                if (matrix[r][c] == '0') h[c] = 0;
+                else h[c]++;
             }
-            ans = max(ans, largestRectangleArea(heights));
+            ans = max(ans, largestRectangleArea(h));
         }
         return ans;
     }
 
-    int largestRectangleArea(vector<int>& heights) {
+    int largestRectangleArea(vector<int>& h) {
         // 同https://leetcode.com/problems/largest-rectangle-in-histogram/
-        // 用栈找“波峰” <=> 找下一个更小的数
-        // 弹出数是"波峰"，当前数是右边小于它的数，新栈顶是左边小于它的数。
-
-        // 为方便起见，heights[]首尾加上高度为0的哨兵块，变为h[]
-        vector<int> h(heights.size() + 2, 0);
+        // 找波峰，对应找下一个更小的数
+        h.push_back(0); // 右哨兵
         const int N = h.size();
-        for (int i = 1; i < N - 1; i++) {
-            h[i] = heights[i-1];
-        }
-
         int ans = 0;
         stack<int> stk; // 栈中保存坐标
         for (int i = 0; i < N; i++) {
             while (!stk.empty() && h[i] < h[stk.top()]) {
                 int peak = stk.top(); stk.pop();
-                int left = stk.top();
+                int left = stk.empty() ? -1 : stk.top();
                 ans = max(ans, h[peak] * (i - left - 1));
             }
             stk.push(i);
