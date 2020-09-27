@@ -12,30 +12,31 @@ using namespace std;
 
 class Solution {
 public:
-    bool canIWin(int maxChoosableInteger, int desiredTotal) {
-        if (maxChoosableInteger >= desiredTotal) return true;
-        if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 < desiredTotal) return false;
-        unordered_map<unsigned, bool> memo;
-        return dfs(maxChoosableInteger, desiredTotal, 0, memo);
+    bool canIWin(int maxInt, int desired) {
+        if (maxInt >= desired) return true;
+        if (maxInt * (maxInt + 1) / 2 < desired) return false;
+        // 因为1<=maxInt<=20，memo需要1<<20大小
+        // memo[i]：0 未计算、1 win、-1 lose
+        vector<int> memo(1 << 20);
+        return dfs(maxInt, desired, 0, memo);
     }
     
-    // 把哪些数用过的当前状态编码used 作为memo的键
-    bool dfs(int maxChoosableInteger, int desiredTotal,
-            unsigned used, unordered_map<unsigned, bool> &memo) {
-        if (desiredTotal <= 0) return false; // 对方已赢
-        if (memo.count(used)) return memo[used];
+    // 把哪些数用过编码到maskUsed
+    bool dfs(int maxInt, int desired, unsigned maskUsed, vector<int>& memo) {
+        if (desired <= 0) return false; // 对方已拿到desired
+        if (memo[maskUsed] != 0) return memo[maskUsed] == 1;
         
-        for (int i = 1; i <= maxChoosableInteger; i++) {
-            unsigned mask = 1 << i;
-            if ((used & mask) == 0) { // i还未用过
-                if (!dfs(maxChoosableInteger, desiredTotal - i, used | mask, memo)) { // 对方输
-                    memo[used] = true;
+        for (int i = 1; i <= maxInt; i++) {
+            unsigned maskCur = 1 << (i - 1);
+            if ((maskUsed & maskCur) == 0) { // 当前数还未用过
+                if (!dfs(maxInt, desired - i, maskUsed | maskCur, memo)) {
+                    memo[maskUsed] = 1;
                     return true;
                 }
             }
         }
-        memo[used] = false;
-        return memo[used];
+        memo[maskUsed] = -1;
+        return false;
     }
 };
 

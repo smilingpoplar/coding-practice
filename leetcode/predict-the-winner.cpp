@@ -14,10 +14,13 @@ public:
     bool PredictTheWinner(vector<int>& nums) {
         // 设dp[i][j]表示当前玩家从nums[i..j]局面能得的最高分，0<=i<=j<N
         // dp[i][j] = max(nums[i]-dp[i+1][j], nums[j]-dp[i][j-1])
-        // 初始j==i时，dp[i][i]=nums[i]
+        // 初始dp[i][i]=nums[i]，dp[N][N]=0
+        // i从右往左遍历，j从左往右遍历
         const int N = nums.size();
-        vector<vector<int>> dp(N, vector<int>(N, 0));
-        for (int i = 0; i < N; i++) dp[i][i] = nums[i];
+        vector<vector<int>> dp(N + 1, vector<int>(N + 1, 0));
+        for (int i = 0; i < N; i++) {
+            dp[i][i] = nums[i];
+        }
         for (int i = N - 1; i >= 0; i--) {
             for (int j = i + 1; j < N; j++) {
                 dp[i][j] = max(nums[i] - dp[i+1][j], nums[j] - dp[i][j-1]);
