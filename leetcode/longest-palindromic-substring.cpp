@@ -15,13 +15,13 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         // 设dp[i][j]表示s[i..j]是否是回文串，0<=i<=j<N
-        // dp[i][j] = s[i]==s[j] && dp[i+1][j-1]，若dp[i][j]是回文串则回文串长为j-i+1
+        // dp[i][j] = s[i]==s[j] && dp[i+1][j-1]，
         // dp在i维上只依赖i+1项，可省掉i维，i仍从右往左遍历
         // 要让dp[j-1]表示旧状态dp[i+1][j-1]，j从右往左遍历
         const int N = s.size();
         vector<bool> dp(N, false);
         int longest = 0;
-        string palindrome;
+        string ans;
         for (int i = N - 1; i >= 0; i--) {
             for (int j = N - 1; j >= i; j--) {
                 dp[j] = (s[i] == s[j]);
@@ -31,12 +31,12 @@ public:
                     int len = j - i + 1;
                     if (len > longest) {
                         longest = len;
-                        palindrome = s.substr(i, len);
+                        ans = s.substr(i, len);
                     }
                 }
             }
         }
-        return palindrome;
+        return ans;
     }
 };
 */
