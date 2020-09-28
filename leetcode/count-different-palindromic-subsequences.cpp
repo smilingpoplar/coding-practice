@@ -39,8 +39,8 @@ public:
             if (itLo == idxSets[i].end() || *itLo > hi) continue;
             auto itHi = idxSets[i].upper_bound(hi); 
             itHi--; // *itLo<=hi，<=hi非空，可itHi--
-            ans += (*itLo == *itHi) ? 1 : 2; // 最外层贡献c、cc
-            ans += dfs(*itLo + 1, *itHi - 1, idxSets, memo); // 剥掉最外层c..c、内层子问题
+            ans += (*itLo == *itHi) ? 1 : 2; // 相等时贡献c，不等时贡献c和cc
+            ans += dfs(*itLo + 1, *itHi - 1, idxSets, memo); // 剥掉最外层、内层子问题
         }
         memo[lo][hi] = ans % MOD;
         return memo[lo][hi];
