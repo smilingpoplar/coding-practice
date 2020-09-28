@@ -13,11 +13,12 @@ using namespace std;
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
-        int i = 0;
-        for (int j = 0; j < t.size() && i < s.size(); j++) { // 在t中搜索s
-            if (s[i] == t[j]) i++;
+        // 在t中找s
+        int is = 0;
+        for (int it = 0; it < t.size() && is < s.size(); it++) {
+            if (s[is] == t[it]) is++;
         }
-        return i == s.size();
+        return is == s.size();
     }
 };
 */
