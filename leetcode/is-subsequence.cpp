@@ -32,7 +32,7 @@ public:
         }
         
         int lastIdx = -1;
-        for (char c : s) {
+        for (char c : s) { // 应在各字母的位置列表穿梭前进
             auto &list = pos[c - 'a'];
             auto it = upper_bound(list.begin(), list.end(), lastIdx);
             if (it == list.end()) return false;
