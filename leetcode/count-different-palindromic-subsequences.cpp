@@ -15,10 +15,10 @@ class Solution {
     const int MOD = 1e9 + 7;
 public:
     int countPalindromicSubsequences(string S) {
-        // 先考虑某字母的最外层区间。比如"bccb"，先考虑b的最外层区间S[firstIdx(b)..lastIdx(b)]。
-        // 这最外层可贡献回文b（不再考虑内层）、bb（firstIdx(b)!=lastIdx(b)），剥去最外层的bb，
-        // 还可得内层子问题：S[firstIdx(b)+1..lastIdx(b)-1]]。
-        // 不同字母的子问题不重叠，count可相加。
+        // 考虑某字母作最外层的区间，比如"bccb"，b作最外层的区间S[firstIdx(b)..lastIdx(b)]。
+        // 这最外层可贡献回文b（不再考虑内层）、bb（firstIdx(b)!=lastIdx(b)）。
+        // 当最外层为bb时，内层可为空集和非空子问题S[firstIdx(b)+1..lastIdx(b)-1]]。
+        // 只要最外层不同就一定是不同的回文串，不用管内层是什么，计数可累加。
         const int N = S.size();
         vector<set<int>> idxSets(CHAR_CNT); // char=>idxSet
         for (int i = 0; i < N; i++) {
@@ -26,10 +26,10 @@ public:
         }
 
         vector<vector<int>> memo(N, vector<int>(N, -1)); // S[lo..hi] => count
-        return rCount(0, N - 1, idxSets, memo);
+        return dfs(0, N - 1, idxSets, memo);
     }
     
-    int rCount(int lo, int hi, vector<set<int>> &idxSets, vector<vector<int>> &memo) {
+    int dfs(int lo, int hi, vector<set<int>> &idxSets, vector<vector<int>> &memo) {
         if (lo > hi) return 0;
         if (memo[lo][hi] != -1) return memo[lo][hi];
         
@@ -40,7 +40,7 @@ public:
             auto itHi = idxSets[i].upper_bound(hi); 
             itHi--; // *itLo<=hi，<=hi非空，可itHi--
             ans += (*itLo == *itHi) ? 1 : 2; // 最外层贡献c、cc
-            ans += rCount(*itLo + 1, *itHi - 1, idxSets, memo); // 剥掉最外层c..c、内层子问题
+            ans += dfs(*itLo + 1, *itHi - 1, idxSets, memo); // 剥掉最外层c..c、内层子问题
         }
         memo[lo][hi] = ans % MOD;
         return memo[lo][hi];
