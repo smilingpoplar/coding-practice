@@ -15,7 +15,7 @@ public:
         // 找以各个字母结尾的最长子串长，
         // 比如以d结尾的最长子串bcd长3，它就贡献了d、cd、bcd三个子串
         vector<int> longest(26);
-        int len;
+        int len = 0;
         for (int i = 0; i < p.size(); i++) {
             if (i > 0 && (p[i] == p[i-1] + 1 || p[i] == p[i-1] - 25)) len++;
             else len = 1;
@@ -24,8 +24,9 @@ public:
         }
 
         int ans = 0;
-        for (int l : longest)
+        for (int l : longest) {
             ans += l;
+        }
         return ans;        
     }
 };
