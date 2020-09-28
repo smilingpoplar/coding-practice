@@ -12,22 +12,18 @@ using namespace std;
 class Solution {
 public:
     int findSubstringInWraproundString(string p) {
-        // 找以各个字母结尾的最长子串长，
+        // 找以各个字母结尾的最长子串长
         // 比如以d结尾的最长子串bcd长3，它就贡献了d、cd、bcd三个子串
-        vector<int> longest(26);
+        vector<int> endsWith(26);
         int len = 0;
         for (int i = 0; i < p.size(); i++) {
             if (i > 0 && (p[i] == p[i-1] + 1 || p[i] == p[i-1] - 25)) len++;
             else len = 1;
-            int idx = p[i] - 'a';
-            longest[idx] = max(longest[idx], len);
+            int charIdx = p[i] - 'a';
+            endsWith[charIdx] = max(endsWith[charIdx], len);
         }
 
-        int ans = 0;
-        for (int l : longest) {
-            ans += l;
-        }
-        return ans;        
+        return accumulate(begin(endsWith), end(endsWith), 0);
     }
 };
 
