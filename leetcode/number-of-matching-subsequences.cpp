@@ -13,18 +13,18 @@ using namespace std;
 class Solution {
 public:
     int numMatchingSubseq(string S, vector<string>& words) {
-        // 将word按待匹配字母分桶，待匹配字母 => (单词idx, 单词中字母idx)
+        // 将word按待匹配char分桶，charToMatch=>{wordIdx,charIdxInWord}
         vector<pair<int, int>> buckets[128];
         for (int i = 0; i < words.size(); i++) {
             buckets[words[i][0]].push_back({i, 0});
         }
         
-        for (char c : S) {
-            auto bucket = buckets[c];
+        for (char c : S) { // 待匹配字母c
+            auto cBucket = buckets[c];
             buckets[c].clear();
-            for (auto &p : bucket) { // bucket中单词都匹配掉一个字母
-                p.second++;
-                buckets[words[p.first][p.second]].push_back(p);
+            for (auto [wordIdx, charIdx] : cBucket) { // 桶中word都匹配掉c
+                charIdx++;
+                buckets[words[wordIdx][charIdx]].push_back({wordIdx, charIdx});
             }
         }
         // 全单词匹配的最后分到'\0'桶里
