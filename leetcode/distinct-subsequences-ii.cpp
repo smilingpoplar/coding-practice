@@ -14,18 +14,13 @@ class Solution {
 public:
     int distinctSubseqII(string S) {
         const int MOD = 1e9 + 7;
-        // 用count[26]记录S[0..i]以各字母结尾的子序列各有多少
-        vector<int> count(26, 0);
-        long sum = 0; // sum为count[]的和
+        vector<int> endsWith(26, 0); // 扫描到S[i]时、以各字母结尾的子序列数
         for (char c : S) {
-            // 以字母c结尾的子序列有sum+1个
-            // sum为原先子序列扩展个c，1是新的字母c序列
-            int idx = c - 'a';
-            int diff = (sum + 1 - count[idx] + MOD) % MOD;
-            count[idx] = (count[idx] + diff) % MOD;
-            sum = (sum + diff) % MOD;
+            // 原先子序列都扩展个c，有sum(endsWith[])个；还有1个新的字母c序列
+            // (不用担心旧的字母c序列，它被扩展成cc序列，和新的字母c序列不冲突)
+            endsWith[c - 'a'] = accumulate(begin(endsWith), end(endsWith), 1L) % MOD;
         }
-        return sum;
+        return accumulate(begin(endsWith), end(endsWith), 0L) % MOD;
     }
 };
 
