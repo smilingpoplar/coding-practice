@@ -19,7 +19,7 @@ public:
         // dp[i][j] = min{ dp[i][k]+dp[k+1][j-1] }（这里要k+1<=j-1）
         // 若所有s[k]和s[j]都不相等，dp[i][j] = dp[i][j-1]+1
         // 初始dp[i][i]=1。i从右往左遍历，j从左往右遍历。
-        if (s.empty()) return 0;
+        if (s.empty()) return 0;1
         const int N = s.size();
         vector<vector<int>> dp(N, vector<int>(N, INT_MAX));
         for (int i = 0; i < N; i++) {
