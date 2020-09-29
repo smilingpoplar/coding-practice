@@ -12,12 +12,12 @@ using namespace std;
 
 class Solution {
 public:
-    // <K时不断得[1..W]分，求最后得分在[K..N]间的概率
     double new21Game(int N, int K, int W) {
-        if (K == 0 || K - 1 + W <= N) return 1;
-        // 设dp[i]表示得分为i的概率，Wsum表示前W个dp[]的和sum{dp[i-W..i-1]}，则dp[i]=Wsum/W
-        // 由于得分>=K就不再得分，Wsum不能包含dp[K..i-1]，Wsum=sum{dp[i-W..min(K-1,i-1)]}
-        // 维护长<=W的窗口，随着i增大更新Wsum
+        // 题目：<K时不断得[1..W]分，求最后得分在[K..N]间的概率
+        if (K == 0 || N - K + 1 >= W) return 1;
+        // 设dp[i]表示得分为i的概率，则dp[i]=sum{dp[i-W..i-1]}/W
+        // 由于得分>=K就不再得分，dp[K..i-1]=0，dp[i]=sum{dp[i-W..min(K-1,i-1)]}/W
+        // 维护一个长<=W的窗口，设Wsum=sum{dp[i-W..min(K-1,i-1)]}
         vector<double> dp(N + 1, 0);
         dp[0] = 1;
         double Wsum = dp[0], ans = 0;
