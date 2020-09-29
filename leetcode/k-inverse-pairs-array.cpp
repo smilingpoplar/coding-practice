@@ -32,9 +32,9 @@ public:
         
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= k; j++) {
-                int val = (dp[i][j-1] + dp[i-1][j]) % MOD;
-                if (j - i >= 0) val = (val - dp[i-1][j-i] + MOD) % MOD;
-                dp[i][j] = val;
+                long val = dp[i][j-1] + dp[i-1][j];
+                if (j - i >= 0) val -= dp[i-1][j-i];
+                dp[i][j] = (val + MOD) % MOD;
             }
         }
         return dp[n][k];
