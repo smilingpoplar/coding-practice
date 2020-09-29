@@ -27,7 +27,7 @@ public:
                 }
             }
         }
-        return n1 + n2 - 2 * dp[0][0];
+        return n1 + n2 - 2 * dp[0][0]; // 需要删除的个数
     }
 };
 
