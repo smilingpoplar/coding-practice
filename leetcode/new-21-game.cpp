@@ -25,7 +25,7 @@ public:
             dp[i] = Wsum / W;
             // 更新Wsum
             if (i < K) Wsum += dp[i]; // min(K-1,i-1)=i-1，扩展窗口右边界
-            else ans += dp[i]; // min(K-1,i-1)=i-1，不用扩展窗口右边界；i>=K，正好可以统计[K..N]间的概率
+            else ans += dp[i]; // min(K-1,i-1)=K-1，不用扩展窗口右边界；i>=K，正好可以统计[K..N]间的概率
             if (i-W >= 0) Wsum -= dp[i-W]; // 收缩窗口左边界
         }
         return ans;

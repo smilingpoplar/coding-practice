@@ -21,7 +21,7 @@ public:
         const int N = (int)nums.size() + 2;
         vector<int> a(N);
         a[0] = a[N-1] = 1;
-        for (int i = 1; i < N - 1; i++) {
+        for (int i = 1; i <= N - 2; i++) {
             a[i] = nums[i-1];
         }
 
