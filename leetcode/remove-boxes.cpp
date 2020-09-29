@@ -12,14 +12,15 @@ using namespace std;
 class Solution {
 public:
     int removeBoxes(vector<int>& boxes) {
-        const int N = boxes.size();
-        // 设dp[i][j][k]表示boxes[i..j]、前面有连续k个未拿盒子和boxes[i]同色时的最大得分
+        // 题目：有一排着色的盒子，每次可以拿连续同色的k个盒子得k^2分，最多得多少分？
+        // 设dp[i][j][k]表示子问题boxes[i..j]、前面有连续k个未拿盒子和boxes[i]同色时的最大的分
         // 0<=i<=j<N，0<=k<=i
         // 分情况：现在拿boxes[i]、还是将来遇到同色时再考虑
-        // * 现在拿，dp[i][j][k] = (k+1) * (k+1) + dp[i+1][j][0];
-        // * 将来遇到同色时再考虑，dp[i][j][k] = max{ dp[i+1][m-1][0] + dp[m][j][k+1] }，
-        //   i<m<=j && boxes[m]与boxes[i]同色
+        //  现在拿，dp[i][j][k] = (k+1)^2 + dp[i+1][j][0];
+        //  将来遇到同色的boxes[m]时再考虑，dp[i][j][k] = max{ dp[i+1][m-1][0] + dp[m][j][k+1] }，
+        //   i<m<=j 且 boxes[m]与boxes[i]同色
         // i从右往左遍历，j从左往右遍历
+        const int N = boxes.size();
         vector<vector<vector<int>>> dp(N, vector<vector<int>>(N, vector<int>(N, 0)));
         // i == j
         for (int i = 0; i < N; i++) {
