@@ -14,7 +14,8 @@ class Solution {
 public:
     bool isScramble(string s1, string s2) {
         // 设dp[n][i][j]表示两个等长串s1[i..i+n)和s2[j..j+n)是否scramble
-        // 每个串可由二叉树分成两部分，遍历1<=k<n种划分可能（k表示左串长），
+        // 每个串可由二叉树分成两部分，遍历左串长1<=k<n的划分
+        // | k | n-k |、| k | n-k |  或  | k | n-k |、| n-k | k |
         // dp[n][i][j] = ( dp[k][i][j] && dp[n-k][i+k][j+k] ) || ( dp[k][i][j+n-k] && dp[n-k][i+k][j] )
         // 初始n==1时，dp[1][i][j] = s1[i]==s2[j]
         const int N = s1.size();
