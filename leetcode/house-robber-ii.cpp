@@ -22,7 +22,7 @@ public:
     }
     // rob nums[from,to]
     int robSub(const vector<int> &nums, int from, int to) {
-        // 设dp[i]表示抢了nums[0..i]后的最大值，from<=i<=to
+        // 设dp[i]表示抢了nums[from..i]后的最大值，from<=i<=to
         // dp[i] = max( dp[i-1], nums[i]+dp[i-2] )，初始dp[-2]=dp[-1]=0
         // 递推式只依赖于前两项，记前两项为prev2和prev1
         int prev2 = 0, prev1 = 0;
