@@ -28,11 +28,10 @@ public:
         for (int i = 0; i <= M; i++) {
             for (int j = 0; j <= N; j++) {
                 if (i > 0) {
-                    dp[i][j] = (s1[i-1] == s3[i+j-1]) && dp[i-1][j];
-                    if (dp[i][j]) continue;
+                    dp[i][j] = dp[i][j] || ((s1[i-1] == s3[i+j-1]) && dp[i-1][j]);
                 }
                 if (j > 0) {
-                    dp[i][j] = (s2[j-1] == s3[i+j-1]) && dp[i][j-1];
+                    dp[i][j] = dp[i][j] || ((s2[j-1] == s3[i+j-1]) && dp[i][j-1]);
                 }
             }
         }
