@@ -20,9 +20,11 @@ public:
         // 递推式在i维上只依赖于i-1项，省掉i这维，i仍从左往右遍历
         // 降维使用临时变量：ndp[a][l] = dp[a-1][2] + dp[a][l-1] + dp[a][2]
         const int MOD = 1e9 + 7;
-        vector<vector<int>> dp(2, vector<int>(3, 1)); // i==0
+        array<array<int, 3>, 2> dp = {{
+            {1,1,1}, {1,1,1},
+        }}; // i==0
         for (int i = 1; i <= n; i++) {
-            vector<vector<int>> ndp(2, vector<int>(3));
+            array<array<int, 3>, 2> ndp;
             for (int a = 0; a < 2; a++) {
                 for (int l = 0; l < 3; l++) {
                     long val = dp[a][2]; // ..P
