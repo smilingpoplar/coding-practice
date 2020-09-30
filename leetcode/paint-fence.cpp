@@ -12,8 +12,8 @@ using namespace std;
 
 class Solution {
 public:
-    // 题目：不能有连续三根杆同色
     int numWays(int n, int k) {
+        // 题目：不能有连续三根杆同色
         // 漆第i新杆时，根据前两根杆同色或不同色分情况讨论。
         // 设前两根同色的子问题的上色方式数为dp[i][0]
         //      不同色                  dp[i][1]
