@@ -18,7 +18,7 @@ public:
         // avg(j+1..i)用累加数组计算：(sum[i]-sum[j])/(i-j)，sum[i]表示A[0..i]的和
         // 初始dp[i][1]=avg(0..i)
         // 递推式k这维只依赖k-1项，省掉k这维，k仍从左往右遍历；
-        // dp[i]由旧状态dp[j]等计算，i从右往左遍历
+        // dp[j]要表示旧状态dp[j][k-1]，i从右往左遍历
         const int N = A.size();
         vector<double> sum(N, 0);
         int runningSum = 0;
