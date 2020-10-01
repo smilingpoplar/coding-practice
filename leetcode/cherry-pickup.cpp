@@ -21,27 +21,27 @@ public:
         // 0<=k<=2*(N-1)；0<=r1<=N-1、0<=c1<=N-1；r2取值范围类似r1
         const int N = grid.size();
         vector<vector<vector<int>>> memo(2 * (N - 1) + 1, vector<vector<int>>(N, vector<int>(N, INT_MIN)));
-        int ans = dfs(2 * (N - 1), N - 1, N - 1, grid, memo);
+
+        function<int(int,int,int)> dp = [&](int k, int r1, int r2) {
+            if (k == 0 && r1 == 0 && r2 == 0) return grid[0][0];
+            int c1 = k - r1, c2 = k - r2;
+            if (r1 < 0 || c1 < 0 || r2 < 0 || c2 < 0 
+                || grid[r1][c1] < 0 || grid[r2][c2] < 0) return -1;
+            if (memo[k][r1][r2] != INT_MIN) return memo[k][r1][r2];
+
+            int ans = -1;
+            ans = max(ans, dp(k - 1, r1, r2));
+            ans = max(ans, dp(k - 1, r1, r2 - 1));
+            ans = max(ans, dp(k - 1, r1 - 1, r2));
+            ans = max(ans, dp(k - 1, r1 - 1, r2 - 1));
+            if (ans >= 0) {
+                ans += r1 == r2 ? grid[r1][c1] : grid[r1][c1] + grid[r2][c2];
+            }   
+            return memo[k][r1][r2] = ans;
+        };
+        
+        int ans = dp(2 * (N - 1), N - 1, N - 1);
         return ans == -1 ? 0 : ans;
-    }
-
-    int dfs(int k, int r1, int r2, vector<vector<int>>& grid,
-            vector<vector<vector<int>>>& memo) {
-        if (k == 0 && r1 == 0 && r2 == 0) return grid[0][0];
-        int c1 = k - r1, c2 = k - r2;
-        if (r1 < 0 || c1 < 0 || r2 < 0 || c2 < 0 
-            || grid[r1][c1] < 0 || grid[r2][c2] < 0) return -1;
-        if (memo[k][r1][r2] != INT_MIN) return memo[k][r1][r2];
-
-        int ans = -1;
-        ans = max(ans, dfs(k - 1, r1, r2, grid, memo));
-        ans = max(ans, dfs(k - 1, r1, r2 - 1, grid, memo));
-        ans = max(ans, dfs(k - 1, r1 - 1, r2, grid, memo));
-        ans = max(ans, dfs(k - 1, r1 - 1, r2 - 1, grid, memo));
-        if (ans >= 0) {
-            ans += r1 == r2 ? grid[r1][c1] : grid[r1][c1] + grid[r2][c2];
-        }   
-        return memo[k][r1][r2] = ans;
     }
 };
 
