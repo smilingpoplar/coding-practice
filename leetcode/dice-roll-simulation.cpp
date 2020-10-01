@@ -12,11 +12,12 @@ using namespace std;
 class Solution {
 public:
     int dieSimulator(int n, vector<int>& rollMax) {
-        // 设dp[i][j]表示取i次数、第i次取数为j的子问题解
-        // 要求不能有超过r=rollMax[j]个j，第i次前可以有连续[0..r-1]个j
-        // dp[i][j] = dp[i-1][~j] + dp[i-2][~j] + ... + dp[i-r][~j]，
-        // ~j表示非j的其他数。
-        // 令sum[i]表示取i次数的子问题解，则dp[i][~j]=sum[i]-dp[i][j]
+        // 设dp[i][j]表示取i次数、第i次取数为j的不同序列数，
+        // 要求不能有超过r=rollMax[j]个j，
+        // dp[i][j] = dp[i-1][not_j] /*连续1个j*/ + dp[i-2][not_j] /*连续2个j*/ + ... + dp[i-r][not_j] /*连续r个j*/，
+        //    = sum{ dp[i-k][not_j] }, k在[1..rollMax[j]]
+        // 令sum[i]表示取i次数的不同序列数，则sum[i]=sum{ dp[i][j], for all j }，sum{dp[i][not_j]}=sum[i]-dp[i][j]，
+        // 所以dp[i][j] = sum{ sum[i-k]-dp[i-k][j] }
         const int MOD = 1e9 + 7;
         vector<vector<int>> dp(n+1, vector<int>(6, 0));
         vector<long> sum(n+1, 0);
