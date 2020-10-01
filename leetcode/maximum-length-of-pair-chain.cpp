@@ -17,8 +17,7 @@ public:
             return a[1] < b[1];
         });
         
-        int ans = 0;
-        int end = INT_MIN;
+        int end = INT_MIN, ans = 0;
         for (auto &p : pairs) {
             if (p[0] > end) {
                 ans++;
