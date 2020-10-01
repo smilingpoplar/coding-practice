@@ -13,6 +13,18 @@ using namespace std;
 class Solution {
 public:
     vector<int> grayCode(int n) {
+        vector<int> ans;
+        for (int i = 0; i < 1 << n; i++) {
+            ans.push_back(i ^ (i >> 1));
+        }
+        return ans;    
+    }
+};
+
+/*
+class Solution {
+public:
+    vector<int> grayCode(int n) {
         // n位格雷码的序列可分作上下两半：
         //  上半是n-1位格雷码序列、前面拼上0；下半是n-1位格雷码的逆序列、前面拼上1
         // 反过来，已知n位格雷码序列，把它当作n+1位格雷码序列的上半部，
@@ -27,6 +39,7 @@ public:
         return ans;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     Solution solution;
