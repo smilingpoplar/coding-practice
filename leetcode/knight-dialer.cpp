@@ -27,13 +27,16 @@ public:
             vector<long> ndp(10, 0);
             for (int d = 0; d < 10; d++) {
                 for (int nd : jump[d]) {
-                    ndp[nd] += dp[d] % MOD;
+                    ndp[nd] = (ndp[nd] + dp[d]) % MOD;
                 }
             }
             swap(ndp, dp);
         }
-        
-        return accumulate(begin(dp), end(dp), 0L) % MOD;
+        long ans = 0;
+        for (int i = 0; i < 10; i++) {
+            ans = (ans + dp[i]) % MOD;
+        }
+        return ans;
     }
 };
 
