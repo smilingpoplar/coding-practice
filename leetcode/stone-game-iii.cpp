@@ -25,7 +25,9 @@ public:
                 dp[i] = max(dp[i], sum - dp[i + k + 1]);
             }
         }
-        return dp[0] > 0 ? "Alice" : dp[0] < 0 ? "Bob" : "Tie";
+        if (dp[0] > 0) return "Alice";
+        if (dp[0] < 0) return "Bob";
+        return "Tie";
     }
 };
 
