@@ -18,22 +18,19 @@ public:
             sufsum[i] = sufsum[i+1] + piles[i];
         }
         vector<vector<int>> memo(N + 1, vector<int>(N + 1, -1));
-        return dfs(piles, 0, 1, sufsum, memo);
-    }
+        // 求piles[i..]、M=m时的最优解
+        function<int(int,int)> dp = [&](int i, int m) {
+            if (i == N) return 0;
+            if (m == N) return sufsum[i];
+            if (memo[i][m] != -1) return memo[i][m];
 
-    // 求piles[i..]、M=m时的最优解
-    int dfs(vector<int>& piles, int i, int m, 
-            vector<int>& sufsum, vector<vector<int>>& memo) {
-        const int N = piles.size();
-        if (i == N) return 0;
-        if (m == N) return sufsum[i];
-        if (memo[i][m] != -1) return memo[i][m];
-
-        for (int x = 1; x <= 2 * m && i + x <= N; x++) {
-            int sub = dfs(piles, i + x, max(m, x), sufsum, memo);
-            memo[i][m] = max(memo[i][m], sufsum[i] - sub);
-        }
-        return memo[i][m];
+            for (int x = 1; x <= 2 * m && i + x <= N; x++) {
+                int sub = dp(i + x, max(m, x));
+                memo[i][m] = max(memo[i][m], sufsum[i] - sub);
+            }
+            return memo[i][m];
+        };
+        return dp(0, 1);
     }
 };
 
