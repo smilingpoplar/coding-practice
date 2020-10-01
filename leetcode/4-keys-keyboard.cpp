@@ -13,9 +13,9 @@ using namespace std;
 class Solution {
 public:
     int maxA(int N) {
-        // dp[i]表示按i次键盘时A的最大个数。
-        // 一种是按1次A，dp[i]=dp[i-1]+1；
-        // 一种是成组按3<=k<=i次，ctrlA+ctrlC+(k-2)ctrlV，字符数 *= (k-1)，
+        // dp[i]表示按i次键盘时A的最大个数
+        // 一种是按1次A，dp[i]=dp[i-1]+1
+        // 一种是成组按3<=k<=i次，ctrlA+ctrlC+(k-2)ctrlV，字符数 *= (k-1)
         //  dp[i]=max{ dp[i-k] * (k-1) }
         vector<int> dp(N + 1, 0);
         for (int i = 1; i <= N; i++) {
