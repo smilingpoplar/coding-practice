@@ -20,14 +20,14 @@ public:
         // 
         // F(k)只依赖于k-1项，降维，F += sum(A) - n*A[n-k]
         // 初始F(0)=sum(i*A[i])
-        const int n = A.size();
-        int sum = 0, F = 0;
+        const long n = A.size();
+        long sum = 0, F = 0;
         for (int i = 0; i < n; i++) {
             sum += A[i];
             F += i * A[i];
         }
 
-        int ans = F;
+        long ans = F;
         for (int k = 1; k < n; k++) {
             F += sum - n * A[n-k];
             ans = max(ans, F);
