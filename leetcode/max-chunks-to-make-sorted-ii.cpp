@@ -12,18 +12,18 @@ using namespace std;
 class Solution {
 public:
     int maxChunksToSorted(vector<int>& arr) {
-        // 若leftMax[i]<=rightMin[i+1]，则在i后可断开左右
+        // maxL[i]表示arr[0..i)的最大值，minR[i]表示arr[i..]的最小值
+        // maxL[i]<=minR[i]时可分
         const int N = arr.size();
-        vector<int> rightMin(N);
-        rightMin[N-1] = arr[N-1];
-        for (int i = N-2; i >= 0; i--) {
-            rightMin[i] = min(arr[i], rightMin[i+1]);
+        vector<int> maxL(N + 1, INT_MIN), minR(N + 1, INT_MAX);
+        for (int i = 0; i < N; i++) {
+            maxL[i+1] = max(maxL[i], arr[i]);
         }
-        int ans = 1;
-        int leftMax = INT_MIN;
-        for (int i = 0; i < N-1; i++) {
-            leftMax = max(leftMax, arr[i]);
-            if (leftMax <= rightMin[i+1]) ans++;
+
+        int ans = 0;
+        for (int i = N - 1; i >= 0; i--) {
+            minR[i] = min(minR[i+1], arr[i]);
+            if (maxL[i] <= minR[i]) ans++;
         }
         return ans;
     }
