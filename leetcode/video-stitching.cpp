@@ -14,11 +14,11 @@ public:
     int videoStitching(vector<vector<int>>& clips, int T) {
         const int N = clips.size();
         sort(begin(clips), end(clips));
-        int sofar = 0; // 当前已覆盖[..sofar]区间
-        int tryharder = 0; // 尝试扩展所有可扩展区间
         int i = 0, ans = 0;
+        int sofar = 0; // 当前已覆盖[..sofar]区间
+        int tryharder = 0; // 尝试扩展当前区间
         while (sofar < T) {
-            while (i < N && clips[i][0] <= sofar) { // 可扩展
+            while (i < N && clips[i][0] <= sofar) {
                 tryharder = max(tryharder, clips[i][1]);
                 i++;
             }
