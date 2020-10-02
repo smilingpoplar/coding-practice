@@ -16,14 +16,14 @@ public:
         sort(begin(clips), end(clips));
         int i = 0, ans = 0;
         int sofar = 0; // 当前已覆盖[..sofar]区间
-        int tryharder = 0; // 尝试扩展当前区间
+        int frontier = 0; // 尝试扩展当前区间
         while (sofar < T) {
             while (i < N && clips[i][0] <= sofar) {
-                tryharder = max(tryharder, clips[i][1]);
+                frontier = max(frontier, clips[i][1]);
                 i++;
             }
-            if (tryharder == sofar) return -1;
-            sofar = tryharder;
+            if (frontier == sofar) return -1;
+            sofar = frontier;
             ans++;
         }
         return ans;

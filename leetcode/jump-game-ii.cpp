@@ -13,16 +13,16 @@ using namespace std;
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        // bfs分层遍历，记录最远可达farthest
+        // bfs分层遍历，记录最远可达frontier
         const int N = nums.size();
         if (N <= 1) return 0;
 
-        int farthest = 0, ans = 0;
-        for (int i = 0; i <= farthest; ) {
+        int frontier = 0, ans = 0;
+        for (int i = 0; i <= frontier; ) {
             ans++;            
-            for (int sofar = farthest; i <= sofar; i++) {
-                farthest = max(farthest, i + nums[i]);
-                if (farthest >= N - 1) return ans;
+            for (int sofar = frontier; i <= sofar; i++) {
+                frontier = max(frontier, i + nums[i]);
+                if (frontier >= N - 1) return ans;
             }
         }
         return -1;

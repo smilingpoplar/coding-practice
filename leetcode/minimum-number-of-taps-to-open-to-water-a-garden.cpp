@@ -22,16 +22,16 @@ public:
     int videoStitching(vector<vector<int>>& clips, int T) {
         const int N = clips.size();
         sort(begin(clips), end(clips));
-        int ans = 0;
-        int sofar = 0; // 已覆盖[0..sofar]时间
-        int i = 0, extend = 0; // 尝试扩展到extend时间
+        int i = 0, ans = 0;
+        int sofar = 0; // 当前已覆盖[..sofar]区间
+        int frontier = 0; // 尝试扩展当前区间
         while (sofar < T) {
             while (i < N && clips[i][0] <= sofar) {
-                extend = max(extend, clips[i][1]); // 选最长的
+                frontier = max(frontier, clips[i][1]);
                 i++;
             }
-            if (extend == sofar) return -1;
-            sofar = extend;
+            if (frontier == sofar) return -1;
+            sofar = frontier;
             ans++;
         }
         return ans;
