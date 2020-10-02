@@ -68,10 +68,10 @@ public:
         vector<int> ans;
         for (int i = 0; i < N; i++) {
             int base = 0;
-            int ileft = pos[i][0], iright = pos[i][0] + pos[i][1];
+            int iL = pos[i][0], iR = pos[i][0] + pos[i][1];
             for (int j = 0; j < i; j++) {
-                int jleft = pos[j][0], jright = pos[j][0] + pos[j][1];
-                if (ileft < jright && jleft < iright) base = max(base, high[j]);
+                int jL = pos[j][0], jR = pos[j][0] + pos[j][1];
+                if (iL < jR && jL < iR) base = max(base, high[j]);
             }
             high[i] = base + pos[i][1];
             highest = max(highest, high[i]);
