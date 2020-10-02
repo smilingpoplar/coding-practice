@@ -14,16 +14,16 @@ public:
     int videoStitching(vector<vector<int>>& clips, int T) {
         const int N = clips.size();
         sort(begin(clips), end(clips));
-        int ans = 0;
-        int sofar = 0; // 已覆盖[0..sofar]时间
-        int i = 0, extend = 0; // 尝试扩展到extend时间
+        int sofar = 0; // 当前已覆盖[..sofar]区间
+        int tryharder = 0; // 尝试扩展所有可扩展区间
+        int i = 0, ans = 0;
         while (sofar < T) {
-            while (i < N && clips[i][0] <= sofar) {
-                extend = max(extend, clips[i][1]); // 选最长的
+            while (i < N && clips[i][0] <= sofar) { // 可扩展
+                tryharder = max(tryharder, clips[i][1]);
                 i++;
             }
-            if (extend == sofar) return -1;
-            sofar = extend;
+            if (tryharder == sofar) return -1;
+            sofar = tryharder;
             ans++;
         }
         return ans;
