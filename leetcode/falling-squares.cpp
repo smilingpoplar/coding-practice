@@ -26,11 +26,11 @@ class Solution {
         return a.left < b.right && b.left < a.right;
     }
 public:
-    vector<int> fallingSquares(vector<pair<int, int>>& pos) {
+    vector<int> fallingSquares(vector<vector<int>>& pos) {
         vector<int> ans;
         int highest = 0;
         for (auto &p : pos) {
-            int left = p.first, right = p.first + p.second, height = p.second;
+            int left = p[0], right = p[0] + p[1], height = p[1];
             // 删除[left,right)区间
             // 首个与[left,right)重叠的区间toFind.right > left
             auto it = st.upper_bound({INT_MIN, left, 0});
@@ -60,7 +60,7 @@ public:
 /*
 class Solution {
 public:
-    vector<int> fallingSquares(vector<pair<int, int>>& pos) {
+    vector<int> fallingSquares(vector<vector<int>>& pos) {
         // 每个块儿看会不会和前面块儿重叠，重叠时要提高当前块儿的摆放高度
         const int N = pos.size();
         vector<int> high(N); // 每个块儿的高
@@ -68,12 +68,12 @@ public:
         vector<int> ans;
         for (int i = 0; i < N; i++) {
             int base = 0;
-            int ileft = pos[i].first, iright = pos[i].first + pos[i].second;
+            int ileft = pos[i][0], iright = pos[i][0] + pos[i][1];
             for (int j = 0; j < i; j++) {
-                int jleft = pos[j].first, jright = pos[j].first + pos[j].second;
+                int jleft = pos[j][0], jright = pos[j][0] + pos[j][1];
                 if (ileft < jright && jleft < iright) base = max(base, high[j]);
             }
-            high[i] = base + pos[i].second;
+            high[i] = base + pos[i][1];
             highest = max(highest, high[i]);
             ans.push_back(highest);
         }
