@@ -16,14 +16,14 @@ public:
         const int N = nums.size();
         vector<int> ans(N, 1);
         // 从左到右扫一遍
-        for (int i = 0, lProd = 1; i < N; i++) {
-            ans[i] *= lProd;
-            lProd *= nums[i];
+        for (int i = 0, prodL = 1; i < N; i++) {
+            ans[i] *= prodL;
+            prodL *= nums[i];
         }
         // 从右到左扫一遍
-        for (int i = N - 1, rProd = 1; i >= 0; i--) {
-            ans[i] *= rProd;
-            rProd *= nums[i];
+        for (int i = N - 1, prodR = 1; i >= 0; i--) {
+            ans[i] *= prodR;
+            prodR *= nums[i];
         }
         return ans;
     }
