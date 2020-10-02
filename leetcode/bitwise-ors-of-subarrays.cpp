@@ -13,14 +13,15 @@ using namespace std;
 class Solution {
 public:
     int subarrayBitwiseORs(vector<int>& A) {
-        // 设st1表示以A[i-1]结尾的子段的ORs集合，st2表示以A[i]结尾的子段的ORs集合
-        // st2等于 {A[i] | st1中的各个元素} + {A[i]}
-        unordered_set<int> st1, st2, ans;
-        for (int num : A) {
-            st2 = { num };
-            for (int x : st1) st2.insert(num | x);
-            st1 = st2;
-            ans.insert(st2.begin(), st2.end());
+        // 用set[r]记录A[l]~A[r]子段的ORs结果
+        // set[r+1]为 {set[r]中各数 | A[r+1], A[r+1]}
+        unordered_set<int> set1, set2, ans;
+        for (int a : A) {
+            set2 = {a};
+            for (int x : set1) 
+                set2.insert(x | a);
+            ans.insert(set2.begin(), set2.end());
+            swap(set1, set2);
         }
         return ans.size();
     }
