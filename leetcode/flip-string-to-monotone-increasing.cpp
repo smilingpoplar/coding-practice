@@ -1,4 +1,4 @@
-//
+f//
 //  flip-string-to-monotone-increasing
 //  https://leetcode.com/problems/flip-string-to-monotone-increasing/
 //
@@ -27,6 +27,29 @@ public:
         return min(f0, f1);
     }
 };
+
+/*
+class Solution {
+public:
+    int minFlipsMonoIncr(string S) {
+        const int N = S.size();
+        vector<int> pre(N + 1); // pre[i]表示S[..i-1]以0结尾
+        for (int i = 0; i < N; i++) {
+            pre[i+1] = pre[i] + (S[i] == '1');
+        }
+        vector<int> suf(N + 1); // suf[i]表示S[i..]以1开头
+        for (int i = N - 1; i >= 0; i--) {
+            suf[i] = suf[i+1] + (S[i] == '0');
+        }
+
+        int ans = INT_MAX;
+        for (int i = 0; i <= N; i++) {
+            ans = min(ans, pre[i] + suf[i]);
+        }
+        return ans;
+    }
+};
+*/
 
 int main(int argc, const char * argv[]) {
     return 0;
