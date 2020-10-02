@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        // bfs分层遍历，记录最远可达frontier
+        // 实际是bfs分层遍历
         const int N = nums.size();
         if (N <= 1) return 0;
 
