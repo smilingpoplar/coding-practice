@@ -11,16 +11,16 @@ using namespace std;
 
 class Solution {
 public:
-    int findMinArrowShots(vector<pair<int, int>>& points) {
+    int findMinArrowShots(vector<vector<int>>& points) {
         // 找最多的不重叠区间数
-        sort(points.begin(), points.end(), [](const pair<int, int> &a, const pair<int, int> &b) {
-            return a.second < b.second;
+        sort(points.begin(), points.end(), [](const vector<int> &a, const vector<int> &b) {
+            return a[1] < b[1];
         });
         int ans = 0;
         long end = LONG_MIN;
         for (auto &p : points) {
-            if (p.first > end) {
-                end = p.second;
+            if (p[0] > end) {
+                end = p[1];
                 ans++;
             }
         }
