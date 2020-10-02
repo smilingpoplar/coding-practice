@@ -25,10 +25,7 @@ public:
             }
         }
 
-        int sum = 0;
-        for (int candy : candies)
-            sum += candy;
-        return sum;
+        return accumulate(begin(candies), end(candies), 0);
     }
 };
 
