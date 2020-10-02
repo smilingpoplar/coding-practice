@@ -13,19 +13,21 @@ using namespace std;
 class Solution {
 public:
     int longestMountain(vector<int>& A) {
-        int ans = 0;
-        int up = 0, down = 0;
+        // 统计一段上升和下降的最大长度
+        int up = 0, down = 0, ans = 0;
         for (int i = 1; i < A.size(); i++) {
             if (A[i] > A[i-1]) {
-                if (down > 0) up = down = 0;
+                if (down > 0) up = down = 0; // 下降结束，开始新一段的统计
                 up++;
             } else if (A[i] < A[i-1]) {
                 down++;
             } else {
-                up = down = 0;
+                up = down = 0; // 开始新一段的统计
             }
             
-            if (up > 0 && down > 0) ans = max(ans, 1 + up + down); // 1来自A[0]
+            if (up > 0 && down > 0) {
+                ans = max(ans, 1 + up + down); // 1来自统计开始处的元素
+            }
         }
         return ans;
     }
