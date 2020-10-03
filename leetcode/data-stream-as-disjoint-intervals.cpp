@@ -10,44 +10,37 @@
 
 using namespace std;
 
-/**
- * Definition for an interval.
- * struct Interval {
- *     int start;
- *     int end;
- *     Interval() : start(0), end(0) {}
- *     Interval(int s, int e) : start(s), end(e) {}
- * };
- */
 class SummaryRanges {
+    map<int, int> _ranges; // left=>right, [left,right]
+    using RI = map<int, int>::iterator;
+    array<RI, 2> getOverlapRanges(int val) {
+        auto l = _ranges.upper_bound(val - 1);
+        if (l != begin(_ranges) && prev(l)->second >= val - 1) l = prev(l);
+        auto r = _ranges.upper_bound(val + 1);
+        return {l, r};
+    }
 public:
     /** Initialize your data structure here. */
     SummaryRanges() {
     }
     
     void addNum(int val) {
-        // 首个与[val,val]重叠区间toFind.end>=val-1
-        auto it = st.lower_bound({INT_MIN, val - 1}); 
-        Interval adding({ val, val });
-        while (it != st.end() && isOverlap(*it, adding)) {
-            adding.start = min(adding.start, it->start);
-            adding.end = max(adding.end, it->end);
-            it = st.erase(it);
+        auto [l, r] = getOverlapRanges(val);
+        int left = val, right = val;
+        if (l != r) {
+            left = min(val, l->first);
+            right = max(val, prev(r)->second);
+            _ranges.erase(l, r);
         }
-        st.insert(adding);
+        _ranges[left] = right;
     }
     
-    vector<Interval> getIntervals() {
-        return vector<Interval>(st.begin(), st.end());
-    }
-private:
-    struct Cmp {
-        bool operator()(const Interval &a, const Interval &b) const { return a.end < b.end; }
-    };
-    set<Interval, Cmp> st;
-
-    bool isOverlap(const Interval &a, const Interval &b) {
-        return (a.start <= b.end + 1) && (b.start <= a.end + 1);
+    vector<vector<int>> getIntervals() {
+        vector<vector<int>> ans;
+        for (auto& [left, right] : _ranges) {
+            ans.push_back({left, right});
+        }
+        return ans;
     }
 };
 
