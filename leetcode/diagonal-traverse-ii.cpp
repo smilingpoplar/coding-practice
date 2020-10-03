@@ -12,22 +12,20 @@ using namespace std;
 class Solution {
 public:
     vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
-        // 每条对角线上rIdx+cIdx=某常数，可以把这个常数作为桶下标，
+        // 每条对角线上r+c=某常数，可以把这个常数作为桶下标，
         // 这样就把一条对角线上的数都放到了一个桶里
         const int R = nums.size();
-        vector<vector<int>> buckets;
+        vector<vector<int>> diags;
         for (int r = 0; r < R; r++) {
             for (int c = 0; c < nums[r].size(); c++) {
-                if (r + c >= buckets.size()) buckets.push_back({});
-                buckets[r+c].push_back(nums[r][c]);
+                if (r + c >= diags.size()) diags.push_back({});
+                diags[r+c].push_back(nums[r][c]);
             }
         }
         // 每条对角线上的数是逆序放入桶中的
         vector<int> ans;
-        for (auto &bucket : buckets) {
-            for (auto it = bucket.rbegin(); it != bucket.rend(); it++) {
-                ans.push_back(*it);
-            }
+        for (auto& diag : diags) {
+            ans.insert(end(ans), rbegin(diag), rend(diag));
         }
         return ans;
     }
