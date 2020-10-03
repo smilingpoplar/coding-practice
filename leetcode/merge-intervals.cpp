@@ -29,12 +29,5 @@ public:
 };
 
 int main(int argc, const char * argv[]) {
-    vector<Interval> intervals = {{1,3},{2,6},{8,10},{15,18}};
-    Solution solution;
-    auto result = solution.merge(intervals);
-    for (const auto &interval : result) {
-        cout << interval.start << "," << interval.end << " ";
-    }
-    
     return 0;
 }
