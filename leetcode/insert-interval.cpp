@@ -10,49 +10,27 @@
 
 using namespace std;
 
-struct Interval {
-    int start;
-    int end;
-    Interval() : start(0), end(0) {}
-    Interval(int s, int e) : start(s), end(e) {}
-};
-
 class Solution {
 public:
-    vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
-        // 区间互不重叠、已按起点排序 <=等价于=> 已按终点排序
-        const int N = intervals.size();
-        vector<Interval> ans;
-        int idx = 0;
-        while (idx < N && intervals[idx].end < newInterval.start) {
-            ans.push_back(intervals[idx]);
-            idx++;
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        // 区间互不重叠、已按起点排序
+        vector<vector<int>> before, after; // 前后的不重叠区间
+        int left = newInterval[0], right = newInterval[1];
+        for (auto& interval : intervals) {
+            if (interval[1] < left) before.push_back(interval);
+            else if (interval[0] > right) after.push_back(interval);
+            else {
+                left = min(left, interval[0]);
+                right = max(right, interval[1]);
+            }
         }
-        // 至此 newInterval.start <= intervals[idx].end
-        while (idx < N && intervals[idx].start <= newInterval.end) {
-             // 重叠，合并到newInterval
-            newInterval.start = min(newInterval.start, intervals[idx].start);
-            newInterval.end = max(newInterval.end, intervals[idx].end);
-            idx++;
-        }
-        ans.push_back(newInterval);
-        // 至此 newInterval.end < intervals[idx].start
-        while (idx < N) {
-            ans.push_back(intervals[idx]);
-            idx++;
-        }
-        return ans;
+
+        before.push_back({left, right});
+        before.insert(end(before), begin(after), end(after));
+        return before;
     }
 };
 
 int main(int argc, const char * argv[]) {
-    vector<Interval> intervals = {{1,2},{3,5},{6,7},{8,10},{12,16}};
-    Interval newInterval = {4,9};
-    Solution solution;
-    auto ans = solution.insert(intervals, newInterval);
-    for (const auto &interval : ans) {
-        cout << interval.start << "," << interval.end << " ";
-    }
-    
     return 0;
 }
