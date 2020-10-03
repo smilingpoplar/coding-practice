@@ -22,14 +22,14 @@ using namespace std;
 class Solution {
 public:
     bool canAttendMeetings(vector<Interval>& intervals) {
-        // 是否所有区间都不重叠？
-        sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) {
+        // 题目：是否所有区间都不重叠？
+        sort(begin(intervals), end(intervals), [](const Interval &a, const Interval &b) {
             return a.end < b.end;
         });
         int end = INT_MIN;
-        for (auto &interval : intervals) {
+        for (auto& interval : intervals) {
             if (interval.start < end) return false;
-            else end = interval.end;
+            end = interval.end;
         }
         return true;
     }
