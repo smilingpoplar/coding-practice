@@ -14,7 +14,8 @@ class RangeModule {
     map<int, int> _ranges; // left=>right, [left,right)
     using RI = map<int, int>::iterator;
     array<RI, 2> getOverlapRanges(int left, int right) {
-        // 左闭右开，左边找第一个相交的区间
+        // 在端点重合处，认为重叠
+        // 左边找第一个相交的区间
         auto l = _ranges.upper_bound(left); // toFind.left>left
         if (l != begin(_ranges) && prev(l)->second >= left) // toFind.left<=left&&toFind.right>=left
             l = prev(l);
@@ -44,11 +45,11 @@ public:
     void removeRange(int left, int right) {
         auto [l, r] = getOverlapRanges(left, right);
         if (l != r) {
-            int start = min(left, l->first);
-            int end = max(right, prev(r)->second);
+            int lower = min(left, l->first);
+            int upper = max(right, prev(r)->second);
             _ranges.erase(l, r);
-            if (start < left) _ranges[start] = left;
-            if (right < end) _ranges[right] = end;
+            if (lower < left) _ranges[lower] = left;
+            if (right < upper) _ranges[right] = upper;
         }
     }
 };

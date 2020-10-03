@@ -14,6 +14,7 @@ class SummaryRanges {
     map<int, int> _ranges; // left=>right, [left,right]
     using RI = map<int, int>::iterator;
     array<RI, 2> getOverlapRanges(int val) {
+        // 认为val和[..val-1]、[val+1..]都重叠
         auto l = _ranges.upper_bound(val - 1);
         if (l != begin(_ranges) && prev(l)->second >= val - 1) l = prev(l);
         auto r = _ranges.upper_bound(val + 1);
