@@ -16,7 +16,7 @@ class RangeModule {
     array<RI, 2> getOverlapRanges(int left, int right) {
         // 左闭右开，左边找第一个相交的区间
         auto l = _ranges.upper_bound(left); // toFind.left>left
-        if (l != _ranges.begin() && prev(l)->second >= left) // toFind.left<=left&&toFind.right>=left
+        if (l != begin(_ranges) && prev(l)->second >= left) // toFind.left<=left&&toFind.right>=left
             l = prev(l);
         // 右边找第一个不相交的区间
         auto r = _ranges.upper_bound(right); // toFind.left>right
