@@ -12,7 +12,7 @@ using namespace std;
 class Solution {
 public:
     int wiggleMaxLength(vector<int>& nums) {
-        // 贪婪法，摇摆发生时增长子序列
+        // 贪心法，摇摆发生时增长子序列
         if (nums.empty()) return 0;
         int ans = 1;
         int prevDiff = 0;

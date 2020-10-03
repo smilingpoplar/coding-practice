@@ -15,7 +15,7 @@ class Solution {
 public:
     // 复杂度O(KlgN)，这里K很大，超时
     double minmaxGasDist(vector<int>& stations, int K) {
-        // 贪婪法，将站加到站间距离最大的那个区间
+        // 贪心法，将站加到站间距离最大的那个区间
         // pair: dist, stations_added_count
         auto cmp = [](pair<double,int> &a, pair<double,int> &b) {
             return a.first / (a.second + 1) < b.first / (b.second + 1);

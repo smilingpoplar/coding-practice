@@ -14,7 +14,7 @@ class Solution {
 public:
     int bagOfTokensScore(vector<int>& tokens, int P) {
         // token有两种用法：-tokens[i]、+1分，+tokens[i]、-1分
-        // 贪婪法，尽量多加分少减分，让单位token加分最多减分最少。
+        // 贪心法，尽量多加分少减分，让单位token加分最多减分最少。
         // 加分时用最小的tokens[i]、减分时用最大的tokens[i]
         sort(tokens.begin(), tokens.end());
         int i = 0, j = (int)tokens.size() - 1;

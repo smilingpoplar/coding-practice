@@ -12,7 +12,7 @@ using namespace std;
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
-        // 贪婪法。找到违反<=关系的x[i]>x[i+1]，优先改小x[i]：x[i]=x[i+1]。
+        // 贪心法。找到违反<=关系的x[i]>x[i+1]，优先改小x[i]：x[i]=x[i+1]。
         // （后面是否满足<=待后面循环去检查，前面满足要还需x[i-1]<=x[i+1]）
         // 无法改小时改大x[i+1]：x[i+1]=x[i]。
         int cnt = 0;

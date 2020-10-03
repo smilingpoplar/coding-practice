@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
-        // 贪婪法
+        // 贪心法
         // 车油足够时不加油，只把加油站油量记入最大堆；车油不够时，从堆中取最大值加油。
         const int N = stations.size();
         int idx = 0;
