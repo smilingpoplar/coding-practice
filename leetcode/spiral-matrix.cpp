@@ -13,6 +13,29 @@ using namespace std;
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        if (matrix.empty()) return {};
+        const int R = matrix.size(), C = matrix[0].size();
+        const vector<vector<int>> dirs = {{0,1},{1,0},{0,-1},{-1,0}}; // 右下左上
+        vector<int> numSteps = {C, R-1};
+        int cur = 0; // 方向，4种
+        int r = 0, c = -1;
+        vector<int> ans;
+        while (numSteps[cur % 2]) {
+            for (int i = 0; i < numSteps[cur % 2]; i++) {
+                r += dirs[cur][0], c += dirs[cur][1];
+                ans.push_back(matrix[r][c]);
+            }
+            numSteps[cur % 2]--;
+            cur = (cur + 1) % 4;
+        }
+        return ans;
+    }
+};
+
+/*
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
         // 从外层往内层、一层层打印
         vector<int> ans;
         if (matrix.empty()) return ans;
@@ -48,6 +71,7 @@ public:
         return ans;
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     vector<vector<int>> matrix = {
