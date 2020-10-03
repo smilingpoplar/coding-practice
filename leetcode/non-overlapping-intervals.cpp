@@ -9,32 +9,22 @@
 
 using namespace std;
 
-/**
- * Definition for an interval.
- * struct Interval {
- *     int start;
- *     int end;
- *     Interval() : start(0), end(0) {}
- *     Interval(int s, int e) : start(s), end(e) {}
- * };
- */
 class Solution {
 public:
-    int eraseOverlapIntervals(vector<Interval>& intervals) {
-        // 等价问题：求最多不重叠区间数
-        sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b) { 
-            return a.end < b.end;
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        // 等价问题：求最多的不重叠区间数
+        sort(begin(intervals), end(intervals), [](const vector<int>& a, const vector<int>& b) { 
+            return a[1] < b[1];
         });
-        int count = 0;
-        int end = INT_MIN;
+        int end = INT_MIN, cnt = 0;
         for (auto &interval : intervals) {
-            if (interval.start >= end) { // 不重叠，取当前区间
-                end = interval.end;
+            if (interval[0] >= end) { // 不重叠，取当前区间
+                end = interval[1];
             } else {
-                count++;
+                cnt++;
             }
         }
-        return count;
+        return cnt;
     }
 };
 
