@@ -33,7 +33,7 @@ public:
                 int newdist = d + cost;
                 if (newdist < dist[v]) {
                     dist[v] = newdist;
-                    pq.push({newdist, v}); // pq中将可能有多个v值，但后续v值对结果没影响
+                    pq.push({newdist, v});
                 }
             }
         }
@@ -128,10 +128,7 @@ public:
         for (int k = 1; k <= N; k++) {
             for (int i = 1; i <= N; i++) {
                 for (int j = 1; j <= N; j++) {
-                    int newdist = dist[i][k] + dist[k][j];
-                    if (newdist < dist[i][j]) {
-                        dist[i][j] = newdist;
-                    }
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
                 }
             }
         }
