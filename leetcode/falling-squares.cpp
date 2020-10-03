@@ -29,21 +29,18 @@ public:
             int left = pos[0], right = pos[0] + pos[1], height = pos[1];
             auto [l, r] = getOverlapRanges(left, right);
             if (l != r) {
-               int baseH = 0; // 重叠区间的最大高度是新块儿的放置高度
+                // 重叠区间的最大高度是新块儿的放置高度
+                int baseH = 0;
                 for (auto i = l; i != r; i++) {
                     baseH = max(baseH, i->second[1]);
                 }
                 height += baseH;
-
                 // 删除重叠区间
-                int lo = min(left, l->first), loH = 0;
-                if (lo < left) loH = l->second[1];
-                int hi = max(right, prev(r)->second[0]), hiH = 0;
-                if (right < hi) hiH = prev(r)->second[1];
+                int lower = min(left, l->first), lH = l->second[1];
+                int upper = max(right, prev(r)->second[0]), rH = prev(r)->second[1];
                 _ranges.erase(l, r);
-                // 剩余不重叠区间
-                if (lo < left) _ranges[lo] = {left, loH};
-                if (right < hi) _ranges[right] = {hi, hiH};
+                if (lower < left) _ranges[lower] = {left, lH};
+                if (right < upper) _ranges[right] = {upper, rH};
             }
             _ranges[left] = {right, height};
 
@@ -64,8 +61,8 @@ public:
         int highest = 0;
         vector<int> ans;
         for (int i = 0; i < N; i++) {
-            int base = 0;
             int iL = pos[i][0], iR = pos[i][0] + pos[i][1];
+            int base = 0;
             for (int j = 0; j < i; j++) {
                 int jL = pos[j][0], jR = pos[j][0] + pos[j][1];
                 if (iL < jR && jL < iR) base = max(base, high[j]);
