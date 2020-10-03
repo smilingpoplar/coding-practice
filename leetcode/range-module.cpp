@@ -11,6 +11,50 @@
 using namespace std;
 
 class RangeModule {
+    map<int, int> _ranges; // left=>right, [left,right)
+    using RI = map<int, int>::iterator;
+    array<RI, 2> getOverlapRanges(int left, int right) {
+        // 左闭右开，左边找第一个相交的区间
+        auto l = _ranges.upper_bound(left); // toFind.left>left
+        if (l != _ranges.begin() && prev(l)->second >= left) // toFind.left<=left&&toFind.right>=left
+            l = prev(l);
+        // 右边找第一个不相交的区间
+        auto r = _ranges.upper_bound(right); // toFind.left>right
+        return {l, r};
+    }
+public:
+    RangeModule() { 
+    }
+    
+    void addRange(int left, int right) {
+        auto [l, r] = getOverlapRanges(left, right);
+        if (l != r) {
+            left = min(left, l->first);
+            right = max(right, prev(r)->second);
+            _ranges.erase(l, r);
+        }
+        _ranges[left] = right;
+    }
+    
+    bool queryRange(int left, int right) {
+        auto [l, r] = getOverlapRanges(left, right);
+        return l != r && l->first <= left && right <= l->second;
+    }
+    
+    void removeRange(int left, int right) {
+        auto [l, r] = getOverlapRanges(left, right);
+        if (l != r) {
+            int start = min(left, l->first);
+            int end = max(right, prev(r)->second);
+            _ranges.erase(l, r);
+            if (start < left) _ranges[start] = left;
+            if (right < end) _ranges[right] = end;
+        }
+    }
+};
+
+/*
+class RangeModule {
     struct Interval { // [left,right)
         int left;
         int right;
@@ -61,6 +105,7 @@ public:
         st.insert(remain.begin(), remain.end());
     }
 };
+*/
 
 /**
  * Your RangeModule object will be instantiated and called as such:
