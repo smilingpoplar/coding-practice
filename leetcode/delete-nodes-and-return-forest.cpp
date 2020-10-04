@@ -12,23 +12,22 @@ using namespace std;
 class Solution {
 public:
     vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete) {
-        unordered_set<int> toDel;
-        for (int d : to_delete) {
-            toDel.insert(d);
-        }
+        unordered_set<int> toDel(begin(to_delete), end(to_delete));
         vector<TreeNode*> ans;
-        delNode(root, toDel, true, ans);
+        root = dfs(root, toDel, ans);
+        if (root) ans.push_back(root);
         return ans;
     }
     
-    TreeNode* delNode(TreeNode *root, unordered_set<int> &toDel, bool isRoot, vector<TreeNode*> &ans) {
+    TreeNode* dfs(TreeNode *root, unordered_set<int> &toDel, vector<TreeNode*> &ans) {
         if (!root) return nullptr;
-        bool delRoot = toDel.count(root->val);
-        if (!delRoot && isRoot) ans.push_back(root);
+        root->left = dfs(root->left, toDel, ans);
+        root->right = dfs(root->right, toDel, ans);
+        if (!toDel.count(root->val)) return root;
         
-        root->left = delNode(root->left, toDel, delRoot, ans); // 当前节点删除后子节点变新树的根
-        root->right = delNode(root->right, toDel, delRoot, ans);
-        return delRoot ? nullptr : root;
+        if (root->left) ans.push_back(root->left);
+        if (root->right) ans.push_back(root->right);
+        return nullptr;
     }
 };
 
