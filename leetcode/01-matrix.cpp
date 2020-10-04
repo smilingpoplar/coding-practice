@@ -12,7 +12,7 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
-        const int INF = 1e9;
+        const int INF = 1e7;
         const int R = matrix.size(), C = matrix[0].size();
         vector<vector<int>> dist(R, vector<int>(C, INF));
 

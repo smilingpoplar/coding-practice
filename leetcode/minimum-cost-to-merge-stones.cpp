@@ -12,7 +12,7 @@ using namespace std;
 class Solution {
 public:
     int mergeStones(vector<int>& stones, int K) {
-        const int INF = 1e9;
+        const int INF = 1e7;
         const int N = stones.size();
         // 就像汽水瓶换汽水的问题
         if ((N - 1) % (K - 1) != 0) return -1;

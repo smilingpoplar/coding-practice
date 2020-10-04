@@ -16,7 +16,7 @@ public:
         // 设dp[i][d]表示子问题A[i..]还剩d天的最优解
         // dp[i][d] = max(A[i..k]) + dp[k+1][d-1], i<=k<=N-1
         // 初始 dp[N][0]=0，dp[N][>d]=INF，dp[<N][0]=INF
-        const int INF = 1e9;
+        const int INF = 1e7;
         const int N = A.size();
         vector<vector<int>> memo(N + 1, vector<int>(d + 1, -1));
         function<int(int,int)> dp = [&](int idx, int d) {

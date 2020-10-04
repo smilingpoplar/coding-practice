@@ -51,7 +51,7 @@ public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
         // 从src到dst最多K个中间站，共V=K+2个节点
         // Bellman-Ford算法，对所有边做V-1=K+1次松弛
-        const int INF = 1e9;
+        const int INF = 1e7;
         vector<int> dist(n, INF); // src到各节点的距离
         dist[src] = 0;
         for (int i = 0; i <= K; i++) {

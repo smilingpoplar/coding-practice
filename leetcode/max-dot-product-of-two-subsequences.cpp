@@ -15,7 +15,7 @@ public:
         // 设dp[i][j]表示A[..i)和B[..j)的最大非空子序列点积
         // dp[i][j] = max{ A[i-1]*B[j-1], // 子序列非空，dp[i-1][j-1]也非空
         //                 A[i-1]*B[j-1] + dp[i-1][j-1], dp[i-1][j], dp[i][j-1] }
-        const int INF = 1e9;
+        const int INF = 1e7;
         const int M = A.size(), N = B.size();
         vector<vector<int>> dp(M + 1, vector<int>(N + 1, -INF));
         

@@ -11,7 +11,7 @@
 using namespace std;
 
 class Solution {
-    const int INF = 2147483647;
+    const int INF = 1e7;
 public:
     void wallsAndGates(vector<vector<int>>& rooms) {
         // bfs，各门先入队

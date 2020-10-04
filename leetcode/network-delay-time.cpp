@@ -90,7 +90,7 @@ class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
         // Bellman-Ford算法，对所有边做N-1次松弛
-        const int INF = 1e9;
+        const int INF = 1e7;
         vector<int> dist(N + 1, INF);
         dist[K] = 0;
         for (int i = 1; i < N; i++) {
@@ -115,7 +115,7 @@ class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
         // Floyd算法，所有点对的最短路径
-        const int INF = 1e9;
+        const int INF = 1e7;
         vector<vector<int>> dist(N + 1, vector<int>(N + 1, INF));
         for (int i = 1; i <= N; i++) {
             dist[i][i] = 0;

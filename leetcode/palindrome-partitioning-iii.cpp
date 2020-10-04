@@ -10,7 +10,7 @@
 using namespace std;
 
 class Solution {
-    const int INF = 1e9;
+    const int INF = 1e7;
 public:
     int palindromePartition(string s, int k) {
         // 设dp[i][k]表示s[i..]分成k个回文的最少改动，

@@ -44,7 +44,7 @@ public:
 
 /*
 class Solution {
-    const int INF = 1e9;
+    const int INF = 1e7;
 public:
     int shortestPathLength(vector<vector<int>>& graph) {
         const int N = graph.size();
