@@ -12,7 +12,7 @@ using namespace std;
 class Solution {
 public:
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
-        // 设dp[i]表示arr[0..i-1]子问题的最大和
+        // 设dp[i]表示arr[0..i)子问题的最大和
         // dp[i] = max{ dp[i-j]+max(arr[i-j..i-1])*j }, 1<=j<=k
         // 初始dp[0]=0
         // i从左往右遍历
