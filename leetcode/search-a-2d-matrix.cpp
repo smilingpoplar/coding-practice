@@ -20,10 +20,10 @@ public:
         int l = -1, u = M * N;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;
-            int midValue = matrix[mid / N][mid % N];
-            if (target == midValue) {
+            int midVal = matrix[mid / N][mid % N];
+            if (target == midVal) {
                 return true;
-            } else if (target > midValue) {
+            } else if (target > midVal) {
                 l = mid;
             } else {
                 u = mid;
