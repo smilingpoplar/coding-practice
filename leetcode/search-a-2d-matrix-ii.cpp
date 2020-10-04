@@ -15,8 +15,7 @@ public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
         // 从行列有序的”中间“位置（右上角或左下角）开始线性查找，O(m+n)
         if (matrix.empty()) return false;
-        const int R = matrix.size();
-        const int C = matrix[0].size();
+        const int R = matrix.size(), C = matrix[0].size();
         int r = 0, c = C - 1;
         while (r < R && c >= 0) {
             if (target == matrix[r][c]) {
