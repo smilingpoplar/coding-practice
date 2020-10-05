@@ -13,10 +13,10 @@ using namespace std;
 class Solution {
 public:
     bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
-        vector<unordered_set<int>> adj(N + 1);
+        vector<vector<int>> adj(N + 1);
         for (auto &e : dislikes) {
-            adj[e[0]].insert(e[1]);
-            adj[e[1]].insert(e[0]);
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
         }
         
         vector<int> color(N + 1, -1);
@@ -26,7 +26,7 @@ public:
         return true;
     }
     
-    bool canColor(int idx, int c, vector<unordered_set<int>> &adj, vector<int> &color) {
+    bool canColor(int idx, int c, vector<vector<int>> &adj, vector<int> &color) {
         if (color[idx] != -1) return color[idx] == c;
         
         color[idx] = c;
