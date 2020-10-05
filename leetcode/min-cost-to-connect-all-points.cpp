@@ -33,14 +33,14 @@ public:
         }
 
         int ans = 0, cnt = 0;
-        while (!pq.empty()) {
+        while (!pq.empty() && cnt != N - 1) {
             const auto [cost, x, y] = pq.top(); pq.pop();
             // unite
             int px = find(x, uf), py = find(y, uf);
             if (px != py) {
                 uf[py] = px;
                 ans += cost;
-                if (++cnt == N - 1) break; // N个节点最多N-1条边
+                cnt++;
             }
         }
         return ans;
