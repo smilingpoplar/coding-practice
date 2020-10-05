@@ -9,6 +9,53 @@
 
 using namespace std;
 
+/*
+class NumArray {
+    class FenwickTree {
+        static inline int lowbit(int x) { return x & -x; }
+        vector<int> _sums;
+    public:
+        // 1-based，在_sums[1..n]保存部分和
+        FenwickTree(int n): _sums(n + 1, 0) { }
+
+        void update(int idx, int delta) {
+            while (idx < _sums.size()) {
+                _sums[idx] += delta;
+                idx += lowbit(idx);
+            }
+        }
+        // 返回sum[1..idx]
+        int query(int idx) const {
+            int sum = 0;
+            while (idx) {
+                sum += _sums[idx];
+                idx -= lowbit(idx);
+            }
+            return sum;
+        }
+    };
+    
+    vector<int> _nums;
+    FenwickTree _tree;
+public:
+    NumArray(vector<int>& nums) 
+        : _nums(nums), _tree(nums.size()) {
+        for (int i = 0; i < _nums.size(); i++) {
+            _tree.update(i + 1, _nums[i]);
+        }
+    }
+    
+    void update(int i, int val) {
+        _tree.update(i + 1, val - _nums[i]);
+        _nums[i] = val;
+    }
+    
+    int sumRange(int i, int j) {
+        return _tree.query(j + 1) - _tree.query(i);
+    }
+};
+*/
+
 class NumArray {
     vector<int> t;
     int n;
