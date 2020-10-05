@@ -43,6 +43,41 @@ public:
     }
 };
 
+/*
+string longestDupSubstring(string S) {
+    const int N = S.size();
+    string_view sv(S);
+    
+    vector<string_view> arr; // suffix array
+    for (int i = 0; i < N; i++) {
+        arr.push_back(sv.substr(i));
+    }
+    sort(begin(arr), end(arr));
+    
+    string ans;
+    int maxLen = 0;
+    for (int i = N - 1; i > 0; i--) { // from N-1 to 1, case "aaaaa..."
+        if (arr[i].size() < maxLen || arr[i-1].size() < maxLen) continue;
+        
+        int len = lenCommonPrefix(arr[i], arr[i-1]);
+        if (len > maxLen) {
+            maxLen = len;
+            ans = arr[i].substr(0, len);
+        }
+    }
+    return ans;
+}
+
+int lenCommonPrefix(string_view a, string_view b) {
+    int len = 0;
+    while (len < a.size() && len < b.size() 
+            && a[len] == b[len]) {
+        len++;
+    }
+    return len;
+}
+*/
+
 int main(int argc, const char * argv[]) {    
     return 0;
 }
