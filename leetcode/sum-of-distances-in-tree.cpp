@@ -21,10 +21,10 @@ public:
         // 2. 已知dist(p)，前序遍历求dist(c)。设树中除子树c外的含p的其他部分为o，
         // 从dist(p)（所有其他节点到p）变为dist(c)（所有其他节点到c），o中的节点距离+1，c中的节点距离-1，
         // 所以 dist(c) = dist(p)+nodeCount(o)-nodeCount(c) = dist(p)+N-2*nodeCount(c)
-        vector<unordered_set<int>> adj(N);
+        vector<vector<int>> adj(N);
         for (auto &e : edges) {
-            adj[e[0]].insert(e[1]);
-            adj[e[1]].insert(e[0]);
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
         }
         vector<bool> visited1(N, false), visited2(N, false);
 
@@ -34,7 +34,7 @@ public:
         return ans;
     }
 
-    void postOrder(int root, vector<unordered_set<int>>& adj, vector<bool> &visited,
+    void postOrder(int root, vector<vector<int>>& adj, vector<bool> &visited,
                   vector<int> &nodeCount, vector<int> &subtreeDist) {
         visited[root] = true;
 
@@ -47,7 +47,7 @@ public:
         nodeCount[root] += 1;        
     }
     
-    void preOrder(int root, vector<unordered_set<int>>& adj, vector<bool> &visited, 
+    void preOrder(int root, vector<vector<int>>& adj, vector<bool> &visited, 
                   vector<int> &nodeCount, int N, vector<int> &dist) {
         visited[root] = true;
 
