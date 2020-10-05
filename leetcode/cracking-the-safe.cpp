@@ -23,7 +23,7 @@ public:
 
         string ans;
         function<void(const string &)> dfs = [&](const string &prefix) {
-            for (int i = 0; i < k; i++) { // 遍历所有出边
+            for (int i = 0; i < k; i++) { // 遍历所有未访问的边
                 string x = to_string(i);
                 auto next = prefix + x;
                 if (visited.count(next)) continue;
@@ -36,7 +36,7 @@ public:
 
         dfs(str.substr(1));
         ans += str; // 后序遍历
-        reverse(begin(ans), end(ans));
+        reverse(begin(ans), end(ans)); // 逆欧拉路径
         return ans;
     }
 };
