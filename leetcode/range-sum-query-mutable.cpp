@@ -60,37 +60,56 @@ public:
 */
 
 class NumArray {
-    vector<int> t;
-    int n;
+    class SegmentTree {
+        int _n;
+        vector<int> _tree;
+    public:
+        SegmentTree(const vector<int> &nums) 
+            : _n(nums.size()), _tree(2 * _n) {
+            build(nums); 
+        }
+        
+        void build(const vector<int> &nums) {
+            // 叶节点是原数组元素
+            for (int i = _n; i < 2 * _n; i++) {
+                _tree[i] = nums[i-_n];
+            }
+            // 内节点计算聚合信息
+            for (int i = _n - 1; i >= 1; i--) {
+                _tree[i] = _tree[2*i] + _tree[2*i+1];
+            }
+        }
+        
+        void update(int i, int val) {
+            i += _n;
+            _tree[i] = val;
+            for (int j = i/2; j >= 1; j /= 2) {
+                _tree[j] = _tree[2*j] + _tree[2*j+1];
+            }
+        }
+
+        // 返回nums[i..j]的和
+        int sumRange(int i, int j) {
+            int sum = 0;
+            for (i += _n, j += _n; i <= j; i /= 2, j /= 2) {
+                if (i % 2 == 1) sum += _tree[i++];
+                if (j % 2 == 0) sum += _tree[j--];
+            }
+            return sum;
+        }
+    };
+    
+    SegmentTree _tree;
 public:
-    NumArray(vector<int> nums) {
-        // 用线段树作动态范围查询
-        n = nums.size();
-        t = vector<int>(2*n);
-        // build
-        for (int i = n; i < 2*n; i++) {
-            t[i] = nums[i-n];
-        }
-        for (int i = n - 1; i >= 1; i--) {
-            t[i] = t[2*i] + t[2*i+1];
-        }
+    NumArray(vector<int> nums) : _tree(nums) {
     }
     
     void update(int i, int val) {
-        i += n;
-        t[i] = val;
-        for (int j = i/2; j >= 1; j /= 2) {
-            t[j] = t[2*j] + t[2*j+1];
-        }
+        _tree.update(i, val);
     }
     
     int sumRange(int i, int j) {
-        int sum = 0;
-        for (i += n, j += n; i <= j; i /= 2, j /= 2) {
-            if (i % 2 == 1) sum += t[i++];
-            if (j % 2 == 0) sum += t[j--];
-        }
-        return sum;
+        return _tree.sumRange(i, j);
     }
 };
 
