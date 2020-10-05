@@ -34,7 +34,7 @@ class NumArray {
         }
 
         // 返回_nums[0..i]的和
-        int presum(int i) const {
+        int query(int i) const {
             i++;
             int sum = 0;
             while (i) {
@@ -54,7 +54,7 @@ public:
     }
     
     int sumRange(int i, int j) {
-        return _tree.presum(j) - _tree.presum(i - 1);
+        return _tree.query(j) - _tree.query(i - 1);
     }
 };
 */
@@ -89,7 +89,7 @@ class NumArray {
         }
 
         // 返回nums[i..j]的和
-        int sumRange(int i, int j) {
+        int query(int i, int j) {
             int sum = 0;
             for (i += _n, j += _n; i <= j; i /= 2, j /= 2) {
                 if (i % 2 == 1) sum += _tree[i++];
@@ -108,7 +108,7 @@ public:
     }
     
     int sumRange(int i, int j) {
-        return _tree.sumRange(i, j);
+        return _tree.query(i, j);
     }
 };
 
