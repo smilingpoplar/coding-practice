@@ -15,10 +15,8 @@ public:
         // 最小生成树的Kruskal算法，并查集+优先队列
         // 完全连接E=O(N^2)，所以O(ElgE)=O(N^2*2N)=O(N^3)
         const int N = points.size();
-        vector<int> uf(N); 
-        for (int i = 0; i < N; i++) {
-            uf[i] = i;
-        }
+        vector<int> uf(N);
+        iota(begin(uf), end(uf), 0);
 
         using arr3 = array<int, 3>;
         auto cmp = [](arr3 &a, arr3 &b) {
@@ -33,7 +31,7 @@ public:
         }
 
         int ans = 0, cnt = 0;
-        while (!pq.empty() && cnt != N - 1) {
+        while (!pq.empty() && cnt < N - 1) { // MST有N-1条边
             const auto [cost, x, y] = pq.top(); pq.pop();
             // unite
             int px = find(x, uf), py = find(y, uf);
@@ -74,13 +72,14 @@ public:
         priority_queue<arr2, vector<arr2>, decltype(cmp)> pq(cmp);
         pq.push({dist[0], 0});
 
-        int ans = 0;
+        int ans = 0, cnt = 0;
         vector<int> visited(N, false);
-        while (!pq.empty()) {
+        while (!pq.empty() && cnt < N) { // MST有N个顶点
             auto [d, u] = pq.top();  pq.pop();
             if (visited[u]) continue;
             visited[u] = true;
             ans += d;
+            cnt++;
 
             for (int v = 0; v < N; v++) {
                 if (visited[v]) continue;
