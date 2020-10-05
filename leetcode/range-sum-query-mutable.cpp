@@ -101,8 +101,7 @@ class NumArray {
     
     SegmentTree _tree;
 public:
-    NumArray(vector<int> nums) : _tree(nums) {
-    }
+    NumArray(vector<int> nums) : _tree(nums) { }
     
     void update(int i, int val) {
         _tree.update(i, val);
