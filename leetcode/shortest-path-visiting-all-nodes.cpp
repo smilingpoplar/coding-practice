@@ -77,7 +77,7 @@ public:
         // 并最终停在group中dst节点的最短路径，
         // 在group中选一节点u、在group外选一节点v，u松弛v
         // dp[group+{v}][v] = min( dp[group][u] + dist[u][v] )
-        // 其中dist[u][v]表示u->v的最短路径，可用Floyd算法三重循环松弛得到
+        // 其中dist[u][v]表示u->v的最短路径，可用Floyd-Warshall算法三重循环松弛得到
         const int N = dist.size();
         vector<vector<int>> dp(1<<N, vector<int>(N, INF));
         for (int i = 0; i < N; i++) {
@@ -114,7 +114,7 @@ int shortestHamilton(vector<vector<int>> &dist) {
     // 并最终停在group中dst节点的最短路径，
     // 在group中选一节点u、在group-{u}中选一点k，k松弛u
     // dp[group][u] = min( dp[group-{u}][k] + dist[k][u] )
-    // 其中dist[u][v]表示u->v的最短路径，可用Floyd算法三重循环松弛得到
+    // 其中dist[u][v]表示u->v的最短路径，可用Floyd-Warshall算法三重循环松弛得到
     const int N = dist.size();
     vector<vector<int>> dp(1<<N, vector<int>(N, INF));
     for (int i = 0; i < N; i++) {
