@@ -13,45 +13,48 @@ using namespace std;
 class NumArray {
     class FenwickTree {
         static inline int lowbit(int x) { return x & -x; }
-        vector<int> _sums;
+        vector<int> _nums;
+        vector<int> _tree; // 使用_tree[1..n]
     public:
-        // 1-based，在_sums[1..n]保存部分和
-        FenwickTree(int n): _sums(n + 1, 0) { }
-
-        void update(int idx, int delta) {
-            while (idx < _sums.size()) {
-                _sums[idx] += delta;
-                idx += lowbit(idx);
+        FenwickTree(const vector<int> &nums)
+            : _nums(nums.size()), _tree(nums.size() + 1) { 
+            for (int i = 0; i < _nums.size(); i++) {
+                update(i, nums[i]);
             }
         }
-        // 返回sum[1..idx]
-        int query(int idx) const {
+
+        void update(int i, int val) {
+            int delta = val - _nums[i];
+            _nums[i] = val;
+            i++;
+            while (i < _tree.size()) {
+                _tree[i] += delta;
+                i += lowbit(i);
+            }
+        }
+
+        // 返回_nums[0..i]的和
+        int presum(int i) const {
+            i++;
             int sum = 0;
-            while (idx) {
-                sum += _sums[idx];
-                idx -= lowbit(idx);
+            while (i) {
+                sum += _tree[i];
+                i -= lowbit(i);
             }
             return sum;
         }
     };
     
-    vector<int> _nums;
     FenwickTree _tree;
 public:
-    NumArray(vector<int>& nums) 
-        : _nums(nums), _tree(nums.size()) {
-        for (int i = 0; i < _nums.size(); i++) {
-            _tree.update(i + 1, _nums[i]);
-        }
-    }
+    NumArray(vector<int>& nums) : _tree(nums) { }
     
     void update(int i, int val) {
-        _tree.update(i + 1, val - _nums[i]);
-        _nums[i] = val;
+        _tree.update(i, val);
     }
     
     int sumRange(int i, int j) {
-        return _tree.query(j + 1) - _tree.query(i);
+        return _tree.presum(j) - _tree.presum(i - 1);
     }
 };
 */
