@@ -13,19 +13,20 @@ using namespace std;
 class Solution {
 public:
     vector<string> removeInvalidParentheses(string s) {
-        // 有多少left,right不匹配
-        int left = 0, right = 0;
+        // 有多少左右括号不匹配待删除，
+        // rmL和rmR将作为dfs的剪枝条件
+        int rmL = 0, rmR = 0;
         for (char c : s) {
             if (c == '(') {
-                left++;
+                rmL++;
             } else if (c == ')') {
-                if (left > 0) left--; // 匹配
-                else right++;
+                if (rmL > 0) rmL--; // 匹配
+                else rmR++;
             }
         }
 
         vector<string> ans;
-        remove(s, 0, 0, left, right, ans);
+        remove(s, 0, 0, rmL, rmR, ans);
         return ans;
     }
 
@@ -50,7 +51,6 @@ public:
 
         if (moreL == 0 && rmL == 0 && rmR == 0) {
             ans.push_back(s);
-            return;
         }
     }
 };
