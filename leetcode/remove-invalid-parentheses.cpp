@@ -29,19 +29,19 @@ public:
             if (s[i] == paren[0]) leftDiff++;
             else if (s[i] == paren[1]) leftDiff--;
             if (leftDiff >= 0) continue;
-
+            // 现在leftDiff<0，串无效
             for (int j = lastRmIdx; j <= i; j++) { // [lastRmIdx..i]间删除一个')'
                 if (s[j] == paren[1] && (j == lastRmIdx || s[j] != s[j-1])) { // 连续')'只删第一个
                     // 删除第j后，原i+1因删除前移，递归从i开始
                     search(s.substr(0, j) + s.substr(j + 1), i, j, paren, ans);
                 }
             }
-            return; // 不删除')'，串已无效，后面不用再看
+            return; // 若不删除')'，串已无效，后面不用再看
         }
 
         string reversed(s.rbegin(), s.rend());
-        if (paren[0] == '(') search(reversed, 0, 0, ")(", ans);
-        else ans.push_back(reversed);
+        if (paren[0] == '(') search(reversed, 0, 0, ")(", ans); // 进入第二遍处理，从右往左
+        else ans.push_back(reversed); // 第二遍处理完
     }
 };
 
