@@ -24,7 +24,7 @@ public:
     
     // 从nums[idx..]取数，还要分割k个子集，当前子集已累积和subSum
     bool search(vector<int> &nums, int idx, vector<bool> &visited, int k, int subSum, int target) {
-        if (k == 1) return true; // 前面k-1个子集和都是sum/k，最后1个肯定也是sum/k
+        if (k == 0) return true;
         if (subSum == target) return search(nums, 0, visited, k - 1, 0, target);
         
         for (int i = idx; i < nums.size(); i++) {
