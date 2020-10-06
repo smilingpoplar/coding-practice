@@ -13,6 +13,52 @@ using namespace std;
 class Solution {
 public:
     vector<string> removeInvalidParentheses(string s) {
+        // 有多少left,right不匹配
+        int left = 0, right = 0;
+        for (char c : s) {
+            if (c == '(') {
+                left++;
+            } else if (c == ')') {
+                if (left > 0) left--; // 匹配
+                else right++;
+            }
+        }
+
+        vector<string> ans;
+        remove(s, 0, 0, left, right, ans);
+        return ans;
+    }
+
+    // s[..idx)的左括号比右括号多moreL，s[idx..]有rmL个'('待删除、rmR个')'待删除
+    void remove(const string &s, int idx, int moreL, int rmL, int rmR, vector<string> &ans) {
+        if (moreL < 0 || rmL < 0 || rmR < 0) return;
+        const int N = s.size();
+
+        for (int i = idx; i < N && moreL >= 0; i++) {
+            if (s[i] == '(') {
+                if (rmL > 0 && (i == idx || s[i] != s[i-1])) { // 连续'('只删第一个
+                    remove(s.substr(0, i) + s.substr(i + 1), i, moreL, rmL - 1, rmR, ans);
+                }
+                moreL++;
+            } else if (s[i] == ')') {
+                if (rmR > 0 && (i == idx || s[i] != s[i-1])) {
+                    remove(s.substr(0, i) + s.substr(i + 1), i, moreL, rmL, rmR - 1, ans);
+                }
+                moreL--;
+            }
+        }
+
+        if (moreL == 0 && rmL == 0 && rmR == 0) {
+            ans.push_back(s);
+            return;
+        }
+    }
+};
+
+/*
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
         vector<string> ans;
         search(s, 0, 0, "()", ans);
         return ans;
@@ -44,6 +90,7 @@ public:
         else ans.push_back(reversed); // 第二遍处理完
     }
 };
+*/
 
 int main(int argc, const char * argv[]) {
     return 0;
