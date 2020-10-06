@@ -13,16 +13,12 @@ class Solution {
 public:
     string getHappyString(int n, int k) {
         if (k > 3 * (1 << (n - 1))) return "";
-        unordered_map<char, string> lookup{ 
-            {'a', "bc"}, 
-            {'b', "ac"}, 
-            {'c', "ab"} 
-        };
-        deque<string> q{"a", "b", "c"};
+        deque<string> q{""};
         while (q[0].size() < n) {
             string s = q[0]; q.pop_front();
-            for (char c : lookup[s.back()]) {
-                q.push_back(s + string(1, c));
+            for (char c = 'a'; c <= 'c'; c++) {
+                if (c != s.back())
+                    q.push_back(s + string(1, c));
             }
         }
         return q[k - 1];
