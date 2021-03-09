@@ -40,8 +40,8 @@ public:
             }
             int lo = stk.empty() ? -1 : stk.top();
             // 现在h[lo]<h[i]
-            // (lo..i]位置的高度>=h[i]，贡献右下角在(r,i)的子矩阵数(i-lo)*h[i]
-            // (..lo]位置的高度<h[i]，贡献右下角在(r,i)的子矩阵数已记录在sum[lo]中
+            // (lo..i]位置的高度>h[i]，贡献右下角在(r,i)的子矩阵数(i-lo)*h[i]
+            // (..lo]位置的高度<=h[i]，贡献右下角在(r,i)的子矩阵数已记录在sum[lo]中
             sum[i] += (i - lo) * h[i];
             if (lo >= 0) sum[i] += sum[lo];
             ans += sum[i];
