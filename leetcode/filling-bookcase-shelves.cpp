@@ -15,7 +15,6 @@ public:
         // 设dp[i]表示books[0..i)子问题的最小高度，
         // books[i-1]可以和books[j..i-1)放在一层，即books[j..i-1]在一层，
         //  j<i 且 sum(books[j..i-1][0])<=shelf_width
-        // dp[j]是前面层的最小高度，
         // dp[i] = min{ dp[j] + max{ books[j..i-1][1] }}
         const int N = books.size();
         vector<int> dp(N + 1, 1e9);
