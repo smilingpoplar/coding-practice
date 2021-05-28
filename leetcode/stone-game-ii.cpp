@@ -15,7 +15,7 @@ public:
         // 设dp[i][m]表示从piles[i..]、参数M=m时的得分（能拿的最大石头数）
         // 拿掉前x个后，对手得分dp[i+x][max(m,x)]，最小化对手得分即最大化自己得分，
         // dp[i][m]=max{ sufsum[i] - dp[i+x][max(m,x)] }，1<=x<=2m
-        // 初始dp[N][]=0，dp[i][N]=sufsum[i
+        // 初始dp[N][]=0，dp[i][N]=sufsum[i]
         const int N = piles.size();
         vector<int> sufsum(N + 1, 0);
         for (int i = N - 1; i >= 0; i--) {
