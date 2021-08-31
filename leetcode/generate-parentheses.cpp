@@ -26,7 +26,7 @@ public:
         }
         
         if (leftRemain > 0) search(leftRemain - 1, rightRemain, paren + '(', ans);
-        if (leftRemain < rightRemain) search(leftRemain, rightRemain - 1, paren + ")", ans);
+        if (leftRemain < rightRemain) search(leftRemain, rightRemain - 1, paren + ')', ans);
     }
 };
 
