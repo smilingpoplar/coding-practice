@@ -12,7 +12,7 @@ using namespace std;
 class Solution {
 public:
     bool containsPattern(vector<int>& arr, int m, int k) {
-        // 是否有m长子段重复k次
+        // 是否有m长子段连续重复k次
         const int N = arr.size();
         int count = 0;
         for (int i = 0; i + m < N; i++) {
