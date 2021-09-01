@@ -23,7 +23,7 @@ public:
             hi += (c == ')') ? -1 : 1;
             // 在扫描过程中，一旦hi<0，leftDiff<0，串无效
             if (hi < 0) return false;
-            // 而lo<0的部分可以直接丢弃
+            // 而lo<0的部分可以直接丢弃，因为有效串的leftDiff>=0
             lo = max(lo, 0);
         }
         // 最终能够leftDiff==0，串才有效
