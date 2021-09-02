@@ -28,8 +28,8 @@ public:
         }
         for (int v = sum / 2; v >= 0; v--) {
             if (dp[v]) return sum - v - v;
-        }
-        return 0;  
+        } 
+        return -1; // invalid
     }
 };
 
