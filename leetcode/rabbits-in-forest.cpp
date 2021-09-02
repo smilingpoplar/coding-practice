@@ -13,8 +13,8 @@ using namespace std;
 class Solution {
 public:
     int numRabbits(vector<int>& answers) {
-        // 相同数才能分在一组，数x每组有x+1个
-        // 数x共有 ceil(count[x]/(x+1)) = (count[x]+x)/(x+1)组
+        // 数x每组有x+1个，共有ceil(count[x]/(x+1)) = (count[x]+x)/(x+1)组，
+        // 所以报数x的兔子数为 (count[x]+x)/(x+1)*(x+1)
         unordered_map<int, int> count;
         for (int num : answers) count[num]++;
 
