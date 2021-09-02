@@ -18,9 +18,9 @@ public:
             total += machine;
         if (total % N != 0) return -1;
 
-        // 每个洗衣机要发出衣服：out[i] = machines[i]-avg
-        // 1. 一次只能发一件，发out[i]件需要out[i]次
-        // 2. 通过本机发向另一侧的件数 x=abs(sum(out[0..i]))，
+        // 1. 每个洗衣机要发出衣服：out[i] = machines[i]-avg，
+        //    一次只能发一件，需要out[i]次
+        // 2. 通过本机向另一侧发送的件数 x = abs( sum(out[0..i] ))，
         //    sum为正向右流、为负向左流，又需要x次
         int avg = total / N;
         int sum = 0;
