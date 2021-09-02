@@ -15,7 +15,7 @@ public:
     int matrixScore(vector<vector<int>>& A) {
         // 2^n > 2^(n-1) + 2^(n-2) + ... + 1 = 2^n-1，越高位贡献越大。
         // 所以 行先翻转，使首列都为1；非首列再翻转，使该列更多1。
-        // 首列都为1后，某格是否为1根据A[r][c]==A[r][0]判断。
+        // 不做实际的翻转，假想首列已变为1，后面列的某格是否为1根据A[r][c]==A[r][0]判断。
         if (A.empty()) return 0;
         const int R = A.size(), C = A[0].size();
         int ans = 0;
