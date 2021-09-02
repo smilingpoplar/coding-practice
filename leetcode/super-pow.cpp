@@ -1,4 +1,4 @@
-//
+-//
 //  super-pow
 //  https://leetcode.com/problems/super-pow/
 //
@@ -21,7 +21,7 @@ public:
         return (pow(superPow(a, b), 10, K) * pow(a, lastDigit, K)) % K;
     }
     
-    // 幂较小用该函数计算，a^k mod K
+    // 幂较小用该函数计算，a^b mod K
     int pow(long a, int b, int K) {
         int ans = 1;
         while (b) {
