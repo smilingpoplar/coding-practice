@@ -12,8 +12,8 @@ using namespace std;
 class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
-        // 和为i的子集排列数，递推式 dp[i]=sum(dp[i-num])
-        // 这写法刚好 将背包问题的外层物品循环改内层
+        // 和为i的子集排列数 dp[i]=sum(dp[i-num])
+        // 这写法刚好 将背包问题的外层物品循环改为内层
         vector<int> dp(target + 1, 0);
         dp[0] = 1;
         for (int i = 1; i <= target; i++) {
