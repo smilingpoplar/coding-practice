@@ -11,9 +11,9 @@
 using namespace std;
 
 class Solution {
-    // 把2d矩阵当作1d数组处理
-    // Fisher-Yates洗牌：生成0~n-1随机数r，交换r和n-1，n--
-    unordered_map<int, int> mp; // 记录r和n-1的交换操作
+    // 把2D矩阵当作1D数组处理
+    // Fisher-Yates洗牌：生成[0,n-1]随机数r，交换r和n-1，n--
+    unordered_map<int, int> mapping; // 记录r和n-1的交换操作
     int rows, cols, n;
 public:
     Solution(int n_rows, int n_cols) {
@@ -25,19 +25,20 @@ public:
     
     vector<int> flip() {
         int r = rand() % n;
-        int tmp = mapping(r);
-        mp[r] = mapping(n-1);
-        mp[n-1] = tmp;
+        // 交换r和n-1索引在mapping中的值
+        int tmp = getMapping(r);
+        mapping[r] = getMapping(n-1);
+        mapping[n-1] = tmp;
         n--;
         return { tmp / cols, tmp % cols };
     }
     
-    int mapping(int idx) {
-        return mp.count(idx) ? mp[idx] : idx;
+    int getMapping(int idx) {
+        return mapping.count(idx) ? mapping[idx] : idx;
     }
     
     void reset() {
-        mp.clear();
+        mapping.clear();
         n = rows * cols;
     }
 };
