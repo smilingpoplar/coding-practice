@@ -11,7 +11,7 @@
 using namespace std;
 
 class Solution {
-    unordered_map<int, int> mp; // 下标重映射
+    unordered_map<int, int> mapping; // 下标重映射
     int M;
 public:
     Solution(int N, vector<int> blacklist) {
@@ -24,7 +24,7 @@ public:
         for (int b : blacklist) {
             if (b < M) { 
                 while (st.count(N - 1)) N--;
-                mp[b] = N - 1;
+                mapping[b] = N - 1;
                 N--;
             } 
         }
@@ -34,7 +34,7 @@ public:
     
     int pick() {
         int idx = rand() % M;
-        return mp.count(idx) ? mp[idx] : idx;
+        return mapping.count(idx) ? mapping[idx] : idx;
     }
 };
 
