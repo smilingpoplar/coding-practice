@@ -29,9 +29,9 @@ public:
     }
 
     bool enough(long x, int A, int B, int lcm, int N) {
-        // <=x的A,B倍数的个数count(x)是关于x的递增函数
-        // count(x)>=N满足二分搜索的条件形式[0..0 1..1]
-        // 而 count = x/A + x/B - x/lcm(A,B)
+        // count(x){ <=x的A,B倍数的个数}是关于x的递增函数
+        // enough(x){ count(x)>=N }满足二分搜索的条件形式[0..0 1..1]
+        // 而 count(x) = x/A + x/B - x/lcm(A,B)
         return x / A + x / B - x / lcm >= N;
     }
 };
