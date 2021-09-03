@@ -12,15 +12,15 @@ using namespace std;
 class Solution {
 public:
     int reversePairs(vector<int>& nums) {
-        return mergeSort(nums, 0, nums.size() - 1);
+        return rReversePairs(nums, 0, nums.size() - 1);
     }
     
-    int mergeSort(vector<int>& nums, int l, int h) {
+    int rReversePairs(vector<int>& nums, int l, int h) {
         if (l >= h) return 0;
         int mid = l + (h - l) / 2;
-        int ans = mergeSort(nums, l, mid) + mergeSort(nums, mid + 1, h);
+        int ans = rReversePairs(nums, l, mid) + rReversePairs(nums, mid + 1, h);
         
-        // 统计组间逆序数，不妨从数组末往前数
+        // 统计组间逆序数，两指针同向遍历，不妨从数组末往前数
         for (int i = mid, j = h; i >= l; i--) {
             while (j > mid && nums[i] <= (long)2 * nums[j]) j--;
             ans += j - mid; // 位置[mid+1..j]与i逆序
