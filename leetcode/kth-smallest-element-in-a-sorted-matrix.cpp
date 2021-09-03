@@ -17,7 +17,7 @@ public:
         const int R = matrix.size(), C = matrix[0].size();
         // 猜第k小的数为x，x在范围[matrix[0][0]..matrix[R-1][C-1]]
         // count(x){ <=x的个数 }是关于x的递增函数，
-        // enough(x){ count(x)>=k }符合二分搜索的条件形式[0 .. 0 1 .. ]
+        // enough(x){ count(x)>=k }符合二分搜索的条件形式[0..0 1..1]
         int l = matrix[0][0], u = matrix[R-1][C-1];
         while (l <= u) {
             int mid = l + (u - l) / 2;

@@ -26,8 +26,8 @@ public:
     }
     
     bool enough(int x, int m, int n, int k) {
-        // <=x的数有count个，count(x)是关于x的递增函数，
-        // count(x)>=k符合二分搜索的条件形式[0..0 1..1]
+        // count(x){ <=x的个数 }是关于x的递增函数，
+        // enough(x){ count(x)>=k }符合二分搜索的条件形式[0..0 1..1]
         int count = 0;
         for (int r = 1; r <= m; r++) {
             // 乘法表一行行看该行有多少乘积<=x
