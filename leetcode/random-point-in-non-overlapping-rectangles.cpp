@@ -25,8 +25,10 @@ public:
     }
     
     vector<int> pick() {
+        // 按概率选中某项 <=> 从左往右按累计概率选中某项（从左往右保证了排除掉前面的累计概率，只剩当前项的概率）
         int rnd = rand() % wsum.back();
-        int idx = upper_bound(wsum.begin(), wsum.end(), rnd) - wsum.begin();
+        // rnd<wsum[i]时选中wsum[i]，在wsum[]中找第一个>rnd的位置
+        int idx = upper_bound(begin(wsum), end(wsum), rnd) - begin(wsum);
         auto rect = rects[idx];
         int x = rand() % (rect[2] - rect[0] + 1) + rect[0];
         int y = rand() % (rect[3] - rect[1] + 1) + rect[1];

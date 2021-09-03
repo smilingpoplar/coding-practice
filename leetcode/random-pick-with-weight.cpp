@@ -13,18 +13,16 @@ using namespace std;
 class Solution {
     vector<int> wsum;
 public:
-    Solution(vector<int> w) : wsum(w.size(), 0) {
-        wsum[0] = w[0];
-        for (int i = 1; i < w.size(); i++) {
-            wsum[i] = wsum[i-1] + w[i];
-        }
+    Solution(vector<int> w) {
+        partial_sum(begin(w), end(w), back_inserter(wsum));
         srand(time(NULL));
     }
     
     int pickIndex() {
+        // 按概率选中某项 <=> 从左往右按累计概率选中某项（从左往右保证了排除掉前面的累计概率，只剩当前项的概率）
         int rnd = rand() % wsum.back();
         // 要rnd<wsum[i]，在wsum中找第一个>rnd的位置
-        return upper_bound(wsum.begin(), wsum.end(), rnd) - wsum.begin();
+        return upper_bound(begin(wsum), end(wsum), rnd) - begin(wsum);
     }
 };
 
