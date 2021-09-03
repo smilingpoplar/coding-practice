@@ -20,16 +20,16 @@ using namespace std;
  */
 class Solution {
 public:
-    vector<int> findRightInterval(vector<Interval>& intervals) {
+    vector<int> findRightInterval(vector<vector<int>>& intervals) {
         map<int, int> mp; // start=>idx
         for (int i = 0; i < intervals.size(); i++) {
-            mp[intervals[i].start] = i;
+            mp[intervals[i][0]] = i;
         }
 
         vector<int> ans;
         // 每个区间找>=end的下一起点：mp.lower_bound(end)
         for (auto &interval : intervals) {
-            auto it = mp.lower_bound(interval.end);
+            auto it = mp.lower_bound(interval[1]);
             ans.push_back(it != mp.end() ? it->second : -1);
         }
         return ans;
