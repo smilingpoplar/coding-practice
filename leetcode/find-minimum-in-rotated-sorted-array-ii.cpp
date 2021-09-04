@@ -13,29 +13,22 @@ using namespace std;
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        if (nums.empty()) return INT_MIN;
-
-        int l = 0, r = (int)nums.size() - 1;
-        while (l + 1 < r) { // N>=3的情况
-            if (nums[l] < nums[r]) return nums[l];
-            
-            // 旋转数组对半分，一半旋转一半有序，最小值在旋转那一半
-            int mid = l + (r - l) / 2;
-            if (nums[l] < nums[mid]) { // 左半有序，右半旋转
-                l = mid;
-            } else if (nums[l] > nums[mid]) { // 左半旋转
-                r = mid;
-            } else { // 至少半边全是重复元素
-                if (nums[mid] != nums[r]) { // 在右半找
-                    l = mid;
-                } else { // 不知哪半全是重复元素，两边都得找
-                    l++;
-                    r--;
-                }
+        // 旋转数组对半分，一半旋转一半有序，最小值在旋转那一半
+        const int N = nums.size();
+        int lo = 0, hi = N - 1;
+        while (lo < hi) { // len(nums)>=2
+            int mi = lo + (hi - lo) / 2;
+            // 如果用if (nums[lo] < nums[mi])，由于mi向下取整，
+            // 可能mi==lo进入else循环。用mi和hi就没问题，mi!=hi。
+            if (nums[mi] > nums[hi]) { // 右半旋转，且m位置不是min
+                lo = mi + 1;
+            } else if (nums[lo] > nums[mi]) { // 左半旋转
+                hi = mi;
+            } else { // nums[lo] <= nums[mi]<= nums[hi]
+                hi--;
             }
         }
-        
-        return min(nums[l], nums[r]);
+        return nums[lo];
     }
 };
 
