@@ -14,21 +14,22 @@ class Solution {
 public:
     int search(vector<int>& nums, int target) {
         // 旋转数组对半分后，一半是有序数组、一半是旋转数组
-        int l = 0, r = (int)nums.size() - 1;
-        while (l <= r) {
-            int mid = l + (r - l) / 2;
-            if (nums[mid] == target) return mid;
-            if (nums[l] <= nums[mid]) { // 左半有序
-                if (nums[l] <= target && target < nums[mid]) {
-                    r = mid - 1;
+        int lo = 0, hi = (int)nums.size() - 1;
+        while (lo <= hi) {
+            int mi = lo + (hi - lo) / 2;
+            if (nums[mi] == target) return mi;
+            
+            if (nums[lo] <= nums[mi]) { // 左半有序
+                if (nums[lo] <= target && target < nums[mi]) {
+                    hi = mi - 1;
                 } else {
-                    l = mid + 1;
+                    lo = mi + 1;
                 }
             } else { // 右半有序
-                if (nums[mid] < target && target <= nums[r]) {
-                    l = mid + 1;
+                if (nums[mi] < target && target <= nums[hi]) {
+                    lo = mi + 1;
                 } else {
-                    r = mid - 1;
+                    hi = mi - 1;
                 }
             }
         }
