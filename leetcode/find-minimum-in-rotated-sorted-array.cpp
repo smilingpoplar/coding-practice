@@ -16,10 +16,11 @@ public:
         // 旋转数组对半分，一半旋转一半有序，最小值在旋转那一半
         const int N = nums.size();
         int lo = 0, hi = N - 1;
-        while (lo < hi) { // len(nums)>=2
+        while (lo < hi) { // len([lo..hi])>=2
             int mi = lo + (hi - lo) / 2;
-            // 如果用if (nums[lo] < nums[mi])，由于mi向下取整，
-            // 可能mi==lo进入else循环。用mi和hi就没问题，mi!=hi。
+            // 由于mi向下取整，可能mi==lo，
+            // 若用if (nums[lo] < nums[mi])，当mi==lo时这个if将被绕过
+            // 用mi和hi就没这个问题，mi!=hi
             if (nums[mi] > nums[hi]) { // 右半旋转，且m位置不是min
                 lo = mi + 1;
             } else { // 左半旋转
