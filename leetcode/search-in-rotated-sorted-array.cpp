@@ -19,10 +19,10 @@ public:
             int mi = lo + (hi - lo) / 2;
             if (nums[mi] == target) return mi;
             
-            // mi由于向下取整，可能==lo，使判断if (nums[lo] < nums[mi])失效,
-            // 要用if (nums[lo] <= nums[hi])回避。
-            // 用mi和hi比较更健壮，因为mi一定!=hi，
-            // 可用if (nums[mi] < nums[hi])，或if (nums[mi] <= nums[hi])
+            // mi由于向下取整，可能==lo，使判断if (nums[lo] < nums[mi])被绕过,
+            // 要用if (nums[lo] <= nums[hi])解决。
+            // 用mi和hi比较更健壮，因为mi一定!=hi（len>=2时），
+            // 可用if (nums[mi] < nums[hi])或if (nums[mi] <= nums[hi])
             if (nums[mi] < nums[hi]) { // 右半有序
                 if (nums[mi] < target && target <= nums[hi]) {
                     lo = mi + 1;
