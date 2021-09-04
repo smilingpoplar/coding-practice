@@ -12,6 +12,9 @@ using namespace std;
 class Solution {
 public:
     bool canCross(vector<int>& stones) {
+        // 题目：河宽被分成一格格，已知某些格有石头。青蛙往前跳，初始跳1步，
+        // 若上次跳k步、这次跳k-1、k、k+1步。问青蛙能否过河？
+        // 写法类似bfs，石头当作顶点，jump[i]当作顶点i的出边
         unordered_map<int, set<int>> jump; // 某石头=>set{可以跳几步}
         jump[0].insert(1);
 
