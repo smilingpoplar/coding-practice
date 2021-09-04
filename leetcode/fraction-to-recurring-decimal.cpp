@@ -26,7 +26,8 @@ public:
         long rmd = n % d;
         if (rmd > 0) ans += ".";
         
-        unordered_map<long, int> mp; // 余数 => 对应输出到ans的位置
+        // 为插入循环节的左括号，记录 余数=>对应左括号应在ans串的位置
+        unordered_map<long, int> mp; 
         while (rmd) {
             if (mp.count(rmd)) { // 找到循环节
                 ans.insert(mp[rmd], "(");
