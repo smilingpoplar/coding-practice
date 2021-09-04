@@ -19,20 +19,20 @@ public:
             int mi = lo + (hi - lo) / 2;
             if (nums[mi] == target) return true;
             
-            if (nums[lo] < nums[mi]) { // 左半有序
-                if (nums[lo] <= target && target < nums[mi]) {
-                    hi = mi - 1;
-                } else {
-                    lo = mi + 1;
-                }
-            } else if (nums[lo] > nums[mi]) { // 右半有序
+            if (nums[mi] < nums[hi]) { // 右半有序
                 if (nums[mi] < target && target <= nums[hi]) {
                     lo = mi + 1;
                 } else {
                     hi = mi - 1;
                 }
-            } else { // nums[lo] == nums[mi]
-                lo++;
+            } else if (nums[mi] > nums[hi]) { // 左半有序
+                if (nums[lo] <= target && target < nums[mi]) {
+                    hi = mi - 1;
+                } else {
+                    lo = mi + 1;
+                }
+            } else { // nums[mi] == nums[hi]
+                hi--;
             }
         }
         return false;

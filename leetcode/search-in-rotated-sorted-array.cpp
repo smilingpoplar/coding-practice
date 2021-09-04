@@ -19,17 +19,21 @@ public:
             int mi = lo + (hi - lo) / 2;
             if (nums[mi] == target) return mi;
             
-            if (nums[lo] <= nums[mi]) { // 左半有序
-                if (nums[lo] <= target && target < nums[mi]) {
-                    hi = mi - 1;
-                } else {
-                    lo = mi + 1;
-                }
-            } else { // 右半有序
+            // mi由于向下取整，可能==lo，使判断if (nums[lo] < nums[mi])失效,
+            // 要用if (nums[lo] <= nums[hi])回避。
+            // 用mi和hi比较更健壮，因为mi一定!=hi，
+            // 可用if (nums[mi] < nums[hi])，或if (nums[mi] <= nums[hi])
+            if (nums[mi] < nums[hi]) { // 右半有序
                 if (nums[mi] < target && target <= nums[hi]) {
                     lo = mi + 1;
                 } else {
                     hi = mi - 1;
+                }
+            } else { // 左半有序
+                if (nums[lo] <= target && target < nums[mi]) {
+                    hi = mi - 1;
+                } else {
+                    lo = mi + 1;
                 }
             }
         }
