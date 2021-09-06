@@ -18,8 +18,8 @@ public:
         // 所有站的总积累 sum(gas[i]-cost[i]) < 0 ==取逆否命题=> sum(gas[i]-cost[i]) >=0 就能绕圈
 
         const int N = gas.size();
-        int start = 0;
-        int gasSum = 0, gasFromStart = 0;
+        int gasSum = 0;
+        int start = 0, gasFromStart = 0;
         for (int i = 0; i < N; i++) {
             int gasI = gas[i] - cost[i];
             gasSum += gasI, gasFromStart += gasI;
