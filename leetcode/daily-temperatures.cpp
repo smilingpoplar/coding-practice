@@ -17,8 +17,8 @@ public:
         stack<int> stk;
         for (int i = 0; i < N; i++) {
             while (!stk.empty() && T[i] > T[stk.top()]) {
-                int top = stk.top(); stk.pop();
-                ans[top] = i - top;                
+                int pop = stk.top(); stk.pop();
+                ans[pop] = i - pop;
             }
             stk.push(i);
         }
@@ -26,6 +26,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char * argv[]) {
     return 0;
 }

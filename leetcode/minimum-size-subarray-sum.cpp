@@ -12,12 +12,12 @@ using namespace std;
 
 class Solution {
 public:
-    int minSubArrayLen(int s, vector<int>& nums) {
-        const int N = nums.size();        
+    int minSubArrayLen(int k, vector<int>& nums) {
+        const int N = nums.size();
         int sum = 0, ans = INT_MAX;
         for (int hi = 0, lo = 0; hi < N; hi++) {
             sum += nums[hi];
-            while (sum >= s) { 
+            while (sum >= k) {
                 ans = min(ans, hi - lo + 1);
                 sum -= nums[lo];
                 lo++;
@@ -27,11 +27,11 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
-    vector<int> nums = {2,3,1,2,4,3};
-    
+int main(int argc, const char* argv[]) {
+    vector<int> nums = {2, 3, 1, 2, 4, 3};
+
     Solution solution;
     cout << solution.minSubArrayLen(7, nums);
-    
+
     return 0;
 }

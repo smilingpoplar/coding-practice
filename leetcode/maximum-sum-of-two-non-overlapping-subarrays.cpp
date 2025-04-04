@@ -11,27 +11,27 @@ using namespace std;
 
 class Solution {
 public:
-    int maxSumTwoNoOverlap(vector<int>& A, int L, int M) {
-        // 题目：两个不重叠子段，L在M前或M在L前
+    int maxSumTwoNoOverlap(vector<int>& A, int l1, int l2) {
+        // 题目：两个不重叠子段，l1在l2前、或l2在l1前
         const int N = A.size();
         vector<int> presum(N + 1, 0);
         for (int i = 0; i < N; i++) {
-            presum[i+1] = presum[i] + A[i];
+            presum[i + 1] = presum[i] + A[i];
         }
-        
-        int Lmax = 0, Mmax = 0, ans = 0;
-        for (int i = L + M; i <= N; i++) {
-            // L在M前
-            Lmax = max(Lmax, presum[i-M] - presum[i-L-M]);
-            ans = max(ans, Lmax + (presum[i] - presum[i-M]));
-            // M在L前
-            Mmax = max(Mmax, presum[i-L] - presum[i-L-M]);
-            ans = max(ans, Mmax + (presum[i] - presum[i-L]));
+
+        int l1max = 0, l2max = 0, ans = 0;
+        for (int i = l1 + l2; i <= N; i++) {
+            // l1在l2前
+            l1max = max(l1max, presum[i - l2] - presum[i - l1 - l2]);
+            ans = max(ans, l1max + (presum[i] - presum[i - l2]));
+            // l2在l1前
+            l2max = max(l2max, presum[i - l1] - presum[i - l1 - l2]);
+            ans = max(ans, l2max + (presum[i] - presum[i - l1]));
         }
         return ans;
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }

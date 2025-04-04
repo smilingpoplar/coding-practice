@@ -13,9 +13,9 @@ using namespace std;
 class Solution {
 public:
     int maxSubarraySumCircular(vector<int>& A) {
-        // 1) 没跨越数组尾，= 最大子段和ansMax
-        // 2) 跨越数组尾，= arrSum - 最小子段和ansMin
-        // 特例是ansMax<0时，数组全是负数，arrSum==ansMin，要返回ansMax
+        // 1. 没跨越数组尾，= 最大子段和ansMax
+        // 2. 跨越数组尾，= arrSum - 最小子段和ansMin
+        // 特例：ansMax<0时，数组全是负数，arrSum==ansMin；要返回ansMax
         int currMax = 0, ansMax = INT_MIN;
         int currMin = 0, ansMin = INT_MAX;
         int arrSum = 0;
@@ -31,6 +31,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
