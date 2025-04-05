@@ -14,13 +14,13 @@ public:
     int maxWidthRamp(vector<int>& A) {
         // 找相距最远的两个递增数
         const int N = A.size();
-        stack<int> stk; // 栈底固定为A[0]的递减栈
+        stack<int> stk;  // 栈底固定为A[0]的递减栈
         for (int i = 0; i < N; i++) {
             if (stk.empty() || A[i] < A[stk.top()]) {
                 stk.push(i);
             }
         }
-        // 在从右往左A[j]与栈顶比较
+        // 再从右往左A[j]与栈顶比较
         int ans = 0;
         for (int j = N - 1; j >= 0; j--) {
             while (!stk.empty() && A[j] >= A[stk.top()]) {
@@ -41,7 +41,7 @@ public:
         for (int i = 0; i < N; i++) {
             mp.insert({A[i], i});
         }
-        
+
         int minIdx = INT_MAX, ans = 0;
         for (auto &e : mp) { // 按值递增遍历
             int idx = e.second;
@@ -53,6 +53,6 @@ public:
 };
 */
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }
