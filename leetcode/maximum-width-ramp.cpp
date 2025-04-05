@@ -13,6 +13,11 @@ class Solution {
 public:
     int maxWidthRamp(vector<int>& A) {
         // 找相距最远的两个递增数
+        // 对于第一个数，若A[i]<A[j]，A[j]、A[k]递增，则A[i]、A[k]是更远的递增，A[i]优于A[j]
+        // 即几何上的左下点占支配地位，未被支配的集合是递减序列
+        // 对于第二个数，若A[j]<A[k]，A[i]、A[j]递增，则A[i]、A[k]是更远的递增，A[k]优于A[j]
+        // 即几何上的右上点占支配地位，未被支配的集合是从右往左的递增序列
+        // 双指针法
         const int N = A.size();
         stack<int> stk;  // 栈底固定为A[0]的递减栈
         for (int i = 0; i < N; i++) {
