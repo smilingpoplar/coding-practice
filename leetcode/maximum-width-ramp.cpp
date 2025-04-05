@@ -37,6 +37,31 @@ class Solution {
 public:
     int maxWidthRamp(vector<int>& A) {
         const int N = A.size();
+        vector<int> rMax(N, 0);
+        rMax[N - 1] = A[N - 1];
+        for (int i = N - 2; i >= 0; i--) {
+            rMax[i] = max(A[i], rMax[i + 1]);
+        }
+
+        int ans = 0;
+        int lo = 0, hi = 0;
+        while (hi < N) {
+            while (lo < hi && A[lo] > rMax[hi]) {
+                lo++;
+            }
+            ans = max(ans, hi - lo);
+            hi++;
+        }
+        return ans;
+    }
+};
+*/
+
+/*
+class Solution {
+public:
+    int maxWidthRamp(vector<int>& A) {
+        const int N = A.size();
         multimap<int, int> mp; // num=>idx
         for (int i = 0; i < N; i++) {
             mp.insert({A[i], i});
