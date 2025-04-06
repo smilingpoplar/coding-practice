@@ -6,8 +6,8 @@
 //
 
 #include <iostream>
-#include <vector>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
@@ -15,8 +15,8 @@ class Solution {
 public:
     bool find132pattern(vector<int>& nums) {
         // 132模式：顺序三个数a1、a2、a3，a1<a3<a2。
-        // 固定第二个数，在右边找小于它的最大数rMax，再看左边是否有数<rMax。
-        // 某数右边小于它的最大数 <=等价于=> 从右往左找下一个更大的数
+        // 对于第二个数a2，在右边找小于它的最大数rMax，再看左边是否有数<rMax。
+        // 某数右边小于它的最大数 <=等价于=> 从右往左找"下一个更大的数"时最后的弹出数
         const int N = nums.size();
         int rMax = INT_MIN;
         stack<int> stk;
@@ -24,7 +24,7 @@ public:
             // 因为rMax将递增，<rMax判断条件将变宽，
             // 即使nums[i]左边有数<rMax，这次没返回以后也会返回
             if (nums[i] < rMax) return true;
-            
+
             while (!stk.empty() && nums[i] > stk.top()) {
                 rMax = stk.top();
                 stk.pop();
@@ -35,8 +35,8 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
-    vector<int> nums = { 3, 1, 4, 2 };
-    cout << find132pattern(nums);  
+int main(int argc, const char* argv[]) {
+    vector<int> nums = {3, 1, 4, 2};
+    cout << find132pattern(nums);
     return 0;
 }
