@@ -13,22 +13,22 @@ class Solution {
 public:
     int maxWidthRamp(vector<int>& A) {
         // 找相距最远的两个递增数
-        // 对于第一个数，若A[i]<A[j]，A[j]、A[k]递增，则A[i]、A[k]是更远的递增，A[i]优于A[j]
-        // 即几何上的左下点占支配地位，未被支配的集合是递减序列
-        // 对于第二个数，若A[j]<A[k]，A[i]、A[j]递增，则A[i]、A[k]是更远的递增，A[k]优于A[j]
-        // 即几何上的右上点占支配地位，未被支配的集合是从右往左的递增序列
+        // 对第一个数，若A[i]<A[j]，A[j]、A[k]递增，则A[i]、A[k]是更远的递增，
+        // A[i]占优于A[j]，即几何上的左下点占优，所以从左到右扫描，<栈顶的占优
+        // 对第二个数，若A[j]<A[k]，A[i]、A[j]递增，则A[i]、A[k]是更远的递增，
+        // A[k]占优于A[j]，即几何上的右上点占优，所以从右往左扫描，>栈顶的占优
         // 双指针法
         const int N = A.size();
-        stack<int> stk;  // 栈底固定为A[0]的递减栈
+        stack<int> stk;
         for (int i = 0; i < N; i++) {
-            if (stk.empty() || A[i] < A[stk.top()]) {
+            if (stk.empty() || A[i] < A[stk.top()]) {  // 第一个数的占优选择
                 stk.push(i);
             }
         }
-        // 再从右往左A[j]与栈顶比较
+
         int ans = 0;
-        for (int j = N - 1; j >= 0; j--) {
-            while (!stk.empty() && A[j] >= A[stk.top()]) {
+        for (int j = N - 1; j >= 0; j--) {                  // 从右往左扫描
+            while (!stk.empty() && A[j] >= A[stk.top()]) {  // 第二个数的占优选择
                 ans = max(ans, j - stk.top());
                 stk.pop();
             }
