@@ -13,10 +13,10 @@ using namespace std;
 class Solution {
 public:
     bool isCompleteTree(TreeNode* root) {
-        queue<TreeNode *> q;
+        queue<TreeNode*> q;
         q.push(root);
 
-        // BFS，在弹出NULL后不应再有实际节点
+        // BFS，在弹出nullptr后不应再有实际节点
         bool seenNull = false;
         while (!q.empty()) {
             auto node = q.front(); q.pop();
@@ -32,6 +32,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
