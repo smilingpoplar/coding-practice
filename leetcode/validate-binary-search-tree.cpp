@@ -19,17 +19,34 @@ struct TreeNode {
 
 class Solution {
 public:
-    bool isValidBST(TreeNode* root) {
+    bool isValidBST(TreeNode *root) {
         return isValidBST(root, LONG_MIN, LONG_MAX);
     }
 
     bool isValidBST(TreeNode *root, long lower, long upper) {
         if (!root) return true;
-        return (lower < root->val && root->val < upper) 
-            && isValidBST(root->left, lower, root->val) 
-            && isValidBST(root->right, root->val, upper);
+        return (lower < root->val && root->val < upper) && isValidBST(root->left, lower, root->val) && isValidBST(root->right, root->val, upper);
     }
 };
+
+/*
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        int prev = INT_MIN;
+        return inorder(root, prev);
+    }
+
+    bool inorder(TreeNode* root, int &prev) {
+        if (!root) return true;
+        if (!inorder(root->left, prev)) return false;
+        if (prev >= root->val) return false;
+        prev = root->val;
+        if (!inorder(root->right, prev)) return false;
+        return true;
+    }
+};
+*/
 
 /*
 class Solution {
@@ -40,7 +57,7 @@ public:
         pushLeft(stk, root);
         TreeNode *prev = NULL;
         while (!stk.empty()) {
-            auto node = stk.top(); stk.pop();                
+            auto node = stk.top(); stk.pop();
             if (prev && prev->val >= node->val) return false;
             prev = node;
             pushLeft(stk, node->right);
@@ -57,15 +74,15 @@ public:
 };
 */
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     TreeNode t0(3);
     TreeNode t1l(1);
     t0.left = &t1l;
     TreeNode t2r(2);
     t1l.right = &t2r;
-    
+
     Solution solution;
     cout << solution.isValidBST(&t0);
-    
+
     return 0;
 }
