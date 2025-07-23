@@ -11,7 +11,7 @@ using namespace std;
 
 struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode(int x) : val(x), next(NULL) {}
 };
 
@@ -46,24 +46,24 @@ public:
 
         ListNode dummy(-1);
         dummy.next = head;
-        auto prev = &dummy; // 组前的指针
+        auto prev = &dummy;  // 组前的指针
 
         for (; len >= k; len -= k) {
-            // 组头是反转后的组为tail，将组内第[2..k]元素插入到prev之后
-            auto tail = prev->next, curr = tail->next;
+            // 组头是反转后的组尾newtail，将组内第[2..k]元素插入到prev之后
+            auto newtail = prev->next, curr = newtail->next;
             for (int i = 2; i <= k; i++) {
-                tail->next = curr->next;
+                newtail->next = curr->next;
                 curr->next = prev->next;
                 prev->next = curr;
-                curr = tail->next;
+                curr = newtail->next;
             }
-            prev = tail;
+            prev = newtail;
         }
         return dummy.next;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     ListNode l1(1);
     ListNode l2(2);
     ListNode l3(3);
@@ -73,13 +73,13 @@ int main(int argc, const char * argv[]) {
     l2.next = &l3;
     l3.next = &l4;
     l4.next = &l5;
-    
+
     Solution solution;
     auto head = solution.reverseKGroup(&l1, 2);
     while (head) {
         cout << head->val << " ";
         head = head->next;
     }
-    
+
     return 0;
 }
