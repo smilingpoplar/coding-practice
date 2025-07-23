@@ -18,26 +18,26 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode *l1, ListNode *l2) {
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
         ListNode dummy(-1);
-        auto p = &dummy;
+        auto curr = &dummy;
         while (l1 && l2) {
             if (l1->val < l2->val) {
-                p->next = l1;
-                p = l1;
+                curr->next = l1;
+                curr = l1;
                 l1 = l1->next;
             } else {
-                p->next = l2;
-                p = l2;
+                curr->next = l2;
+                curr = l2;
                 l2 = l2->next;
             }
         }
-        p->next = l1 ? l1 : l2;
+        curr->next = l1 ? l1 : l2;
         return dummy.next;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     ListNode l1(1);
     ListNode l2(2);
     ListNode l3(3);
@@ -48,13 +48,13 @@ int main(int argc, const char * argv[]) {
     l3.next = &l5;
     l2.next = &l4;
     l4.next = &l6;
-    
+
     Solution solution;
     auto head = solution.mergeTwoLists(&l1, &l2);
     while (head) {
         cout << head->val << " ";
         head = head->next;
     }
-    
+
     return 0;
 }
