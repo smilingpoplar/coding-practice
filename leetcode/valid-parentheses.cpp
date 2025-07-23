@@ -18,19 +18,21 @@ public:
         for (char c : s) {
             if (mp.count(c)) {
                 stk.push(mp[c]);
+            } else if (stk.empty()) {
+                return false;
+            } else if (stk.top() != c) {
+                return false;
             } else {
-                if (stk.empty()) return false;
-                char top = stk.top(); stk.pop();
-                if (top != c) return false;
+                stk.pop();
             }
         }
         return stk.empty();
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     Solution solution;
     cout << solution.isValid("()[]{}");
-    
+
     return 0;
 }
