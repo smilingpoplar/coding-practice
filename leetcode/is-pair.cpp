@@ -1,8 +1,5 @@
 //
 //  is-pair
-//  https://leetcode.com/problems/is-pair/
-//
-//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

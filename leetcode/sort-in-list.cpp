@@ -1,8 +1,5 @@
 //
 //  sort-in-list
-//  https://leetcode.com/problems/sort-in-list/
-//
-//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

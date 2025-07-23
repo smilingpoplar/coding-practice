@@ -1,8 +1,5 @@
 //
 //  add-in-list
-//  https://leetcode.com/problems/add-in-list/
-//
-//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>

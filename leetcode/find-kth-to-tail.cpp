@@ -1,8 +1,5 @@
 //
 //  find-kth-to-tail
-//  https://leetcode.com/problems/find-kth-to-tail/
-//
-//  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
 #include <iostream>
