@@ -18,10 +18,11 @@ using namespace std;
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        if (!head) return NULL;
+        if (!head) return nullptr;
         ListNode dummyOdd(-1), dummyEven(-1);
         auto odd = &dummyOdd, even = &dummyEven;
         while (head) {
@@ -29,13 +30,13 @@ public:
             odd = odd->next;
             even->next = head->next;
             even = even->next;
-            head = even ? even->next : NULL;
+            head = even ? even->next : nullptr;
         }
         odd->next = dummyEven.next;
         return dummyOdd.next;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
