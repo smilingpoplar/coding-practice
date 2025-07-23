@@ -18,18 +18,18 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
-        // p和q都在树中则返回lca，只一个在树中则返回p或q，都不在树中则返回NULL
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
+        // 在子树中找p或q，找到一个就返回
         if (!root || root == p || root == q) return root;
-        
+
         auto left = lowestCommonAncestor(root->left, p, q);
         auto right = lowestCommonAncestor(root->right, p, q);
-        if (left && right) return root; // p和q分别在左右子树，root就是lca
-        return left ? left : right; // lca来自某个子树
+        if (left && right) return root;  // p和q分别在左右子树，root就是lca
+        return left ? left : right;      // p和q都在某个子树
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     TreeNode t(3);
     TreeNode t0(5);
     t.left = &t0;
@@ -43,10 +43,10 @@ int main(int argc, const char * argv[]) {
     t01.left = &t010;
     TreeNode t011(4);
     t01.right = &t011;
-    
+
     Solution solution;
     auto ancestor = solution.lowestCommonAncestor(&t, &t00, &t011);
-    cout << ancestor->val << endl; // 5
-    
+    cout << ancestor->val << endl;  // 5
+
     return 0;
 }
