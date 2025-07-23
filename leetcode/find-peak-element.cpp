@@ -27,13 +27,14 @@ public:
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
+        // 只要不断往高处走，就一定有波峰，这是一种单调性
         // 找波峰，找第一个nums[i]>nums[i+1]的位置i
         // i二分搜索的范围是[0..N-2]
         const int N = nums.size();
         int l = -1, u = N - 1;
         while (l + 1 < u) {
             int mid = l + (u - l) / 2;
-            if (nums[mid] > nums[mid+1]) {
+            if (nums[mid] > nums[mid + 1]) {
                 u = mid;
             } else {
                 l = mid;
@@ -76,10 +77,10 @@ public:
     */
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     vector<int> nums = {1, 2, 3, 1};
     Solution solution;
     cout << solution.findPeakElement(nums);
-    
+
     return 0;
 }
