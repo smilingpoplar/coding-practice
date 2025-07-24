@@ -20,20 +20,24 @@ class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         int len = 0;
-        for (auto node = head; node && len < k; node = node->next) len++;
+        for (auto p = head; p && len < k; p = p->next) len++;
         if (len < k) return head;
-        // 反转前k个
-        ListNode *list = NULL;
-        auto node = head;
-        for (int i = 0; i < k; i++) {
-            auto next = node->next;
-            node->next = list;
-            list = node;
-            node = next;
+
+        ListNode dummy(-1);
+        dummy.next = head;
+        auto prev = &dummy;  // 组前的指针
+
+        // 组头是反转后的组尾newtail，将组内第[2..k]元素插入到prev之后
+        auto newtail = prev->next, curr = newtail->next;
+        for (int i = 2; i <= k; i++) {
+            newtail->next = curr->next;
+            curr->next = prev->next;
+            prev->next = curr;
+            curr = newtail->next;
         }
-        // 至此head是组内尾元素，node是下一组头元素
-        head->next = reverseKGroup(node, k);
-        return list;
+        newtail->next = reverseKGroup(curr, k);
+
+        return dummy.next;
     }
 };
 */
