@@ -6,66 +6,69 @@
 //
 
 #include <iostream>
-#include <vector>
+#include <list>
+#include <map>
 
 using namespace std;
 
 class LFUCache {
-    // 映射表table按频率分行，每行行首放最近使用项
-    struct Entry { int key; int value; };
-    struct FreqRow { int freq; list<Entry> entries; };
-    list<FreqRow> table;
-    struct EntryPtr { list<FreqRow>::iterator row; list<Entry>::iterator entry; };
-    unordered_map<int, EntryPtr> entryPtrs;
+    struct Entry {
+        int freq;
+        int key;
+        int value;
+    };
+    map<int, list<Entry>> freqMp;                  // 实际存储，frep => list<Entry>
+    unordered_map<int, list<Entry>::iterator> mp;  // key => 实际存储位置
     int capacity;
+
 private:
-    void moveKey(int key, list<FreqRow>::iterator &to) {
-        auto from = entryPtrs[key].row;
-        to->entries.splice(to->entries.begin(), from->entries, entryPtrs[key].entry);
-        if (from->entries.empty()) table.erase(from);
-        entryPtrs[key] = { to, to->entries.begin() };
+    void incFreq(int key) {
+        int freq = mp[key]->freq, value = mp[key]->value;
+        // 从原频率行删除
+        freqMp[freq].erase(mp[key]);
+        if (freqMp[freq].empty()) {
+            freqMp.erase(freq);
+        }
+
+        freq++;
+        // 插入到新频率行
+        freqMp[freq].push_front({freq, key, value});
+        mp[key] = freqMp[freq].begin();
     }
 
-    // 将entry从原行删除、插入"freq+1"行
-    void incFreq(int key) {
-        auto currRow = entryPtrs[key].row, nextRow = next(currRow);
-        int nextFreq = currRow->freq + 1;
-        if (nextRow == table.end() || nextRow->freq != nextFreq) { // 插入新行
-            nextRow = table.insert(nextRow, { nextFreq, { }});
-        }
-        moveKey(key, nextRow);
-    }
-    
-    // 删除最小频率lfu的行中最少最近使用lru项
+    // 删除最小频率的行中最少最近使用项
     void evict() {
-        if (table.empty()) return;
-        auto lfu = table.begin();
-        entryPtrs.erase(lfu->entries.back().key);
-        lfu->entries.pop_back();
-        if (lfu->entries.empty()) table.erase(lfu);
+        if (freqMp.empty()) return;
+        auto &l = freqMp.begin()->second;  // 最小频率行
+        auto lfu = l.back();               // 最少最近使用的项
+        l.pop_back();                      // 删除
+        if (l.empty()) {
+            freqMp.erase(lfu.freq);
+        }
+        mp.erase(lfu.key);
     }
+
 public:
     LFUCache(int capacity) {
         this->capacity = capacity;
     }
-    
+
     int get(int key) {
-        if (!entryPtrs.count(key)) return -1;
+        if (!mp.count(key)) return -1;
         incFreq(key);
-        return entryPtrs[key].entry->value;
+        return mp[key]->value;
     }
-    
+
     void put(int key, int value) {
         if (capacity == 0) return;
-        if (!entryPtrs.count(key)) {
-            if (entryPtrs.size() == capacity) evict();
-            // 先插入freq=0的行，待会儿和其他情况一起增1
-            auto row = table.insert(table.begin(), { 0, {{key, value}} });
-            entryPtrs[key] = { row, row->entries.begin() };
-        } else {
-            entryPtrs[key].entry->value = value;
+        if (!mp.count(key)) {  // 新增
+            if (mp.size() == capacity) evict();
+            freqMp[1].push_front({1, key, value});
+            mp[key] = freqMp[1].begin();
+        } else {  // 更新
+            mp[key]->value = value;
+            incFreq(key);
         }
-        incFreq(key);
     }
 };
 
@@ -76,6 +79,23 @@ public:
  * obj.put(key,value);
  */
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
+    LFUCache lfu(3);
+    lfu.put(1, 1);
+    lfu.put(2, 2);
+    lfu.put(3, 3);
+    lfu.put(4, 4);
+    cout << lfu.get(4) << endl;  // 4
+    cout << lfu.get(3) << endl;  // 3
+    cout << lfu.get(2) << endl;  // 2
+    cout << lfu.get(1) << endl;  // -1
+
+    lfu.put(5, 5);
+    cout << lfu.get(1) << endl;  // -1
+    cout << lfu.get(2) << endl;  // 2
+    cout << lfu.get(3) << endl;  // 3
+    cout << lfu.get(4) << endl;  // -1
+    cout << lfu.get(5) << endl;  // 5
+
     return 0;
 }
