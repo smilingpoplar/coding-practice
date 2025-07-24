@@ -15,23 +15,23 @@ class Solution {
 public:
     int findMedianinTwoSortedAray(vector<int>& arr1, vector<int>& arr2) {
         const int N = arr1.size();  // 上中位数是在合并数组中第N小的数
-        int lo1 = 0, hi1 = N - 1;
-        while (lo1 < hi1) {
-            int mid1 = lo1 + (hi1 - lo1) / 2;
-            // 划分出N个元素 arr1[0..mid1]，arr2[0..mid2]，有 mid1+1 + mid2+1 == N
+        int lo = 0, hi = N - 1;
+        while (lo < hi) {
+            int mid1 = lo + (hi - lo) / 2;
+            // 划分出N个元素 arr1[0..mid1]、arr2[0..mid2]，有 mid1+1 + mid2+1 == N
             int mid2 = N - 2 - mid1;
             int a1 = arr1[mid1], a2 = arr2[mid2];
             if (a1 < a2) {
                 // 一共划分出N个元素，arr1[mid1]较小，不可能是第N个元素，排除 arr1[0..mid1]
-                lo1 = mid1 + 1;
+                lo = mid1 + 1;
             } else if (a1 > a2) {
-                // 划分之外的 arr1[mid1+1..]，可以排除
-                hi1 = mid1;
+                // N个元素的划分之外的 arr1[mid1+1..]，可以排除
+                hi = mid1;
             } else {
                 return a1;
             }
         }
-        // lo1+1+x == N，x = N-1-lo1
-        return min(arr1[lo1], arr2[N - 1 - lo1]);
+        // 合并数组中 lo+x == N-1，x = N-1-lo
+        return min(arr1[lo], arr2[N - 1 - lo]);
     }
 };
