@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  construct-binary-search-tree-from-preorder-traversal
+//  https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -24,8 +24,8 @@ public:
         int idx = 0;
         return bstFromPreorder(A, idx, INT_MAX);
     }
-    
-    TreeNode* bstFromPreorder(vector<int>& A, int &idx, int upperBound) {
+
+    TreeNode* bstFromPreorder(vector<int>& A, int& idx, int upperBound) {
         if (idx >= A.size() || A[idx] > upperBound) return NULL;
 
         int val = A[idx++];
@@ -36,6 +36,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }

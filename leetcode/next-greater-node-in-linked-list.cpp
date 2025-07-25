@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  next-greater-node-in-linked-list
+//  https://leetcode.com/problems/next-greater-node-in-linked-list/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -27,10 +27,10 @@ public:
             arr.push_back(head->val);
             head = head->next;
         }
-        
+
         const int N = arr.size();
         vector<int> ans(N, 0);
-        stack<int> stk; // 单调栈，保存下标
+        stack<int> stk;  // 单调栈，保存下标
         for (int i = 0; i < N; i++) {
             while (!stk.empty() && arr[i] > arr[stk.top()]) {
                 ans[stk.top()] = arr[i];
@@ -42,6 +42,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }

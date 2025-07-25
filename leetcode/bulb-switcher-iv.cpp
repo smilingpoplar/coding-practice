@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  bulb-switcher-iv
+//  https://leetcode.com/problems/bulb-switcher-iv/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -25,6 +25,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }

@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  check-if-a-string-contains-all-binary-codes-of-size-k
+//  https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -23,6 +23,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }

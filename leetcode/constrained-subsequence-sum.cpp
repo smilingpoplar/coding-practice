@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  constrained-subsequence-sum
+//  https://leetcode.com/problems/constrained-subsequence-sum/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -21,11 +21,11 @@ public:
         dp[0] = nums[0];
         deque<int> q = {{dp[0]}};
         int ans = dp[0];
-        
+
         for (int i = 1; i < N; i++) {
-            if (i-k-1 >= 0 && q[0] == dp[i-k-1]) q.pop_front();
+            if (i - k - 1 >= 0 && q[0] == dp[i - k - 1]) q.pop_front();
             dp[i] = nums[i] + max(q[0], 0);
-            while (!q.empty() && dp[i] > q.back()) { // 递减队列
+            while (!q.empty() && dp[i] > q.back()) {  // 递减队列
                 q.pop_back();
             }
             q.push_back(dp[i]);
@@ -36,6 +36,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }

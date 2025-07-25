@@ -1,6 +1,6 @@
 //
-//  maximal-square
-//  https://leetcode.com/problems/maximal-square/
+//  minimum-number-of-days-to-make-m-bouquets
+//  https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -20,7 +20,7 @@ public:
             mn = min(mn, day);
             mx = max(mx, day);
         }
-        
+
         // 二分搜索猜等待天数
         int lo = mn, hi = mx;
         while (lo <= hi) {
@@ -33,7 +33,7 @@ public:
         }
         return lo;
     }
-    
+
     bool enough(int wait, vector<int>& bloomDay, int m, int k) {
         // 等待天数wait一确定，bloomDay根据开没开花变成10数组，
         // 就能统计有多少个k长的连续1的子段，count(wait)是关于wait的递增函数，
@@ -54,6 +54,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }
