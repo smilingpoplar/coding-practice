@@ -13,9 +13,9 @@ class Solution {
 public:
     int longestPalindromeSubseq(string s) {
         // 设dp[i][j]表示s[i..j]的最长回文子序列长，0<=i<=j<N
-        // 若s[i]==s[j]，dp[i][j]=dp[i+1][j-1]+2，i<j
+        // 若s[i]==s[j]，dp[i][j]=dp[i+1][j-1]+2
         // 否则，dp[i][j]=max(dp[i+1][j], dp[i][j-1])
-        // 初始dp[i][i]=1
+        // 初始 dp[i][i]=1
         const int N = s.size();
         vector<vector<int>> dp(N, vector<int>(N, 0));
         for (int i = 0; i < N; i++) {
@@ -26,16 +26,16 @@ public:
             for (int i = 0; i + len <= N; i++) {
                 int j = i + len - 1;
                 if (s[i] == s[j]) {
-                    dp[i][j] = dp[i+1][j-1] + 2;
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
                 } else {
-                    dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
                 }
             }
         }
-        return dp[0][N-1];
+        return dp[0][N - 1];
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }
