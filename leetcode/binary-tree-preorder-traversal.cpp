@@ -41,9 +41,9 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> ans;
         stack<TreeNode *> stk;
-        auto curr = root; // curr是待入栈的节点
+        auto curr = root; // curr是额外栈顶
         while (curr || !stk.empty()) {
-            while (curr) {
+            while (curr) { // pushLeft
                 ans.push_back(curr->val); // 进栈前访问
                 stk.push(curr);
                 curr = curr->left;

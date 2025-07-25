@@ -19,29 +19,26 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<int> postorderTraversal(TreeNode* root) {
-        stack<TreeNode *> stk;
-        pushLeft(stk, root);
-        TreeNode *prev = NULL;
+    vector<int> postorderTraversal(TreeNode *root) {
         vector<int> ans;
-        while (!stk.empty()) {
+        stack<TreeNode *> stk;
+        auto curr = root;  // curr是额外栈顶
+        TreeNode *prev = nullptr;
+        while (curr || !stk.empty()) {
+            while (curr) {  // pushLeft
+                stk.push(curr);
+                curr = curr->left;
+            }
             auto node = stk.top();
-            if (node->right && prev != node->right) { // 不是从右子树返回，访问右子树
-                pushLeft(stk, node->right);
-            } else { // 从右子树返回，出栈并访问
+            if (node->right && prev != node->right) {  // 不是从右子树返回，访问右子树
+                curr = node->right;
+            } else {  // 从右子树返回，出栈并访问
                 stk.pop();
                 ans.push_back(node->val);
                 prev = node;
             }
         }
         return ans;
-    }
-
-    void pushLeft(stack<TreeNode*> &stk, TreeNode *node) {
-       while (node) {
-            stk.push(node);
-            node = node->left;
-        }
     }
 };
 
@@ -90,7 +87,7 @@ public:
 };
 */
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     TreeNode t0(3);
     TreeNode t1l(9);
     t0.left = &t1l;
@@ -100,12 +97,12 @@ int main(int argc, const char * argv[]) {
     t1r.left = &t2l;
     TreeNode t2r(7);
     t1r.right = &t2r;
-    
+
     Solution solution;
     auto result = solution.postorderTraversal(&t0);
     for (int num : result) {
         cout << num << " ";
     }
-    
+
     return 0;
 }
