@@ -19,22 +19,47 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> inorderTraversal(TreeNode *root) {
         vector<int> ans;
         stack<TreeNode *> stk;
-        auto curr = root; // curr是待入栈的节点
+        auto curr = root;  // curr是额外栈顶
         while (curr || !stk.empty()) {
             while (curr) {
                 stk.push(curr);
                 curr = curr->left;
-            } 
-            auto node = stk.top();  stk.pop();
+            }
+            auto node = stk.top();
+            stk.pop();
             ans.push_back(node->val);  // 出栈时访问
             curr = node->right;
         }
         return ans;
     }
 };
+
+/*
+class Solution {
+public:
+    void pushLeft(stack<TreeNode *> &stk, TreeNode *node) {
+        while (node) {
+            stk.push(node);
+            node = node->left;
+        }
+    }
+
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> ans;
+        stack<TreeNode *> stk;
+        pushLeft(stk, root);
+        while (!stk.empty()) {
+            auto node = stk.top(); stk.pop();
+            ans.push_back(node->val);  // 出栈时访问
+            pushLeft(stk, node->right);
+        }
+        return ans;
+    }
+};
+*/
 
 /*
 class Solution {
@@ -71,18 +96,18 @@ public:
 };
 */
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     TreeNode t0(3);
     TreeNode t1l(1);
     t0.left = &t1l;
     TreeNode t2r(2);
     t1l.right = &t2r;
-    
+
     Solution solution;
     auto result = solution.inorderTraversal(&t0);
     for (int num : result) {
         cout << num << " ";
     }
-    
+
     return 0;
 }
