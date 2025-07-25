@@ -18,47 +18,28 @@ struct TreeNode {
 
 class Solution {
 public:
-    /*
-    // 递归
-    int countNodes(TreeNode* root) {
+    int countNodes(TreeNode *root) {
         if (!root) return 0;
         int leftH = getHeight(root->left);
         int rightH = getHeight(root->right);
-        if (leftH == rightH) { // 左子树是满二叉树，左子树和根节点共(2^leftH-1)+1
+        if (leftH == rightH) {  // 左子树是满二叉树，左子树和根节点共(2^leftH-1)+1
             return (1 << leftH) + countNodes(root->right);
-        } else { // 右子树是满二叉树
+        } else {  // 右子树是满二叉树
             return (1 << rightH) + countNodes(root->left);
         }
     }
-    */
-    // 迭代
-    int countNodes(TreeNode* root) {
-        int count = 0;
-        while (root) {
-            int leftH = getHeight(root->left);
-            int rightH = getHeight(root->right);
-            if (leftH == rightH) { // 左子树是满二叉树
-                count += (1 << leftH); // 左子树和根节点共(2^leftH-1)+1
-                root = root->right;
-            } else { // 右子树是满二叉树
-                count += (1 << rightH);
-                root = root->left;
-            }
-        }
-        return count;
-    }
 
     int getHeight(TreeNode *root) {
-        int height = 0;
+        int h = 0;
         while (root) {
-            height++;
+            h++;
             root = root->left;
         }
-        return height;
+        return h;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     TreeNode t0(0);
     TreeNode t1l(1);
     t0.left = &t1l;
@@ -66,9 +47,9 @@ int main(int argc, const char * argv[]) {
     t0.right = &t1r;
     TreeNode t2l(3);
     t1l.left = &t2l;
-    
+
     Solution solution;
     cout << solution.countNodes(&t0);
-    
+
     return 0;
 }
