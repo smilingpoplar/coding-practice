@@ -14,19 +14,18 @@ class Solution {
 public:
     bool canJump(vector<int>& nums) {
         const int N = nums.size();
-        int farthest = 0;
-        for (int i = 0; i <= farthest; i++) {
-            farthest = max(farthest, i + nums[i]);
-            if (farthest >= N - 1) return true;
+        for (int i = 0, hi = 0; i <= hi; i++) {
+            hi = max(hi, i + nums[i]);
+            if (hi >= N - 1) return true;
         }
         return false;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     Solution solution;
-    vector<int> nums = {3,2,1,0,4};
+    vector<int> nums = {3, 2, 1, 0, 4};
     cout << solution.canJump(nums);
-    
+
     return 0;
 }
