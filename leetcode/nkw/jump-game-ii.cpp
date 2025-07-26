@@ -3,7 +3,9 @@
 //  NC206 跳跃游戏(二)
 //
 
-#include <climits>
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
     int maxJumpGrade(vector<int>& nums) {
