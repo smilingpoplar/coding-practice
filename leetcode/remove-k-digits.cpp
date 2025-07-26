@@ -12,20 +12,20 @@ using namespace std;
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        // 使数字串最小，需要栈中留下递增序列 <=> 找下一个更小的数；在此基础上，考虑限制条件：
-        // 当栈内数字个数+剩余可压栈个数>needed时才可pop()，栈内数字个数<needed时才可push()
+        // 使剩余数字串最小，需要栈中留下递增序列 <=> 找下一个更小的数
+        // 在此基础上，考虑限制条件：
+        // 当栈内个数+剩余可压栈个数>needed时才可pop()，栈内个数<needed时才可push()
         const int N = num.size(), needed = N - k;
         string s;
         for (int i = 0; i < N; i++) {
-            while (!s.empty() && num[i] < s.back() 
-                   && s.size() + (N - i) > needed) { // [i,N)是剩余可压栈的数字
+            while (!s.empty() && num[i] < s.back() && s.size() + (N - i) > needed) {  // [i,N)是剩余可压栈的数字
                 s.pop_back();
             }
             if (s.size() < needed) s.push_back(num[i]);
         }
         // 删除开头的0
         int pos = 0;
-        while (pos < s.size() && s[pos] == '0') pos++;      
+        while (pos < s.size() && s[pos] == '0') pos++;
         return pos < s.size() ? s.substr(pos) : "0";
     }
 };
@@ -57,6 +57,6 @@ public:
 };
 */
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }
