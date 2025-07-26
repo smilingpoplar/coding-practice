@@ -15,10 +15,10 @@ public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         if (matrix.empty()) return {};
         const int R = matrix.size(), C = matrix[0].size();
-        const vector<vector<int>> dirs = {{0,1},{1,0},{0,-1},{-1,0}}; // 右下左上
-        vector<int> numSteps = {C, R-1};
-        int cur = 0; // 方向，4种
+        const vector<vector<int>> dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};  // 右下左上
+        vector<int> numSteps = {C, R - 1};
         int r = 0, c = -1;
+        int cur = 0;  // 方向，4种
         vector<int> ans;
         while (numSteps[cur % 2]) {
             for (int i = 0; i < numSteps[cur % 2]; i++) {
@@ -73,7 +73,7 @@ public:
 };
 */
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     vector<vector<int>> matrix = {
         {1, 2, 3},
         {4, 5, 6},
@@ -84,6 +84,6 @@ int main(int argc, const char * argv[]) {
     for (auto num : result) {
         cout << num << " ";
     }
-    
+
     return 0;
 }
