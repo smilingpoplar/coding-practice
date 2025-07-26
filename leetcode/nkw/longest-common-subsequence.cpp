@@ -1,5 +1,6 @@
 //
-//  longest-common-subsequence.nkw
+//  longest-common-subsequence
+//  NC92 最长公共子序列(二)
 //
 
 #include <iostream>

@@ -1,5 +1,6 @@
 //
 //  tower-of-hanoi
+//  NC67 汉诺塔问题
 //
 
 #include <iostream>

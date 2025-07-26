@@ -1,5 +1,6 @@
 //
 //  kmp
+//  NC149 kmp算法
 //
 
 #include <iostream>

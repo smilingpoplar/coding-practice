@@ -1,5 +1,6 @@
 //
-//  is-pair
+//  is-pail
+//  BM13 判断一个链表是否为回文结构
 //
 
 #include <iostream>

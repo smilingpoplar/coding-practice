@@ -1,5 +1,6 @@
 //
 //  longest-AA-type-substring
+//  NC142 最长重复子串
 //
 
 #include <iostream>
