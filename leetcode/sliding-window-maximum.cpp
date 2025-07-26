@@ -24,6 +24,7 @@ public:
                 dq.pop_back();
             }
             dq.push_back(i);
+            
             if (i - k + 1 >= 0) ans.push_back(nums[dq[0]]);
         }
         return ans;
