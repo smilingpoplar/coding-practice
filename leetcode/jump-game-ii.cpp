@@ -16,6 +16,7 @@ public:
         // 设dp[i]表示以nums[i]开头的nums[i..]的最小跳数
         // dp[i] = min{ 1 + dp[i + j]} , 0 < j <= nums[i] && i + j < N
         const int N = nums.size();
+        if (N == 0) return -1;
         const int INF = 1e5 + 7;
         vector<int> dp(N, INF);
         dp[N - 1] = 0;
@@ -24,7 +25,7 @@ public:
                 dp[i] = min(dp[i], 1 + dp[i + j]);
             }
         }
-        return dp[0];
+        return dp[0] == INF ? -1 : dp[0];
     }
 };
 
