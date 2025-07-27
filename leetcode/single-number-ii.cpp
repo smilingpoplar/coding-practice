@@ -13,6 +13,24 @@ using namespace std;
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
+        // 按位统计1的个数，mod 3
+        int ans = 0;
+        for (int i = 31; i >= 0; i--) {
+            int b = 0;
+            for (int num : nums) {
+                b += (num >> i) & 1;
+            }
+            b %= 3;
+            ans = (ans << 1) + b;
+        }
+        return ans;
+    }
+};
+
+/*
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
         // 泛化成：其他数出现k次，某个数出现p次（p不能被k整除），找这单个数
         // bit运算各个位相互独立，下面用int同时操作所有位，逻辑上把整个int当作一个bit（nums[i]也当作一个bit）
         // 要统计某位上出现1的次数，需要个mod k计数器（该计数器共m>=lgk位），设bm,..,b2,b1表示该计数器的位，
@@ -35,11 +53,12 @@ public:
         return b1 | b2;
     }
 };
+*/
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     vector<int> nums = {5, 5, 4, 5, 3, 3, 3};
     Solution solution;
     cout << solution.singleNumber(nums);
-    
+
     return 0;
 }
