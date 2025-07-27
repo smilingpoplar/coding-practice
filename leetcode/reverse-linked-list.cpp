@@ -11,14 +11,14 @@ using namespace std;
 
 struct ListNode {
     int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
 };
 
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode *list = NULL;
+        ListNode* list = nullptr;
         while (head) {
             auto next = head->next;
             head->next = list;
@@ -29,19 +29,19 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     ListNode l1(1);
     ListNode l2(2);
     ListNode l3(3);
     l1.next = &l2;
     l2.next = &l3;
-    
+
     Solution solution;
     auto head = solution.reverseList(&l1);
     while (head) {
         cout << head->val << " ";
         head = head->next;
     }
-    
+
     return 0;
 }
