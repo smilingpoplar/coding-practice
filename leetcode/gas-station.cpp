@@ -23,7 +23,7 @@ public:
         for (int i = 0; i < N; i++) {
             int gasI = gas[i] - cost[i];
             gasSum += gasI, gasFromStart += gasI;
-            if (gasFromStart < 0) { // i站及前面站不能作为起点，下一站作起点候选
+            if (gasFromStart < 0) {  // i站及前面站不能作为起点，下一站作起点候选
                 start = i + 1;
                 gasFromStart = 0;
             }
@@ -33,11 +33,11 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     vector<int> gas = {4, 3};
     vector<int> cost = {5, 2};
     Solution solution;
     cout << solution.canCompleteCircuit(gas, cost);
-    
+
     return 0;
 }
