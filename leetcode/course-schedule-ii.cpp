@@ -6,8 +6,8 @@
 //
 
 #include <iostream>
-#include <vector>
 #include <unordered_set>
+#include <vector>
 
 using namespace std;
 
@@ -30,7 +30,7 @@ public:
         return ans;
     }
 private:
-    bool hasCycle(int u, const vector<vector<int>> &graph, 
+    bool hasCycle(int u, const vector<vector<int>> &graph,
                   vector<int> &colors, vector<int> &ans) {
         if (colors[u] != 0) return colors[u] == 1;
         colors[u] = 1;
@@ -52,7 +52,7 @@ public:
         // 拓扑排序，bfs不断删除入度为0的点，若完不成所有点的拓扑排序则有环
         vector<vector<int>> adj(numCourses);
         vector<int> indegree(numCourses, 0);
-        for (const auto &edge : prerequisites) {
+        for (const auto& edge : prerequisites) {
             adj[edge[1]].push_back(edge[0]);
             indegree[edge[0]]++;
         }
@@ -63,7 +63,8 @@ public:
             if (indegree[i] == 0) q.push(i);
         }
         while (!q.empty()) {
-            int u = q.front(); q.pop();
+            int u = q.front();
+            q.pop();
             ans.push_back(u);
             for (int to : adj[u]) {
                 if (--indegree[to] == 0) q.push(to);
@@ -74,13 +75,13 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     Solution solution;
-    vector<pair<int, int>> prerequisites{{5,8},{3,5},{1,9},{4,5},{0,2},{1,9},{7,8},{4,9}};
+    vector<pair<int, int>> prerequisites{{5, 8}, {3, 5}, {1, 9}, {4, 5}, {0, 2}, {1, 9}, {7, 8}, {4, 9}};
     auto result = solution.findOrder(10, prerequisites);
     for (int course : result) {
         cout << course;
     }
-    
+
     return 0;
 }
