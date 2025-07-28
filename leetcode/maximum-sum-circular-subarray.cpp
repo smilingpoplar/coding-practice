@@ -20,7 +20,7 @@ public:
         int currMin = 0, ansMin = INT_MAX;
         int arrSum = 0;
         for (int a : A) {
-            currMax = a + max(currMax, 0);
+            currMax = a + max(currMax, 0);  // 非空子段
             ansMax = max(ansMax, currMax);
             currMin = a + min(currMin, 0);
             ansMin = min(ansMin, currMin);
