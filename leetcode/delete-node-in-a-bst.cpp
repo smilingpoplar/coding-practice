@@ -22,27 +22,33 @@ using namespace std;
 class Solution {
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
-        if (!root) return NULL;
+        if (!root) return nullptr;
         if (key < root->val) {
             root->left = deleteNode(root->left, key);
-        } else if (key > root->val) {
-            root->right = deleteNode(root->right, key);
-        } else {
-            if (!root->right) {
-                auto left = root->left;
-                delete root;
-                return left;
-            }
-            // 把后继节点的值赋给根，并删除该后继节点
-            auto curr = root->right;
-            while (curr->left) curr = curr->left;
-            root->val = curr->val;
-            root->right = deleteNode(root->right, curr->val);
+            return root;
         }
-        return root;
+        if (key > root->val) {
+            root->right = deleteNode(root->right, key);
+            return root;
+        }
+
+        if (!root->right) {
+            auto left = root->left;
+            delete root;
+            return left;
+        }
+        // 找到后继节点
+        auto succ = root->right;
+        while (succ->left) {
+            succ = succ->left;
+        }
+        succ->left = root->left;
+        auto right = root->right;
+        delete root;
+        return right;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
