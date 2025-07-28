@@ -13,6 +13,43 @@ using namespace std;
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+        const int M = a.size(), N = b.size();
+        double median1 = findKthSmallest((M + N + 1) / 2, a, 0, M, b, 0, N);
+        if ((M + N) % 2 == 1) return median1;
+        return (median1 + findKthSmallest((M + N) / 2 + 1, a, 0, M, b, 0, N)) * 0.5;
+    }
+
+    // 在arr1[star1..end1)和arr2[start2..end2)中找第k小的数
+    int findKthSmallest(int k, const vector<int>& arr1, int start1, int end1,
+                        const vector<int>& arr2, int start2, int end2) {
+        int len1 = end1 - start1, len2 = end2 - start2;
+        if (len1 > len2) return findKthSmallest(k, arr2, start2, end2, arr1, start1, end1);
+        if (len1 == 0) return arr2[start2 + k - 1];
+        if (k == 1) return min(arr1[start1], arr2[start2]);
+
+        // 划分出k个元素: arr1[start1..aMid]、arr2[start2..aMid]
+        int k1 = min(k / 2, end1 - start1);  // A的划分位置
+        int k2 = k - k1;
+        int aMid = start1 + k1 - 1;
+        int bMid = start2 + k2 - 1;
+
+        if (arr1[aMid] < arr2[bMid]) {
+            // 排除a[start1..aMid]
+            return findKthSmallest(k - k1, arr1, aMid + 1, end1, arr2, start2, end2);
+        } else if (arr1[aMid] > arr2[bMid]) {
+            // 排除b[start2..bMid]
+            return findKthSmallest(k - k2, arr1, start1, end1, arr2, bMid + 1, end2);
+        } else {
+            return arr1[aMid];
+        }
+        return -1;  // 不会到达这里
+    }
+};
+
+/*
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
         // a分成a[0..i-1]、a[i..M-1]，b分成b[0..j-1]、b[j..N-1]，
         // 令k=(M+N+1)/2，划分i要满足i+j=k，且a[i-1]<=b[j] && b[j-1]<=a[i]
         // 1.要在a、b的较短数组中搜索划分i
@@ -46,6 +83,7 @@ public:
         return -1;
     }
 };
+*/
 
 /*
 class Solution {
