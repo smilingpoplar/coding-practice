@@ -1,6 +1,6 @@
 //
-//  bulb-switcher
-//  https://leetcode.com/problems/bulb-switcher/
+//  nim-game
+//  https://leetcode.com/problems/nim-game/
 //
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
@@ -17,6 +17,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
