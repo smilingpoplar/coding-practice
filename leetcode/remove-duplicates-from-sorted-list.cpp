@@ -17,23 +17,23 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
+    ListNode *deleteDuplicates(ListNode *head) {
         if (!head) return head;
-        auto node = head;
-        while (node->next) {
-            if (node->next->val == node->val) {
-                auto next = node->next->next;
-                delete node->next;
-                node->next = next;
+        auto prev = head;
+        while (prev->next) {
+            if (prev->next->val == prev->val) {
+                auto next = prev->next->next;
+                delete prev->next;
+                prev->next = next;
             } else {
-                node = node->next;
+                prev = prev->next;
             }
         }
         return head;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     ListNode *l1 = new ListNode(1);
     ListNode *l2 = new ListNode(1);
     ListNode *l3 = new ListNode(2);
@@ -43,13 +43,13 @@ int main(int argc, const char * argv[]) {
     l2->next = l3;
     l3->next = l4;
     l4->next = l5;
-    
+
     Solution solution;
     auto head = solution.deleteDuplicates(l1);
     while (head) {
         cout << head->val << " ";
         head = head->next;
     }
-    
+
     return 0;
 }

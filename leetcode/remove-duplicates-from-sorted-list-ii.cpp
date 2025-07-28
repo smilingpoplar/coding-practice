@@ -17,28 +17,28 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
+    ListNode *deleteDuplicates(ListNode *head) {
         ListNode dummy(-1);
         dummy.next = head;
-        auto node = &dummy;
-        
-        while (node->next) {
-            if (node->next->next && node->next->val == node->next->next->val) {
-                int val = node->next->val; // 删除有这个值的节点
-                while (node->next && node->next->val == val) {
-                    auto next = node->next->next;
-                    delete node->next;
-                    node->next = next;
+        auto prev = &dummy;
+
+        while (prev->next) {
+            if (prev->next->next && prev->next->val == prev->next->next->val) {
+                int val = prev->next->val;  // 删除有这个值的节点
+                while (prev->next && prev->next->val == val) {
+                    auto next = prev->next->next;
+                    delete prev->next;
+                    prev->next = next;
                 }
             } else {
-                node = node->next;
+                prev = prev->next;
             }
         }
         return dummy.next;
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     ListNode *l1 = new ListNode(1);
     ListNode *l2 = new ListNode(1);
     ListNode *l3 = new ListNode(2);
@@ -48,13 +48,13 @@ int main(int argc, const char * argv[]) {
     l2->next = l3;
     l3->next = l4;
     l4->next = l5;
-    
+
     Solution solution;
     auto head = solution.deleteDuplicates(l1);
     while (head) {
         cout << head->val << " ";
         head = head->next;
     }
-    
+
     return 0;
 }

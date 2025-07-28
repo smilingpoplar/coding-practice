@@ -16,8 +16,8 @@ public:
         stack<int> stk;
         int j = 0;
         for (int num : pushed) {
-            stk.push(num);
             // num先入栈，栈顶与popped[j]相同时弹出
+            stk.push(num);
             while (!stk.empty() && stk.top() == popped[j]) {
                 stk.pop();
                 j++;
@@ -27,6 +27,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
