@@ -13,6 +13,7 @@ using namespace std;
 class Solution {
 public:
     int getSum(int a, int b) {
+        // 不用加减号，做加法
         while (b) {
             int carry = (a & b) << 1;
             a = a ^ b;
@@ -22,6 +23,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
