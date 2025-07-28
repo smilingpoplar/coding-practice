@@ -27,20 +27,20 @@ public:
         if (len1 == 0) return arr2[start2 + k - 1];
         if (k == 1) return min(arr1[start1], arr2[start2]);
 
-        // 划分出k个元素: arr1[start1..aMid]、arr2[start2..aMid]
+        // 划分出k个元素: arr1[start1..mid1]、arr2[start2..mid1]
         int k1 = min(k / 2, end1 - start1);  // A的划分位置
         int k2 = k - k1;
-        int aMid = start1 + k1 - 1;
-        int bMid = start2 + k2 - 1;
+        int mid1 = start1 + k1 - 1;
+        int mid2 = start2 + k2 - 1;
 
-        if (arr1[aMid] < arr2[bMid]) {
-            // 排除a[start1..aMid]
-            return findKthSmallest(k - k1, arr1, aMid + 1, end1, arr2, start2, end2);
-        } else if (arr1[aMid] > arr2[bMid]) {
-            // 排除b[start2..bMid]
-            return findKthSmallest(k - k2, arr1, start1, end1, arr2, bMid + 1, end2);
+        if (arr1[mid1] < arr2[mid2]) {
+            // 排除a[start1..mid1]
+            return findKthSmallest(k - k1, arr1, mid1 + 1, end1, arr2, start2, end2);
+        } else if (arr1[mid1] > arr2[mid2]) {
+            // 排除b[start2..mid2]
+            return findKthSmallest(k - k2, arr1, start1, end1, arr2, mid2 + 1, end2);
         } else {
-            return arr1[aMid];
+            return arr1[mid1];
         }
         return -1;  // 不会到达这里
     }
