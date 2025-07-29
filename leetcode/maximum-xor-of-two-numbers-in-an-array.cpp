@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
@@ -28,7 +29,7 @@ public:
             // 是否存在两个i位前缀，使xor结果的第i位为1
             int guess = maxXor | (1 << i);
             for (int a : st) {
-                if (st.count(guess ^ a)) { // 存在
+                if (st.count(guess ^ a)) {  // 存在
                     maxXor = guess;
                     break;
                 }
@@ -38,6 +39,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     return 0;
 }
