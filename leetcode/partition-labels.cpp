@@ -16,21 +16,21 @@ public:
         for (int i = 0; i < S.size(); i++) {
             lastIdx[S[i]] = i;
         }
-        
+
         vector<int> ans;
         // 每个字母都向右扩展当前区间右端点
-        int left = 0, right = -1;
+        int lo = 0, hi = -1;
         for (int i = 0; i < S.size(); i++) {
-            right = max(right, lastIdx[S[i]]);
-            if (i == right) { // 右端点不再扩展时子段结束
-                ans.push_back(right - left + 1);
-                left = right + 1;
+            hi = max(hi, lastIdx[S[i]]);
+            if (i == hi) {  // 右端点不再扩展时子段结束
+                ans.push_back(hi - lo + 1);
+                lo = hi + 1;
             }
         }
-        return ans;        
+        return ans;
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }
