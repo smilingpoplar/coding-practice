@@ -11,17 +11,17 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> partitionLabels(string S) {
+    vector<int> partitionLabels(string str) {
         unordered_map<char, int> lastIdx;
-        for (int i = 0; i < S.size(); i++) {
-            lastIdx[S[i]] = i;
+        for (int i = 0; i < str.size(); i++) {
+            lastIdx[str[i]] = i;
         }
 
         vector<int> ans;
         // 每个字母都向右扩展当前区间右端点
         int lo = 0, hi = -1;
-        for (int i = 0; i < S.size(); i++) {
-            hi = max(hi, lastIdx[S[i]]);
+        for (int i = 0; i < str.size(); i++) {
+            hi = max(hi, lastIdx[str[i]]);
             if (i == hi) {  // 右端点不再扩展时子段结束
                 ans.push_back(hi - lo + 1);
                 lo = hi + 1;
