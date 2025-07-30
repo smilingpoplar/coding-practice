@@ -32,6 +32,7 @@ public:
 
     bool enough(int capacity, vector<int>& weights, int D) {
         // 随着capacity增大，days变小，days<=D返回形如[0..0 1..1]
+        // 找最小的capacity，对应找第一个1
         int weight = 0, days = 1;
         for (int i = 0; i < weights.size(); i++) {
             weight += weights[i];
