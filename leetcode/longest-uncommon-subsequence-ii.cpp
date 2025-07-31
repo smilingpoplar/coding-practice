@@ -11,16 +11,17 @@ using namespace std;
 
 class Solution {
 public:
-    int findLUSlength(vector<string>& strs) {
-        unordered_map<string, int> count;
-        for (string & s : strs)
-            count[s]++;
-        
-        sort(strs.begin(), strs.end(), [](const string &a, const string &b) {
+    int findLUSlength(vector<string> &strs) {
+        // 最长，且不是其他串的子序列
+        unordered_map<string, int> cnt;
+        for (string &s : strs)
+            cnt[s]++;
+
+        sort(begin(strs), end(strs), [](const string &a, const string &b) {
             return a.size() > b.size();
         });
         for (int i = 0; i < strs.size(); i++) {
-            if (count[strs[i]] > 1) continue;
+            if (cnt[strs[i]] > 1) continue;
             int j = 0;
             while (j < i && !isSubsequence(strs[i], strs[j]))
                 j++;
@@ -28,7 +29,7 @@ public:
         }
         return -1;
     }
-    
+
     bool isSubsequence(const string &sub, const string &str) {
         int idx = 0;
         for (char c : str) {
@@ -39,6 +40,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char *argv[]) {
     return 0;
 }
