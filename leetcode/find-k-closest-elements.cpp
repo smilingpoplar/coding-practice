@@ -5,25 +5,25 @@
 //  Copyright (c) 2015 YangLe. All rights reserved.
 //
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
 class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        int j = lower_bound(arr.begin(), arr.end(), x) - arr.begin(); // arr[j]是第一个>=x的数
+        int j = lower_bound(begin(arr), end(arr), x) - begin(arr);  // arr[j]是第一个>=x的数
         int i = j - 1;
         while (k--) {
-            // i >= 0 && j < arr.size() && x - arr[i] > arr[j] - x  => j++
-            // i >= 0 && j < arr.size() && x - arr[i] <= arr[j] - x  => i--
-            // i < 0  => j++
-            // j >= arr.size()  => i--
-            if (i < 0 || (j < arr.size() && x - arr[i] > arr[j] - x)) {
+            if (i < 0) {
                 j++;
-            } else {
+            } else if (j >= arr.size()) {
                 i--;
+            } else if (x - arr[i] <= arr[j] - x) {
+                i--;
+            } else {
+                j++;
             }
         }
         // (i,j)是前开后开区间
@@ -31,6 +31,6 @@ public:
     }
 };
 
-int main(int argc, const char * argv[]) {    
+int main(int argc, const char* argv[]) {
     return 0;
 }
