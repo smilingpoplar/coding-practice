@@ -13,21 +13,21 @@ using namespace std;
 class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        int j = lower_bound(begin(arr), end(arr), x) - begin(arr);  // arr[j]是第一个>=x的数
-        int i = j - 1;
-        while (k--) {
-            if (i < 0) {
-                j++;
-            } else if (j >= arr.size()) {
-                i--;
-            } else if (x - arr[i] <= arr[j] - x) {
-                i--;
+        // 双指针法
+        int i = 0, j = (int)arr.size() - 1;
+        while (j - i >= k) {  // 循环结束后 j-i+1 == k
+            if (abs(x - arr[i]) <= abs(arr[j] - x)) {
+                j--;
             } else {
-                j++;
+                i++;
             }
         }
-        // (i,j)是前开后开区间
-        return vector<int>(arr.begin() + i + 1, arr.begin() + j);
+
+        vector<int> ans;
+        for (int l = i; l <= j; l++) {
+            ans.push_back(arr[l]);
+        }
+        return ans;
     }
 };
 
