@@ -13,34 +13,33 @@ class Solution {
 public:
     int maxEvents(vector<vector<int>>& events) {
         const int N = events.size();
-        // 事件按开始时间排序
+        // 事件按开始时间升序
         sort(events.begin(), events.end());
-        // 对进行中事件按结束时间升序排列
-        priority_queue<int, vector<int>, greater<int>> pq;
-        int ans = 0, i = 0, d = 0;
-        while (!pq.empty() || i < N) {
-            if (pq.empty()) d = events[i][0];
-            // 把d前开始事件加入pq
-            while (i < N && events[i][0] <= d) {
+        // 尽量选结束时间早的，"进行中事件"的结束时间升序
+        priority_queue<int, vector<int>, greater<>> pq;
+
+        int maxDay = 0;
+        for (auto& e : events) {
+            maxDay = max(maxDay, e[1]);
+        }
+        int ans = 0;
+        for (int day = 1, i = 0; day <= maxDay; day++) {  // 扫描线
+            // 当天或之前开始的事件，结束时间入堆
+            while (i < N && events[i][0] <= day) {
                 pq.push(events[i][1]);
                 i++;
             }
-            // 把已结束事件移出pq
-            while (!pq.empty() && pq.top() < d) {
+            // 移除已结束的事件
+            while (!pq.empty() && pq.top() < day) {
                 pq.pop();
             }
-            // 选一个事件
+
+            // 取结束时间最早的
             if (!pq.empty()) {
                 pq.pop();
-                d++;
                 ans++;
             }
-            
         }
         return ans;
     }
 };
-
-int main(int argc, const char * argv[]) {    
-    return 0;
-}
